@@ -1,0 +1,1 @@
+# open-ai-generator-desktop
