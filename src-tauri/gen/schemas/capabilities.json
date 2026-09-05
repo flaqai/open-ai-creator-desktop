@@ -1,0 +1,1 @@
+{"default":{"identifier":"default","description":"Default permissions for the Flaq Creator main window","local":true,"windows":["main"],"permissions":["core:default","opener:default","dialog:allow-save","fs:allow-write-file",{"identifier":"http:default","allow":[{"url":"https://**"},{"url":"http://**"}]}]}}

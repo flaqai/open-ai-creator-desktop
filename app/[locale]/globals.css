@@ -1,0 +1,422 @@
+@import 'tailwindcss';
+@import 'tw-animate-css';
+@plugin "@tailwindcss/typography";
+
+@custom-variant dark (&:is(.dark *));
+
+@utility container {
+  margin-inline: auto;
+  padding-inline: 2rem;
+  @media (width >= --theme(--breakpoint-sm)) {
+    max-width: none;
+  }
+  @media (width >= 1400px) {
+    max-width: 1400px;
+  }
+}
+
+body.desktop-app {
+  min-width: 1040px;
+  overscroll-behavior: none;
+}
+
+body.desktop-app footer {
+  display: none;
+}
+
+body.desktop-app .desktop-marketing-heading {
+  display: none;
+}
+
+body.desktop-app .desktop-top-nav-links {
+  display: none;
+}
+
+body.desktop-app [data-cookie-consent] {
+  display: none;
+}
+
+/*
+  The default border color has changed to `currentcolor` in Tailwind CSS v4,
+  so we've added these compatibility styles to make sure everything still
+  looks the same as it did with Tailwind CSS v3.
+
+  If we ever want to remove these styles, we need to add an explicit border
+  color utility to any element that depends on these defaults.
+*/
+@layer base {
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-gray-200, currentcolor);
+  }
+
+  button {
+    cursor: pointer;
+  }
+}
+
+@utility container-centered {
+  width: 100%;
+  margin-inline: auto;
+  padding-inline: 0.75rem;
+
+  @media (width >= 1386px) {
+    max-width: 1386px;
+    padding-inline: 2rem;
+  }
+}
+
+@utility container-py {
+  padding-block: 60px;
+}
+
+@utility container-gap {
+  @apply space-y-5 lg:space-y-10;
+}
+
+@utility container-wide {
+  width: 100%;
+  margin-inline: auto;
+  padding-inline: 0.75rem;
+  max-width: 1600px;
+}
+
+@utility flex-center {
+  @apply flex items-center justify-center;
+}
+
+@utility flex-xy-center {
+  @apply flex items-center justify-center;
+}
+
+@utility flex-y-center {
+  @apply flex flex-col items-center;
+}
+
+@utility input-border {
+  @apply border-color-b1 bg-color-c2 h-12 rounded-lg border p-3 outline-hidden focus:ring-0 focus:outline-hidden;
+}
+
+@utility login-btn {
+  @apply bg-color-main text-white;
+}
+
+@utility bg-frosted-glass {
+  @apply backdrop-blur-lg backdrop-filter;
+}
+
+@utility faded-content {
+  @apply before:bg-gradient-faded-out before:absolute before:top-0 before:left-0 before:size-full before:content-[""];
+}
+
+@utility no-scrollbar {
+  /* Chrome, Safari and Opera */
+  &::-webkit-scrollbar {
+    display: none;
+  }
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+@utility custom-scrollbar {
+  /* Chrome, Safari and Opera */
+  &::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  &::-webkit-scrollbar-track {
+    background: transparent;
+    border-radius: 4px;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: var(--color-30);
+    border-radius: 4px;
+    &:hover {
+      background: var(--color-40);
+    }
+  }
+  /* Firefox */
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-30) transparent;
+}
+
+@layer utilities {
+  /* html {
+  scroll-behavior: smooth;
+} */
+
+  /* .video::-webkit-media-controls-enclosure {
+  opacity: 0;
+} */
+
+  /* .video:hover::-webkit-media-controls-enclosure {
+  opacity: 1;
+} */
+
+  input[type='search']::-webkit-search-cancel-button {
+    -webkit-appearance: none;
+  }
+
+  .trapezoidal {
+    clip-path: polygon(10% 0%, 90% 0%, 100% 100%, 0% 100%);
+  }
+}
+
+@layer base {
+  :root {
+    --radius: 0.625rem;
+
+    /* shadcn/ui - deep dark only */
+    --background: #0f1113;
+    --foreground: #ffffff;
+    --card: #16161a;
+    --card-foreground: #ffffff;
+    --popover: #1b1c23;
+    --popover-foreground: #ffffff;
+    --primary: #4c52fe;
+    --primary-foreground: #111111;
+    --secondary: #1b1c23;
+    --secondary-foreground: #ffffff;
+    --muted: #1b1c23;
+    --muted-foreground: #b8b8b8;
+    --accent: #353443;
+    --accent-foreground: #ffffff;
+    --destructive: #ff5a5f;
+    --destructive-foreground: #ffffff;
+    --border: #34343c;
+    --input: #34343c;
+    --ring: #4c52fe;
+    --sidebar: #16161a;
+    --sidebar-foreground: #ffffff;
+    --sidebar-primary: #4c52fe;
+    --sidebar-primary-foreground: #111111;
+    --sidebar-accent: #1b1c23;
+    --sidebar-accent-foreground: #ffffff;
+    --sidebar-border: #34343c;
+    --sidebar-ring: #4c52fe;
+
+    /* project semantic tokens */
+    --color-t1: #ffffff;
+    --color-t2: #b8b8b8;
+    --color-t3: #737373;
+    --color-t4: #5c5c5c;
+    --color-inverse-t1: #111111;
+    --color-strong-t1: #ff66ab;
+
+    --color-bg0: #020202;
+    --color-bg1: #141516;
+    --color-bg2: #141516;
+    --color-bg3: #222129;
+
+    --color-c1: #16161a;
+    --color-c2: #1b1c23;
+    --color-c3: #353443;
+    --color-c4: #232528;
+
+    --color-b1: #34343c;
+    --color-b2: #ffffff66;
+
+    --color-main: #4c52fe;
+    --color-green: #8aefb9;
+    --color-red: #fff6f6;
+    --color-100: #ffffff;
+    --color-40: #737373;
+    --color-30: #5c5c5c;
+    --color-5: #212121;
+  }
+}
+
+@theme inline {
+  --text-xxs: 0.625rem;
+
+  /* semantic project tokens */
+  --color-color-t1: var(--color-t1);
+  --color-color-t2: var(--color-t2);
+  --color-color-t3: var(--color-t3);
+  --color-color-t4: var(--color-t4);
+  --color-color-inverse-t1: var(--color-inverse-t1);
+  --color-color-strong-t1: var(--color-strong-t1);
+  --color-color-bg0: var(--color-bg0);
+  --color-color-bg1: var(--color-bg1);
+  --color-color-bg2: var(--color-bg2);
+  --color-color-bg3: var(--color-bg3);
+
+  --color-color-c1: var(--color-c1);
+  --color-color-c2: var(--color-c2);
+  --color-color-c3: var(--color-c3);
+  --color-color-c4: var(--color-c4);
+
+  --color-color-b1: var(--color-b1);
+  --color-color-b2: var(--color-b2);
+
+  --color-color-main: var(--color-main);
+  --color-color-green: var(--color-green);
+  --color-color-red: var(--color-red);
+  --color-color-100: var(--color-100);
+  --color-color-40: var(--color-40);
+  --color-color-30: var(--color-30);
+  --color-color-5: var(--color-5);
+
+  /* compatibility aliases for current components */
+  --color-color-bg: var(--color-bg1);
+  --color-color-bg-light: var(--color-c3);
+  --color-color-card: var(--color-c1);
+  --color-color-card-2: var(--color-c2);
+  --color-color-card-3: var(--color-c3);
+  --color-color-text: var(--color-t1);
+  --color-color-text-inverse: #111111;
+  --color-color-1: var(--color-c1);
+  --color-color-2: var(--color-c2);
+  --color-color-3: var(--color-c4);
+
+  --color-dark-bg: var(--color-bg0);
+  --color-card-black: var(--color-bg2);
+  --color-main-black: var(--color-bg3);
+  --color-main-gray: var(--color-b1);
+  --color-dark-gray: var(--color-c3);
+
+  --background-image-gradient-faded-out: linear-gradient(180deg, rgba(34, 33, 41, 0) 0%, #222129 100%);
+  --container-pc-head: 1840px;
+  --container-pc: 1322px;
+  --container-screen: 1322px;
+
+  --shadow-input:
+    0px 2px 3px -1px rgba(0, 0, 0, 0.1), 0px 1px 0px 0px rgba(25, 28, 33, 0.02), 0px 0px 0px 1px rgba(25, 28, 33, 0.08);
+
+  --font-din: var(--font-din);
+
+  --animate-accordion-down: accordion-down 0.2s ease-out;
+  --animate-accordion-up: accordion-up 0.2s ease-out;
+  --animate-caret-blink: caret-blink 1.25s ease-out infinite;
+  --animate-first: moveVertical 30s ease infinite;
+  --animate-second: moveInCircle 20s reverse infinite;
+  --animate-third: moveInCircle 40s linear infinite;
+  --animate-fourth: moveHorizontal 40s ease infinite;
+  --animate-fifth: moveInCircle 20s ease infinite;
+  --animate-marquee: marquee var(--duration) linear infinite;
+  --animate-marquee-vertical: marquee-vertical var(--duration) linear infinite;
+
+  @keyframes accordion-down {
+    from {
+      height: 0;
+    }
+    to {
+      height: var(--radix-accordion-content-height);
+    }
+  }
+  @keyframes accordion-up {
+    from {
+      height: var(--radix-accordion-content-height);
+    }
+    to {
+      height: 0;
+    }
+  }
+  @keyframes caret-blink {
+    0%,
+    70%,
+    100% {
+      opacity: 1;
+    }
+    20%,
+    50% {
+      opacity: 0;
+    }
+  }
+  @keyframes moveHorizontal {
+    0% {
+      transform: translateX(-50%) translateY(-10%);
+    }
+    50% {
+      transform: translateX(50%) translateY(10%);
+    }
+    100% {
+      transform: translateX(-50%) translateY(-10%);
+    }
+  }
+  @keyframes moveInCircle {
+    0% {
+      transform: rotate(0deg);
+    }
+    50% {
+      transform: rotate(180deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+  @keyframes moveVertical {
+    0% {
+      transform: translateY(-50%);
+    }
+    50% {
+      transform: translateY(50%);
+    }
+    100% {
+      transform: translateY(-50%);
+    }
+  }
+  @keyframes marquee {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(calc(-100% - var(--gap)));
+    }
+  }
+  @keyframes marquee-vertical {
+    from {
+      transform: translateY(0);
+    }
+    to {
+      transform: translateY(calc(-100% - var(--gap)));
+    }
+  }
+
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-family: var(--font-noto-sans), 'Inter', sans-serif;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}

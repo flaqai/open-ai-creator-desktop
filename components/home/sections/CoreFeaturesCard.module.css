@@ -1,0 +1,52 @@
+.notification {
+  display: flex;
+  /* flex-direction: column; */
+  isolation: isolate;
+  position: relative;
+  width: 100%;
+  height: 234px;
+  background: #29292c;
+  overflow: hidden;
+}
+
+.notification:hover:after {
+  transform: translateX(0.15rem);
+}
+
+.notiglow,
+.notiborderglow {
+  position: absolute;
+  width: 30rem;
+  height: 30rem;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(circle closest-side at center, white, transparent);
+  opacity: 0;
+  transition: opacity 300ms ease;
+}
+
+.notiglow {
+  z-index: 3;
+}
+
+.notiborderglow {
+  z-index: 1;
+}
+
+.notification:hover .notiglow {
+  opacity: 0.1;
+}
+
+.notification:hover .notiborderglow {
+  opacity: 0.1;
+}
+
+.note {
+  color: var(--color);
+  position: fixed;
+  top: 80%;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  font-size: 0.9rem;
+  width: 75%;
+}

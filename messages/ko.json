@@ -1,0 +1,1640 @@
+{
+  "Desktop": {
+    "r2AccountId": "R2 계정 ID",
+    "r2BucketName": "버킷 이름",
+    "r2AccessKeyId": "액세스 키 ID",
+    "r2SecretAccessKey": "비밀 액세스 키",
+    "workspace": "크리에이티브 작업 공간",
+    "workspaceDescription": "워크플로를 선택하고 바로 제작을 시작하세요. 설정과 최근 작업도 가까이 있습니다.",
+    "configure": "Flaq 연결",
+    "firstRunTitle": "Flaq에 연결하고 제작 시작",
+    "firstRunDescription": "하나의 Client Key로 모든 이미지 및 비디오 워크플로를 사용할 수 있습니다.",
+    "stepAccount": "Flaq에 로그인하거나 계정 만들기",
+    "stepKey": "Client Key 생성 및 복사",
+    "stepCreate": "키 붙여넣기, 연결 테스트 후 제작",
+    "openSettings": "연결 설정 열기",
+    "skip": "먼저 둘러보기",
+    "toolGuide": "도구 가이드",
+    "toolGuideDescription": "이 워크플로의 예시, 기능 및 자주 묻는 질문",
+    "close": "제작으로 돌아가기"
+  },
+  "Common": {
+    "loading": "로딩 중...",
+    "copy": "복사",
+    "prompt": "프롬프트",
+    "model": "모델",
+    "failure": "생성에 실패했습니다",
+    "success": "Success",
+    "reset": "Reset",
+    "selectModel": "Select Model",
+    "uploadImages": "Upload Images",
+    "tryNow": "Try Now",
+    "copy-right": {
+      "title": "저작권:",
+      "content": "유료 이용자는 이미지 권리를 소유합니다."
+    },
+    "images": "images",
+    "panel": "패널"
+  },
+  "cookie": {
+    "content": "보다 나은 사용 경험을 위해 쿠키를 사용합니다. 자세한 내용은 개인정보 보호정책을 참고하세요.",
+    "confirm": "동의"
+  },
+  "error-page": {
+    "not-found": {
+      "title": "404 찾을 수 없음",
+      "goHome": "홈으로 돌아가기"
+    }
+  },
+  "components": {
+    "hero-form": {
+      "image-video": {
+        "format-hint": "지원 형식",
+        "image-count": "Images",
+        "prompt-placeholder": "만들고 싶은 내용을 설명하세요..."
+      },
+      "reference-upload": {
+        "upload": "업로드",
+        "history": "기록",
+        "uploadFromDevice": "기기에서 업로드",
+        "noCompletedHistory": "완료된 기록이 아직 없습니다",
+        "addImage": "이미지 추가",
+        "addVideo": "동영상 추가",
+        "addAudio": "오디오 추가",
+        "addMore": "더 추가",
+        "remove": "제거",
+        "noLocalUploads": "최근 업로드가 아직 없습니다",
+        "deleteLocalImage": "최근 업로드 삭제",
+        "durationMin": "파일 길이는 {value}초 이상이어야 합니다.",
+        "metadataError": "파일 메타데이터를 읽을 수 없습니다.",
+        "maxFiles": "파일은 최대 {count}개까지 추가할 수 있습니다.",
+        "unsupportedFormat": "지원되지 않는 파일 형식입니다.",
+        "imageCropCount": "{total}개 중 {current}번째 이미지 자르기",
+        "imagePreviewCount": "{total}개 중 {current}번째 이미지",
+        "selectImage": "이미지 {index} 선택",
+        "cropFailed": "이 이미지를 자를 수 없습니다.",
+        "deleteImage": "이미지 삭제",
+        "cropImage": "이미지 자르기",
+        "videoPreview": "동영상 미리보기",
+        "audioPreview": "오디오 미리보기",
+        "mention": "참조 미디어",
+        "mediaDuration": "{type} 길이는 {min}초에서 {max}초 사이여야 합니다.",
+        "video": "동영상",
+        "audio": "오디오",
+        "imageDimensionMin": "이미지 너비와 높이는 최소 {value}px이어야 합니다.",
+        "imageDimensionMax": "Image width and height must not exceed {value}px.",
+        "cancelTrim": "트리밍 취소",
+        "confirmTrim": "트리밍 확인",
+        "videoDimensionRange": "동영상 너비와 높이는 각각 {min}~{max}px 사이여야 합니다."
+      },
+      "unified-upload": {
+        "formats": "JPG, PNG, WebP",
+        "hints": {
+          "video": "첫 프레임을 업로드하면 프롬프트가 이미지-투-비디오로 연결됩니다. 비워 두면 텍스트-투-비디오가 됩니다.",
+          "image": "참조 이미지를 업로드하면 프롬프트가 이미지-투-이미지로 연결됩니다. 비워 두면 텍스트-투-이미지가 됩니다."
+        },
+        "slots": {
+          "firstFrame": "첫 프레임",
+          "endFrame": "마지막 프레임",
+          "image": "이미지",
+          "audio": "오디오",
+          "optional": "선택 사항"
+        }
+      }
+    },
+    "video-carousel": {
+      "original-image": "원본 이미지",
+      "video": "비디오",
+      "prompt": "Prompt"
+    },
+    "open-api-settings": {
+      "title": "Open API Settings",
+      "description": "Configure the local Open API base URL and client key for this browser.",
+      "base-url": "Base URL",
+      "base-url-hint": "Leave this as the default unless you need a custom gateway or proxy.",
+      "client-key": "Client Key",
+      "remember-me": "Remember me (store locally)",
+      "remember-me-hint": "If unchecked, the key will be cleared when you close the tab.",
+      "security-warning": "Security Notice: Your client key is encrypted before storage, but XSS attacks can still intercept it during API requests. Keep your key secure.",
+      "clear-data": "Clear All Data",
+      "clear-data-confirm": "Are you sure you want to clear all stored settings?",
+      "data-cleared": "All stored data has been cleared.",
+      "register": "Register",
+      "test": "Test Connection",
+      "testing": "Testing...",
+      "cancel": "Cancel",
+      "save": "Save",
+      "required": "Client key is required.",
+      "saved": "Open API settings saved.",
+      "test-success": "Connection succeeded.",
+      "test-success-validation": "API에 연결되었습니다. 테스트 작업이 없어 키의 유효성은 아직 확인되지 않았습니다.",
+      "test-failed": "Connection failed."
+    },
+    "image-hosting": {
+      "title": "Image Hosting (R2)",
+      "public-domain": "Public Domain",
+      "public-domain-hint": "The CDN domain for accessing uploaded files. Recommended to use https:// protocol.",
+      "public-domain-placeholder": "https://assets.example.com",
+      "not-configured": "R2 credentials should be set in .env (server-side only). Click \"Test R2\" to verify.",
+      "saved": "Image hosting settings saved.",
+      "test": "Test R2 Connection",
+      "testing": "Testing...",
+      "test-success": "R2 connection succeeded.",
+      "test-failed": "R2 connection failed."
+    },
+    "dialog": {
+      "business": {
+        "title": "비즈니스 문의",
+        "description": "비즈니스 파트너십, 엔터프라이즈 솔루션 또는 고급 API 지원에 대해서는 이메일로 문의해 주세요.",
+        "contactButton": "문의하기"
+      }
+    },
+    "video-form": {
+      "ai-generation": "AI 생성",
+      "product-image": "Product Image",
+      "end-frame": "End Frame",
+      "product-image-description": "We recommend using AI to create your product images",
+      "upload-first-frame": "시작 프레임 업로드",
+      "upload-end-frame": "종료 프레임 업로드",
+      "promptPlaceholder": "프롬프트를 입력해주세요",
+      "generate": "생성",
+      "duration": "길이",
+      "ratio": "Video Ratio",
+      "resolution": "Video Resolution",
+      "startFrame": "시작 프레임",
+      "endFrame": "종료 프레임",
+      "modelVersion": "모델 버전",
+      "history": {
+        "title": "기록",
+        "noHistory": "아직 기록이 없습니다",
+        "backToStart": "처음으로 돌아가기"
+      },
+      "noPromptInput": "프롬프트를 입력하세요",
+      "noImageInput": "이미지를 업로드하세요",
+      "min width": "Image width is less than",
+      "or": "or",
+      "min height": "Image height is less than",
+      "image": "이미지 업로드",
+      "display": {
+        "noVideo": "AI 비디오 생성기를 지금 사용해보세요",
+        "prompt": "프롬프트",
+        "videoDetail": "View Details"
+      },
+      "audio": {
+        "title": "오디오",
+        "upload-audio": "오디오 업로드",
+        "audio-support": "이 모델에는 내장 오디오가 포함되어 있습니다",
+        "supported-formats": "지원: MP3, WAV (최대 15MB)",
+        "unsupported-format": "지원하지 않는 오디오 형식입니다. MP3 및 WAV만 지원됩니다",
+        "file-too-large": "파일 크기가 15MB를 초과합니다",
+        "show-trim": "트림 표시",
+        "hide-trim": "트림 숨기기",
+        "start-time": "시작",
+        "end-time": "종료",
+        "duration": "길이",
+        "audio-too-short": "오디오가 너무 짧습니다. 최소 3초 필요",
+        "audio-auto-trimmed": "오디오 길이는 {duration}초입니다. 처음 30초까지만 자동 트리밍되었습니다. 트림 핸들을 드래그하여 조정할 수 있습니다",
+        "audio-duration-requirement": "오디오는 3~30초여야 합니다",
+        "drag-region": "영역 드래그",
+        "dragging-region": "영역 드래그 중...",
+        "audio-duration-error": "오디오 길이는 3~30초 사이여야 하며, 현재",
+        "audio-load-failed": "오디오 파일 불러오기 실패",
+        "audio-trim-failed": "오디오 트리밍 실패, 전체 오디오가 사용됩니다"
+      },
+      "enable-audio": "사운드 활성화",
+      "enable-audio-tip": "AI가 생성한 효과음이 포함된 비디오를 생성합니다",
+      "audio-support": "This model includes built-in audio",
+      "audioFile": "오디오 업로드",
+      "model-parameters": "Model Parameters",
+      "enable-bgm": "배경 음악",
+      "enable-bgm-tip": "AI 생성 배경 음악이 포함된 동영상을 생성합니다",
+      "style": "스타일",
+      "seed": "시드",
+      "seed-hint": "Set a fixed value (0-2147483647) to reproduce the same result, or keep number empty for a random result each time.",
+      "negative-prompt": "네거티브 프롬프트",
+      "negative-prompt-placeholder": "결과물에 포함하지 않을 요소를 설명하세요 (예: 흐릿함, 저화질, 워터마크...)",
+      "guidance-scale": "가이던스 스케일",
+      "guidance-scale-flexible": "유연",
+      "guidance-scale-strict": "엄격",
+      "keep-original-sound": "원본 소리 유지",
+      "keep-original-sound-tip": "Preserve the uploaded video's original audio when supported.",
+      "error": {
+        "image-required": "계속하려면 이미지를 업로드하세요"
+      },
+      "reference-source": {
+        "file-title": "참조 파일",
+        "file-formats": "참조 파일 1개를 업로드하세요. 지원 형식: {formats}.",
+        "page-limit": "PDF, 문서, 프레젠테이션, Keynote 및 Pages 파일은 최대 {count}페이지까지 지원됩니다.",
+        "remove-file": "참조 파일 제거",
+        "unsupported-file": "지원되는 참조 파일 형식: {formats}.",
+        "link-title": "참조 웹 링크",
+        "link-tip": "로그인하지 않고 열 수 있는 공개 웹페이지를 사용하세요.",
+        "link-placeholder": "https://example.com/article",
+        "invalid-link": "유효한 공개 HTTP 또는 HTTPS 웹페이지 링크를 입력하세요.",
+        "mutually-exclusive": "참조 파일과 웹페이지 링크는 함께 사용할 수 없습니다."
+      },
+      "video-upload": {
+        "label": "동영상을 업로드하거나 위에 URL을 붙여넣으세요",
+        "duration-minimum": "업로드한 비디오는 최소 {duration}초여야 합니다",
+        "duration-range-error": "잘라낸 비디오 길이는 {min}~{max}초 사이여야 합니다",
+        "duration-limit": "업로드한 비디오는 {duration}초를 초과할 수 없습니다",
+        "auto-trimmed": "원본 비디오 길이는 {duration}초입니다. 기본으로 앞의 {max}초가 선택되며 범위를 조정할 수 있습니다",
+        "load-failed": "비디오 파일을 불러오지 못했습니다",
+        "play-failed": "비디오를 재생하지 못했습니다",
+        "trim-failed": "비디오 자르기에 실패했습니다. 구간을 조정한 뒤 다시 시도해 주세요",
+        "selected-range": "선택된 구간: {start} - {end}, 총 {duration}",
+        "range-tip": "{min}~{max}초 사이의 비디오 구간을 선택하세요",
+        "trim-start": "시작 시간",
+        "trim-end": "종료 시간",
+        "reset-trim": "초기화",
+        "show-trim": "트림 표시",
+        "hide-trim": "트림 숨기기",
+        "play": "재생",
+        "pause": "일시정지",
+        "delete": "삭제",
+        "playback-progress": "재생 진행 상태"
+      }
+    },
+    "video-image-upload-form": {
+      "label": "Click or drag to upload",
+      "crop": "Crop",
+      "min width": "Min width",
+      "or": "or",
+      "min height": "Min height",
+      "supported-formats": "Supported formats"
+    },
+    "audio-upload-form": {
+      "upload-audio": "오디오 업로드",
+      "supported-formats": "MP3, WAV, M4A, AAC, OGG",
+      "unsupported-format": "Unsupported audio format",
+      "file-too-large": "File size cannot exceed 10MB"
+    },
+    "audio-modal": {
+      "start-time": "Start",
+      "end-time": "End",
+      "duration": "Duration",
+      "show-trim": "Enable Trim Mode",
+      "hide-trim": "Disable Trim Mode"
+    },
+    "confirmDialog": {
+      "title": "정말로 진행하시겠습니까?",
+      "cancel": "취소",
+      "confirm": "확인"
+    },
+    "image-form": {
+      "click-to-upload": "클릭 또는 드래그로 업로드",
+      "promptPlaceholder": "프롬프트를 입력하세요",
+      "selectModel": "Select Model",
+      "enterPrompt": "프롬프트 입력",
+      "selectAspectRatio": "Select Aspect Ratio",
+      "ratio": "Image Ratio",
+      "selectResolution": "Select Resolution",
+      "resolution": "Image Resolution",
+      "quality": "품질",
+      "model": "Image Models",
+      "motion": "Motion",
+      "selectMotion": "Select Motion",
+      "transformImages": "이미지 변환",
+      "imageSupport": "지원 형식: jpg, jpeg, webp, png",
+      "public": "Public",
+      "generate": "생성",
+      "history": {
+        "title": "기록",
+        "check-all": "전체 선택",
+        "noImage": "아직 기록이 없습니다",
+        "backToStart": "처음으로 돌아가기"
+      },
+      "noPromptInput": "먼저 프롬프트를 입력해 주세요.",
+      "noImageUpload": "먼저 이미지를 업로드해 주세요.",
+      "reset": "초기화",
+      "describe": "Describe",
+      "image-required": "이미지가 필요합니다.",
+      "paint-required": "Painting on the image is required.",
+      "process-model": "Process Model",
+      "errors": {
+        "webpNotSupported": "WebP 형식이 지원되지 않습니다",
+        "aspectRatioOutOfRange": "이미지 비율은 0.33~3.0 사이여야 합니다. 현재 비율:",
+        "imageLoadFailed": "이미지 불러오기 실패"
+      },
+      "upload-dialog": {
+        "history-tab": "Generation History",
+        "upload-tab": "Upload Image",
+        "loading": "Loading...",
+        "no-images": "No images yet",
+        "go-generate": "Go Generate",
+        "click-to-upload": "Click To Upload Image",
+        "file-format-info": "JPG, PNG, WEBP up to 10MB",
+        "unsupported-format": "Please upload supported image formats: JPG, PNG, WEBP",
+        "file-too-large": "File size cannot exceed 10MB"
+      },
+      "display": {
+        "useImage": "Use This Image",
+        "noImage": "AI 이미지 생성기를 지금 사용해보세요",
+        "original-img": "원본 이미지",
+        "prompt": "Prompt",
+        "reset-inpainting": "Reset Inpainting",
+        "removeBg": "Remove Background",
+        "imageDetail": "View Details",
+        "imageToImage": "Image to Image",
+        "model": "Model"
+      },
+      "input-range": {
+        "num inference steps": "추론 단계 수",
+        "guidance scale": "가이던스 강도 (CFG)",
+        "image prompt strength": "이미지 프롬프트 강도",
+        "steps": "단계"
+      },
+      "image-generation-modal": {
+        "onlineGenerateImage": "온라인 이미지 생성",
+        "pleaseDoNotLeaveDuringGeneration": "생성 중에는 페이지를 떠나지 마세요"
+      }
+    },
+    "compress-dialog": {
+      "title": "이미지 압축",
+      "content": "이미지 크기가 10MB를 초과하여 AI 비디오 생성에 적합하지 않습니다. 압축하시겠습니까?",
+      "reupload": "재업로드",
+      "compress": "압축"
+    }
+  },
+  "Navigation": {
+    "title": "Flaq AI",
+    "docs": "Docs",
+    "business": "비즈니스",
+    "video-ai": "Video AI",
+    "image-ai": "Image AI",
+    "ai-api": "AI API",
+    "text-to-video": "Text to Video",
+    "text-to-video-content": "Generate video from text",
+    "image-to-video": "Image to Video",
+    "image-to-video-content": "Generate video from image",
+    "image-to-image": "Image to Image",
+    "image-to-image-content": "Generate image from image",
+    "text-to-image": "Text to Image",
+    "text-to-image-content": "Generate image from text",
+    "nano-banana-2": "Nano Banana 2 API",
+    "nano-banana-2-content": "Generate image with Nano Banana 2 API",
+    "nano-banana-pro": "Nano Banana Pro API",
+    "nano-banana-pro-content": "Generate image with Nano Banana Pro",
+    "veo-3-1": "Veo 3.1 API",
+    "veo-3-1-content": "Generate video with Veo 3.1 API",
+    "kling-3-0": "Kling 3.0 API",
+    "kling-3-0-content": "Generate video with Kling 3.0 API",
+    "vidu-q3": "VIDU Q3 API",
+    "vidu-q3-content": "Generate video with VIDU Q3 API",
+    "wan-2-7": "Wan 2.7 API",
+    "wan-2-7-content": "Generate video with Wan 2.7 API",
+    "seedream-4-5": "Seedream 4.5 API",
+    "seedream-4-5-content": "Generate image with Seedream 4.5 API",
+    "seedream-5-0": "Seedream 5.0 API",
+    "seedream-5-0-content": "Generate image with Seedream 5.0 API",
+    "seedance-1-5": "Seedance 1.5 API",
+    "seedance-1-5-content": "Generate video with Seedance 1.5 API",
+    "virtual-try-on": "Virtual Try On",
+    "virtual-try-on-content": "Try on outfits virtually with AI",
+    "gpt-image-2": "GPT Image 2 API",
+    "gpt-image-2-content": "Generate image with GPT Image 2 API",
+    "menu": "메뉴",
+    "close": "닫기",
+    "language-dialog": {
+      "title": "언어 안내",
+      "content": "브라우저 언어로 전환하시겠습니까?",
+      "cancel": "현재 언어 유지",
+      "confirm": "전환"
+    },
+    "ai-create": "AI Create",
+    "reference-to-video": "Reference to Video",
+    "reference-to-video-content": "Create video from image, video, audio, document, or link references"
+  },
+  "Footer": {
+    "title": "AI 이미지와 동영상 — 무료 오픈 소스 · 가입 불필요",
+    "subTitle": "가입 없이 무료 오픈 소스 AI 이미지와 동영상 템플릿을 사용, 수정, 자체 호스팅할 수 있습니다. 모델 생성에는 Flaq Client Key가 필요하며 API 사용료는 별도입니다.",
+    "support": "고객지원",
+    "docs": "Docs",
+    "business": "비즈니스",
+    "flaq": "Flaq AI",
+    "privacy": "개인정보 보호정책",
+    "termsConditions": "이용 약관",
+    "refundPolicy": "환불 정책",
+    "contactUs": "문의하기",
+    "feature-link": "Features",
+    "feature": {
+      "text-to-video": "Text to Video",
+      "image-to-video": "Image to Video",
+      "image-to-image": "Image to Image Generator",
+      "text-to-image": "Text to Image Generator",
+      "virtual-try-on": "Virtual Try On AI",
+      "reference-to-video": "Reference to Video",
+      "ai-create": "AI Create"
+    }
+  },
+  "FooterNavigation": {
+    "privacyPolicy": {
+      "1-h1": "flaq.ai 개인정보처리방침",
+      "1-p": "이 개인정보처리방침은 Flaq AI가 flaq.ai에서 서비스를 제공할 때 귀하의 개인정보를 어떻게 수집, 사용, 보호하는지 설명합니다. Flaq AI를 이용함으로써 본 방침에 명시된 조항에 동의하게 됩니다.",
+      "2-h2": "1. 정보 수집 및 이용",
+      "2-p": "Flaq AI는 서비스 개선을 위해 개인을 식별할 수 있는 정보를 수집할 수 있습니다. 또한 제3자 서비스를 사용하여 귀하를 식별하는 데 필요한 정보를 수집할 수도 있습니다.",
+      "3-h2": "2. 데이터 분석 및 제3자 AI 서비스",
+      "3-p": "우리는 서비스 이용 현황을 분석하기 위해 Google Analytics 등 도구를 사용해 데이터를 수집합니다. 또한 AI 생성 기능은 알리바바, 구글, 바이트댄스, fal.ai, Kling AI, Replicate 등(국한되지 않음) 제3자 플랫폼을 활용합니다. 이 외부 플랫폼들은 자체적으로 생성 요청 내역을 보관할 수 있습니다.",
+      "4-h2": "3. 쿠키",
+      "4-p": "Flaq AI는 쿠키를 사용하는 제3자 코드 및 라이브러리를 사용할 수 있습니다. 사용자는 쿠키 허용 또는 거부를 선택할 수 있으나, 거부할 경우 일부 기능이 제한될 수 있습니다.",
+      "5-h2": "4. 서비스 제공업체",
+      "5-p": "우리는 fal.ai, Replicate, Kling AI, OpenAI, OpenRouter 등 AI 서비스 플랫폼을 포함한 제3자 업체를 고용하여 서비스 제공, 관련 업무 수행 또는 Flaq AI 사용 현황 분석을 진행할 수 있습니다. 이 업체들은 귀하의 개인정보에 접근할 수 있으나, 반드시 비밀을 유지해야 합니다.",
+      "5-p-1": "아래 이유로 제3자 회사 및 개인을 고용할 수 있습니다:",
+      "5-li-1": "서비스 제공을 용이하게 하기 위함;",
+      "5-li-2": "당사를 대신해 서비스를 제공하기 위함;",
+      "5-li-3": "서비스 관련 업무 수행을 위함;",
+      "5-li-4": "서비스 사용 분석 지원을 위함;",
+      "5-p-2": "본 서비스 사용자는 이들 제3자는 오직 지정된 업무 수행을 위해서만 개인정보에 접근할 수 있으며, 그 외 목적으로 정보를 공개하거나 사용하는 것이 금지되어 있음을 안내합니다.",
+      "6-h2": "5. 보안",
+      "6-p": "당사는 상업적으로 허용되는 방법으로 귀하의 개인정보를 보호하도록 노력하지만, 절대적인 보안을 보장하지는 못합니다.",
+      "7-h2": "6. 외부 사이트 링크",
+      "7-p": "Flaq AI에는 외부 사이트로 연결되는 링크가 있을 수 있습니다. 우리는 이러한 외부 사이트의 내용이나 개인정보 보호 관행에 대해 책임지지 않습니다.",
+      "8-h2": "7. 개인정보처리방침 변경",
+      "8-p": "당사는 때때로 본 개인정보처리방침을 변경할 수 있습니다. 정기적으로 이 페이지를 확인해 주시기 바랍니다. 변경사항은 게시 즉시 효력이 발생합니다.",
+      "9-h2": "8. 문의하기",
+      "9-p": "개인정보처리방침에 대한 문의, 우려 사항 또는 피드백이 있으시면 contact@flaq.ai로 연락 바랍니다. 회사 정보: FLAQ AI PTE. LTD., 112 ROBINSON ROAD, #03-01, ROBINSON 112, SINGAPORE. 항상 고객의 문의에 신속히 대응할 수 있도록 최선을 다하겠습니다."
+    },
+    "termsConditions": {
+      "1-h1": "flaq.ai 이용약관",
+      "1-p": "flaq.ai(AI 기반 이미지 및 영상 생성 플랫폼, 이하 \"서비스\")에 오신 것을 환영합니다. https://flaq.ai(이하 \"사이트\")에 접속하거나 서비스를 이용하면 본 이용약관(이하 \"약관\")에 동의하는 것으로 간주됩니다. 약관은 귀하가 본 사이트 및 flaq.ai(이하 '당사', '우리')가 제공하는 서비스 이용에 적용됩니다. 서비스를 사용하기 전 약관을 주의 깊게 읽어보시기 바랍니다. 약관의 일부라도 동의하지 않으면 사이트 또는 서비스를 이용할 수 없습니다. 약관이나 당사 제품/서비스 관련 문의는 개인정보처리방침을 참조하거나 contact@flaq.ai로 연락해 주십시오.",
+      "terms-of-service": "이용약관",
+      "2-h2": "1. 자격 요건",
+      "2-p": "서비스 이용을 위해서는 만 18세 이상이거나 귀하의 관할 지역에서 성인임을 요구합니다. 서비스를 사용함으로써 귀하는 이 요건을 충족함을 진술 및 보증합니다. 회사, 조직 또는 기타 법인을 대신해 서비스를 사용하는 경우 이를 위 약관에 구속할 권한이 있음을 진술 및 보증합니다.",
+      "3-h2": "2. 계정 등록",
+      "3-p": "서비스의 일부 기능을 이용하려면 계정 생성을 해야 할 수 있습니다. 등록 과정에서 정확하고 완전한 최신 정보를 제공하며 필요한 경우 정보를 갱신할 것에 동의합니다. 귀하는 계정 자격 증명 관리 및 계정 내 모든 활동에 책임이 있습니다. 무단 사용이 의심되는 경우 즉시 contact@flaq.ai로 통지해야 합니다.",
+      "4-h2": "3. 서비스 이용",
+      "4-p": "허용된 이용: flaq.ai는 귀하에게 개인적 및 상업적 용도의 서비스를 이용할 수 있는 제한적·비독점적·양도불가·철회 가능한 라이선스를 부여합니다(약관에 따름). 귀하는 불법적이거나 금지된 목적으로 서비스를 사용하지 않을 것에 동의합니다.",
+      "5-h2": "금지된 행동",
+      "5-p": "금지된 행동: 귀하는 다음 행위를 하지 않을 것에 동의합니다. (a) 불법적, 유해, 남용적, 명예훼손적, 음란하거나 기타 부적절한 콘텐츠 생성 또는 배포; (b) 서비스 일부의 역공학, 디컴파일, 분해 시도; (c) 봇, 스파이더, 크롤러 등 자동화 도구를 사용해 사이트나 서비스에 접근; (d) 서비스 또는 관련 서버 및 네트워크 방해; (e) 타인의 지식재산권 침해.",
+      "6-h2": "4. 사용자 콘텐츠",
+      "6-p": "소유권 및 책임: 귀하는 서비스 이용 중 업로드/생성한 이미지, 텍스트, 기타 자료('사용자 콘텐츠')의 소유권을 보유합니다. 귀하는 직접 생성, 업로드, 게시, 공유하는 사용자 콘텐츠에 대해 전적인 책임이 있습니다.",
+      "7-h2": "7. flaq.ai에 대한 라이선스",
+      "7-p": "flaq.ai 라이선스: 사용자 콘텐츠를 제출함으로써 귀하는 flaq.ai에게 글로벌, 비독점적, 로열티 무료, 서브라이선스 가능, 양도 가능한 라이선스를 부여하여 해당 콘텐츠를 서비스 운영·개선·홍보를 위해 사용할 수 있도록 허락합니다.",
+      "8-h2": "8. 콘텐츠 제한",
+      "8-p": "콘텐츠 제한: 귀하는 다음 내용을 가진 사용자 콘텐츠를 업로드·생성·공유하지 않을 것에 동의합니다. (a) 타인의 지식재산권 침해; (b) 관련 법규 위반; (c) 악성코드, 바이러스 등 유해 코드 포함; (d) 허위, 오해의 소지가 있거나 부정확한 정보.",
+      "9-h2": "9. 지적 재산권",
+      "9-p": "Flaq AI의 소유권: 서비스는 라이선스로 제공되며, 판매되는 것이 아닙니다. Flaq AI 및 그 라이선스 제공자는 사이트, 서비스 및 Flaq AI 콘텐츠(소프트웨어, 텍스트, 그래픽, 로고 등)에 대한 모든 소유권 및 지식재산권을 보유합니다. 약관에서 명시적으로 부여되지 않은 모든 권리는 보유합니다.",
+      "10-h2": "10. 사용자 피드백",
+      "10-p": "사용자 피드백: 귀하가 서비스에 대해 flaq.ai에 제공하는 모든 피드백, 제안, 아이디어(이하 '피드백')는 flaq.ai의 독점 자산이 됩니다. 귀하는 피드백에 대한 모든 권리를 flaq.ai에 양도하며, 당사는 별도의 보상 없이 이를 자유롭게 활용할 수 있습니다.",
+      "11-h2": "11. 결제",
+      "11-p": "이용 요금: 일부 서비스 기능은 결제가 필요할 수 있습니다. 귀하는 서비스 이용에 따라 발생하는 모든 요금을 지불하는 것에 동의합니다. flaq.ai는 사전 고지 후 요금 또는 청구 방식을 언제든 변경할 수 있습니다.",
+      "12-h2": "12. 청구",
+      "12-p": "청구: 결제는 제3자 결제 처리사를 통해 이루어질 수 있습니다. 결제 정보를 제공함으로써 귀하는 flaq.ai 및 결제 처리사가 해당 결제수단으로 요금을 청구하는 것에 동의합니다.",
+      "13-h2": "13. 크레딧 및 사용",
+      "13-p": "크레딧 및 사용: Flaq AI는 선불(PAYG) 방식으로 운영됩니다. 귀하가 구매 또는 충전한 크레딧은 소멸되지 않으며, 이용량에 따라 과금됩니다. 요금은 사용 모델에 따라 달라질 수 있습니다.",
+      "14-h2": "14. 환불",
+      "14-p": "환불: 별도 명시가 없는 한 모든 요금은 환불되지 않습니다. flaq.ai는 필요에 따라 특정 상황에서 환불 또는 크레딧을 제공할 수 있습니다.",
+      "15-h2": "15. 이용자에 의한 해지",
+      "15-p": "이용자 해지: 귀하는 사이트상의 안내에 따라 언제든 계정을 해지할 수 있습니다. 해지 즉시 서비스에 대한 접근 및 이용 권한이 즉시 종료됩니다.",
+      "16-h2": "16. flaq.ai에 의한 해지",
+      "16-p": "flaq.ai 해지: flaq.ai는 사유 불문, 통지 여부에 관계없이 귀하의 계정 또는 서비스 사용을 종료/중지시킬 수 있습니다. (약관 위반 등)",
+      "17-h2": "17. 해지의 효과",
+      "17-p": "해지 효과: 이용약관에 따라 부여된 모든 라이선스는 해지 시 종료되며, 서비스를 즉시 중단해야 합니다. 결제, 지적 재산 등 미지급 권리·의무는 해지 후에도 유효합니다.",
+      "18-h2": "18. 책임제한 및 면책",
+      "18-p": "책임의 한계: 서비스는 \"있는 그대로\" 및 \"이용 가능한 상태로\" 제공되며, 명시적/묵시적/법정 책임을 포함한 모든 보증이 없습니다. flaq.ai는 서비스의 중단, 오류, 유해 요소의 부재를 보장하지 않으며, 법이 허용하는 최대한도 내에서 상품성, 특정 목적 또는 비침해성 등 모든 보증을 부인합니다.",
+      "19-h2": "19. 손해배상 한도",
+      "19-p": "책임의 한도: 법이 허용하는 최대 한도 내에서 flaq.ai는 귀하의 서비스 사용에서 발생하거나 관련된 간접적, 우발적, 특별, 결과적, 징벌적 손해(이익 손실, 데이터 손실 등)에 대해 책임지지 않습니다.",
+      "20-h2": "20. 면책",
+      "20-p": "귀하는 서비스 사용이나 약관 위반, 제3자의 지식재산권 등 권리 침해로부터 발생하는 모든 청구, 손해, 비용, 손실, 합리적 법률 비용 등으로부터 flaq.ai 및 임직원을 방어하고 면책하는 데 동의합니다.",
+      "21-h2": "21. 개인정보 보호 방침 준수",
+      "21-p": "당사의 개인정보 수집, 이용, 보호는 https://flaq.ai/privacy-policy에서 확인하실 수 있는 방침에 따릅니다. 당사는 브라질 LGPD, 멕시코 LFPDPPP, 유럽 GDPR 등 관련 데이터 보호법을 준수합니다. 귀하는 당사 개인정보처리방침을 읽고 데이터 처리 방법을 이해할 것에 동의합니다.",
+      "22-h2": "22. 약관 변경",
+      "22-p": "flaq.ai는 언제든 약관을 변경할 권리가 있습니다. 변경사항은 사이트 또는 서비스 내에 고지되며, 효력 발생일 이후 계속 서비스를 사용할 경우 약관 수정에 동의한 것으로 간주합니다.",
+      "23-h2": "23. 기타 조항",
+      "23-p": "전체 계약: 본 약관은 귀하와 flaq.ai 간 서비스 이용에 대한 완전한 합의를 구성하며, 이전 계약은 모두 대체됩니다.",
+      "24-h2": "24. 분리 가능성",
+      "24-p": "분리 가능성: 약관 일부가 무효 또는 집행 불능으로 간주되더라도 가능한 최대 범위로 시행되며 나머지 조항은 계속 완전한 효력을 가집니다.",
+      "25-h2": "25. 권리 포기",
+      "25-p": "권리 포기: flaq.ai가 약관의 권리나 조항을 집행하지 않는다고 하여 그 권리를 포기하는 것으로 간주되지 않습니다.",
+      "26-h2": "26. 양도",
+      "26-p": "양도: 귀하는 flaq.ai의 사전 서면동의 없이 약관 또는 관련 권리·의무를 양도할 수 없습니다. flaq.ai는 자유롭게 양도할 수 있습니다.",
+      "27-h2": "27. 준거법",
+      "27-p": "본 약관 및 서비스 이용은 해당 국가의 법률(충돌 규정 제외)에 따릅니다. 귀하의 서비스 이용은 미국, 브라질의 LGPD, 멕시코 LFPDPPP, 유럽 GDPR 등 기타 지역/국가 법률 적용을 받을 수 있습니다.",
+      "28-h2": "28. 동의",
+      "28-p": "동의: flaq.ai를 이용함으로써 귀하는 본 약관을 읽고 이해했으며, 그 내용에 구속 받음에 동의합니다.",
+      "29-h2": "29. 연락처 정보",
+      "29-p": "연락처: 약관 관련 문의는 contact@flaq.ai로 연락해 주십시오. 회사 정보: FLAQ AI PTE. LTD., 112 ROBINSON ROAD, #03-01, ROBINSON 112, SINGAPORE. 모든 문의에 신속히 응답드리도록 최선을 다하겠습니다."
+    },
+    "refundPolicy": {
+      "1": {
+        "title": "1. 환불 자격",
+        "description": "플랫폼 파트너 의존 및 AI 처리의 높은 연산 비용으로 인해, 환불 요청은 구매 후 3일 이내에 제출해야 합니다. 이 기간이 지난 후에는 환불이 불가합니다. 자세한 내용은 contact@flaq.ai로 문의해 주십시오."
+      },
+      "2": {
+        "title": "2. 크레딧 사용 제한",
+        "description": "서비스의 연산 자원(예: AI 영상 또는 이미지 생성)을 이미 사용하신 경우, 구매 시점과 관계없이 환불 대상이 아닙니다. 자세한 사항은 contact@flaq.ai로 문의해 주십시오."
+      },
+      "3": {
+        "title": "3. 환불 요청 방법",
+        "description": "환불을 요청하시려면 account 정보, 주문번호, 구매일, 환불 사유 등 상세 정보를 포함하여 contact@flaq.ai로 지원팀에 연락해 주십시오. 모든 환불 요청은 구매 후 3일 이내에 제출되어야 합니다."
+      },
+      "4": {
+        "title": "4. 선불(PAYG) 서비스",
+        "description": "Flaq AI는 사용량 기반 결제(pay-as-you-go) 모델로 운영됩니다. 사용한 크레딧 또는 자원은 환불되지 않으니 참고해 주십시오."
+      },
+      "5": {
+        "title": "5. 환불 처리",
+        "description": "환불 요청이 접수되면, 당사 팀이 신중히 심사 후 결과를 안내드립니다. 환불 승인이 되면 원래 결제수단으로 환불이 진행됩니다. 문의사항이 있을 경우 contact@flaq.ai로 연락해 주십시오."
+      },
+      "6": {
+        "title": "6. 본 정책의 변경",
+        "description": "1. 당사는 환불 정책을 언제든 변경할 권리가 있습니다. \n2. 변경 시 즉시 본 페이지에 적용됩니다. \n3. 정기적으로 정책을 확인하시길 권장합니다. \n4. 정책 안내 또는 문의는 contact@flaq.ai로 연락하십시오."
+      },
+      "title": "flaq.ai 환불 정책"
+    }
+  },
+  "Home": {
+    "heading": {
+      "title": "AI 이미지와 동영상 — 무료 오픈 소스 · 가입 불필요",
+      "description": "가입 없이 무료 오픈 소스 AI 이미지와 동영상 템플릿을 사용, 수정, 자체 호스팅할 수 있습니다. 모델 생성에는 Flaq Client Key가 필요하며 API 사용료는 별도입니다.",
+      "try-now": "Try Now",
+      "try-now-video": "비디오 API 체험",
+      "try-now-image": "이미지 API 체험"
+    },
+    "carousel": {
+      "title": "Flaq SaaS Template: AI Generation Tools",
+      "description": "Explore AI generation tools powered by Flaq AI",
+      "video": {
+        "type": "AI Video Generator"
+      },
+      "image": {
+        "type": "AI Image Generator"
+      },
+      "tryon": {
+        "type": "AI Virtual Try-On"
+      }
+    },
+    "unique-features": {
+      "1": {
+        "title": "Flaq AI Integration",
+        "description": "Built-in integration with Flaq AI's open API for seamless image and video generation capabilities."
+      },
+      "2": {
+        "title": "Multiple Types & Presets",
+        "description": "Support for text-to-image, image-to-image, text-to-video, image-to-video, and virtual try-on with built-in scene presets."
+      },
+      "3": {
+        "title": "Ready-to-Deploy",
+        "description": "Complete UI components, API integration, and deployment configuration included. Get started in minutes."
+      },
+      "4": {
+        "title": "Open Source & Customizable",
+        "description": "Fully open source with clean code structure. Easy to customize and extend for your specific needs."
+      },
+      "title": "Key Features of Flaq SaaS Template",
+      "description": "A complete open source template with essential features for building your own AI generation platform.",
+      "button-text": "Try Now"
+    },
+    "use-cases": {
+      "1": {
+        "title": "완전 자동화 콘텐츠 마케팅 플랫폼",
+        "description": "Nano Banana Pro API로 브랜드 비주얼을 일괄 생성하고 LLM으로 게시글을 자동 생성, 카피라이팅부터 비주얼까지 즉시 아웃풋을 만듭니다."
+      },
+      "2": {
+        "title": "실시간 인터랙티브 AI 제품",
+        "description": "Flaq의 초저지연 추론 기술로 소셜 앱, 게임, 실시간 어시스턴트의 이미지/비디오 생성을 매끄럽게 구현하세요."
+      },
+      "3": {
+        "title": "영화·광고 산업 파이프라인",
+        "description": "Veo 3.1 및 Wan 2.6 API로 시나리오 초기 단계에서 빠른 프리비주얼(Pre-viz) 구현, 기존 렌더링 비용을 획기적으로 절감합니다."
+      },
+      "4": {
+        "title": "개발자 프로토타이핑 및 성장",
+        "description": "통합 API 키로 다양한 모델 조합을 빠르게 테스트하고, 시장 피드백에 따라 코드 수정 없이 언제든 핵심 알고리즘을 전환할 수 있습니다."
+      },
+      "title": "Flaq AI의 대표 활용 시나리오",
+      "description": "Flaq AI의 고성능 API 클러스터는 단순한 도구세트를 넘어 산업 혁신을 이끄는 엔진입니다. 창작 워크플로우부터 엔터프라이즈 자동화까지 모든 상황을 지원하는 기술적 기반을 제공합니다.",
+      "button-text": "Try Now"
+    },
+    "exampleSection": {
+      "title": "Examples Generated via Flaq API",
+      "description": "Explore what you can create with Flaq SaaS Template powered by Flaq AI. Use this template to quickly build your own platform! For the full AI generation experience, visit flaq.ai.",
+      "imageExamples": {
+        "title": "Image Generation Examples",
+        "description": "See how the template handles AI image generation with various styles and prompts."
+      },
+      "videoExamples": {
+        "title": "Video Generation Examples",
+        "description": "Discover how the template transforms images and text into dynamic video content.",
+        "promptLabel": "Prompt"
+      }
+    },
+    "faq": {
+      "1": {
+        "question": "Flaq AI와 모델 제공자 공식 API 직접 사용의 차이점은 무엇인가요?",
+        "answer": "Flaq AI는 표준화된 데이터 포맷, 지능적 페일오버 라우팅, 최적화된 네트워크를 제공해 지연 시간을 대폭 줄이고, 여러 API 계정 관리의 번거로움을 해소합니다."
+      },
+      "2": {
+        "question": "Flaq AI가 지원하는 모델의 종류는?",
+        "answer": "현재 100개 이상의 최첨단 AI 모델을 심층 지원하며, 이미지 생성·비디오 생성·음성 텍스트 변환 등을 포함합니다."
+      },
+      "3": {
+        "question": "플랫폼은 데이터 보안과 개인정보를 어떻게 지키나요?",
+        "answer": "Flaq AI는 엔터프라이즈급 암호화 통신을 도입하고, 사용자 프롬프트 및 개인정보 저장 금지 정책을 지켜, 비즈니스 데이터가 규제 요건을 준수하도록 보장합니다."
+      },
+      "4": {
+        "question": "무료 체험 할당량이 제공되나요?",
+        "answer": "신규 가입 시 통합 테스트용 무료 체험 할당이 제공됩니다. 이후에는 비즈니스 상황에 맞춰 종량제 또는 구독 요금제를 유연하게 선택할 수 있습니다."
+      },
+      "5": {
+        "question": "Flaq AI를 상업적 목적으로 사용할 수 있나요?",
+        "answer": "네, Flaq AI를 상업적 목적으로 사용할 수 있습니다. 다만 모델 제공업체의 약관과 현재 거주 국가의 법률을 준수해야 합니다."
+      },
+      "6": {
+        "question": "flaq.ai에서 환불을 받으려면 어떻게 해야 하나요?",
+        "answer": "환불이 필요하면 contact@flaq.ai로 지원팀에 문의하세요. 상황을 검토한 뒤 조건에 맞는 환불 해결책을 제공하겠습니다. 단, 사용하지 않은 크레딧 또는 리소스에 대해서만 환불을 제공합니다."
+      },
+      "7": {
+        "question": "제품 관련 질문이 있거나 문제가 발생하면 어떻게 해야 하나요?",
+        "answer": "제품에 관한 질문이나 문제가 있으면 contact@flaq.ai로 문의하세요. 필요한 사항이나 사용 중 겪는 문제와 관계없이 가능한 최선의 해결책을 제공하겠습니다."
+      },
+      "8": {
+        "question": "지식 재산권 침해에 관한 면책 조항은 무엇인가요?",
+        "answer": "Flaq AI는 사용자가 상상력을 활용해 원하는 이미지 콘텐츠를 생성할 수 있도록 AI 도구를 제공합니다. 사용자가 유명인 또는 기타 지식 재산권과 관련된 콘텐츠를 포함하여 홍보하고 이로 인해 침해 문제가 발생하는 경우, 법적 책임은 사용자에게 있습니다."
+      },
+      "title": "Flaq AI 자주 묻는 질문"
+    }
+  },
+  "image-to-image": {
+    "heading": {
+      "title": "이미지로 이미지 — 무료 오픈 소스 · 가입 불필요",
+      "description": "가입 없이 무료 오픈 소스 이미지로 이미지 템플릿을 사용, 수정, 자체 호스팅할 수 있습니다. 모델 생성에는 Flaq Client Key가 필요하며 API 사용료는 별도입니다."
+    },
+    "form": {
+      "title": "이미지로 이미지"
+    },
+    "examples": {
+      "1": {
+        "1": {
+          "title": "Original"
+        },
+        "2": {
+          "title": "A girl with a backpack, standing relaxed near a bookshelf and behind a chair. Keep every other detail in the scene completely unchanged."
+        },
+        "title": "The AI image-to-image converter enables high-quality style conversion and reconstruction while maintaining original characteristics and details."
+      },
+      "2": {
+        "1": {
+          "title": "Original"
+        },
+        "2": {
+          "title": "Convert a realistic image into retro, grid-style pixel video game art."
+        },
+        "title": "The AI image-to-image converter supports fine-grained control of style transfer while preserving the source image's complete content."
+      },
+      "3": {
+        "1": {
+          "title": "Original"
+        },
+        "2": {
+          "title": "Ultra-realistic 8K overhead photo in strict knolling style. Take the object from the reference image and fully disassemble it into 8 to 12 main parts, arranging them neatly in a grid or radial layout on a minimalist wood or matte gray tabletop. Use uniform spacing and perfect alignment, no overlap or extraneous items. The scene is softly and diffusely lit by multiple light sources, casting subtle shadows and balancing neutral colors, with all elements in perfect focus. Show highly detailed real-world materials (metal, plastic, rubber grips, circuit boards, screws). For each part, add a slim white rectangular border, and place a short, clear English label next to it in a simple sans-serif font, not covering the part; annotations must be legible and not intrusive."
+        },
+        "title": "The AI image-to-image converter preserves the original structure and layout during transformation, enabling creators to achieve more accurate composition control and generate high-quality, stable output images."
+      },
+      "title": "AI 이미지-투-이미지 생성기의 핵심 기능",
+      "description": "주요 소스 이미지 디테일을 보존하면서 참조 기반 생성, 시각 편집, 스타일 전환, 제품 목업, 빠른 이미지 변형을 위한 유연한 이미지-투-이미지 제작 도구입니다."
+    },
+    "core-feature": {
+      "1": {
+        "title": "Realistic and Delicate Visual Presentation",
+        "description": "Outstanding in rendering textures, lighting, and composition, the system produces highly accurate, richly detailed, and realistic images for vivid results."
+      },
+      "2": {
+        "title": "Highly Flexible Style Control",
+        "description": "Customize your desired visual style freely using prompts or reference images. Whether illustration, social media, product sketch, or other visual types, achieve your vision with ease."
+      },
+      "3": {
+        "title": "Powerful Text Understanding and Parsing",
+        "description": "Leveraging advanced natural language processing, the system accurately understands prompts and descriptions to quickly generate and optimize image content for smarter, more efficient creation."
+      },
+      "title": "Core Advantages of Image-to-Image Converter",
+      "description": "A professional AI image-to-image tool offering high-resolution outputs and a streamlined, user-friendly interface. Easily generate high-quality works from reference images. Diverse settings provide creative freedom, making image editing, design, and art creation more efficient and flexible."
+    },
+    "advantage": {
+      "1": {
+        "title": "Poster & Visual Design",
+        "description": "Supports poster and various creative visual editing, with flexible adjustment of fonts, sizes, and styles—perfect for event promotion and brand marketing."
+      },
+      "2": {
+        "title": "Product Marketing & Brand Communication",
+        "description": "Enables rapid generation of product visuals and creative marketing materials, saving design time, enhancing visual appeal, and boosting brand influence."
+      },
+      "3": {
+        "title": "Educational Content Creation",
+        "description": "Assists educators in creating and editing teaching visuals, making teaching resources more vivid and greatly improving presentation and effectiveness."
+      },
+      "4": {
+        "title": "Artistic Creation & Cultural Innovation",
+        "description": "Empowers artists and designers with rich creative tools for style transformation, cross-domain inspiration, and maximized artistic possibilities."
+      },
+      "title": "Applications of the AI Image-to-Image Converter",
+      "description": "The AI image-to-image converter is suitable for poster design, brand marketing, product showcases, and artistic creation. It enables precise image and text control, greatly improving creative efficiency and visual quality and providing powerful creative capabilities for designers, business teams, and educators.",
+      "try-now": "Try Now"
+    },
+    "manual": {
+      "1": {
+        "title": "참조 이미지 업로드",
+        "description": "제품 사진, 인물, 스케치, 디자인 초안, 스타일 참조 또는 생성 결과를 안내해야 하는 어떤 이미지로든 시작하세요."
+      },
+      "2": {
+        "title": "변환 내용 설명",
+        "description": "무엇을 변경하고 무엇을 보존할지 설명하는 프롬프트를 작성하세요. 스타일, 배경, 조명, 색상, 구도, 피사체 디테일, 출력 목표를 포함할 수 있습니다."
+      },
+      "3": {
+        "title": "생성 및 다듬기",
+        "description": "지원 모델과 설정을 선택하고 이미지를 생성한 뒤 결과를 미리보고, 완성된 이미지를 JPG, PNG 또는 WebP 같은 지원 형식으로 다운로드하세요."
+      },
+      "title": "이미지에서 이미지를 생성하는 방법",
+      "content": "This step-by-step guide will help you get started and achieve the best results with the AI image-to-image conversion tool."
+    },
+    "faq": {
+      "1": {
+        "question": "AI 이미지-투-이미지 생성기란 무엇인가요?",
+        "answer": "AI 이미지-투-이미지 생성기는 업로드된 이미지를 시각 입력으로 사용한 뒤, 프롬프트를 바탕으로 새 이미지를 만듭니다. 기존 비주얼의 스타일 변경, 편집, 개선 또는 재해석에 도움이 됩니다."
+      },
+      "2": {
+        "question": "이미지를 업로드해도 프롬프트가 필요한가요?",
+        "answer": "네. 업로드한 이미지는 시각 컨텍스트를 제공하고, 프롬프트는 생성 결과에서 무엇을 변경, 보존 또는 강조할지 모델에 알려 줍니다."
+      },
+      "3": {
+        "question": "이미지-투-이미지 생성기가 원래 피사체를 보존할 수 있나요?",
+        "answer": "이미지-투-이미지 모델은 원래 피사체, 구조, 구도, 레이아웃 또는 스타일 단서를 보존할 수 있는 경우가 많지만, 최종 일관성은 선택한 모델, 입력 이미지 품질, 프롬프트 명확성에 따라 달라집니다."
+      },
+      "4": {
+        "question": "어떤 이미지 설정과 형식이 지원되나요?",
+        "answer": "사용 가능한 설정은 선택한 모델에 따라 달라집니다. 일반적인 옵션에는 화면 비율, 해상도, 품질, 시드, 프롬프트 최적화, 모델별 이미지 입력 제어, JPG, PNG, WebP 같은 지원 형식이 포함될 수 있습니다."
+      },
+      "5": {
+        "question": "크레딧 비용은 어떻게 계산되나요?",
+        "answer": "예상 비용은 선택한 모델과 참조 이미지 워크플로, 해상도, 품질, 제공업체 가격, 무료 크레딧, 현재 할인 규칙 같은 지원 매개변수를 바탕으로 계산됩니다."
+      },
+      "6": {
+        "question": "image-to-image 결과를 상업적으로 사용할 수 있나요?",
+        "answer": "상업적 사용은 업로드한 이미지에 대한 권리, 플랜, 플랫폼 약관, 모델 제공업체 규칙, 생성된 콘텐츠에 따라 달라집니다. 유료, 클라이언트 또는 공개 작업에 출력을 사용하기 전에 현재 약관을 확인하세요."
+      },
+      "title": "이미지-투-이미지 생성기 FAQ"
+    }
+  },
+  "image-to-video": {
+    "heading": {
+      "title": "이미지로 동영상 — 무료 오픈 소스 · 가입 불필요",
+      "description": "가입 없이 무료 오픈 소스 이미지로 동영상 템플릿을 사용, 수정, 자체 호스팅할 수 있습니다. 모델 생성에는 Flaq Client Key가 필요하며 API 사용료는 별도입니다."
+    },
+    "form": {
+      "title": "이미지로 동영상"
+    },
+    "example": {
+      "1": {
+        "prompt": "cutting the tomato"
+      },
+      "2": {
+        "prompt": "The man is skiing"
+      },
+      "title": "이미지-투-비디오 AI 생성기 예시",
+      "description": "이미지-투-비디오 AI 생성기 예시는 선택한 모델이 지원하는 경우, 소스 이미지가 프롬프트 기반 동작, 카메라 움직임, 시각 일관성, 선택적 오디오가 있는 움직이는 클립이 될 수 있음을 보여줍니다."
+    },
+    "core-feature": {
+      "1": {
+        "title": "High-Quality Video Output",
+        "description": "AI Video Generator produces high-quality videos with smooth motion and clear visuals, meeting professional video production standards."
+      },
+      "2": {
+        "title": "Efficient Generation Process",
+        "description": "Through optimized AI models, the generator significantly improves creative efficiency and shortens production cycles."
+      },
+      "3": {
+        "title": "Natural Motion and Spatial Consistency",
+        "description": "Character movements connect smoothly, scene transitions are seamless, both enhancing immersion and ensuring narrative continuity and logic."
+      },
+      "title": "Advantages about the Image to Video AI Generator",
+      "description": "AI Video Generator not only generates content quickly but also focuses on visual hierarchy and narrative logic, making it an important productivity tool for content creators and business teams."
+    },
+    "advantage": {
+      "1": {
+        "title": "Film and Video Creation",
+        "description": "AI Video Generator can quickly transform text descriptions into cinematic short films. Whether it's dramatic segments, sci-fi scenes, or emotional narratives, it can present precise cinematography, character consistency, and style matching, significantly improving the creative efficiency of film and video content."
+      },
+      "2": {
+        "title": "Marketing and Advertising Production",
+        "description": "With AI Video Generator, brands can easily generate high-quality advertising videos, product showcases, or promotional shorts at lower costs than traditional filming while quickly iterating versions, thereby enhancing brand exposure and communication effectiveness."
+      },
+      "3": {
+        "title": "Social Media Content Creation",
+        "description": "For platforms like YouTube Shorts, TikTok, and Instagram Reels, AI Video Generator can create attractive short videos. Combined with sound effects and visual filters, it helps creators enhance content interactivity and viral potential."
+      },
+      "4": {
+        "title": "Educational and Training Videos",
+        "description": "Teachers and training personnel can use AI Video Generator to create instructional videos, teaching demonstrations, or animated courseware. With AI-generated visuals and audio coordination, abstract or complex knowledge becomes more intuitive and easier to understand."
+      },
+      "title": "Use Cases about the Image to Video AI Generator",
+      "description": "With the Image to Video AI Generator, creators can unleash their imagination across various scenarios—from film shorts and social media content to brand advertising, educational training, and virtual reality experiences. This advanced tool can quickly transform text descriptions into high-quality, realistic and vivid video works, not only improving creative efficiency but also saving production costs, making creativity come to life faster.",
+      "try-now": "Try Now"
+    },
+    "manual": {
+      "1": {
+        "title": "참조 이미지 업로드",
+        "description": "애니메이션화하려는 사진, 제품 이미지, 인물, 디자인 또는 시각 참조로 시작하세요. 일부 모델은 마지막 프레임도 지원합니다."
+      },
+      "2": {
+        "title": "모션 설명",
+        "description": "동작, 카메라 움직임, 감정, 조명, 속도, 배경 변화, 안정적으로 유지해야 하는 소스 이미지 디테일을 설명하는 프롬프트를 작성하세요."
+      },
+      "3": {
+        "title": "생성, 미리보기 및 다듬기",
+        "description": "지원되는 이미지-투-비디오 모델을 선택하고 클립을 생성한 뒤 결과를 미리보고, 더 나은 버전을 위해 프롬프트나 설정을 다듬으세요."
+      },
+      "title": "이미지에서 비디오를 생성하는 방법",
+      "content": ""
+    },
+    "faq": {
+      "1": {
+        "question": "AI 이미지-투-비디오 생성기란 무엇인가요?",
+        "answer": "AI 이미지-투-비디오 생성기는 업로드된 이미지를 시각 시작점으로 사용한 뒤, 모션 프롬프트와 선택한 모델을 바탕으로 짧은 애니메이션 비디오를 만듭니다."
+      },
+      "2": {
+        "question": "이미지를 업로드해도 프롬프트가 필요한가요?",
+        "answer": "네. 업로드한 이미지는 시각 컨텍스트를 제공하고, 프롬프트는 무엇이 움직여야 하는지, 카메라가 어떻게 동작해야 하는지, 어떤 디테일을 일관되게 유지해야 하는지 모델에 알려 줍니다."
+      },
+      "3": {
+        "question": "이미지-투-비디오 생성기가 오디오가 포함된 비디오를 만들 수 있나요?",
+        "answer": "지원되는 일부 이미지-투-비디오 모델에는 오디오 또는 사운드 옵션이 포함됩니다. 선택한 모델이 지원할 때만 폼에 오디오 제어가 표시됩니다."
+      },
+      "4": {
+        "question": "마지막 프레임을 사용할 수 있나요?",
+        "answer": "일부 모델은 마지막 프레임 가이드를 지원합니다. 사용 가능한 경우 마지막 프레임은 생성된 비디오의 최종 구도나 전환 목표를 정의하는 데 도움이 됩니다."
+      },
+      "5": {
+        "question": "더 나은 이미지-투-비디오 결과를 얻으려면 어떻게 해야 하나요?",
+        "answer": "명확한 소스 이미지를 사용하고, 의도한 모션과 정체성, 제품 형태, 조명 또는 구도처럼 안정적으로 유지되어야 할 디테일을 구분하는 정확한 프롬프트를 작성하세요."
+      },
+      "6": {
+        "question": "image-to-video 결과를 상업적으로 사용할 수 있나요?",
+        "answer": "상업적 사용은 업로드한 이미지에 대한 권리, 플랜, 플랫폼 약관, 모델 제공업체 규칙, 생성된 콘텐츠에 따라 달라집니다. 유료, 클라이언트 또는 공개 작업에 출력을 사용하기 전에 현재 약관을 확인하세요."
+      },
+      "title": "이미지-투-비디오 생성기 FAQ"
+    }
+  },
+  "text-to-video": {
+    "heading": {
+      "title": "텍스트로 동영상 — 무료 오픈 소스 · 가입 불필요",
+      "description": "가입 없이 무료 오픈 소스 텍스트로 동영상 템플릿을 사용, 수정, 자체 호스팅할 수 있습니다. 모델 생성에는 Flaq Client Key가 필요하며 API 사용료는 별도입니다."
+    },
+    "form": {
+      "title": "텍스트로 동영상"
+    },
+    "example": {
+      "1": {
+        "prompt": "A short hair beautiful European influencer is trying to sell to the camera a smooth cylindrical object, tapering slightly at one end, made of firm or flexible material with a polished, minimal design, recorded with an iPhone, smiling"
+      },
+      "2": {
+        "prompt": "A man soaring gracefully through outer space as the camera orbits smoothly around him"
+      },
+      "title": "텍스트-투-비디오 AI 생성기 예시",
+      "description": "텍스트-투-비디오 AI 생성기 예시는 선택한 모델이 지원하는 경우, 프롬프트만으로 시작한 아이디어가 명확한 모션, 시네마틱 프레이밍, 사실적인 물리감, 선택적 오디오가 있는 역동적인 클립이 될 수 있음을 보여줍니다."
+    },
+    "core-feature": {
+      "1": {
+        "title": "Cutting-Edge AI Technology",
+        "description": "Based on advanced artificial intelligence models with deep semantic understanding and physics modeling capabilities, generating realistic and vivid video content from text or images."
+      },
+      "2": {
+        "title": "Realistic Physics Engine",
+        "description": "Built-in high-precision physics simulation system that accurately recreates momentum, buoyancy, and complex motion for natural and smooth dynamic effects."
+      },
+      "3": {
+        "title": "High-Quality Video Output",
+        "description": "Generates high-quality videos with smooth motion and cinematic visual quality for various creative scenarios."
+      },
+      "title": "Advantages about Text to Video AI Generator",
+      "description": "AI Video Generator not only generates content quickly but also focuses on visual hierarchy and narrative logic, making it an important productivity tool for content creators and business teams."
+    },
+    "advantage": {
+      "1": {
+        "title": "Film and Video Creation",
+        "description": "Text to Video AI Generator can rapidly transform text descriptions into cinematic short films. Whether dramatic segments, sci-fi scenes, or emotional narratives, it can precisely present cinematography, character consistency, and style matching, significantly improving film and video content creation efficiency."
+      },
+      "2": {
+        "title": "Marketing and Advertising Production",
+        "description": "Brands can leverage Text to Video AI Generator to efficiently generate advertising videos, product showcases, or promotional shorts at low cost, rapidly iterate versions, and enhance brand exposure and communication effectiveness."
+      },
+      "3": {
+        "title": "Social Media Content Creation",
+        "description": "Suitable for platforms like YouTube Shorts, TikTok, and Instagram Reels, Text to Video AI Generator can create engaging short videos. Combined with sound effects and visual filters, it enhances content interactivity and viral potential."
+      },
+      "4": {
+        "title": "Educational and Training Videos",
+        "description": "Teachers and training personnel can use AI Video Generator to create instructional videos, demonstrations, or animated courseware. AI-generated visuals combined with audio make abstract or complex knowledge more intuitive and understandable."
+      },
+      "title": "Application Scenarios about Text to Video AI Generator",
+      "description": "Text to Video AI Generator helps you quickly turn text into high-quality videos for short films, social media, marketing, training, and more—saving time and reducing costs.",
+      "try-now": "Try Now"
+    },
+    "manual": {
+      "1": {
+        "title": "비디오 프롬프트 입력",
+        "description": "비디오의 피사체, 배경, 동작, 카메라 각도, 움직임, 조명, 감정, 시각 스타일, 최종 목적을 설명하세요."
+      },
+      "2": {
+        "title": "모델 및 설정 선택",
+        "description": "제공업체와 텍스트-투-비디오 모델을 선택한 뒤, 비율, 길이, 해상도, 사운드, 시드, 카메라 제어 또는 네거티브 프롬프트 같은 지원 옵션을 설정하세요."
+      },
+      "3": {
+        "title": "생성, 미리보기 및 다듬기",
+        "description": "비디오를 만들고 결과를 검토한 뒤 프롬프트나 모델 설정을 조정하고, 모션이 목표에 맞을 때까지 다른 버전을 생성하세요."
+      },
+      "title": "텍스트에서 비디오를 생성하는 방법",
+      "content": ""
+    },
+    "faq": {
+      "1": {
+        "question": "AI 텍스트-투-비디오 생성기란 무엇인가요?",
+        "answer": "AI 텍스트-투-비디오 생성기는 작성된 프롬프트에서 짧은 비디오를 만듭니다. 장면, 모션, 카메라, 스타일을 설명하면 선택한 AI 모델이 비디오 결과를 생성합니다."
+      },
+      "2": {
+        "question": "텍스트-투-비디오 생성기를 사용하려면 이미지를 업로드해야 하나요?",
+        "answer": "아니요. 텍스트-투-비디오 생성은 텍스트만으로 시작합니다. 업로드한 사진이나 디자인으로 비디오를 안내하고 싶다면 대신 이미지-투-비디오 생성기를 사용하세요."
+      },
+      "3": {
+        "question": "텍스트-투-비디오 생성기가 오디오가 포함된 비디오를 만들 수 있나요?",
+        "answer": "지원되는 일부 비디오 모델은 오디오를 생성하거나 포함할 수 있습니다. 오디오 옵션은 선택한 모델이 사운드 또는 오디오-비디오 생성을 지원할 때만 표시됩니다."
+      },
+      "4": {
+        "question": "어떤 비디오 설정을 조정할 수 있나요?",
+        "answer": "사용 가능한 설정은 선택한 모델에 따라 달라집니다. 일반적인 옵션에는 화면 비율, 길이, 해상도, 사운드, 시드, 카메라 제어, 네거티브 프롬프트가 포함됩니다."
+      },
+      "5": {
+        "question": "크레딧 비용은 어떻게 계산되나요?",
+        "answer": "예상 비용은 선택한 모델과 길이, 해상도, 오디오, 제공업체 가격, 무료 크레딧, 현재 할인 규칙 같은 지원 매개변수를 바탕으로 계산됩니다."
+      },
+      "6": {
+        "question": "생성된 비디오를 상업적으로 사용할 수 있나요?",
+        "answer": "상업적 사용은 플랜, 플랫폼 약관, 모델 제공업체 규칙, 생성한 콘텐츠에 따라 달라집니다. 유료, 클라이언트 또는 공개 작업에 출력을 사용하기 전에 현재 약관을 확인하세요."
+      },
+      "title": "텍스트-투-비디오 생성기 FAQ"
+    }
+  },
+  "text-to-image": {
+    "heading": {
+      "title": "텍스트로 이미지 — 무료 오픈 소스 · 가입 불필요",
+      "description": "가입 없이 무료 오픈 소스 텍스트로 이미지 템플릿을 사용, 수정, 자체 호스팅할 수 있습니다. 모델 생성에는 Flaq Client Key가 필요하며 API 사용료는 별도입니다."
+    },
+    "form": {
+      "title": "텍스트로 이미지"
+    },
+    "examples": {
+      "1": {
+        "title": "Enter product descriptions, scene details, or character features. The system will automatically interpret the semantics and generate a corresponding visual image."
+      },
+      "2": {
+        "title": "The system deeply analyzes and interprets the text, outputting well-structured, detail-rich, and stylistically diverse image results."
+      },
+      "title": "AI 텍스트-투-이미지 생성기의 핵심 기능",
+      "description": "작성한 아이디어를 디테일한 비주얼로 바꾸기 위한 강력한 AI 이미지 제작 워크플로로, 강력한 프롬프트 이해, 유연한 모델 선택, 깔끔한 구성, 빠른 창작 반복 작업에 맞춰 구축되었습니다."
+    },
+    "advantage": {
+      "1": {
+        "title": "Efficient Generation, Greatly Saves Time",
+        "description": "AI rapidly transforms text into images, dramatically reducing time costs for creators."
+      },
+      "2": {
+        "title": "Semantic Accuracy & Detailed Realism",
+        "description": "The generated images maintain consistency in overall composition, color, and detailed features, faithfully reproducing both meaning and fine details."
+      },
+      "3": {
+        "title": "Flexible Multi-Input Adaptation",
+        "description": "Supports natural language text inputs, platform templates, or AI auto-generated supplementary materials—catering to all levels of experience and diverse needs."
+      },
+      "4": {
+        "title": "Ideal for Personal and Business Use",
+        "description": "Whether you're a designer, content creator, product team, developer, or brand owner, easily create ready-to-use image assets for a variety of applications."
+      },
+      "title": "Advantages of Text to Image AI",
+      "description": "The core advantages of Text to Image AI lie in automating the traditionally complex, high-barrier image creation process, enabling users to rapidly obtain high-quality visual results while maintaining realism and creativity.",
+      "button-text": "Try Now"
+    },
+    "use-cases": {
+      "1": {
+        "title": "마케팅 및 소셜 비주얼",
+        "description": "작성한 크리에이티브 브리프에서 캠페인 콘셉트, 제품 장면, 출시 그래픽, 소셜 미디어 게시물, 썸네일 아이디어, 광고 변형을 바로 생성하세요."
+      },
+      "2": {
+        "title": "디자인 초안 및 브랜드 탐색",
+        "description": "무드보드, 시각 방향, 스타일 노트, 패키징 아이디어, 레이아웃 콘셉트를 더 빠른 검토와 반복 작업을 위한 세련된 초안으로 전환하세요."
+      },
+      "3": {
+        "title": "교육 및 프레젠테이션 이미지",
+        "description": "추상적인 정보를 더 쉽게 이해할 수 있도록 교실 비주얼, 콘셉트 일러스트, 다이어그램, 설명 이미지, 프레젠테이션 자산을 만드세요."
+      },
+      "4": {
+        "title": "스토리텔링 및 콘셉트 아트",
+        "description": "상세한 텍스트 설명에서 캐릭터, 시네마틱 프레임, 환경, 포스터, 표지, 세계관 장면, 서사형 아트워크를 개발하세요."
+      },
+      "title": "텍스트-투-이미지 사용 사례",
+      "description": "참조 이미지를 준비하거나 복잡한 디자인 워크플로를 만들지 않고, 단어에서 원본 이미지를 만들어야 할 때 Flaq AI 텍스트-투-이미지 생성기를 사용하세요.",
+      "try-now": "제작 시작"
+    },
+    "manual": {
+      "1": {
+        "title": "이미지 프롬프트 입력",
+        "description": "원하는 이미지를 설명하세요. 피사체, 배경, 스타일, 조명, 구도, 분위기, 색상, 카메라 각도, 표시되어야 할 텍스트를 포함할 수 있습니다."
+      },
+      "2": {
+        "title": "모델 및 설정 선택",
+        "description": "창작 목표에 맞는 제공업체와 모델을 선택한 뒤, 선택한 모델이 지원하는 경우 비율, 해상도, 품질, 시드 또는 프롬프트 최적화를 설정하세요."
+      },
+      "3": {
+        "title": "생성, 미리보기 및 다듬기",
+        "description": "생성을 클릭하고 이미지 결과를 검토한 뒤 프롬프트나 설정을 조정하고, 완성된 이미지를 JPG, PNG 또는 WebP 같은 지원 형식으로 다운로드하세요."
+      },
+      "title": "텍스트에서 이미지를 생성하는 방법",
+      "content": "Text to Image features a simple and intuitive workflow—no design experience required. Just enter your text description and the system automatically analyzes the semantics to generate the corresponding visual image."
+    },
+    "faq": {
+      "1": {
+        "question": "AI 텍스트-투-이미지 생성기란 무엇인가요?",
+        "answer": "AI 텍스트-투-이미지 생성기는 작성된 프롬프트에서 이미지를 만듭니다. 피사체, 장면, 스타일, 출력 요구사항을 설명하면 선택한 AI 모델이 시각 결과를 생성합니다."
+      },
+      "2": {
+        "question": "텍스트-투-이미지 생성기를 사용하려면 이미지를 업로드해야 하나요?",
+        "answer": "아니요. 텍스트-투-이미지 생성은 텍스트만으로 시작합니다. 기존 이미지를 변환, 스타일 변경 또는 편집하려면 대신 이미지-투-이미지 생성기를 사용하세요."
+      },
+      "3": {
+        "question": "다른 AI 이미지 모델을 선택할 수 있나요?",
+        "answer": "네. Flaq AI에서는 제공업체와 모델을 선택할 수 있어, 하나의 워크플로에서 서로 다른 모델의 강점, 지원 설정, 시각 스타일, 가격을 비교할 수 있습니다."
+      },
+      "4": {
+        "question": "어떤 이미지 설정과 형식이 지원되나요?",
+        "answer": "사용 가능한 설정은 선택한 모델에 따라 달라집니다. 일반적인 옵션에는 화면 비율, 해상도, 품질, 시드, 프롬프트 최적화가 포함되며, JPG, PNG, WebP 같은 이미지 형식이 지원됩니다."
+      },
+      "5": {
+        "question": "크레딧 비용은 어떻게 계산되나요?",
+        "answer": "예상 비용은 선택한 모델과 해상도, 품질, 제공업체 가격, 무료 크레딧, 현재 할인 규칙 같은 지원 매개변수를 바탕으로 계산됩니다."
+      },
+      "title": "텍스트-투-이미지 생성기 FAQ"
+    }
+  },
+  "virtual-try-on": {
+    "heading": {
+      "title": "가상 피팅 — 무료 오픈 소스 · 가입 불필요",
+      "description": "가입 없이 무료 오픈 소스 가상 피팅 템플릿을 사용, 수정, 자체 호스팅할 수 있습니다. 모델 생성에는 Flaq Client Key가 필요하며 API 사용료는 별도입니다."
+    },
+    "form": {
+      "title": "가상 피팅",
+      "upload-images-title": "Upload Images",
+      "upload-subject-label": "Upload [Person]",
+      "upload-object-label": "Upload [Clothing]",
+      "hints-title": "Hints",
+      "subject-label": "Person",
+      "object-label": "Clothing",
+      "ai-generation-label": "AI Generation"
+    },
+    "examples": {
+      "1": {
+        "1": {
+          "title": "Original"
+        },
+        "2": {
+          "title": "Generated"
+        },
+        "title": "Upload a person photo and a clothing image. The AI maps the garment onto the body with natural drape, accurate fit, and full detail preservation."
+      },
+      "2": {
+        "1": {
+          "title": "Original"
+        },
+        "2": {
+          "title": "Generated"
+        },
+        "title": "Choose from curated style hint templates to get started instantly—no sourcing required. The AI generates a complete try-on result based on your selection."
+      },
+      "3": {
+        "1": {
+          "title": "Original"
+        },
+        "2": {
+          "title": "Generated"
+        },
+        "title": "Switch between different AI models to control output style and detail level. Each model delivers consistent, high-quality virtual try-on results."
+      },
+      "title": "Core Features of Virtual Try On AI",
+      "description": "Virtual Try On AI accurately renders garments onto uploaded person photos, preserving body proportions, fabric texture, and design details across a wide range of clothing styles and model types."
+    },
+    "advantage": {
+      "1": {
+        "title": "Fast Generation, Instant Results",
+        "description": "Get photorealistic try-on results quickly. Our AI is pre-trained on millions of garment and body reference images, requiring no complex setup—just upload and see instant output."
+      },
+      "2": {
+        "title": "Perfect Details, Precise Presentation",
+        "description": "From delicate textures and complex patterns to tiny text and logos, every detail of the clothing is faithfully preserved in each result. The original design is fully represented—no distortions, no unexpected differences."
+      },
+      "3": {
+        "title": "Unlimited Compatibility, Complete Coverage",
+        "description": "Whether it's model photography, flat lay displays, or invisible mannequin shots, the AI handles them all without additional configuration. It adapts flexibly to diverse clothing styles, body types, and pose variations."
+      },
+      "4": {
+        "title": "Multiple Models, One Platform",
+        "description": "Switch between different AI models based on your output preference. Each model is optimized for different generation styles and clothing complexities—all accessible without any technical setup."
+      },
+      "title": "Core Advantages of Virtual Try On AI",
+      "description": "Virtual Try On AI combines multiple state-of-the-art generation models with a simple upload workflow, making realistic outfit visualization accessible to anyone—from individual shoppers to e-commerce teams.",
+      "try-now": "Try Now"
+    },
+    "use-cases": {
+      "1": {
+        "title": "Online Shopping & Purchase Decisions",
+        "description": "See exactly how a garment will look on your body before buying. Reduce return rates and purchase uncertainty by visualizing real outfit combinations on yourself."
+      },
+      "2": {
+        "title": "E-commerce Product Photography",
+        "description": "Generate on-model product visuals at scale without organizing photoshoots. Upload clothing images and instantly produce catalog-ready imagery for any body type or style."
+      },
+      "3": {
+        "title": "Fashion Design & Sampling",
+        "description": "Preview how new designs look on real body references before producing physical samples. Speed up design iteration and reduce prototyping costs across the development cycle."
+      },
+      "4": {
+        "title": "Marketing & Social Media Content",
+        "description": "Produce high-quality outfit imagery for campaigns, lookbooks, social posts, or brand promotions—without models, studios, or post-production. Generate multiple variations quickly to test different looks."
+      },
+      "title": "Use Cases for Virtual Try On AI",
+      "description": "Virtual Try On AI supports a wide range of personal and professional applications—from online shopping decisions to high-volume e-commerce content production.",
+      "try-now": "Try Now"
+    },
+    "manual": {
+      "1": {
+        "title": "Step 1: Upload a Person Photo",
+        "description": "Upload one clear photo of a person. This will serve as the base body reference for the virtual try-on."
+      },
+      "2": {
+        "title": "Step 2: Add Clothing Images or Choose a Style Hint",
+        "description": "Upload one or more clothing images (the number supported varies by model), or select from pre-built style hint templates to skip sourcing entirely."
+      },
+      "3": {
+        "title": "Step 3: Select Your AI Model",
+        "description": "Choose from available AI models. Each model offers different generation characteristics—select based on your desired output style and clothing type."
+      },
+      "4": {
+        "title": "Step 4: Generate and Download",
+        "description": "Click generate and receive your virtual try-on result. Preview the output and download it for personal use, product listings, or content creation."
+      },
+      "title": "How to Use Virtual Try On AI",
+      "content": "Virtual Try On AI requires no technical experience. Upload your images, select a model and style hint if needed, and receive a realistic try-on result quickly."
+    },
+    "faq": {
+      "1": {
+        "question": "What AI models are supported for Virtual Try On?",
+        "answer": "Multiple AI models are available, each with different generation characteristics suited to different clothing types and output styles. You can select the model that best fits your use case before generating."
+      },
+      "2": {
+        "question": "How many clothing images can I upload at once?",
+        "answer": "The number of supported clothing images depends on the selected model. Some models allow multiple garment uploads in a single session. Check the model details on the generation page for the specific limit."
+      },
+      "3": {
+        "question": "What are the style hint templates?",
+        "answer": "Style hints are curated outfit references. Instead of sourcing your own clothing images, you can select a hint to guide the AI toward a specific look. They are especially useful for quick style exploration."
+      },
+      "4": {
+        "question": "What types of clothing does Virtual Try On AI support?",
+        "answer": "Most standard clothing categories are supported, including tops, bottoms, dresses, and outerwear. Swimwear and lingerie are excluded due to platform usage policies."
+      },
+      "5": {
+        "question": "Does Virtual Try On AI support accessories or shoes?",
+        "answer": "Currently, the tool focuses on clothing items. Accessories and footwear require different rendering approaches and are not part of the current feature set."
+      },
+      "6": {
+        "question": "Can generated images be used for commercial purposes?",
+        "answer": "Yes. Generated images can be used for commercial purposes, subject to Flaq AI's terms of service."
+      },
+      "7": {
+        "question": "How much does it cost to use Virtual Try On AI?",
+        "answer": "Usage is billed based on the Flaq API pricing. Different models have different costs. Please refer to flaq.ai for the latest pricing details."
+      },
+      "8": {
+        "question": "What output resolution does Virtual Try On AI produce?",
+        "answer": "Output resolution varies by model. Results are optimized for visual quality suitable for both personal styling and professional e-commerce or marketing use."
+      },
+      "title": "FAQs about Virtual Try On AI"
+    }
+  },
+  "Pricing": {
+    "insufficientDialog": {
+      "title": "충전하고 계속 창작하기",
+      "description": "이미지, 채팅, 코딩, 동영상용 주요 모델로 계속 창작할 수 있도록 잔액을 충전하세요. 시각 콘텐츠용 Nano Banana와 GPT Image, 사고와 코딩용 GPT와 Claude, 동영상용 Seedance와 Kling을 사용할 수 있습니다. 일부 플랜에는 보너스 가치가 포함됩니다.",
+      "confirm": "Go to Flaq",
+      "cancel": "Close"
+    }
+  },
+  "Metadata": {
+    "common": {
+      "siteName": "flaq.ai",
+      "creator": "Flaq AI"
+    },
+    "home": {
+      "title": "AI 이미지와 동영상 — 무료 오픈 소스 · 가입 불필요",
+      "description": "가입 없이 무료 오픈 소스 AI 이미지와 동영상 템플릿을 사용, 수정, 자체 호스팅할 수 있습니다. 모델 생성에는 Flaq Client Key가 필요하며 API 사용료는 별도입니다.",
+      "keywords": "AI 이미지 및 동영상 플랫폼, 무료 오픈 소스, 가입 불필요, no signup required, free AI generator, open source AI, free to use, Flaq API, AIGC",
+      "openGraph": {
+        "title": "AI 이미지와 동영상 — 무료 오픈 소스 · 가입 불필요",
+        "description": "가입 없이 무료 오픈 소스 AI 이미지와 동영상 템플릿을 사용, 수정, 자체 호스팅할 수 있습니다. 모델 생성에는 Flaq Client Key가 필요하며 API 사용료는 별도입니다.",
+        "siteName": "Flaq SaaS Template"
+      },
+      "twitter": {
+        "title": "AI 이미지와 동영상 — 무료 오픈 소스 · 가입 불필요",
+        "description": "가입 없이 무료 오픈 소스 AI 이미지와 동영상 템플릿을 사용, 수정, 자체 호스팅할 수 있습니다. 모델 생성에는 Flaq Client Key가 필요하며 API 사용료는 별도입니다.",
+        "site": "flaq.ai",
+        "creator": "Flaq AI"
+      }
+    },
+    "image-to-video": {
+      "title": "이미지로 동영상 — 무료 오픈 소스 · 가입 불필요",
+      "description": "가입 없이 무료 오픈 소스 이미지로 동영상 템플릿을 사용, 수정, 자체 호스팅할 수 있습니다. 모델 생성에는 Flaq Client Key가 필요하며 API 사용료는 별도입니다."
+    },
+    "text-to-video": {
+      "title": "텍스트로 동영상 — 무료 오픈 소스 · 가입 불필요",
+      "description": "가입 없이 무료 오픈 소스 텍스트로 동영상 템플릿을 사용, 수정, 자체 호스팅할 수 있습니다. 모델 생성에는 Flaq Client Key가 필요하며 API 사용료는 별도입니다."
+    },
+    "image-to-image": {
+      "title": "이미지로 이미지 — 무료 오픈 소스 · 가입 불필요",
+      "description": "가입 없이 무료 오픈 소스 이미지로 이미지 템플릿을 사용, 수정, 자체 호스팅할 수 있습니다. 모델 생성에는 Flaq Client Key가 필요하며 API 사용료는 별도입니다."
+    },
+    "text-to-image": {
+      "title": "텍스트로 이미지 — 무료 오픈 소스 · 가입 불필요",
+      "description": "가입 없이 무료 오픈 소스 텍스트로 이미지 템플릿을 사용, 수정, 자체 호스팅할 수 있습니다. 모델 생성에는 Flaq Client Key가 필요하며 API 사용료는 별도입니다."
+    },
+    "virtual-try-on": {
+      "title": "가상 피팅 — 무료 오픈 소스 · 가입 불필요",
+      "description": "가입 없이 무료 오픈 소스 가상 피팅 템플릿을 사용, 수정, 자체 호스팅할 수 있습니다. 모델 생성에는 Flaq Client Key가 필요하며 API 사용료는 별도입니다."
+    },
+    "reference-to-video": {
+      "title": "참조로 동영상 — 무료 오픈 소스 · 가입 불필요",
+      "description": "가입 없이 무료 오픈 소스 참조로 동영상 템플릿을 사용, 수정, 자체 호스팅할 수 있습니다. 모델 생성에는 Flaq Client Key가 필요하며 API 사용료는 별도입니다."
+    },
+    "ai-media-creator": {
+      "title": "AI 미디어 — 무료 오픈 소스 · 가입 불필요",
+      "description": "가입 없이 무료 오픈 소스 AI 미디어 템플릿을 사용, 수정, 자체 호스팅할 수 있습니다. 모델 생성에는 Flaq Client Key가 필요하며 API 사용료는 별도입니다."
+    }
+  },
+  "Profile": {
+    "image-history": {
+      "detail": {
+        "title": "Image Details",
+        "resolution": "Resolution",
+        "ratio": "Aspect Ratio",
+        "size": "File Size",
+        "generatedTime": "Generated Time",
+        "model": "Model",
+        "prompt": "Prompt",
+        "images": "Reference Images",
+        "download": "Download",
+        "delete": "Delete",
+        "copyPrompt": "Copy Prompt",
+        "copied": "Copied",
+        "expiredImage": "Image Expired"
+      },
+      "delete-success": "Image deleted successfully",
+      "delete-fail": "Failed to delete image"
+    },
+    "video-history": {
+      "detail": {
+        "title": "Video Details",
+        "resolution": "Resolution",
+        "ratio": "Aspect Ratio",
+        "duration": "Duration",
+        "generatedTime": "Generated Time",
+        "model": "Model",
+        "prompt": "Prompt",
+        "frames": "Frames",
+        "download": "Download",
+        "delete": "Delete",
+        "copyPrompt": "Copy Prompt",
+        "copied": "Copied"
+      },
+      "delete-success": "Video deleted successfully",
+      "delete-fail": "Failed to delete video"
+    }
+  },
+  "UnifiedGenerator": {
+    "media-type": {
+      "image": "Image",
+      "video": "Video"
+    },
+    "video-type": {
+      "text-to-video": "Text to Video",
+      "image-to-video": "Image to Video",
+      "reference-to-video": "Reference to Video"
+    },
+    "reset": "Reset",
+    "prompt": "Prompt",
+    "prompt-placeholder": "Describe what you want to create",
+    "model": "Model",
+    "ratio": "Aspect Ratio",
+    "resolution": "Resolution",
+    "duration": "Duration",
+    "sound": "Generate Sound",
+    "seed": "Seed",
+    "guidance": "Guidance Scale",
+    "negative-prompt": "Negative Prompt",
+    "optional": "Optional",
+    "start-image": "Start and End Images",
+    "reference-images": "Reference Images",
+    "reference-videos": "Reference Videos",
+    "reference-audios": "Reference Audios",
+    "reference-files": "Reference Files",
+    "reference-links": "Reference Links",
+    "reference-link-placeholder": "Paste a public reference URL",
+    "no-reference-input": "This model has no reference input configuration.",
+    "generate": "Generate",
+    "submitted": "Task submitted.",
+    "errors": {
+      "prompt": "Enter a prompt before generating.",
+      "model": "Select an available model.",
+      "reference-required": "Add the required reference media.",
+      "max-files": "The maximum number of reference files has been reached.",
+      "reference-source-exclusive": "Use reference files or reference links, not both.",
+      "reference-file-format": "One or more reference files use an unsupported format.",
+      "reference-link": "Enter a valid public HTTP or HTTPS reference URL.",
+      "missing-references": "Remove or replace missing prompt references: {references}.",
+      "media-duration": "Each reference must be between {min} and {max} seconds.",
+      "total-duration": "The total reference duration cannot exceed {max} seconds.",
+      "media-metadata": "The selected media file could not be read."
+    },
+    "image-type": {
+      "text-to-image": "Text to Image",
+      "image-to-image": "Image to Image"
+    },
+    "mention-reference": "Mention a reference in the prompt",
+    "quality": "Image Quality",
+    "end-frame": "End Frame",
+    "model-select": {
+      "all-providers": "All",
+      "all-types": "All",
+      "text-type": "Text",
+      "image-type": "Image",
+      "reference-type": "Reference",
+      "scroll-up": "Scroll up",
+      "scroll-down": "Scroll down",
+      "ratio": "Ratio",
+      "image": "Image",
+      "end-frame": "End Frame",
+      "sound": "Sound",
+      "seed": "Seed",
+      "duration": "{value}"
+    }
+  },
+  "CreatorHistory": {
+    "title": "Generation History",
+    "description": "Your image and video tasks are stored locally in this browser.",
+    "image": "Images",
+    "video": "Videos",
+    "no-preview": "No preview",
+    "empty": "No generation history yet.",
+    "loading-more": "Loading more...",
+    "end": "No more results"
+  },
+  "reference-to-video": {
+    "heading": {
+      "title": "참조로 동영상 — 무료 오픈 소스 · 가입 불필요",
+      "description": "가입 없이 무료 오픈 소스 참조로 동영상 템플릿을 사용, 수정, 자체 호스팅할 수 있습니다. 모델 생성에는 Flaq Client Key가 필요하며 API 사용료는 별도입니다."
+    },
+    "core-feature": {
+      "1": {
+        "title": "Flexible Reference Media",
+        "description": "Add images, video clips, audio, documents, or links when the selected model supports them. Available upload controls update automatically with your model choice."
+      },
+      "2": {
+        "title": "Direct Each Asset with @ Mentions",
+        "description": "Mention uploaded media inside the prompt and explain whether each asset should guide a character, product, action, camera move, sound, background, or style."
+      },
+      "3": {
+        "title": "Multiple Reference-to-Video Models",
+        "description": "Choose from supported Seedance, MiniMax, Wan, and Happy Horse reference workflows, then match the model to the input types and output controls your project needs."
+      },
+      "title": "Core Features of Reference to Video AI Generator",
+      "description": "Build a reference-guided video brief with compatible media uploads, asset mentions, model-specific controls, and multiple generation models."
+    },
+    "advantage": {
+      "1": {
+        "title": "Fewer Reshoots and Revisions",
+        "description": "Start from existing reference media instead of filming every variation again. Create fresh scenes, product moments, character actions, and talking clips while using source assets as visual guidance."
+      },
+      "2": {
+        "title": "More Consistent Visual Direction",
+        "description": "Use references to guide people, avatars, products, props, outfits, backgrounds, and scene details across the generated clip."
+      },
+      "3": {
+        "title": "Simple Creative Workflow",
+        "description": "Upload supported reference media, mention assets in the prompt, describe the action and style, choose the available video settings, and start the task from the same form."
+      },
+      "4": {
+        "title": "Flexible Video Results",
+        "description": "Create reference-guided character videos, product scenes, social content, brand clips, UGC-style ads, cinematic concepts, animation previews, and visual experiments."
+      },
+      "title": "Advantages of Reference to Video AI Generator",
+      "description": "Reference to Video helps creators, marketers, ecommerce teams, designers, storytellers, agencies, and social media producers develop AI videos from existing reference media.",
+      "try-now": "Try Now"
+    },
+    "manual": {
+      "1": {
+        "title": "참조 모델 선택",
+        "description": "참조 미디어로 동영상 생성을 선택한 다음 프로젝트에 필요한 입력 유형, 출력 설정 및 제어 기능에 따라 호환 모델을 선택하세요."
+      },
+      "2": {
+        "title": "미디어 업로드 및 참조",
+        "description": "지원되는 이미지, 동영상 또는 오디오를 업로드한 다음 프롬프트에서 @ 멘션을 사용해 각 자료가 동영상에 어떻게 반영되어야 하는지 설명하세요."
+      },
+      "3": {
+        "title": "AI 미디어 크리에이터에서 계속",
+        "description": "초안을 검토하고 AI 미디어 크리에이터로 이동한 다음 거기에서 생성을 시작하면 동영상 기록에서 작업을 추적할 수 있습니다."
+      },
+      "title": "참조 미디어로 동영상 생성하는 방법",
+      "content": "Create a reference-guided AI video in three steps."
+    },
+    "faq": {
+      "1": {
+        "question": "참조 미디어로 동영상 생성이란 무엇인가요?",
+        "answer": "참조 미디어로 동영상 생성은 업로드된 미디어를 지침으로 사용해 새 동영상의 캐릭터, 제품, 사물, 움직임, 소리, 장면 및 시각적 스타일을 안내하는 AI 생성 워크플로입니다."
+      },
+      "2": {
+        "question": "어떤 참조 미디어를 업로드할 수 있나요?",
+        "answer": "사용 가능한 입력은 선택한 모델에 따라 다릅니다. 현재 참조 미디어 기반 동영상 모델에서 지원하는 경우에만 이미지, 동영상 및 오디오 업로드 제어가 표시됩니다."
+      },
+      "3": {
+        "question": "프롬프트에서 @ 참조는 어떻게 사용하나요?",
+        "answer": "프롬프트에서 @를 사용해 업로드된 자료를 언급한 다음 해당 이미지, 동영상 또는 오디오 참조가 생성된 동영상에 어떻게 반영되어야 하는지 설명하세요."
+      },
+      "4": {
+        "question": "동영상은 어디에서 생성되나요?",
+        "answer": "이 페이지에서는 참조 미디어 기반 동영상 초안을 준비합니다. 계속하면 AI 미디어 크리에이터에서 같은 설정이 열리며, 설정을 확인하고 작업을 생성한 후 동영상 기록에서 진행 상황을 추적할 수 있습니다."
+      },
+      "5": {
+        "question": "Can I use more than one type of reference?",
+        "answer": "Yes, when the selected model supports multiple input types. Its configuration determines whether images, videos, audio, documents, and links can be combined."
+      },
+      "6": {
+        "question": "Where do I find my generated video?",
+        "answer": "Generated tasks appear in the AI Create video history. The history can use the generated video itself when a separate cover image is unavailable."
+      },
+      "title": "참조 미디어 기반 동영상 생성기 자주 묻는 질문"
+    }
+  },
+  "ai-media-creator": {
+    "heading": {
+      "title": "AI 미디어 — 무료 오픈 소스 · 가입 불필요",
+      "description": "가입 없이 무료 오픈 소스 AI 미디어 템플릿을 사용, 수정, 자체 호스팅할 수 있습니다. 모델 생성에는 Flaq Client Key가 필요하며 API 사용료는 별도입니다."
+    },
+    "core-feature": {
+      "1": {
+        "title": "Image and Video Creation",
+        "description": "Switch between image and video workflows while keeping the same familiar creation experience."
+      },
+      "2": {
+        "title": "Supported AI Models",
+        "description": "Choose from the image and video models available through the Flaq API and view each model's supported settings in one place."
+      },
+      "3": {
+        "title": "Flexible Reference Uploads",
+        "description": "Upload supported images, video clips, audio, documents, or links when the selected model accepts reference media."
+      },
+      "4": {
+        "title": "Unified Local History",
+        "description": "Review recent image and video tasks saved in this browser, including video previews when a separate cover image is unavailable."
+      },
+      "title": "One AI Media Creation Workspace for Every Idea",
+      "description": "Move from an initial concept to generated media with a unified form that adapts its models, uploads, and settings to the selected creation type."
+    },
+    "use-cases": {
+      "1": {
+        "title": "제품 및 마케팅 자료",
+        "description": "이미지와 동영상 제작을 하나의 작업 환경에서 진행하며 제품 비주얼, 캠페인 이미지, 홍보 영상 및 광고 변형을 만드세요."
+      },
+      "2": {
+        "title": "소셜 미디어용 변형 콘텐츠",
+        "description": "공유 프롬프트 기반 워크플로를 통해 게시물 이미지, 썸네일, 숏폼 동영상 아이디어 및 소셜 채널을 위한 다양한 창작 방향을 개발하세요."
+      },
+      "3": {
+        "title": "비주얼 콘셉트 및 스토리보드",
+        "description": "구도, 캐릭터, 환경, 스타일 방향, 움직임 아이디어를 이미지나 동영상으로 탐색한 후 다듬을 방향을 선택하세요."
+      },
+      "4": {
+        "title": "혼합 미디어 창작 프로젝트",
+        "description": "정지 이미지와 동영상이 모두 필요한 프로젝트를 만들고 각 장면, 메시지 또는 제작 단계에 맞는 형식과 지원 모델 제어 기능을 사용하세요."
+      },
+      "title": "AI 미디어 크리에이터 활용 사례",
+      "description": "AI 미디어 크리에이터를 마케팅 자료, 소셜 콘텐츠, 비주얼 개발 및 이미지와 동영상 생성을 결합하는 프로젝트에 활용하세요.",
+      "button-text": "Create Now"
+    },
+    "manual": {
+      "1": {
+        "title": "제작 유형 및 모델 선택",
+        "description": "필요한 이미지 또는 동영상 워크플로를 선택한 다음 입력 방식, 출력 형식, 필요한 창작 제어 기능에 따라 지원 모델을 선택하세요."
+      },
+      "2": {
+        "title": "방향과 입력 추가",
+        "description": "프롬프트를 작성하고 선택한 워크플로가 허용하는 미디어를 업로드한 다음 양식에 표시되는 모델별 옵션을 설정하세요."
+      },
+      "3": {
+        "title": "생성 및 검토",
+        "description": "작업 공간에서 작업을 실행하고 결과를 확인하세요. 로그인한 경우 이미지 또는 동영상 기록 보기에서 저장된 생성 결과를 추적할 수 있습니다."
+      },
+      "title": "AI 미디어 크리에이터 사용 방법",
+      "description": "미디어 워크플로와 호환 모델을 선택하고 프롬프트 및 지원되는 입력을 추가한 다음 결과를 생성하고 검토하세요.",
+      "button-text": "Start Creating"
+    },
+    "faq": {
+      "1": {
+        "question": "AI 미디어 크리에이터란 무엇인가요?",
+        "answer": "AI 미디어 크리에이터는 이미지 및 동영상 생성을 위한 Flaq AI의 통합 작업 공간입니다. 한 페이지에서 워크플로 선택, 지원 모델, 프롬프트, 호환 미디어 입력, 생성 제어 및 로그인 후 기록을 제공합니다."
+      },
+      "2": {
+        "question": "어떤 이미지 및 동영상 워크플로를 사용할 수 있나요?",
+        "answer": "이미지 탭은 프롬프트 기반 생성과 호환되는 이미지 가이드 워크플로를 지원합니다. 지원 모델이 있는 경우 동영상 옵션에는 텍스트로 동영상 생성, 이미지로 동영상 생성, 참조 미디어로 동영상 생성 및 동영상 편집이 포함됩니다."
+      },
+      "3": {
+        "question": "AI 모델은 어떻게 선택하나요?",
+        "answer": "먼저 미디어 유형과 워크플로를 선택한 다음 양식에 표시되는 호환 모델 중에서 선택하세요. 사용 가능한 입력과 설정은 선택 항목에 맞게 업데이트됩니다."
+      },
+      "4": {
+        "question": "이미지, 동영상 또는 오디오를 입력으로 사용할 수 있나요?",
+        "answer": "입력 지원 여부는 워크플로와 모델에 따라 다릅니다. 현재 선택 항목에서 지원하는 경우에만 이미지, 동영상, 오디오 및 참조 미디어 제어 기능이 양식에 표시됩니다."
+      },
+      "5": {
+        "question": "생성한 미디어는 어디에서 찾을 수 있나요?",
+        "answer": "로그인한 후 양식 아래의 기록 영역에서 진행 중인 작업을 추적하고 완료된 결과를 이미지 및 동영상 보기에서 각각 다시 확인할 수 있습니다."
+      },
+      "6": {
+        "question": "사용 가능한 제어 기능은 모델마다 달라지나요?",
+        "answer": "네. 화면 비율, 해상도, 길이, 품질 옵션, 업로드 슬롯 및 기타 제어 기능은 선택한 모델에 설정된 기능에 따라 표시됩니다."
+      },
+      "title": "AI 미디어 크리에이터 자주 묻는 질문"
+    }
+  },
+  "ResourceEntrySections": {
+    "affiliate": {
+      "eyebrow": "제휴 프로그램",
+      "title": "Flaq.ai 제휴 프로그램에 참여하세요",
+      "description": "이미지 및 동영상 생성, 모델 API, 크리에이티브 워크플로, 개발자 통합에 관심 있는 크리에이터, 개발자, 팀에 Flaq.ai를 추천하세요. 추천 사용자의 첫 유효 유료 주문에서 20%, 가입 후 60일 이내의 후속 유효 유료 주문에서 10%의 커미션을 받을 수 있습니다.",
+      "button": "수익 창출 시작하기"
+    },
+    "modelMarket": {
+      "eyebrow": "Flaq AI Model Market",
+      "title": "Explore more AI creation models in one place",
+      "description": "Continue to the Flaq AI Model Market to discover additional image, video, language, and creative AI options with documentation for each supported workflow.",
+      "button": "Visit the Model Market"
+    },
+    "promptLibrary": {
+      "title": "Explore ready-to-use AI prompt collections",
+      "description": "Open curated prompt libraries for popular image and video models, then adapt complete examples to your own creative workflow.",
+      "viewPrompts": "View Prompts",
+      "repository": "GitHub",
+      "items": {
+        "seedance-2-5": {
+          "title": "Seedance 2.5 Prompt Library",
+          "description": "Explore production-ready prompts for cinematic scenes, branded videos, social content, and reference-guided motion."
+        },
+        "minimax-h3": {
+          "title": "MiniMax H3 Prompt Library",
+          "description": "Browse detailed prompts for expressive characters, product stories, cinematic sequences, and fast-moving video concepts."
+        },
+        "wan-3-0": {
+          "title": "Wan 3.0 Prompt Library",
+          "description": "Find adaptable prompt ideas for realistic motion, visual storytelling, advertisements, and imaginative video generation."
+        },
+        "qwen-image-3-0": {
+          "title": "Qwen Image 3.0 Prompt Library",
+          "description": "Discover structured image prompts for design exploration, illustration, marketing visuals, and precise creative direction."
+        }
+      }
+    },
+    "agentGuides": {
+      "title": "Connect Flaq AI with coding and agent workflows",
+      "description": "Follow practical setup guides for using Flaq AI models and tools from popular coding agents, assistants, and MCP clients.",
+      "items": {
+        "claude-code": {
+          "title": "Claude Code Guide",
+          "description": "Configure Flaq AI model access for Claude Code workflows."
+        },
+        "openai-codex": {
+          "title": "OpenAI Codex Guide",
+          "description": "Use Flaq AI generation models from an OpenAI Codex environment."
+        },
+        "hermes": {
+          "title": "Hermes Agent Guide",
+          "description": "Connect Hermes Agent to supported Flaq AI language models."
+        },
+        "zcode": {
+          "title": "Zcode Guide",
+          "description": "Set up Flaq AI model access for Zcode development workflows."
+        },
+        "deepseek": {
+          "title": "DeepSeek Harness Guide",
+          "description": "Configure DeepSeek Harness with Flaq AI endpoints and supported models."
+        },
+        "mcp": {
+          "title": "Flaq MCP Server",
+          "description": "Connect compatible AI clients to Flaq image and video tools through MCP."
+        }
+      }
+    }
+  }
+}

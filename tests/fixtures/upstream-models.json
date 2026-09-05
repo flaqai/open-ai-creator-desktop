@@ -1,0 +1,205 @@
+{
+  "commit": "285a52bd3dbbdab1b17174b9b60f241b8689952c",
+  "models": [
+    {
+      "id": "nano-banana-pro",
+      "digest": "8905ca9b59e77b1d63db18d4ceb5ffec9d230ad7b49770b7c041fb058578b9dd"
+    },
+    {
+      "id": "nano-banana-pro-edit",
+      "digest": "540266a9a4ceeeee2f5abe030441a2217873c39bb52b35f1425d2f31daa81e9f"
+    },
+    {
+      "id": "nano-banana-2",
+      "digest": "b9c54831c955ae9f89f9baf0b334eedbe2a5a7e7159d0ffa611ae49f67b2b330"
+    },
+    {
+      "id": "nano-banana-2-edit",
+      "digest": "3f6a5ad262858ec82b226f92840d5500e059d3a22d6521bb2698fbe07ac1bdde"
+    },
+    {
+      "id": "gpt-image-2",
+      "digest": "3de83eda3ccbd3f0dc19730e02676fe04dd0cc2b4056b5e3c9261336796265e5"
+    },
+    {
+      "id": "gpt-image-2-edit",
+      "digest": "e1b2ba649a420448e9ee4796ac2fd0b3fd8709482988ece9b76265d6e2addfdf"
+    },
+    {
+      "id": "gpt-image-2-client",
+      "digest": "f1c0d1e41cad7eeb5069951ced7373ced677ac4648483c37c1efb679b2a8af29"
+    },
+    {
+      "id": "gpt-image-2-edit-client",
+      "digest": "d402f18d38f2ac000ee75eba729ec7cc780b6dbf75b02bac7982a28bc2fc9f13"
+    },
+    {
+      "id": "qwen-image-3.0-pro",
+      "digest": "bfe7c78ed833ed7e4f55a5f980f20c03c1ecb6a52fb31f9078fec2552a08bfac"
+    },
+    {
+      "id": "qwen-image-3.0-pro-edit",
+      "digest": "36753907daa8074a1e41a64f9a13204e2d61c7d4ca8eb4bdeed8c7cc7ff661e7"
+    },
+    {
+      "id": "seedream-4.5",
+      "digest": "d32076690052d52a02242d4186dc73ac0838b2d9aa85b83d4fc9921f0df82365"
+    },
+    {
+      "id": "seedream-4.5-edit",
+      "digest": "57db4d7e205ab14204000970073e794587a6fdad90bd2ec6cfe03ffa3debe1c3"
+    },
+    {
+      "id": "seedream-5.0",
+      "digest": "42fe452f42c7d10c1a49e468816481ac6df8c7848b4ec4ef4f3f59d42184863c"
+    },
+    {
+      "id": "seedream-5.0-edit",
+      "digest": "ad7318bd59b5ff0a5d922299c7a4c0dc42ab91ad8929777af413fcd10a7b611b"
+    },
+    {
+      "id": "seedream-5.0-pro",
+      "digest": "3cb82b970c080c6b41866f031ce70cf3259a1670e9b0e780963ef987b8f26d9a"
+    },
+    {
+      "id": "seedream-5.0-pro-edit",
+      "digest": "14559994ec5587092661141378f0f753c25a02990e8964a0ce71bd5bdbbddd5b"
+    },
+    {
+      "id": "kling-3.0-text-to-video",
+      "digest": "ecf26c9b4bbe85ff42713e10ae7d6b5e25609a34b11378e185b91c7e0b9a6696"
+    },
+    {
+      "id": "kling-3.0-image-to-video",
+      "digest": "af38df327e51243276b9400ff845a0223a303384581275c17ea7a6c54bbf5ab9"
+    },
+    {
+      "id": "seedance-2-0-text-to-video",
+      "digest": "7b8d729e1b7039ad6af3c410a82dd779e05d427afb07c078e886f93100556d71"
+    },
+    {
+      "id": "seedance-2-0-image-to-video",
+      "digest": "583f820d9efa270cd13495a939c37a82bf92ade0ad7488c90052cb5a74da35f8"
+    },
+    {
+      "id": "seedance-2-0-reference-to-video",
+      "digest": "02a755824d0614623c43781bb93eae0c335100dedf280675ef2706bbbe537431"
+    },
+    {
+      "id": "seedance-2-0-fast-text-to-video",
+      "digest": "032eb73e29f9e795739dc3fcfa59226e530dd279d351913f4ccb90fd5c845b89"
+    },
+    {
+      "id": "seedance-2-0-fast-image-to-video",
+      "digest": "a124a8a47a3e13c489aaf9880752c86c0fc394e71fa35b9e8513b8f04a5b103f"
+    },
+    {
+      "id": "seedance-2-0-fast-reference-to-video",
+      "digest": "1ed20f21885a4db0a67c5bee916e118330ae07196788e06147977f98dd11f867"
+    },
+    {
+      "id": "seedance-2-0-mini-text-to-video",
+      "digest": "e2a974d4189cf2dd5a0e84fad41cfd4f709a1c15b0088500a0ad7e3f5d641707"
+    },
+    {
+      "id": "seedance-2-0-mini-image-to-video",
+      "digest": "4f734b9d32fec535db42e686dbf70c994633c998b1577333504a065772c572e8"
+    },
+    {
+      "id": "seedance-2-0-mini-reference-to-video",
+      "digest": "080e417b02a013d81d35d2e5d7aed2deb1ee83cee1a404a327f77810da57d9e1"
+    },
+    {
+      "id": "seedance-2-5-text-to-video",
+      "digest": "458ae1f781468163a4db95d823d8e55a3d262ee814a5f5ebce5e20babeab43d1"
+    },
+    {
+      "id": "seedance-2-5-image-to-video",
+      "digest": "1bc96dad41270ce79b6a6b2713813bd500e20edcfce44be3afaf6411c52fa38b"
+    },
+    {
+      "id": "seedance-2-5-reference-to-video",
+      "digest": "6e1f93a6234f6405fd77167b54fab51da8b4ec5f40bbf64974bc4f85d5a2163e"
+    },
+    {
+      "id": "flux-3-text-to-video",
+      "digest": "8f42812193788de237afb18019232a96202b7e02b5a2cc9add7a443f232d78ae"
+    },
+    {
+      "id": "flux-3-image-to-video",
+      "digest": "e8561dfaba8cc6de84256a623ddb173a375b2562ed2d074d5e19a5fb7eaadfe3"
+    },
+    {
+      "id": "flux-3-start-end-to-video",
+      "digest": "759ce24a97e3151af82500f82d08d8a99ba1b0411f8bfa2e1800ff1d43ab6708"
+    },
+    {
+      "id": "minimax-h3-text-to-video",
+      "digest": "fd28fee5581548fbc8d3daaf12b1c2e7393bba8baf8cddaee457772affb1389f"
+    },
+    {
+      "id": "minimax-h3-image-to-video",
+      "digest": "204f19a40258f8c90a2111a18b2f009cc2c9604957867e48248ccb3d0732ad6a"
+    },
+    {
+      "id": "minimax-h3-reference-to-video",
+      "digest": "989cb031bf1abdccf97876727671e2bb20b8ff5e2ffc9ec5f0a3b73235ff7355"
+    },
+    {
+      "id": "happyhorse-1-1-text-to-video",
+      "digest": "3e46f266c11a79aaa368ce5113f035647990f0881e79fa8d741f5587b2a5e3df"
+    },
+    {
+      "id": "happyhorse-1-1-image-to-video",
+      "digest": "4dc12790fc95a6b816eb278929c5b6c7c468a8d63a471597e512c34c9bedf6d7"
+    },
+    {
+      "id": "happyhorse-1-1-reference-to-video",
+      "digest": "37a99f418b9725e4de7af90582eea32fa316c4ff36dc0bbbbc41596074800ba1"
+    },
+    {
+      "id": "veo-3.1-fast-text-to-video",
+      "digest": "04a7407a234f47e4efa6a8c8b7637e4457da39b7b84b4cf67c0d40e668ae2562"
+    },
+    {
+      "id": "veo-3.1-text-to-video",
+      "digest": "f439c952420390e87766e58b4ebad9b0217f0bf63d1843a92ccd3fdddd3d99f8"
+    },
+    {
+      "id": "veo-3.1-fast-image-to-video",
+      "digest": "f954ee97718264a0388f2edbd643ab69740a50ead6b3a804da9f558348b5b0cf"
+    },
+    {
+      "id": "veo-3.1-image-to-video",
+      "digest": "32488e5916ddb3ad5a4f6156f52f4476be48a37b3365ca0c4a7536677559fb9e"
+    },
+    {
+      "id": "vidu-q3-text-to-video",
+      "digest": "e004c0369eacfb889722ee461e8e8e2d7db2229fd2594e4e4ee7c9a1324aff3c"
+    },
+    {
+      "id": "vidu-q3-image-to-video",
+      "digest": "f80ce4379198ebb239deffc5e1f565491ffee31598e166a3cb0a6c989cc6c1c7"
+    },
+    {
+      "id": "wan-2.7-text-to-video",
+      "digest": "399bea5a18184013dba8db050478c75128fc5f632b129e29367e034362ee81ea"
+    },
+    {
+      "id": "wan-2.7-image-to-video",
+      "digest": "660b68386b73aafdd964add5670545f980691bfbcd780771be325a6b1f894f47"
+    },
+    {
+      "id": "wan-3.0-text-to-video",
+      "digest": "0fd78f1acd3dac0093cf75b49798ecdaec6cd2118089996939be9933c9814998"
+    },
+    {
+      "id": "wan-3.0-image-to-video",
+      "digest": "913b5d42a14fef36f29c3886744c95963b7bd60f3f56e91b36797173047e4caf"
+    },
+    {
+      "id": "wan-3.0-reference-to-video",
+      "digest": "75ca493431c7a8864e7bbcf13a025c6a7cc295bdcd50bf5e83a3c11a995218ef"
+    }
+  ]
+}

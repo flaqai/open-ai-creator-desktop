@@ -1,0 +1,1640 @@
+{
+  "Desktop": {
+    "r2AccountId": "ID tài khoản R2",
+    "r2BucketName": "Tên bucket",
+    "r2AccessKeyId": "ID khóa truy cập",
+    "r2SecretAccessKey": "Khóa truy cập bí mật",
+    "workspace": "Không gian sáng tạo",
+    "workspaceDescription": "Chọn quy trình và bắt đầu sáng tạo. Cài đặt và tác phẩm gần đây luôn trong tầm tay.",
+    "configure": "Kết nối Flaq",
+    "firstRunTitle": "Kết nối Flaq để bắt đầu sáng tạo",
+    "firstRunDescription": "Một Client Key mở khóa mọi quy trình hình ảnh và video.",
+    "stepAccount": "Đăng nhập hoặc tạo tài khoản Flaq",
+    "stepKey": "Tạo và sao chép Client Key",
+    "stepCreate": "Dán khóa, kiểm tra kết nối rồi sáng tạo",
+    "openSettings": "Mở cài đặt kết nối",
+    "skip": "Khám phá trước",
+    "toolGuide": "Hướng dẫn công cụ",
+    "toolGuideDescription": "Ví dụ, tính năng và câu hỏi thường gặp cho quy trình này",
+    "close": "Quay lại sáng tạo"
+  },
+  "Common": {
+    "loading": "Đang tải...",
+    "copy": "Sao chép",
+    "prompt": "Lời nhắc",
+    "model": "Mô hình",
+    "failure": "Tạo không thành công",
+    "success": "Success",
+    "reset": "Reset",
+    "selectModel": "Select Model",
+    "uploadImages": "Upload Images",
+    "tryNow": "Try Now",
+    "copy-right": {
+      "title": "Bản quyền:",
+      "content": "Người dùng trả phí sở hữu bản quyền hình ảnh."
+    },
+    "images": "images",
+    "panel": "Bảng điều khiển"
+  },
+  "cookie": {
+    "content": "Chúng tôi sử dụng cookie để cải thiện trải nghiệm của bạn. Tìm hiểu thêm trong Chính sách Bảo mật của chúng tôi.",
+    "confirm": "Chấp nhận"
+  },
+  "error-page": {
+    "not-found": {
+      "title": "404 Không tìm thấy",
+      "goHome": "QUAY LẠI TRANG CHỦ"
+    }
+  },
+  "components": {
+    "hero-form": {
+      "image-video": {
+        "format-hint": "Định dạng được hỗ trợ",
+        "image-count": "Images",
+        "prompt-placeholder": "Mô tả nội dung bạn muốn tạo..."
+      },
+      "reference-upload": {
+        "upload": "Tải lên",
+        "history": "Lịch sử",
+        "uploadFromDevice": "Tải lên từ thiết bị",
+        "noCompletedHistory": "Chưa có lịch sử hoàn tất",
+        "addImage": "Thêm hình ảnh",
+        "addVideo": "Thêm video",
+        "addAudio": "Thêm âm thanh",
+        "addMore": "Thêm nội dung khác",
+        "remove": "Xóa",
+        "noLocalUploads": "Chưa có nội dung tải lên gần đây",
+        "deleteLocalImage": "Xóa nội dung tải lên gần đây",
+        "durationMin": "Tệp phải dài ít nhất {value} giây.",
+        "metadataError": "Không thể đọc siêu dữ liệu của tệp.",
+        "maxFiles": "Bạn có thể thêm tối đa {count} tệp.",
+        "unsupportedFormat": "Định dạng tệp này không được hỗ trợ.",
+        "imageCropCount": "Cắt hình ảnh {current} trên {total}",
+        "imagePreviewCount": "Hình ảnh {current} trên {total}",
+        "selectImage": "Chọn hình ảnh {index}",
+        "cropFailed": "Không thể cắt hình ảnh này.",
+        "deleteImage": "Xóa hình ảnh",
+        "cropImage": "Cắt hình ảnh",
+        "videoPreview": "Xem trước video",
+        "audioPreview": "Nghe thử âm thanh",
+        "mention": "Nội dung đa phương tiện tham chiếu",
+        "mediaDuration": "Thời lượng {type} phải từ {min} đến {max} giây.",
+        "video": "Video",
+        "audio": "Âm thanh",
+        "imageDimensionMin": "Chiều rộng và chiều cao của hình ảnh phải đạt ít nhất {value}px.",
+        "imageDimensionMax": "Image width and height must not exceed {value}px.",
+        "cancelTrim": "Hủy cắt",
+        "confirmTrim": "Xác nhận cắt",
+        "videoDimensionRange": "Chiều rộng và chiều cao của video phải nằm trong khoảng từ {min} đến {max}px."
+      },
+      "unified-upload": {
+        "formats": "JPG, PNG, WebP",
+        "hints": {
+          "video": "Tải lên khung đầu tiên để chuyển prompt của bạn sang image-to-video. Để trống cho text-to-video.",
+          "image": "Tải lên hình ảnh tham chiếu để chuyển prompt của bạn sang image-to-image. Để trống cho text-to-image."
+        },
+        "slots": {
+          "firstFrame": "Khung đầu tiên",
+          "endFrame": "Khung cuối",
+          "image": "Hình ảnh",
+          "audio": "Âm thanh",
+          "optional": "Tùy chọn"
+        }
+      }
+    },
+    "video-carousel": {
+      "original-image": "Hình ảnh gốc",
+      "video": "Video",
+      "prompt": "Prompt"
+    },
+    "open-api-settings": {
+      "title": "Open API Settings",
+      "description": "Configure the local Open API base URL and client key for this browser.",
+      "base-url": "Base URL",
+      "base-url-hint": "Leave this as the default unless you need a custom gateway or proxy.",
+      "client-key": "Client Key",
+      "remember-me": "Remember me (store locally)",
+      "remember-me-hint": "If unchecked, the key will be cleared when you close the tab.",
+      "security-warning": "Security Notice: Your client key is encrypted before storage, but XSS attacks can still intercept it during API requests. Keep your key secure.",
+      "clear-data": "Clear All Data",
+      "clear-data-confirm": "Are you sure you want to clear all stored settings?",
+      "data-cleared": "All stored data has been cleared.",
+      "register": "Register",
+      "test": "Test Connection",
+      "testing": "Testing...",
+      "cancel": "Cancel",
+      "save": "Save",
+      "required": "Client key is required.",
+      "saved": "Open API settings saved.",
+      "test-success": "Connection succeeded.",
+      "test-success-validation": "API có thể truy cập. Tác vụ thử nghiệm không tồn tại nên chưa xác nhận được tính hợp lệ của khóa.",
+      "test-failed": "Connection failed."
+    },
+    "image-hosting": {
+      "title": "Image Hosting (R2)",
+      "public-domain": "Public Domain",
+      "public-domain-hint": "The CDN domain for accessing uploaded files. Recommended to use https:// protocol.",
+      "public-domain-placeholder": "https://assets.example.com",
+      "not-configured": "R2 credentials should be set in .env (server-side only). Click \"Test R2\" to verify.",
+      "saved": "Image hosting settings saved.",
+      "test": "Test R2 Connection",
+      "testing": "Testing...",
+      "test-success": "R2 connection succeeded.",
+      "test-failed": "R2 connection failed."
+    },
+    "dialog": {
+      "business": {
+        "title": "Yêu cầu kinh doanh",
+        "description": "Để hợp tác kinh doanh, giải pháp doanh nghiệp hoặc hỗ trợ kỹ thuật API nâng cao, vui lòng liên hệ với chúng tôi qua email.",
+        "contactButton": "Liên hệ chúng tôi"
+      }
+    },
+    "video-form": {
+      "ai-generation": "Tạo AI",
+      "product-image": "Product Image",
+      "end-frame": "End Frame",
+      "product-image-description": "We recommend using AI to create your product images",
+      "upload-first-frame": "Tải khung đầu tiên lên",
+      "upload-end-frame": "Tải khung cuối lên",
+      "promptPlaceholder": "Vui lòng nhập lời nhắc",
+      "generate": "Tạo",
+      "duration": "Thời lượng",
+      "ratio": "Video Ratio",
+      "resolution": "Video Resolution",
+      "startFrame": "Khung bắt đầu",
+      "endFrame": "Khung kết thúc",
+      "modelVersion": "Phiên bản mô hình",
+      "history": {
+        "title": "Lịch sử",
+        "noHistory": "Chưa có lịch sử",
+        "backToStart": "Quay lại phần bắt đầu"
+      },
+      "noPromptInput": "Vui lòng nhập lời nhắc",
+      "noImageInput": "Vui lòng tải ảnh lên",
+      "min width": "Image width is less than",
+      "or": "or",
+      "min height": "Image height is less than",
+      "image": "Tải ảnh lên",
+      "display": {
+        "noVideo": "Thử ngay AI tạo video",
+        "prompt": "Lời nhắc",
+        "videoDetail": "View Details"
+      },
+      "audio": {
+        "title": "Âm thanh",
+        "upload-audio": "Tải âm thanh lên",
+        "audio-support": "Mô hình này bao gồm âm thanh nội bộ",
+        "supported-formats": "Hỗ trợ: MP3, WAV (Tối đa 15MB)",
+        "unsupported-format": "Định dạng âm thanh không được hỗ trợ. Chỉ hỗ trợ MP3 và WAV",
+        "file-too-large": "Kích thước tệp vượt quá 15MB",
+        "show-trim": "Hiển thị cắt âm",
+        "hide-trim": "Ẩn cắt âm",
+        "start-time": "Bắt đầu",
+        "end-time": "Kết thúc",
+        "duration": "Thời lượng",
+        "audio-too-short": "Âm thanh quá ngắn. Tối thiểu 3 giây",
+        "audio-auto-trimmed": "Thời lượng âm thanh là {duration}s. Đã tự động cắt 30 giây đầu. Bạn có thể điều chỉnh bằng cách kéo thanh điều chỉnh",
+        "audio-duration-requirement": "Âm thanh phải từ 3-30 giây",
+        "drag-region": "Kéo vùng chọn",
+        "dragging-region": "Đang kéo...",
+        "audio-duration-error": "Thời lượng âm thanh phải từ 3-30 giây, hiện tại",
+        "audio-load-failed": "Tải tệp âm thanh thất bại",
+        "audio-trim-failed": "Cắt âm thanh thất bại, sẽ dùng toàn bộ"
+      },
+      "enable-audio": "Bật âm thanh",
+      "enable-audio-tip": "Tạo video kèm hiệu ứng âm thanh do AI tạo ra",
+      "audio-support": "This model includes built-in audio",
+      "audioFile": "Tải âm thanh lên",
+      "model-parameters": "Model Parameters",
+      "enable-bgm": "Nhạc nền",
+      "enable-bgm-tip": "Tạo video với nhạc nền do AI tạo",
+      "style": "Phong cách",
+      "seed": "Seed",
+      "seed-hint": "Set a fixed value (0-2147483647) to reproduce the same result, or keep number empty for a random result each time.",
+      "negative-prompt": "Lời nhắc phủ định",
+      "negative-prompt-placeholder": "Mô tả những gì bạn không muốn trong kết quả, vd. mờ, chất lượng thấp, hình mờ...",
+      "guidance-scale": "Thang hướng dẫn",
+      "guidance-scale-flexible": "Linh hoạt",
+      "guidance-scale-strict": "Nghiêm ngặt",
+      "keep-original-sound": "Giữ âm thanh gốc",
+      "keep-original-sound-tip": "Preserve the uploaded video's original audio when supported.",
+      "error": {
+        "image-required": "Vui lòng tải ảnh lên để tiếp tục"
+      },
+      "reference-source": {
+        "file-title": "Tệp tham chiếu",
+        "file-formats": "Tải lên một tệp tham chiếu. Các định dạng được hỗ trợ: {formats}.",
+        "page-limit": "Các tệp PDF, tài liệu, bản trình bày, Keynote và Pages hỗ trợ tối đa {count} trang.",
+        "remove-file": "Xóa tệp tham chiếu",
+        "unsupported-file": "Các định dạng tệp tham chiếu được hỗ trợ: {formats}.",
+        "link-title": "Liên kết web tham chiếu",
+        "link-tip": "Sử dụng trang web công khai có thể mở mà không cần đăng nhập.",
+        "link-placeholder": "https://example.com/article",
+        "invalid-link": "Nhập liên kết trang web HTTP hoặc HTTPS công khai hợp lệ.",
+        "mutually-exclusive": "Không thể sử dụng đồng thời tệp tham chiếu và liên kết trang web."
+      },
+      "video-upload": {
+        "label": "Tải lên video hoặc dán URL ở trên",
+        "duration-minimum": "Video tải lên phải dài ít nhất {duration} giây",
+        "duration-range-error": "Thời lượng video sau khi cắt phải nằm trong khoảng {min}-{max} giây",
+        "duration-limit": "Video tải lên không được vượt quá {duration} giây",
+        "auto-trimmed": "Thời lượng gốc của video là {duration} giây. Mặc định đã chọn {max} giây đầu tiên và bạn có thể điều chỉnh phạm vi",
+        "load-failed": "Không thể tải tệp video",
+        "play-failed": "Không thể phát video",
+        "trim-failed": "Không thể cắt video. Vui lòng điều chỉnh phạm vi rồi thử lại",
+        "selected-range": "Phạm vi đã chọn: {start} - {end}, tổng {duration}",
+        "range-tip": "Chọn một đoạn video trong khoảng {min}-{max} giây",
+        "trim-start": "Thời gian bắt đầu",
+        "trim-end": "Thời gian kết thúc",
+        "reset-trim": "Đặt lại",
+        "show-trim": "Hiển thị cắt video",
+        "hide-trim": "Ẩn cắt video",
+        "play": "Phát",
+        "pause": "Tạm dừng",
+        "delete": "Xóa",
+        "playback-progress": "Tiến độ phát"
+      }
+    },
+    "video-image-upload-form": {
+      "label": "Click or drag to upload",
+      "crop": "Crop",
+      "min width": "Min width",
+      "or": "or",
+      "min height": "Min height",
+      "supported-formats": "Supported formats"
+    },
+    "audio-upload-form": {
+      "upload-audio": "Tải lên âm thanh",
+      "supported-formats": "MP3, WAV, M4A, AAC, OGG",
+      "unsupported-format": "Unsupported audio format",
+      "file-too-large": "File size cannot exceed 10MB"
+    },
+    "audio-modal": {
+      "start-time": "Start",
+      "end-time": "End",
+      "duration": "Duration",
+      "show-trim": "Enable Trim Mode",
+      "hide-trim": "Disable Trim Mode"
+    },
+    "confirmDialog": {
+      "title": "Bạn chắc chắn chứ?",
+      "cancel": "Hủy",
+      "confirm": "Xác nhận"
+    },
+    "image-form": {
+      "click-to-upload": "Nhấn hoặc kéo để tải lên",
+      "promptPlaceholder": "Nhập lời nhắc của bạn tại đây",
+      "selectModel": "Select Model",
+      "enterPrompt": "Nhập lời nhắc",
+      "selectAspectRatio": "Select Aspect Ratio",
+      "ratio": "Image Ratio",
+      "selectResolution": "Select Resolution",
+      "resolution": "Image Resolution",
+      "quality": "Chất lượng",
+      "model": "Image Models",
+      "motion": "Motion",
+      "selectMotion": "Select Motion",
+      "transformImages": "Biến đổi hình ảnh",
+      "imageSupport": "Định dạng hỗ trợ: jpg, jpeg, webp, png",
+      "public": "Public",
+      "generate": "Tạo",
+      "history": {
+        "title": "Lịch sử",
+        "check-all": "Chọn tất cả",
+        "noImage": "Chưa có lịch sử",
+        "backToStart": "Quay lại phần bắt đầu"
+      },
+      "noPromptInput": "Vui lòng nhập lời nhắc trước.",
+      "noImageUpload": "Vui lòng tải ảnh lên trước.",
+      "reset": "Đặt lại",
+      "describe": "Describe",
+      "image-required": "Cần có hình ảnh.",
+      "paint-required": "Painting on the image is required.",
+      "process-model": "Process Model",
+      "errors": {
+        "webpNotSupported": "Không hỗ trợ định dạng WebP",
+        "aspectRatioOutOfRange": "Tỷ lệ khung hình phải từ 0,33 đến 3,0. Tỷ lệ hiện tại:",
+        "imageLoadFailed": "Tải hình ảnh thất bại"
+      },
+      "upload-dialog": {
+        "history-tab": "Generation History",
+        "upload-tab": "Upload Image",
+        "loading": "Loading...",
+        "no-images": "No images yet",
+        "go-generate": "Go Generate",
+        "click-to-upload": "Click To Upload Image",
+        "file-format-info": "JPG, PNG, WEBP up to 10MB",
+        "unsupported-format": "Please upload supported image formats: JPG, PNG, WEBP",
+        "file-too-large": "File size cannot exceed 10MB"
+      },
+      "display": {
+        "useImage": "Use This Image",
+        "noImage": "Thử ngay AI tạo ảnh",
+        "original-img": "Ảnh gốc",
+        "prompt": "Prompt",
+        "reset-inpainting": "Reset Inpainting",
+        "removeBg": "Remove Background",
+        "imageDetail": "View Details",
+        "imageToImage": "Image to Image",
+        "model": "Model"
+      },
+      "input-range": {
+        "num inference steps": "Số bước suy luận",
+        "guidance scale": "Thang hướng dẫn (CFG)",
+        "image prompt strength": "Độ mạnh lời nhắc hình ảnh",
+        "steps": "Số bước"
+      },
+      "image-generation-modal": {
+        "onlineGenerateImage": "Tạo ảnh trực tuyến",
+        "pleaseDoNotLeaveDuringGeneration": "Vui lòng không rời khỏi trang khi đang tạo"
+      }
+    },
+    "compress-dialog": {
+      "title": "Nén hình ảnh",
+      "content": "Kích thước ảnh vượt quá 10MB và không phù hợp để tạo video AI. Bạn có muốn nén ảnh này không?",
+      "reupload": "Tải lại",
+      "compress": "Nén"
+    }
+  },
+  "Navigation": {
+    "title": "Flaq AI",
+    "docs": "Docs",
+    "business": "Doanh nghiệp",
+    "video-ai": "Video AI",
+    "image-ai": "Image AI",
+    "ai-api": "AI API",
+    "text-to-video": "Text to Video",
+    "text-to-video-content": "Generate video from text",
+    "image-to-video": "Image to Video",
+    "image-to-video-content": "Generate video from image",
+    "image-to-image": "Image to Image",
+    "image-to-image-content": "Generate image from image",
+    "text-to-image": "Text to Image",
+    "text-to-image-content": "Generate image from text",
+    "nano-banana-2": "Nano Banana 2 API",
+    "nano-banana-2-content": "Generate image with Nano Banana 2 API",
+    "nano-banana-pro": "Nano Banana Pro API",
+    "nano-banana-pro-content": "Generate image with Nano Banana Pro",
+    "veo-3-1": "Veo 3.1 API",
+    "veo-3-1-content": "Generate video with Veo 3.1 API",
+    "kling-3-0": "Kling 3.0 API",
+    "kling-3-0-content": "Generate video with Kling 3.0 API",
+    "vidu-q3": "VIDU Q3 API",
+    "vidu-q3-content": "Generate video with VIDU Q3 API",
+    "wan-2-7": "Wan 2.7 API",
+    "wan-2-7-content": "Generate video with Wan 2.7 API",
+    "seedream-4-5": "Seedream 4.5 API",
+    "seedream-4-5-content": "Generate image with Seedream 4.5 API",
+    "seedream-5-0": "Seedream 5.0 API",
+    "seedream-5-0-content": "Generate image with Seedream 5.0 API",
+    "seedance-1-5": "Seedance 1.5 API",
+    "seedance-1-5-content": "Generate video with Seedance 1.5 API",
+    "virtual-try-on": "Virtual Try On",
+    "virtual-try-on-content": "Try on outfits virtually with AI",
+    "gpt-image-2": "GPT Image 2 API",
+    "gpt-image-2-content": "Generate image with GPT Image 2 API",
+    "menu": "Menu",
+    "close": "Đóng",
+    "language-dialog": {
+      "title": "Gợi ý ngôn ngữ",
+      "content": "Chuyển sang ngôn ngữ trình duyệt của bạn?",
+      "cancel": "Giữ hiện tại",
+      "confirm": "Chuyển đổi"
+    },
+    "ai-create": "AI Create",
+    "reference-to-video": "Reference to Video",
+    "reference-to-video-content": "Create video from image, video, audio, document, or link references"
+  },
+  "Footer": {
+    "title": "Ảnh và Video AI — Miễn phí và Mã nguồn mở · Không cần đăng ký",
+    "subTitle": "Dùng và tự lưu trữ mẫu Ảnh và Video AI miễn phí, mã nguồn mở mà không cần đăng ký. Việc tạo nội dung cần Flaq Client Key và tín dụng API.",
+    "support": "Hỗ trợ",
+    "docs": "Docs",
+    "business": "Doanh nghiệp",
+    "flaq": "Flaq AI",
+    "privacy": "Chính sách bảo mật",
+    "termsConditions": "Điều khoản & Điều kiện",
+    "refundPolicy": "Chính sách hoàn tiền",
+    "contactUs": "Liên hệ",
+    "feature-link": "Features",
+    "feature": {
+      "text-to-video": "Text to Video",
+      "image-to-video": "Image to Video",
+      "image-to-image": "Image to Image Generator",
+      "text-to-image": "Text to Image Generator",
+      "virtual-try-on": "Virtual Try On AI",
+      "reference-to-video": "Reference to Video",
+      "ai-create": "AI Create"
+    }
+  },
+  "FooterNavigation": {
+    "privacyPolicy": {
+      "1-h1": "Chính sách bảo mật của flaq.ai",
+      "1-p": "Chính sách Bảo mật này giải thích cách Flaq AI thu thập, sử dụng và bảo vệ thông tin cá nhân của bạn khi bạn sử dụng dịch vụ tại flaq.ai. Khi truy cập hoặc sử dụng Flaq AI, bạn đã đồng ý với các điều khoản được mô tả trong chính sách này.",
+      "2-h2": "1. Thu thập và sử dụng thông tin",
+      "2-p": "Flaq AI có thể thu thập thông tin nhận dạng cá nhân để cải thiện dịch vụ của chúng tôi. Chúng tôi cũng sử dụng các dịch vụ của bên thứ ba có thể thu thập thông tin để giúp xác định bạn.",
+      "3-h2": "2. Phân tích dữ liệu và các dịch vụ AI của bên thứ ba",
+      "3-p": "Chúng tôi sử dụng Google Analytics để thu thập dữ liệu về việc sử dụng dịch vụ của bạn cho mục đích phân tích. Ngoài ra, các tính năng tạo AI của chúng tôi dựa vào các nền tảng bên thứ ba, bao gồm nhưng không giới hạn ở alibaba, google, bytedance, fal.ai, Kling AI và Replicate. Những nền tảng này có thể lưu trữ thông tin về các yêu cầu tạo nội dung đã được xử lý qua hệ thống của họ.",
+      "4-h2": "3. Cookie",
+      "4-p": "Flaq AI có thể sử dụng mã và thư viện của bên thứ ba, trong đó sử dụng cookie. Bạn có thể chọn chấp nhận hoặc từ chối cookie, tuy nhiên việc từ chối có thể giới hạn một số tính năng.",
+      "5-h2": "4. Đơn vị cung cấp dịch vụ",
+      "5-p": "Chúng tôi có thể hợp tác với các công ty bên thứ ba, bao gồm các nền tảng dịch vụ AI như fal.ai, Replicate, Kling AI, OpenAI, OpenRouter và các nhà cung cấp AI bên thứ ba khác nhằm hỗ trợ cung cấp dịch vụ, thực hiện công việc liên quan hoặc phân tích việc sử dụng Flaq AI. Các bên này có thể truy cập thông tin cá nhân của bạn nhưng bắt buộc phải giữ bí mật thông tin đó.",
+      "5-p-1": "Chúng tôi có thể thuê các công ty và cá nhân bên thứ ba vì các lý do sau:",
+      "5-li-1": "Để hỗ trợ hoạt động dịch vụ của chúng tôi;",
+      "5-li-2": "Để cung cấp dịch vụ thay mặt chúng tôi;",
+      "5-li-3": "Để thực hiện các công việc liên quan đến dịch vụ;",
+      "5-li-4": "Để giúp chúng tôi phân tích cách dịch vụ được sử dụng;",
+      "5-p-2": "Chúng tôi muốn thông báo cho người dùng rằng các bên thứ ba này chỉ được phép truy cập thông tin cá nhân của bạn nhằm thực hiện nhiệm vụ được giao thay mặt chúng tôi. Tuy nhiên, họ có nghĩa vụ không tiết lộ hoặc sử dụng thông tin cho mục đích khác.",
+      "6-h2": "5. Bảo mật",
+      "6-p": "Chúng tôi nỗ lực để bảo vệ thông tin cá nhân của bạn bằng các phương pháp được chấp nhận thương mại, nhưng không thể đảm bảo an toàn tuyệt đối.",
+      "7-h2": "6. Liên kết tới trang khác",
+      "7-p": "Flaq AI có thể chứa liên kết tới các trang bên ngoài. Chúng tôi không chịu trách nhiệm về nội dung hoặc chính sách bảo mật của các trang web đó.",
+      "8-h2": "7. Thay đổi chính sách bảo mật này",
+      "8-p": "Chúng tôi có thể cập nhật Chính sách bảo mật của mình theo thời gian. Vui lòng kiểm tra trang này định kỳ để cập nhật. Các thay đổi có hiệu lực ngay khi được đăng.",
+      "9-h2": "8. Liên hệ",
+      "9-p": "Nếu bạn có bất kỳ câu hỏi, thắc mắc hoặc góp ý nào liên quan đến chính sách bảo mật, vui lòng liên hệ với chúng tôi qua email contact@flaq.ai. Thông tin công ty: FLAQ AI PTE. LTD., 112 ROBINSON ROAD, #03-01, ROBINSON 112, SINGAPORE. Chúng tôi cam kết xử lý các yêu cầu của bạn nhanh chóng nhất có thể."
+    },
+    "termsConditions": {
+      "1-h1": "Điều khoản và Điều kiện cho flaq.ai",
+      "1-p": "Chào mừng đến với flaq.ai, nền tảng tạo ảnh và video bằng AI (\"Dịch vụ\"). Khi truy cập hoặc sử dụng trang web của chúng tôi tại https://flaq.ai (\"Trang web\"), bạn đồng ý bị ràng buộc bởi các Điều khoản và Điều kiện này (\"Điều khoản\"). Các Điều khoản này điều chỉnh việc sử dụng Trang web và Dịch vụ do flaq.ai cung cấp (\"chúng tôi\"). Vui lòng đọc kỹ các Điều khoản này trước khi sử dụng dịch vụ. Nếu bạn không đồng ý với bất kỳ phần nào của các Điều khoản này, bạn không được sử dụng Trang web hoặc Dịch vụ. Nếu có câu hỏi về Điều khoản hoặc sản phẩm/dịch vụ, vui lòng xem Chính sách Bảo mật hoặc liên hệ chúng tôi qua contact@flaq.ai.",
+      "terms-of-service": "điều-khoản-dịch-vụ",
+      "2-h2": "1. Đủ điều kiện sử dụng",
+      "2-p": "Để sử dụng Dịch vụ, bạn phải đủ 18 tuổi hoặc đã đủ tuổi thành niên tại quốc gia của mình. Khi sử dụng Dịch vụ, bạn cam kết và bảo đảm rằng mình đáp ứng đủ điều kiện này. Nếu bạn sử dụng Dịch vụ thay mặt cho một công ty, tổ chức hoặc đơn vị khác, bạn xác nhận rằng có thẩm quyền ràng buộc pháp nhân đó vào các Điều khoản này.",
+      "3-h2": "2. Đăng ký tài khoản",
+      "3-p": "Để truy cập một số tính năng nhất định của Dịch vụ, bạn có thể cần tạo một tài khoản. Bạn đồng ý cung cấp thông tin chính xác, đầy đủ và cập nhật trong quá trình đăng ký, và cập nhật thông tin khi cần. Bạn chịu trách nhiệm bảo mật thông tin tài khoản của mình và mọi hoạt động dưới tài khoản đó, dù có được ủy quyền hay không. Bạn phải báo cho chúng tôi ngay qua contact@flaq.ai nếu phát hiện sử dụng trái phép tài khoản.",
+      "4-h2": "3. Sử dụng Dịch vụ",
+      "4-p": "Sử dụng hợp pháp: flaq.ai cấp cho bạn giấy phép giới hạn, không độc quyền, không chuyển nhượng và có thể thu hồi để sử dụng Dịch vụ cho mục đích cá nhân và thương mại, tùy theo các Điều khoản này. Bạn đồng ý không sử dụng Dịch vụ cho các mục đích bất hợp pháp hoặc bị cấm.",
+      "5-h2": "Hành vi bị cấm",
+      "5-p": "Hành vi bị cấm: Bạn đồng ý không: (a) Tạo hoặc chia sẻ nội dung bất hợp pháp, có hại, lăng mạ, phỉ báng, khiêu dâm hoặc gây phản cảm; (b) Cố gắng phân tích, tách mã hoặc đảo ngược bất kỳ phần nào của Dịch vụ; (c) Sử dụng hệ thống tự động như bot, spider hoặc trình thu thập dữ liệu để truy cập Trang web hoặc Dịch vụ; (d) Can thiệp hoặc gây gián đoạn đến Dịch vụ hoặc máy chủ, mạng lưới liên quan; (e) Xâm phạm quyền sở hữu trí tuệ của người khác.",
+      "6-h2": "4. Nội dung người dùng",
+      "6-p": "Quyền sở hữu và trách nhiệm: Bạn giữ quyền sở hữu bất kỳ nội dung nào (bao gồm ảnh, văn bản, hoặc tài liệu khác) mà bạn tải lên hoặc tạo bằng Dịch vụ (\"Nội dung người dùng\"). Bạn tự chịu trách nhiệm về Nội dung người dùng của mình khi tạo, tải lên, đăng hoặc chia sẻ qua Dịch vụ.",
+      "7-h2": "7. Cấp phép cho flaq.ai",
+      "7-p": "Cấp phép cho flaq.ai: Bằng cách gửi Nội dung người dùng, bạn cấp cho flaq.ai giấy phép toàn cầu, không độc quyền, miễn phí bản quyền, có thể chuyển nhượng và cấp lại cho phép sử dụng, sao chép, chỉnh sửa, phân phối và hiển thị Nội dung người dùng đó để vận hành, cải thiện và quảng bá Dịch vụ.",
+      "8-h2": "8. Hạn chế nội dung",
+      "8-p": "Hạn chế nội dung: Bạn đồng ý không tải lên, tạo hoặc chia sẻ Nội dung người dùng mà: (a) Xâm phạm quyền sở hữu trí tuệ của người khác; (b) Vi phạm bất kỳ luật/quy định hiện hành nào; (c) Chứa mã độc, virus hoặc đoạn mã gây hại khác; (d) Gây hiểu lầm, sai sự thật hoặc không chính xác.",
+      "9-h2": "9. Quyền sở hữu trí tuệ",
+      "9-p": "Quyền sở hữu của Flaq AI: Dịch vụ được cấp phép chứ không bán đứt. Flaq AI và các bên sở hữu cấp phép giữ toàn bộ quyền về Trang web, Dịch vụ và nội dung Flaq AI (phần mềm, văn bản, hình ảnh, logo, v.v). Chúng tôi giữ mọi quyền mà các Điều khoản này không trao cho bạn.",
+      "10-h2": "10. Góp ý của người dùng",
+      "10-p": "Góp ý của người dùng: Bất kỳ phản hồi, đề xuất hoặc ý tưởng nào bạn cung cấp cho flaq.ai liên quan tới Dịch vụ (\"Góp ý\") sẽ thuộc sở hữu độc quyền của flaq.ai. Bạn chuyển giao mọi quyền với Góp ý mà không đòi hỏi bồi thường.",
+      "11-h2": "11. Thanh toán",
+      "11-p": "Phí: Một số tính năng của Dịch vụ có thể yêu cầu thanh toán. Bạn đồng ý trả toàn bộ các khoản phí áp dụng liên quan đến việc sử dụng Dịch vụ. flaq.ai có quyền thay đổi phí hoặc phương thức thanh toán bất cứ lúc nào với thông báo.",
+      "12-h2": "12. Thanh toán",
+      "12-p": "Thanh toán: Việc thanh toán có thể được xử lý qua bên cung cấp dịch vụ thanh toán bên thứ ba. Khi cung cấp thông tin thanh toán, bạn cho phép flaq.ai và đơn vị thanh toán thu phí vào phương thức thanh toán của bạn.",
+      "13-h2": "13. Tín dụng và sử dụng",
+      "13-p": "Tín dụng và sử dụng: Flaq AI hoạt động theo mô hình trả theo mức dùng. Các tín dụng bạn mua hoặc nạp có hiệu lực vô thời hạn và không hết hạn. Bạn bị tính phí dựa trên mức sử dụng thực tế, lệ phí có thể khác nhau tùy theo mô hình AI sử dụng.",
+      "14-h2": "14. Hoàn tiền",
+      "14-p": "Hoàn tiền: Tất cả phí đều không hoàn lại trừ trường hợp được quy định khác. flaq.ai có thể, theo quyết định riêng, hoàn lại tiền hoặc tín dụng trong một số trường hợp cụ thể.",
+      "15-h2": "15. Chấm dứt bởi bạn",
+      "15-p": "Chấm dứt bởi bạn: Bạn có thể hủy tài khoản bất cứ lúc nào bằng cách làm theo hướng dẫn trên Trang web. Khi hủy, quyền truy cập và sử dụng Dịch vụ của bạn sẽ chấm dứt ngay lập tức.",
+      "16-h2": "16. Chấm dứt bởi flaq.ai",
+      "16-p": "Chấm dứt bởi flaq.ai: flaq.ai có thể tạm ngưng hoặc xóa tài khoản, quyền truy cập dịch vụ của bạn mà không cần thông báo trước, vì bất kỳ lý do gì, bao gồm cả vi phạm Điều khoản.",
+      "17-h2": "17. Hiệu lực của việc chấm dứt",
+      "17-p": "Hiệu lực của việc chấm dứt: Sau khi chấm dứt, mọi giấy phép được cấp cho bạn theo các Điều khoản này sẽ hết hiệu lực. Bạn phải ngừng mọi việc sử dụng Dịch vụ. Mọi quyền và nghĩa vụ đã phát sinh, bao gồm các nghĩa vụ liên quan đến thanh toán và sở hữu trí tuệ, vẫn còn hiệu lực.",
+      "18-h2": "18. Tuyên bố miễn trừ và giới hạn trách nhiệm",
+      "18-p": "Tuyên bố miễn trừ bảo đảm: Dịch vụ được cung cấp \"như hiện trạng\" và \"phụ thuộc vào khả năng sẵn sàng\" mà không có bảo đảm nào dưới bất kỳ hình thức nào, dù rõ ràng, ngụ ý hay theo luật định. flaq.ai không cam kết rằng Dịch vụ sẽ không bị gián đoạn, không có lỗi hoặc phần tử gây hại. Ở mức tối đa được phép bởi luật pháp, flaq.ai miễn trừ mọi bảo đảm, bao gồm thương mại, mục đích cụ thể và không vi phạm.",
+      "19-h2": "19. Giới hạn trách nhiệm",
+      "19-p": "Giới hạn trách nhiệm: Trong phạm vi tối đa luật cho phép, flaq.ai sẽ không chịu trách nhiệm về bất kỳ thiệt hại gián tiếp, tình cờ, đặc biệt, hệ quả hoặc trừng phạt nào, gồm mất lợi nhuận, dữ liệu hoặc khả năng sử dụng, phát sinh do bạn sử dụng Dịch vụ, bất kể dựa trên bảo đảm, hợp đồng, lỗi dân sự hay lý thuyết pháp lý khác, kể cả khi đã được thông báo về khả năng xảy ra thiệt hại đó.",
+      "20-h2": "20. Bồi thường",
+      "20-p": "Bạn đồng ý bồi thường, bảo vệ và giữ cho flaq.ai, các quản lý, giám đốc, nhân viên, đại lý không bị tổn hại khỏi mọi khiếu nại, trách nhiệm, thiệt hại, mất mát hoặc chi phí, bao gồm phí luật sư hợp lý, phát sinh từ việc bạn sử dụng Dịch vụ, vi phạm Điều khoản hoặc xâm phạm quyền sở hữu trí tuệ của bên thứ ba.",
+      "21-h2": "21. Tuân thủ chính sách quyền riêng tư",
+      "21-p": "Việc thu thập, sử dụng và bảo vệ dữ liệu cá nhân của chúng tôi tuân theo Chính sách Bảo mật tại https://flaq.ai/privacy-policy. Chúng tôi tuân thủ các quy định bảo vệ dữ liệu hiện hành, bao gồm nhưng không giới hạn Luật Bảo vệ Dữ liệu của Brazil (LGPD), Luật Bảo vệ Dữ liệu Cá nhân của Mexico (LFPDPPP), và Quy định Bảo vệ Dữ liệu Chung của Liên minh Châu Âu (GDPR) khi áp dụng. Bạn đồng ý xem xét Chính sách Bảo mật để hiểu cách chúng tôi xử lý dữ liệu của bạn.",
+      "22-h2": "22. Sửa đổi điều khoản",
+      "22-p": "flaq.ai có quyền sửa đổi các Điều khoản này bất cứ lúc nào. Chúng tôi sẽ thông báo cho bạn về các thay đổi quan trọng bằng cách đăng Điều khoản cập nhật trên Trang web hoặc qua Dịch vụ. Việc bạn tiếp tục sử dụng Dịch vụ sau ngày hiệu lực của Điều khoản sửa đổi là đồng nghĩa với việc bạn chấp thuận các thay đổi đó.",
+      "23-h2": "23. Các điều khoản khác",
+      "23-p": "Toàn bộ thỏa thuận: Các Điều khoản này là toàn bộ thỏa thuận giữa bạn và flaq.ai liên quan đến Dịch vụ, thay thế cho mọi thỏa thuận trước đó.",
+      "24-h2": "24. Tính riêng lẻ",
+      "24-p": "Tính riêng lẻ: Nếu bất kỳ điều khoản nào trong các Điều khoản này không hợp lệ hoặc không thể thực thi, điều khoản đó sẽ được áp dụng ở mức tối đa có thể và các điều khoản còn lại vẫn còn hiệu lực đầy đủ.",
+      "25-h2": "25. Miễn trừ",
+      "25-p": "Miễn trừ: Việc flaq.ai không thực thi bất kỳ quyền hay điều khoản nào trong Điều khoản này không được coi là từ bỏ quyền hoặc điều khoản đó.",
+      "26-h2": "26. Chuyển nhượng",
+      "26-p": "Chuyển nhượng: Bạn không được chuyển nhượng hoặc chuyển giao các Điều khoản này hoặc bất kỳ quyền, nghĩa vụ nào của bạn mà không có sự đồng ý bằng văn bản của flaq.ai. flaq.ai có thể tự do chuyển nhượng các Điều khoản này.",
+      "27-h2": "27. Luật áp dụng",
+      "27-p": "Luật của quốc gia (trừ các quy tắc xung đột luật) sẽ điều chỉnh các Điều khoản này và việc bạn sử dụng Dịch vụ. Việc sử dụng Dịch vụ của bạn cũng có thể tuân theo các luật địa phương, bang, quốc gia hoặc quốc tế khác, bao gồm nhưng không giới hạn ở luật của Hoa Kỳ, Luật LGPD của Brazil, Luật LFPDPPP của Mexico và Quy định GDPR của EU.",
+      "28-h2": "28. Chấp thuận",
+      "28-p": "Chấp thuận: Khi sử dụng flaq.ai, bạn xác nhận rằng đã đọc, hiểu và đồng ý bị ràng buộc bởi các Điều khoản và Điều kiện này.",
+      "29-h2": "29. Thông tin liên hệ",
+      "29-p": "Thông tin liên hệ: Nếu có câu hỏi về các Điều khoản này, vui lòng liên hệ với chúng tôi qua email contact@flaq.ai. Thông tin công ty: FLAQ AI PTE. LTD., 112 ROBINSON ROAD, #03-01, ROBINSON 112, SINGAPORE. Chúng tôi cam kết xử lý các yêu cầu của bạn một cách nhanh chóng."
+    },
+    "refundPolicy": {
+      "1": {
+        "title": "1. Điều kiện hoàn tiền",
+        "description": "Do chúng tôi phụ thuộc vào các nền tảng đối tác và chi phí tính toán AI lớn, yêu cầu hoàn tiền phải được gửi trong vòng 3 ngày kể từ khi mua hàng. Sau khoảng thời gian này sẽ không hoàn tiền. Để biết thêm, vui lòng liên hệ contact@flaq.ai."
+      },
+      "2": {
+        "title": "2. Giới hạn sử dụng tín dụng",
+        "description": "Nếu bạn đã sử dụng tài nguyên tính toán của dịch vụ (ví dụ: tạo video AI hoặc hình ảnh AI), bạn sẽ không đủ điều kiện hoàn tiền, bất kể thời gian mua hàng. Vui lòng liên hệ contact@flaq.ai để biết thêm chi tiết."
+      },
+      "3": {
+        "title": "3. Cách yêu cầu hoàn tiền",
+        "description": "Để yêu cầu hoàn tiền, hãy liên hệ bộ phận hỗ trợ tại contact@flaq.ai với thông tin tài khoản, số đơn hàng, ngày mua và giải thích chi tiết lý do yêu cầu. Tất cả yêu cầu hoàn tiền phải gửi trong 3 ngày kể từ khi mua."
+      },
+      "4": {
+        "title": "4. Dịch vụ trả theo mức sử dụng",
+        "description": "Flaq AI hoạt động theo mô hình trả tiền theo mức sử dụng, nơi bạn sẽ bị tính phí dựa trên mức tiêu thụ. Xin lưu ý rằng mọi tín dụng hoặc tài nguyên đã sử dụng đều không thể hoàn tiền."
+      },
+      "5": {
+        "title": "5. Xử lý yêu cầu hoàn tiền",
+        "description": "Khi nhận được yêu cầu hoàn tiền, đội ngũ của chúng tôi sẽ kiểm tra kỹ lưỡng và thông báo cho bạn kết quả. Nếu được chấp thuận, tiền sẽ được hoàn về phương thức thanh toán ban đầu. Nếu có thắc mắc, vui lòng liên hệ contact@flaq.ai."
+      },
+      "6": {
+        "title": "6. Thay đổi chính sách này",
+        "description": "1. Chúng tôi có quyền sửa đổi chính sách hoàn tiền này bất cứ lúc nào.\n2. Mọi thay đổi sẽ có hiệu lực ngay lập tức và thể hiện tại trang này.\n3. Nên kiểm tra chính sách này định kỳ.\n4. Để cập nhật hoặc thắc mắc chính sách, vui lòng liên hệ contact@flaq.ai."
+      },
+      "title": "Chính sách hoàn tiền dành cho flaq.ai"
+    }
+  },
+  "Home": {
+    "heading": {
+      "title": "Ảnh và Video AI — Miễn phí và Mã nguồn mở · Không cần đăng ký",
+      "description": "Dùng và tự lưu trữ mẫu Ảnh và Video AI miễn phí, mã nguồn mở mà không cần đăng ký. Việc tạo nội dung cần Flaq Client Key và tín dụng API.",
+      "try-now": "Try Now",
+      "try-now-video": "Dùng thử API Video",
+      "try-now-image": "Dùng thử API Ảnh"
+    },
+    "carousel": {
+      "title": "Flaq SaaS Template: AI Generation Tools",
+      "description": "Explore AI generation tools powered by Flaq AI",
+      "video": {
+        "type": "AI Video Generator"
+      },
+      "image": {
+        "type": "AI Image Generator"
+      },
+      "tryon": {
+        "type": "AI Virtual Try-On"
+      }
+    },
+    "unique-features": {
+      "1": {
+        "title": "Flaq AI Integration",
+        "description": "Built-in integration with Flaq AI's open API for seamless image and video generation capabilities."
+      },
+      "2": {
+        "title": "Multiple Types & Presets",
+        "description": "Support for text-to-image, image-to-image, text-to-video, image-to-video, and virtual try-on with built-in scene presets."
+      },
+      "3": {
+        "title": "Ready-to-Deploy",
+        "description": "Complete UI components, API integration, and deployment configuration included. Get started in minutes."
+      },
+      "4": {
+        "title": "Open Source & Customizable",
+        "description": "Fully open source with clean code structure. Easy to customize and extend for your specific needs."
+      },
+      "title": "Key Features of Flaq SaaS Template",
+      "description": "A complete open source template with essential features for building your own AI generation platform.",
+      "button-text": "Try Now"
+    },
+    "use-cases": {
+      "1": {
+        "title": "Nền tảng Marketing Nội dung Tự động",
+        "description": "Tạo hàng loạt hình ảnh thương hiệu với Nano Banana Pro API và tự động viết bài với LLM, giúp xuất bản tức thời từ nội dung đến hình ảnh."
+      },
+      "2": {
+        "title": "Sản phẩm AI Tương tác Thời gian thực",
+        "description": "Nhờ inference độ trễ cực thấp của Flaq, tích hợp liền mạch tạo ảnh & video cho ứng dụng xã hội, game hoặc trợ lý AI."
+      },
+      "3": {
+        "title": "Chuỗi Sản xuất Phim & Quảng cáo",
+        "description": "Kết hợp API Veo 3.1 và Wan 2.6 tạo tiền kỳ hình ảnh (Pre-viz) khi phát triển kịch bản, giảm mạnh chi phí dựng truyền thống."
+      },
+      "4": {
+        "title": "Phát triển mẫu thử & Tăng trưởng Lập trình viên",
+        "description": "Nhanh chóng kiểm thử nhiều mô hình với 1 API key duy nhất và linh hoạt thay đổi thuật toán theo phản hồi thị trường mà không sửa code."
+      },
+      "title": "Tình huống ứng dụng tiêu biểu trên Flaq AI",
+      "description": "Cụm API hiệu suất cao của Flaq AI không chỉ là công cụ—mà là động lực đổi mới cho ngành công nghiệp. Từ quy trình sáng tạo đến tự động hóa doanh nghiệp, chúng tôi cung cấp hỗ trợ kỹ thuật cho mọi trường hợp.",
+      "button-text": "Try Now"
+    },
+    "exampleSection": {
+      "title": "Examples Generated via Flaq API",
+      "description": "Explore what you can create with Flaq SaaS Template powered by Flaq AI. Use this template to quickly build your own platform! For the full AI generation experience, visit flaq.ai.",
+      "imageExamples": {
+        "title": "Image Generation Examples",
+        "description": "See how the template handles AI image generation with various styles and prompts."
+      },
+      "videoExamples": {
+        "title": "Video Generation Examples",
+        "description": "Discover how the template transforms images and text into dynamic video content.",
+        "promptLabel": "Prompt"
+      }
+    },
+    "faq": {
+      "1": {
+        "question": "Flaq AI khác gì với việc dùng trực tiếp API của nhà cung cấp mô hình?",
+        "answer": "Flaq AI chuẩn hóa định dạng dữ liệu, định tuyến dự phòng thông minh, tối ưu mạng nền tảng—giảm đáng kể độ trễ và không phải duy trì nhiều tài khoản API."
+      },
+      "2": {
+        "question": "Flaq AI hỗ trợ những loại mô hình AI nào?",
+        "answer": "Chúng tôi hiện hỗ trợ hơn 100 mô hình AI dẫn đầu, gồm tạo ảnh, tạo video, và chuyển đổi giọng nói thành văn bản."
+      },
+      "3": {
+        "question": "Nền tảng đảm bảo bảo mật & quyền riêng tư dữ liệu như thế nào?",
+        "answer": "Flaq AI sử dụng mã hóa truyền dẫn cấp doanh nghiệp và cam kết không lưu trữ prompt hoặc dữ liệu cá nhân của bạn—đảm bảo dữ liệu doanh nghiệp tuân thủ quy định."
+      },
+      "4": {
+        "question": "Có gói dùng thử miễn phí không?",
+        "answer": "Tài khoản mới nhận miễn phí hạn mức để kiểm thử tích hợp. Sau đó, bạn có thể chọn trả theo mức dùng hoặc đăng ký gói phù hợp nhu cầu."
+      },
+      "5": {
+        "question": "Tôi có thể dùng Flaq AI cho mục đích thương mại không?",
+        "answer": "Có, bạn có thể dùng Flaq AI cho mục đích thương mại. Tuy nhiên, bạn cần tuân thủ điều khoản và điều kiện của nhà cung cấp model cũng như luật pháp của quốc gia nơi bạn đang ở."
+      },
+      "6": {
+        "question": "Làm thế nào để tôi được hoàn tiền từ flaq.ai?",
+        "answer": "Nếu bạn cần hoàn tiền, vui lòng liên hệ đội ngũ hỗ trợ của chúng tôi qua contact@flaq.ai. Chúng tôi sẽ đánh giá tình huống của bạn và đưa ra giải pháp hoàn tiền phù hợp dựa trên hoàn cảnh cụ thể. Xin lưu ý rằng chúng tôi chỉ hoàn tiền cho credit hoặc tài nguyên chưa sử dụng."
+      },
+      "7": {
+        "question": "Tôi nên làm gì nếu có câu hỏi về sản phẩm hoặc gặp sự cố?",
+        "answer": "Nếu bạn có bất kỳ câu hỏi hoặc sự cố nào liên quan đến sản phẩm của chúng tôi, vui lòng liên hệ với chúng tôi qua contact@flaq.ai. Dù nhu cầu hoặc vấn đề sử dụng của bạn là gì, chúng tôi sẽ cung cấp giải pháp tốt nhất có thể."
+      },
+      "8": {
+        "question": "Tuyên bố miễn trừ trách nhiệm về hành vi xâm phạm quyền sở hữu trí tuệ là gì?",
+        "answer": "Flaq AI cung cấp các công cụ AI để giúp người dùng vận dụng trí tưởng tượng nhằm tạo ra nội dung hình ảnh mong muốn. Nếu người dùng đưa vào nội dung liên quan đến người nổi tiếng hoặc các quyền sở hữu trí tuệ khác rồi quảng bá nội dung đó, dẫn đến vấn đề xâm phạm, người dùng phải chịu trách nhiệm pháp lý."
+      },
+      "title": "Các câu hỏi thường gặp về Flaq AI"
+    }
+  },
+  "image-to-image": {
+    "heading": {
+      "title": "Ảnh thành Ảnh — Miễn phí và Mã nguồn mở · Không cần đăng ký",
+      "description": "Dùng và tự lưu trữ mẫu Ảnh thành Ảnh miễn phí, mã nguồn mở mà không cần đăng ký. Việc tạo nội dung cần Flaq Client Key và tín dụng API."
+    },
+    "form": {
+      "title": "Ảnh thành Ảnh"
+    },
+    "examples": {
+      "1": {
+        "1": {
+          "title": "Original"
+        },
+        "2": {
+          "title": "A girl with a backpack, standing relaxed near a bookshelf and behind a chair. Keep every other detail in the scene completely unchanged."
+        },
+        "title": "The AI image-to-image converter enables high-quality style conversion and reconstruction while maintaining original characteristics and details."
+      },
+      "2": {
+        "1": {
+          "title": "Original"
+        },
+        "2": {
+          "title": "Convert a realistic image into retro, grid-style pixel video game art."
+        },
+        "title": "The AI image-to-image converter supports fine-grained control of style transfer while preserving the source image's complete content."
+      },
+      "3": {
+        "1": {
+          "title": "Original"
+        },
+        "2": {
+          "title": "Ultra-realistic 8K overhead photo in strict knolling style. Take the object from the reference image and fully disassemble it into 8 to 12 main parts, arranging them neatly in a grid or radial layout on a minimalist wood or matte gray tabletop. Use uniform spacing and perfect alignment, no overlap or extraneous items. The scene is softly and diffusely lit by multiple light sources, casting subtle shadows and balancing neutral colors, with all elements in perfect focus. Show highly detailed real-world materials (metal, plastic, rubber grips, circuit boards, screws). For each part, add a slim white rectangular border, and place a short, clear English label next to it in a simple sans-serif font, not covering the part; annotations must be legible and not intrusive."
+        },
+        "title": "The AI image-to-image converter preserves the original structure and layout during transformation, enabling creators to achieve more accurate composition control and generate high-quality, stable output images."
+      },
+      "title": "Tính năng cốt lõi của AI Image to Image Generator",
+      "description": "Một công cụ tạo image-to-image linh hoạt cho tạo theo tham chiếu, chỉnh sửa hình ảnh, chuyển phong cách, mockup sản phẩm và biến thể hình ảnh nhanh trong khi giữ các chi tiết nguồn quan trọng."
+    },
+    "core-feature": {
+      "1": {
+        "title": "Realistic and Delicate Visual Presentation",
+        "description": "Outstanding in rendering textures, lighting, and composition, the system produces highly accurate, richly detailed, and realistic images for vivid results."
+      },
+      "2": {
+        "title": "Highly Flexible Style Control",
+        "description": "Customize your desired visual style freely using prompts or reference images. Whether illustration, social media, product sketch, or other visual types, achieve your vision with ease."
+      },
+      "3": {
+        "title": "Powerful Text Understanding and Parsing",
+        "description": "Leveraging advanced natural language processing, the system accurately understands prompts and descriptions to quickly generate and optimize image content for smarter, more efficient creation."
+      },
+      "title": "Core Advantages of Image-to-Image Converter",
+      "description": "A professional AI image-to-image tool offering high-resolution outputs and a streamlined, user-friendly interface. Easily generate high-quality works from reference images. Diverse settings provide creative freedom, making image editing, design, and art creation more efficient and flexible."
+    },
+    "advantage": {
+      "1": {
+        "title": "Poster & Visual Design",
+        "description": "Supports poster and various creative visual editing, with flexible adjustment of fonts, sizes, and styles—perfect for event promotion and brand marketing."
+      },
+      "2": {
+        "title": "Product Marketing & Brand Communication",
+        "description": "Enables rapid generation of product visuals and creative marketing materials, saving design time, enhancing visual appeal, and boosting brand influence."
+      },
+      "3": {
+        "title": "Educational Content Creation",
+        "description": "Assists educators in creating and editing teaching visuals, making teaching resources more vivid and greatly improving presentation and effectiveness."
+      },
+      "4": {
+        "title": "Artistic Creation & Cultural Innovation",
+        "description": "Empowers artists and designers with rich creative tools for style transformation, cross-domain inspiration, and maximized artistic possibilities."
+      },
+      "title": "Applications of the AI Image-to-Image Converter",
+      "description": "The AI image-to-image converter is suitable for poster design, brand marketing, product showcases, and artistic creation. It enables precise image and text control, greatly improving creative efficiency and visual quality and providing powerful creative capabilities for designers, business teams, and educators.",
+      "try-now": "Try Now"
+    },
+    "manual": {
+      "1": {
+        "title": "Tải lên hình ảnh tham chiếu của bạn",
+        "description": "Bắt đầu bằng ảnh sản phẩm, chân dung, bản phác thảo, bản nháp thiết kế, tham chiếu phong cách hoặc bất kỳ hình ảnh nào cần định hướng kết quả được tạo."
+      },
+      "2": {
+        "title": "Mô tả sự biến đổi",
+        "description": "Viết prompt giải thích điều cần thay đổi và điều cần giữ lại, bao gồm phong cách, nền, ánh sáng, màu sắc, bố cục, chi tiết chủ thể và mục tiêu đầu ra."
+      },
+      "3": {
+        "title": "Tạo và tinh chỉnh",
+        "description": "Chọn model và thiết lập được hỗ trợ, tạo hình ảnh, xem trước kết quả, rồi tải xuống hình ảnh hoàn chỉnh ở các định dạng được hỗ trợ như JPG, PNG hoặc WebP."
+      },
+      "title": "Cách tạo hình ảnh từ hình ảnh",
+      "content": "This step-by-step guide will help you get started and achieve the best results with the AI image-to-image conversion tool."
+    },
+    "faq": {
+      "1": {
+        "question": "Trình tạo AI image to image là gì?",
+        "answer": "Trình tạo AI image to image dùng hình ảnh đã tải lên làm đầu vào trực quan, sau đó tạo hình ảnh mới dựa trên prompt của bạn. Công cụ có thể giúp đổi phong cách, chỉnh sửa, cải thiện hoặc diễn giải lại hình ảnh hiện có."
+      },
+      "2": {
+        "question": "Tôi có cần prompt nếu đã tải hình ảnh lên không?",
+        "answer": "Có. Hình ảnh đã tải lên cung cấp ngữ cảnh trực quan, còn prompt của bạn cho model biết cần thay đổi, giữ lại hoặc nhấn mạnh điều gì trong kết quả được tạo."
+      },
+      "3": {
+        "question": "Image to Image Generator có thể giữ chủ thể gốc không?",
+        "answer": "Các model image-to-image thường có thể giữ chủ thể, cấu trúc, bố cục, layout hoặc dấu hiệu phong cách gốc, nhưng độ nhất quán cuối cùng phụ thuộc vào model đã chọn, chất lượng hình ảnh đầu vào và độ rõ ràng của prompt."
+      },
+      "4": {
+        "question": "Những thiết lập và định dạng hình ảnh nào được hỗ trợ?",
+        "answer": "Thiết lập khả dụng phụ thuộc vào model đã chọn. Các tùy chọn phổ biến có thể gồm tỷ lệ khung hình, độ phân giải, chất lượng, seed, tối ưu hóa prompt, điều khiển đầu vào hình ảnh theo từng model và định dạng được hỗ trợ như JPG, PNG và WebP."
+      },
+      "5": {
+        "question": "Chi phí credit được tính như thế nào?",
+        "answer": "Ước tính được tính từ model đã chọn và các tham số được hỗ trợ như quy trình hình ảnh tham chiếu, độ phân giải, chất lượng, giá nhà cung cấp, credit miễn phí và quy tắc ưu đãi hiện tại."
+      },
+      "6": {
+        "question": "Tôi có thể dùng kết quả image-to-image cho mục đích thương mại không?",
+        "answer": "Việc sử dụng thương mại phụ thuộc vào quyền của bạn đối với hình ảnh đã tải lên, gói của bạn, điều khoản nền tảng, quy định của nhà cung cấp model và nội dung được tạo. Hãy xem lại điều khoản hiện tại trước khi dùng đầu ra trong công việc trả phí, cho khách hàng hoặc công khai."
+      },
+      "title": "FAQ về Image-to-Image Generator"
+    }
+  },
+  "image-to-video": {
+    "heading": {
+      "title": "Ảnh thành Video — Miễn phí và Mã nguồn mở · Không cần đăng ký",
+      "description": "Dùng và tự lưu trữ mẫu Ảnh thành Video miễn phí, mã nguồn mở mà không cần đăng ký. Việc tạo nội dung cần Flaq Client Key và tín dụng API."
+    },
+    "form": {
+      "title": "Ảnh thành Video"
+    },
+    "example": {
+      "1": {
+        "prompt": "cutting the tomato"
+      },
+      "2": {
+        "prompt": "The man is skiing"
+      },
+      "title": "Ví dụ về AI Image to Video Generator",
+      "description": "Các ví dụ của Image to Video AI Generator cho thấy hình ảnh nguồn có thể trở thành clip chuyển động với hành động theo prompt, chuyển động camera, độ nhất quán hình ảnh và âm thanh tùy chọn khi model đã chọn hỗ trợ."
+    },
+    "core-feature": {
+      "1": {
+        "title": "High-Quality Video Output",
+        "description": "AI Video Generator produces high-quality videos with smooth motion and clear visuals, meeting professional video production standards."
+      },
+      "2": {
+        "title": "Efficient Generation Process",
+        "description": "Through optimized AI models, the generator significantly improves creative efficiency and shortens production cycles."
+      },
+      "3": {
+        "title": "Natural Motion and Spatial Consistency",
+        "description": "Character movements connect smoothly, scene transitions are seamless, both enhancing immersion and ensuring narrative continuity and logic."
+      },
+      "title": "Advantages about the Image to Video AI Generator",
+      "description": "AI Video Generator not only generates content quickly but also focuses on visual hierarchy and narrative logic, making it an important productivity tool for content creators and business teams."
+    },
+    "advantage": {
+      "1": {
+        "title": "Film and Video Creation",
+        "description": "AI Video Generator can quickly transform text descriptions into cinematic short films. Whether it's dramatic segments, sci-fi scenes, or emotional narratives, it can present precise cinematography, character consistency, and style matching, significantly improving the creative efficiency of film and video content."
+      },
+      "2": {
+        "title": "Marketing and Advertising Production",
+        "description": "With AI Video Generator, brands can easily generate high-quality advertising videos, product showcases, or promotional shorts at lower costs than traditional filming while quickly iterating versions, thereby enhancing brand exposure and communication effectiveness."
+      },
+      "3": {
+        "title": "Social Media Content Creation",
+        "description": "For platforms like YouTube Shorts, TikTok, and Instagram Reels, AI Video Generator can create attractive short videos. Combined with sound effects and visual filters, it helps creators enhance content interactivity and viral potential."
+      },
+      "4": {
+        "title": "Educational and Training Videos",
+        "description": "Teachers and training personnel can use AI Video Generator to create instructional videos, teaching demonstrations, or animated courseware. With AI-generated visuals and audio coordination, abstract or complex knowledge becomes more intuitive and easier to understand."
+      },
+      "title": "Use Cases about the Image to Video AI Generator",
+      "description": "With the Image to Video AI Generator, creators can unleash their imagination across various scenarios—from film shorts and social media content to brand advertising, educational training, and virtual reality experiences. This advanced tool can quickly transform text descriptions into high-quality, realistic and vivid video works, not only improving creative efficiency but also saving production costs, making creativity come to life faster.",
+      "try-now": "Try Now"
+    },
+    "manual": {
+      "1": {
+        "title": "Tải lên hình ảnh tham chiếu của bạn",
+        "description": "Bắt đầu với ảnh, hình sản phẩm, chân dung, thiết kế hoặc tham chiếu hình ảnh bạn muốn tạo chuyển động. Một số model cũng hỗ trợ khung cuối."
+      },
+      "2": {
+        "title": "Mô tả chuyển động",
+        "description": "Viết prompt giải thích hành động, chuyển động camera, cảm xúc, ánh sáng, nhịp độ, thay đổi nền và các chi tiết của hình ảnh nguồn cần giữ ổn định."
+      },
+      "3": {
+        "title": "Tạo, xem trước và tinh chỉnh",
+        "description": "Chọn model image-to-video được hỗ trợ, tạo clip, xem trước kết quả, rồi tinh chỉnh prompt hoặc thiết lập để có phiên bản tốt hơn."
+      },
+      "title": "Cách tạo video từ hình ảnh",
+      "content": ""
+    },
+    "faq": {
+      "1": {
+        "question": "Trình tạo AI image to video là gì?",
+        "answer": "Trình tạo AI image to video dùng hình ảnh đã tải lên làm điểm bắt đầu trực quan, sau đó tạo video hoạt ảnh ngắn dựa trên prompt chuyển động và model đã chọn của bạn."
+      },
+      "2": {
+        "question": "Tôi có cần prompt nếu đã tải hình ảnh lên không?",
+        "answer": "Có. Hình ảnh đã tải lên cung cấp ngữ cảnh trực quan, còn prompt của bạn cho model biết điều gì nên chuyển động, camera nên hoạt động ra sao và chi tiết nào cần nhất quán."
+      },
+      "3": {
+        "question": "Image to Video Generator có thể tạo video có âm thanh không?",
+        "answer": "Một số model image-to-video được hỗ trợ có tùy chọn âm thanh hoặc tiếng động. Biểu mẫu chỉ hiển thị điều khiển âm thanh khi model đã chọn hỗ trợ."
+      },
+      "4": {
+        "question": "Tôi có thể dùng khung cuối không?",
+        "answer": "Một số model hỗ trợ hướng dẫn bằng khung cuối. Khi có, khung cuối có thể giúp xác định bố cục cuối hoặc mục tiêu chuyển cảnh cho video được tạo."
+      },
+      "5": {
+        "question": "Làm thế nào để có kết quả image-to-video tốt hơn?",
+        "answer": "Dùng hình ảnh nguồn rõ ràng và viết prompt chính xác, tách biệt chuyển động mong muốn khỏi các chi tiết cần giữ ổn định, như nhận dạng, hình dáng sản phẩm, ánh sáng hoặc bố cục."
+      },
+      "6": {
+        "question": "Tôi có thể dùng kết quả image-to-video cho mục đích thương mại không?",
+        "answer": "Việc sử dụng thương mại phụ thuộc vào quyền của bạn đối với hình ảnh đã tải lên, gói của bạn, điều khoản nền tảng, quy định của nhà cung cấp model và nội dung được tạo. Hãy xem lại điều khoản hiện tại trước khi dùng đầu ra trong công việc trả phí, cho khách hàng hoặc công khai."
+      },
+      "title": "FAQ về Image-to-Video Generator"
+    }
+  },
+  "text-to-video": {
+    "heading": {
+      "title": "Văn bản thành Video — Miễn phí và Mã nguồn mở · Không cần đăng ký",
+      "description": "Dùng và tự lưu trữ mẫu Văn bản thành Video miễn phí, mã nguồn mở mà không cần đăng ký. Việc tạo nội dung cần Flaq Client Key và tín dụng API."
+    },
+    "form": {
+      "title": "Văn bản thành Video"
+    },
+    "example": {
+      "1": {
+        "prompt": "A short hair beautiful European influencer is trying to sell to the camera a smooth cylindrical object, tapering slightly at one end, made of firm or flexible material with a polished, minimal design, recorded with an iPhone, smiling"
+      },
+      "2": {
+        "prompt": "A man soaring gracefully through outer space as the camera orbits smoothly around him"
+      },
+      "title": "Ví dụ về AI Text to Video Generator",
+      "description": "Các ví dụ của Text to Video AI Generator cho thấy ý tưởng chỉ bằng prompt có thể trở thành clip động với chuyển động rõ, khung hình điện ảnh, vật lý chân thực và âm thanh tùy chọn khi model đã chọn hỗ trợ."
+    },
+    "core-feature": {
+      "1": {
+        "title": "Cutting-Edge AI Technology",
+        "description": "Based on advanced artificial intelligence models with deep semantic understanding and physics modeling capabilities, generating realistic and vivid video content from text or images."
+      },
+      "2": {
+        "title": "Realistic Physics Engine",
+        "description": "Built-in high-precision physics simulation system that accurately recreates momentum, buoyancy, and complex motion for natural and smooth dynamic effects."
+      },
+      "3": {
+        "title": "High-Quality Video Output",
+        "description": "Generates high-quality videos with smooth motion and cinematic visual quality for various creative scenarios."
+      },
+      "title": "Advantages about Text to Video AI Generator",
+      "description": "AI Video Generator not only generates content quickly but also focuses on visual hierarchy and narrative logic, making it an important productivity tool for content creators and business teams."
+    },
+    "advantage": {
+      "1": {
+        "title": "Film and Video Creation",
+        "description": "Text to Video AI Generator can rapidly transform text descriptions into cinematic short films. Whether dramatic segments, sci-fi scenes, or emotional narratives, it can precisely present cinematography, character consistency, and style matching, significantly improving film and video content creation efficiency."
+      },
+      "2": {
+        "title": "Marketing and Advertising Production",
+        "description": "Brands can leverage Text to Video AI Generator to efficiently generate advertising videos, product showcases, or promotional shorts at low cost, rapidly iterate versions, and enhance brand exposure and communication effectiveness."
+      },
+      "3": {
+        "title": "Social Media Content Creation",
+        "description": "Suitable for platforms like YouTube Shorts, TikTok, and Instagram Reels, Text to Video AI Generator can create engaging short videos. Combined with sound effects and visual filters, it enhances content interactivity and viral potential."
+      },
+      "4": {
+        "title": "Educational and Training Videos",
+        "description": "Teachers and training personnel can use AI Video Generator to create instructional videos, demonstrations, or animated courseware. AI-generated visuals combined with audio make abstract or complex knowledge more intuitive and understandable."
+      },
+      "title": "Application Scenarios about Text to Video AI Generator",
+      "description": "Text to Video AI Generator helps you quickly turn text into high-quality videos for short films, social media, marketing, training, and more—saving time and reducing costs.",
+      "try-now": "Try Now"
+    },
+    "manual": {
+      "1": {
+        "title": "Nhập prompt video của bạn",
+        "description": "Mô tả chủ thể, bối cảnh, hành động, góc máy, chuyển động, ánh sáng, cảm xúc, phong cách hình ảnh và mục đích cuối cùng của video."
+      },
+      "2": {
+        "title": "Chọn model và thiết lập",
+        "description": "Chọn nhà cung cấp và model text-to-video, rồi đặt các tùy chọn được hỗ trợ như tỷ lệ, thời lượng, độ phân giải, âm thanh, seed, điều khiển camera hoặc negative prompt."
+      },
+      "3": {
+        "title": "Tạo, xem trước và tinh chỉnh",
+        "description": "Tạo video của bạn, xem lại kết quả, điều chỉnh prompt hoặc thiết lập model, rồi tạo phiên bản khác cho đến khi chuyển động phù hợp với mục tiêu của bạn."
+      },
+      "title": "Cách tạo video từ văn bản",
+      "content": ""
+    },
+    "faq": {
+      "1": {
+        "question": "Trình tạo AI text to video là gì?",
+        "answer": "Trình tạo AI text to video tạo video ngắn từ prompt bằng văn bản. Bạn mô tả cảnh, chuyển động, camera và phong cách, sau đó model AI đã chọn tạo ra kết quả video."
+      },
+      "2": {
+        "question": "Tôi có cần tải hình ảnh lên để dùng Text to Video Generator không?",
+        "answer": "Không. Quá trình tạo text-to-video bắt đầu chỉ từ văn bản. Nếu bạn muốn ảnh hoặc thiết kế đã tải lên định hướng video, hãy dùng trình tạo image-to-video thay thế."
+      },
+      "3": {
+        "question": "Text to Video Generator có thể tạo video có âm thanh không?",
+        "answer": "Một số model video được hỗ trợ có thể tạo hoặc bao gồm âm thanh. Tùy chọn âm thanh chỉ xuất hiện khi model đã chọn hỗ trợ âm thanh hoặc tạo audio-video."
+      },
+      "4": {
+        "question": "Tôi có thể điều chỉnh những thiết lập video nào?",
+        "answer": "Thiết lập khả dụng phụ thuộc vào model đã chọn. Các tùy chọn phổ biến gồm tỷ lệ khung hình, thời lượng, độ phân giải, âm thanh, seed, điều khiển camera và negative prompt."
+      },
+      "5": {
+        "question": "Chi phí credit được tính như thế nào?",
+        "answer": "Ước tính được tính từ model đã chọn và các tham số được hỗ trợ như thời lượng, độ phân giải, âm thanh, giá nhà cung cấp, credit miễn phí và quy tắc ưu đãi hiện tại."
+      },
+      "6": {
+        "question": "Tôi có thể dùng video đã tạo cho mục đích thương mại không?",
+        "answer": "Việc sử dụng thương mại phụ thuộc vào gói của bạn, điều khoản nền tảng, quy định của nhà cung cấp model và nội dung bạn tạo. Hãy xem lại điều khoản hiện tại trước khi dùng đầu ra trong công việc trả phí, cho khách hàng hoặc công khai."
+      },
+      "title": "FAQ về Text-to-Video Generator"
+    }
+  },
+  "text-to-image": {
+    "heading": {
+      "title": "Văn bản thành Ảnh — Miễn phí và Mã nguồn mở · Không cần đăng ký",
+      "description": "Dùng và tự lưu trữ mẫu Văn bản thành Ảnh miễn phí, mã nguồn mở mà không cần đăng ký. Việc tạo nội dung cần Flaq Client Key và tín dụng API."
+    },
+    "form": {
+      "title": "Văn bản thành Ảnh"
+    },
+    "examples": {
+      "1": {
+        "title": "Enter product descriptions, scene details, or character features. The system will automatically interpret the semantics and generate a corresponding visual image."
+      },
+      "2": {
+        "title": "The system deeply analyzes and interprets the text, outputting well-structured, detail-rich, and stylistically diverse image results."
+      },
+      "title": "Tính năng cốt lõi của AI Text to Image Generator",
+      "description": "Một quy trình tạo hình ảnh AI mạnh mẽ để biến ý tưởng viết thành hình ảnh chi tiết, được xây dựng cho khả năng hiểu prompt mạnh, lựa chọn model linh hoạt, bố cục sạch và lặp ý tưởng sáng tạo nhanh."
+    },
+    "advantage": {
+      "1": {
+        "title": "Efficient Generation, Greatly Saves Time",
+        "description": "AI rapidly transforms text into images, dramatically reducing time costs for creators."
+      },
+      "2": {
+        "title": "Semantic Accuracy & Detailed Realism",
+        "description": "The generated images maintain consistency in overall composition, color, and detailed features, faithfully reproducing both meaning and fine details."
+      },
+      "3": {
+        "title": "Flexible Multi-Input Adaptation",
+        "description": "Supports natural language text inputs, platform templates, or AI auto-generated supplementary materials—catering to all levels of experience and diverse needs."
+      },
+      "4": {
+        "title": "Ideal for Personal and Business Use",
+        "description": "Whether you're a designer, content creator, product team, developer, or brand owner, easily create ready-to-use image assets for a variety of applications."
+      },
+      "title": "Advantages of Text to Image AI",
+      "description": "The core advantages of Text to Image AI lie in automating the traditionally complex, high-barrier image creation process, enabling users to rapidly obtain high-quality visual results while maintaining realism and creativity.",
+      "button-text": "Try Now"
+    },
+    "use-cases": {
+      "1": {
+        "title": "Hình ảnh marketing và mạng xã hội",
+        "description": "Tạo ý tưởng chiến dịch, cảnh sản phẩm, đồ họa ra mắt, bài đăng mạng xã hội, ý tưởng thumbnail và biến thể quảng cáo trực tiếp từ bản brief sáng tạo bằng văn bản."
+      },
+      "2": {
+        "title": "Phác thảo thiết kế và khám phá thương hiệu",
+        "description": "Biến moodboard, định hướng hình ảnh, ghi chú phong cách, ý tưởng bao bì và concept bố cục thành bản nháp trau chuốt để đánh giá và lặp lại nhanh hơn."
+      },
+      "3": {
+        "title": "Hình ảnh giáo dục và thuyết trình",
+        "description": "Tạo hình ảnh lớp học, minh họa khái niệm, sơ đồ, hình giải thích và tài sản thuyết trình giúp thông tin trừu tượng dễ hiểu hơn."
+      },
+      "4": {
+        "title": "Kể chuyện và concept art",
+        "description": "Phát triển nhân vật, khung hình điện ảnh, môi trường, poster, bìa, cảnh xây dựng thế giới và tác phẩm kể chuyện từ mô tả văn bản chi tiết."
+      },
+      "title": "Trường hợp sử dụng Text-to-Image",
+      "description": "Dùng Flaq AI Text to Image Generator bất cứ khi nào bạn cần hình ảnh gốc từ lời mô tả, không cần chuẩn bị hình ảnh tham chiếu hoặc xây dựng quy trình thiết kế phức tạp.",
+      "try-now": "Bắt đầu tạo"
+    },
+    "manual": {
+      "1": {
+        "title": "Nhập prompt hình ảnh của bạn",
+        "description": "Mô tả hình ảnh bạn muốn, bao gồm chủ thể, bối cảnh, phong cách, ánh sáng, bố cục, tâm trạng, màu sắc, góc máy và bất kỳ chữ nào cần xuất hiện."
+      },
+      "2": {
+        "title": "Chọn model và thiết lập",
+        "description": "Chọn nhà cung cấp và model cho mục tiêu sáng tạo của bạn, rồi đặt tỷ lệ, độ phân giải, chất lượng, seed hoặc tối ưu hóa prompt khi model đã chọn hỗ trợ."
+      },
+      "3": {
+        "title": "Tạo, xem trước và tinh chỉnh",
+        "description": "Nhấp tạo, xem kết quả hình ảnh, điều chỉnh prompt hoặc thiết lập, rồi tải xuống hình ảnh hoàn chỉnh ở các định dạng được hỗ trợ như JPG, PNG hoặc WebP."
+      },
+      "title": "Cách tạo hình ảnh từ văn bản",
+      "content": "Text to Image features a simple and intuitive workflow—no design experience required. Just enter your text description and the system automatically analyzes the semantics to generate the corresponding visual image."
+    },
+    "faq": {
+      "1": {
+        "question": "Trình tạo AI text to image là gì?",
+        "answer": "Trình tạo AI text to image tạo hình ảnh từ prompt bằng văn bản. Bạn mô tả chủ thể, cảnh, phong cách và yêu cầu đầu ra, sau đó model AI đã chọn tạo ra kết quả hình ảnh."
+      },
+      "2": {
+        "question": "Tôi có cần tải hình ảnh lên để dùng Text to Image Generator không?",
+        "answer": "Không. Quá trình tạo text-to-image bắt đầu chỉ từ văn bản. Nếu bạn muốn biến đổi, đổi phong cách hoặc chỉnh sửa hình ảnh hiện có, hãy dùng trình tạo image-to-image thay thế."
+      },
+      "3": {
+        "question": "Tôi có thể chọn các model hình ảnh AI khác nhau không?",
+        "answer": "Có. Flaq AI cho phép bạn chọn nhà cung cấp và model, để bạn có thể so sánh điểm mạnh của các model, thiết lập được hỗ trợ, phong cách hình ảnh và giá trong một quy trình."
+      },
+      "4": {
+        "question": "Những thiết lập và định dạng hình ảnh nào được hỗ trợ?",
+        "answer": "Thiết lập khả dụng phụ thuộc vào model đã chọn. Các tùy chọn phổ biến gồm tỷ lệ khung hình, độ phân giải, chất lượng, seed và tối ưu hóa prompt, với các định dạng hình ảnh được hỗ trợ như JPG, PNG và WebP."
+      },
+      "5": {
+        "question": "Chi phí credit được tính như thế nào?",
+        "answer": "Ước tính được tính từ model đã chọn và các tham số được hỗ trợ như độ phân giải, chất lượng, giá nhà cung cấp, credit miễn phí và quy tắc ưu đãi hiện tại."
+      },
+      "title": "FAQ về Text-to-Image Generator"
+    }
+  },
+  "virtual-try-on": {
+    "heading": {
+      "title": "Thử Đồ Ảo — Miễn phí và Mã nguồn mở · Không cần đăng ký",
+      "description": "Dùng và tự lưu trữ mẫu Thử Đồ Ảo miễn phí, mã nguồn mở mà không cần đăng ký. Việc tạo nội dung cần Flaq Client Key và tín dụng API."
+    },
+    "form": {
+      "title": "Thử Đồ Ảo",
+      "upload-images-title": "Upload Images",
+      "upload-subject-label": "Upload [Person]",
+      "upload-object-label": "Upload [Clothing]",
+      "hints-title": "Hints",
+      "subject-label": "Person",
+      "object-label": "Clothing",
+      "ai-generation-label": "AI Generation"
+    },
+    "examples": {
+      "1": {
+        "1": {
+          "title": "Original"
+        },
+        "2": {
+          "title": "Generated"
+        },
+        "title": "Upload a person photo and a clothing image. The AI maps the garment onto the body with natural drape, accurate fit, and full detail preservation."
+      },
+      "2": {
+        "1": {
+          "title": "Original"
+        },
+        "2": {
+          "title": "Generated"
+        },
+        "title": "Choose from curated style hint templates to get started instantly—no sourcing required. The AI generates a complete try-on result based on your selection."
+      },
+      "3": {
+        "1": {
+          "title": "Original"
+        },
+        "2": {
+          "title": "Generated"
+        },
+        "title": "Switch between different AI models to control output style and detail level. Each model delivers consistent, high-quality virtual try-on results."
+      },
+      "title": "Core Features of Virtual Try On AI",
+      "description": "Virtual Try On AI accurately renders garments onto uploaded person photos, preserving body proportions, fabric texture, and design details across a wide range of clothing styles and model types."
+    },
+    "advantage": {
+      "1": {
+        "title": "Fast Generation, Instant Results",
+        "description": "Get photorealistic try-on results quickly. Our AI is pre-trained on millions of garment and body reference images, requiring no complex setup—just upload and see instant output."
+      },
+      "2": {
+        "title": "Perfect Details, Precise Presentation",
+        "description": "From delicate textures and complex patterns to tiny text and logos, every detail of the clothing is faithfully preserved in each result. The original design is fully represented—no distortions, no unexpected differences."
+      },
+      "3": {
+        "title": "Unlimited Compatibility, Complete Coverage",
+        "description": "Whether it's model photography, flat lay displays, or invisible mannequin shots, the AI handles them all without additional configuration. It adapts flexibly to diverse clothing styles, body types, and pose variations."
+      },
+      "4": {
+        "title": "Multiple Models, One Platform",
+        "description": "Switch between different AI models based on your output preference. Each model is optimized for different generation styles and clothing complexities—all accessible without any technical setup."
+      },
+      "title": "Core Advantages of Virtual Try On AI",
+      "description": "Virtual Try On AI combines multiple state-of-the-art generation models with a simple upload workflow, making realistic outfit visualization accessible to anyone—from individual shoppers to e-commerce teams.",
+      "try-now": "Try Now"
+    },
+    "use-cases": {
+      "1": {
+        "title": "Online Shopping & Purchase Decisions",
+        "description": "See exactly how a garment will look on your body before buying. Reduce return rates and purchase uncertainty by visualizing real outfit combinations on yourself."
+      },
+      "2": {
+        "title": "E-commerce Product Photography",
+        "description": "Generate on-model product visuals at scale without organizing photoshoots. Upload clothing images and instantly produce catalog-ready imagery for any body type or style."
+      },
+      "3": {
+        "title": "Fashion Design & Sampling",
+        "description": "Preview how new designs look on real body references before producing physical samples. Speed up design iteration and reduce prototyping costs across the development cycle."
+      },
+      "4": {
+        "title": "Marketing & Social Media Content",
+        "description": "Produce high-quality outfit imagery for campaigns, lookbooks, social posts, or brand promotions—without models, studios, or post-production. Generate multiple variations quickly to test different looks."
+      },
+      "title": "Use Cases for Virtual Try On AI",
+      "description": "Virtual Try On AI supports a wide range of personal and professional applications—from online shopping decisions to high-volume e-commerce content production.",
+      "try-now": "Try Now"
+    },
+    "manual": {
+      "1": {
+        "title": "Step 1: Upload a Person Photo",
+        "description": "Upload one clear photo of a person. This will serve as the base body reference for the virtual try-on."
+      },
+      "2": {
+        "title": "Step 2: Add Clothing Images or Choose a Style Hint",
+        "description": "Upload one or more clothing images (the number supported varies by model), or select from pre-built style hint templates to skip sourcing entirely."
+      },
+      "3": {
+        "title": "Step 3: Select Your AI Model",
+        "description": "Choose from available AI models. Each model offers different generation characteristics—select based on your desired output style and clothing type."
+      },
+      "4": {
+        "title": "Step 4: Generate and Download",
+        "description": "Click generate and receive your virtual try-on result. Preview the output and download it for personal use, product listings, or content creation."
+      },
+      "title": "How to Use Virtual Try On AI",
+      "content": "Virtual Try On AI requires no technical experience. Upload your images, select a model and style hint if needed, and receive a realistic try-on result quickly."
+    },
+    "faq": {
+      "1": {
+        "question": "What AI models are supported for Virtual Try On?",
+        "answer": "Multiple AI models are available, each with different generation characteristics suited to different clothing types and output styles. You can select the model that best fits your use case before generating."
+      },
+      "2": {
+        "question": "How many clothing images can I upload at once?",
+        "answer": "The number of supported clothing images depends on the selected model. Some models allow multiple garment uploads in a single session. Check the model details on the generation page for the specific limit."
+      },
+      "3": {
+        "question": "What are the style hint templates?",
+        "answer": "Style hints are curated outfit references. Instead of sourcing your own clothing images, you can select a hint to guide the AI toward a specific look. They are especially useful for quick style exploration."
+      },
+      "4": {
+        "question": "What types of clothing does Virtual Try On AI support?",
+        "answer": "Most standard clothing categories are supported, including tops, bottoms, dresses, and outerwear. Swimwear and lingerie are excluded due to platform usage policies."
+      },
+      "5": {
+        "question": "Does Virtual Try On AI support accessories or shoes?",
+        "answer": "Currently, the tool focuses on clothing items. Accessories and footwear require different rendering approaches and are not part of the current feature set."
+      },
+      "6": {
+        "question": "Can generated images be used for commercial purposes?",
+        "answer": "Yes. Generated images can be used for commercial purposes, subject to Flaq AI's terms of service."
+      },
+      "7": {
+        "question": "How much does it cost to use Virtual Try On AI?",
+        "answer": "Usage is billed based on the Flaq API pricing. Different models have different costs. Please refer to flaq.ai for the latest pricing details."
+      },
+      "8": {
+        "question": "What output resolution does Virtual Try On AI produce?",
+        "answer": "Output resolution varies by model. Results are optimized for visual quality suitable for both personal styling and professional e-commerce or marketing use."
+      },
+      "title": "FAQs about Virtual Try On AI"
+    }
+  },
+  "Pricing": {
+    "insufficientDialog": {
+      "title": "Nạp tiền để tiếp tục sáng tạo",
+      "description": "Nạp thêm số dư để tiếp tục sáng tạo với các mô hình hàng đầu cho hình ảnh, chat, lập trình và video, bao gồm Nano Banana và GPT Image cho hình ảnh, GPT và Claude cho tư duy và lập trình, cùng Seedance và Kling cho video. Một số gói có thêm giá trị thưởng.",
+      "confirm": "Go to Flaq",
+      "cancel": "Close"
+    }
+  },
+  "Metadata": {
+    "common": {
+      "siteName": "flaq.ai",
+      "creator": "Flaq AI"
+    },
+    "home": {
+      "title": "Ảnh và Video AI — Miễn phí và Mã nguồn mở · Không cần đăng ký",
+      "description": "Dùng và tự lưu trữ mẫu Ảnh và Video AI miễn phí, mã nguồn mở mà không cần đăng ký. Việc tạo nội dung cần Flaq Client Key và tín dụng API.",
+      "keywords": "Nền tảng Tạo Ảnh và Video AI, Miễn phí và Mã nguồn mở, Không cần đăng ký, no signup required, free AI generator, open source AI, free to use, Flaq API, AIGC",
+      "openGraph": {
+        "title": "Ảnh và Video AI — Miễn phí và Mã nguồn mở · Không cần đăng ký",
+        "description": "Dùng và tự lưu trữ mẫu Ảnh và Video AI miễn phí, mã nguồn mở mà không cần đăng ký. Việc tạo nội dung cần Flaq Client Key và tín dụng API.",
+        "siteName": "Flaq SaaS Template"
+      },
+      "twitter": {
+        "title": "Ảnh và Video AI — Miễn phí và Mã nguồn mở · Không cần đăng ký",
+        "description": "Dùng và tự lưu trữ mẫu Ảnh và Video AI miễn phí, mã nguồn mở mà không cần đăng ký. Việc tạo nội dung cần Flaq Client Key và tín dụng API.",
+        "site": "flaq.ai",
+        "creator": "Flaq AI"
+      }
+    },
+    "image-to-video": {
+      "title": "Ảnh thành Video — Miễn phí và Mã nguồn mở · Không cần đăng ký",
+      "description": "Dùng và tự lưu trữ mẫu Ảnh thành Video miễn phí, mã nguồn mở mà không cần đăng ký. Việc tạo nội dung cần Flaq Client Key và tín dụng API."
+    },
+    "text-to-video": {
+      "title": "Văn bản thành Video — Miễn phí và Mã nguồn mở · Không cần đăng ký",
+      "description": "Dùng và tự lưu trữ mẫu Văn bản thành Video miễn phí, mã nguồn mở mà không cần đăng ký. Việc tạo nội dung cần Flaq Client Key và tín dụng API."
+    },
+    "image-to-image": {
+      "title": "Ảnh thành Ảnh — Miễn phí và Mã nguồn mở · Không cần đăng ký",
+      "description": "Dùng và tự lưu trữ mẫu Ảnh thành Ảnh miễn phí, mã nguồn mở mà không cần đăng ký. Việc tạo nội dung cần Flaq Client Key và tín dụng API."
+    },
+    "text-to-image": {
+      "title": "Văn bản thành Ảnh — Miễn phí và Mã nguồn mở · Không cần đăng ký",
+      "description": "Dùng và tự lưu trữ mẫu Văn bản thành Ảnh miễn phí, mã nguồn mở mà không cần đăng ký. Việc tạo nội dung cần Flaq Client Key và tín dụng API."
+    },
+    "virtual-try-on": {
+      "title": "Thử Đồ Ảo — Miễn phí và Mã nguồn mở · Không cần đăng ký",
+      "description": "Dùng và tự lưu trữ mẫu Thử Đồ Ảo miễn phí, mã nguồn mở mà không cần đăng ký. Việc tạo nội dung cần Flaq Client Key và tín dụng API."
+    },
+    "reference-to-video": {
+      "title": "Tư liệu thành Video — Miễn phí và Mã nguồn mở · Không cần đăng ký",
+      "description": "Dùng và tự lưu trữ mẫu Tư liệu thành Video miễn phí, mã nguồn mở mà không cần đăng ký. Việc tạo nội dung cần Flaq Client Key và tín dụng API."
+    },
+    "ai-media-creator": {
+      "title": "Nội dung AI — Miễn phí và Mã nguồn mở · Không cần đăng ký",
+      "description": "Dùng và tự lưu trữ mẫu Nội dung AI miễn phí, mã nguồn mở mà không cần đăng ký. Việc tạo nội dung cần Flaq Client Key và tín dụng API."
+    }
+  },
+  "Profile": {
+    "image-history": {
+      "detail": {
+        "title": "Image Details",
+        "resolution": "Resolution",
+        "ratio": "Aspect Ratio",
+        "size": "File Size",
+        "generatedTime": "Generated Time",
+        "model": "Model",
+        "prompt": "Prompt",
+        "images": "Reference Images",
+        "download": "Download",
+        "delete": "Delete",
+        "copyPrompt": "Copy Prompt",
+        "copied": "Copied",
+        "expiredImage": "Image Expired"
+      },
+      "delete-success": "Image deleted successfully",
+      "delete-fail": "Failed to delete image"
+    },
+    "video-history": {
+      "detail": {
+        "title": "Video Details",
+        "resolution": "Resolution",
+        "ratio": "Aspect Ratio",
+        "duration": "Duration",
+        "generatedTime": "Generated Time",
+        "model": "Model",
+        "prompt": "Prompt",
+        "frames": "Frames",
+        "download": "Download",
+        "delete": "Delete",
+        "copyPrompt": "Copy Prompt",
+        "copied": "Copied"
+      },
+      "delete-success": "Video deleted successfully",
+      "delete-fail": "Failed to delete video"
+    }
+  },
+  "UnifiedGenerator": {
+    "media-type": {
+      "image": "Image",
+      "video": "Video"
+    },
+    "video-type": {
+      "text-to-video": "Text to Video",
+      "image-to-video": "Image to Video",
+      "reference-to-video": "Reference to Video"
+    },
+    "reset": "Reset",
+    "prompt": "Prompt",
+    "prompt-placeholder": "Describe what you want to create",
+    "model": "Model",
+    "ratio": "Aspect Ratio",
+    "resolution": "Resolution",
+    "duration": "Duration",
+    "sound": "Generate Sound",
+    "seed": "Seed",
+    "guidance": "Guidance Scale",
+    "negative-prompt": "Negative Prompt",
+    "optional": "Optional",
+    "start-image": "Start and End Images",
+    "reference-images": "Reference Images",
+    "reference-videos": "Reference Videos",
+    "reference-audios": "Reference Audios",
+    "reference-files": "Reference Files",
+    "reference-links": "Reference Links",
+    "reference-link-placeholder": "Paste a public reference URL",
+    "no-reference-input": "This model has no reference input configuration.",
+    "generate": "Generate",
+    "submitted": "Task submitted.",
+    "errors": {
+      "prompt": "Enter a prompt before generating.",
+      "model": "Select an available model.",
+      "reference-required": "Add the required reference media.",
+      "max-files": "The maximum number of reference files has been reached.",
+      "reference-source-exclusive": "Use reference files or reference links, not both.",
+      "reference-file-format": "One or more reference files use an unsupported format.",
+      "reference-link": "Enter a valid public HTTP or HTTPS reference URL.",
+      "missing-references": "Remove or replace missing prompt references: {references}.",
+      "media-duration": "Each reference must be between {min} and {max} seconds.",
+      "total-duration": "The total reference duration cannot exceed {max} seconds.",
+      "media-metadata": "The selected media file could not be read."
+    },
+    "image-type": {
+      "text-to-image": "Text to Image",
+      "image-to-image": "Image to Image"
+    },
+    "mention-reference": "Mention a reference in the prompt",
+    "quality": "Image Quality",
+    "end-frame": "End Frame",
+    "model-select": {
+      "all-providers": "All",
+      "all-types": "All",
+      "text-type": "Text",
+      "image-type": "Image",
+      "reference-type": "Reference",
+      "scroll-up": "Scroll up",
+      "scroll-down": "Scroll down",
+      "ratio": "Ratio",
+      "image": "Image",
+      "end-frame": "End Frame",
+      "sound": "Sound",
+      "seed": "Seed",
+      "duration": "{value}"
+    }
+  },
+  "CreatorHistory": {
+    "title": "Generation History",
+    "description": "Your image and video tasks are stored locally in this browser.",
+    "image": "Images",
+    "video": "Videos",
+    "no-preview": "No preview",
+    "empty": "No generation history yet.",
+    "loading-more": "Loading more...",
+    "end": "No more results"
+  },
+  "reference-to-video": {
+    "heading": {
+      "title": "Tư liệu thành Video — Miễn phí và Mã nguồn mở · Không cần đăng ký",
+      "description": "Dùng và tự lưu trữ mẫu Tư liệu thành Video miễn phí, mã nguồn mở mà không cần đăng ký. Việc tạo nội dung cần Flaq Client Key và tín dụng API."
+    },
+    "core-feature": {
+      "1": {
+        "title": "Flexible Reference Media",
+        "description": "Add images, video clips, audio, documents, or links when the selected model supports them. Available upload controls update automatically with your model choice."
+      },
+      "2": {
+        "title": "Direct Each Asset with @ Mentions",
+        "description": "Mention uploaded media inside the prompt and explain whether each asset should guide a character, product, action, camera move, sound, background, or style."
+      },
+      "3": {
+        "title": "Multiple Reference-to-Video Models",
+        "description": "Choose from supported Seedance, MiniMax, Wan, and Happy Horse reference workflows, then match the model to the input types and output controls your project needs."
+      },
+      "title": "Core Features of Reference to Video AI Generator",
+      "description": "Build a reference-guided video brief with compatible media uploads, asset mentions, model-specific controls, and multiple generation models."
+    },
+    "advantage": {
+      "1": {
+        "title": "Fewer Reshoots and Revisions",
+        "description": "Start from existing reference media instead of filming every variation again. Create fresh scenes, product moments, character actions, and talking clips while using source assets as visual guidance."
+      },
+      "2": {
+        "title": "More Consistent Visual Direction",
+        "description": "Use references to guide people, avatars, products, props, outfits, backgrounds, and scene details across the generated clip."
+      },
+      "3": {
+        "title": "Simple Creative Workflow",
+        "description": "Upload supported reference media, mention assets in the prompt, describe the action and style, choose the available video settings, and start the task from the same form."
+      },
+      "4": {
+        "title": "Flexible Video Results",
+        "description": "Create reference-guided character videos, product scenes, social content, brand clips, UGC-style ads, cinematic concepts, animation previews, and visual experiments."
+      },
+      "title": "Advantages of Reference to Video AI Generator",
+      "description": "Reference to Video helps creators, marketers, ecommerce teams, designers, storytellers, agencies, and social media producers develop AI videos from existing reference media.",
+      "try-now": "Try Now"
+    },
+    "manual": {
+      "1": {
+        "title": "Chọn mô hình tham chiếu",
+        "description": "Chọn Nội dung tham chiếu thành video, sau đó chọn mô hình tương thích dựa trên loại đầu vào, thiết lập đầu ra và các tùy chọn mà dự án cần."
+      },
+      "2": {
+        "title": "Tải lên và tham chiếu nội dung đa phương tiện",
+        "description": "Tải lên hình ảnh, video hoặc âm thanh được hỗ trợ, sau đó dùng lượt đề cập @ trong prompt để giải thích cách từng tài nguyên định hướng video."
+      },
+      "3": {
+        "title": "Tiếp tục trong Trình tạo nội dung đa phương tiện AI",
+        "description": "Xem lại bản nháp, tiếp tục đến Trình tạo nội dung đa phương tiện AI và bắt đầu tạo tại đó để theo dõi tác vụ trong Lịch sử video."
+      },
+      "title": "Cách sử dụng tính năng Nội dung tham chiếu thành video",
+      "content": "Create a reference-guided AI video in three steps."
+    },
+    "faq": {
+      "1": {
+        "question": "Nội dung tham chiếu thành video là gì?",
+        "answer": "Nội dung tham chiếu thành video là quy trình tạo bằng AI sử dụng nội dung đã tải lên để định hướng nhân vật, sản phẩm, vật thể, chuyển động, âm thanh, cảnh và phong cách hình ảnh trong video mới."
+      },
+      "2": {
+        "question": "Tôi có thể tải lên loại nội dung tham chiếu nào?",
+        "answer": "Đầu vào hiện có phụ thuộc vào mô hình đã chọn. Biểu mẫu chỉ hiển thị tùy chọn tải lên hình ảnh, video và âm thanh khi mô hình reference-to-video hiện tại hỗ trợ chúng."
+      },
+      "3": {
+        "question": "Nội dung tham chiếu @ hoạt động thế nào trong prompt?",
+        "answer": "Dùng @ để đề cập một tài nguyên đã tải lên trong prompt, sau đó mô tả cách hình ảnh, video hoặc âm thanh tham chiếu đó tác động đến video được tạo."
+      },
+      "4": {
+        "question": "Video được tạo ở đâu?",
+        "answer": "Trang này chuẩn bị bản nháp Nội dung tham chiếu thành video. Khi tiếp tục, thiết lập tương tự sẽ mở trong Trình tạo nội dung đa phương tiện AI, nơi bạn xác nhận thiết lập, tạo tác vụ và theo dõi trong Lịch sử video."
+      },
+      "5": {
+        "question": "Can I use more than one type of reference?",
+        "answer": "Yes, when the selected model supports multiple input types. Its configuration determines whether images, videos, audio, documents, and links can be combined."
+      },
+      "6": {
+        "question": "Where do I find my generated video?",
+        "answer": "Generated tasks appear in the AI Create video history. The history can use the generated video itself when a separate cover image is unavailable."
+      },
+      "title": "Câu hỏi thường gặp về Trình tạo video từ nội dung tham chiếu"
+    }
+  },
+  "ai-media-creator": {
+    "heading": {
+      "title": "Nội dung AI — Miễn phí và Mã nguồn mở · Không cần đăng ký",
+      "description": "Dùng và tự lưu trữ mẫu Nội dung AI miễn phí, mã nguồn mở mà không cần đăng ký. Việc tạo nội dung cần Flaq Client Key và tín dụng API."
+    },
+    "core-feature": {
+      "1": {
+        "title": "Image and Video Creation",
+        "description": "Switch between image and video workflows while keeping the same familiar creation experience."
+      },
+      "2": {
+        "title": "Supported AI Models",
+        "description": "Choose from the image and video models available through the Flaq API and view each model's supported settings in one place."
+      },
+      "3": {
+        "title": "Flexible Reference Uploads",
+        "description": "Upload supported images, video clips, audio, documents, or links when the selected model accepts reference media."
+      },
+      "4": {
+        "title": "Unified Local History",
+        "description": "Review recent image and video tasks saved in this browser, including video previews when a separate cover image is unavailable."
+      },
+      "title": "One AI Media Creation Workspace for Every Idea",
+      "description": "Move from an initial concept to generated media with a unified form that adapts its models, uploads, and settings to the selected creation type."
+    },
+    "use-cases": {
+      "1": {
+        "title": "Tài nguyên sản phẩm và tiếp thị",
+        "description": "Tạo hình ảnh sản phẩm, hình ảnh chiến dịch, đoạn phim quảng bá và các biến thể quảng cáo trong khi duy trì quy trình sản xuất hình ảnh lẫn video trong một môi trường làm việc."
+      },
+      "2": {
+        "title": "Các biến thể cho mạng xã hội",
+        "description": "Phát triển hình ảnh bài đăng, hình thu nhỏ, ý tưởng video ngắn và nhiều hướng sáng tạo cho các kênh xã hội từ một quy trình dùng chung được điều khiển bằng prompt."
+      },
+      "3": {
+        "title": "Ý tưởng hình ảnh và bảng phân cảnh",
+        "description": "Khám phá bố cục, nhân vật, môi trường, định hướng phong cách và ý tưởng chuyển động dưới dạng hình ảnh hoặc video trước khi chọn hướng để tinh chỉnh."
+      },
+      "4": {
+        "title": "Dự án sáng tạo đa phương tiện kết hợp",
+        "description": "Xây dựng dự án cần cả tài nguyên tĩnh và chuyển động, sử dụng định dạng cùng các tùy chọn mô hình được hỗ trợ phù hợp với từng cảnh, thông điệp hoặc giai đoạn sản xuất."
+      },
+      "title": "Các trường hợp sử dụng Trình tạo nội dung đa phương tiện AI",
+      "description": "Sử dụng Trình tạo nội dung đa phương tiện AI cho tài nguyên tiếp thị, nội dung xã hội, phát triển hình ảnh và các dự án kết hợp tạo hình ảnh với video.",
+      "button-text": "Create Now"
+    },
+    "manual": {
+      "1": {
+        "title": "Chọn loại nội dung và mô hình",
+        "description": "Chọn quy trình hình ảnh hoặc video bạn cần, sau đó chọn mô hình được hỗ trợ dựa trên phương thức đầu vào, định dạng đầu ra và các tùy chọn sáng tạo cần thiết."
+      },
+      "2": {
+        "title": "Thêm chỉ dẫn và đầu vào",
+        "description": "Viết prompt, tải lên nội dung đa phương tiện mà quy trình đã chọn chấp nhận và thiết lập các tùy chọn dành riêng cho mô hình hiển thị trong biểu mẫu."
+      },
+      "3": {
+        "title": "Tạo và xem lại",
+        "description": "Chạy tác vụ trong không gian làm việc, sau đó xem lại đầu ra và dùng chế độ xem lịch sử hình ảnh hoặc video để theo dõi các kết quả đã lưu khi đăng nhập."
+      },
+      "title": "Cách sử dụng Trình tạo nội dung đa phương tiện AI",
+      "description": "Chọn quy trình đa phương tiện, chọn mô hình tương thích, thêm prompt cùng đầu vào được hỗ trợ, sau đó tạo và xem lại kết quả.",
+      "button-text": "Start Creating"
+    },
+    "faq": {
+      "1": {
+        "question": "Trình tạo nội dung đa phương tiện AI là gì?",
+        "answer": "Trình tạo nội dung đa phương tiện AI là không gian làm việc dùng chung của Flaq AI để tạo hình ảnh và video. Công cụ kết hợp lựa chọn quy trình, mô hình được hỗ trợ, prompt, đầu vào đa phương tiện tương thích, tùy chọn tạo và lịch sử khi đăng nhập trên một trang."
+      },
+      "2": {
+        "question": "Có những quy trình tạo hình ảnh và video nào?",
+        "answer": "Thẻ hình ảnh hỗ trợ tạo bằng prompt và các quy trình tương thích có hình ảnh hướng dẫn. Các tùy chọn video gồm văn bản thành video, hình ảnh thành video, nội dung tham chiếu thành video và chỉnh sửa video khi có mô hình hỗ trợ."
+      },
+      "3": {
+        "question": "Làm cách nào để chọn mô hình AI?",
+        "answer": "Trước tiên hãy chọn loại nội dung đa phương tiện và quy trình, sau đó chọn trong số các mô hình tương thích hiển thị trên biểu mẫu. Đầu vào và thiết lập hiện có sẽ cập nhật theo lựa chọn đó."
+      },
+      "4": {
+        "question": "Tôi có thể dùng hình ảnh, video hoặc âm thanh làm đầu vào không?",
+        "answer": "Khả năng hỗ trợ đầu vào phụ thuộc vào quy trình và mô hình. Biểu mẫu chỉ hiển thị các tùy chọn hình ảnh, video, âm thanh và nội dung tham chiếu khi lựa chọn hiện tại chấp nhận chúng."
+      },
+      "5": {
+        "question": "Tôi có thể tìm nội dung đã tạo ở đâu?",
+        "answer": "Khi đăng nhập, hãy dùng khu vực lịch sử bên dưới biểu mẫu để theo dõi tác vụ đang chạy và xem lại kết quả đã hoàn tất trong các chế độ xem hình ảnh và video riêng biệt."
+      },
+      "6": {
+        "question": "Các tùy chọn có thay đổi giữa các mô hình không?",
+        "answer": "Có. Tỷ lệ, độ phân giải, thời lượng, tùy chọn chất lượng, vị trí tải lên và các tùy chọn khác xuất hiện theo tính năng được cấu hình cho mô hình đã chọn."
+      },
+      "title": "Câu hỏi thường gặp về Trình tạo nội dung đa phương tiện AI"
+    }
+  },
+  "ResourceEntrySections": {
+    "affiliate": {
+      "eyebrow": "Chương trình tiếp thị liên kết",
+      "title": "Tham gia Chương trình tiếp thị liên kết Flaq.ai",
+      "description": "Giới thiệu Flaq.ai đến các nhà sáng tạo, nhà phát triển và đội ngũ quan tâm đến tạo ảnh, tạo video, API mô hình, quy trình sáng tạo và tích hợp cho nhà phát triển. Nhận hoa hồng 20% từ đơn trả phí hợp lệ đầu tiên của người được giới thiệu và 10% từ các đơn trả phí hợp lệ tiếp theo trong vòng 60 ngày sau khi họ đăng ký.",
+      "button": "Bắt đầu kiếm tiền"
+    },
+    "modelMarket": {
+      "eyebrow": "Flaq AI Model Market",
+      "title": "Explore more AI creation models in one place",
+      "description": "Continue to the Flaq AI Model Market to discover additional image, video, language, and creative AI options with documentation for each supported workflow.",
+      "button": "Visit the Model Market"
+    },
+    "promptLibrary": {
+      "title": "Explore ready-to-use AI prompt collections",
+      "description": "Open curated prompt libraries for popular image and video models, then adapt complete examples to your own creative workflow.",
+      "viewPrompts": "View Prompts",
+      "repository": "GitHub",
+      "items": {
+        "seedance-2-5": {
+          "title": "Seedance 2.5 Prompt Library",
+          "description": "Explore production-ready prompts for cinematic scenes, branded videos, social content, and reference-guided motion."
+        },
+        "minimax-h3": {
+          "title": "MiniMax H3 Prompt Library",
+          "description": "Browse detailed prompts for expressive characters, product stories, cinematic sequences, and fast-moving video concepts."
+        },
+        "wan-3-0": {
+          "title": "Wan 3.0 Prompt Library",
+          "description": "Find adaptable prompt ideas for realistic motion, visual storytelling, advertisements, and imaginative video generation."
+        },
+        "qwen-image-3-0": {
+          "title": "Qwen Image 3.0 Prompt Library",
+          "description": "Discover structured image prompts for design exploration, illustration, marketing visuals, and precise creative direction."
+        }
+      }
+    },
+    "agentGuides": {
+      "title": "Connect Flaq AI with coding and agent workflows",
+      "description": "Follow practical setup guides for using Flaq AI models and tools from popular coding agents, assistants, and MCP clients.",
+      "items": {
+        "claude-code": {
+          "title": "Claude Code Guide",
+          "description": "Configure Flaq AI model access for Claude Code workflows."
+        },
+        "openai-codex": {
+          "title": "OpenAI Codex Guide",
+          "description": "Use Flaq AI generation models from an OpenAI Codex environment."
+        },
+        "hermes": {
+          "title": "Hermes Agent Guide",
+          "description": "Connect Hermes Agent to supported Flaq AI language models."
+        },
+        "zcode": {
+          "title": "Zcode Guide",
+          "description": "Set up Flaq AI model access for Zcode development workflows."
+        },
+        "deepseek": {
+          "title": "DeepSeek Harness Guide",
+          "description": "Configure DeepSeek Harness with Flaq AI endpoints and supported models."
+        },
+        "mcp": {
+          "title": "Flaq MCP Server",
+          "description": "Connect compatible AI clients to Flaq image and video tools through MCP."
+        }
+      }
+    }
+  }
+}

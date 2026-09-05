@@ -1,0 +1,1640 @@
+{
+  "Desktop": {
+    "r2AccountId": "ID account R2",
+    "r2BucketName": "Nome bucket",
+    "r2AccessKeyId": "ID chiave di accesso",
+    "r2SecretAccessKey": "Chiave di accesso segreta",
+    "workspace": "Spazio creativo",
+    "workspaceDescription": "Scegli un flusso e inizia a creare. Impostazioni e lavori recenti restano a portata di mano.",
+    "configure": "Connetti Flaq",
+    "firstRunTitle": "Connetti Flaq e inizia a creare",
+    "firstRunDescription": "Una Client Key abilita tutti i flussi per immagini e video.",
+    "stepAccount": "Accedi o crea un account Flaq",
+    "stepKey": "Crea e copia la Client Key",
+    "stepCreate": "Incolla la chiave, verifica la connessione e crea",
+    "openSettings": "Apri impostazioni di connessione",
+    "skip": "Esplora prima",
+    "toolGuide": "Guida allo strumento",
+    "toolGuideDescription": "Esempi, funzioni e domande frequenti per questo flusso",
+    "close": "Torna alla creazione"
+  },
+  "Common": {
+    "loading": "caricamento...",
+    "copy": "copia",
+    "prompt": "prompt",
+    "model": "Modello",
+    "failure": "Generazione non riuscita",
+    "success": "Success",
+    "reset": "Reset",
+    "selectModel": "Select Model",
+    "uploadImages": "Upload Images",
+    "tryNow": "Try Now",
+    "copy-right": {
+      "title": "Copyright:",
+      "content": "Gli utenti a pagamento possiedono i diritti delle loro immagini."
+    },
+    "images": "images",
+    "panel": "Pannello"
+  },
+  "cookie": {
+    "content": "Utilizziamo i cookie per migliorare la tua esperienza. Scopri di più nella nostra Informativa sulla Privacy.",
+    "confirm": "Accetta"
+  },
+  "error-page": {
+    "not-found": {
+      "title": "404 Non Trovato",
+      "goHome": "TORNA ALLA HOME"
+    }
+  },
+  "components": {
+    "hero-form": {
+      "image-video": {
+        "format-hint": "Formati supportati",
+        "image-count": "Images",
+        "prompt-placeholder": "Descrivi cosa vuoi creare..."
+      },
+      "reference-upload": {
+        "upload": "Carica",
+        "history": "Cronologia",
+        "uploadFromDevice": "Carica dal dispositivo",
+        "noCompletedHistory": "Non sono ancora presenti elementi completati nella cronologia",
+        "addImage": "Aggiungi immagine",
+        "addVideo": "Aggiungi video",
+        "addAudio": "Aggiungi audio",
+        "addMore": "Aggiungi altro",
+        "remove": "Rimuovi",
+        "noLocalUploads": "Non ci sono ancora caricamenti recenti",
+        "deleteLocalImage": "Elimina caricamento recente",
+        "durationMin": "Il file deve durare almeno {value} secondi.",
+        "metadataError": "Impossibile leggere i metadati del file.",
+        "maxFiles": "Puoi aggiungere fino a {count} file.",
+        "unsupportedFormat": "Questo formato di file non è supportato.",
+        "imageCropCount": "Ritaglia immagine {current} di {total}",
+        "imagePreviewCount": "Immagine {current} di {total}",
+        "selectImage": "Seleziona immagine {index}",
+        "cropFailed": "Impossibile ritagliare questa immagine.",
+        "deleteImage": "Elimina immagine",
+        "cropImage": "Ritaglia immagine",
+        "videoPreview": "Anteprima video",
+        "audioPreview": "Anteprima audio",
+        "mention": "Contenuti multimediali di riferimento",
+        "mediaDuration": "La durata di {type} deve essere compresa tra {min} e {max} secondi.",
+        "video": "Video",
+        "audio": "Audio",
+        "imageDimensionMin": "La larghezza e l’altezza dell’immagine devono essere di almeno {value}px.",
+        "imageDimensionMax": "Image width and height must not exceed {value}px.",
+        "cancelTrim": "Annulla ritaglio",
+        "confirmTrim": "Conferma ritaglio",
+        "videoDimensionRange": "La larghezza e l’altezza del video devono essere comprese tra {min} e {max}px."
+      },
+      "unified-upload": {
+        "formats": "JPG, PNG, WebP",
+        "hints": {
+          "video": "Carica un primo fotogramma per indirizzare il prompt verso image-to-video. Lascialo vuoto per text-to-video.",
+          "image": "Carica immagini di riferimento per indirizzare il prompt verso image-to-image. Lasciale vuote per text-to-image."
+        },
+        "slots": {
+          "firstFrame": "Primo fotogramma",
+          "endFrame": "Fotogramma finale",
+          "image": "Immagine",
+          "audio": "Audio",
+          "optional": "Opzionale"
+        }
+      }
+    },
+    "video-carousel": {
+      "original-image": "Immagine originale",
+      "video": "Video",
+      "prompt": "Prompt"
+    },
+    "open-api-settings": {
+      "title": "Open API Settings",
+      "description": "Configure the local Open API base URL and client key for this browser.",
+      "base-url": "Base URL",
+      "base-url-hint": "Leave this as the default unless you need a custom gateway or proxy.",
+      "client-key": "Client Key",
+      "remember-me": "Remember me (store locally)",
+      "remember-me-hint": "If unchecked, the key will be cleared when you close the tab.",
+      "security-warning": "Security Notice: Your client key is encrypted before storage, but XSS attacks can still intercept it during API requests. Keep your key secure.",
+      "clear-data": "Clear All Data",
+      "clear-data-confirm": "Are you sure you want to clear all stored settings?",
+      "data-cleared": "All stored data has been cleared.",
+      "register": "Register",
+      "test": "Test Connection",
+      "testing": "Testing...",
+      "cancel": "Cancel",
+      "save": "Save",
+      "required": "Client key is required.",
+      "saved": "Open API settings saved.",
+      "test-success": "Connection succeeded.",
+      "test-success-validation": "L’API è raggiungibile. Il task di test non esiste, quindi la validità della chiave non è ancora confermata.",
+      "test-failed": "Connection failed."
+    },
+    "image-hosting": {
+      "title": "Image Hosting (R2)",
+      "public-domain": "Public Domain",
+      "public-domain-hint": "The CDN domain for accessing uploaded files. Recommended to use https:// protocol.",
+      "public-domain-placeholder": "https://assets.example.com",
+      "not-configured": "R2 credentials should be set in .env (server-side only). Click \"Test R2\" to verify.",
+      "saved": "Image hosting settings saved.",
+      "test": "Test R2 Connection",
+      "testing": "Testing...",
+      "test-success": "R2 connection succeeded.",
+      "test-failed": "R2 connection failed."
+    },
+    "dialog": {
+      "business": {
+        "title": "Richiesta Business",
+        "description": "Per partnership commerciali, soluzioni aziendali o supporto tecnico API avanzato, contattaci via email.",
+        "contactButton": "Contattaci"
+      }
+    },
+    "video-form": {
+      "ai-generation": "Generazione AI",
+      "product-image": "Product Image",
+      "end-frame": "End Frame",
+      "product-image-description": "We recommend using AI to create your product images",
+      "upload-first-frame": "Carica Frame Iniziale",
+      "upload-end-frame": "Carica Frame Finale",
+      "promptPlaceholder": "Inserisci un prompt",
+      "generate": "Genera",
+      "duration": "Durata",
+      "ratio": "Video Ratio",
+      "resolution": "Video Resolution",
+      "startFrame": "Frame Iniziale",
+      "endFrame": "Frame Finale",
+      "modelVersion": "Versione Modello",
+      "history": {
+        "title": "Cronologia",
+        "noHistory": "Nessuna cronologia ancora",
+        "backToStart": "Torna all'inizio"
+      },
+      "noPromptInput": "Inserisci un prompt",
+      "noImageInput": "Carica un'immagine",
+      "min width": "Image width is less than",
+      "or": "or",
+      "min height": "Image height is less than",
+      "image": "Carica Immagine",
+      "display": {
+        "noVideo": "Prova ora il Generatore di Video AI",
+        "prompt": "Prompt",
+        "videoDetail": "View Details"
+      },
+      "audio": {
+        "title": "Audio",
+        "upload-audio": "Carica Audio",
+        "audio-support": "Questo modello include audio incorporato",
+        "supported-formats": "Supportato: MP3, WAV (Max 15MB)",
+        "unsupported-format": "Formato audio non supportato. Solo MP3 e WAV sono supportati",
+        "file-too-large": "Dimensione del file superiore a 15MB",
+        "show-trim": "Mostra ritaglio",
+        "hide-trim": "Nascondi ritaglio",
+        "start-time": "Inizio",
+        "end-time": "Fine",
+        "duration": "Durata",
+        "audio-too-short": "Audio troppo corto. Minimo richiesto 3 secondi",
+        "audio-auto-trimmed": "Durata audio {duration}s. Tagliato automaticamente ai primi 30 secondi. Puoi regolarlo trascinando i manici del trim",
+        "audio-duration-requirement": "L'audio deve essere tra 3-30 secondi",
+        "drag-region": "Trascina area",
+        "dragging-region": "Trascinamento...",
+        "audio-duration-error": "La durata dell'audio deve essere tra 3-30 secondi, attualmente",
+        "audio-load-failed": "Caricamento file audio fallito",
+        "audio-trim-failed": "Taglio audio fallito, verrà utilizzato l'audio completo"
+      },
+      "enable-audio": "Abilita suono",
+      "enable-audio-tip": "Genera video con effetti sonori generati dall'IA",
+      "audio-support": "This model includes built-in audio",
+      "audioFile": "Carica Audio",
+      "model-parameters": "Model Parameters",
+      "enable-bgm": "Musica di Sottofondo",
+      "enable-bgm-tip": "Genera video con musica di sottofondo generata dall'AI",
+      "style": "Stile",
+      "seed": "Seme",
+      "seed-hint": "Set a fixed value (0-2147483647) to reproduce the same result, or keep number empty for a random result each time.",
+      "negative-prompt": "Prompt negativo",
+      "negative-prompt-placeholder": "Descrivi cosa non vuoi nel risultato, es. sfocato, bassa qualità, filigrana...",
+      "guidance-scale": "Scala di guida",
+      "guidance-scale-flexible": "Flessibile",
+      "guidance-scale-strict": "Rigoroso",
+      "keep-original-sound": "Mantieni audio originale",
+      "keep-original-sound-tip": "Preserve the uploaded video's original audio when supported.",
+      "error": {
+        "image-required": "Carica un'immagine per continuare"
+      },
+      "reference-source": {
+        "file-title": "File di riferimento",
+        "file-formats": "Carica un file di riferimento. Formati supportati: {formats}.",
+        "page-limit": "I file PDF, i documenti, le presentazioni, i file Keynote e Pages supportano fino a {count} pagine.",
+        "remove-file": "Rimuovi file di riferimento",
+        "unsupported-file": "Formati di file di riferimento supportati: {formats}.",
+        "link-title": "Link web di riferimento",
+        "link-tip": "Usa una pagina web pubblica che possa essere aperta senza accedere.",
+        "link-placeholder": "https://example.com/article",
+        "invalid-link": "Inserisci un link HTTP o HTTPS valido a una pagina web pubblica.",
+        "mutually-exclusive": "I file di riferimento e i link alle pagine web non possono essere usati insieme."
+      },
+      "video-upload": {
+        "label": "Carica un video o incolla un URL sopra",
+        "duration-minimum": "Il video caricato deve durare almeno {duration} secondi",
+        "duration-range-error": "La durata del video ritagliato deve essere compresa tra {min} e {max} secondi",
+        "duration-limit": "Il video caricato non deve superare {duration} secondi",
+        "auto-trimmed": "La durata originale del video è {duration}s. Per impostazione predefinita sono stati selezionati i primi {max} secondi e puoi regolare l'intervallo",
+        "load-failed": "Impossibile caricare il file video",
+        "play-failed": "Impossibile riprodurre il video",
+        "trim-failed": "Impossibile ritagliare il video. Regola l'intervallo e riprova",
+        "selected-range": "Intervallo selezionato: {start} - {end}, totale {duration}",
+        "range-tip": "Scegli un segmento video tra {min} e {max} secondi",
+        "trim-start": "Ora di inizio",
+        "trim-end": "Ora di fine",
+        "reset-trim": "Reimposta",
+        "show-trim": "Mostra ritaglio",
+        "hide-trim": "Nascondi ritaglio",
+        "play": "Riproduci",
+        "pause": "Pausa",
+        "delete": "Elimina",
+        "playback-progress": "Avanzamento riproduzione"
+      }
+    },
+    "video-image-upload-form": {
+      "label": "Click or drag to upload",
+      "crop": "Crop",
+      "min width": "Min width",
+      "or": "or",
+      "min height": "Min height",
+      "supported-formats": "Supported formats"
+    },
+    "audio-upload-form": {
+      "upload-audio": "Carica audio",
+      "supported-formats": "MP3, WAV, M4A, AAC, OGG",
+      "unsupported-format": "Unsupported audio format",
+      "file-too-large": "File size cannot exceed 10MB"
+    },
+    "audio-modal": {
+      "start-time": "Start",
+      "end-time": "End",
+      "duration": "Duration",
+      "show-trim": "Enable Trim Mode",
+      "hide-trim": "Disable Trim Mode"
+    },
+    "confirmDialog": {
+      "title": "Sei sicuro?",
+      "cancel": "Annulla",
+      "confirm": "Conferma"
+    },
+    "image-form": {
+      "click-to-upload": "Clicca o trascina per caricare",
+      "promptPlaceholder": "Inserisci qui il tuo prompt",
+      "selectModel": "Select Model",
+      "enterPrompt": "Inserisci Prompt",
+      "selectAspectRatio": "Select Aspect Ratio",
+      "ratio": "Image Ratio",
+      "selectResolution": "Select Resolution",
+      "resolution": "Image Resolution",
+      "quality": "Qualità",
+      "model": "Image Models",
+      "motion": "Motion",
+      "selectMotion": "Select Motion",
+      "transformImages": "Trasforma Immagini",
+      "imageSupport": "Formati supportati: jpg, jpeg, webp, png",
+      "public": "Public",
+      "generate": "Genera",
+      "history": {
+        "title": "Cronologia",
+        "check-all": "Seleziona tutto",
+        "noImage": "Nessuna cronologia ancora",
+        "backToStart": "Torna all'inizio"
+      },
+      "noPromptInput": "Inserisci prima un prompt.",
+      "noImageUpload": "Carica prima un'immagine.",
+      "reset": "Reimposta",
+      "describe": "Describe",
+      "image-required": "È richiesta un'immagine.",
+      "paint-required": "Painting on the image is required.",
+      "process-model": "Process Model",
+      "errors": {
+        "webpNotSupported": "Il formato WebP non è supportato",
+        "aspectRatioOutOfRange": "Il rapporto d'aspetto deve essere tra 0,33 e 3,0. Rapporto attuale:",
+        "imageLoadFailed": "Caricamento immagine fallito"
+      },
+      "upload-dialog": {
+        "history-tab": "Generation History",
+        "upload-tab": "Upload Image",
+        "loading": "Loading...",
+        "no-images": "No images yet",
+        "go-generate": "Go Generate",
+        "click-to-upload": "Click To Upload Image",
+        "file-format-info": "JPG, PNG, WEBP up to 10MB",
+        "unsupported-format": "Please upload supported image formats: JPG, PNG, WEBP",
+        "file-too-large": "File size cannot exceed 10MB"
+      },
+      "display": {
+        "useImage": "Use This Image",
+        "noImage": "Prova ora il Generatore di Immagini AI",
+        "original-img": "Immagine Originale",
+        "prompt": "Prompt",
+        "reset-inpainting": "Reset Inpainting",
+        "removeBg": "Remove Background",
+        "imageDetail": "View Details",
+        "imageToImage": "Image to Image",
+        "model": "Model"
+      },
+      "input-range": {
+        "num inference steps": "Numero di Passi di Inferenza",
+        "guidance scale": "Scala di Guida (CFG)",
+        "image prompt strength": "Forza Prompt Immagine",
+        "steps": "Passi"
+      },
+      "image-generation-modal": {
+        "onlineGenerateImage": "Genera Immagine Online",
+        "pleaseDoNotLeaveDuringGeneration": "Non lasciare la pagina durante la generazione"
+      }
+    },
+    "compress-dialog": {
+      "title": "Comprimi Immagine",
+      "content": "La dimensione dell'immagine supera i 10MB e non è adatta alla generazione video AI. Vuoi comprimerla?",
+      "reupload": "Ricarica",
+      "compress": "Comprimi"
+    }
+  },
+  "Navigation": {
+    "title": "Flaq AI",
+    "docs": "Docs",
+    "business": "Business",
+    "video-ai": "Video AI",
+    "image-ai": "Image AI",
+    "ai-api": "AI API",
+    "text-to-video": "Text to Video",
+    "text-to-video-content": "Generate video from text",
+    "image-to-video": "Image to Video",
+    "image-to-video-content": "Generate video from image",
+    "image-to-image": "Image to Image",
+    "image-to-image-content": "Generate image from image",
+    "text-to-image": "Text to Image",
+    "text-to-image-content": "Generate image from text",
+    "nano-banana-2": "Nano Banana 2 API",
+    "nano-banana-2-content": "Generate image with Nano Banana 2 API",
+    "nano-banana-pro": "Nano Banana Pro API",
+    "nano-banana-pro-content": "Generate image with Nano Banana Pro",
+    "veo-3-1": "Veo 3.1 API",
+    "veo-3-1-content": "Generate video with Veo 3.1 API",
+    "kling-3-0": "Kling 3.0 API",
+    "kling-3-0-content": "Generate video with Kling 3.0 API",
+    "vidu-q3": "VIDU Q3 API",
+    "vidu-q3-content": "Generate video with VIDU Q3 API",
+    "wan-2-7": "Wan 2.7 API",
+    "wan-2-7-content": "Generate video with Wan 2.7 API",
+    "seedream-4-5": "Seedream 4.5 API",
+    "seedream-4-5-content": "Generate image with Seedream 4.5 API",
+    "seedream-5-0": "Seedream 5.0 API",
+    "seedream-5-0-content": "Generate image with Seedream 5.0 API",
+    "seedance-1-5": "Seedance 1.5 API",
+    "seedance-1-5-content": "Generate video with Seedance 1.5 API",
+    "virtual-try-on": "Virtual Try On",
+    "virtual-try-on-content": "Try on outfits virtually with AI",
+    "gpt-image-2": "GPT Image 2 API",
+    "gpt-image-2-content": "Generate image with GPT Image 2 API",
+    "menu": "Menu",
+    "close": "Chiudi",
+    "language-dialog": {
+      "title": "Suggerimenti sulla lingua",
+      "content": "Passare alla lingua del browser?",
+      "cancel": "Mantieni Attuale",
+      "confirm": "Cambia"
+    },
+    "ai-create": "AI Create",
+    "reference-to-video": "Reference to Video",
+    "reference-to-video-content": "Create video from image, video, audio, document, or link references"
+  },
+  "Footer": {
+    "title": "Immagini e Video AI — Gratuito e Open Source · Nessuna Registrazione",
+    "subTitle": "Usa e ospita senza registrazione il template Immagini e Video AI, gratuito e open source. Per generare servono Flaq Client Key e credito API.",
+    "support": "Supporto",
+    "docs": "Docs",
+    "business": "Business",
+    "flaq": "Flaq AI",
+    "privacy": "Politica sulla Privacy",
+    "termsConditions": "Termini & Condizioni",
+    "refundPolicy": "Politica di Rimborso",
+    "contactUs": "Contattaci",
+    "feature-link": "Features",
+    "feature": {
+      "text-to-video": "Text to Video",
+      "image-to-video": "Image to Video",
+      "image-to-image": "Image to Image Generator",
+      "text-to-image": "Text to Image Generator",
+      "virtual-try-on": "Virtual Try On AI",
+      "reference-to-video": "Reference to Video",
+      "ai-create": "AI Create"
+    }
+  },
+  "FooterNavigation": {
+    "privacyPolicy": {
+      "1-h1": "Informativa sulla privacy per flaq.ai",
+      "1-p": "Questa Informativa sulla privacy spiega come Flaq AI raccoglie, utilizza e protegge le tue informazioni personali quando utilizzi i nostri servizi su flaq.ai. Accedendo o utilizzando Flaq AI, accetti i termini descritti in questa informativa.",
+      "2-h2": "1. Raccolta e utilizzo delle informazioni",
+      "2-p": "Flaq AI può raccogliere informazioni personali identificabili per migliorare i nostri servizi. Utilizziamo anche servizi di terze parti che potrebbero raccogliere informazioni per aiutare a identificarti.",
+      "3-h2": "2. Analisi dei dati e servizi di AI di terze parti",
+      "3-p": "Utilizziamo Google Analytics per raccogliere dati sull'utilizzo dei nostri servizi a fini analitici. Inoltre, le nostre funzionalità di generazione AI si basano su piattaforme di terze parti, tra cui ma non solo alibaba, google, bytedance, fal.ai, Kling AI e Replicate. Queste piattaforme esterne potrebbero conservare i dati delle richieste di generazione elaborate tramite i loro sistemi.",
+      "4-h2": "3. Cookie",
+      "4-p": "Flaq AI può utilizzare codice e librerie di terze parti che fanno uso di cookie. Puoi scegliere se accettarli o rifiutarli, ma il rifiuto può limitare alcune funzionalità.",
+      "5-h2": "4. Fornitori di servizi",
+      "5-p": "Potremmo coinvolgere aziende esterne, inclusi fornitori di servizi AI come fal.ai, Replicate, Kling AI, OpenAI, OpenRouter e altri fornitori di servizi AI di terze parti, per erogare il nostro servizio, svolgere attività correlate o analizzare l'utilizzo di Flaq AI. Questi soggetti possono avere accesso alle tue informazioni personali ma sono tenuti a mantenerle riservate.",
+      "5-p-1": "Possiamo impiegare società e individui terzi per i seguenti motivi:",
+      "5-li-1": "Per facilitare il nostro servizio;",
+      "5-li-2": "Per fornire il servizio per nostro conto;",
+      "5-li-3": "Per svolgere attività correlate al servizio;",
+      "5-li-4": "Per aiutarci ad analizzare l'utilizzo del nostro servizio;",
+      "5-p-2": "Vogliamo informare gli utenti di questo servizio che queste terze parti hanno accesso alle tue informazioni personali solo per svolgere i compiti loro affidati per nostro conto. Tuttavia, sono obbligati a non divulgarle o usarle per altri scopi.",
+      "6-h2": "5. Sicurezza",
+      "6-p": "Ci impegniamo a proteggere le tue informazioni personali utilizzando mezzi commercialmente accettabili, ma non possiamo garantire una sicurezza assoluta.",
+      "7-h2": "6. Collegamenti ad altri siti",
+      "7-p": "Flaq AI può contenere collegamenti a siti esterni. Non siamo responsabili per il contenuto o le pratiche sulla privacy di questi siti esterni.",
+      "8-h2": "7. Modifiche a questa informativa sulla privacy",
+      "8-p": "Potremmo aggiornare la nostra Informativa sulla privacy di tanto in tanto. Ti invitiamo a consultare periodicamente questa pagina per eventuali cambiamenti. Le modifiche sono efficaci immediatamente dopo la pubblicazione.",
+      "9-h2": "8. Contattaci",
+      "9-p": "Se hai domande, dubbi o feedback riguardo alla nostra Informativa sulla privacy, contattaci all'indirizzo contact@flaq.ai. I nostri dettagli aziendali sono: FLAQ AI PTE. LTD., 112 ROBINSON ROAD, #03-01, ROBINSON 112, SINGAPORE. Ci impegniamo a rispondere alle tue richieste nel più breve tempo possibile."
+    },
+    "termsConditions": {
+      "1-h1": "Termini e condizioni per flaq.ai",
+      "1-p": "Benvenuto su flaq.ai, una piattaforma per la generazione di immagini e video tramite AI (il \"Servizio\"). Accedendo o utilizzando il nostro sito web all'indirizzo https://flaq.ai (il \"Sito\"), accetti di essere vincolato da questi Termini e condizioni (i \"Termini\"). Questi Termini regolano l'utilizzo del Sito e del Servizio forniti da flaq.ai (\"noi,\" \"ci\" o \"nostro\"). Ti preghiamo di leggere attentamente questi Termini prima di usare il Servizio. Se non sei d'accordo con una qualsiasi parte di questi Termini, non utilizzare il Sito o il Servizio. Per domande o dubbi riguardanti questi Termini o i nostri prodotti/servizi, consulta la nostra Informativa sulla privacy o contattaci a contact@flaq.ai.",
+      "terms-of-service": "terms-of-service",
+      "2-h2": "1. Requisiti di ammissibilità",
+      "2-p": "Per utilizzare il nostro Servizio, devi avere almeno 18 anni o aver raggiunto la maggiore età secondo la tua giurisdizione. Utilizzando il Servizio, dichiari e garantisci di soddisfare questi requisiti. Se utilizzi il Servizio per conto di un'azienda, organizzazione o ente, dichiari e garantisci di avere l'autorità di vincolare tale entità a questi Termini.",
+      "3-h2": "2. Registrazione dell'account",
+      "3-p": "Per accedere ad alcune funzionalità del Servizio, potrebbe essere necessario creare un account. Accetti di fornire informazioni accurate, complete e aggiornate durante la registrazione e di mantenerle tali. Sei responsabile della sicurezza delle tue credenziali e di tutte le attività effettuate tramite il tuo account, siano esse autorizzate o meno. Devi notificarci immediatamente a contact@flaq.ai se sospetti un uso non autorizzato del tuo account.",
+      "4-h2": "3. Utilizzo del servizio",
+      "4-p": "Uso consentito: flaq.ai ti concede una licenza limitata, non esclusiva, non trasferibile e revocabile per utilizzare il Servizio per scopi personali e commerciali, nei limiti di questi Termini. Accetti di non utilizzare il Servizio per scopi illegali o non autorizzati.",
+      "5-h2": "Condotta proibita",
+      "5-p": "Condotta proibita: Accetti di non: (a) Generare o distribuire contenuti illegali, dannosi, abusivi, diffamatori, osceni o altrimenti discutibili; (b) Tentare di decodificare, decompilare o disassemblare qualsiasi parte del Servizio; (c) Utilizzare sistemi automatizzati, come bot, spider o scraper, per accedere al Sito o al Servizio; (d) Interferire o interrompere il Servizio o i relativi server e reti; (e) Violare i diritti di proprietà intellettuale di terzi.",
+      "6-h2": "4. Contenuti dell'utente",
+      "6-p": "Proprietà e responsabilità: Conservi la proprietà di qualsiasi contenuto, incluse immagini, testi o materiali, che carichi o crei utilizzando il Servizio (\"Contenuti dell'utente\"). Sei l'unico responsabile dei Contenuti che crei, carichi, pubblichi o condividi tramite il Servizio.",
+      "7-h2": "7. Licenza a flaq.ai",
+      "7-p": "Licenza a flaq.ai: Inviando Contenuti dell'utente, concedi a flaq.ai una licenza mondiale, non esclusiva, royalty-free, sublicenziabile e trasferibile per utilizzare, riprodurre, modificare, distribuire e mostrare tali contenuti per il funzionamento, il miglioramento e la promozione del Servizio.",
+      "8-h2": "8. Restrizioni sui contenuti",
+      "8-p": "Restrizioni sui contenuti: Accetti di non caricare, generare o condividere Contenuti che: (a) Violino i diritti di proprietà intellettuale di terzi; (b) Violino leggi o regolamenti applicabili; (c) Contengano malware, virus o altri codici dannosi; (d) Siano fuorvianti, falsi o inaccurati.",
+      "9-h2": "9. Proprietà intellettuale",
+      "9-p": "Proprietà di Flaq AI: Il Servizio è concesso in licenza, non venduto. Flaq AI e i suoi licenziatari conservano tutti i diritti di proprietà e di proprietà intellettuale sul Sito, sul Servizio e sui contenuti di Flaq AI (software, testo, grafica, loghi, ecc.). Ci riserviamo tutti i diritti non espressamente concessi in questi Termini.",
+      "10-h2": "10. Feedback dell'utente",
+      "10-p": "Feedback dell'utente: Qualsiasi feedback, suggerimento o idea fornita a flaq.ai riguardante il Servizio (\"Feedback\") sarà di esclusiva proprietà di flaq.ai. Cedi tutti i diritti su tali Feedback a flaq.ai, che potrà utilizzarli senza alcun compenso verso di te.",
+      "11-h2": "11. Pagamenti",
+      "11-p": "Tariffe: Alcune funzionalità del Servizio possono essere a pagamento. Accetti di pagare tutte le tariffe applicabili associate all'utilizzo del Servizio. flaq.ai si riserva il diritto di modificare tariffe o metodi di fatturazione in qualsiasi momento previa comunicazione.",
+      "12-h2": "12. Fatturazione",
+      "12-p": "Fatturazione: I pagamenti possono essere elaborati tramite processori di pagamento di terzi. Fornendo informazioni di pagamento, autorizzi flaq.ai e i suoi processori di pagamento a addebitare le tariffe applicabili al tuo metodo di pagamento.",
+      "13-h2": "13. Crediti e utilizzo",
+      "13-p": "Crediti e utilizzo: Flaq AI opera su un modello pay-as-you-go. I crediti acquistati o ricaricati sono validi indefinitamente e non scadono. La fatturazione avviene in base all'effettivo utilizzo e le tariffe possono variare a seconda del modello AI utilizzato.",
+      "14-h2": "14. Rimborsi",
+      "14-p": "Rimborsi: Tutte le tariffe sono non rimborsabili salvo diversamente indicato. flaq.ai può, a propria discrezione, concedere rimborsi o crediti in determinate circostanze.",
+      "15-h2": "15. Cessazione",
+      "15-p": "Cessazione da parte tua: Puoi chiudere il tuo account in qualsiasi momento seguendo le istruzioni sul Sito. Al termine, il tuo diritto di accesso e uso del Servizio cesserà immediatamente.",
+      "16-h2": "16. Cessazione da parte di flaq.ai",
+      "16-p": "Cessazione da parte di flaq.ai: flaq.ai può sospendere o terminare il tuo account o l'accesso al Servizio, con o senza preavviso, per qualsiasi motivo, incluso la violazione di questi Termini.",
+      "17-h2": "17. Effetto della cessazione",
+      "17-p": "Effetto della cessazione: Alla cessazione, tutte le licenze concesse ai sensi di questi Termini cessano e devi immediatamente interrompere l'uso del Servizio. I diritti o obblighi maturati, inclusi quelli relativi a pagamenti e proprietà intellettuale, sopravvivranno alla cessazione.",
+      "18-h2": "18. Esclusioni di responsabilità e limitazione di responsabilità",
+      "18-p": "Esclusioni di garanzie: Il Servizio è fornito \"così com'è\" e \"come disponibile\" senza alcuna garanzia, espressa o implicita. flaq.ai non garantisce che il Servizio sarà ininterrotto, privo di errori o di componenti dannosi. Nei limiti della legge, flaq.ai declina tutte le garanzie, comprese quelle di commerciabilità, idoneità per uno scopo specifico e non violazione.",
+      "19-h2": "19. Limitazione di responsabilità",
+      "19-p": "Limitazione di responsabilità: Nei limiti massimi consentiti dalla legge, flaq.ai non sarà responsabile per eventuali danni indiretti, incidentali, speciali, consequenziali o punitivi, inclusa la perdita di profitti, dati o uso, derivanti dall'utilizzo del Servizio, sia su base contrattuale, extracontrattuale che per altra ragione legale, anche se avvisati della possibilità di tali danni.",
+      "20-h2": "20. Manleva",
+      "20-p": "Accetti di manlevare, difendere e tenere indenne flaq.ai, i suoi dirigenti, direttori, dipendenti e agenti da qualsiasi reclamo, responsabilità, danno, perdita o spesa, incluse le spese legali, derivanti dal tuo utilizzo del Servizio, dalla violazione di questi Termini o dalla violazione dei diritti di terzi.",
+      "21-h2": "21. Conformità alla privacy policy",
+      "21-p": "La raccolta, l'utilizzo e la protezione dei dati personali sono regolati dalla nostra Informativa sulla privacy, disponibile su https://flaq.ai/privacy-policy. Rispettiamo le leggi applicabili in materia di protezione dei dati, inclusi ma non limitati a: la Lei Geral de Proteção de Dados (LGPD) del Brasile, la Ley Federal de Protección de Datos Personales en Posesión de los Particulares (LFPDPPP) del Messico e, dove applicabile, il Regolamento Generale sulla Protezione dei Dati (GDPR) dell'Unione Europea. Accetti di consultare la nostra Informativa sulla privacy per comprendere come trattiamo i tuoi dati.",
+      "22-h2": "22. Modifiche ai Termini",
+      "22-p": "flaq.ai si riserva il diritto di modificare questi Termini in qualsiasi momento. Ti informeremo delle modifiche materiali pubblicando i Termini aggiornati sul Sito o tramite il Servizio. L'uso continuato del Servizio dopo la data di entrata in vigore dei Termini modificati costituisce accettazione delle modifiche.",
+      "23-h2": "23. Varie",
+      "23-p": "Intero accordo: Questi Termini costituiscono l'intero accordo tra te e flaq.ai riguardo al Servizio, sostituendo qualsiasi precedente accordo.",
+      "24-h2": "24. Clausola di separabilità",
+      "24-p": "Separabilità: Se una qualsiasi disposizione di questi Termini è invalida o inapplicabile, sarà applicata nella misura massima possibile e le restanti disposizioni rimarranno pienamente efficaci.",
+      "25-h2": "25. Rinuncia",
+      "25-p": "Rinuncia: L'eventuale mancato esercizio da parte di flaq.ai di un diritto o di una previsione di questi Termini non costituirà rinuncia a tale diritto o previsione.",
+      "26-h2": "26. Cessione",
+      "26-p": "Cessione: Non puoi cedere o trasferire questi Termini o i tuoi diritti ed obblighi senza il consenso scritto di flaq.ai. flaq.ai può liberamente cedere questi Termini.",
+      "27-h2": "27. Legge applicabile",
+      "27-p": "Le leggi del Paese, escluse le norme sui conflitti di legge, disciplinano questi Termini e l'utilizzo del Servizio. L'utilizzo del Servizio può inoltre essere soggetto ad altre leggi locali, statali, nazionali o internazionali, inclusi ma non limitati alle leggi degli Stati Uniti, alla LGPD brasiliana, alla LFPDPPP messicana e al GDPR europeo.",
+      "28-h2": "28. Accettazione",
+      "28-p": "Accettazione: Utilizzando flaq.ai, confermi di aver letto, compreso e accettato di essere vincolato da questi Termini e condizioni.",
+      "29-h2": "29. Informazioni di contatto",
+      "29-p": "Informazioni di contatto: Per domande o dubbi relativi a questi Termini, contattaci all'indirizzo contact@flaq.ai. I nostri dettagli aziendali sono: FLAQ AI PTE. LTD., 112 ROBINSON ROAD, #03-01, ROBINSON 112, SINGAPORE. Ci impegniamo a rispondere alle tue richieste nel più breve tempo possibile."
+    },
+    "refundPolicy": {
+      "1": {
+        "title": "1. Idoneità al rimborso",
+        "description": "A causa della nostra dipendenza da piattaforme partner e dei significativi costi computazionali dell'elaborazione AI, le richieste di rimborso devono essere presentate entro 3 giorni dall'acquisto. I rimborsi non sono disponibili dopo tale periodo. Per maggiori informazioni, contattaci a contact@flaq.ai."
+      },
+      "2": {
+        "title": "2. Limitazione all'utilizzo dei crediti",
+        "description": "Se hai già utilizzato le risorse computazionali del servizio (ad esempio, generato video o immagini con AI), non hai diritto al rimborso, indipendentemente dal tempo trascorso dall'acquisto. Per dettagli, contattaci a contact@flaq.ai."
+      },
+      "3": {
+        "title": "3. Come richiedere un rimborso",
+        "description": "Per richiedere un rimborso, contatta il nostro servizio clienti all'indirizzo contact@flaq.ai fornendo i dettagli del tuo account, il numero d'ordine, la data di acquisto e una spiegazione dettagliata della richiesta. Tutte le richieste di rimborso devono essere presentate entro 3 giorni dall'acquisto."
+      },
+      "4": {
+        "title": "4. Servizio pay-as-you-go",
+        "description": "Flaq AI opera secondo un modello pay-as-you-go, in cui l'uso viene fatturato in base al consumo. Si prega di notare che eventuali crediti o risorse consumate non sono rimborsabili."
+      },
+      "5": {
+        "title": "5. Elaborazione dei rimborsi",
+        "description": "Una volta ricevuta la tua richiesta di rimborso, il nostro team la esaminerà con attenzione e ti notificherà la decisione. Se approvata, il rimborso sarà elaborato sul metodo di pagamento originale. Se hai domande, contattaci a contact@flaq.ai."
+      },
+      "6": {
+        "title": "6. Modifiche a questa politica",
+        "description": "1. Ci riserviamo il diritto di modificare questa politica di rimborso in qualsiasi momento. \n2. Qualsiasi modifica avrà effetto immediato e sarà riflessa su questa pagina. \n3. Si consiglia di consultare periodicamente questa politica. \n4. Per aggiornamenti o domande sulla politica, contattaci a contact@flaq.ai."
+      },
+      "title": "Politica di rimborso per flaq.ai"
+    }
+  },
+  "Home": {
+    "heading": {
+      "title": "Immagini e Video AI — Gratuito e Open Source · Nessuna Registrazione",
+      "description": "Usa e ospita senza registrazione il template Immagini e Video AI, gratuito e open source. Per generare servono Flaq Client Key e credito API.",
+      "try-now": "Try Now",
+      "try-now-video": "Prova l'API Video",
+      "try-now-image": "Prova l'API Immagine"
+    },
+    "carousel": {
+      "title": "Flaq SaaS Template: AI Generation Tools",
+      "description": "Explore AI generation tools powered by Flaq AI",
+      "video": {
+        "type": "AI Video Generator"
+      },
+      "image": {
+        "type": "AI Image Generator"
+      },
+      "tryon": {
+        "type": "AI Virtual Try-On"
+      }
+    },
+    "unique-features": {
+      "1": {
+        "title": "Flaq AI Integration",
+        "description": "Built-in integration with Flaq AI's open API for seamless image and video generation capabilities."
+      },
+      "2": {
+        "title": "Multiple Types & Presets",
+        "description": "Support for text-to-image, image-to-image, text-to-video, image-to-video, and virtual try-on with built-in scene presets."
+      },
+      "3": {
+        "title": "Ready-to-Deploy",
+        "description": "Complete UI components, API integration, and deployment configuration included. Get started in minutes."
+      },
+      "4": {
+        "title": "Open Source & Customizable",
+        "description": "Fully open source with clean code structure. Easy to customize and extend for your specific needs."
+      },
+      "title": "Key Features of Flaq SaaS Template",
+      "description": "A complete open source template with essential features for building your own AI generation platform.",
+      "button-text": "Try Now"
+    },
+    "use-cases": {
+      "1": {
+        "title": "Piattaforma Marketing di Contenuti Completamente Automatizzata",
+        "description": "Genera in batch materiali visivi brandizzati con l’API Nano Banana Pro e crea automaticamente post con LLM, passando dalla scrittura ai contenuti visivi in modo istantaneo."
+      },
+      "2": {
+        "title": "Prodotti AI Interattivi in Tempo Reale",
+        "description": "Sfrutta l’inferenza ultra low-latency di Flaq per abilitare una generazione di immagini e video senza interruzioni su app social, giochi o assistenti in tempo reale."
+      },
+      "3": {
+        "title": "Pipeline per Film e Industria Pubblicitaria",
+        "description": "Integra le API Veo 3.1 e Wan 2.6 per una rapidissima pre-visualizzazione (Pre-viz) nelle prime fasi di sviluppo sceneggiature, riducendo notevolmente i costi di rendering tradizionali."
+      },
+      "4": {
+        "title": "Prototipazione e Crescita per Sviluppatori",
+        "description": "Testa velocemente molteplici combinazioni di modelli con una API key unificata e cambia algoritmo principale in qualunque momento in base al feedback di mercato, il tutto senza modifiche di codice."
+      },
+      "title": "Scenari Tipici di Applicazione in Flaq AI",
+      "description": "L’API cluster ad alte prestazioni di Flaq AI è molto più di un semplice set di strumenti—è il motore trainante dell’innovazione industriale. Dai flussi di lavoro creativi all’automazione d’impresa, forniamo supporto tecnico per tutti gli scenari.",
+      "button-text": "Try Now"
+    },
+    "exampleSection": {
+      "title": "Examples Generated via Flaq API",
+      "description": "Explore what you can create with Flaq SaaS Template powered by Flaq AI. Use this template to quickly build your own platform! For the full AI generation experience, visit flaq.ai.",
+      "imageExamples": {
+        "title": "Image Generation Examples",
+        "description": "See how the template handles AI image generation with various styles and prompts."
+      },
+      "videoExamples": {
+        "title": "Video Generation Examples",
+        "description": "Discover how the template transforms images and text into dynamic video content.",
+        "promptLabel": "Prompt"
+      }
+    },
+    "faq": {
+      "1": {
+        "question": "Quali sono le differenze tra Flaq AI e l’uso diretto delle API ufficiali dei fornitori di modelli?",
+        "answer": "Flaq AI offre formati dati standardizzati, routing intelligente di failover e una superiore ottimizzazione della rete sottostante, riducendo significativamente la latenza ed eliminando la complessità di gestione di account API molteplici."
+      },
+      "2": {
+        "question": "Che tipo di modelli supporta Flaq AI?",
+        "answer": "Attualmente supportiamo in profondità oltre cento modelli AI leader, tra cui generazione di immagini, generazione di video e trascrizione vocale."
+      },
+      "3": {
+        "question": "Come la piattaforma garantisce sicurezza e privacy dei dati?",
+        "answer": "Flaq AI utilizza protocolli di trasmissione criptati di livello enterprise e non memorizza i prompt o i dati privati degli utenti, assicurando la conformità alle normative sui dati."
+      },
+      "4": {
+        "question": "C’è una quota gratuita di prova disponibile?",
+        "answer": "Gli utenti appena registrati ricevono una quota gratuita iniziale per i test di integrazione. Successivamente puoi scegliere in modo flessibile tra pagamenti a consumo o abbonamenti a seconda delle esigenze."
+      },
+      "5": {
+        "question": "Posso usare Flaq AI per scopi commerciali?",
+        "answer": "Sì, puoi usare Flaq AI per scopi commerciali. Tuttavia, devi rispettare i termini e le condizioni dei provider dei modelli e le leggi del Paese in cui ti trovi."
+      },
+      "6": {
+        "question": "Come posso ottenere un rimborso da flaq.ai?",
+        "answer": "Se hai bisogno di un rimborso, contatta il nostro team di supporto all'indirizzo contact@flaq.ai. Valuteremo la tua situazione e forniremo una soluzione di rimborso adeguata in base alle circostanze. Tieni presente che offriamo rimborsi solo per crediti o risorse non utilizzati."
+      },
+      "7": {
+        "question": "Cosa devo fare se ho domande sul prodotto o incontro problemi?",
+        "answer": "Se hai domande o problemi relativi al nostro prodotto, contattaci all'indirizzo contact@flaq.ai. Qualunque siano le tue esigenze o i problemi di utilizzo, ti forniremo le migliori soluzioni possibili."
+      },
+      "8": {
+        "question": "Qual è la dichiarazione di non responsabilità relativa alla violazione della proprietà intellettuale?",
+        "answer": "Flaq AI fornisce strumenti AI per aiutare gli utenti a generare i contenuti visivi desiderati usando la propria immaginazione. Se gli utenti includono contenuti relativi a celebrità o ad altre proprietà intellettuali e li promuovono causando problemi di violazione, la responsabilità legale ricade sull'utente."
+      },
+      "title": "FAQ su Flaq AI"
+    }
+  },
+  "image-to-image": {
+    "heading": {
+      "title": "Immagine in Immagine — Gratuito e Open Source · Nessuna Registrazione",
+      "description": "Usa e ospita senza registrazione il template Immagine in Immagine, gratuito e open source. Per generare servono Flaq Client Key e credito API."
+    },
+    "form": {
+      "title": "Immagine in Immagine"
+    },
+    "examples": {
+      "1": {
+        "1": {
+          "title": "Original"
+        },
+        "2": {
+          "title": "A girl with a backpack, standing relaxed near a bookshelf and behind a chair. Keep every other detail in the scene completely unchanged."
+        },
+        "title": "The AI image-to-image converter enables high-quality style conversion and reconstruction while maintaining original characteristics and details."
+      },
+      "2": {
+        "1": {
+          "title": "Original"
+        },
+        "2": {
+          "title": "Convert a realistic image into retro, grid-style pixel video game art."
+        },
+        "title": "The AI image-to-image converter supports fine-grained control of style transfer while preserving the source image's complete content."
+      },
+      "3": {
+        "1": {
+          "title": "Original"
+        },
+        "2": {
+          "title": "Ultra-realistic 8K overhead photo in strict knolling style. Take the object from the reference image and fully disassemble it into 8 to 12 main parts, arranging them neatly in a grid or radial layout on a minimalist wood or matte gray tabletop. Use uniform spacing and perfect alignment, no overlap or extraneous items. The scene is softly and diffusely lit by multiple light sources, casting subtle shadows and balancing neutral colors, with all elements in perfect focus. Show highly detailed real-world materials (metal, plastic, rubber grips, circuit boards, screws). For each part, add a slim white rectangular border, and place a short, clear English label next to it in a simple sans-serif font, not covering the part; annotations must be legible and not intrusive."
+        },
+        "title": "The AI image-to-image converter preserves the original structure and layout during transformation, enabling creators to achieve more accurate composition control and generate high-quality, stable output images."
+      },
+      "title": "Funzionalità principali del generatore AI Image to Image",
+      "description": "Uno strumento flessibile di creazione image-to-image per generazione guidata da riferimenti, editing visivo, trasferimento di stile, mockup di prodotto e variazioni rapide dell'immagine preservando dettagli chiave dell'immagine sorgente."
+    },
+    "core-feature": {
+      "1": {
+        "title": "Realistic and Delicate Visual Presentation",
+        "description": "Outstanding in rendering textures, lighting, and composition, the system produces highly accurate, richly detailed, and realistic images for vivid results."
+      },
+      "2": {
+        "title": "Highly Flexible Style Control",
+        "description": "Customize your desired visual style freely using prompts or reference images. Whether illustration, social media, product sketch, or other visual types, achieve your vision with ease."
+      },
+      "3": {
+        "title": "Powerful Text Understanding and Parsing",
+        "description": "Leveraging advanced natural language processing, the system accurately understands prompts and descriptions to quickly generate and optimize image content for smarter, more efficient creation."
+      },
+      "title": "Core Advantages of Image-to-Image Converter",
+      "description": "A professional AI image-to-image tool offering high-resolution outputs and a streamlined, user-friendly interface. Easily generate high-quality works from reference images. Diverse settings provide creative freedom, making image editing, design, and art creation more efficient and flexible."
+    },
+    "advantage": {
+      "1": {
+        "title": "Poster & Visual Design",
+        "description": "Supports poster and various creative visual editing, with flexible adjustment of fonts, sizes, and styles—perfect for event promotion and brand marketing."
+      },
+      "2": {
+        "title": "Product Marketing & Brand Communication",
+        "description": "Enables rapid generation of product visuals and creative marketing materials, saving design time, enhancing visual appeal, and boosting brand influence."
+      },
+      "3": {
+        "title": "Educational Content Creation",
+        "description": "Assists educators in creating and editing teaching visuals, making teaching resources more vivid and greatly improving presentation and effectiveness."
+      },
+      "4": {
+        "title": "Artistic Creation & Cultural Innovation",
+        "description": "Empowers artists and designers with rich creative tools for style transformation, cross-domain inspiration, and maximized artistic possibilities."
+      },
+      "title": "Applications of the AI Image-to-Image Converter",
+      "description": "The AI image-to-image converter is suitable for poster design, brand marketing, product showcases, and artistic creation. It enables precise image and text control, greatly improving creative efficiency and visual quality and providing powerful creative capabilities for designers, business teams, and educators.",
+      "try-now": "Try Now"
+    },
+    "manual": {
+      "1": {
+        "title": "Carica la tua immagine di riferimento",
+        "description": "Inizia con una foto di prodotto, un ritratto, uno schizzo, una bozza di design, un riferimento di stile o qualsiasi immagine che dovrebbe guidare il risultato generato."
+      },
+      "2": {
+        "title": "Descrivi la trasformazione",
+        "description": "Scrivi un prompt che spieghi cosa cambiare e cosa preservare, inclusi stile, sfondo, illuminazione, colori, composizione, dettagli del soggetto e obiettivo dell'output."
+      },
+      "3": {
+        "title": "Genera e perfeziona",
+        "description": "Scegli un modello e impostazioni supportati, genera l'immagine, visualizza l'anteprima del risultato, quindi scarica l'immagine finale nei formati supportati come JPG, PNG o WebP."
+      },
+      "title": "Come generare immagini da immagini",
+      "content": "This step-by-step guide will help you get started and achieve the best results with the AI image-to-image conversion tool."
+    },
+    "faq": {
+      "1": {
+        "question": "Che cos'è un generatore AI image to image?",
+        "answer": "Un generatore AI image to image usa un'immagine caricata come input visivo, poi crea una nuova immagine in base al tuo prompt. Può aiutare a ridisegnare lo stile, modificare, migliorare o reinterpretare un visual esistente."
+      },
+      "2": {
+        "question": "Ho bisogno di un prompt se carico un'immagine?",
+        "answer": "Sì. L'immagine caricata fornisce contesto visivo, mentre il tuo prompt dice al modello cosa cambiare, preservare o enfatizzare nel risultato generato."
+      },
+      "3": {
+        "question": "Image to Image Generator può preservare il soggetto originale?",
+        "answer": "I modelli image-to-image possono spesso preservare soggetto originale, struttura, composizione, layout o indizi di stile, ma la coerenza finale dipende dal modello selezionato, dalla qualità dell'immagine di input e dalla chiarezza del prompt."
+      },
+      "4": {
+        "question": "Quali impostazioni immagine e formati sono supportati?",
+        "answer": "Le impostazioni disponibili dipendono dal modello selezionato. Le opzioni comuni possono includere proporzioni, risoluzione, qualità, seed, ottimizzazione del prompt, controlli input immagine specifici del modello e formati supportati come JPG, PNG e WebP."
+      },
+      "5": {
+        "question": "Come viene calcolato il costo in crediti?",
+        "answer": "La stima viene calcolata dal modello selezionato e dai parametri supportati come flusso con immagine di riferimento, risoluzione, qualità, prezzi del provider, crediti gratuiti e regole di sconto correnti."
+      },
+      "6": {
+        "question": "Posso usare commercialmente i risultati image-to-image?",
+        "answer": "L'uso commerciale dipende dai tuoi diritti sull'immagine caricata, dal tuo piano, dai termini della piattaforma, dalle regole del provider del modello e dal contenuto generato. Controlla i termini aggiornati prima di usare gli output in lavori a pagamento, per clienti o pubblici."
+      },
+      "title": "FAQ sul generatore Image-to-Image"
+    }
+  },
+  "image-to-video": {
+    "heading": {
+      "title": "Immagine in Video — Gratuito e Open Source · Nessuna Registrazione",
+      "description": "Usa e ospita senza registrazione il template Immagine in Video, gratuito e open source. Per generare servono Flaq Client Key e credito API."
+    },
+    "form": {
+      "title": "Immagine in Video"
+    },
+    "example": {
+      "1": {
+        "prompt": "cutting the tomato"
+      },
+      "2": {
+        "prompt": "The man is skiing"
+      },
+      "title": "Esempi del generatore AI Image to Video",
+      "description": "Gli esempi di Image to Video AI Generator mostrano come un'immagine sorgente possa diventare una clip in movimento con azione guidata da prompt, movimento camera, coerenza visiva e audio opzionale quando il modello selezionato lo supporta."
+    },
+    "core-feature": {
+      "1": {
+        "title": "High-Quality Video Output",
+        "description": "AI Video Generator produces high-quality videos with smooth motion and clear visuals, meeting professional video production standards."
+      },
+      "2": {
+        "title": "Efficient Generation Process",
+        "description": "Through optimized AI models, the generator significantly improves creative efficiency and shortens production cycles."
+      },
+      "3": {
+        "title": "Natural Motion and Spatial Consistency",
+        "description": "Character movements connect smoothly, scene transitions are seamless, both enhancing immersion and ensuring narrative continuity and logic."
+      },
+      "title": "Advantages about the Image to Video AI Generator",
+      "description": "AI Video Generator not only generates content quickly but also focuses on visual hierarchy and narrative logic, making it an important productivity tool for content creators and business teams."
+    },
+    "advantage": {
+      "1": {
+        "title": "Film and Video Creation",
+        "description": "AI Video Generator can quickly transform text descriptions into cinematic short films. Whether it's dramatic segments, sci-fi scenes, or emotional narratives, it can present precise cinematography, character consistency, and style matching, significantly improving the creative efficiency of film and video content."
+      },
+      "2": {
+        "title": "Marketing and Advertising Production",
+        "description": "With AI Video Generator, brands can easily generate high-quality advertising videos, product showcases, or promotional shorts at lower costs than traditional filming while quickly iterating versions, thereby enhancing brand exposure and communication effectiveness."
+      },
+      "3": {
+        "title": "Social Media Content Creation",
+        "description": "For platforms like YouTube Shorts, TikTok, and Instagram Reels, AI Video Generator can create attractive short videos. Combined with sound effects and visual filters, it helps creators enhance content interactivity and viral potential."
+      },
+      "4": {
+        "title": "Educational and Training Videos",
+        "description": "Teachers and training personnel can use AI Video Generator to create instructional videos, teaching demonstrations, or animated courseware. With AI-generated visuals and audio coordination, abstract or complex knowledge becomes more intuitive and easier to understand."
+      },
+      "title": "Use Cases about the Image to Video AI Generator",
+      "description": "With the Image to Video AI Generator, creators can unleash their imagination across various scenarios—from film shorts and social media content to brand advertising, educational training, and virtual reality experiences. This advanced tool can quickly transform text descriptions into high-quality, realistic and vivid video works, not only improving creative efficiency but also saving production costs, making creativity come to life faster.",
+      "try-now": "Try Now"
+    },
+    "manual": {
+      "1": {
+        "title": "Carica la tua immagine di riferimento",
+        "description": "Inizia con la foto, immagine prodotto, ritratto, design o riferimento visivo che vuoi animare. Alcuni modelli supportano anche un fotogramma finale."
+      },
+      "2": {
+        "title": "Descrivi il movimento",
+        "description": "Scrivi un prompt che spieghi azione, movimento della camera, emozione, illuminazione, ritmo, cambiamento dello sfondo e dettagli dell'immagine sorgente che devono restare stabili."
+      },
+      "3": {
+        "title": "Genera, visualizza l'anteprima e perfeziona",
+        "description": "Scegli un modello image-to-video supportato, genera la clip, visualizza l'anteprima del risultato, quindi perfeziona prompt o impostazioni per una versione migliore."
+      },
+      "title": "Come generare video da immagini",
+      "content": ""
+    },
+    "faq": {
+      "1": {
+        "question": "Che cos'è un generatore AI image to video?",
+        "answer": "Un generatore AI image to video usa un'immagine caricata come punto di partenza visivo, poi crea un breve video animato in base al tuo prompt di movimento e al modello selezionato."
+      },
+      "2": {
+        "question": "Ho bisogno di un prompt se carico un'immagine?",
+        "answer": "Sì. L'immagine caricata fornisce contesto visivo, mentre il tuo prompt dice al modello cosa deve muoversi, come deve comportarsi la camera e quali dettagli devono restare coerenti."
+      },
+      "3": {
+        "question": "Image to Video Generator può creare video con audio?",
+        "answer": "Alcuni modelli image-to-video supportati includono opzioni audio o suono. Il modulo mostra i controlli audio solo quando il modello selezionato li supporta."
+      },
+      "4": {
+        "question": "Posso usare un fotogramma finale?",
+        "answer": "Alcuni modelli supportano la guida tramite fotogramma finale. Quando disponibile, un fotogramma finale può aiutare a definire la composizione finale o il target di transizione del video generato."
+      },
+      "5": {
+        "question": "Come ottengo risultati image-to-video migliori?",
+        "answer": "Usa un'immagine sorgente chiara e scrivi un prompt preciso che separi il movimento desiderato dai dettagli che devono restare stabili, come identità, forma del prodotto, illuminazione o composizione."
+      },
+      "6": {
+        "question": "Posso usare commercialmente i risultati image-to-video?",
+        "answer": "L'uso commerciale dipende dai tuoi diritti sull'immagine caricata, dal tuo piano, dai termini della piattaforma, dalle regole del provider del modello e dal contenuto generato. Controlla i termini aggiornati prima di usare gli output in lavori a pagamento, per clienti o pubblici."
+      },
+      "title": "FAQ sul generatore Image-to-Video"
+    }
+  },
+  "text-to-video": {
+    "heading": {
+      "title": "Testo in Video — Gratuito e Open Source · Nessuna Registrazione",
+      "description": "Usa e ospita senza registrazione il template Testo in Video, gratuito e open source. Per generare servono Flaq Client Key e credito API."
+    },
+    "form": {
+      "title": "Testo in Video"
+    },
+    "example": {
+      "1": {
+        "prompt": "A short hair beautiful European influencer is trying to sell to the camera a smooth cylindrical object, tapering slightly at one end, made of firm or flexible material with a polished, minimal design, recorded with an iPhone, smiling"
+      },
+      "2": {
+        "prompt": "A man soaring gracefully through outer space as the camera orbits smoothly around him"
+      },
+      "title": "Esempi del generatore AI Text to Video",
+      "description": "Gli esempi di Text to Video AI Generator mostrano come idee basate solo su prompt possano diventare clip dinamiche con movimento chiaro, inquadratura cinematografica, fisica realistica e audio opzionale quando il modello selezionato lo supporta."
+    },
+    "core-feature": {
+      "1": {
+        "title": "Cutting-Edge AI Technology",
+        "description": "Based on advanced artificial intelligence models with deep semantic understanding and physics modeling capabilities, generating realistic and vivid video content from text or images."
+      },
+      "2": {
+        "title": "Realistic Physics Engine",
+        "description": "Built-in high-precision physics simulation system that accurately recreates momentum, buoyancy, and complex motion for natural and smooth dynamic effects."
+      },
+      "3": {
+        "title": "High-Quality Video Output",
+        "description": "Generates high-quality videos with smooth motion and cinematic visual quality for various creative scenarios."
+      },
+      "title": "Advantages about Text to Video AI Generator",
+      "description": "AI Video Generator not only generates content quickly but also focuses on visual hierarchy and narrative logic, making it an important productivity tool for content creators and business teams."
+    },
+    "advantage": {
+      "1": {
+        "title": "Film and Video Creation",
+        "description": "Text to Video AI Generator can rapidly transform text descriptions into cinematic short films. Whether dramatic segments, sci-fi scenes, or emotional narratives, it can precisely present cinematography, character consistency, and style matching, significantly improving film and video content creation efficiency."
+      },
+      "2": {
+        "title": "Marketing and Advertising Production",
+        "description": "Brands can leverage Text to Video AI Generator to efficiently generate advertising videos, product showcases, or promotional shorts at low cost, rapidly iterate versions, and enhance brand exposure and communication effectiveness."
+      },
+      "3": {
+        "title": "Social Media Content Creation",
+        "description": "Suitable for platforms like YouTube Shorts, TikTok, and Instagram Reels, Text to Video AI Generator can create engaging short videos. Combined with sound effects and visual filters, it enhances content interactivity and viral potential."
+      },
+      "4": {
+        "title": "Educational and Training Videos",
+        "description": "Teachers and training personnel can use AI Video Generator to create instructional videos, demonstrations, or animated courseware. AI-generated visuals combined with audio make abstract or complex knowledge more intuitive and understandable."
+      },
+      "title": "Application Scenarios about Text to Video AI Generator",
+      "description": "Text to Video AI Generator helps you quickly turn text into high-quality videos for short films, social media, marketing, training, and more—saving time and reducing costs.",
+      "try-now": "Try Now"
+    },
+    "manual": {
+      "1": {
+        "title": "Inserisci il prompt del video",
+        "description": "Descrivi soggetto, ambientazione, azione, angolazione della camera, movimento, illuminazione, emozione, stile visivo e scopo finale del video."
+      },
+      "2": {
+        "title": "Scegli modello e impostazioni",
+        "description": "Seleziona un provider e un modello text-to-video, poi imposta opzioni supportate come rapporto, durata, risoluzione, audio, seed, controllo camera o negative prompt."
+      },
+      "3": {
+        "title": "Genera, visualizza l'anteprima e perfeziona",
+        "description": "Crea il tuo video, rivedi il risultato, modifica il prompt o le impostazioni del modello, poi genera un'altra versione finché il movimento non corrisponde al tuo obiettivo."
+      },
+      "title": "Come generare video dal testo",
+      "content": ""
+    },
+    "faq": {
+      "1": {
+        "question": "Che cos'è un generatore AI text to video?",
+        "answer": "Un generatore AI text to video crea brevi video da prompt scritti. Descrivi scena, movimento, camera e stile, poi il modello AI selezionato genera un risultato video."
+      },
+      "2": {
+        "question": "Devo caricare un'immagine per usare Text to Video Generator?",
+        "answer": "No. La generazione text-to-video parte solo dal testo. Se vuoi che una foto o un design caricato guidi il video, usa invece il generatore image-to-video."
+      },
+      "3": {
+        "question": "Text to Video Generator può creare video con audio?",
+        "answer": "Alcuni modelli video supportati possono generare o includere audio. Le opzioni audio appaiono solo quando il modello selezionato supporta suono o generazione audio-video."
+      },
+      "4": {
+        "question": "Quali impostazioni video posso regolare?",
+        "answer": "Le impostazioni disponibili dipendono dal modello selezionato. Le opzioni comuni includono proporzioni, durata, risoluzione, audio, seed, controllo camera e negative prompt."
+      },
+      "5": {
+        "question": "Come viene calcolato il costo in crediti?",
+        "answer": "La stima viene calcolata dal modello selezionato e dai parametri supportati come durata, risoluzione, audio, prezzi del provider, crediti gratuiti e regole di sconto correnti."
+      },
+      "6": {
+        "question": "Posso usare commercialmente i video generati?",
+        "answer": "L'uso commerciale dipende dal tuo piano, dai termini della piattaforma, dalle regole del provider del modello e dal contenuto che generi. Controlla i termini aggiornati prima di usare gli output in lavori a pagamento, per clienti o pubblici."
+      },
+      "title": "FAQ sul generatore Text-to-Video"
+    }
+  },
+  "text-to-image": {
+    "heading": {
+      "title": "Testo in Immagine — Gratuito e Open Source · Nessuna Registrazione",
+      "description": "Usa e ospita senza registrazione il template Testo in Immagine, gratuito e open source. Per generare servono Flaq Client Key e credito API."
+    },
+    "form": {
+      "title": "Testo in Immagine"
+    },
+    "examples": {
+      "1": {
+        "title": "Enter product descriptions, scene details, or character features. The system will automatically interpret the semantics and generate a corresponding visual image."
+      },
+      "2": {
+        "title": "The system deeply analyzes and interprets the text, outputting well-structured, detail-rich, and stylistically diverse image results."
+      },
+      "title": "Funzionalità principali del generatore AI Text to Image",
+      "description": "Un potente flusso di creazione immagini AI per trasformare idee scritte in visual dettagliati, progettato per forte comprensione del prompt, selezione flessibile del modello, composizione pulita e iterazione creativa rapida."
+    },
+    "advantage": {
+      "1": {
+        "title": "Efficient Generation, Greatly Saves Time",
+        "description": "AI rapidly transforms text into images, dramatically reducing time costs for creators."
+      },
+      "2": {
+        "title": "Semantic Accuracy & Detailed Realism",
+        "description": "The generated images maintain consistency in overall composition, color, and detailed features, faithfully reproducing both meaning and fine details."
+      },
+      "3": {
+        "title": "Flexible Multi-Input Adaptation",
+        "description": "Supports natural language text inputs, platform templates, or AI auto-generated supplementary materials—catering to all levels of experience and diverse needs."
+      },
+      "4": {
+        "title": "Ideal for Personal and Business Use",
+        "description": "Whether you're a designer, content creator, product team, developer, or brand owner, easily create ready-to-use image assets for a variety of applications."
+      },
+      "title": "Advantages of Text to Image AI",
+      "description": "The core advantages of Text to Image AI lie in automating the traditionally complex, high-barrier image creation process, enabling users to rapidly obtain high-quality visual results while maintaining realism and creativity.",
+      "button-text": "Try Now"
+    },
+    "use-cases": {
+      "1": {
+        "title": "Visual per marketing e social",
+        "description": "Genera concept di campagna, scene di prodotto, grafiche di lancio, post social, idee per miniature e varianti pubblicitarie direttamente da un brief creativo scritto."
+      },
+      "2": {
+        "title": "Bozze di design ed esplorazione del brand",
+        "description": "Trasforma moodboard, direzioni visive, note di stile, idee di packaging e concept di layout in bozze rifinite per revisione e iterazione più rapide."
+      },
+      "3": {
+        "title": "Immagini per formazione e presentazioni",
+        "description": "Crea visual per lezioni, illustrazioni concettuali, diagrammi, immagini esplicative e asset per presentazioni che rendono le informazioni astratte più facili da capire."
+      },
+      "4": {
+        "title": "Storytelling e concept art",
+        "description": "Sviluppa personaggi, fotogrammi cinematografici, ambienti, poster, copertine, scene di worldbuilding e artwork narrativi da descrizioni testuali dettagliate."
+      },
+      "title": "Casi d'uso Text-to-Image",
+      "description": "Usa Flaq AI Text to Image Generator ogni volta che hai bisogno di immagini originali da parole, senza preparare un'immagine di riferimento o costruire un flusso di design complesso.",
+      "try-now": "Inizia a creare"
+    },
+    "manual": {
+      "1": {
+        "title": "Inserisci il prompt dell'immagine",
+        "description": "Descrivi l'immagine che vuoi, includendo soggetto, ambientazione, stile, illuminazione, composizione, atmosfera, colori, angolazione della camera e qualsiasi testo che dovrebbe apparire."
+      },
+      "2": {
+        "title": "Scegli modello e impostazioni",
+        "description": "Seleziona un provider e un modello per il tuo obiettivo creativo, poi imposta rapporto, risoluzione, qualità, seed o ottimizzazione del prompt quando il modello scelto li supporta."
+      },
+      "3": {
+        "title": "Genera, visualizza l'anteprima e perfeziona",
+        "description": "Clicca genera, rivedi il risultato dell'immagine, modifica il prompt o le impostazioni, quindi scarica l'immagine finale nei formati supportati come JPG, PNG o WebP."
+      },
+      "title": "Come generare immagini dal testo",
+      "content": "Text to Image features a simple and intuitive workflow—no design experience required. Just enter your text description and the system automatically analyzes the semantics to generate the corresponding visual image."
+    },
+    "faq": {
+      "1": {
+        "question": "Che cos'è un generatore AI text to image?",
+        "answer": "Un generatore AI text to image crea immagini da prompt scritti. Descrivi soggetto, scena, stile e requisiti di output, poi il modello AI selezionato genera un risultato visivo."
+      },
+      "2": {
+        "question": "Devo caricare un'immagine per usare Text to Image Generator?",
+        "answer": "No. La generazione text-to-image parte solo dal testo. Se vuoi trasformare, ridisegnare lo stile o modificare un'immagine esistente, usa invece il generatore image-to-image."
+      },
+      "3": {
+        "question": "Posso scegliere diversi modelli immagine AI?",
+        "answer": "Sì. Flaq AI ti permette di scegliere provider e modello, così puoi confrontare punti di forza, impostazioni supportate, stili visivi e prezzi di diversi modelli in un unico flusso."
+      },
+      "4": {
+        "question": "Quali impostazioni immagine e formati sono supportati?",
+        "answer": "Le impostazioni disponibili dipendono dal modello selezionato. Le opzioni comuni includono proporzioni, risoluzione, qualità, seed e ottimizzazione del prompt, con formati immagine supportati come JPG, PNG e WebP."
+      },
+      "5": {
+        "question": "Come viene calcolato il costo in crediti?",
+        "answer": "La stima viene calcolata dal modello selezionato e dai parametri supportati come risoluzione, qualità, prezzi del provider, crediti gratuiti e regole di sconto correnti."
+      },
+      "title": "FAQ sul generatore Text-to-Image"
+    }
+  },
+  "virtual-try-on": {
+    "heading": {
+      "title": "Prova Virtuale — Gratuito e Open Source · Nessuna Registrazione",
+      "description": "Usa e ospita senza registrazione il template Prova Virtuale, gratuito e open source. Per generare servono Flaq Client Key e credito API."
+    },
+    "form": {
+      "title": "Prova Virtuale",
+      "upload-images-title": "Upload Images",
+      "upload-subject-label": "Upload [Person]",
+      "upload-object-label": "Upload [Clothing]",
+      "hints-title": "Hints",
+      "subject-label": "Person",
+      "object-label": "Clothing",
+      "ai-generation-label": "AI Generation"
+    },
+    "examples": {
+      "1": {
+        "1": {
+          "title": "Original"
+        },
+        "2": {
+          "title": "Generated"
+        },
+        "title": "Upload a person photo and a clothing image. The AI maps the garment onto the body with natural drape, accurate fit, and full detail preservation."
+      },
+      "2": {
+        "1": {
+          "title": "Original"
+        },
+        "2": {
+          "title": "Generated"
+        },
+        "title": "Choose from curated style hint templates to get started instantly—no sourcing required. The AI generates a complete try-on result based on your selection."
+      },
+      "3": {
+        "1": {
+          "title": "Original"
+        },
+        "2": {
+          "title": "Generated"
+        },
+        "title": "Switch between different AI models to control output style and detail level. Each model delivers consistent, high-quality virtual try-on results."
+      },
+      "title": "Core Features of Virtual Try On AI",
+      "description": "Virtual Try On AI accurately renders garments onto uploaded person photos, preserving body proportions, fabric texture, and design details across a wide range of clothing styles and model types."
+    },
+    "advantage": {
+      "1": {
+        "title": "Fast Generation, Instant Results",
+        "description": "Get photorealistic try-on results quickly. Our AI is pre-trained on millions of garment and body reference images, requiring no complex setup—just upload and see instant output."
+      },
+      "2": {
+        "title": "Perfect Details, Precise Presentation",
+        "description": "From delicate textures and complex patterns to tiny text and logos, every detail of the clothing is faithfully preserved in each result. The original design is fully represented—no distortions, no unexpected differences."
+      },
+      "3": {
+        "title": "Unlimited Compatibility, Complete Coverage",
+        "description": "Whether it's model photography, flat lay displays, or invisible mannequin shots, the AI handles them all without additional configuration. It adapts flexibly to diverse clothing styles, body types, and pose variations."
+      },
+      "4": {
+        "title": "Multiple Models, One Platform",
+        "description": "Switch between different AI models based on your output preference. Each model is optimized for different generation styles and clothing complexities—all accessible without any technical setup."
+      },
+      "title": "Core Advantages of Virtual Try On AI",
+      "description": "Virtual Try On AI combines multiple state-of-the-art generation models with a simple upload workflow, making realistic outfit visualization accessible to anyone—from individual shoppers to e-commerce teams.",
+      "try-now": "Try Now"
+    },
+    "use-cases": {
+      "1": {
+        "title": "Online Shopping & Purchase Decisions",
+        "description": "See exactly how a garment will look on your body before buying. Reduce return rates and purchase uncertainty by visualizing real outfit combinations on yourself."
+      },
+      "2": {
+        "title": "E-commerce Product Photography",
+        "description": "Generate on-model product visuals at scale without organizing photoshoots. Upload clothing images and instantly produce catalog-ready imagery for any body type or style."
+      },
+      "3": {
+        "title": "Fashion Design & Sampling",
+        "description": "Preview how new designs look on real body references before producing physical samples. Speed up design iteration and reduce prototyping costs across the development cycle."
+      },
+      "4": {
+        "title": "Marketing & Social Media Content",
+        "description": "Produce high-quality outfit imagery for campaigns, lookbooks, social posts, or brand promotions—without models, studios, or post-production. Generate multiple variations quickly to test different looks."
+      },
+      "title": "Use Cases for Virtual Try On AI",
+      "description": "Virtual Try On AI supports a wide range of personal and professional applications—from online shopping decisions to high-volume e-commerce content production.",
+      "try-now": "Try Now"
+    },
+    "manual": {
+      "1": {
+        "title": "Step 1: Upload a Person Photo",
+        "description": "Upload one clear photo of a person. This will serve as the base body reference for the virtual try-on."
+      },
+      "2": {
+        "title": "Step 2: Add Clothing Images or Choose a Style Hint",
+        "description": "Upload one or more clothing images (the number supported varies by model), or select from pre-built style hint templates to skip sourcing entirely."
+      },
+      "3": {
+        "title": "Step 3: Select Your AI Model",
+        "description": "Choose from available AI models. Each model offers different generation characteristics—select based on your desired output style and clothing type."
+      },
+      "4": {
+        "title": "Step 4: Generate and Download",
+        "description": "Click generate and receive your virtual try-on result. Preview the output and download it for personal use, product listings, or content creation."
+      },
+      "title": "How to Use Virtual Try On AI",
+      "content": "Virtual Try On AI requires no technical experience. Upload your images, select a model and style hint if needed, and receive a realistic try-on result quickly."
+    },
+    "faq": {
+      "1": {
+        "question": "What AI models are supported for Virtual Try On?",
+        "answer": "Multiple AI models are available, each with different generation characteristics suited to different clothing types and output styles. You can select the model that best fits your use case before generating."
+      },
+      "2": {
+        "question": "How many clothing images can I upload at once?",
+        "answer": "The number of supported clothing images depends on the selected model. Some models allow multiple garment uploads in a single session. Check the model details on the generation page for the specific limit."
+      },
+      "3": {
+        "question": "What are the style hint templates?",
+        "answer": "Style hints are curated outfit references. Instead of sourcing your own clothing images, you can select a hint to guide the AI toward a specific look. They are especially useful for quick style exploration."
+      },
+      "4": {
+        "question": "What types of clothing does Virtual Try On AI support?",
+        "answer": "Most standard clothing categories are supported, including tops, bottoms, dresses, and outerwear. Swimwear and lingerie are excluded due to platform usage policies."
+      },
+      "5": {
+        "question": "Does Virtual Try On AI support accessories or shoes?",
+        "answer": "Currently, the tool focuses on clothing items. Accessories and footwear require different rendering approaches and are not part of the current feature set."
+      },
+      "6": {
+        "question": "Can generated images be used for commercial purposes?",
+        "answer": "Yes. Generated images can be used for commercial purposes, subject to Flaq AI's terms of service."
+      },
+      "7": {
+        "question": "How much does it cost to use Virtual Try On AI?",
+        "answer": "Usage is billed based on the Flaq API pricing. Different models have different costs. Please refer to flaq.ai for the latest pricing details."
+      },
+      "8": {
+        "question": "What output resolution does Virtual Try On AI produce?",
+        "answer": "Output resolution varies by model. Results are optimized for visual quality suitable for both personal styling and professional e-commerce or marketing use."
+      },
+      "title": "FAQs about Virtual Try On AI"
+    }
+  },
+  "Pricing": {
+    "insufficientDialog": {
+      "title": "Ricarica per continuare a creare",
+      "description": "Aggiungi saldo per continuare a creare con modelli leader per immagini, chat, coding e video, tra cui Nano Banana e GPT Image per i contenuti visivi, GPT e Claude per ragionamento e coding, oltre a Seedance e Kling per i video. Alcuni piani includono valore bonus.",
+      "confirm": "Go to Flaq",
+      "cancel": "Close"
+    }
+  },
+  "Metadata": {
+    "common": {
+      "siteName": "flaq.ai",
+      "creator": "Flaq AI"
+    },
+    "home": {
+      "title": "Immagini e Video AI — Gratuito e Open Source · Nessuna Registrazione",
+      "description": "Usa e ospita senza registrazione il template Immagini e Video AI, gratuito e open source. Per generare servono Flaq Client Key e credito API.",
+      "keywords": "Piattaforma AI per Immagini e Video, Gratuito e Open Source, Nessuna Registrazione, no signup required, free AI generator, open source AI, free to use, Flaq API, AIGC",
+      "openGraph": {
+        "title": "Immagini e Video AI — Gratuito e Open Source · Nessuna Registrazione",
+        "description": "Usa e ospita senza registrazione il template Immagini e Video AI, gratuito e open source. Per generare servono Flaq Client Key e credito API.",
+        "siteName": "Flaq SaaS Template"
+      },
+      "twitter": {
+        "title": "Immagini e Video AI — Gratuito e Open Source · Nessuna Registrazione",
+        "description": "Usa e ospita senza registrazione il template Immagini e Video AI, gratuito e open source. Per generare servono Flaq Client Key e credito API.",
+        "site": "flaq.ai",
+        "creator": "Flaq AI"
+      }
+    },
+    "image-to-video": {
+      "title": "Immagine in Video — Gratuito e Open Source · Nessuna Registrazione",
+      "description": "Usa e ospita senza registrazione il template Immagine in Video, gratuito e open source. Per generare servono Flaq Client Key e credito API."
+    },
+    "text-to-video": {
+      "title": "Testo in Video — Gratuito e Open Source · Nessuna Registrazione",
+      "description": "Usa e ospita senza registrazione il template Testo in Video, gratuito e open source. Per generare servono Flaq Client Key e credito API."
+    },
+    "image-to-image": {
+      "title": "Immagine in Immagine — Gratuito e Open Source · Nessuna Registrazione",
+      "description": "Usa e ospita senza registrazione il template Immagine in Immagine, gratuito e open source. Per generare servono Flaq Client Key e credito API."
+    },
+    "text-to-image": {
+      "title": "Testo in Immagine — Gratuito e Open Source · Nessuna Registrazione",
+      "description": "Usa e ospita senza registrazione il template Testo in Immagine, gratuito e open source. Per generare servono Flaq Client Key e credito API."
+    },
+    "virtual-try-on": {
+      "title": "Prova Virtuale — Gratuito e Open Source · Nessuna Registrazione",
+      "description": "Usa e ospita senza registrazione il template Prova Virtuale, gratuito e open source. Per generare servono Flaq Client Key e credito API."
+    },
+    "reference-to-video": {
+      "title": "Riferimenti in Video — Gratuito e Open Source · Nessuna Registrazione",
+      "description": "Usa e ospita senza registrazione il template Riferimenti in Video, gratuito e open source. Per generare servono Flaq Client Key e credito API."
+    },
+    "ai-media-creator": {
+      "title": "Contenuti AI — Gratuito e Open Source · Nessuna Registrazione",
+      "description": "Usa e ospita senza registrazione il template Contenuti AI, gratuito e open source. Per generare servono Flaq Client Key e credito API."
+    }
+  },
+  "Profile": {
+    "image-history": {
+      "detail": {
+        "title": "Image Details",
+        "resolution": "Resolution",
+        "ratio": "Aspect Ratio",
+        "size": "File Size",
+        "generatedTime": "Generated Time",
+        "model": "Model",
+        "prompt": "Prompt",
+        "images": "Reference Images",
+        "download": "Download",
+        "delete": "Delete",
+        "copyPrompt": "Copy Prompt",
+        "copied": "Copied",
+        "expiredImage": "Image Expired"
+      },
+      "delete-success": "Image deleted successfully",
+      "delete-fail": "Failed to delete image"
+    },
+    "video-history": {
+      "detail": {
+        "title": "Video Details",
+        "resolution": "Resolution",
+        "ratio": "Aspect Ratio",
+        "duration": "Duration",
+        "generatedTime": "Generated Time",
+        "model": "Model",
+        "prompt": "Prompt",
+        "frames": "Frames",
+        "download": "Download",
+        "delete": "Delete",
+        "copyPrompt": "Copy Prompt",
+        "copied": "Copied"
+      },
+      "delete-success": "Video deleted successfully",
+      "delete-fail": "Failed to delete video"
+    }
+  },
+  "UnifiedGenerator": {
+    "media-type": {
+      "image": "Image",
+      "video": "Video"
+    },
+    "video-type": {
+      "text-to-video": "Text to Video",
+      "image-to-video": "Image to Video",
+      "reference-to-video": "Reference to Video"
+    },
+    "reset": "Reset",
+    "prompt": "Prompt",
+    "prompt-placeholder": "Describe what you want to create",
+    "model": "Model",
+    "ratio": "Aspect Ratio",
+    "resolution": "Resolution",
+    "duration": "Duration",
+    "sound": "Generate Sound",
+    "seed": "Seed",
+    "guidance": "Guidance Scale",
+    "negative-prompt": "Negative Prompt",
+    "optional": "Optional",
+    "start-image": "Start and End Images",
+    "reference-images": "Reference Images",
+    "reference-videos": "Reference Videos",
+    "reference-audios": "Reference Audios",
+    "reference-files": "Reference Files",
+    "reference-links": "Reference Links",
+    "reference-link-placeholder": "Paste a public reference URL",
+    "no-reference-input": "This model has no reference input configuration.",
+    "generate": "Generate",
+    "submitted": "Task submitted.",
+    "errors": {
+      "prompt": "Enter a prompt before generating.",
+      "model": "Select an available model.",
+      "reference-required": "Add the required reference media.",
+      "max-files": "The maximum number of reference files has been reached.",
+      "reference-source-exclusive": "Use reference files or reference links, not both.",
+      "reference-file-format": "One or more reference files use an unsupported format.",
+      "reference-link": "Enter a valid public HTTP or HTTPS reference URL.",
+      "missing-references": "Remove or replace missing prompt references: {references}.",
+      "media-duration": "Each reference must be between {min} and {max} seconds.",
+      "total-duration": "The total reference duration cannot exceed {max} seconds.",
+      "media-metadata": "The selected media file could not be read."
+    },
+    "image-type": {
+      "text-to-image": "Text to Image",
+      "image-to-image": "Image to Image"
+    },
+    "mention-reference": "Mention a reference in the prompt",
+    "quality": "Image Quality",
+    "end-frame": "End Frame",
+    "model-select": {
+      "all-providers": "All",
+      "all-types": "All",
+      "text-type": "Text",
+      "image-type": "Image",
+      "reference-type": "Reference",
+      "scroll-up": "Scroll up",
+      "scroll-down": "Scroll down",
+      "ratio": "Ratio",
+      "image": "Image",
+      "end-frame": "End Frame",
+      "sound": "Sound",
+      "seed": "Seed",
+      "duration": "{value}"
+    }
+  },
+  "CreatorHistory": {
+    "title": "Generation History",
+    "description": "Your image and video tasks are stored locally in this browser.",
+    "image": "Images",
+    "video": "Videos",
+    "no-preview": "No preview",
+    "empty": "No generation history yet.",
+    "loading-more": "Loading more...",
+    "end": "No more results"
+  },
+  "reference-to-video": {
+    "heading": {
+      "title": "Riferimenti in Video — Gratuito e Open Source · Nessuna Registrazione",
+      "description": "Usa e ospita senza registrazione il template Riferimenti in Video, gratuito e open source. Per generare servono Flaq Client Key e credito API."
+    },
+    "core-feature": {
+      "1": {
+        "title": "Flexible Reference Media",
+        "description": "Add images, video clips, audio, documents, or links when the selected model supports them. Available upload controls update automatically with your model choice."
+      },
+      "2": {
+        "title": "Direct Each Asset with @ Mentions",
+        "description": "Mention uploaded media inside the prompt and explain whether each asset should guide a character, product, action, camera move, sound, background, or style."
+      },
+      "3": {
+        "title": "Multiple Reference-to-Video Models",
+        "description": "Choose from supported Seedance, MiniMax, Wan, and Happy Horse reference workflows, then match the model to the input types and output controls your project needs."
+      },
+      "title": "Core Features of Reference to Video AI Generator",
+      "description": "Build a reference-guided video brief with compatible media uploads, asset mentions, model-specific controls, and multiple generation models."
+    },
+    "advantage": {
+      "1": {
+        "title": "Fewer Reshoots and Revisions",
+        "description": "Start from existing reference media instead of filming every variation again. Create fresh scenes, product moments, character actions, and talking clips while using source assets as visual guidance."
+      },
+      "2": {
+        "title": "More Consistent Visual Direction",
+        "description": "Use references to guide people, avatars, products, props, outfits, backgrounds, and scene details across the generated clip."
+      },
+      "3": {
+        "title": "Simple Creative Workflow",
+        "description": "Upload supported reference media, mention assets in the prompt, describe the action and style, choose the available video settings, and start the task from the same form."
+      },
+      "4": {
+        "title": "Flexible Video Results",
+        "description": "Create reference-guided character videos, product scenes, social content, brand clips, UGC-style ads, cinematic concepts, animation previews, and visual experiments."
+      },
+      "title": "Advantages of Reference to Video AI Generator",
+      "description": "Reference to Video helps creators, marketers, ecommerce teams, designers, storytellers, agencies, and social media producers develop AI videos from existing reference media.",
+      "try-now": "Try Now"
+    },
+    "manual": {
+      "1": {
+        "title": "Scegli un modello di riferimento",
+        "description": "Seleziona Da riferimento a video, quindi scegli un modello compatibile in base ai tipi di input, alle impostazioni di output e ai controlli necessari al progetto."
+      },
+      "2": {
+        "title": "Carica e cita i tuoi contenuti multimediali",
+        "description": "Carica le immagini, i video o gli audio supportati, quindi usa le menzioni con @ nel prompt per spiegare come ogni risorsa deve guidare il video."
+      },
+      "3": {
+        "title": "Continua nel creatore multimediale IA",
+        "description": "Controlla la bozza, continua nel creatore multimediale IA e avvia lì la generazione per poter seguire l’attività nella cronologia video."
+      },
+      "title": "Come usare Da riferimento a video",
+      "content": "Create a reference-guided AI video in three steps."
+    },
+    "faq": {
+      "1": {
+        "question": "Che cos’è Da riferimento a video?",
+        "answer": "Da riferimento a video è un flusso di generazione IA che utilizza i contenuti multimediali caricati come guida per personaggi, prodotti, oggetti, movimento, audio, scene e stile visivo in un nuovo video."
+      },
+      "2": {
+        "question": "Quali contenuti multimediali di riferimento posso caricare?",
+        "answer": "Gli input disponibili dipendono dal modello selezionato. Il modulo mostra i controlli di caricamento per immagini, video e audio solo quando il modello Reference-to-Video corrente li supporta."
+      },
+      "3": {
+        "question": "Come funzionano i riferimenti con @ nel prompt?",
+        "answer": "Usa @ per menzionare una risorsa caricata nel prompt, quindi descrivi come il riferimento di immagine, video o audio deve influenzare il video generato."
+      },
+      "4": {
+        "question": "Dove viene generato il video?",
+        "answer": "Questa pagina prepara la bozza di Da riferimento a video. Continuando si apre la stessa configurazione nel creatore multimediale IA, dove puoi confermare le impostazioni, generare l’attività e seguirla nella cronologia video."
+      },
+      "5": {
+        "question": "Can I use more than one type of reference?",
+        "answer": "Yes, when the selected model supports multiple input types. Its configuration determines whether images, videos, audio, documents, and links can be combined."
+      },
+      "6": {
+        "question": "Where do I find my generated video?",
+        "answer": "Generated tasks appear in the AI Create video history. The history can use the generated video itself when a separate cover image is unavailable."
+      },
+      "title": "FAQ sul generatore da riferimento a video"
+    }
+  },
+  "ai-media-creator": {
+    "heading": {
+      "title": "Contenuti AI — Gratuito e Open Source · Nessuna Registrazione",
+      "description": "Usa e ospita senza registrazione il template Contenuti AI, gratuito e open source. Per generare servono Flaq Client Key e credito API."
+    },
+    "core-feature": {
+      "1": {
+        "title": "Image and Video Creation",
+        "description": "Switch between image and video workflows while keeping the same familiar creation experience."
+      },
+      "2": {
+        "title": "Supported AI Models",
+        "description": "Choose from the image and video models available through the Flaq API and view each model's supported settings in one place."
+      },
+      "3": {
+        "title": "Flexible Reference Uploads",
+        "description": "Upload supported images, video clips, audio, documents, or links when the selected model accepts reference media."
+      },
+      "4": {
+        "title": "Unified Local History",
+        "description": "Review recent image and video tasks saved in this browser, including video previews when a separate cover image is unavailable."
+      },
+      "title": "One AI Media Creation Workspace for Every Idea",
+      "description": "Move from an initial concept to generated media with a unified form that adapts its models, uploads, and settings to the selected creation type."
+    },
+    "use-cases": {
+      "1": {
+        "title": "Risorse di prodotto e marketing",
+        "description": "Crea immagini di prodotto, immagini per campagne, clip promozionali e varianti di annunci mantenendo la produzione di immagini e video in un unico ambiente di lavoro."
+      },
+      "2": {
+        "title": "Varianti per i social media",
+        "description": "Sviluppa immagini per post, miniature, idee per video brevi e più direzioni creative per i canali social da un flusso di lavoro condiviso basato sui prompt."
+      },
+      "3": {
+        "title": "Concept visivi e storyboard",
+        "description": "Esplora composizioni, personaggi, ambienti, direzioni stilistiche e idee di movimento come immagini o video prima di scegliere una direzione da perfezionare."
+      },
+      "4": {
+        "title": "Progetti creativi multimediali",
+        "description": "Realizza progetti che richiedono contenuti statici e in movimento utilizzando il formato e i controlli supportati dal modello più adatti a ogni scena, messaggio o fase di produzione."
+      },
+      "title": "Casi d’uso del creatore multimediale IA",
+      "description": "Usa il creatore multimediale IA per risorse di marketing, contenuti social, sviluppo visivo e progetti che combinano la generazione di immagini e video.",
+      "button-text": "Create Now"
+    },
+    "manual": {
+      "1": {
+        "title": "Scegli un tipo di creazione e un modello",
+        "description": "Seleziona il flusso di lavoro per immagini o video di cui hai bisogno, quindi scegli un modello supportato in base al metodo di input, al formato di output e ai controlli creativi richiesti."
+      },
+      "2": {
+        "title": "Aggiungi indicazioni e input",
+        "description": "Scrivi il prompt, carica i contenuti multimediali accettati dal flusso selezionato e configura le opzioni specifiche del modello mostrate nel modulo."
+      },
+      "3": {
+        "title": "Genera e controlla",
+        "description": "Avvia l’attività nello spazio di lavoro, controlla l’output e utilizza la cronologia di immagini o video per seguire le generazioni salvate dopo l’accesso."
+      },
+      "title": "Come usare il creatore multimediale IA",
+      "description": "Seleziona un flusso multimediale, scegli un modello compatibile, aggiungi il prompt e gli input supportati, quindi genera e controlla il risultato.",
+      "button-text": "Start Creating"
+    },
+    "faq": {
+      "1": {
+        "question": "Che cos’è il creatore multimediale IA?",
+        "answer": "Il creatore multimediale IA è lo spazio di lavoro condiviso di Flaq AI per generare immagini e video. Riunisce in un’unica pagina la selezione del flusso, i modelli supportati, i prompt, gli input multimediali compatibili, i controlli di generazione e la cronologia dopo l’accesso."
+      },
+      "2": {
+        "question": "Quali flussi di lavoro per immagini e video sono disponibili?",
+        "answer": "La scheda Immagine supporta la generazione basata su prompt e i flussi compatibili guidati da immagini. Le opzioni video includono testo in video, immagine in video, riferimento in video e modifica video quando sono disponibili modelli supportati."
+      },
+      "3": {
+        "question": "Come scelgo un modello IA?",
+        "answer": "Seleziona prima il tipo di contenuto e il flusso di lavoro, quindi scegli uno dei modelli compatibili mostrati nel modulo. Gli input e le impostazioni disponibili si aggiornano in base alla selezione."
+      },
+      "4": {
+        "question": "Posso usare immagini, video o audio come input?",
+        "answer": "Il supporto degli input dipende dal flusso di lavoro e dal modello. Il modulo mostra i controlli per immagini, video, audio e contenuti multimediali di riferimento solo quando la selezione corrente li accetta."
+      },
+      "5": {
+        "question": "Dove posso trovare i contenuti multimediali generati?",
+        "answer": "Dopo l’accesso, usa l’area della cronologia sotto il modulo per seguire le attività in corso e rivedere i risultati completati in visualizzazioni separate per immagini e video."
+      },
+      "6": {
+        "question": "I controlli disponibili cambiano tra i modelli?",
+        "answer": "Sì. Proporzioni, risoluzioni, durate, opzioni di qualità, spazi di caricamento e altri controlli vengono mostrati in base alle funzionalità configurate per il modello selezionato."
+      },
+      "title": "FAQ sul creatore multimediale IA"
+    }
+  },
+  "ResourceEntrySections": {
+    "affiliate": {
+      "eyebrow": "Programma di affiliazione",
+      "title": "Unisciti al programma di affiliazione Flaq.ai",
+      "description": "Consiglia Flaq.ai a creator, sviluppatori e team interessati alla generazione di immagini e video, alle API dei modelli, ai workflow creativi e alle integrazioni per sviluppatori. Guadagna il 20% di commissione sul primo ordine valido a pagamento di un utente segnalato e il 10% sui successivi ordini validi a pagamento effettuati entro 60 giorni dalla registrazione.",
+      "button": "Inizia a guadagnare"
+    },
+    "modelMarket": {
+      "eyebrow": "Flaq AI Model Market",
+      "title": "Explore more AI creation models in one place",
+      "description": "Continue to the Flaq AI Model Market to discover additional image, video, language, and creative AI options with documentation for each supported workflow.",
+      "button": "Visit the Model Market"
+    },
+    "promptLibrary": {
+      "title": "Explore ready-to-use AI prompt collections",
+      "description": "Open curated prompt libraries for popular image and video models, then adapt complete examples to your own creative workflow.",
+      "viewPrompts": "View Prompts",
+      "repository": "GitHub",
+      "items": {
+        "seedance-2-5": {
+          "title": "Seedance 2.5 Prompt Library",
+          "description": "Explore production-ready prompts for cinematic scenes, branded videos, social content, and reference-guided motion."
+        },
+        "minimax-h3": {
+          "title": "MiniMax H3 Prompt Library",
+          "description": "Browse detailed prompts for expressive characters, product stories, cinematic sequences, and fast-moving video concepts."
+        },
+        "wan-3-0": {
+          "title": "Wan 3.0 Prompt Library",
+          "description": "Find adaptable prompt ideas for realistic motion, visual storytelling, advertisements, and imaginative video generation."
+        },
+        "qwen-image-3-0": {
+          "title": "Qwen Image 3.0 Prompt Library",
+          "description": "Discover structured image prompts for design exploration, illustration, marketing visuals, and precise creative direction."
+        }
+      }
+    },
+    "agentGuides": {
+      "title": "Connect Flaq AI with coding and agent workflows",
+      "description": "Follow practical setup guides for using Flaq AI models and tools from popular coding agents, assistants, and MCP clients.",
+      "items": {
+        "claude-code": {
+          "title": "Claude Code Guide",
+          "description": "Configure Flaq AI model access for Claude Code workflows."
+        },
+        "openai-codex": {
+          "title": "OpenAI Codex Guide",
+          "description": "Use Flaq AI generation models from an OpenAI Codex environment."
+        },
+        "hermes": {
+          "title": "Hermes Agent Guide",
+          "description": "Connect Hermes Agent to supported Flaq AI language models."
+        },
+        "zcode": {
+          "title": "Zcode Guide",
+          "description": "Set up Flaq AI model access for Zcode development workflows."
+        },
+        "deepseek": {
+          "title": "DeepSeek Harness Guide",
+          "description": "Configure DeepSeek Harness with Flaq AI endpoints and supported models."
+        },
+        "mcp": {
+          "title": "Flaq MCP Server",
+          "description": "Connect compatible AI clients to Flaq image and video tools through MCP."
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,1640 @@
+{
+  "Desktop": {
+    "r2AccountId": "R2 帳戶 ID",
+    "r2BucketName": "儲存桶名稱",
+    "r2AccessKeyId": "存取金鑰 ID",
+    "r2SecretAccessKey": "存取金鑰 Secret",
+    "workspace": "創作工作台",
+    "workspaceDescription": "選擇工作流程即可開始創作，設定與最近作品都在手邊。",
+    "configure": "連接 Flaq",
+    "firstRunTitle": "連接 Flaq，開始創作",
+    "firstRunDescription": "一個 Client Key 即可使用桌面版的所有圖片與影片工作流程。",
+    "stepAccount": "登入或建立 Flaq 帳號",
+    "stepKey": "建立並複製 Client Key",
+    "stepCreate": "貼上金鑰、測試連線，然後開始創作",
+    "openSettings": "開啟連線設定",
+    "skip": "先看看",
+    "toolGuide": "工具指南",
+    "toolGuideDescription": "查看此工作流程的範例、功能與常見問題",
+    "close": "返回創作"
+  },
+  "Common": {
+    "loading": "載入中...",
+    "copy": "複製",
+    "prompt": "提示詞",
+    "model": "模型",
+    "failure": "生成失敗",
+    "success": "Success",
+    "reset": "Reset",
+    "selectModel": "Select Model",
+    "uploadImages": "Upload Images",
+    "tryNow": "Try Now",
+    "copy-right": {
+      "title": "版權：",
+      "content": "付費用戶擁有其圖像權益。"
+    },
+    "images": "images",
+    "panel": "面板"
+  },
+  "cookie": {
+    "content": "我們使用 Cookie 以提升您的使用體驗。詳情請參閱我們的隱私政策。",
+    "confirm": "接受"
+  },
+  "error-page": {
+    "not-found": {
+      "title": "404 找不到頁面",
+      "goHome": "返回主頁"
+    }
+  },
+  "components": {
+    "hero-form": {
+      "image-video": {
+        "format-hint": "支援格式",
+        "image-count": "Images",
+        "prompt-placeholder": "描述你想建立的內容..."
+      },
+      "reference-upload": {
+        "upload": "上傳",
+        "history": "歷史記錄",
+        "uploadFromDevice": "從裝置上傳",
+        "noCompletedHistory": "尚無已完成的歷史記錄",
+        "addImage": "新增圖片",
+        "addVideo": "新增影片",
+        "addAudio": "新增音訊",
+        "addMore": "新增更多",
+        "remove": "移除",
+        "noLocalUploads": "尚無最近上傳的檔案",
+        "deleteLocalImage": "刪除最近上傳的檔案",
+        "durationMin": "檔案長度必須至少為 {value} 秒。",
+        "metadataError": "無法讀取檔案中繼資料。",
+        "maxFiles": "最多可新增 {count} 個檔案。",
+        "unsupportedFormat": "不支援此檔案格式。",
+        "imageCropCount": "裁切第 {current} 張圖片，共 {total} 張",
+        "imagePreviewCount": "第 {current} 張圖片，共 {total} 張",
+        "selectImage": "選擇圖片 {index}",
+        "cropFailed": "無法裁切此圖片。",
+        "deleteImage": "刪除圖片",
+        "cropImage": "裁切圖片",
+        "videoPreview": "影片預覽",
+        "audioPreview": "音訊預覽",
+        "mention": "參考素材",
+        "mediaDuration": "{type}長度必須介於 {min} 至 {max} 秒之間。",
+        "video": "影片",
+        "audio": "音訊",
+        "imageDimensionMin": "圖片寬度和高度必須至少為 {value}px。",
+        "imageDimensionMax": "Image width and height must not exceed {value}px.",
+        "cancelTrim": "取消修剪",
+        "confirmTrim": "確認修剪",
+        "videoDimensionRange": "影片寬度與高度皆須介於 {min} 至 {max}px 之間。"
+      },
+      "unified-upload": {
+        "formats": "JPG、PNG、WebP",
+        "hints": {
+          "video": "上傳首幀，將提示詞路由到圖片轉影片。留空則使用文字轉影片。",
+          "image": "上傳參考圖片，將提示詞路由到圖片轉圖片。留空則使用文字轉圖片。"
+        },
+        "slots": {
+          "firstFrame": "首幀",
+          "endFrame": "結尾幀",
+          "image": "圖片",
+          "audio": "音訊",
+          "optional": "選填"
+        }
+      }
+    },
+    "video-carousel": {
+      "original-image": "原始圖片",
+      "video": "影片",
+      "prompt": "Prompt"
+    },
+    "open-api-settings": {
+      "title": "Open API Settings",
+      "description": "Configure the local Open API base URL and client key for this browser.",
+      "base-url": "Base URL",
+      "base-url-hint": "Leave this as the default unless you need a custom gateway or proxy.",
+      "client-key": "Client Key",
+      "remember-me": "Remember me (store locally)",
+      "remember-me-hint": "If unchecked, the key will be cleared when you close the tab.",
+      "security-warning": "Security Notice: Your client key is encrypted before storage, but XSS attacks can still intercept it during API requests. Keep your key secure.",
+      "clear-data": "Clear All Data",
+      "clear-data-confirm": "Are you sure you want to clear all stored settings?",
+      "data-cleared": "All stored data has been cleared.",
+      "register": "Register",
+      "test": "Test Connection",
+      "testing": "Testing...",
+      "cancel": "Cancel",
+      "save": "Save",
+      "required": "Client key is required.",
+      "saved": "Open API settings saved.",
+      "test-success": "Connection succeeded.",
+      "test-success-validation": "API 已連通。測試任務不存在，因此暫時無法確認金鑰是否有效。",
+      "test-failed": "Connection failed."
+    },
+    "image-hosting": {
+      "title": "Image Hosting (R2)",
+      "public-domain": "Public Domain",
+      "public-domain-hint": "The CDN domain for accessing uploaded files. Recommended to use https:// protocol.",
+      "public-domain-placeholder": "https://assets.example.com",
+      "not-configured": "R2 credentials should be set in .env (server-side only). Click \"Test R2\" to verify.",
+      "saved": "Image hosting settings saved.",
+      "test": "Test R2 Connection",
+      "testing": "Testing...",
+      "test-success": "R2 connection succeeded.",
+      "test-failed": "R2 connection failed."
+    },
+    "dialog": {
+      "business": {
+        "title": "商務諮詢",
+        "description": "如需商務合作、企業解決方案或進階 API 技術支援，請透過電子郵件與我們聯繫。",
+        "contactButton": "聯絡我們"
+      }
+    },
+    "video-form": {
+      "ai-generation": "AI 生成",
+      "product-image": "Product Image",
+      "end-frame": "End Frame",
+      "product-image-description": "We recommend using AI to create your product images",
+      "upload-first-frame": "上傳起始幀",
+      "upload-end-frame": "上傳結束幀",
+      "promptPlaceholder": "請輸入提示詞",
+      "generate": "生成",
+      "duration": "時長",
+      "ratio": "Video Ratio",
+      "resolution": "Video Resolution",
+      "startFrame": "起始幀",
+      "endFrame": "結束幀",
+      "modelVersion": "模型版本",
+      "history": {
+        "title": "歷史紀錄",
+        "noHistory": "尚無歷史紀錄",
+        "backToStart": "回到開始"
+      },
+      "noPromptInput": "請輸入提示詞",
+      "noImageInput": "請先上傳圖片",
+      "min width": "Image width is less than",
+      "or": "or",
+      "min height": "Image height is less than",
+      "image": "上傳圖片",
+      "display": {
+        "noVideo": "立即體驗 AI 影片生成器",
+        "prompt": "提示詞",
+        "videoDetail": "View Details"
+      },
+      "audio": {
+        "title": "音訊",
+        "upload-audio": "上傳音訊",
+        "audio-support": "此模型內建音訊",
+        "supported-formats": "支援格式：MP3、WAV（最大 15MB）",
+        "unsupported-format": "音訊格式不支援，僅支援 MP3 與 WAV",
+        "file-too-large": "檔案大小超過 15MB",
+        "show-trim": "顯示裁切",
+        "hide-trim": "隱藏裁切",
+        "start-time": "開始",
+        "end-time": "結束",
+        "duration": "時長",
+        "audio-too-short": "音訊過短，最少需 3 秒",
+        "audio-auto-trimmed": "音訊時長 {duration} 秒，自動裁切為前 30 秒。可拖曳調整區間。",
+        "audio-duration-requirement": "音訊長度需為 3-30 秒",
+        "drag-region": "拖曳區塊",
+        "dragging-region": "拖曳中...",
+        "audio-duration-error": "音訊時長需介於 3-30 秒，目前為",
+        "audio-load-failed": "音訊檔載入失敗",
+        "audio-trim-failed": "音訊裁切失敗，將使用完整音訊"
+      },
+      "enable-audio": "啟用音效",
+      "enable-audio-tip": "生成帶有 AI 音效的影片",
+      "audio-support": "This model includes built-in audio",
+      "audioFile": "音訊上傳",
+      "model-parameters": "Model Parameters",
+      "enable-bgm": "背景音樂",
+      "enable-bgm-tip": "生成帶有 AI 背景音樂的影片",
+      "style": "風格",
+      "seed": "隨機種子",
+      "seed-hint": "Set a fixed value (0-2147483647) to reproduce the same result, or keep number empty for a random result each time.",
+      "negative-prompt": "反向提示詞",
+      "negative-prompt-placeholder": "描述您不希望出現在結果中的內容，例如：模糊、低畫質、浮水印……",
+      "guidance-scale": "引導強度",
+      "guidance-scale-flexible": "靈活",
+      "guidance-scale-strict": "嚴格",
+      "keep-original-sound": "保留原聲",
+      "keep-original-sound-tip": "Preserve the uploaded video's original audio when supported.",
+      "error": {
+        "image-required": "請先上傳圖片以繼續"
+      },
+      "reference-source": {
+        "file-title": "參考檔案",
+        "file-formats": "上傳一個參考檔案。支援格式：{formats}。",
+        "page-limit": "PDF、文件、簡報、Keynote 與 Pages 檔案最多支援 {count} 頁。",
+        "remove-file": "移除參考檔案",
+        "unsupported-file": "支援的參考檔案格式：{formats}。",
+        "link-title": "參考網頁連結",
+        "link-tip": "請使用無須登入即可開啟的公開網頁。",
+        "link-placeholder": "https://example.com/article",
+        "invalid-link": "請輸入有效的公開 HTTP 或 HTTPS 網頁連結。",
+        "mutually-exclusive": "參考檔案與網頁連結無法同時使用。"
+      },
+      "video-upload": {
+        "label": "上傳影片或在上方貼上 URL",
+        "duration-minimum": "上傳的影片至少需要 {duration} 秒",
+        "duration-range-error": "裁剪後的影片時長需介於 {min}-{max} 秒之間",
+        "duration-limit": "上傳的影片不能超過 {duration} 秒",
+        "auto-trimmed": "影片原始時長為 {duration} 秒，已預設截取前 {max} 秒，可自行調整區間",
+        "load-failed": "影片檔案載入失敗",
+        "play-failed": "影片播放失敗",
+        "trim-failed": "影片裁剪失敗，請重新調整區間後再試",
+        "selected-range": "已選區間：{start} - {end}，共 {duration}",
+        "range-tip": "可選擇 {min}-{max} 秒的影片片段",
+        "trim-start": "開始時間",
+        "trim-end": "結束時間",
+        "reset-trim": "重設",
+        "show-trim": "顯示裁切",
+        "hide-trim": "隱藏裁切",
+        "play": "播放",
+        "pause": "暫停",
+        "delete": "刪除",
+        "playback-progress": "播放進度"
+      }
+    },
+    "video-image-upload-form": {
+      "label": "Click or drag to upload",
+      "crop": "Crop",
+      "min width": "Min width",
+      "or": "or",
+      "min height": "Min height",
+      "supported-formats": "Supported formats"
+    },
+    "audio-upload-form": {
+      "upload-audio": "上傳音訊",
+      "supported-formats": "MP3, WAV, M4A, AAC, OGG",
+      "unsupported-format": "Unsupported audio format",
+      "file-too-large": "File size cannot exceed 10MB"
+    },
+    "audio-modal": {
+      "start-time": "Start",
+      "end-time": "End",
+      "duration": "Duration",
+      "show-trim": "Enable Trim Mode",
+      "hide-trim": "Disable Trim Mode"
+    },
+    "confirmDialog": {
+      "title": "您確定嗎？",
+      "cancel": "取消",
+      "confirm": "確認"
+    },
+    "image-form": {
+      "click-to-upload": "點擊或拖曳以上傳",
+      "promptPlaceholder": "請輸入提示詞",
+      "selectModel": "Select Model",
+      "enterPrompt": "輸入提示詞",
+      "selectAspectRatio": "Select Aspect Ratio",
+      "ratio": "Image Ratio",
+      "selectResolution": "Select Resolution",
+      "resolution": "Image Resolution",
+      "quality": "品質",
+      "model": "Image Models",
+      "motion": "Motion",
+      "selectMotion": "Select Motion",
+      "transformImages": "轉換圖片",
+      "imageSupport": "支援格式：jpg、jpeg、webp、png",
+      "public": "Public",
+      "generate": "生成",
+      "history": {
+        "title": "歷史紀錄",
+        "check-all": "全選",
+        "noImage": "尚無歷史紀錄",
+        "backToStart": "回到開始"
+      },
+      "noPromptInput": "請先輸入提示詞。",
+      "noImageUpload": "請先上傳圖片。",
+      "reset": "重設",
+      "describe": "Describe",
+      "image-required": "需要上傳圖片。",
+      "paint-required": "Painting on the image is required.",
+      "process-model": "Process Model",
+      "errors": {
+        "webpNotSupported": "不支援 WebP 格式",
+        "aspectRatioOutOfRange": "圖片長寬比必須在 0.33 至 3.0 之間，當前比值：",
+        "imageLoadFailed": "圖片讀取失敗"
+      },
+      "upload-dialog": {
+        "history-tab": "Generation History",
+        "upload-tab": "Upload Image",
+        "loading": "Loading...",
+        "no-images": "No images yet",
+        "go-generate": "Go Generate",
+        "click-to-upload": "Click To Upload Image",
+        "file-format-info": "JPG, PNG, WEBP up to 10MB",
+        "unsupported-format": "Please upload supported image formats: JPG, PNG, WEBP",
+        "file-too-large": "File size cannot exceed 10MB"
+      },
+      "display": {
+        "useImage": "Use This Image",
+        "noImage": "立即體驗 AI 圖片生成器",
+        "original-img": "原圖",
+        "prompt": "Prompt",
+        "reset-inpainting": "Reset Inpainting",
+        "removeBg": "Remove Background",
+        "imageDetail": "View Details",
+        "imageToImage": "Image to Image",
+        "model": "Model"
+      },
+      "input-range": {
+        "num inference steps": "推理步數",
+        "guidance scale": "引導強度（CFG）",
+        "image prompt strength": "圖片提示強度",
+        "steps": "步數"
+      },
+      "image-generation-modal": {
+        "onlineGenerateImage": "在線生成圖片",
+        "pleaseDoNotLeaveDuringGeneration": "生成過程中請勿關閉或跳離頁面"
+      }
+    },
+    "compress-dialog": {
+      "title": "壓縮圖片",
+      "content": "圖片大小超過 10MB，不適合 AI 影片生成。是否需要壓縮？",
+      "reupload": "重新上傳",
+      "compress": "壓縮"
+    }
+  },
+  "Navigation": {
+    "title": "Flaq AI",
+    "docs": "Docs",
+    "business": "商務合作",
+    "video-ai": "Video AI",
+    "image-ai": "Image AI",
+    "ai-api": "AI API",
+    "text-to-video": "Text to Video",
+    "text-to-video-content": "Generate video from text",
+    "image-to-video": "Image to Video",
+    "image-to-video-content": "Generate video from image",
+    "image-to-image": "Image to Image",
+    "image-to-image-content": "Generate image from image",
+    "text-to-image": "Text to Image",
+    "text-to-image-content": "Generate image from text",
+    "nano-banana-2": "Nano Banana 2 API",
+    "nano-banana-2-content": "Generate image with Nano Banana 2 API",
+    "nano-banana-pro": "Nano Banana Pro API",
+    "nano-banana-pro-content": "Generate image with Nano Banana Pro",
+    "veo-3-1": "Veo 3.1 API",
+    "veo-3-1-content": "Generate video with Veo 3.1 API",
+    "kling-3-0": "Kling 3.0 API",
+    "kling-3-0-content": "Generate video with Kling 3.0 API",
+    "vidu-q3": "VIDU Q3 API",
+    "vidu-q3-content": "Generate video with VIDU Q3 API",
+    "wan-2-7": "Wan 2.7 API",
+    "wan-2-7-content": "Generate video with Wan 2.7 API",
+    "seedream-4-5": "Seedream 4.5 API",
+    "seedream-4-5-content": "Generate image with Seedream 4.5 API",
+    "seedream-5-0": "Seedream 5.0 API",
+    "seedream-5-0-content": "Generate image with Seedream 5.0 API",
+    "seedance-1-5": "Seedance 1.5 API",
+    "seedance-1-5-content": "Generate video with Seedance 1.5 API",
+    "virtual-try-on": "Virtual Try On",
+    "virtual-try-on-content": "Try on outfits virtually with AI",
+    "gpt-image-2": "GPT Image 2 API",
+    "gpt-image-2-content": "Generate image with GPT Image 2 API",
+    "menu": "選單",
+    "close": "關閉",
+    "language-dialog": {
+      "title": "語言提示",
+      "content": "是否切換至瀏覽器語言？",
+      "cancel": "保持當前",
+      "confirm": "切換"
+    },
+    "ai-create": "AI Create",
+    "reference-to-video": "Reference to Video",
+    "reference-to-video-content": "Create video from image, video, audio, document, or link references"
+  },
+  "Footer": {
+    "title": "AI 圖像與影片 — 免費開源 · 無需註冊",
+    "subTitle": "無需註冊即可使用、修改和自行部署這款免費開源的AI 圖像與影片範本。生成內容時需設定 Flaq Client Key，並使用相應的 API 額度。",
+    "support": "支援",
+    "docs": "Docs",
+    "business": "商務合作",
+    "flaq": "Flaq AI",
+    "privacy": "隱私政策",
+    "termsConditions": "使用條款",
+    "refundPolicy": "退款政策",
+    "contactUs": "聯絡我們",
+    "feature-link": "Features",
+    "feature": {
+      "text-to-video": "Text to Video",
+      "image-to-video": "Image to Video",
+      "image-to-image": "Image to Image Generator",
+      "text-to-image": "Text to Image Generator",
+      "virtual-try-on": "Virtual Try On AI",
+      "reference-to-video": "Reference to Video",
+      "ai-create": "AI Create"
+    }
+  },
+  "FooterNavigation": {
+    "privacyPolicy": {
+      "1-h1": "flaq.ai 隱私權政策",
+      "1-p": "本隱私權政策說明 Flaq AI 如何在您使用 flaq.ai 服務時，蒐集、使用及保護您的個人資訊。當您使用 Flaq AI 或進入 flaq.ai，即表示您同意本政策中所述之條款。",
+      "2-h2": "1. 資訊蒐集與使用",
+      "2-p": "Flaq AI 可能會蒐集可識別個人身分的資料，以便改善我們的服務。我們也會使用第三方服務進行輔助，其亦可能蒐集資訊來協助識別您的身分。",
+      "3-h2": "2. 數據分析與第三方 AI 服務",
+      "3-p": "我們使用 Google Analytics 收集您使用本服務的數據，以進行分析。此外，我們的 AI 產生功能依賴於多個第三方平台，包含但不限於 alibaba、google、bytedance、fal.ai、Kling AI 及 Replicate。這些外部平台可能會保存透過其系統處理的生成請求紀錄。",
+      "4-h2": "3. Cookie（Cookies）",
+      "4-p": "Flaq AI 可能會使用導入第三方程式碼與函式庫，這些資源會運用 cookies。您可以選擇接受或拒絕 cookies，但若拒絕，部分功能可能會受限。",
+      "5-h2": "4. 服務供應商",
+      "5-p": "我們可能會聘用第三方公司，包括如 fal.ai、Replicate、Kling AI、OpenAI、OpenRouter 及其他 AI 服務供應商，協助我們提供服務、執行相關任務，或協助分析 Flaq AI 的使用情形。這些第三方可能會取得您的個人資訊，但必須對該資訊保密。",
+      "5-p-1": "我們聘用第三方公司和個人的可能原因包括：",
+      "5-li-1": "協助提供本服務；",
+      "5-li-2": "受我們委託提供本服務；",
+      "5-li-3": "執行與服務相關之任務；",
+      "5-li-4": "協助我們分析本服務之使用情形；",
+      "5-p-2": "我們提醒本服務的使用者，這些第三方僅能為我們指定之目的存取您的個人資訊，並有義務不得用於其它用途或對外揭露。",
+      "6-h2": "5. 資安保障",
+      "6-p": "我們致力以商業上可接受方式來保護您的個人資訊，但無法保證百分之百安全。",
+      "7-h2": "6. 連結至其他網站",
+      "7-p": "Flaq AI 服務可能包含前往第三方網站的連結。我們無法對這些外部網站的內容或隱私實踐負責。",
+      "8-h2": "7. 隱私權政策之變更",
+      "8-p": "我們可能不定期更新本隱私權政策。請不時檢視本頁，以隨時了解最新更動。更新一經公佈即時生效。",
+      "9-h2": "8. 聯絡我們",
+      "9-p": "若您對本隱私權政策有任何疑問、意見或反饋，請透過 contact@flaq.ai 與我們聯絡。我們的公司資訊如下：FLAQ AI PTE. LTD., 112 ROBINSON ROAD, #03-01, ROBINSON 112, SINGAPORE。 我們承諾積極回應您的需求，並盡速給予協助。"
+    },
+    "termsConditions": {
+      "1-h1": "flaq.ai 服務條款",
+      "1-p": "歡迎使用 flaq.ai，這是一個 AI 驅動的圖片與影片生成平台（下稱「本服務」）。您訪問或使用 https://flaq.ai（下稱「本網站」）即表示同意遵守本《服務條款》（下稱「本條款」）。本條款規範您對本網站和 flaq.ai 提供之服務（「我們」、「本公司」或「我們的」）的使用。在使用服務前，請務必詳細閱讀本條款。如不同意任何內容，請勿使用本網站或本服務。如對本條款或產品／服務有任何疑問，請參閱本隱私權政策或聯繫 contact@flaq.ai。",
+      "terms-of-service": "terms-of-service",
+      "2-h2": "1. 適用資格",
+      "2-p": "您必須年滿 18 歲或已達您所屬司法管轄區的法定成年年齡，方可使用本服務。使用本服務即表示您具備使用資格。如代表公司、組織或其他機構使用本服務，請確保您有權使該單位受本條款約束。",
+      "3-h2": "2. 帳號註冊",
+      "3-p": "部分功能可能需註冊帳號。註冊時，請填寫正確、完整且即時更新的資訊。您需妥善保管帳戶憑證，對帳戶發生的所有行為（無論是否經授權）負責。如發現未經授權的使用，請立即聯繫 contact@flaq.ai。",
+      "4-h2": "3. 服務使用",
+      "4-p": "允許使用：flaq.ai 授予您一個有限、非專屬、不可轉讓、可撤回的授權，在遵守本條款前提下，用於個人及商業目的。您同意不以非法或未經授權方式使用本服務。",
+      "5-h2": "禁止行為",
+      "5-p": "禁止行為：您同意不從事下列行為：(a) 生成或散布非法、有害、辱罵、誹謗、猥褻或其他令人反感的內容；(b) 企圖逆向工程、反編譯或拆解本服務的任何部分；(c) 使用自動化程序（如機器人、爬蟲等）存取本網站或服務；(d) 干擾或破壞本服務或其伺服器與網路連線；(e) 侵害他人智慧財產權。",
+      "6-h2": "4. 用戶內容",
+      "6-p": "所有權與責任： 您於本服務上傳、生成的內容（圖片、文字或其他素材，下稱「用戶內容」）屬於您本人所有。您應對透過本服務所產生、上傳、發佈或分享之用戶內容自行負責。",
+      "7-h2": "7. 給 flaq.ai 的授權",
+      "7-p": "授權條款： 提交用戶內容即表示您授權 flaq.ai 於全球範圍內，獲得非專屬、免權利金、可轉授權及可轉讓之權利，用於營運、完善及推廣本服務，包括使用、重製、修改、散布及展示您的用戶內容。",
+      "8-h2": "8. 內容限制",
+      "8-p": "內容限制： 您同意不會上傳、生成或分享：(a) 侵害他人知識產權的內容；(b) 違反任何法律法規的內容；(c) 含有惡意軟體、病毒或其他危險程式碼的內容；(d) 虛假、誤導性資訊。",
+      "9-h2": "9. 智慧財產權",
+      "9-p": "平台所有權：本服務僅授權使用，並非出售。Flaq AI 及其授權人擁有本網站、服務和 Flaq AI 內容（軟體、文本、圖形、標誌等）的所有智慧財產權。未經明示授權，所有權利皆屬於 Flaq AI。",
+      "10-h2": "10. 用戶反饋",
+      "10-p": "用戶反饋：您針對 flaq.ai 所提供的服務反饋、建議或想法（「反饋」）均屬 flaq.ai 專有財產。您同意將所有反饋權利轉讓予 flaq.ai，且 flaq.ai 無需支付任何補償即可使用該等反饋。",
+      "11-h2": "11. 付款",
+      "11-p": "費用：部分服務功能需付費，您需支付所有適用費用。flq.ai 保留隨時變更費率及計費方式的權利，並提前通知您。",
+      "12-h2": "12. 計費",
+      "12-p": "計費：付款可能由第三方支付處理服務商完成。您提供付款資訊，即授權 flaq.ai 和支付服務商從您的付款方式中收取相關費用。",
+      "13-h2": "13. 點數與用量",
+      "13-p": "點數與用量：Flaq AI 採用隨用隨付（pay-as-you-go）模式。您購買或儲值的點數無到期日，可永久使用。消耗按實際用量計算，費率可能依模型不同有所調整。",
+      "14-h2": "14. 退款規定",
+      "14-p": "退款：除非另有說明，所有付款皆不予退還。flaq.ai 得酌情針對特定情形予以退款或補償。",
+      "15-h2": "15. 用戶終止",
+      "15-p": "您可隨時按照網站說明終止您的帳戶。終止後，您即無法再存取或使用本服務。",
+      "16-h2": "16. flaq.ai 終止",
+      "16-p": "flaq.ai 可因任何理由（包含違反本條款）隨時、有預警或無預警地終止或暫停您的帳戶或存取權。",
+      "17-h2": "17. 終止後影響",
+      "17-p": "終止後，您根據本條款所獲授權即終止，需即刻停止使用本服務。所有已產生的權利與義務（如付款、智慧財產權），於終止後仍然有效。",
+      "18-h2": "18. 免責聲明與責任限制",
+      "18-p": "服務聲明：本服務按「現狀」及「可用」基礎提供，不附有任何明示、默示或法定的保證。flaq.ai 不保證服務不中斷、無錯誤或無有害組件；在法律允許範圍內，flaq.ai 不負任何適售性、特定目的適用性與非侵權等責任。",
+      "19-h2": "19. 責任限制",
+      "19-p": "責任限制：在法律允許範圍內，flaq.ai 對於您因使用本服務而產生的任何間接、附帶、特殊、衍生性或懲罰性損害（包括利潤、資料或使用損失），不負任何責任，無論是否已獲悉損害可能性。",
+      "20-h2": "20. 賠償",
+      "20-p": "您同意對因使用本服務、違反本條款或侵害任何第三方智慧財產權或其他權益而導致之所有索賠、責任、損失、損害或費用（包括合理律師費），為 flaq.ai、其高階主管、董事、員工及代理人進行賠償、防禦並使其免於損害。",
+      "21-h2": "21. 隱私權政策遵循",
+      "21-p": "我們對個人資料之蒐集、使用與保護均依據我們於 https://flaq.ai/privacy-policy 公開的隱私權政策執行。我們遵守適用之資料保護法，包括但不限於巴西通用資料保護法（LGPD）、墨西哥個人資料保護法（LFPDPPP），以及（如適用）歐盟之一般資料保護規則（GDPR）。您同意檢視我們的隱私權政策，了解我們如何處理您的資料。",
+      "22-h2": "22. 條款變更",
+      "22-p": "flaq.ai 有權隨時修改本條款。若有重大異動，我們將於本網站或服務中公布。您於條款生效後繼續使用本服務，即視為同意修訂內容。",
+      "23-h2": "23. 其他條款",
+      "23-p": "完整協議：本條款構成您與 flaq.ai 有關本服務的完整協議，取代所有先前協議。",
+      "24-h2": "24. 條款可分性",
+      "24-p": "可分性：若本條款部分條文被認定為無效或不可執行，其餘條文仍繼續完全有效。",
+      "25-h2": "25. 權利放棄",
+      "25-p": "權利放棄：flaq.ai 未行使或執行本條款的任何權利或規定，不應視為對該權利之放棄。",
+      "26-h2": "26. 轉讓",
+      "26-p": "轉讓：您不得未經 flaq.ai 書面同意將本條款或您的權利義務轉讓給他人；flaq.ai 得自由轉讓本條款。",
+      "27-h2": "27. 準據法",
+      "27-p": "本條款及您對本服務之使用，應受所在地國家法律（不包括其法律衝突條款）管轄。您也可能受其他地方法律（如美國、巴西 LGPD、墨西哥 LFPDPPP 與歐盟 GDPR）約束。",
+      "28-h2": "28. 使用同意",
+      "28-p": "同意聲明：您使用 flaq.ai 即視為已閱讀、理解並同意受本條款之約束。",
+      "29-h2": "29. 聯絡資訊",
+      "29-p": "聯絡資訊：如有任何關於本條款之問題，請聯繫 contact@flaq.ai。我們公司資訊如下：FLAQ AI PTE. LTD., 112 ROBINSON ROAD, #03-01, ROBINSON 112, SINGAPORE。我們承諾積極回應您的需求，並盡速給予協助。"
+    },
+    "refundPolicy": {
+      "1": {
+        "title": "1. 退款資格",
+        "description": "由於本服務依賴合作平台且 AI 運算成本極高，退款請求須於購買後 3 天內提交，逾期恕不受理。如需進一步資訊，請聯絡 contact@flaq.ai。"
+      },
+      "2": {
+        "title": "2. 點數使用限制",
+        "description": "若您已使用過本服務的運算資源（如產生過 AI 影片或圖片），無論購買時間為何，都無法申請退款。詳情請聯繫 contact@flaq.ai。"
+      },
+      "3": {
+        "title": "3. 如何申請退款",
+        "description": "如需申請退款，請於購買後 3 天內，寄信至 contact@flaq.ai，並提供您的帳號資訊、訂單編號、購買日期及退款原因說明。我們將儘速協助處理。"
+      },
+      "4": {
+        "title": "4. 隨用隨付服務",
+        "description": "Flaq AI 採隨用隨付計費模式，用多少算多少。請注意，所有已使用的點數或資源均不予退還。"
+      },
+      "5": {
+        "title": "5. 退款流程",
+        "description": "收到您的退款申請後，我們團隊會進行審查並通知審核結果。若核准，退款將原路退回您的付款方式。若有疑問請聯絡 contact@flaq.ai。"
+      },
+      "6": {
+        "title": "6. 政策變更",
+        "description": "1. 我們有權隨時修改本退款政策；\n2. 更動將即時生效並於本頁公布；\n3. 建議您定期查閱本政策；\n4. 如有疑問請聯繫 contact@flaq.ai。"
+      },
+      "title": "flaq.ai 退款政策"
+    }
+  },
+  "Home": {
+    "heading": {
+      "title": "AI 圖像與影片 — 免費開源 · 無需註冊",
+      "description": "無需註冊即可使用、修改和自行部署這款免費開源的AI 圖像與影片範本。生成內容時需設定 Flaq Client Key，並使用相應的 API 額度。",
+      "try-now": "Try Now",
+      "try-now-video": "體驗影片 API",
+      "try-now-image": "體驗圖片 API"
+    },
+    "carousel": {
+      "title": "Flaq SaaS Template: AI Generation Tools",
+      "description": "Explore AI generation tools powered by Flaq AI",
+      "video": {
+        "type": "AI Video Generator"
+      },
+      "image": {
+        "type": "AI Image Generator"
+      },
+      "tryon": {
+        "type": "AI Virtual Try-On"
+      }
+    },
+    "unique-features": {
+      "1": {
+        "title": "Flaq AI Integration",
+        "description": "Built-in integration with Flaq AI's open API for seamless image and video generation capabilities."
+      },
+      "2": {
+        "title": "Multiple Types & Presets",
+        "description": "Support for text-to-image, image-to-image, text-to-video, image-to-video, and virtual try-on with built-in scene presets."
+      },
+      "3": {
+        "title": "Ready-to-Deploy",
+        "description": "Complete UI components, API integration, and deployment configuration included. Get started in minutes."
+      },
+      "4": {
+        "title": "Open Source & Customizable",
+        "description": "Fully open source with clean code structure. Easy to customize and extend for your specific needs."
+      },
+      "title": "Key Features of Flaq SaaS Template",
+      "description": "A complete open source template with essential features for building your own AI generation platform.",
+      "button-text": "Try Now"
+    },
+    "use-cases": {
+      "1": {
+        "title": "全自動內容行銷平台",
+        "description": "結合 Nano Banana Pro API 大量產生品牌視覺，並用 LLM 自動貼文，實現從文案到影像一鍵產出。"
+      },
+      "2": {
+        "title": "即時互動式 AI 產品",
+        "description": "Flaq 超低延遲推理技術，讓社群 App、遊戲或助理實現即時影像和影片生成體驗。"
+      },
+      "3": {
+        "title": "影視與廣告產業流程",
+        "description": "整合 Veo 3.1 及 Wan 2.6 API，於劇本前期快速預覽，顯著降低傳統渲染成本。"
+      },
+      "4": {
+        "title": "開發者原型與成長",
+        "description": "以通用 API KEY 快速測試多種模型組合，依市場反饋隨時切換核心算法，無須更動程式碼。"
+      },
+      "title": "Flaq AI 典型應用場景",
+      "description": "Flaq AI 高性能 API 叢集不僅是工具，更是產業創新的動力引擎。從創意流程到企業自動化，全面支援您的技術需求。",
+      "button-text": "Try Now"
+    },
+    "exampleSection": {
+      "title": "Examples Generated via Flaq API",
+      "description": "Explore what you can create with Flaq SaaS Template powered by Flaq AI. Use this template to quickly build your own platform! For the full AI generation experience, visit flaq.ai.",
+      "imageExamples": {
+        "title": "Image Generation Examples",
+        "description": "See how the template handles AI image generation with various styles and prompts."
+      },
+      "videoExamples": {
+        "title": "Video Generation Examples",
+        "description": "Discover how the template transforms images and text into dynamic video content.",
+        "promptLabel": "Prompt"
+      }
+    },
+    "faq": {
+      "1": {
+        "question": "Flaq AI 與直接用模型官方 API 有什麼不同？",
+        "answer": "Flaq AI 提供標準化數據格式、智慧故障切換及卓越的底層網路優化，大幅降低延遲，省去維護多個帳號的繁瑣。"
+      },
+      "2": {
+        "question": "Flaq AI 支援哪些類型的模型？",
+        "answer": "目前已深度支援逾百種領先的影像、影片生成及語音轉錄 AI 模型。"
+      },
+      "3": {
+        "question": "平台如何確保數據安全及隱私？",
+        "answer": "Flaq AI 採用企業級加密傳輸，承諾不儲存用戶提示詞或個資，確保業務合規。"
+      },
+      "4": {
+        "question": "是否有免費體驗額度？",
+        "answer": "新註冊用戶可領取免費測試額度，之後可彈性選擇隨用隨付或訂閱制方案。"
+      },
+      "5": {
+        "question": "我可以將 Flaq AI 用於商業用途嗎？",
+        "answer": "可以，你可以將 Flaq AI 用於商業用途。不過，你需要遵守模型供應商的條款與條件，以及你所在國家/地區的法律。"
+      },
+      "6": {
+        "question": "我如何從 flaq.ai 取得退款？",
+        "answer": "如果你需要退款，請透過 contact@flaq.ai 聯絡我們的支援團隊。我們會評估你的情況，並根據實際狀況提供合適的退款方案。請注意，我們只會針對未使用的點數或資源提供退款。"
+      },
+      "7": {
+        "question": "如果我有產品問題或遇到問題，該怎麼辦？",
+        "answer": "如果你對我們的產品有任何問題，或在使用時遇到狀況，請透過 contact@flaq.ai 聯絡我們。無論你的需求或使用問題是什麼，我們都會盡力為你提供最佳解決方案。"
+      },
+      "8": {
+        "question": "什麼是智慧財產權侵權免責聲明？",
+        "answer": "Flaq AI 提供 AI 工具，協助使用者運用想像力生成所需的圖片內容。如果使用者加入與名人或其他智慧財產權相關的內容並加以推廣，進而引發侵權問題，相關法律責任由使用者承擔。"
+      },
+      "title": "Flaq AI 常見問答"
+    }
+  },
+  "image-to-image": {
+    "heading": {
+      "title": "圖像轉圖像 — 免費開源 · 無需註冊",
+      "description": "無需註冊即可使用、修改和自行部署這款免費開源的圖像轉圖像範本。生成內容時需設定 Flaq Client Key，並使用相應的 API 額度。"
+    },
+    "form": {
+      "title": "圖像轉圖像"
+    },
+    "examples": {
+      "1": {
+        "1": {
+          "title": "Original"
+        },
+        "2": {
+          "title": "A girl with a backpack, standing relaxed near a bookshelf and behind a chair. Keep every other detail in the scene completely unchanged."
+        },
+        "title": "The AI image-to-image converter enables high-quality style conversion and reconstruction while maintaining original characteristics and details."
+      },
+      "2": {
+        "1": {
+          "title": "Original"
+        },
+        "2": {
+          "title": "Convert a realistic image into retro, grid-style pixel video game art."
+        },
+        "title": "The AI image-to-image converter supports fine-grained control of style transfer while preserving the source image's complete content."
+      },
+      "3": {
+        "1": {
+          "title": "Original"
+        },
+        "2": {
+          "title": "Ultra-realistic 8K overhead photo in strict knolling style. Take the object from the reference image and fully disassemble it into 8 to 12 main parts, arranging them neatly in a grid or radial layout on a minimalist wood or matte gray tabletop. Use uniform spacing and perfect alignment, no overlap or extraneous items. The scene is softly and diffusely lit by multiple light sources, casting subtle shadows and balancing neutral colors, with all elements in perfect focus. Show highly detailed real-world materials (metal, plastic, rubber grips, circuit boards, screws). For each part, add a slim white rectangular border, and place a short, clear English label next to it in a simple sans-serif font, not covering the part; annotations must be legible and not intrusive."
+        },
+        "title": "The AI image-to-image converter preserves the original structure and layout during transformation, enabling creators to achieve more accurate composition control and generate high-quality, stable output images."
+      },
+      "title": "AI 圖片轉圖片生成器核心功能",
+      "description": "彈性的圖片轉圖片創作工具，適合參考引導生成、視覺編輯、風格轉換、產品模型圖與快速圖片變體，同時保留關鍵來源圖片細節。"
+    },
+    "core-feature": {
+      "1": {
+        "title": "Realistic and Delicate Visual Presentation",
+        "description": "Outstanding in rendering textures, lighting, and composition, the system produces highly accurate, richly detailed, and realistic images for vivid results."
+      },
+      "2": {
+        "title": "Highly Flexible Style Control",
+        "description": "Customize your desired visual style freely using prompts or reference images. Whether illustration, social media, product sketch, or other visual types, achieve your vision with ease."
+      },
+      "3": {
+        "title": "Powerful Text Understanding and Parsing",
+        "description": "Leveraging advanced natural language processing, the system accurately understands prompts and descriptions to quickly generate and optimize image content for smarter, more efficient creation."
+      },
+      "title": "Core Advantages of Image-to-Image Converter",
+      "description": "A professional AI image-to-image tool offering high-resolution outputs and a streamlined, user-friendly interface. Easily generate high-quality works from reference images. Diverse settings provide creative freedom, making image editing, design, and art creation more efficient and flexible."
+    },
+    "advantage": {
+      "1": {
+        "title": "Poster & Visual Design",
+        "description": "Supports poster and various creative visual editing, with flexible adjustment of fonts, sizes, and styles—perfect for event promotion and brand marketing."
+      },
+      "2": {
+        "title": "Product Marketing & Brand Communication",
+        "description": "Enables rapid generation of product visuals and creative marketing materials, saving design time, enhancing visual appeal, and boosting brand influence."
+      },
+      "3": {
+        "title": "Educational Content Creation",
+        "description": "Assists educators in creating and editing teaching visuals, making teaching resources more vivid and greatly improving presentation and effectiveness."
+      },
+      "4": {
+        "title": "Artistic Creation & Cultural Innovation",
+        "description": "Empowers artists and designers with rich creative tools for style transformation, cross-domain inspiration, and maximized artistic possibilities."
+      },
+      "title": "Applications of the AI Image-to-Image Converter",
+      "description": "The AI image-to-image converter is suitable for poster design, brand marketing, product showcases, and artistic creation. It enables precise image and text control, greatly improving creative efficiency and visual quality and providing powerful creative capabilities for designers, business teams, and educators.",
+      "try-now": "Try Now"
+    },
+    "manual": {
+      "1": {
+        "title": "上傳你的參考圖片",
+        "description": "從產品照片、人像、草圖、設計草稿、風格參考或任何應引導生成結果的圖片開始。"
+      },
+      "2": {
+        "title": "描述轉換方式",
+        "description": "撰寫提示詞，說明要變更與保留的內容，包括風格、背景、光線、色彩、構圖、主體細節與輸出目標。"
+      },
+      "3": {
+        "title": "生成並細修",
+        "description": "選擇支援的模型與設定、生成圖片、預覽結果，然後以 JPG、PNG 或 WebP 等支援格式下載完成圖片。"
+      },
+      "title": "如何從圖片生成圖片",
+      "content": "This step-by-step guide will help you get started and achieve the best results with the AI image-to-image conversion tool."
+    },
+    "faq": {
+      "1": {
+        "question": "什麼是 AI 圖片轉圖片生成器？",
+        "answer": "AI 圖片轉圖片生成器會使用上傳圖片作為視覺輸入，然後根據你的提示詞建立新圖片。它可以協助重新設計風格、編輯、增強或重新詮釋既有視覺。"
+      },
+      "2": {
+        "question": "如果我上傳圖片，還需要提示詞嗎？",
+        "answer": "需要。上傳圖片提供視覺上下文，而你的提示詞會告訴模型在生成結果中要變更、保留或強調什麼。"
+      },
+      "3": {
+        "question": "圖片轉圖片生成器可以保留原始主體嗎？",
+        "answer": "圖片轉圖片模型通常可以保留原始主體、結構、構圖、版面或風格線索，但最終一致性取決於所選模型、輸入圖片品質與提示詞清晰度。"
+      },
+      "4": {
+        "question": "支援哪些圖片設定與格式？",
+        "answer": "可用設定取決於所選模型。常見選項可能包括長寬比、解析度、品質、Seed、提示詞最佳化、模型特定圖片輸入控制，以及 JPG、PNG、WebP 等支援格式。"
+      },
+      "5": {
+        "question": "點數費用如何計算？",
+        "answer": "預估費用會根據所選模型與支援參數計算，例如參考圖片工作流程、解析度、品質、供應商價格、免費點數與目前折扣規則。"
+      },
+      "6": {
+        "question": "我可以將圖片轉圖片結果用於商業用途嗎？",
+        "answer": "商業使用取決於你對上傳圖片的權利、你的方案、平台條款、模型供應商規則，以及生成內容。在將輸出用於付費、客戶或公開作品前，請先查看目前條款。"
+      },
+      "title": "圖片轉圖片生成器常見問題"
+    }
+  },
+  "image-to-video": {
+    "heading": {
+      "title": "圖像轉影片 — 免費開源 · 無需註冊",
+      "description": "無需註冊即可使用、修改和自行部署這款免費開源的圖像轉影片範本。生成內容時需設定 Flaq Client Key，並使用相應的 API 額度。"
+    },
+    "form": {
+      "title": "圖像轉影片"
+    },
+    "example": {
+      "1": {
+        "prompt": "cutting the tomato"
+      },
+      "2": {
+        "prompt": "The man is skiing"
+      },
+      "title": "圖片轉影片 AI 生成器範例",
+      "description": "圖片轉影片 AI 生成器範例展示來源圖片如何在提示詞引導的動作、鏡頭移動、視覺一致性，以及所選模型支援時的可選音訊下，變成動態短片。"
+    },
+    "core-feature": {
+      "1": {
+        "title": "High-Quality Video Output",
+        "description": "AI Video Generator produces high-quality videos with smooth motion and clear visuals, meeting professional video production standards."
+      },
+      "2": {
+        "title": "Efficient Generation Process",
+        "description": "Through optimized AI models, the generator significantly improves creative efficiency and shortens production cycles."
+      },
+      "3": {
+        "title": "Natural Motion and Spatial Consistency",
+        "description": "Character movements connect smoothly, scene transitions are seamless, both enhancing immersion and ensuring narrative continuity and logic."
+      },
+      "title": "Advantages about the Image to Video AI Generator",
+      "description": "AI Video Generator not only generates content quickly but also focuses on visual hierarchy and narrative logic, making it an important productivity tool for content creators and business teams."
+    },
+    "advantage": {
+      "1": {
+        "title": "Film and Video Creation",
+        "description": "AI Video Generator can quickly transform text descriptions into cinematic short films. Whether it's dramatic segments, sci-fi scenes, or emotional narratives, it can present precise cinematography, character consistency, and style matching, significantly improving the creative efficiency of film and video content."
+      },
+      "2": {
+        "title": "Marketing and Advertising Production",
+        "description": "With AI Video Generator, brands can easily generate high-quality advertising videos, product showcases, or promotional shorts at lower costs than traditional filming while quickly iterating versions, thereby enhancing brand exposure and communication effectiveness."
+      },
+      "3": {
+        "title": "Social Media Content Creation",
+        "description": "For platforms like YouTube Shorts, TikTok, and Instagram Reels, AI Video Generator can create attractive short videos. Combined with sound effects and visual filters, it helps creators enhance content interactivity and viral potential."
+      },
+      "4": {
+        "title": "Educational and Training Videos",
+        "description": "Teachers and training personnel can use AI Video Generator to create instructional videos, teaching demonstrations, or animated courseware. With AI-generated visuals and audio coordination, abstract or complex knowledge becomes more intuitive and easier to understand."
+      },
+      "title": "Use Cases about the Image to Video AI Generator",
+      "description": "With the Image to Video AI Generator, creators can unleash their imagination across various scenarios—from film shorts and social media content to brand advertising, educational training, and virtual reality experiences. This advanced tool can quickly transform text descriptions into high-quality, realistic and vivid video works, not only improving creative efficiency but also saving production costs, making creativity come to life faster.",
+      "try-now": "Try Now"
+    },
+    "manual": {
+      "1": {
+        "title": "上傳你的參考圖片",
+        "description": "從你想動畫化的照片、產品圖片、人像、設計或視覺參考開始。部分模型也支援結尾幀。"
+      },
+      "2": {
+        "title": "描述動態",
+        "description": "撰寫提示詞，說明動作、鏡頭移動、情緒、光線、節奏、背景變化，以及應保持穩定的來源圖片細節。"
+      },
+      "3": {
+        "title": "生成、預覽並細修",
+        "description": "選擇支援的圖片轉影片模型、生成短片、預覽結果，然後細修提示詞或設定以取得更好的版本。"
+      },
+      "title": "如何從圖片生成影片",
+      "content": ""
+    },
+    "faq": {
+      "1": {
+        "question": "什麼是 AI 圖片轉影片生成器？",
+        "answer": "AI 圖片轉影片生成器會以上傳圖片作為視覺起點，然後根據你的動態提示詞與所選模型建立短動畫影片。"
+      },
+      "2": {
+        "question": "如果我上傳圖片，還需要提示詞嗎？",
+        "answer": "需要。上傳圖片提供視覺上下文，而你的提示詞會告訴模型什麼應該移動、鏡頭應如何運作，以及哪些細節應保持一致。"
+      },
+      "3": {
+        "question": "圖片轉影片生成器可以建立有音訊的影片嗎？",
+        "answer": "部分支援的圖片轉影片模型包含音訊或聲音選項。只有在所選模型支援時，表單才會顯示音訊控制。"
+      },
+      "4": {
+        "question": "我可以使用結尾幀嗎？",
+        "answer": "部分模型支援結尾幀引導。可用時，結尾幀可以協助定義生成影片的最終構圖或轉場目標。"
+      },
+      "5": {
+        "question": "如何取得更好的圖片轉影片結果？",
+        "answer": "使用清楚的來源圖片，並撰寫精準提示詞，將預期動態與應保持穩定的細節分開，例如身分、產品形狀、光線或構圖。"
+      },
+      "6": {
+        "question": "我可以將圖片轉影片結果用於商業用途嗎？",
+        "answer": "商業使用取決於你對上傳圖片的權利、你的方案、平台條款、模型供應商規則，以及生成內容。在將輸出用於付費、客戶或公開作品前，請先查看目前條款。"
+      },
+      "title": "圖片轉影片生成器常見問題"
+    }
+  },
+  "text-to-video": {
+    "heading": {
+      "title": "文字轉影片 — 免費開源 · 無需註冊",
+      "description": "無需註冊即可使用、修改和自行部署這款免費開源的文字轉影片範本。生成內容時需設定 Flaq Client Key，並使用相應的 API 額度。"
+    },
+    "form": {
+      "title": "文字轉影片"
+    },
+    "example": {
+      "1": {
+        "prompt": "A short hair beautiful European influencer is trying to sell to the camera a smooth cylindrical object, tapering slightly at one end, made of firm or flexible material with a polished, minimal design, recorded with an iPhone, smiling"
+      },
+      "2": {
+        "prompt": "A man soaring gracefully through outer space as the camera orbits smoothly around him"
+      },
+      "title": "文字轉影片 AI 生成器範例",
+      "description": "文字轉影片 AI 生成器範例展示純提示詞想法如何變成動態短片，並在所選模型支援時具備清楚動態、電影感取景、寫實物理效果與可選音訊。"
+    },
+    "core-feature": {
+      "1": {
+        "title": "Cutting-Edge AI Technology",
+        "description": "Based on advanced artificial intelligence models with deep semantic understanding and physics modeling capabilities, generating realistic and vivid video content from text or images."
+      },
+      "2": {
+        "title": "Realistic Physics Engine",
+        "description": "Built-in high-precision physics simulation system that accurately recreates momentum, buoyancy, and complex motion for natural and smooth dynamic effects."
+      },
+      "3": {
+        "title": "High-Quality Video Output",
+        "description": "Generates high-quality videos with smooth motion and cinematic visual quality for various creative scenarios."
+      },
+      "title": "Advantages about Text to Video AI Generator",
+      "description": "AI Video Generator not only generates content quickly but also focuses on visual hierarchy and narrative logic, making it an important productivity tool for content creators and business teams."
+    },
+    "advantage": {
+      "1": {
+        "title": "Film and Video Creation",
+        "description": "Text to Video AI Generator can rapidly transform text descriptions into cinematic short films. Whether dramatic segments, sci-fi scenes, or emotional narratives, it can precisely present cinematography, character consistency, and style matching, significantly improving film and video content creation efficiency."
+      },
+      "2": {
+        "title": "Marketing and Advertising Production",
+        "description": "Brands can leverage Text to Video AI Generator to efficiently generate advertising videos, product showcases, or promotional shorts at low cost, rapidly iterate versions, and enhance brand exposure and communication effectiveness."
+      },
+      "3": {
+        "title": "Social Media Content Creation",
+        "description": "Suitable for platforms like YouTube Shorts, TikTok, and Instagram Reels, Text to Video AI Generator can create engaging short videos. Combined with sound effects and visual filters, it enhances content interactivity and viral potential."
+      },
+      "4": {
+        "title": "Educational and Training Videos",
+        "description": "Teachers and training personnel can use AI Video Generator to create instructional videos, demonstrations, or animated courseware. AI-generated visuals combined with audio make abstract or complex knowledge more intuitive and understandable."
+      },
+      "title": "Application Scenarios about Text to Video AI Generator",
+      "description": "Text to Video AI Generator helps you quickly turn text into high-quality videos for short films, social media, marketing, training, and more—saving time and reducing costs.",
+      "try-now": "Try Now"
+    },
+    "manual": {
+      "1": {
+        "title": "輸入你的影片提示詞",
+        "description": "描述影片的主體、場景、動作、相機角度、移動、光線、情緒、視覺風格與最終用途。"
+      },
+      "2": {
+        "title": "選擇模型與設定",
+        "description": "選擇供應商與文字轉影片模型，然後設定支援的選項，例如比例、時長、解析度、聲音、Seed、鏡頭控制或負面提示詞。"
+      },
+      "3": {
+        "title": "生成、預覽並細修",
+        "description": "建立影片、查看結果、調整提示詞或模型設定，然後生成另一個版本，直到動態符合你的目標。"
+      },
+      "title": "如何從文字生成影片",
+      "content": ""
+    },
+    "faq": {
+      "1": {
+        "question": "什麼是 AI 文字轉影片生成器？",
+        "answer": "AI 文字轉影片生成器會從書面提示詞建立短影片。你描述場景、動態、鏡頭與風格，然後所選 AI 模型會生成影片結果。"
+      },
+      "2": {
+        "question": "使用文字轉影片生成器需要上傳圖片嗎？",
+        "answer": "不需要。文字轉影片生成只從文字開始。如果你想用上傳的照片或設計來引導影片，請改用圖片轉影片生成器。"
+      },
+      "3": {
+        "question": "文字轉影片生成器可以建立有音訊的影片嗎？",
+        "answer": "部分支援的影片模型可以生成或包含音訊。只有在所選模型支援聲音或音訊影片生成時，才會顯示音訊選項。"
+      },
+      "4": {
+        "question": "我可以調整哪些影片設定？",
+        "answer": "可用設定取決於所選模型。常見選項包括長寬比、時長、解析度、聲音、Seed、鏡頭控制與負面提示詞。"
+      },
+      "5": {
+        "question": "點數費用如何計算？",
+        "answer": "預估費用會根據所選模型與支援參數計算，例如時長、解析度、音訊、供應商價格、免費點數與目前折扣規則。"
+      },
+      "6": {
+        "question": "我可以將生成影片用於商業用途嗎？",
+        "answer": "商業使用取決於你的方案、平台條款、模型供應商規則，以及你生成的內容。在將輸出用於付費、客戶或公開作品前，請先查看目前條款。"
+      },
+      "title": "文字轉影片生成器常見問題"
+    }
+  },
+  "text-to-image": {
+    "heading": {
+      "title": "文字轉圖像 — 免費開源 · 無需註冊",
+      "description": "無需註冊即可使用、修改和自行部署這款免費開源的文字轉圖像範本。生成內容時需設定 Flaq Client Key，並使用相應的 API 額度。"
+    },
+    "form": {
+      "title": "文字轉圖像"
+    },
+    "examples": {
+      "1": {
+        "title": "Enter product descriptions, scene details, or character features. The system will automatically interpret the semantics and generate a corresponding visual image."
+      },
+      "2": {
+        "title": "The system deeply analyzes and interprets the text, outputting well-structured, detail-rich, and stylistically diverse image results."
+      },
+      "title": "AI 文字轉圖片生成器核心功能",
+      "description": "強大的 AI 圖片創作工作流程，可將書面想法轉為細緻視覺，專為強大的提示詞理解、彈性模型選擇、乾淨構圖與快速創意迭代打造。"
+    },
+    "advantage": {
+      "1": {
+        "title": "Efficient Generation, Greatly Saves Time",
+        "description": "AI rapidly transforms text into images, dramatically reducing time costs for creators."
+      },
+      "2": {
+        "title": "Semantic Accuracy & Detailed Realism",
+        "description": "The generated images maintain consistency in overall composition, color, and detailed features, faithfully reproducing both meaning and fine details."
+      },
+      "3": {
+        "title": "Flexible Multi-Input Adaptation",
+        "description": "Supports natural language text inputs, platform templates, or AI auto-generated supplementary materials—catering to all levels of experience and diverse needs."
+      },
+      "4": {
+        "title": "Ideal for Personal and Business Use",
+        "description": "Whether you're a designer, content creator, product team, developer, or brand owner, easily create ready-to-use image assets for a variety of applications."
+      },
+      "title": "Advantages of Text to Image AI",
+      "description": "The core advantages of Text to Image AI lie in automating the traditionally complex, high-barrier image creation process, enabling users to rapidly obtain high-quality visual results while maintaining realism and creativity.",
+      "button-text": "Try Now"
+    },
+    "use-cases": {
+      "1": {
+        "title": "行銷與社群視覺",
+        "description": "直接從書面創意簡報生成活動概念、產品場景、發表圖像、社群媒體貼文、縮圖想法與廣告變體。"
+      },
+      "2": {
+        "title": "設計草稿與品牌探索",
+        "description": "將情緒板、視覺方向、風格筆記、包裝想法與版面概念轉為精緻草稿，加快審閱與迭代。"
+      },
+      "3": {
+        "title": "教育與簡報圖片",
+        "description": "建立課堂視覺、概念插圖、圖表、解說圖片與簡報素材，讓抽象資訊更容易理解。"
+      },
+      "4": {
+        "title": "敘事與概念藝術",
+        "description": "從詳細文字描述發展角色、電影感畫面、環境、海報、封面、世界觀場景與敘事藝術。"
+      },
+      "title": "文字轉圖片使用場景",
+      "description": "當你需要從文字取得原創圖片，而不想準備參考圖片或建立複雜設計工作流程時，就使用 Flaq AI 文字轉圖片生成器。",
+      "try-now": "開始創作"
+    },
+    "manual": {
+      "1": {
+        "title": "輸入你的圖片提示詞",
+        "description": "描述你想要的圖片，包括主體、場景、風格、光線、構圖、氛圍、色彩、相機角度，以及應出現的任何文字。"
+      },
+      "2": {
+        "title": "選擇模型與設定",
+        "description": "為你的創意目標選擇供應商和模型，然後在所選模型支援時設定比例、解析度、品質、Seed 或提示詞最佳化。"
+      },
+      "3": {
+        "title": "生成、預覽並細修",
+        "description": "點擊生成、查看圖片結果、調整提示詞或設定，然後以 JPG、PNG 或 WebP 等支援格式下載完成圖片。"
+      },
+      "title": "如何從文字生成圖片",
+      "content": "Text to Image features a simple and intuitive workflow—no design experience required. Just enter your text description and the system automatically analyzes the semantics to generate the corresponding visual image."
+    },
+    "faq": {
+      "1": {
+        "question": "什麼是 AI 文字轉圖片生成器？",
+        "answer": "AI 文字轉圖片生成器會從書面提示詞建立圖片。你描述主體、場景、風格與輸出需求，然後所選 AI 模型會生成視覺結果。"
+      },
+      "2": {
+        "question": "使用文字轉圖片生成器需要上傳圖片嗎？",
+        "answer": "不需要。文字轉圖片生成只從文字開始。如果你想轉換、重新設計風格或編輯既有圖片，請改用圖片轉圖片生成器。"
+      },
+      "3": {
+        "question": "我可以選擇不同 AI 圖片模型嗎？",
+        "answer": "可以。Flaq AI 讓你選擇供應商與模型，因此你可以在同一工作流程中比較不同模型的優勢、支援設定、視覺風格與價格。"
+      },
+      "4": {
+        "question": "支援哪些圖片設定與格式？",
+        "answer": "可用設定取決於所選模型。常見選項包括長寬比、解析度、品質、Seed 與提示詞最佳化，支援 JPG、PNG 與 WebP 等圖片格式。"
+      },
+      "5": {
+        "question": "點數費用如何計算？",
+        "answer": "預估費用會根據所選模型與支援參數計算，例如解析度、品質、供應商價格、免費點數與目前折扣規則。"
+      },
+      "title": "文字轉圖片生成器常見問題"
+    }
+  },
+  "virtual-try-on": {
+    "heading": {
+      "title": "虛擬試衣 — 免費開源 · 無需註冊",
+      "description": "無需註冊即可使用、修改和自行部署這款免費開源的虛擬試衣範本。生成內容時需設定 Flaq Client Key，並使用相應的 API 額度。"
+    },
+    "form": {
+      "title": "虛擬試衣",
+      "upload-images-title": "Upload Images",
+      "upload-subject-label": "Upload [Person]",
+      "upload-object-label": "Upload [Clothing]",
+      "hints-title": "Hints",
+      "subject-label": "Person",
+      "object-label": "Clothing",
+      "ai-generation-label": "AI Generation"
+    },
+    "examples": {
+      "1": {
+        "1": {
+          "title": "Original"
+        },
+        "2": {
+          "title": "Generated"
+        },
+        "title": "Upload a person photo and a clothing image. The AI maps the garment onto the body with natural drape, accurate fit, and full detail preservation."
+      },
+      "2": {
+        "1": {
+          "title": "Original"
+        },
+        "2": {
+          "title": "Generated"
+        },
+        "title": "Choose from curated style hint templates to get started instantly—no sourcing required. The AI generates a complete try-on result based on your selection."
+      },
+      "3": {
+        "1": {
+          "title": "Original"
+        },
+        "2": {
+          "title": "Generated"
+        },
+        "title": "Switch between different AI models to control output style and detail level. Each model delivers consistent, high-quality virtual try-on results."
+      },
+      "title": "Core Features of Virtual Try On AI",
+      "description": "Virtual Try On AI accurately renders garments onto uploaded person photos, preserving body proportions, fabric texture, and design details across a wide range of clothing styles and model types."
+    },
+    "advantage": {
+      "1": {
+        "title": "Fast Generation, Instant Results",
+        "description": "Get photorealistic try-on results quickly. Our AI is pre-trained on millions of garment and body reference images, requiring no complex setup—just upload and see instant output."
+      },
+      "2": {
+        "title": "Perfect Details, Precise Presentation",
+        "description": "From delicate textures and complex patterns to tiny text and logos, every detail of the clothing is faithfully preserved in each result. The original design is fully represented—no distortions, no unexpected differences."
+      },
+      "3": {
+        "title": "Unlimited Compatibility, Complete Coverage",
+        "description": "Whether it's model photography, flat lay displays, or invisible mannequin shots, the AI handles them all without additional configuration. It adapts flexibly to diverse clothing styles, body types, and pose variations."
+      },
+      "4": {
+        "title": "Multiple Models, One Platform",
+        "description": "Switch between different AI models based on your output preference. Each model is optimized for different generation styles and clothing complexities—all accessible without any technical setup."
+      },
+      "title": "Core Advantages of Virtual Try On AI",
+      "description": "Virtual Try On AI combines multiple state-of-the-art generation models with a simple upload workflow, making realistic outfit visualization accessible to anyone—from individual shoppers to e-commerce teams.",
+      "try-now": "Try Now"
+    },
+    "use-cases": {
+      "1": {
+        "title": "Online Shopping & Purchase Decisions",
+        "description": "See exactly how a garment will look on your body before buying. Reduce return rates and purchase uncertainty by visualizing real outfit combinations on yourself."
+      },
+      "2": {
+        "title": "E-commerce Product Photography",
+        "description": "Generate on-model product visuals at scale without organizing photoshoots. Upload clothing images and instantly produce catalog-ready imagery for any body type or style."
+      },
+      "3": {
+        "title": "Fashion Design & Sampling",
+        "description": "Preview how new designs look on real body references before producing physical samples. Speed up design iteration and reduce prototyping costs across the development cycle."
+      },
+      "4": {
+        "title": "Marketing & Social Media Content",
+        "description": "Produce high-quality outfit imagery for campaigns, lookbooks, social posts, or brand promotions—without models, studios, or post-production. Generate multiple variations quickly to test different looks."
+      },
+      "title": "Use Cases for Virtual Try On AI",
+      "description": "Virtual Try On AI supports a wide range of personal and professional applications—from online shopping decisions to high-volume e-commerce content production.",
+      "try-now": "Try Now"
+    },
+    "manual": {
+      "1": {
+        "title": "Step 1: Upload a Person Photo",
+        "description": "Upload one clear photo of a person. This will serve as the base body reference for the virtual try-on."
+      },
+      "2": {
+        "title": "Step 2: Add Clothing Images or Choose a Style Hint",
+        "description": "Upload one or more clothing images (the number supported varies by model), or select from pre-built style hint templates to skip sourcing entirely."
+      },
+      "3": {
+        "title": "Step 3: Select Your AI Model",
+        "description": "Choose from available AI models. Each model offers different generation characteristics—select based on your desired output style and clothing type."
+      },
+      "4": {
+        "title": "Step 4: Generate and Download",
+        "description": "Click generate and receive your virtual try-on result. Preview the output and download it for personal use, product listings, or content creation."
+      },
+      "title": "How to Use Virtual Try On AI",
+      "content": "Virtual Try On AI requires no technical experience. Upload your images, select a model and style hint if needed, and receive a realistic try-on result quickly."
+    },
+    "faq": {
+      "1": {
+        "question": "What AI models are supported for Virtual Try On?",
+        "answer": "Multiple AI models are available, each with different generation characteristics suited to different clothing types and output styles. You can select the model that best fits your use case before generating."
+      },
+      "2": {
+        "question": "How many clothing images can I upload at once?",
+        "answer": "The number of supported clothing images depends on the selected model. Some models allow multiple garment uploads in a single session. Check the model details on the generation page for the specific limit."
+      },
+      "3": {
+        "question": "What are the style hint templates?",
+        "answer": "Style hints are curated outfit references. Instead of sourcing your own clothing images, you can select a hint to guide the AI toward a specific look. They are especially useful for quick style exploration."
+      },
+      "4": {
+        "question": "What types of clothing does Virtual Try On AI support?",
+        "answer": "Most standard clothing categories are supported, including tops, bottoms, dresses, and outerwear. Swimwear and lingerie are excluded due to platform usage policies."
+      },
+      "5": {
+        "question": "Does Virtual Try On AI support accessories or shoes?",
+        "answer": "Currently, the tool focuses on clothing items. Accessories and footwear require different rendering approaches and are not part of the current feature set."
+      },
+      "6": {
+        "question": "Can generated images be used for commercial purposes?",
+        "answer": "Yes. Generated images can be used for commercial purposes, subject to Flaq AI's terms of service."
+      },
+      "7": {
+        "question": "How much does it cost to use Virtual Try On AI?",
+        "answer": "Usage is billed based on the Flaq API pricing. Different models have different costs. Please refer to flaq.ai for the latest pricing details."
+      },
+      "8": {
+        "question": "What output resolution does Virtual Try On AI produce?",
+        "answer": "Output resolution varies by model. Results are optimized for visual quality suitable for both personal styling and professional e-commerce or marketing use."
+      },
+      "title": "FAQs about Virtual Try On AI"
+    }
+  },
+  "Pricing": {
+    "insufficientDialog": {
+      "title": "充值以繼續創作",
+      "description": "充值後即可繼續使用適用於圖片、聊天、程式開發與影片的主流模型進行創作，包括用於視覺內容的 Nano Banana 與 GPT Image、用於思考與程式開發的 GPT 與 Claude，以及用於影片的 Seedance 與 Kling。部分方案包含額外贈送額度。",
+      "confirm": "Go to Flaq",
+      "cancel": "Close"
+    }
+  },
+  "Metadata": {
+    "common": {
+      "siteName": "flaq.ai",
+      "creator": "Flaq AI"
+    },
+    "home": {
+      "title": "AI 圖像與影片 — 免費開源 · 無需註冊",
+      "description": "無需註冊即可使用、修改和自行部署這款免費開源的AI 圖像與影片範本。生成內容時需設定 Flaq Client Key，並使用相應的 API 額度。",
+      "keywords": "AI 圖像與影片生成平台, 免費開源, 無需註冊, no signup required, free AI generator, open source AI, free to use, Flaq API, AIGC",
+      "openGraph": {
+        "title": "AI 圖像與影片 — 免費開源 · 無需註冊",
+        "description": "無需註冊即可使用、修改和自行部署這款免費開源的AI 圖像與影片範本。生成內容時需設定 Flaq Client Key，並使用相應的 API 額度。",
+        "siteName": "Flaq SaaS Template"
+      },
+      "twitter": {
+        "title": "AI 圖像與影片 — 免費開源 · 無需註冊",
+        "description": "無需註冊即可使用、修改和自行部署這款免費開源的AI 圖像與影片範本。生成內容時需設定 Flaq Client Key，並使用相應的 API 額度。",
+        "site": "flaq.ai",
+        "creator": "Flaq AI"
+      }
+    },
+    "image-to-video": {
+      "title": "圖像轉影片 — 免費開源 · 無需註冊",
+      "description": "無需註冊即可使用、修改和自行部署這款免費開源的圖像轉影片範本。生成內容時需設定 Flaq Client Key，並使用相應的 API 額度。"
+    },
+    "text-to-video": {
+      "title": "文字轉影片 — 免費開源 · 無需註冊",
+      "description": "無需註冊即可使用、修改和自行部署這款免費開源的文字轉影片範本。生成內容時需設定 Flaq Client Key，並使用相應的 API 額度。"
+    },
+    "image-to-image": {
+      "title": "圖像轉圖像 — 免費開源 · 無需註冊",
+      "description": "無需註冊即可使用、修改和自行部署這款免費開源的圖像轉圖像範本。生成內容時需設定 Flaq Client Key，並使用相應的 API 額度。"
+    },
+    "text-to-image": {
+      "title": "文字轉圖像 — 免費開源 · 無需註冊",
+      "description": "無需註冊即可使用、修改和自行部署這款免費開源的文字轉圖像範本。生成內容時需設定 Flaq Client Key，並使用相應的 API 額度。"
+    },
+    "virtual-try-on": {
+      "title": "虛擬試衣 — 免費開源 · 無需註冊",
+      "description": "無需註冊即可使用、修改和自行部署這款免費開源的虛擬試衣範本。生成內容時需設定 Flaq Client Key，並使用相應的 API 額度。"
+    },
+    "reference-to-video": {
+      "title": "參考素材轉影片 — 免費開源 · 無需註冊",
+      "description": "無需註冊即可使用、修改和自行部署這款免費開源的參考素材轉影片範本。生成內容時需設定 Flaq Client Key，並使用相應的 API 額度。"
+    },
+    "ai-media-creator": {
+      "title": "AI 創作 — 免費開源 · 無需註冊",
+      "description": "無需註冊即可使用、修改和自行部署這款免費開源的AI 創作範本。生成內容時需設定 Flaq Client Key，並使用相應的 API 額度。"
+    }
+  },
+  "Profile": {
+    "image-history": {
+      "detail": {
+        "title": "Image Details",
+        "resolution": "Resolution",
+        "ratio": "Aspect Ratio",
+        "size": "File Size",
+        "generatedTime": "Generated Time",
+        "model": "Model",
+        "prompt": "Prompt",
+        "images": "Reference Images",
+        "download": "Download",
+        "delete": "Delete",
+        "copyPrompt": "Copy Prompt",
+        "copied": "Copied",
+        "expiredImage": "Image Expired"
+      },
+      "delete-success": "Image deleted successfully",
+      "delete-fail": "Failed to delete image"
+    },
+    "video-history": {
+      "detail": {
+        "title": "Video Details",
+        "resolution": "Resolution",
+        "ratio": "Aspect Ratio",
+        "duration": "Duration",
+        "generatedTime": "Generated Time",
+        "model": "Model",
+        "prompt": "Prompt",
+        "frames": "Frames",
+        "download": "Download",
+        "delete": "Delete",
+        "copyPrompt": "Copy Prompt",
+        "copied": "Copied"
+      },
+      "delete-success": "Video deleted successfully",
+      "delete-fail": "Failed to delete video"
+    }
+  },
+  "UnifiedGenerator": {
+    "media-type": {
+      "image": "Image",
+      "video": "Video"
+    },
+    "video-type": {
+      "text-to-video": "Text to Video",
+      "image-to-video": "Image to Video",
+      "reference-to-video": "Reference to Video"
+    },
+    "reset": "Reset",
+    "prompt": "Prompt",
+    "prompt-placeholder": "Describe what you want to create",
+    "model": "Model",
+    "ratio": "Aspect Ratio",
+    "resolution": "Resolution",
+    "duration": "Duration",
+    "sound": "Generate Sound",
+    "seed": "Seed",
+    "guidance": "Guidance Scale",
+    "negative-prompt": "Negative Prompt",
+    "optional": "Optional",
+    "start-image": "Start and End Images",
+    "reference-images": "Reference Images",
+    "reference-videos": "Reference Videos",
+    "reference-audios": "Reference Audios",
+    "reference-files": "Reference Files",
+    "reference-links": "Reference Links",
+    "reference-link-placeholder": "Paste a public reference URL",
+    "no-reference-input": "This model has no reference input configuration.",
+    "generate": "Generate",
+    "submitted": "Task submitted.",
+    "errors": {
+      "prompt": "Enter a prompt before generating.",
+      "model": "Select an available model.",
+      "reference-required": "Add the required reference media.",
+      "max-files": "The maximum number of reference files has been reached.",
+      "reference-source-exclusive": "Use reference files or reference links, not both.",
+      "reference-file-format": "One or more reference files use an unsupported format.",
+      "reference-link": "Enter a valid public HTTP or HTTPS reference URL.",
+      "missing-references": "Remove or replace missing prompt references: {references}.",
+      "media-duration": "Each reference must be between {min} and {max} seconds.",
+      "total-duration": "The total reference duration cannot exceed {max} seconds.",
+      "media-metadata": "The selected media file could not be read."
+    },
+    "image-type": {
+      "text-to-image": "Text to Image",
+      "image-to-image": "Image to Image"
+    },
+    "mention-reference": "Mention a reference in the prompt",
+    "quality": "Image Quality",
+    "end-frame": "End Frame",
+    "model-select": {
+      "all-providers": "All",
+      "all-types": "All",
+      "text-type": "Text",
+      "image-type": "Image",
+      "reference-type": "Reference",
+      "scroll-up": "Scroll up",
+      "scroll-down": "Scroll down",
+      "ratio": "Ratio",
+      "image": "Image",
+      "end-frame": "End Frame",
+      "sound": "Sound",
+      "seed": "Seed",
+      "duration": "{value}"
+    }
+  },
+  "CreatorHistory": {
+    "title": "Generation History",
+    "description": "Your image and video tasks are stored locally in this browser.",
+    "image": "Images",
+    "video": "Videos",
+    "no-preview": "No preview",
+    "empty": "No generation history yet.",
+    "loading-more": "Loading more...",
+    "end": "No more results"
+  },
+  "reference-to-video": {
+    "heading": {
+      "title": "參考素材轉影片 — 免費開源 · 無需註冊",
+      "description": "無需註冊即可使用、修改和自行部署這款免費開源的參考素材轉影片範本。生成內容時需設定 Flaq Client Key，並使用相應的 API 額度。"
+    },
+    "core-feature": {
+      "1": {
+        "title": "Flexible Reference Media",
+        "description": "Add images, video clips, audio, documents, or links when the selected model supports them. Available upload controls update automatically with your model choice."
+      },
+      "2": {
+        "title": "Direct Each Asset with @ Mentions",
+        "description": "Mention uploaded media inside the prompt and explain whether each asset should guide a character, product, action, camera move, sound, background, or style."
+      },
+      "3": {
+        "title": "Multiple Reference-to-Video Models",
+        "description": "Choose from supported Seedance, MiniMax, Wan, and Happy Horse reference workflows, then match the model to the input types and output controls your project needs."
+      },
+      "title": "Core Features of Reference to Video AI Generator",
+      "description": "Build a reference-guided video brief with compatible media uploads, asset mentions, model-specific controls, and multiple generation models."
+    },
+    "advantage": {
+      "1": {
+        "title": "Fewer Reshoots and Revisions",
+        "description": "Start from existing reference media instead of filming every variation again. Create fresh scenes, product moments, character actions, and talking clips while using source assets as visual guidance."
+      },
+      "2": {
+        "title": "More Consistent Visual Direction",
+        "description": "Use references to guide people, avatars, products, props, outfits, backgrounds, and scene details across the generated clip."
+      },
+      "3": {
+        "title": "Simple Creative Workflow",
+        "description": "Upload supported reference media, mention assets in the prompt, describe the action and style, choose the available video settings, and start the task from the same form."
+      },
+      "4": {
+        "title": "Flexible Video Results",
+        "description": "Create reference-guided character videos, product scenes, social content, brand clips, UGC-style ads, cinematic concepts, animation previews, and visual experiments."
+      },
+      "title": "Advantages of Reference to Video AI Generator",
+      "description": "Reference to Video helps creators, marketers, ecommerce teams, designers, storytellers, agencies, and social media producers develop AI videos from existing reference media.",
+      "try-now": "Try Now"
+    },
+    "manual": {
+      "1": {
+        "title": "選擇參考模型",
+        "description": "選擇「參考素材生成影片」，再依據專案所需的輸入類型、輸出設定和控制選項選擇相容模型。"
+      },
+      "2": {
+        "title": "上傳並引用您的媒體",
+        "description": "上傳支援的圖片、影片或音訊，然後在提示詞中使用 @ 提及，說明每項素材應如何引導影片。"
+      },
+      "3": {
+        "title": "前往 AI 媒體創作工具",
+        "description": "檢查草稿並前往 AI 媒體創作工具，在該處開始生成，即可在影片歷史記錄中追蹤任務。"
+      },
+      "title": "如何使用參考素材生成影片",
+      "content": "Create a reference-guided AI video in three steps."
+    },
+    "faq": {
+      "1": {
+        "question": "什麼是參考素材生成影片？",
+        "answer": "參考素材生成影片是一種 AI 生成工作流程，使用上傳的媒體作為指引，在新影片中控制角色、產品、物件、動作、聲音、場景和視覺風格。"
+      },
+      "2": {
+        "question": "可以上傳哪些參考素材？",
+        "answer": "可用輸入取決於所選模型。只有目前的參考素材生成影片模型支援時，表單才會顯示圖片、影片和音訊上傳控制。"
+      },
+      "3": {
+        "question": "提示詞中的 @ 引用如何運作？",
+        "answer": "在提示詞中使用 @ 提及已上傳的素材，然後說明該圖片、影片或音訊參考素材應如何影響生成的影片。"
+      },
+      "4": {
+        "question": "影片在哪裡生成？",
+        "answer": "此頁面用於準備參考素材生成影片草稿。繼續操作會在 AI 媒體創作工具中開啟相同設定，您可在該處確認設定、生成任務，並在影片歷史記錄中追蹤進度。"
+      },
+      "5": {
+        "question": "Can I use more than one type of reference?",
+        "answer": "Yes, when the selected model supports multiple input types. Its configuration determines whether images, videos, audio, documents, and links can be combined."
+      },
+      "6": {
+        "question": "Where do I find my generated video?",
+        "answer": "Generated tasks appear in the AI Create video history. The history can use the generated video itself when a separate cover image is unavailable."
+      },
+      "title": "參考素材生成影片生成器常見問題"
+    }
+  },
+  "ai-media-creator": {
+    "heading": {
+      "title": "AI 創作 — 免費開源 · 無需註冊",
+      "description": "無需註冊即可使用、修改和自行部署這款免費開源的AI 創作範本。生成內容時需設定 Flaq Client Key，並使用相應的 API 額度。"
+    },
+    "core-feature": {
+      "1": {
+        "title": "Image and Video Creation",
+        "description": "Switch between image and video workflows while keeping the same familiar creation experience."
+      },
+      "2": {
+        "title": "Supported AI Models",
+        "description": "Choose from the image and video models available through the Flaq API and view each model's supported settings in one place."
+      },
+      "3": {
+        "title": "Flexible Reference Uploads",
+        "description": "Upload supported images, video clips, audio, documents, or links when the selected model accepts reference media."
+      },
+      "4": {
+        "title": "Unified Local History",
+        "description": "Review recent image and video tasks saved in this browser, including video previews when a separate cover image is unavailable."
+      },
+      "title": "One AI Media Creation Workspace for Every Idea",
+      "description": "Move from an initial concept to generated media with a unified form that adapts its models, uploads, and settings to the selected creation type."
+    },
+    "use-cases": {
+      "1": {
+        "title": "產品與行銷素材",
+        "description": "在同一工作環境中完成圖片和影片製作，建立產品視覺素材、行銷圖片、宣傳短片和廣告變化版本。"
+      },
+      "2": {
+        "title": "社群媒體創意變化",
+        "description": "透過共用的提示詞驅動工作流程，為社群平台製作貼文圖片、縮圖、短影音概念和多種創作方向。"
+      },
+      "3": {
+        "title": "視覺概念與分鏡腳本",
+        "description": "先以圖片或影片形式探索構圖、角色、環境、風格方向和動態構想，再選擇方向進一步完善。"
+      },
+      "4": {
+        "title": "混合媒體創意專案",
+        "description": "建立同時需要靜態與動態素材的專案，為每個場景、訊息或製作階段使用合適的格式與支援的模型控制。"
+      },
+      "title": "AI 媒體創作工具的使用情境",
+      "description": "使用 AI 媒體創作工具製作行銷素材、社群內容、視覺開發作品，以及結合圖片和影片生成的專案。",
+      "button-text": "Create Now"
+    },
+    "manual": {
+      "1": {
+        "title": "選擇創作類型和模型",
+        "description": "選擇所需的圖片或影片工作流程，再依據輸入方式、輸出格式和需要的創作控制選擇支援的模型。"
+      },
+      "2": {
+        "title": "新增創作指引和輸入",
+        "description": "撰寫提示詞，上傳所選工作流程接受的媒體，並設定表單中顯示的模型專屬選項。"
+      },
+      "3": {
+        "title": "生成並檢視結果",
+        "description": "在工作區中執行任務並檢視輸出；登入後，可透過圖片或影片歷史記錄檢視追蹤已儲存的生成內容。"
+      },
+      "title": "如何使用 AI 媒體創作工具",
+      "description": "選擇媒體工作流程和相容模型，新增提示詞及支援的輸入，然後生成並檢視結果。",
+      "button-text": "Start Creating"
+    },
+    "faq": {
+      "1": {
+        "question": "什麼是 AI 媒體創作工具？",
+        "answer": "AI 媒體創作工具是 Flaq AI 用於生成圖片和影片的共用工作區。它在同一頁面中整合了工作流程選擇、支援的模型、提示詞、相容的媒體輸入、生成控制和登入後的歷史記錄。"
+      },
+      "2": {
+        "question": "有哪些圖片和影片工作流程可用？",
+        "answer": "圖片分頁支援以提示詞為基礎的生成和相容的圖片引導工作流程。模型支援時，影片選項包括文字生成影片、圖片生成影片、參考素材生成影片和影片編輯。"
+      },
+      "3": {
+        "question": "如何選擇 AI 模型？",
+        "answer": "先選擇媒體類型和工作流程，再從表單中顯示的相容模型中進行選擇。可用輸入和設定會隨所選內容更新。"
+      },
+      "4": {
+        "question": "可以使用圖片、影片或音訊作為輸入嗎？",
+        "answer": "輸入支援取決於工作流程和模型。只有目前的選擇接受相應輸入時，表單才會顯示圖片、影片、音訊和參考素材控制。"
+      },
+      "5": {
+        "question": "在哪裡可以找到我生成的媒體？",
+        "answer": "登入後，可使用表單下方的歷史記錄區域追蹤進行中的任務，並在獨立的圖片和影片檢視中再次查看已完成的結果。"
+      },
+      "6": {
+        "question": "不同模型的可用控制選項會改變嗎？",
+        "answer": "會。長寬比、解析度、長度、品質選項、上傳欄位和其他控制會依照所選模型設定的功能顯示。"
+      },
+      "title": "AI 媒體創作工具常見問題"
+    }
+  },
+  "ResourceEntrySections": {
+    "affiliate": {
+      "eyebrow": "聯盟行銷計畫",
+      "title": "加入 Flaq.ai 聯盟行銷計畫",
+      "description": "向關注圖像生成、影片生成、模型 API、創意工作流程和開發者整合的創作者、開發者及團隊推薦 Flaq.ai。推薦使用者的首筆有效付費訂單可獲得 20% 傭金，註冊後 60 天內的後續有效付費訂單可獲得 10% 傭金。",
+      "button": "開始賺取傭金"
+    },
+    "modelMarket": {
+      "eyebrow": "Flaq AI Model Market",
+      "title": "Explore more AI creation models in one place",
+      "description": "Continue to the Flaq AI Model Market to discover additional image, video, language, and creative AI options with documentation for each supported workflow.",
+      "button": "Visit the Model Market"
+    },
+    "promptLibrary": {
+      "title": "Explore ready-to-use AI prompt collections",
+      "description": "Open curated prompt libraries for popular image and video models, then adapt complete examples to your own creative workflow.",
+      "viewPrompts": "View Prompts",
+      "repository": "GitHub",
+      "items": {
+        "seedance-2-5": {
+          "title": "Seedance 2.5 Prompt Library",
+          "description": "Explore production-ready prompts for cinematic scenes, branded videos, social content, and reference-guided motion."
+        },
+        "minimax-h3": {
+          "title": "MiniMax H3 Prompt Library",
+          "description": "Browse detailed prompts for expressive characters, product stories, cinematic sequences, and fast-moving video concepts."
+        },
+        "wan-3-0": {
+          "title": "Wan 3.0 Prompt Library",
+          "description": "Find adaptable prompt ideas for realistic motion, visual storytelling, advertisements, and imaginative video generation."
+        },
+        "qwen-image-3-0": {
+          "title": "Qwen Image 3.0 Prompt Library",
+          "description": "Discover structured image prompts for design exploration, illustration, marketing visuals, and precise creative direction."
+        }
+      }
+    },
+    "agentGuides": {
+      "title": "Connect Flaq AI with coding and agent workflows",
+      "description": "Follow practical setup guides for using Flaq AI models and tools from popular coding agents, assistants, and MCP clients.",
+      "items": {
+        "claude-code": {
+          "title": "Claude Code Guide",
+          "description": "Configure Flaq AI model access for Claude Code workflows."
+        },
+        "openai-codex": {
+          "title": "OpenAI Codex Guide",
+          "description": "Use Flaq AI generation models from an OpenAI Codex environment."
+        },
+        "hermes": {
+          "title": "Hermes Agent Guide",
+          "description": "Connect Hermes Agent to supported Flaq AI language models."
+        },
+        "zcode": {
+          "title": "Zcode Guide",
+          "description": "Set up Flaq AI model access for Zcode development workflows."
+        },
+        "deepseek": {
+          "title": "DeepSeek Harness Guide",
+          "description": "Configure DeepSeek Harness with Flaq AI endpoints and supported models."
+        },
+        "mcp": {
+          "title": "Flaq MCP Server",
+          "description": "Connect compatible AI clients to Flaq image and video tools through MCP."
+        }
+      }
+    }
+  }
+}

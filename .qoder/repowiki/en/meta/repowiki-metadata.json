@@ -1,0 +1,2387 @@
+{
+  "code_snippets": [
+    {
+      "id": "db5ae2fcaa9507f3ad4785ee1b8c71c0",
+      "path": "README.md",
+      "line_range": "34-48",
+      "gmt_create": "2026-04-26T21:36:27.916368+08:00",
+      "gmt_modified": "2026-04-26T21:36:27.916369+08:00"
+    },
+    {
+      "id": "95b7223ccbcb9f213796c3863bbab2c0",
+      "path": "README.md",
+      "line_range": "49-67",
+      "gmt_create": "2026-04-26T21:36:27.924418+08:00",
+      "gmt_modified": "2026-04-26T21:36:27.924419+08:00"
+    },
+    {
+      "id": "e0b92b10bacfa3fc465ffb92851ba67d",
+      "path": "README.md",
+      "line_range": "70-76",
+      "gmt_create": "2026-04-26T21:36:27.92603+08:00",
+      "gmt_modified": "2026-04-26T21:36:27.92603+08:00"
+    },
+    {
+      "id": "faa900fefcf796d0d6253ff376ae4413",
+      "path": "package.json",
+      "line_range": "122",
+      "gmt_create": "2026-04-26T21:36:27.931353+08:00",
+      "gmt_modified": "2026-04-26T21:36:27.931353+08:00"
+    },
+    {
+      "id": "998fadd2338efbccf40992276e5730de",
+      "path": "README.md",
+      "line_range": "77-92",
+      "gmt_create": "2026-04-26T21:36:27.93171+08:00",
+      "gmt_modified": "2026-04-26T21:36:27.93171+08:00"
+    },
+    {
+      "id": "929a331eeef8e964e6dc2742dd066149",
+      "path": "README.md",
+      "line_range": "94-114",
+      "gmt_create": "2026-04-26T21:36:27.932818+08:00",
+      "gmt_modified": "2026-04-26T21:36:27.932818+08:00"
+    },
+    {
+      "id": "1987a1aad8bd3459f2e371efbcb48180",
+      "path": "README.md",
+      "line_range": "115-133",
+      "gmt_create": "2026-04-26T21:36:27.93299+08:00",
+      "gmt_modified": "2026-04-26T21:36:27.93299+08:00"
+    },
+    {
+      "id": "31a266906817491ed52ba96550b52b61",
+      "path": "README.md",
+      "line_range": "134-149",
+      "gmt_create": "2026-04-26T21:36:27.947619+08:00",
+      "gmt_modified": "2026-04-26T21:36:27.947619+08:00"
+    },
+    {
+      "id": "f793c14528725fc9fe1443fb7ab655e5",
+      "path": "next-env.d.ts",
+      "line_range": "1-7",
+      "gmt_create": "2026-04-26T21:36:27.948044+08:00",
+      "gmt_modified": "2026-04-26T21:36:27.948044+08:00"
+    },
+    {
+      "id": "8d255fc3d0d9767ee38514e05e9c9f7c",
+      "path": "postcss.config.js",
+      "line_range": "1-6",
+      "gmt_create": "2026-04-26T21:36:27.9514+08:00",
+      "gmt_modified": "2026-04-26T21:36:27.9514+08:00"
+    },
+    {
+      "id": "b438415da6423cc4d71a2e3d94d9781c",
+      "path": "app/robots.ts",
+      "line_range": "1-35",
+      "gmt_create": "2026-04-26T21:36:27.952168+08:00",
+      "gmt_modified": "2026-04-26T21:36:27.952168+08:00"
+    },
+    {
+      "id": "cfa95eb275aa10acde912b100b498a77",
+      "path": "app/sitemap.ts",
+      "line_range": "1-35",
+      "gmt_create": "2026-04-26T21:36:27.952587+08:00",
+      "gmt_modified": "2026-04-26T21:36:27.952587+08:00"
+    },
+    {
+      "id": "efcd93ffe41098eff9d1c90d4f9180bb",
+      "path": "README.md",
+      "line_range": "152-162",
+      "gmt_create": "2026-04-26T21:36:27.9529+08:00",
+      "gmt_modified": "2026-04-26T21:36:27.9529+08:00"
+    },
+    {
+      "id": "9257ab69ce79557e06dd4f83f5508034",
+      "path": "package.json",
+      "line_range": "5-15",
+      "gmt_create": "2026-04-26T21:36:27.954422+08:00",
+      "gmt_modified": "2026-04-26T21:36:27.954423+08:00"
+    },
+    {
+      "id": "f3477bdb58a9955c19f7ce91ecaac6c6",
+      "path": "README.md",
+      "line_range": "227-266",
+      "gmt_create": "2026-04-26T21:36:27.97876+08:00",
+      "gmt_modified": "2026-04-26T21:36:27.97876+08:00"
+    },
+    {
+      "id": "28c004433b42e9fce1cdc2aab87478c0",
+      "path": "README.md",
+      "line_range": "193-211",
+      "gmt_create": "2026-04-26T21:36:27.978952+08:00",
+      "gmt_modified": "2026-04-26T21:36:27.978952+08:00"
+    },
+    {
+      "id": "fab4c21cfd553fc00352ab7a21f9ff7b",
+      "path": "components/home/new-section/HeroSection.tsx",
+      "line_range": "1-51",
+      "gmt_create": "2026-04-26T21:36:27.97908+08:00",
+      "gmt_modified": "2026-04-26T21:36:27.97908+08:00"
+    },
+    {
+      "id": "56fd8ba4539ca6ec191fd98ad8bf04d5",
+      "path": "README.md",
+      "line_range": "195-204",
+      "gmt_create": "2026-04-26T21:36:27.97919+08:00",
+      "gmt_modified": "2026-04-26T21:36:27.97919+08:00"
+    },
+    {
+      "id": "577acbdf94a7bd4fad647bc988edc069",
+      "path": "README.md",
+      "line_range": "268-279",
+      "gmt_create": "2026-04-26T21:36:27.979302+08:00",
+      "gmt_modified": "2026-04-26T21:36:27.979302+08:00"
+    },
+    {
+      "id": "e1eaef75b5d4d6c5ada2050c32267b2f",
+      "path": "next.config.mjs",
+      "line_range": "25-55",
+      "gmt_create": "2026-04-26T21:36:27.979401+08:00",
+      "gmt_modified": "2026-04-26T21:36:27.979401+08:00"
+    },
+    {
+      "id": "c2b8bbc1fb9896ee823f4e86e2ac42e7",
+      "path": "README.md",
+      "line_range": "113-114",
+      "gmt_create": "2026-04-26T21:36:27.979568+08:00",
+      "gmt_modified": "2026-04-26T21:36:27.979568+08:00"
+    },
+    {
+      "id": "bb2a65eba0e3eb1902b6bf78d1e1dde7",
+      "path": "README.md",
+      "line_range": "281-284",
+      "gmt_create": "2026-04-26T21:36:27.979646+08:00",
+      "gmt_modified": "2026-04-26T21:36:27.979646+08:00"
+    },
+    {
+      "id": "6a200925afe45c556594e18f07d85d03",
+      "path": "components/AgSwitch.tsx",
+      "line_range": "1-36",
+      "gmt_create": "2026-04-26T21:47:33.425853+08:00",
+      "gmt_modified": "2026-04-26T21:47:33.425853+08:00"
+    },
+    {
+      "id": "cf6ecfbb6e203f3a12d07fd37acfcfa5",
+      "path": "components/Box.tsx",
+      "line_range": "1-22",
+      "gmt_create": "2026-04-26T21:47:33.426206+08:00",
+      "gmt_modified": "2026-04-26T21:47:33.426206+08:00"
+    },
+    {
+      "id": "7a85367694ebe1d8592f48317109e8af",
+      "path": "components/CopyBtn.tsx",
+      "line_range": "1-31",
+      "gmt_create": "2026-04-26T21:47:33.426309+08:00",
+      "gmt_modified": "2026-04-26T21:47:33.426309+08:00"
+    },
+    {
+      "id": "3d79b94b9eaea9cf25f58ef6825f34f1",
+      "path": "components/Faq.tsx",
+      "line_range": "1-35",
+      "gmt_create": "2026-04-26T21:47:33.426406+08:00",
+      "gmt_modified": "2026-04-26T21:47:33.426406+08:00"
+    },
+    {
+      "id": "2fee6e9ad0c61fc1375730e3372bbef0",
+      "path": "components/Loading.tsx",
+      "line_range": "1-17",
+      "gmt_create": "2026-04-26T21:47:33.426493+08:00",
+      "gmt_modified": "2026-04-26T21:47:33.426493+08:00"
+    },
+    {
+      "id": "7a8e9c97a55af9837ee16446462b9dd7",
+      "path": "components/Spinning.tsx",
+      "line_range": "1-26",
+      "gmt_create": "2026-04-26T21:47:33.42658+08:00",
+      "gmt_modified": "2026-04-26T21:47:33.42658+08:00"
+    },
+    {
+      "id": "faf72df9504a744f1f86a7518562c9c4",
+      "path": "components/home/Footer.tsx",
+      "line_range": "1-164",
+      "gmt_create": "2026-04-26T21:47:33.426819+08:00",
+      "gmt_modified": "2026-04-26T21:47:33.426819+08:00"
+    },
+    {
+      "id": "ea596aa7416fb1c89820d6b2f7fac205",
+      "path": "components/home/BusinessButton.tsx",
+      "line_range": "1-23",
+      "gmt_create": "2026-04-26T21:47:33.426917+08:00",
+      "gmt_modified": "2026-04-26T21:47:33.426917+08:00"
+    },
+    {
+      "id": "c65483a7779ada2aaa268d9e9831fd07",
+      "path": "components/svg/footer/Github.tsx",
+      "line_range": "1-21",
+      "gmt_create": "2026-04-26T21:47:33.427126+08:00",
+      "gmt_modified": "2026-04-26T21:47:33.427126+08:00"
+    },
+    {
+      "id": "99b515348562dfeab13eb8e1704e829d",
+      "path": "components/svg/footer/Twitter.tsx",
+      "line_range": "1-14",
+      "gmt_create": "2026-04-26T21:47:33.427258+08:00",
+      "gmt_modified": "2026-04-26T21:47:33.427258+08:00"
+    },
+    {
+      "id": "945d71252d066256c382785e4a072467",
+      "path": "lib/constants/navigation.ts",
+      "line_range": "1-52",
+      "gmt_create": "2026-04-26T21:47:33.427513+08:00",
+      "gmt_modified": "2026-04-26T21:47:33.427513+08:00"
+    },
+    {
+      "id": "6e172888b9c83c110fe70fc28fdec727",
+      "path": "components/AgSwitch.tsx",
+      "line_range": "10-31",
+      "gmt_create": "2026-04-26T21:47:33.432787+08:00",
+      "gmt_modified": "2026-04-26T21:47:33.432787+08:00"
+    },
+    {
+      "id": "b2398bd2478b2c3f9d0c8a92f4033ee4",
+      "path": "components/Box.tsx",
+      "line_range": "11-21",
+      "gmt_create": "2026-04-26T21:47:33.433186+08:00",
+      "gmt_modified": "2026-04-26T21:47:33.433186+08:00"
+    },
+    {
+      "id": "2c59a6c5f41ee4f9e234b1195c1c7af9",
+      "path": "components/CopyBtn.tsx",
+      "line_range": "8-30",
+      "gmt_create": "2026-04-26T21:47:33.433411+08:00",
+      "gmt_modified": "2026-04-26T21:47:33.433411+08:00"
+    },
+    {
+      "id": "eb421bb754d38da69c24f0fa33f6b90f",
+      "path": "components/Faq.tsx",
+      "line_range": "5-34",
+      "gmt_create": "2026-04-26T21:47:33.433751+08:00",
+      "gmt_modified": "2026-04-26T21:47:33.433751+08:00"
+    },
+    {
+      "id": "99c10f583103a252ca3f584a64e8d6d6",
+      "path": "components/Loading.tsx",
+      "line_range": "7-16",
+      "gmt_create": "2026-04-26T21:47:33.433919+08:00",
+      "gmt_modified": "2026-04-26T21:47:33.433919+08:00"
+    },
+    {
+      "id": "d6c5e08626950d83385ee7d2771d4c55",
+      "path": "components/Spinning.tsx",
+      "line_range": "3-25",
+      "gmt_create": "2026-04-26T21:47:33.434149+08:00",
+      "gmt_modified": "2026-04-26T21:47:33.434149+08:00"
+    },
+    {
+      "id": "948f9bb7e26b5f726ae078e008baa859",
+      "path": "components/home/Footer.tsx",
+      "line_range": "54-164",
+      "gmt_create": "2026-04-26T21:47:33.434655+08:00",
+      "gmt_modified": "2026-04-26T21:47:33.434655+08:00"
+    },
+    {
+      "id": "73eb0b846b15919568b325e846d420ad",
+      "path": "components/home/BusinessButton.tsx",
+      "line_range": "10-22",
+      "gmt_create": "2026-04-26T21:47:33.435069+08:00",
+      "gmt_modified": "2026-04-26T21:47:33.435069+08:00"
+    },
+    {
+      "id": "70766a0c219df404a323c8b81f7e6dd9",
+      "path": "components/svg/footer/Github.tsx",
+      "line_range": "2-20",
+      "gmt_create": "2026-04-26T21:47:33.435273+08:00",
+      "gmt_modified": "2026-04-26T21:47:33.435274+08:00"
+    },
+    {
+      "id": "ef93c319501512964a38c99dd9d60fad",
+      "path": "components/svg/footer/Twitter.tsx",
+      "line_range": "2-13",
+      "gmt_create": "2026-04-26T21:47:33.435616+08:00",
+      "gmt_modified": "2026-04-26T21:47:33.435616+08:00"
+    },
+    {
+      "id": "8e82dd2dffee6331957efa7ee13cd4cb",
+      "path": "components/Faq.tsx",
+      "line_range": "3-3",
+      "gmt_create": "2026-04-26T21:47:33.435832+08:00",
+      "gmt_modified": "2026-04-26T21:47:33.435832+08:00"
+    },
+    {
+      "id": "3556601390ebb4f32e32c351833c876c",
+      "path": "components/Loading.tsx",
+      "line_range": "4-4",
+      "gmt_create": "2026-04-26T21:47:33.436083+08:00",
+      "gmt_modified": "2026-04-26T21:47:33.436083+08:00"
+    },
+    {
+      "id": "445465ca53d3c2362a9584085bf98c54",
+      "path": "components/CopyBtn.tsx",
+      "line_range": "6-6",
+      "gmt_create": "2026-04-26T21:47:33.436167+08:00",
+      "gmt_modified": "2026-04-26T21:47:33.436167+08:00"
+    },
+    {
+      "id": "181e03a0b9309c1c9b284c56e0efb5c3",
+      "path": "components/home/Footer.tsx",
+      "line_range": "7-8",
+      "gmt_create": "2026-04-26T21:47:33.43636+08:00",
+      "gmt_modified": "2026-04-26T21:47:33.43636+08:00"
+    },
+    {
+      "id": "e5b3ed4cf35994ada3cc4f4bd0c796f3",
+      "path": "components/home/BusinessButton.tsx",
+      "line_range": "3",
+      "gmt_create": "2026-04-26T21:47:33.436434+08:00",
+      "gmt_modified": "2026-04-26T21:47:33.436434+08:00"
+    },
+    {
+      "id": "096d8563d77d81209c2795af4e13c177",
+      "path": "components/svg/footer/Github.tsx",
+      "line_range": "1",
+      "gmt_create": "2026-04-26T21:47:33.436632+08:00",
+      "gmt_modified": "2026-04-26T21:47:33.436632+08:00"
+    },
+    {
+      "id": "8b1fd8f4d4ec8a0977ca5391e81af636",
+      "path": "components/svg/footer/Twitter.tsx",
+      "line_range": "1",
+      "gmt_create": "2026-04-26T21:47:33.436713+08:00",
+      "gmt_modified": "2026-04-26T21:47:33.436713+08:00"
+    }
+  ],
+  "knowledge_relations": [
+    {
+      "id": 1,
+      "source_id": "9fa2bfad-333e-49bd-8e88-f6eadaf375e7",
+      "target_id": "f17d45c9-2c2e-43ce-aa9c-eb273d90585e",
+      "source_type": "WIKI_ITEM",
+      "target_type": "WIKI_ITEM",
+      "relationship_type": "PARENT_CHILD",
+      "extra": "Wiki parent-child relationship: 9fa2bfad-333e-49bd-8e88-f6eadaf375e7 -\u003e f17d45c9-2c2e-43ce-aa9c-eb273d90585e",
+      "gmt_create": "2026-04-26T16:05:45.570339+08:00",
+      "gmt_modified": "2026-04-26T16:05:45.570339+08:00"
+    },
+    {
+      "id": 2,
+      "source_id": "9fa2bfad-333e-49bd-8e88-f6eadaf375e7",
+      "target_id": "7a659045-10dc-497a-9b48-9353bd79ac86",
+      "source_type": "WIKI_ITEM",
+      "target_type": "WIKI_ITEM",
+      "relationship_type": "PARENT_CHILD",
+      "extra": "Wiki parent-child relationship: 9fa2bfad-333e-49bd-8e88-f6eadaf375e7 -\u003e 7a659045-10dc-497a-9b48-9353bd79ac86",
+      "gmt_create": "2026-04-26T16:05:45.570554+08:00",
+      "gmt_modified": "2026-04-26T16:05:45.570554+08:00"
+    },
+    {
+      "id": 3,
+      "source_id": "9fa2bfad-333e-49bd-8e88-f6eadaf375e7",
+      "target_id": "a63f0023-bd9b-42fc-a160-e4f6fedb2b8e",
+      "source_type": "WIKI_ITEM",
+      "target_type": "WIKI_ITEM",
+      "relationship_type": "PARENT_CHILD",
+      "extra": "Wiki parent-child relationship: 9fa2bfad-333e-49bd-8e88-f6eadaf375e7 -\u003e a63f0023-bd9b-42fc-a160-e4f6fedb2b8e",
+      "gmt_create": "2026-04-26T16:05:45.570712+08:00",
+      "gmt_modified": "2026-04-26T16:05:45.570712+08:00"
+    },
+    {
+      "id": 4,
+      "source_id": "9fa2bfad-333e-49bd-8e88-f6eadaf375e7",
+      "target_id": "04d31cc8-e018-4143-a068-0c515cd8f23d",
+      "source_type": "WIKI_ITEM",
+      "target_type": "WIKI_ITEM",
+      "relationship_type": "PARENT_CHILD",
+      "extra": "Wiki parent-child relationship: 9fa2bfad-333e-49bd-8e88-f6eadaf375e7 -\u003e 04d31cc8-e018-4143-a068-0c515cd8f23d",
+      "gmt_create": "2026-04-26T16:05:45.570897+08:00",
+      "gmt_modified": "2026-04-26T16:05:45.570897+08:00"
+    },
+    {
+      "id": 5,
+      "source_id": "443f22a1-1408-4221-a62e-851b73c7023e",
+      "target_id": "a166eb11c9477f569f9aba9fedcdff31",
+      "source_type": "WIKI_ITEM",
+      "target_type": "SOURCE_FILE",
+      "relationship_type": "REFERENCED_BY",
+      "extra": "Wiki references source file: README.md",
+      "gmt_create": "2026-04-26T21:36:27.979785+08:00",
+      "gmt_modified": "2026-04-26T21:36:27.979785+08:00"
+    },
+    {
+      "id": 6,
+      "source_id": "443f22a1-1408-4221-a62e-851b73c7023e",
+      "target_id": "dbb0b04fd16a5f60d4f8be87bc085aa5",
+      "source_type": "WIKI_ITEM",
+      "target_type": "SOURCE_FILE",
+      "relationship_type": "REFERENCED_BY",
+      "extra": "Wiki references source file: package.json",
+      "gmt_create": "2026-04-26T21:36:27.980044+08:00",
+      "gmt_modified": "2026-04-26T21:36:27.980044+08:00"
+    },
+    {
+      "id": 7,
+      "source_id": "443f22a1-1408-4221-a62e-851b73c7023e",
+      "target_id": "4dd427e7f6a05e73f9fd5b1d805dcb13",
+      "source_type": "WIKI_ITEM",
+      "target_type": "SOURCE_FILE",
+      "relationship_type": "REFERENCED_BY",
+      "extra": "Wiki references source file: next.config.mjs",
+      "gmt_create": "2026-04-26T21:36:27.98031+08:00",
+      "gmt_modified": "2026-04-26T21:36:27.98031+08:00"
+    },
+    {
+      "id": 8,
+      "source_id": "443f22a1-1408-4221-a62e-851b73c7023e",
+      "target_id": "eb5e2c5d8def8fcdbdd811c8a55e08aa",
+      "source_type": "WIKI_ITEM",
+      "target_type": "SOURCE_FILE",
+      "relationship_type": "REFERENCED_BY",
+      "extra": "Wiki references source file: next-env.d.ts",
+      "gmt_create": "2026-04-26T21:36:27.980538+08:00",
+      "gmt_modified": "2026-04-26T21:36:27.980538+08:00"
+    },
+    {
+      "id": 9,
+      "source_id": "443f22a1-1408-4221-a62e-851b73c7023e",
+      "target_id": "496e94529fbbf56ec7d546408c4b3566",
+      "source_type": "WIKI_ITEM",
+      "target_type": "SOURCE_FILE",
+      "relationship_type": "REFERENCED_BY",
+      "extra": "Wiki references source file: postcss.config.js",
+      "gmt_create": "2026-04-26T21:36:27.980826+08:00",
+      "gmt_modified": "2026-04-26T21:36:27.980826+08:00"
+    },
+    {
+      "id": 10,
+      "source_id": "443f22a1-1408-4221-a62e-851b73c7023e",
+      "target_id": "f1b03347db802b4284dd8d2ca7b39c7f",
+      "source_type": "WIKI_ITEM",
+      "target_type": "SOURCE_FILE",
+      "relationship_type": "REFERENCED_BY",
+      "extra": "Wiki references source file: app/robots.ts",
+      "gmt_create": "2026-04-26T21:36:27.980996+08:00",
+      "gmt_modified": "2026-04-26T21:36:27.980996+08:00"
+    },
+    {
+      "id": 11,
+      "source_id": "443f22a1-1408-4221-a62e-851b73c7023e",
+      "target_id": "8e0d9a32c8febda1497e4412ed4fb503",
+      "source_type": "WIKI_ITEM",
+      "target_type": "SOURCE_FILE",
+      "relationship_type": "REFERENCED_BY",
+      "extra": "Wiki references source file: app/sitemap.ts",
+      "gmt_create": "2026-04-26T21:36:27.981245+08:00",
+      "gmt_modified": "2026-04-26T21:36:27.981245+08:00"
+    },
+    {
+      "id": 12,
+      "source_id": "443f22a1-1408-4221-a62e-851b73c7023e",
+      "target_id": "9e5d54cbf1d5d9304b24bbb6666900f1",
+      "source_type": "WIKI_ITEM",
+      "target_type": "SOURCE_FILE",
+      "relationship_type": "REFERENCED_BY",
+      "extra": "Wiki references source file: lib/env.ts",
+      "gmt_create": "2026-04-26T21:36:27.981397+08:00",
+      "gmt_modified": "2026-04-26T21:36:27.981397+08:00"
+    },
+    {
+      "id": 13,
+      "source_id": "443f22a1-1408-4221-a62e-851b73c7023e",
+      "target_id": "640657b684b2a6d4b16f6793a9cbc07c",
+      "source_type": "WIKI_ITEM",
+      "target_type": "SOURCE_FILE",
+      "relationship_type": "REFERENCED_BY",
+      "extra": "Wiki references source file: lib/constants/index.ts",
+      "gmt_create": "2026-04-26T21:36:27.981642+08:00",
+      "gmt_modified": "2026-04-26T21:36:27.981642+08:00"
+    },
+    {
+      "id": 14,
+      "source_id": "443f22a1-1408-4221-a62e-851b73c7023e",
+      "target_id": "e40584f67c2665c43da6d65a8d64e86f",
+      "source_type": "WIKI_ITEM",
+      "target_type": "SOURCE_FILE",
+      "relationship_type": "REFERENCED_BY",
+      "extra": "Wiki references source file: components/home/new-section/HeroSection.tsx",
+      "gmt_create": "2026-04-26T21:36:27.981722+08:00",
+      "gmt_modified": "2026-04-26T21:36:27.981722+08:00"
+    },
+    {
+      "id": 15,
+      "source_id": "443f22a1-1408-4221-a62e-851b73c7023e",
+      "target_id": "db5ae2fcaa9507f3ad4785ee1b8c71c0",
+      "source_type": "WIKI_ITEM",
+      "target_type": "CODE_SNIPPET",
+      "relationship_type": "CONTAINS",
+      "extra": "Wiki contains code snippet: README.md#34-48",
+      "gmt_create": "2026-04-26T21:36:27.982006+08:00",
+      "gmt_modified": "2026-04-26T21:36:27.982006+08:00"
+    },
+    {
+      "id": 16,
+      "source_id": "a166eb11c9477f569f9aba9fedcdff31",
+      "target_id": "db5ae2fcaa9507f3ad4785ee1b8c71c0",
+      "source_type": "SOURCE_FILE",
+      "target_type": "CODE_SNIPPET",
+      "relationship_type": "CONTAINS",
+      "extra": "Source file contains code snippet: 34-48",
+      "gmt_create": "2026-04-26T21:36:27.982237+08:00",
+      "gmt_modified": "2026-04-26T21:36:27.982237+08:00"
+    },
+    {
+      "id": 17,
+      "source_id": "443f22a1-1408-4221-a62e-851b73c7023e",
+      "target_id": "95b7223ccbcb9f213796c3863bbab2c0",
+      "source_type": "WIKI_ITEM",
+      "target_type": "CODE_SNIPPET",
+      "relationship_type": "CONTAINS",
+      "extra": "Wiki contains code snippet: README.md#49-67",
+      "gmt_create": "2026-04-26T21:36:27.983924+08:00",
+      "gmt_modified": "2026-04-26T21:36:27.983924+08:00"
+    },
+    {
+      "id": 18,
+      "source_id": "a166eb11c9477f569f9aba9fedcdff31",
+      "target_id": "95b7223ccbcb9f213796c3863bbab2c0",
+      "source_type": "SOURCE_FILE",
+      "target_type": "CODE_SNIPPET",
+      "relationship_type": "CONTAINS",
+      "extra": "Source file contains code snippet: 49-67",
+      "gmt_create": "2026-04-26T21:36:27.984687+08:00",
+      "gmt_modified": "2026-04-26T21:36:27.984687+08:00"
+    },
+    {
+      "id": 19,
+      "source_id": "443f22a1-1408-4221-a62e-851b73c7023e",
+      "target_id": "e0b92b10bacfa3fc465ffb92851ba67d",
+      "source_type": "WIKI_ITEM",
+      "target_type": "CODE_SNIPPET",
+      "relationship_type": "CONTAINS",
+      "extra": "Wiki contains code snippet: README.md#70-76",
+      "gmt_create": "2026-04-26T21:36:27.985067+08:00",
+      "gmt_modified": "2026-04-26T21:36:27.985067+08:00"
+    },
+    {
+      "id": 20,
+      "source_id": "a166eb11c9477f569f9aba9fedcdff31",
+      "target_id": "e0b92b10bacfa3fc465ffb92851ba67d",
+      "source_type": "SOURCE_FILE",
+      "target_type": "CODE_SNIPPET",
+      "relationship_type": "CONTAINS",
+      "extra": "Source file contains code snippet: 70-76",
+      "gmt_create": "2026-04-26T21:36:27.985166+08:00",
+      "gmt_modified": "2026-04-26T21:36:27.985166+08:00"
+    },
+    {
+      "id": 21,
+      "source_id": "443f22a1-1408-4221-a62e-851b73c7023e",
+      "target_id": "faa900fefcf796d0d6253ff376ae4413",
+      "source_type": "WIKI_ITEM",
+      "target_type": "CODE_SNIPPET",
+      "relationship_type": "CONTAINS",
+      "extra": "Wiki contains code snippet: package.json#122",
+      "gmt_create": "2026-04-26T21:36:27.985293+08:00",
+      "gmt_modified": "2026-04-26T21:36:27.985293+08:00"
+    },
+    {
+      "id": 22,
+      "source_id": "dbb0b04fd16a5f60d4f8be87bc085aa5",
+      "target_id": "faa900fefcf796d0d6253ff376ae4413",
+      "source_type": "SOURCE_FILE",
+      "target_type": "CODE_SNIPPET",
+      "relationship_type": "CONTAINS",
+      "extra": "Source file contains code snippet: 122",
+      "gmt_create": "2026-04-26T21:36:27.985374+08:00",
+      "gmt_modified": "2026-04-26T21:36:27.985374+08:00"
+    },
+    {
+      "id": 23,
+      "source_id": "443f22a1-1408-4221-a62e-851b73c7023e",
+      "target_id": "998fadd2338efbccf40992276e5730de",
+      "source_type": "WIKI_ITEM",
+      "target_type": "CODE_SNIPPET",
+      "relationship_type": "CONTAINS",
+      "extra": "Wiki contains code snippet: README.md#77-92",
+      "gmt_create": "2026-04-26T21:36:27.985731+08:00",
+      "gmt_modified": "2026-04-26T21:36:27.985731+08:00"
+    },
+    {
+      "id": 24,
+      "source_id": "a166eb11c9477f569f9aba9fedcdff31",
+      "target_id": "998fadd2338efbccf40992276e5730de",
+      "source_type": "SOURCE_FILE",
+      "target_type": "CODE_SNIPPET",
+      "relationship_type": "CONTAINS",
+      "extra": "Source file contains code snippet: 77-92",
+      "gmt_create": "2026-04-26T21:36:27.985933+08:00",
+      "gmt_modified": "2026-04-26T21:36:27.985933+08:00"
+    },
+    {
+      "id": 25,
+      "source_id": "443f22a1-1408-4221-a62e-851b73c7023e",
+      "target_id": "929a331eeef8e964e6dc2742dd066149",
+      "source_type": "WIKI_ITEM",
+      "target_type": "CODE_SNIPPET",
+      "relationship_type": "CONTAINS",
+      "extra": "Wiki contains code snippet: README.md#94-114",
+      "gmt_create": "2026-04-26T21:36:27.986198+08:00",
+      "gmt_modified": "2026-04-26T21:36:27.986198+08:00"
+    },
+    {
+      "id": 26,
+      "source_id": "a166eb11c9477f569f9aba9fedcdff31",
+      "target_id": "929a331eeef8e964e6dc2742dd066149",
+      "source_type": "SOURCE_FILE",
+      "target_type": "CODE_SNIPPET",
+      "relationship_type": "CONTAINS",
+      "extra": "Source file contains code snippet: 94-114",
+      "gmt_create": "2026-04-26T21:36:27.986297+08:00",
+      "gmt_modified": "2026-04-26T21:36:27.986297+08:00"
+    },
+    {
+      "id": 27,
+      "source_id": "443f22a1-1408-4221-a62e-851b73c7023e",
+      "target_id": "1987a1aad8bd3459f2e371efbcb48180",
+      "source_type": "WIKI_ITEM",
+      "target_type": "CODE_SNIPPET",
+      "relationship_type": "CONTAINS",
+      "extra": "Wiki contains code snippet: README.md#115-133",
+      "gmt_create": "2026-04-26T21:36:27.986432+08:00",
+      "gmt_modified": "2026-04-26T21:36:27.986432+08:00"
+    },
+    {
+      "id": 28,
+      "source_id": "a166eb11c9477f569f9aba9fedcdff31",
+      "target_id": "1987a1aad8bd3459f2e371efbcb48180",
+      "source_type": "SOURCE_FILE",
+      "target_type": "CODE_SNIPPET",
+      "relationship_type": "CONTAINS",
+      "extra": "Source file contains code snippet: 115-133",
+      "gmt_create": "2026-04-26T21:36:27.986526+08:00",
+      "gmt_modified": "2026-04-26T21:36:27.986526+08:00"
+    },
+    {
+      "id": 29,
+      "source_id": "443f22a1-1408-4221-a62e-851b73c7023e",
+      "target_id": "31a266906817491ed52ba96550b52b61",
+      "source_type": "WIKI_ITEM",
+      "target_type": "CODE_SNIPPET",
+      "relationship_type": "CONTAINS",
+      "extra": "Wiki contains code snippet: README.md#134-149",
+      "gmt_create": "2026-04-26T21:36:27.986691+08:00",
+      "gmt_modified": "2026-04-26T21:36:27.986691+08:00"
+    },
+    {
+      "id": 30,
+      "source_id": "a166eb11c9477f569f9aba9fedcdff31",
+      "target_id": "31a266906817491ed52ba96550b52b61",
+      "source_type": "SOURCE_FILE",
+      "target_type": "CODE_SNIPPET",
+      "relationship_type": "CONTAINS",
+      "extra": "Source file contains code snippet: 134-149",
+      "gmt_create": "2026-04-26T21:36:27.986791+08:00",
+      "gmt_modified": "2026-04-26T21:36:27.986791+08:00"
+    },
+    {
+      "id": 31,
+      "source_id": "443f22a1-1408-4221-a62e-851b73c7023e",
+      "target_id": "f793c14528725fc9fe1443fb7ab655e5",
+      "source_type": "WIKI_ITEM",
+      "target_type": "CODE_SNIPPET",
+      "relationship_type": "CONTAINS",
+      "extra": "Wiki contains code snippet: next-env.d.ts#1-7",
+      "gmt_create": "2026-04-26T21:36:27.987065+08:00",
+      "gmt_modified": "2026-04-26T21:36:27.987065+08:00"
+    },
+    {
+      "id": 32,
+      "source_id": "eb5e2c5d8def8fcdbdd811c8a55e08aa",
+      "target_id": "f793c14528725fc9fe1443fb7ab655e5",
+      "source_type": "SOURCE_FILE",
+      "target_type": "CODE_SNIPPET",
+      "relationship_type": "CONTAINS",
+      "extra": "Source file contains code snippet: 1-7",
+      "gmt_create": "2026-04-26T21:36:27.987256+08:00",
+      "gmt_modified": "2026-04-26T21:36:27.987256+08:00"
+    },
+    {
+      "id": 33,
+      "source_id": "443f22a1-1408-4221-a62e-851b73c7023e",
+      "target_id": "8d255fc3d0d9767ee38514e05e9c9f7c",
+      "source_type": "WIKI_ITEM",
+      "target_type": "CODE_SNIPPET",
+      "relationship_type": "CONTAINS",
+      "extra": "Wiki contains code snippet: postcss.config.js#1-6",
+      "gmt_create": "2026-04-26T21:36:27.987412+08:00",
+      "gmt_modified": "2026-04-26T21:36:27.987412+08:00"
+    },
+    {
+      "id": 34,
+      "source_id": "496e94529fbbf56ec7d546408c4b3566",
+      "target_id": "8d255fc3d0d9767ee38514e05e9c9f7c",
+      "source_type": "SOURCE_FILE",
+      "target_type": "CODE_SNIPPET",
+      "relationship_type": "CONTAINS",
+      "extra": "Source file contains code snippet: 1-6",
+      "gmt_create": "2026-04-26T21:36:27.987634+08:00",
+      "gmt_modified": "2026-04-26T21:36:27.987634+08:00"
+    },
+    {
+      "id": 35,
+      "source_id": "443f22a1-1408-4221-a62e-851b73c7023e",
+      "target_id": "b438415da6423cc4d71a2e3d94d9781c",
+      "source_type": "WIKI_ITEM",
+      "target_type": "CODE_SNIPPET",
+      "relationship_type": "CONTAINS",
+      "extra": "Wiki contains code snippet: app/robots.ts#1-35",
+      "gmt_create": "2026-04-26T21:36:27.987869+08:00",
+      "gmt_modified": "2026-04-26T21:36:27.98787+08:00"
+    },
+    {
+      "id": 36,
+      "source_id": "f1b03347db802b4284dd8d2ca7b39c7f",
+      "target_id": "b438415da6423cc4d71a2e3d94d9781c",
+      "source_type": "SOURCE_FILE",
+      "target_type": "CODE_SNIPPET",
+      "relationship_type": "CONTAINS",
+      "extra": "Source file contains code snippet: 1-35",
+      "gmt_create": "2026-04-26T21:36:27.988103+08:00",
+      "gmt_modified": "2026-04-26T21:36:27.988103+08:00"
+    },
+    {
+      "id": 37,
+      "source_id": "443f22a1-1408-4221-a62e-851b73c7023e",
+      "target_id": "cfa95eb275aa10acde912b100b498a77",
+      "source_type": "WIKI_ITEM",
+      "target_type": "CODE_SNIPPET",
+      "relationship_type": "CONTAINS",
+      "extra": "Wiki contains code snippet: app/sitemap.ts#1-35",
+      "gmt_create": "2026-04-26T21:36:27.988393+08:00",
+      "gmt_modified": "2026-04-26T21:36:27.988393+08:00"
+    },
+    {
+      "id": 38,
+      "source_id": "8e0d9a32c8febda1497e4412ed4fb503",
+      "target_id": "cfa95eb275aa10acde912b100b498a77",
+      "source_type": "SOURCE_FILE",
+      "target_type": "CODE_SNIPPET",
+      "relationship_type": "CONTAINS",
+      "extra": "Source file contains code snippet: 1-35",
+      "gmt_create": "2026-04-26T21:36:27.988486+08:00",
+      "gmt_modified": "2026-04-26T21:36:27.988486+08:00"
+    },
+    {
+      "id": 39,
+      "source_id": "443f22a1-1408-4221-a62e-851b73c7023e",
+      "target_id": "efcd93ffe41098eff9d1c90d4f9180bb",
+      "source_type": "WIKI_ITEM",
+      "target_type": "CODE_SNIPPET",
+      "relationship_type": "CONTAINS",
+      "extra": "Wiki contains code snippet: README.md#152-162",
+      "gmt_create": "2026-04-26T21:36:27.988831+08:00",
+      "gmt_modified": "2026-04-26T21:36:27.988831+08:00"
+    },
+    {
+      "id": 40,
+      "source_id": "a166eb11c9477f569f9aba9fedcdff31",
+      "target_id": "efcd93ffe41098eff9d1c90d4f9180bb",
+      "source_type": "SOURCE_FILE",
+      "target_type": "CODE_SNIPPET",
+      "relationship_type": "CONTAINS",
+      "extra": "Source file contains code snippet: 152-162",
+      "gmt_create": "2026-04-26T21:36:27.989037+08:00",
+      "gmt_modified": "2026-04-26T21:36:27.989037+08:00"
+    },
+    {
+      "id": 41,
+      "source_id": "443f22a1-1408-4221-a62e-851b73c7023e",
+      "target_id": "9257ab69ce79557e06dd4f83f5508034",
+      "source_type": "WIKI_ITEM",
+      "target_type": "CODE_SNIPPET",
+      "relationship_type": "CONTAINS",
+      "extra": "Wiki contains code snippet: package.json#5-15",
+      "gmt_create": "2026-04-26T21:36:27.989165+08:00",
+      "gmt_modified": "2026-04-26T21:36:27.989165+08:00"
+    },
+    {
+      "id": 42,
+      "source_id": "dbb0b04fd16a5f60d4f8be87bc085aa5",
+      "target_id": "9257ab69ce79557e06dd4f83f5508034",
+      "source_type": "SOURCE_FILE",
+      "target_type": "CODE_SNIPPET",
+      "relationship_type": "CONTAINS",
+      "extra": "Source file contains code snippet: 5-15",
+      "gmt_create": "2026-04-26T21:36:27.989246+08:00",
+      "gmt_modified": "2026-04-26T21:36:27.989246+08:00"
+    },
+    {
+      "id": 43,
+      "source_id": "443f22a1-1408-4221-a62e-851b73c7023e",
+      "target_id": "f3477bdb58a9955c19f7ce91ecaac6c6",
+      "source_type": "WIKI_ITEM",
+      "target_type": "CODE_SNIPPET",
+      "relationship_type": "CONTAINS",
+      "extra": "Wiki contains code snippet: README.md#227-266",
+      "gmt_create": "2026-04-26T21:36:27.98958+08:00",
+      "gmt_modified": "2026-04-26T21:36:27.98958+08:00"
+    },
+    {
+      "id": 44,
+      "source_id": "a166eb11c9477f569f9aba9fedcdff31",
+      "target_id": "f3477bdb58a9955c19f7ce91ecaac6c6",
+      "source_type": "SOURCE_FILE",
+      "target_type": "CODE_SNIPPET",
+      "relationship_type": "CONTAINS",
+      "extra": "Source file contains code snippet: 227-266",
+      "gmt_create": "2026-04-26T21:36:27.989751+08:00",
+      "gmt_modified": "2026-04-26T21:36:27.989752+08:00"
+    },
+    {
+      "id": 45,
+      "source_id": "443f22a1-1408-4221-a62e-851b73c7023e",
+      "target_id": "28c004433b42e9fce1cdc2aab87478c0",
+      "source_type": "WIKI_ITEM",
+      "target_type": "CODE_SNIPPET",
+      "relationship_type": "CONTAINS",
+      "extra": "Wiki contains code snippet: README.md#193-211",
+      "gmt_create": "2026-04-26T21:36:27.989865+08:00",
+      "gmt_modified": "2026-04-26T21:36:27.989865+08:00"
+    },
+    {
+      "id": 46,
+      "source_id": "a166eb11c9477f569f9aba9fedcdff31",
+      "target_id": "28c004433b42e9fce1cdc2aab87478c0",
+      "source_type": "SOURCE_FILE",
+      "target_type": "CODE_SNIPPET",
+      "relationship_type": "CONTAINS",
+      "extra": "Source file contains code snippet: 193-211",
+      "gmt_create": "2026-04-26T21:36:27.990034+08:00",
+      "gmt_modified": "2026-04-26T21:36:27.990034+08:00"
+    },
+    {
+      "id": 47,
+      "source_id": "443f22a1-1408-4221-a62e-851b73c7023e",
+      "target_id": "fab4c21cfd553fc00352ab7a21f9ff7b",
+      "source_type": "WIKI_ITEM",
+      "target_type": "CODE_SNIPPET",
+      "relationship_type": "CONTAINS",
+      "extra": "Wiki contains code snippet: components/home/new-section/HeroSection.tsx#1-51",
+      "gmt_create": "2026-04-26T21:36:27.99026+08:00",
+      "gmt_modified": "2026-04-26T21:36:27.990261+08:00"
+    },
+    {
+      "id": 48,
+      "source_id": "e40584f67c2665c43da6d65a8d64e86f",
+      "target_id": "fab4c21cfd553fc00352ab7a21f9ff7b",
+      "source_type": "SOURCE_FILE",
+      "target_type": "CODE_SNIPPET",
+      "relationship_type": "CONTAINS",
+      "extra": "Source file contains code snippet: 1-51",
+      "gmt_create": "2026-04-26T21:36:27.990333+08:00",
+      "gmt_modified": "2026-04-26T21:36:27.990333+08:00"
+    },
+    {
+      "id": 49,
+      "source_id": "443f22a1-1408-4221-a62e-851b73c7023e",
+      "target_id": "56fd8ba4539ca6ec191fd98ad8bf04d5",
+      "source_type": "WIKI_ITEM",
+      "target_type": "CODE_SNIPPET",
+      "relationship_type": "CONTAINS",
+      "extra": "Wiki contains code snippet: README.md#195-204",
+      "gmt_create": "2026-04-26T21:36:27.990538+08:00",
+      "gmt_modified": "2026-04-26T21:36:27.990538+08:00"
+    },
+    {
+      "id": 50,
+      "source_id": "a166eb11c9477f569f9aba9fedcdff31",
+      "target_id": "56fd8ba4539ca6ec191fd98ad8bf04d5",
+      "source_type": "SOURCE_FILE",
+      "target_type": "CODE_SNIPPET",
+      "relationship_type": "CONTAINS",
+      "extra": "Source file contains code snippet: 195-204",
+      "gmt_create": "2026-04-26T21:36:27.990712+08:00",
+      "gmt_modified": "2026-04-26T21:36:27.990712+08:00"
+    },
+    {
+      "id": 51,
+      "source_id": "443f22a1-1408-4221-a62e-851b73c7023e",
+      "target_id": "577acbdf94a7bd4fad647bc988edc069",
+      "source_type": "WIKI_ITEM",
+      "target_type": "CODE_SNIPPET",
+      "relationship_type": "CONTAINS",
+      "extra": "Wiki contains code snippet: README.md#268-279",
+      "gmt_create": "2026-04-26T21:36:27.990922+08:00",
+      "gmt_modified": "2026-04-26T21:36:27.990922+08:00"
+    },
+    {
+      "id": 52,
+      "source_id": "a166eb11c9477f569f9aba9fedcdff31",
+      "target_id": "577acbdf94a7bd4fad647bc988edc069",
+      "source_type": "SOURCE_FILE",
+      "target_type": "CODE_SNIPPET",
+      "relationship_type": "CONTAINS",
+      "extra": "Source file contains code snippet: 268-279",
+      "gmt_create": "2026-04-26T21:36:27.990999+08:00",
+      "gmt_modified": "2026-04-26T21:36:27.990999+08:00"
+    },
+    {
+      "id": 53,
+      "source_id": "443f22a1-1408-4221-a62e-851b73c7023e",
+      "target_id": "e1eaef75b5d4d6c5ada2050c32267b2f",
+      "source_type": "WIKI_ITEM",
+      "target_type": "CODE_SNIPPET",
+      "relationship_type": "CONTAINS",
+      "extra": "Wiki contains code snippet: next.config.mjs#25-55",
+      "gmt_create": "2026-04-26T21:36:27.991339+08:00",
+      "gmt_modified": "2026-04-26T21:36:27.991339+08:00"
+    },
+    {
+      "id": 54,
+      "source_id": "4dd427e7f6a05e73f9fd5b1d805dcb13",
+      "target_id": "e1eaef75b5d4d6c5ada2050c32267b2f",
+      "source_type": "SOURCE_FILE",
+      "target_type": "CODE_SNIPPET",
+      "relationship_type": "CONTAINS",
+      "extra": "Source file contains code snippet: 25-55",
+      "gmt_create": "2026-04-26T21:36:27.991422+08:00",
+      "gmt_modified": "2026-04-26T21:36:27.991422+08:00"
+    },
+    {
+      "id": 55,
+      "source_id": "443f22a1-1408-4221-a62e-851b73c7023e",
+      "target_id": "c2b8bbc1fb9896ee823f4e86e2ac42e7",
+      "source_type": "WIKI_ITEM",
+      "target_type": "CODE_SNIPPET",
+      "relationship_type": "CONTAINS",
+      "extra": "Wiki contains code snippet: README.md#113-114",
+      "gmt_create": "2026-04-26T21:36:27.991641+08:00",
+      "gmt_modified": "2026-04-26T21:36:27.991641+08:00"
+    },
+    {
+      "id": 56,
+      "source_id": "a166eb11c9477f569f9aba9fedcdff31",
+      "target_id": "c2b8bbc1fb9896ee823f4e86e2ac42e7",
+      "source_type": "SOURCE_FILE",
+      "target_type": "CODE_SNIPPET",
+      "relationship_type": "CONTAINS",
+      "extra": "Source file contains code snippet: 113-114",
+      "gmt_create": "2026-04-26T21:36:27.991874+08:00",
+      "gmt_modified": "2026-04-26T21:36:27.991874+08:00"
+    },
+    {
+      "id": 57,
+      "source_id": "443f22a1-1408-4221-a62e-851b73c7023e",
+      "target_id": "bb2a65eba0e3eb1902b6bf78d1e1dde7",
+      "source_type": "WIKI_ITEM",
+      "target_type": "CODE_SNIPPET",
+      "relationship_type": "CONTAINS",
+      "extra": "Wiki contains code snippet: README.md#281-284",
+      "gmt_create": "2026-04-26T21:36:27.992053+08:00",
+      "gmt_modified": "2026-04-26T21:36:27.992053+08:00"
+    },
+    {
+      "id": 58,
+      "source_id": "a166eb11c9477f569f9aba9fedcdff31",
+      "target_id": "bb2a65eba0e3eb1902b6bf78d1e1dde7",
+      "source_type": "SOURCE_FILE",
+      "target_type": "CODE_SNIPPET",
+      "relationship_type": "CONTAINS",
+      "extra": "Source file contains code snippet: 281-284",
+      "gmt_create": "2026-04-26T21:36:27.992152+08:00",
+      "gmt_modified": "2026-04-26T21:36:27.992152+08:00"
+    },
+    {
+      "id": 59,
+      "source_id": "8d932ac9-cd49-4763-a3ba-d9df215ce9f9",
+      "target_id": "d07cdc39a22609bbceab608d95bf5b68",
+      "source_type": "WIKI_ITEM",
+      "target_type": "SOURCE_FILE",
+      "relationship_type": "REFERENCED_BY",
+      "extra": "Wiki references source file: components/AgSwitch.tsx",
+      "gmt_create": "2026-04-26T21:47:33.437884+08:00",
+      "gmt_modified": "2026-04-26T21:47:33.437884+08:00"
+    },
+    {
+      "id": 60,
+      "source_id": "8d932ac9-cd49-4763-a3ba-d9df215ce9f9",
+      "target_id": "746db0a6c9bf256bae1d483dac0ae857",
+      "source_type": "WIKI_ITEM",
+      "target_type": "SOURCE_FILE",
+      "relationship_type": "REFERENCED_BY",
+      "extra": "Wiki references source file: components/Box.tsx",
+      "gmt_create": "2026-04-26T21:47:33.438525+08:00",
+      "gmt_modified": "2026-04-26T21:47:33.438525+08:00"
+    },
+    {
+      "id": 61,
+      "source_id": "8d932ac9-cd49-4763-a3ba-d9df215ce9f9",
+      "target_id": "030a705cd77e6808d5830c26ea05832b",
+      "source_type": "WIKI_ITEM",
+      "target_type": "SOURCE_FILE",
+      "relationship_type": "REFERENCED_BY",
+      "extra": "Wiki references source file: components/CopyBtn.tsx",
+      "gmt_create": "2026-04-26T21:47:33.438806+08:00",
+      "gmt_modified": "2026-04-26T21:47:33.438806+08:00"
+    },
+    {
+      "id": 62,
+      "source_id": "8d932ac9-cd49-4763-a3ba-d9df215ce9f9",
+      "target_id": "9e507fe98af4f5e821dfc38da7b57eb9",
+      "source_type": "WIKI_ITEM",
+      "target_type": "SOURCE_FILE",
+      "relationship_type": "REFERENCED_BY",
+      "extra": "Wiki references source file: components/Faq.tsx",
+      "gmt_create": "2026-04-26T21:47:33.439004+08:00",
+      "gmt_modified": "2026-04-26T21:47:33.439004+08:00"
+    },
+    {
+      "id": 63,
+      "source_id": "8d932ac9-cd49-4763-a3ba-d9df215ce9f9",
+      "target_id": "d7a4e96cb820d862244d7d3e3485fb36",
+      "source_type": "WIKI_ITEM",
+      "target_type": "SOURCE_FILE",
+      "relationship_type": "REFERENCED_BY",
+      "extra": "Wiki references source file: components/Loading.tsx",
+      "gmt_create": "2026-04-26T21:47:33.439131+08:00",
+      "gmt_modified": "2026-04-26T21:47:33.439131+08:00"
+    },
+    {
+      "id": 64,
+      "source_id": "8d932ac9-cd49-4763-a3ba-d9df215ce9f9",
+      "target_id": "cf062ad66518e254680dbb93a4355aea",
+      "source_type": "WIKI_ITEM",
+      "target_type": "SOURCE_FILE",
+      "relationship_type": "REFERENCED_BY",
+      "extra": "Wiki references source file: components/Spinning.tsx",
+      "gmt_create": "2026-04-26T21:47:33.439398+08:00",
+      "gmt_modified": "2026-04-26T21:47:33.439398+08:00"
+    },
+    {
+      "id": 65,
+      "source_id": "8d932ac9-cd49-4763-a3ba-d9df215ce9f9",
+      "target_id": "90e0919ca2007d267deee1ecd58a090f",
+      "source_type": "WIKI_ITEM",
+      "target_type": "SOURCE_FILE",
+      "relationship_type": "REFERENCED_BY",
+      "extra": "Wiki references source file: components/range-input.tsx",
+      "gmt_create": "2026-04-26T21:47:33.439742+08:00",
+      "gmt_modified": "2026-04-26T21:47:33.439742+08:00"
+    },
+    {
+      "id": 66,
+      "source_id": "8d932ac9-cd49-4763-a3ba-d9df215ce9f9",
+      "target_id": "ef32b5e89291af36339053cd83b42221",
+      "source_type": "WIKI_ITEM",
+      "target_type": "SOURCE_FILE",
+      "relationship_type": "REFERENCED_BY",
+      "extra": "Wiki references source file: components/top-loading-bar.tsx",
+      "gmt_create": "2026-04-26T21:47:33.440131+08:00",
+      "gmt_modified": "2026-04-26T21:47:33.440131+08:00"
+    },
+    {
+      "id": 67,
+      "source_id": "8d932ac9-cd49-4763-a3ba-d9df215ce9f9",
+      "target_id": "ffdf269d0f12628c36c1ed6dab864094",
+      "source_type": "WIKI_ITEM",
+      "target_type": "SOURCE_FILE",
+      "relationship_type": "REFERENCED_BY",
+      "extra": "Wiki references source file: components/home/Footer.tsx",
+      "gmt_create": "2026-04-26T21:47:33.440548+08:00",
+      "gmt_modified": "2026-04-26T21:47:33.440548+08:00"
+    },
+    {
+      "id": 68,
+      "source_id": "8d932ac9-cd49-4763-a3ba-d9df215ce9f9",
+      "target_id": "94a481e9203aae58b2c0ccb9d008431f",
+      "source_type": "WIKI_ITEM",
+      "target_type": "SOURCE_FILE",
+      "relationship_type": "REFERENCED_BY",
+      "extra": "Wiki references source file: components/home/BusinessButton.tsx",
+      "gmt_create": "2026-04-26T21:47:33.440814+08:00",
+      "gmt_modified": "2026-04-26T21:47:33.440814+08:00"
+    },
+    {
+      "id": 69,
+      "source_id": "8d932ac9-cd49-4763-a3ba-d9df215ce9f9",
+      "target_id": "bfe67874fc1b9de81a335682bbe78673",
+      "source_type": "WIKI_ITEM",
+      "target_type": "SOURCE_FILE",
+      "relationship_type": "REFERENCED_BY",
+      "extra": "Wiki references source file: components/svg/footer/Github.tsx",
+      "gmt_create": "2026-04-26T21:47:33.441155+08:00",
+      "gmt_modified": "2026-04-26T21:47:33.441155+08:00"
+    },
+    {
+      "id": 70,
+      "source_id": "8d932ac9-cd49-4763-a3ba-d9df215ce9f9",
+      "target_id": "250571a266d34c93a6218f309aa43143",
+      "source_type": "WIKI_ITEM",
+      "target_type": "SOURCE_FILE",
+      "relationship_type": "REFERENCED_BY",
+      "extra": "Wiki references source file: components/svg/footer/Twitter.tsx",
+      "gmt_create": "2026-04-26T21:47:33.441376+08:00",
+      "gmt_modified": "2026-04-26T21:47:33.441376+08:00"
+    },
+    {
+      "id": 71,
+      "source_id": "8d932ac9-cd49-4763-a3ba-d9df215ce9f9",
+      "target_id": "6ba3533c9a0c4a68ba03c927607fe6e3",
+      "source_type": "WIKI_ITEM",
+      "target_type": "SOURCE_FILE",
+      "relationship_type": "REFERENCED_BY",
+      "extra": "Wiki references source file: lib/constants/navigation.ts",
+      "gmt_create": "2026-04-26T21:47:33.441655+08:00",
+      "gmt_modified": "2026-04-26T21:47:33.441655+08:00"
+    },
+    {
+      "id": 72,
+      "source_id": "8d932ac9-cd49-4763-a3ba-d9df215ce9f9",
+      "target_id": "319f6744c2c64b4cb2873e91663b90a0",
+      "source_type": "WIKI_ITEM",
+      "target_type": "SOURCE_FILE",
+      "relationship_type": "REFERENCED_BY",
+      "extra": "Wiki references source file: app/[locale]/LazyGlobalUI.tsx",
+      "gmt_create": "2026-04-26T21:47:33.441936+08:00",
+      "gmt_modified": "2026-04-26T21:47:33.441936+08:00"
+    },
+    {
+      "id": 73,
+      "source_id": "8d932ac9-cd49-4763-a3ba-d9df215ce9f9",
+      "target_id": "54d823e057aee5ae18a60f3e4cb99368",
+      "source_type": "WIKI_ITEM",
+      "target_type": "SOURCE_FILE",
+      "relationship_type": "REFERENCED_BY",
+      "extra": "Wiki references source file: app/[locale]/layout.tsx",
+      "gmt_create": "2026-04-26T21:47:33.44229+08:00",
+      "gmt_modified": "2026-04-26T21:47:33.44229+08:00"
+    },
+    {
+      "id": 74,
+      "source_id": "8d932ac9-cd49-4763-a3ba-d9df215ce9f9",
+      "target_id": "d5ac0a80a1e3600cc2a18fa1778eeab5",
+      "source_type": "WIKI_ITEM",
+      "target_type": "SOURCE_FILE",
+      "relationship_type": "REFERENCED_BY",
+      "extra": "Wiki references source file: app/[locale]/(without-footer",
+      "gmt_create": "2026-04-26T21:47:33.442518+08:00",
+      "gmt_modified": "2026-04-26T21:47:33.442518+08:00"
+    },
+    {
+      "id": 75,
+      "source_id": "8d932ac9-cd49-4763-a3ba-d9df215ce9f9",
+      "target_id": "f827cf474fa4ed27544ae7cd7c0a44fc",
+      "source_type": "WIKI_ITEM",
+      "target_type": "SOURCE_FILE",
+      "relationship_type": "REFERENCED_BY",
+      "extra": "Wiki references source file: components/ui/accordion.tsx",
+      "gmt_create": "2026-04-26T21:47:33.442786+08:00",
+      "gmt_modified": "2026-04-26T21:47:33.442786+08:00"
+    },
+    {
+      "id": 76,
+      "source_id": "8d932ac9-cd49-4763-a3ba-d9df215ce9f9",
+      "target_id": "6a200925afe45c556594e18f07d85d03",
+      "source_type": "WIKI_ITEM",
+      "target_type": "CODE_SNIPPET",
+      "relationship_type": "CONTAINS",
+      "extra": "Wiki contains code snippet: components/AgSwitch.tsx#1-36",
+      "gmt_create": "2026-04-26T21:47:33.443079+08:00",
+      "gmt_modified": "2026-04-26T21:47:33.443079+08:00"
+    },
+    {
+      "id": 77,
+      "source_id": "d07cdc39a22609bbceab608d95bf5b68",
+      "target_id": "6a200925afe45c556594e18f07d85d03",
+      "source_type": "SOURCE_FILE",
+      "target_type": "CODE_SNIPPET",
+      "relationship_type": "CONTAINS",
+      "extra": "Source file contains code snippet: 1-36",
+      "gmt_create": "2026-04-26T21:47:33.443497+08:00",
+      "gmt_modified": "2026-04-26T21:47:33.443497+08:00"
+    },
+    {
+      "id": 78,
+      "source_id": "8d932ac9-cd49-4763-a3ba-d9df215ce9f9",
+      "target_id": "cf6ecfbb6e203f3a12d07fd37acfcfa5",
+      "source_type": "WIKI_ITEM",
+      "target_type": "CODE_SNIPPET",
+      "relationship_type": "CONTAINS",
+      "extra": "Wiki contains code snippet: components/Box.tsx#1-22",
+      "gmt_create": "2026-04-26T21:47:33.443724+08:00",
+      "gmt_modified": "2026-04-26T21:47:33.443724+08:00"
+    },
+    {
+      "id": 79,
+      "source_id": "746db0a6c9bf256bae1d483dac0ae857",
+      "target_id": "cf6ecfbb6e203f3a12d07fd37acfcfa5",
+      "source_type": "SOURCE_FILE",
+      "target_type": "CODE_SNIPPET",
+      "relationship_type": "CONTAINS",
+      "extra": "Source file contains code snippet: 1-22",
+      "gmt_create": "2026-04-26T21:47:33.443905+08:00",
+      "gmt_modified": "2026-04-26T21:47:33.443905+08:00"
+    },
+    {
+      "id": 80,
+      "source_id": "8d932ac9-cd49-4763-a3ba-d9df215ce9f9",
+      "target_id": "7a85367694ebe1d8592f48317109e8af",
+      "source_type": "WIKI_ITEM",
+      "target_type": "CODE_SNIPPET",
+      "relationship_type": "CONTAINS",
+      "extra": "Wiki contains code snippet: components/CopyBtn.tsx#1-31",
+      "gmt_create": "2026-04-26T21:47:33.444173+08:00",
+      "gmt_modified": "2026-04-26T21:47:33.444173+08:00"
+    },
+    {
+      "id": 81,
+      "source_id": "030a705cd77e6808d5830c26ea05832b",
+      "target_id": "7a85367694ebe1d8592f48317109e8af",
+      "source_type": "SOURCE_FILE",
+      "target_type": "CODE_SNIPPET",
+      "relationship_type": "CONTAINS",
+      "extra": "Source file contains code snippet: 1-31",
+      "gmt_create": "2026-04-26T21:47:33.444514+08:00",
+      "gmt_modified": "2026-04-26T21:47:33.444514+08:00"
+    },
+    {
+      "id": 82,
+      "source_id": "8d932ac9-cd49-4763-a3ba-d9df215ce9f9",
+      "target_id": "3d79b94b9eaea9cf25f58ef6825f34f1",
+      "source_type": "WIKI_ITEM",
+      "target_type": "CODE_SNIPPET",
+      "relationship_type": "CONTAINS",
+      "extra": "Wiki contains code snippet: components/Faq.tsx#1-35",
+      "gmt_create": "2026-04-26T21:47:33.444804+08:00",
+      "gmt_modified": "2026-04-26T21:47:33.444804+08:00"
+    },
+    {
+      "id": 83,
+      "source_id": "9e507fe98af4f5e821dfc38da7b57eb9",
+      "target_id": "3d79b94b9eaea9cf25f58ef6825f34f1",
+      "source_type": "SOURCE_FILE",
+      "target_type": "CODE_SNIPPET",
+      "relationship_type": "CONTAINS",
+      "extra": "Source file contains code snippet: 1-35",
+      "gmt_create": "2026-04-26T21:47:33.444984+08:00",
+      "gmt_modified": "2026-04-26T21:47:33.444984+08:00"
+    },
+    {
+      "id": 84,
+      "source_id": "8d932ac9-cd49-4763-a3ba-d9df215ce9f9",
+      "target_id": "2fee6e9ad0c61fc1375730e3372bbef0",
+      "source_type": "WIKI_ITEM",
+      "target_type": "CODE_SNIPPET",
+      "relationship_type": "CONTAINS",
+      "extra": "Wiki contains code snippet: components/Loading.tsx#1-17",
+      "gmt_create": "2026-04-26T21:47:33.445273+08:00",
+      "gmt_modified": "2026-04-26T21:47:33.445273+08:00"
+    },
+    {
+      "id": 85,
+      "source_id": "d7a4e96cb820d862244d7d3e3485fb36",
+      "target_id": "2fee6e9ad0c61fc1375730e3372bbef0",
+      "source_type": "SOURCE_FILE",
+      "target_type": "CODE_SNIPPET",
+      "relationship_type": "CONTAINS",
+      "extra": "Source file contains code snippet: 1-17",
+      "gmt_create": "2026-04-26T21:47:33.445482+08:00",
+      "gmt_modified": "2026-04-26T21:47:33.445482+08:00"
+    },
+    {
+      "id": 86,
+      "source_id": "8d932ac9-cd49-4763-a3ba-d9df215ce9f9",
+      "target_id": "7a8e9c97a55af9837ee16446462b9dd7",
+      "source_type": "WIKI_ITEM",
+      "target_type": "CODE_SNIPPET",
+      "relationship_type": "CONTAINS",
+      "extra": "Wiki contains code snippet: components/Spinning.tsx#1-26",
+      "gmt_create": "2026-04-26T21:47:33.445847+08:00",
+      "gmt_modified": "2026-04-26T21:47:33.445847+08:00"
+    },
+    {
+      "id": 87,
+      "source_id": "cf062ad66518e254680dbb93a4355aea",
+      "target_id": "7a8e9c97a55af9837ee16446462b9dd7",
+      "source_type": "SOURCE_FILE",
+      "target_type": "CODE_SNIPPET",
+      "relationship_type": "CONTAINS",
+      "extra": "Source file contains code snippet: 1-26",
+      "gmt_create": "2026-04-26T21:47:33.446027+08:00",
+      "gmt_modified": "2026-04-26T21:47:33.446027+08:00"
+    },
+    {
+      "id": 88,
+      "source_id": "8d932ac9-cd49-4763-a3ba-d9df215ce9f9",
+      "target_id": "faf72df9504a744f1f86a7518562c9c4",
+      "source_type": "WIKI_ITEM",
+      "target_type": "CODE_SNIPPET",
+      "relationship_type": "CONTAINS",
+      "extra": "Wiki contains code snippet: components/home/Footer.tsx#1-164",
+      "gmt_create": "2026-04-26T21:47:33.446307+08:00",
+      "gmt_modified": "2026-04-26T21:47:33.446308+08:00"
+    },
+    {
+      "id": 89,
+      "source_id": "ffdf269d0f12628c36c1ed6dab864094",
+      "target_id": "faf72df9504a744f1f86a7518562c9c4",
+      "source_type": "SOURCE_FILE",
+      "target_type": "CODE_SNIPPET",
+      "relationship_type": "CONTAINS",
+      "extra": "Source file contains code snippet: 1-164",
+      "gmt_create": "2026-04-26T21:47:33.44647+08:00",
+      "gmt_modified": "2026-04-26T21:47:33.44647+08:00"
+    },
+    {
+      "id": 90,
+      "source_id": "8d932ac9-cd49-4763-a3ba-d9df215ce9f9",
+      "target_id": "ea596aa7416fb1c89820d6b2f7fac205",
+      "source_type": "WIKI_ITEM",
+      "target_type": "CODE_SNIPPET",
+      "relationship_type": "CONTAINS",
+      "extra": "Wiki contains code snippet: components/home/BusinessButton.tsx#1-23",
+      "gmt_create": "2026-04-26T21:47:33.446683+08:00",
+      "gmt_modified": "2026-04-26T21:47:33.446683+08:00"
+    },
+    {
+      "id": 91,
+      "source_id": "94a481e9203aae58b2c0ccb9d008431f",
+      "target_id": "ea596aa7416fb1c89820d6b2f7fac205",
+      "source_type": "SOURCE_FILE",
+      "target_type": "CODE_SNIPPET",
+      "relationship_type": "CONTAINS",
+      "extra": "Source file contains code snippet: 1-23",
+      "gmt_create": "2026-04-26T21:47:33.446923+08:00",
+      "gmt_modified": "2026-04-26T21:47:33.446923+08:00"
+    },
+    {
+      "id": 92,
+      "source_id": "8d932ac9-cd49-4763-a3ba-d9df215ce9f9",
+      "target_id": "c65483a7779ada2aaa268d9e9831fd07",
+      "source_type": "WIKI_ITEM",
+      "target_type": "CODE_SNIPPET",
+      "relationship_type": "CONTAINS",
+      "extra": "Wiki contains code snippet: components/svg/footer/Github.tsx#1-21",
+      "gmt_create": "2026-04-26T21:47:33.447126+08:00",
+      "gmt_modified": "2026-04-26T21:47:33.447126+08:00"
+    },
+    {
+      "id": 93,
+      "source_id": "bfe67874fc1b9de81a335682bbe78673",
+      "target_id": "c65483a7779ada2aaa268d9e9831fd07",
+      "source_type": "SOURCE_FILE",
+      "target_type": "CODE_SNIPPET",
+      "relationship_type": "CONTAINS",
+      "extra": "Source file contains code snippet: 1-21",
+      "gmt_create": "2026-04-26T21:47:33.447495+08:00",
+      "gmt_modified": "2026-04-26T21:47:33.447495+08:00"
+    },
+    {
+      "id": 94,
+      "source_id": "8d932ac9-cd49-4763-a3ba-d9df215ce9f9",
+      "target_id": "99b515348562dfeab13eb8e1704e829d",
+      "source_type": "WIKI_ITEM",
+      "target_type": "CODE_SNIPPET",
+      "relationship_type": "CONTAINS",
+      "extra": "Wiki contains code snippet: components/svg/footer/Twitter.tsx#1-14",
+      "gmt_create": "2026-04-26T21:47:33.447726+08:00",
+      "gmt_modified": "2026-04-26T21:47:33.447726+08:00"
+    },
+    {
+      "id": 95,
+      "source_id": "250571a266d34c93a6218f309aa43143",
+      "target_id": "99b515348562dfeab13eb8e1704e829d",
+      "source_type": "SOURCE_FILE",
+      "target_type": "CODE_SNIPPET",
+      "relationship_type": "CONTAINS",
+      "extra": "Source file contains code snippet: 1-14",
+      "gmt_create": "2026-04-26T21:47:33.448036+08:00",
+      "gmt_modified": "2026-04-26T21:47:33.448036+08:00"
+    },
+    {
+      "id": 96,
+      "source_id": "8d932ac9-cd49-4763-a3ba-d9df215ce9f9",
+      "target_id": "945d71252d066256c382785e4a072467",
+      "source_type": "WIKI_ITEM",
+      "target_type": "CODE_SNIPPET",
+      "relationship_type": "CONTAINS",
+      "extra": "Wiki contains code snippet: lib/constants/navigation.ts#1-52",
+      "gmt_create": "2026-04-26T21:47:33.448265+08:00",
+      "gmt_modified": "2026-04-26T21:47:33.448265+08:00"
+    },
+    {
+      "id": 97,
+      "source_id": "6ba3533c9a0c4a68ba03c927607fe6e3",
+      "target_id": "945d71252d066256c382785e4a072467",
+      "source_type": "SOURCE_FILE",
+      "target_type": "CODE_SNIPPET",
+      "relationship_type": "CONTAINS",
+      "extra": "Source file contains code snippet: 1-52",
+      "gmt_create": "2026-04-26T21:47:33.448537+08:00",
+      "gmt_modified": "2026-04-26T21:47:33.448537+08:00"
+    },
+    {
+      "id": 98,
+      "source_id": "8d932ac9-cd49-4763-a3ba-d9df215ce9f9",
+      "target_id": "6e172888b9c83c110fe70fc28fdec727",
+      "source_type": "WIKI_ITEM",
+      "target_type": "CODE_SNIPPET",
+      "relationship_type": "CONTAINS",
+      "extra": "Wiki contains code snippet: components/AgSwitch.tsx#10-31",
+      "gmt_create": "2026-04-26T21:47:33.451897+08:00",
+      "gmt_modified": "2026-04-26T21:47:33.451897+08:00"
+    },
+    {
+      "id": 99,
+      "source_id": "d07cdc39a22609bbceab608d95bf5b68",
+      "target_id": "6e172888b9c83c110fe70fc28fdec727",
+      "source_type": "SOURCE_FILE",
+      "target_type": "CODE_SNIPPET",
+      "relationship_type": "CONTAINS",
+      "extra": "Source file contains code snippet: 10-31",
+      "gmt_create": "2026-04-26T21:47:33.452219+08:00",
+      "gmt_modified": "2026-04-26T21:47:33.452219+08:00"
+    },
+    {
+      "id": 100,
+      "source_id": "8d932ac9-cd49-4763-a3ba-d9df215ce9f9",
+      "target_id": "b2398bd2478b2c3f9d0c8a92f4033ee4",
+      "source_type": "WIKI_ITEM",
+      "target_type": "CODE_SNIPPET",
+      "relationship_type": "CONTAINS",
+      "extra": "Wiki contains code snippet: components/Box.tsx#11-21",
+      "gmt_create": "2026-04-26T21:47:33.452533+08:00",
+      "gmt_modified": "2026-04-26T21:47:33.452533+08:00"
+    },
+    {
+      "id": 101,
+      "source_id": "746db0a6c9bf256bae1d483dac0ae857",
+      "target_id": "b2398bd2478b2c3f9d0c8a92f4033ee4",
+      "source_type": "SOURCE_FILE",
+      "target_type": "CODE_SNIPPET",
+      "relationship_type": "CONTAINS",
+      "extra": "Source file contains code snippet: 11-21",
+      "gmt_create": "2026-04-26T21:47:33.452801+08:00",
+      "gmt_modified": "2026-04-26T21:47:33.452801+08:00"
+    },
+    {
+      "id": 102,
+      "source_id": "8d932ac9-cd49-4763-a3ba-d9df215ce9f9",
+      "target_id": "2c59a6c5f41ee4f9e234b1195c1c7af9",
+      "source_type": "WIKI_ITEM",
+      "target_type": "CODE_SNIPPET",
+      "relationship_type": "CONTAINS",
+      "extra": "Wiki contains code snippet: components/CopyBtn.tsx#8-30",
+      "gmt_create": "2026-04-26T21:47:33.453105+08:00",
+      "gmt_modified": "2026-04-26T21:47:33.453105+08:00"
+    },
+    {
+      "id": 103,
+      "source_id": "030a705cd77e6808d5830c26ea05832b",
+      "target_id": "2c59a6c5f41ee4f9e234b1195c1c7af9",
+      "source_type": "SOURCE_FILE",
+      "target_type": "CODE_SNIPPET",
+      "relationship_type": "CONTAINS",
+      "extra": "Source file contains code snippet: 8-30",
+      "gmt_create": "2026-04-26T21:47:33.453375+08:00",
+      "gmt_modified": "2026-04-26T21:47:33.453375+08:00"
+    },
+    {
+      "id": 104,
+      "source_id": "8d932ac9-cd49-4763-a3ba-d9df215ce9f9",
+      "target_id": "eb421bb754d38da69c24f0fa33f6b90f",
+      "source_type": "WIKI_ITEM",
+      "target_type": "CODE_SNIPPET",
+      "relationship_type": "CONTAINS",
+      "extra": "Wiki contains code snippet: components/Faq.tsx#5-34",
+      "gmt_create": "2026-04-26T21:47:33.453734+08:00",
+      "gmt_modified": "2026-04-26T21:47:33.453734+08:00"
+    },
+    {
+      "id": 105,
+      "source_id": "9e507fe98af4f5e821dfc38da7b57eb9",
+      "target_id": "eb421bb754d38da69c24f0fa33f6b90f",
+      "source_type": "SOURCE_FILE",
+      "target_type": "CODE_SNIPPET",
+      "relationship_type": "CONTAINS",
+      "extra": "Source file contains code snippet: 5-34",
+      "gmt_create": "2026-04-26T21:47:33.453967+08:00",
+      "gmt_modified": "2026-04-26T21:47:33.453967+08:00"
+    },
+    {
+      "id": 106,
+      "source_id": "8d932ac9-cd49-4763-a3ba-d9df215ce9f9",
+      "target_id": "99c10f583103a252ca3f584a64e8d6d6",
+      "source_type": "WIKI_ITEM",
+      "target_type": "CODE_SNIPPET",
+      "relationship_type": "CONTAINS",
+      "extra": "Wiki contains code snippet: components/Loading.tsx#7-16",
+      "gmt_create": "2026-04-26T21:47:33.454334+08:00",
+      "gmt_modified": "2026-04-26T21:47:33.454334+08:00"
+    },
+    {
+      "id": 107,
+      "source_id": "d7a4e96cb820d862244d7d3e3485fb36",
+      "target_id": "99c10f583103a252ca3f584a64e8d6d6",
+      "source_type": "SOURCE_FILE",
+      "target_type": "CODE_SNIPPET",
+      "relationship_type": "CONTAINS",
+      "extra": "Source file contains code snippet: 7-16",
+      "gmt_create": "2026-04-26T21:47:33.454514+08:00",
+      "gmt_modified": "2026-04-26T21:47:33.454514+08:00"
+    },
+    {
+      "id": 108,
+      "source_id": "8d932ac9-cd49-4763-a3ba-d9df215ce9f9",
+      "target_id": "d6c5e08626950d83385ee7d2771d4c55",
+      "source_type": "WIKI_ITEM",
+      "target_type": "CODE_SNIPPET",
+      "relationship_type": "CONTAINS",
+      "extra": "Wiki contains code snippet: components/Spinning.tsx#3-25",
+      "gmt_create": "2026-04-26T21:47:33.45482+08:00",
+      "gmt_modified": "2026-04-26T21:47:33.45482+08:00"
+    },
+    {
+      "id": 109,
+      "source_id": "cf062ad66518e254680dbb93a4355aea",
+      "target_id": "d6c5e08626950d83385ee7d2771d4c55",
+      "source_type": "SOURCE_FILE",
+      "target_type": "CODE_SNIPPET",
+      "relationship_type": "CONTAINS",
+      "extra": "Source file contains code snippet: 3-25",
+      "gmt_create": "2026-04-26T21:47:33.455116+08:00",
+      "gmt_modified": "2026-04-26T21:47:33.455116+08:00"
+    },
+    {
+      "id": 110,
+      "source_id": "8d932ac9-cd49-4763-a3ba-d9df215ce9f9",
+      "target_id": "948f9bb7e26b5f726ae078e008baa859",
+      "source_type": "WIKI_ITEM",
+      "target_type": "CODE_SNIPPET",
+      "relationship_type": "CONTAINS",
+      "extra": "Wiki contains code snippet: components/home/Footer.tsx#54-164",
+      "gmt_create": "2026-04-26T21:47:33.45566+08:00",
+      "gmt_modified": "2026-04-26T21:47:33.45566+08:00"
+    },
+    {
+      "id": 111,
+      "source_id": "ffdf269d0f12628c36c1ed6dab864094",
+      "target_id": "948f9bb7e26b5f726ae078e008baa859",
+      "source_type": "SOURCE_FILE",
+      "target_type": "CODE_SNIPPET",
+      "relationship_type": "CONTAINS",
+      "extra": "Source file contains code snippet: 54-164",
+      "gmt_create": "2026-04-26T21:47:33.456037+08:00",
+      "gmt_modified": "2026-04-26T21:47:33.456037+08:00"
+    },
+    {
+      "id": 112,
+      "source_id": "8d932ac9-cd49-4763-a3ba-d9df215ce9f9",
+      "target_id": "73eb0b846b15919568b325e846d420ad",
+      "source_type": "WIKI_ITEM",
+      "target_type": "CODE_SNIPPET",
+      "relationship_type": "CONTAINS",
+      "extra": "Wiki contains code snippet: components/home/BusinessButton.tsx#10-22",
+      "gmt_create": "2026-04-26T21:47:33.45626+08:00",
+      "gmt_modified": "2026-04-26T21:47:33.456261+08:00"
+    },
+    {
+      "id": 113,
+      "source_id": "94a481e9203aae58b2c0ccb9d008431f",
+      "target_id": "73eb0b846b15919568b325e846d420ad",
+      "source_type": "SOURCE_FILE",
+      "target_type": "CODE_SNIPPET",
+      "relationship_type": "CONTAINS",
+      "extra": "Source file contains code snippet: 10-22",
+      "gmt_create": "2026-04-26T21:47:33.456506+08:00",
+      "gmt_modified": "2026-04-26T21:47:33.456506+08:00"
+    },
+    {
+      "id": 114,
+      "source_id": "8d932ac9-cd49-4763-a3ba-d9df215ce9f9",
+      "target_id": "70766a0c219df404a323c8b81f7e6dd9",
+      "source_type": "WIKI_ITEM",
+      "target_type": "CODE_SNIPPET",
+      "relationship_type": "CONTAINS",
+      "extra": "Wiki contains code snippet: components/svg/footer/Github.tsx#2-20",
+      "gmt_create": "2026-04-26T21:47:33.456828+08:00",
+      "gmt_modified": "2026-04-26T21:47:33.456828+08:00"
+    },
+    {
+      "id": 115,
+      "source_id": "bfe67874fc1b9de81a335682bbe78673",
+      "target_id": "70766a0c219df404a323c8b81f7e6dd9",
+      "source_type": "SOURCE_FILE",
+      "target_type": "CODE_SNIPPET",
+      "relationship_type": "CONTAINS",
+      "extra": "Source file contains code snippet: 2-20",
+      "gmt_create": "2026-04-26T21:47:33.457195+08:00",
+      "gmt_modified": "2026-04-26T21:47:33.457195+08:00"
+    },
+    {
+      "id": 116,
+      "source_id": "8d932ac9-cd49-4763-a3ba-d9df215ce9f9",
+      "target_id": "ef93c319501512964a38c99dd9d60fad",
+      "source_type": "WIKI_ITEM",
+      "target_type": "CODE_SNIPPET",
+      "relationship_type": "CONTAINS",
+      "extra": "Wiki contains code snippet: components/svg/footer/Twitter.tsx#2-13",
+      "gmt_create": "2026-04-26T21:47:33.457646+08:00",
+      "gmt_modified": "2026-04-26T21:47:33.457646+08:00"
+    },
+    {
+      "id": 117,
+      "source_id": "250571a266d34c93a6218f309aa43143",
+      "target_id": "ef93c319501512964a38c99dd9d60fad",
+      "source_type": "SOURCE_FILE",
+      "target_type": "CODE_SNIPPET",
+      "relationship_type": "CONTAINS",
+      "extra": "Source file contains code snippet: 2-13",
+      "gmt_create": "2026-04-26T21:47:33.457736+08:00",
+      "gmt_modified": "2026-04-26T21:47:33.457736+08:00"
+    },
+    {
+      "id": 118,
+      "source_id": "8d932ac9-cd49-4763-a3ba-d9df215ce9f9",
+      "target_id": "8e82dd2dffee6331957efa7ee13cd4cb",
+      "source_type": "WIKI_ITEM",
+      "target_type": "CODE_SNIPPET",
+      "relationship_type": "CONTAINS",
+      "extra": "Wiki contains code snippet: components/Faq.tsx#3-3",
+      "gmt_create": "2026-04-26T21:47:33.458096+08:00",
+      "gmt_modified": "2026-04-26T21:47:33.458096+08:00"
+    },
+    {
+      "id": 119,
+      "source_id": "9e507fe98af4f5e821dfc38da7b57eb9",
+      "target_id": "8e82dd2dffee6331957efa7ee13cd4cb",
+      "source_type": "SOURCE_FILE",
+      "target_type": "CODE_SNIPPET",
+      "relationship_type": "CONTAINS",
+      "extra": "Source file contains code snippet: 3-3",
+      "gmt_create": "2026-04-26T21:47:33.458388+08:00",
+      "gmt_modified": "2026-04-26T21:47:33.458388+08:00"
+    },
+    {
+      "id": 120,
+      "source_id": "8d932ac9-cd49-4763-a3ba-d9df215ce9f9",
+      "target_id": "3556601390ebb4f32e32c351833c876c",
+      "source_type": "WIKI_ITEM",
+      "target_type": "CODE_SNIPPET",
+      "relationship_type": "CONTAINS",
+      "extra": "Wiki contains code snippet: components/Loading.tsx#4-4",
+      "gmt_create": "2026-04-26T21:47:33.45859+08:00",
+      "gmt_modified": "2026-04-26T21:47:33.45859+08:00"
+    },
+    {
+      "id": 121,
+      "source_id": "d7a4e96cb820d862244d7d3e3485fb36",
+      "target_id": "3556601390ebb4f32e32c351833c876c",
+      "source_type": "SOURCE_FILE",
+      "target_type": "CODE_SNIPPET",
+      "relationship_type": "CONTAINS",
+      "extra": "Source file contains code snippet: 4-4",
+      "gmt_create": "2026-04-26T21:47:33.458829+08:00",
+      "gmt_modified": "2026-04-26T21:47:33.458829+08:00"
+    },
+    {
+      "id": 122,
+      "source_id": "8d932ac9-cd49-4763-a3ba-d9df215ce9f9",
+      "target_id": "445465ca53d3c2362a9584085bf98c54",
+      "source_type": "WIKI_ITEM",
+      "target_type": "CODE_SNIPPET",
+      "relationship_type": "CONTAINS",
+      "extra": "Wiki contains code snippet: components/CopyBtn.tsx#6-6",
+      "gmt_create": "2026-04-26T21:47:33.459054+08:00",
+      "gmt_modified": "2026-04-26T21:47:33.459055+08:00"
+    },
+    {
+      "id": 123,
+      "source_id": "030a705cd77e6808d5830c26ea05832b",
+      "target_id": "445465ca53d3c2362a9584085bf98c54",
+      "source_type": "SOURCE_FILE",
+      "target_type": "CODE_SNIPPET",
+      "relationship_type": "CONTAINS",
+      "extra": "Source file contains code snippet: 6-6",
+      "gmt_create": "2026-04-26T21:47:33.459351+08:00",
+      "gmt_modified": "2026-04-26T21:47:33.459351+08:00"
+    },
+    {
+      "id": 124,
+      "source_id": "8d932ac9-cd49-4763-a3ba-d9df215ce9f9",
+      "target_id": "181e03a0b9309c1c9b284c56e0efb5c3",
+      "source_type": "WIKI_ITEM",
+      "target_type": "CODE_SNIPPET",
+      "relationship_type": "CONTAINS",
+      "extra": "Wiki contains code snippet: components/home/Footer.tsx#7-8",
+      "gmt_create": "2026-04-26T21:47:33.459567+08:00",
+      "gmt_modified": "2026-04-26T21:47:33.459567+08:00"
+    },
+    {
+      "id": 125,
+      "source_id": "ffdf269d0f12628c36c1ed6dab864094",
+      "target_id": "181e03a0b9309c1c9b284c56e0efb5c3",
+      "source_type": "SOURCE_FILE",
+      "target_type": "CODE_SNIPPET",
+      "relationship_type": "CONTAINS",
+      "extra": "Source file contains code snippet: 7-8",
+      "gmt_create": "2026-04-26T21:47:33.459645+08:00",
+      "gmt_modified": "2026-04-26T21:47:33.459645+08:00"
+    },
+    {
+      "id": 126,
+      "source_id": "8d932ac9-cd49-4763-a3ba-d9df215ce9f9",
+      "target_id": "e5b3ed4cf35994ada3cc4f4bd0c796f3",
+      "source_type": "WIKI_ITEM",
+      "target_type": "CODE_SNIPPET",
+      "relationship_type": "CONTAINS",
+      "extra": "Wiki contains code snippet: components/home/BusinessButton.tsx#3",
+      "gmt_create": "2026-04-26T21:47:33.45977+08:00",
+      "gmt_modified": "2026-04-26T21:47:33.45977+08:00"
+    },
+    {
+      "id": 127,
+      "source_id": "94a481e9203aae58b2c0ccb9d008431f",
+      "target_id": "e5b3ed4cf35994ada3cc4f4bd0c796f3",
+      "source_type": "SOURCE_FILE",
+      "target_type": "CODE_SNIPPET",
+      "relationship_type": "CONTAINS",
+      "extra": "Source file contains code snippet: 3",
+      "gmt_create": "2026-04-26T21:47:33.459877+08:00",
+      "gmt_modified": "2026-04-26T21:47:33.459877+08:00"
+    },
+    {
+      "id": 128,
+      "source_id": "8d932ac9-cd49-4763-a3ba-d9df215ce9f9",
+      "target_id": "096d8563d77d81209c2795af4e13c177",
+      "source_type": "WIKI_ITEM",
+      "target_type": "CODE_SNIPPET",
+      "relationship_type": "CONTAINS",
+      "extra": "Wiki contains code snippet: components/svg/footer/Github.tsx#1",
+      "gmt_create": "2026-04-26T21:47:33.459985+08:00",
+      "gmt_modified": "2026-04-26T21:47:33.459985+08:00"
+    },
+    {
+      "id": 129,
+      "source_id": "bfe67874fc1b9de81a335682bbe78673",
+      "target_id": "096d8563d77d81209c2795af4e13c177",
+      "source_type": "SOURCE_FILE",
+      "target_type": "CODE_SNIPPET",
+      "relationship_type": "CONTAINS",
+      "extra": "Source file contains code snippet: 1",
+      "gmt_create": "2026-04-26T21:47:33.460076+08:00",
+      "gmt_modified": "2026-04-26T21:47:33.460076+08:00"
+    },
+    {
+      "id": 130,
+      "source_id": "8d932ac9-cd49-4763-a3ba-d9df215ce9f9",
+      "target_id": "8b1fd8f4d4ec8a0977ca5391e81af636",
+      "source_type": "WIKI_ITEM",
+      "target_type": "CODE_SNIPPET",
+      "relationship_type": "CONTAINS",
+      "extra": "Wiki contains code snippet: components/svg/footer/Twitter.tsx#1",
+      "gmt_create": "2026-04-26T21:47:33.460204+08:00",
+      "gmt_modified": "2026-04-26T21:47:33.460204+08:00"
+    },
+    {
+      "id": 131,
+      "source_id": "250571a266d34c93a6218f309aa43143",
+      "target_id": "8b1fd8f4d4ec8a0977ca5391e81af636",
+      "source_type": "SOURCE_FILE",
+      "target_type": "CODE_SNIPPET",
+      "relationship_type": "CONTAINS",
+      "extra": "Source file contains code snippet: 1",
+      "gmt_create": "2026-04-26T21:47:33.460304+08:00",
+      "gmt_modified": "2026-04-26T21:47:33.460304+08:00"
+    }
+  ],
+  "source_files": [
+    {
+      "id": "a166eb11c9477f569f9aba9fedcdff31",
+      "path": "README.md",
+      "filename": "README.md",
+      "gmt_create": "2026-04-26T21:36:27.829516+08:00",
+      "gmt_modified": "2026-04-26T21:36:27.829516+08:00"
+    },
+    {
+      "id": "dbb0b04fd16a5f60d4f8be87bc085aa5",
+      "path": "package.json",
+      "filename": "package.json",
+      "gmt_create": "2026-04-26T21:36:27.831549+08:00",
+      "gmt_modified": "2026-04-26T21:36:27.83155+08:00"
+    },
+    {
+      "id": "4dd427e7f6a05e73f9fd5b1d805dcb13",
+      "path": "next.config.mjs",
+      "filename": "next.config.mjs",
+      "gmt_create": "2026-04-26T21:36:27.831759+08:00",
+      "gmt_modified": "2026-04-26T21:36:27.831759+08:00"
+    },
+    {
+      "id": "eb5e2c5d8def8fcdbdd811c8a55e08aa",
+      "path": "next-env.d.ts",
+      "filename": "next-env.d.ts",
+      "gmt_create": "2026-04-26T21:36:27.832313+08:00",
+      "gmt_modified": "2026-04-26T21:36:27.832313+08:00"
+    },
+    {
+      "id": "496e94529fbbf56ec7d546408c4b3566",
+      "path": "postcss.config.js",
+      "filename": "postcss.config.js",
+      "gmt_create": "2026-04-26T21:36:27.832613+08:00",
+      "gmt_modified": "2026-04-26T21:36:27.832613+08:00"
+    },
+    {
+      "id": "f1b03347db802b4284dd8d2ca7b39c7f",
+      "path": "app/robots.ts",
+      "filename": "robots.ts",
+      "gmt_create": "2026-04-26T21:36:27.832989+08:00",
+      "gmt_modified": "2026-04-26T21:36:27.832989+08:00"
+    },
+    {
+      "id": "8e0d9a32c8febda1497e4412ed4fb503",
+      "path": "app/sitemap.ts",
+      "filename": "sitemap.ts",
+      "gmt_create": "2026-04-26T21:36:27.833161+08:00",
+      "gmt_modified": "2026-04-26T21:36:27.833161+08:00"
+    },
+    {
+      "id": "9e5d54cbf1d5d9304b24bbb6666900f1",
+      "path": "lib/env.ts",
+      "filename": "env.ts",
+      "gmt_create": "2026-04-26T21:36:27.833623+08:00",
+      "gmt_modified": "2026-04-26T21:36:27.833623+08:00"
+    },
+    {
+      "id": "640657b684b2a6d4b16f6793a9cbc07c",
+      "path": "lib/constants/index.ts",
+      "filename": "index.ts",
+      "gmt_create": "2026-04-26T21:36:27.833775+08:00",
+      "gmt_modified": "2026-04-26T21:36:27.833775+08:00"
+    },
+    {
+      "id": "e40584f67c2665c43da6d65a8d64e86f",
+      "path": "components/home/new-section/HeroSection.tsx",
+      "filename": "HeroSection.tsx",
+      "gmt_create": "2026-04-26T21:36:27.83414+08:00",
+      "gmt_modified": "2026-04-26T21:36:27.834141+08:00"
+    },
+    {
+      "id": "d07cdc39a22609bbceab608d95bf5b68",
+      "path": "components/AgSwitch.tsx",
+      "filename": "AgSwitch.tsx",
+      "gmt_create": "2026-04-26T21:47:33.423937+08:00",
+      "gmt_modified": "2026-04-26T21:47:33.423937+08:00"
+    },
+    {
+      "id": "746db0a6c9bf256bae1d483dac0ae857",
+      "path": "components/Box.tsx",
+      "filename": "Box.tsx",
+      "gmt_create": "2026-04-26T21:47:33.424193+08:00",
+      "gmt_modified": "2026-04-26T21:47:33.424193+08:00"
+    },
+    {
+      "id": "030a705cd77e6808d5830c26ea05832b",
+      "path": "components/CopyBtn.tsx",
+      "filename": "CopyBtn.tsx",
+      "gmt_create": "2026-04-26T21:47:33.424235+08:00",
+      "gmt_modified": "2026-04-26T21:47:33.424235+08:00"
+    },
+    {
+      "id": "9e507fe98af4f5e821dfc38da7b57eb9",
+      "path": "components/Faq.tsx",
+      "filename": "Faq.tsx",
+      "gmt_create": "2026-04-26T21:47:33.424377+08:00",
+      "gmt_modified": "2026-04-26T21:47:33.424378+08:00"
+    },
+    {
+      "id": "d7a4e96cb820d862244d7d3e3485fb36",
+      "path": "components/Loading.tsx",
+      "filename": "Loading.tsx",
+      "gmt_create": "2026-04-26T21:47:33.424414+08:00",
+      "gmt_modified": "2026-04-26T21:47:33.424414+08:00"
+    },
+    {
+      "id": "cf062ad66518e254680dbb93a4355aea",
+      "path": "components/Spinning.tsx",
+      "filename": "Spinning.tsx",
+      "gmt_create": "2026-04-26T21:47:33.424551+08:00",
+      "gmt_modified": "2026-04-26T21:47:33.424551+08:00"
+    },
+    {
+      "id": "90e0919ca2007d267deee1ecd58a090f",
+      "path": "components/range-input.tsx",
+      "filename": "range-input.tsx",
+      "gmt_create": "2026-04-26T21:47:33.424605+08:00",
+      "gmt_modified": "2026-04-26T21:47:33.424605+08:00"
+    },
+    {
+      "id": "ef32b5e89291af36339053cd83b42221",
+      "path": "components/top-loading-bar.tsx",
+      "filename": "top-loading-bar.tsx",
+      "gmt_create": "2026-04-26T21:47:33.424756+08:00",
+      "gmt_modified": "2026-04-26T21:47:33.424756+08:00"
+    },
+    {
+      "id": "ffdf269d0f12628c36c1ed6dab864094",
+      "path": "components/home/Footer.tsx",
+      "filename": "Footer.tsx",
+      "gmt_create": "2026-04-26T21:47:33.424834+08:00",
+      "gmt_modified": "2026-04-26T21:47:33.424834+08:00"
+    },
+    {
+      "id": "94a481e9203aae58b2c0ccb9d008431f",
+      "path": "components/home/BusinessButton.tsx",
+      "filename": "BusinessButton.tsx",
+      "gmt_create": "2026-04-26T21:47:33.425017+08:00",
+      "gmt_modified": "2026-04-26T21:47:33.425017+08:00"
+    },
+    {
+      "id": "bfe67874fc1b9de81a335682bbe78673",
+      "path": "components/svg/footer/Github.tsx",
+      "filename": "Github.tsx",
+      "gmt_create": "2026-04-26T21:47:33.425074+08:00",
+      "gmt_modified": "2026-04-26T21:47:33.425074+08:00"
+    },
+    {
+      "id": "250571a266d34c93a6218f309aa43143",
+      "path": "components/svg/footer/Twitter.tsx",
+      "filename": "Twitter.tsx",
+      "gmt_create": "2026-04-26T21:47:33.425242+08:00",
+      "gmt_modified": "2026-04-26T21:47:33.425242+08:00"
+    },
+    {
+      "id": "6ba3533c9a0c4a68ba03c927607fe6e3",
+      "path": "lib/constants/navigation.ts",
+      "filename": "navigation.ts",
+      "gmt_create": "2026-04-26T21:47:33.42531+08:00",
+      "gmt_modified": "2026-04-26T21:47:33.42531+08:00"
+    },
+    {
+      "id": "319f6744c2c64b4cb2873e91663b90a0",
+      "path": "app/[locale]/LazyGlobalUI.tsx",
+      "filename": "LazyGlobalUI.tsx",
+      "gmt_create": "2026-04-26T21:47:33.425377+08:00",
+      "gmt_modified": "2026-04-26T21:47:33.425377+08:00"
+    },
+    {
+      "id": "54d823e057aee5ae18a60f3e4cb99368",
+      "path": "app/[locale]/layout.tsx",
+      "filename": "layout.tsx",
+      "gmt_create": "2026-04-26T21:47:33.425432+08:00",
+      "gmt_modified": "2026-04-26T21:47:33.425432+08:00"
+    },
+    {
+      "id": "d5ac0a80a1e3600cc2a18fa1778eeab5",
+      "path": "app/[locale]/(without-footer",
+      "filename": "(without-footer",
+      "gmt_create": "2026-04-26T21:47:33.425488+08:00",
+      "gmt_modified": "2026-04-26T21:47:33.425488+08:00"
+    },
+    {
+      "id": "f827cf474fa4ed27544ae7cd7c0a44fc",
+      "path": "components/ui/accordion.tsx",
+      "filename": "accordion.tsx",
+      "gmt_create": "2026-04-26T21:47:33.425553+08:00",
+      "gmt_modified": "2026-04-26T21:47:33.425553+08:00"
+    }
+  ],
+  "wiki_catalogs": [
+    {
+      "id": "fbdd80d7-d94d-4496-a919-0087693f9b29",
+      "repo_id": "88680e08-955a-451a-9880-773ecc4da749",
+      "name": "Getting Started",
+      "description": "getting-started",
+      "prompt": "Create comprehensive content for the Getting Started section focused on Flaq SaaS Template setup and initial usage. Explain the project purpose as a free SaaS template for building AIGC tools with flaq.ai, covering prerequisites including Node.js, Next.js 16, and basic React knowledge. Document installation steps, environment setup, and initial configuration. Include practical examples of running the development server, accessing different AI features, and understanding the project structure. Provide clear guidance for beginners while ensuring experienced developers can quickly get up and running. Use terminology consistent with the codebase and include troubleshooting tips for common setup issues.",
+      "progress_status": "completed",
+      "dependent_files": "README.md,package.json,next.config.mjs,.gitignore",
+      "gmt_create": "2026-04-26T15:58:16.748511+08:00",
+      "gmt_modified": "2026-04-26T21:36:27.992438+08:00",
+      "raw_data": "WikiEncrypted:OnqdYRPDHJWrck3cSEad5QZzsqGBpsaXzmolc/peQVpBFP4cM3XmFIZAZu6MEPGiidOeeMblP666o/6bNxuH7tj/A6vDo0+sdeTsj5hjQGJKm+ebUoIZpBWbFsyEagp95Fr453FOOMPfjongeLdvsyzXAJHHMnbW2Kdj9T58my/Y1F6PuB5UW36A9l3NfORETEQRqw/5A79RAOGDWwnlC+iv4UlYv7sdp3qimEibl/71WtSa3BnT7/TgHbto/cZA29YGHcutDrrARqoZbJmzli6vDY4LbwLhe5XfnR68hfm0wyY9msgHo5C/nY7MVKYTPkMaVKvHF4D8AIsAeu3fPHO09Q80tfUOdbraex+WZNqjBhYkQGaDLFrQ3SYEIN8fOjEWyl7n+p6lgWJWLnMGQODEOm0O0Iy49IycReMEhjavdO0z8Hfe4qDQDHPDvQBUNKrrmSH9SVTX/eKtILhr4PXlBOLRyaXKoqdNnw6nuUksEEl2ndwTsby4ripFTPp52aFTlC40oWhpjaFnRHNVYiWigyM9ajr3muW0xB0YZ3Qb54jV9yUJuKRcQOpOUwI0gVGtXoJe47YIhPgNB/ajcTaldRoaQ97pWvFs1F+EMk21NhYw3lGZp4z054lYD3HhayhiGScXBeaBVdfJezuPXSoMoAUKL2s9qDmOE0J07YWkvmluQLcGnK6HD7+p3qebmsI/4a8pZR0GVzmIrLQWvv0En4D0oK8FsbFWPKigVqffV0EWP4NRUZS1hG+QwFu03H6fbrhYT/c8Z2Lng5I0IQ/cGTc9N4Fx1Y+Q1HP/1wD5FlZJm7jxjdyHpVHPmhYwD+fMTVjENjd3wiaRL3ztrjq7iZ1blkiIn7jPFbAG6MWQUbaTlItb1rYZliQ7oi1DVEBmZlpfdl6Pv0hXf2RA0olWLV0zDMwmjaWT739+yByESgJwESKrZxpwimErj98rOEzT2MIhW2YOauz/XIQ0gch+doegWGL70EOvxi06etGg0mhWMKq4j/q34r9/b47zMfa9f2TEejPSgh6+z1Eih386lS6w3R4yTnbdb/1qu3kn481UFiwNtxtoyZzS2/RJc21xxiIiqxMA5qqQwhYFQOlZSTJ9u9ZM2ZtpUPJvg6DN87wBNeE7PTByHuCKC6E2OaNZHQOhRER+y0jce9AJGongSvtrOd/ZyHDIQ51Iktcd9nbBcYhGwVTcYVm84qFoQ3OR2GRWbYDKDpP3r4s+jU798Rn01K2HeIzXigLcgphzlnIPyYhfTMUpnqA1UR0nCLIXyxMUK04FGlJOy7bZdbx017nGDyPIwkNo4oa1WvtZo3xKYEbhcJXotzlQaPCNsis9ZTBu/busQSeW2dv6i6jmTd8E8A9JyvbSbNVVucytJahih76VtkhqXih7MtcCdqgbW0/5UAbVI7YOEVPKcfWyyQ05whsvvCSiK1MeqSUehR/glVhXPotlhlsdqKZ0hrHl5U2jHgXcJDThq9lxCMbFIvw3Jd/TnDs7HJjOCgN1uPL9F4JPYXj+eAH6/nWQ"
+    },
+    {
+      "id": "387f6f0a-c0c9-40f5-9dd1-148905c51f41",
+      "repo_id": "88680e08-955a-451a-9880-773ecc4da749",
+      "name": "Text-to-Image Generator",
+      "description": "text-to-image-generator",
+      "prompt": "Develop detailed content for the Text-to-Image Generator feature. Explain the AI-powered text-to-image generation workflow, including prompt input handling, aspect ratio selection, resolution settings, and quality controls. Document the ImageForm component implementation with its form validation, default value priority system, and submission handling. Cover the example showcase gallery featuring real-world use cases and prompt examples. Include practical examples of effective prompt construction, parameter tuning for optimal results, and best practices for different use cases. Address the integration with external AI services, AWS S3 asset management for generated images, and performance considerations for batch processing.",
+      "parent_id": "b6b6eb1b-9d10-4683-a325-49570e8bf726",
+      "progress_status": "completed",
+      "dependent_files": "app/[locale]/(with-footer)/(ai-features)/(image)/text-to-image/page.tsx,components/image-ui-form/image-form.tsx,components/home/new-section/ExampleShowcaseSection.tsx,components/Faq.tsx",
+      "gmt_create": "2026-04-26T15:58:30.861904+08:00",
+      "gmt_modified": "2026-04-26T16:03:36.336034+08:00",
+      "raw_data": "WikiEncrypted:FFPvH6fuTdNO6tSZRuIpzf0zqMHc9Zj0Cp7iNQ/Y8TodiHU6Pq380FhBLFOmp0BeI1hcHmZFgaxJQHYfzoWeGgqaRYJN/xfQN0D9vcb2ru7Ns1G89rTeGYdqOFSDlCOPL9mYXxQsa7m0Ye1W1GnAgTI+PRNBv0cXxje+i/loOrt14nR5TmcdQFp5R+pjTcOUltVXfWmu1Ku8YzugfnS147oUNjwfw/70BUukBCjg1vXZaikt0S8Fsd0De+BQ8ugbcshnm5V8cJ66VnBG921MCIQhiuIudOGTq70j3AUGQ2PE6xohNTuPVONScaa/dXvnuurvs57XyzWLqJP8r13EXUcUhS8SwHOT2s4cuFDCaMebe2gNOkcYIxCJGMUJKzztSQ+Mw03KhpVUt9C7BMBMljGQs5IIMJLXGvTIgNL8GY4s5W5RrqCT+a+dJ/5RRNkU8+ZHTFcMhVb4+3vzu5tC7D9q7/GOC2Usq2LjV7H20sRyqjvXOu3ctxu+ToQikPJFqzXbfExVt7zh00sxyNzXYewGn6B8RlREOYVt210mjZw6/MFpq/b9IzTf8BziCLDDBblJCjdNIC5Ivi/8ahXsyQRNXWszITztIPdKnHohY/WOfxYoCN/Dltd6/FTcyhDFaa/ztS2Ih+DGp2+DgcqVWGH4q2zFDttGuF2Da0+EZ/wjEhn96I/23GCNkiZkc89cP/D95l7bCE/WjZLRMCwFnGnECD+QRs0oH1T3Th6axGl7OFgYiPNgwg2D4PuLYpOwJ5by3ABmMmRxDyhIQBclHzPPtxBopxUq9wi5AkoPtcYLFJ9eBrV1hLa8locwD1yRwnDdViZLCVL2HUEnXMYEtWj9/MLqPphTpFozOXJg6LQgYPR+7N5TujWWdKmNtV665MIdvQUFQdWpblnyjlK2OR+M4anZ+35qg3ql3FmMBjSsYs0kOHJuKoORf4xB9f5touGtCeQpR/943UmfbyAxtWqVOaVLQEdBz2WJBn2jP77x+AbuKKwgLvpSxbhZMFdThFBNQr7xaUf5Y8xU3adjcggNJ5Wyq3NUZ/z8yWv/EAr6Z7olF35cC93z2LS5ywiYoWocnQAmlHWONmO6ARuDznO8AAdmfypk0cEYnlgh0UAgg9B0n8ok12OIGUrKJ6k3AXqZDHfuhAnf61N4SjHG/f6w5zVU+pDwfpfj1xR8pSR3BMV55uX5gDXIW4IhDMF8uSf2dyhXiEq8er/6BNOjYeCpDETofCjV04GEcQcyqQjDD21fAtsKBfrH6FEZRokGrBu6VURNNOLHN4KpzqpED+gvWEL2zQLKyVFWKVed9v1h+Uw8oLn9089STivc5P2awUQc2gmfnUntxmRKLYeUg88gbVxvWTlR+pmWX4y0Kgc+e1SAL9J+tAJSOAwnkRUcUmYiuSqsgRI46pEmw+Bayr3EvqwOa0e/O1NV8tddgXpNi4JJToj4G8CqgrWIPYaBAsEdbVJJK9LWoFJRlOD11ii4YJuNJMpBAPZgUA2ibQXLz3ssu1Y6EPE/xb7eDyUIYKo+jgoewbpb5dUqcGY50dr0Bqr9QcoLScNVP53mAYAdKgqXlTNeqi5KsfSQyJToeMVyZug19DXvMFeLRPfhY6AiDyLA0TSgKHn5wIM3RLxq7CBEq0AGIUKTIp+35timbce38izDBen8Aki0wj6RUsSUQN9hV7mA8QtXlrVUx5Bee4AvvhnLoVsSQVLa+FP/QXq4t7chl7FStm+XjHmjhg==",
+      "layer_level": 1
+    },
+    {
+      "id": "db0b376f-83d0-4535-b7ef-695adea7ea1e",
+      "repo_id": "88680e08-955a-451a-9880-773ecc4da749",
+      "name": "Architecture Overview",
+      "description": "architecture-overview",
+      "prompt": "Create architectural documentation for Flaq SaaS Template's system design and structure. Describe the high-level Next.js 16 App Router architecture, internationalization patterns with next-intl, and component-based design system. Document the route-based organization with locale support, layout hierarchies, and component composition patterns. Explain the technology stack including React 19, TypeScript, Radix UI, Tailwind CSS, Zustand, and AWS S3 integration. Include system boundaries, data flows between AI features and backend services, and integration patterns. Address architectural decisions, scalability considerations, and performance optimizations. Provide component interaction diagrams and explain how different AI features share common infrastructure.",
+      "order": 1,
+      "progress_status": "completed",
+      "dependent_files": "next.config.mjs,tsconfig.json,eslint.config.mjs,app/[locale]/(with-footer)/layout.tsx,app/[locale]/(with-footer)/(ai-features)/layout.tsx",
+      "gmt_create": "2026-04-26T15:58:16.750516+08:00",
+      "gmt_modified": "2026-04-26T15:59:29.846731+08:00",
+      "raw_data": "WikiEncrypted:EPw1VhZSv2AMLpYzHbCG5biFcgGMvwOBOVUOBtRMzXq9nIrsyT+EBefN3hNUPITPVarYYS5Pu/iqKKh086FV2DmKzq7AELY1ngI7PIP4ODjWFKgz4HZGyH37APSwA/sTLQIEeLvBczNxz5t2t/qb0lSVwhJBGhgvl4q9hWn2Kn0G+AU73M8Rl5ySZHIYJmAV9E64K4ovdydyNmzOWG8opqCMGY2Q1TYmVdnS/8/tDlVIEARPXKX5jheUvsmXpkL9fbvgo4MRLapU8FvyTJCoK5lbeBx5ff/Bf9bNXTpxXhPTixgYHOvkEkUN9U0KCpapxFUba7LUUw0SYlY/LiO5+N1CU/nwAScn0XnQAvKZPHyGv2d/hDUprj9ZQkfffaEx8nhly3RWhbUuy6non/UVR0dxscJP0o8Nhvl9IgLO3Iw3a0OnMdDaOFhvo+dRq1EH0urR+7FEbrh8a3nSxoBaHKpz5XsYjGcw5RN5VFQ5D8oKoFMWeFdPVS57IYjZZ5E9Yvz7O/4HcFq1+A9HPxsMAMUh3+p71fwuBEEhE/J4J3S2YLR5IJyCbW77o8P39sLQnY2iQf8j8NaPGDFt1SlsDW/jzHFcQivNxPSWNQyN7tqSKn0u7zwMCla/hEF9mWeL4bsPbhnIKkQbPTa8azkhu13IHkEVP30ls0hH75xkNdtjSw4FgwN89fQoatKVaJ0o+PstAmkH1Yz7dFp8mHqVia0FlTIlUmtyRtLryaTghDglTaYmc7WCFXujG6lcU7WfBszBjN3MekjcQe9RsofYX81KPGEkeVN8Vng9I9PMUePTC+P/bygF720Qya3k3rzWfuuo8+vrxRJNmLKybkeBbaI+qq9aYQ+UnyJed3UptBuMG/k7ct5VUZELdkHyrwzmDjUU1rV34YrT+2/s/qc0q1OiHQo+qN5expbk6KQgfZXxjawHSzfqlA2vxiNAzhuZr5S4GnijCqrS9mMY35FB/q86kllir0RsmU1a7JwV3ff/J6F/2FbkM39lHFKHdnWC3WH/4ndQGRs4rCpU7lyQSrvf/o0UhkECfqQ3FuVpTqhAsksOvJVXyvmdopFFP5XdHEzk+dw+WruVCMsxDS1EzVi4BhckgKIheaCcVRPUGbGbWyDmWpnLLX0yslWvwTLs1KspExRRhSiM7upZeRNI7xHeYfei87YbD6dRjSMOzweDlTnc81u1fQapqWeMabXfb5FFl0B5gN+kLjcpmzNGZyIDGQgs8aLjiSGpb4YcpKuCl7DZBVWB6tpt4+myPdq+1EXCwETG0zMMT+LNFfdxRrmS4+Xf4qHHRRtNM3QMBTEzjKYSPHzkElPxXv3mFrIGzXeJmRD14R8ZsW6Sk/XRuaQCu3ooRuGeUoLPRZGylJ031I6TMA/gg1eYsVsZltJoOuV85sDosVEX26l8+oisCLNmFMDEjb6ubSAFFh7o26qbssuW2sYVaR+UiqCPZiM7vQJUbKYCYrUGSwNVS/4Ai1kaa8JiM4Sx865EQHzdibHg1W56dB+eNzFuqxAEDs2IiuZc/h+VW7LGVFUDP/LG2rSw0LpD8Xa8qve3qVsvrREPikJ0TwdUcE+Ev09+GmdXMbLWMkh3D8QGClygojC9XJ5rt5IXTNiLtVkeo7QwHUX8kn5oMs8wLkOjOGKHm9Su8jGS73bh2nKJrdEKwOvReM5de6U5yphrQLefizQnBQ8zmmqd5SQkYSO/uauFh4LQNuc7ZBulr3QmVoEGON8vpP/IvKAhZFJdG4PXyjEihGR+lN7tbzKAWTbDK7ab6eS87/UtvdifcE6VFizXMpJXwsoa2EtbgF/ToBXv3nKTH3c="
+    },
+    {
+      "id": "1ced157f-6607-4f4a-a2d4-b77cea14d3cd",
+      "repo_id": "88680e08-955a-451a-9880-773ecc4da749",
+      "name": "Image-to-Image Transformer",
+      "description": "image-to-image-transformer",
+      "prompt": "Develop detailed content for the Image-to-Image Transformer feature. Explain the AI-powered image modification and enhancement workflow, including upload interface implementation, effect selection system, and adjustment controls. Document the ImageForm component adaptation for image-based inputs, file validation, preview system functionality, and download options. Cover the processing pipeline from image upload through AI transformation to result delivery. Include practical examples of common transformation effects, parameter adjustment techniques, and quality optimization strategies. Address file size limitations, supported formats, progress tracking during processing, and integration with AWS S3 for asset management.",
+      "parent_id": "b6b6eb1b-9d10-4683-a325-49570e8bf726",
+      "order": 1,
+      "progress_status": "completed",
+      "dependent_files": "app/[locale]/(with-footer)/(ai-features)/(image)/image-to-image/page.tsx,components/image-ui-form/image-form.tsx",
+      "gmt_create": "2026-04-26T15:58:30.862259+08:00",
+      "gmt_modified": "2026-04-26T16:04:25.7054+08:00",
+      "raw_data": "WikiEncrypted:vw8SwXDMWAcq3MVrbhINPGWpw8PDC12etB/Ibo9BhTaMvXAPl107qFOym/2arh4oJRWPEE4RnjQy4sUGm37BxC62tGIV9zRjYR/WHPCJpztY/EY4mjFRCoN7xoRu2CtqSHx6D5p451nHs1bswdhLH6igiGlXu/g4j2zSMOhHLACECmwMUzDJoEMZx0SRYKPaXUSkox8uLDWYZdI5+lpJC5jVscENhC1Ph1TfQKS6OmFSZWdDEt0ocnsEdkBLgOYuy4Xe0Y7J+nk3f/b2+if1PT18sdRb49MlEHTMzQx6KVC0H0TRMoGbGs0rqxxiBPEJXW0IOafJADwzlPdFcQ54VtLwu3aRaAqF1JFQ6S7TwL4iQyQfBr9KSdCtDHyrjQwirGTpnDBC1yScj3xcNXPRx/CvYWZgapS+08axUWfwOVtC0M4Hdrif7ylyxCq/tTX9+Fhk/GF90nceUq/gDg+fmpxT0oZBAutsoFS26iSHYhqZodnuyQzaeQl5/48doaaC4oF6FugVftZ31nWxhKRohJeE/SK+dF1TbOu6HqvtNQVCLXtfWlWPc50olKVj2NmrFAbB6fw1yMM+QyQkl1mR+F3gK1Pnl774tN5JLCAa5KfG43KVydhmKrrVkeW1TuxWhCtdk+C0V1p3bSIL1odBI9oZ/bzyegdFCh17pd1Mrq6yyxKDNFhAlbEB+7cB7QfdY/cOhgzj9kAmPBvFAi4VQWQDWuNneSrNNhClPr4jrtI+Scg3QU3obLew98dRwJrSmQQfF3MlFU+wOabbol5RojTDSP9aCg0OZglLtzdqg5Xkw4vw65QCHmJ6U+o/N314Hk7oEbqu2SmngC0ShX6NoPoRhM9HR0jmwd69J7LjUgZdTRDp7VVwJ/bDUUX5KKwdCTONaXDI0pSfpYFbOkoKxVfAV28xm55a3x5jdd/Z7LbpjyWZGDMZyMkSiBNA/kLmvtqy6wldQ7U33Dg1NpuBwFOT2GZjLXNxA31EECxebfzVEBR8xnB6QVVyd4cZosBsmrNbuKcq381zLuMAdZIWC0tGN4DHL+5coUhpUvVBFo3l9cXSLZpA7XjQpvSclov/AUd54/qvqDkBYZ3kjt00SgdIfo1p+yEEObUa1N8ro+xPIMjwRyv7AT0tampi7Ro0EBM/X0hJsFlK3Jgk4JPt6duJLnAtfvyLnoHrW4MV3pSb+GR0UK9TZa8k1rq3G0et+6+cDFAJ2ph7ORe6YG98SamXLGhBNcqf/gvX0lNfo4cyYTldY38P7LsuRizo3BQSuBUygDgGDaHdJw+gCHzcKRtFkNPQYCyDkl2PtAmzTJr/pwL5c6VfG14h0r89j6+1zB8Mtb2XkOG3nd+QrLnWR0OV5QyXPVvutdoHBLJUBlt/tKEcNYl69YVF9OC2lfpy9pGZHq7POHNNKMwvdij8OVY7E6xELV8WvLgz5o+u34GGrH8TsMAwtZ/trgkJfB+tf1w0v2+DWMhkAjvmQKJRBWcv3WCjj9oEVAnxS3lDfko03B0OA7xlM9E1DLTuPMDDaqd7VP/Wz67xEhrCYRRHT3xxc74dCgHDNj8NnUQNisGnqtSVOPwyeekLHo6WPOLOZEWJaUdGapNqprBUqbwiBVGUFoDI2BHtWmGKIAfQ5RQ=",
+      "layer_level": 1
+    },
+    {
+      "id": "b6b6eb1b-9d10-4683-a325-49570e8bf726",
+      "repo_id": "88680e08-955a-451a-9880-773ecc4da749",
+      "name": "AI Creative Tools",
+      "description": "ai-creative-tools",
+      "prompt": "Create comprehensive content for the AI Creative Tools section focused on Flaq's four core AI features: Text-to-Image Generation, Image-to-Image Transformation, Virtual Try-On, and Image-to-Video Conversion. Explain each tool's purpose, target use cases, and unique capabilities. Document the implementation details including form configurations, processing workflows, and result handling. Cover user interface patterns, input validation, progress tracking, and output management. Include practical examples demonstrating common use cases, parameter tuning, and best practices for each AI feature. Address integration with external AI services, AWS S3 asset management, and performance considerations. Provide guidance on customizing tool parameters and extending functionality.",
+      "order": 2,
+      "progress_status": "completed",
+      "dependent_files": "app/[locale]/(with-footer)/(ai-features)/(image)/text-to-image/page.tsx,app/[locale]/(with-footer)/(ai-features)/(image)/image-to-image/page.tsx,app/[locale]/(with-footer)/(ai-features)/(image)/virtual-try-on/page.tsx,app/[locale]/(with-footer)/(ai-features)/(video)/image-to-video/page.tsx",
+      "gmt_create": "2026-04-26T15:58:16.750677+08:00",
+      "gmt_modified": "2026-04-26T15:59:40.108333+08:00",
+      "raw_data": "WikiEncrypted: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"
+    },
+    {
+      "id": "515a2afb-3b18-42c9-a915-2bfdb16cb4ae",
+      "repo_id": "88680e08-955a-451a-9880-773ecc4da749",
+      "name": "Virtual Try-On",
+      "description": "virtual-try-on",
+      "prompt": "Develop detailed content for the Virtual Try-On feature. Explain the AR-powered clothing visualization and fitting system, including clothing upload process, body measurement input handling, and fit preview functionality. Document the specialized form component for try-on workflows, measurement validation, size recommendation algorithms, and sharing capabilities. Cover the integration with AR/VR technologies, body scanning requirements, and fit accuracy optimization. Include practical examples of successful try-on scenarios, measurement input best practices, and troubleshooting common fit issues. Address privacy considerations for body measurements, performance optimization for real-time previews, and integration with e-commerce workflows.",
+      "parent_id": "b6b6eb1b-9d10-4683-a325-49570e8bf726",
+      "order": 2,
+      "progress_status": "completed",
+      "dependent_files": "app/[locale]/(with-footer)/(ai-features)/(image)/virtual-try-on/page.tsx,app/[locale]/(with-footer)/(ai-features)/(image)/virtual-try-on/form.tsx",
+      "gmt_create": "2026-04-26T15:58:30.862353+08:00",
+      "gmt_modified": "2026-04-26T16:03:57.076052+08:00",
+      "raw_data": "WikiEncrypted:y2a4hKtf0s+4uvn2ROPZrQOkBrUFU/PFAAbCCJpI/wDtsIAzOTE8yzNhEu1ckSrjlvGJoy3HCR3aETzmVBn/GumF4LrCDwThhLiSUVrkt/6Gbe1QtrBQC6X6IpjzfCNEW9ZJtXFjTl+wTkn3LPEIYr7gDRKad/IB0mPrCjblxVJf5NOfTEBQWR/RXmrSEoTousExobZXqH3U5LrttOpFSxZI2YG3g4vygZlxRzr689V5vGd9E8Cgz0z/IQGuS5TLWNZpjY6HyN8+hqbmztRRnCrVrtvJxQG1KIFeUF60hXbgQ5ar34cp35MCxgicols0ofUFZNzqzaz5YlvZZ1+myqsFNyg1JEF9usDaFCRubmQuQJwL1sKH5aYKG+5qKporDrqZTGYzVb1PDeKHbry+Up48hSjFUPEdwENGrTs1cY4JIV8CiWankH2oSEJ0clXL++GaIEsIYUSOI4C4VlxXYMyiK8VJZS64Swgj+Ak6Ibe7hAXNXNV7Vf3EeYck20I7TkdwAewwOnB8iGnDCKAVYN3P8iW5CW9u5fKZe0hjf69VrvUMgDnNmoXXxfMKgdgHhNZj+wQ3VprfWd7hco6YlFTrmBQ2X367eZomFKnlGU6WSYbs5HymriYPit6uPcoBR9iLVo7jY5uMonopcxxljDI6OOLWbF8UcgArmK/TFdCuYdA3CLXs9RZ2fZKUdpnn3EWhYe4mGd2z/Twt0lK9I8M7RBMBftEBFHUXJ+oTAEtHozihuizB9NYh5C/WVpNApHsSq/IU+6IL9hF2SE9H1ACbMrff04k+USCFnWeKRVSyNFz217kN4LZIk9RJv8Dzwd/ajMimJu3svBg5iluopX2/ofyM34+jQ5U1guIBXYJGH4ahaSMqDbRp1vIzxq7YMBx86AputwECgmRh2fNk8c0FR79qhp47LeK0qq0n0KOX9ESKD5gSKsJk3bT1c9ZDYFrsMCcAcbykKNI9xv/yEJ+RGK1xEqVbxhIttQfc+ceH6F1CnqHYGaTRUhAdH2x1QErVgg7jjNx/8n2jY7ZN8ox4+JEDjWMcTmUNzNOOkoFb3MD9IVHcazNwvfwK+F8M1ml6p05FbRQDwkFsJMIiiF7aXaW0MOpDeBovrFlcWqqyPd/Rvk3MLHCV9xqe8nVBTOEu592RerNX8pd2lQAGnd0F93yNRBkP81ygCRGJpgRpIhk/JDgirT6aeEXVJj7lhcrLjAP3QJM2E68cq/11kE9x9zl2LKn0J3Q/VXEK4bQzX1NF/NvUIUg+cvpw7iatTPWx7Br4vFYcVa3LxjCkPTS5rwFawRaCqV6v7X7fCEZgCRf76Gvze8vFNdAph7Dg9l0LVGa02De5fWF2rMVmckTUz8gixwdj2gRq0qKxreF3C/c2j+QGzFzAhZWJBfgu/O/N/z66NkLBdnmDJsa53d0Ac5GguY/FyVDY7P/dlQgXIQ4TlHLGudR5Hymenk+pLqT6v3/+V18Kv8hUvvrBvrx7sZKb/JPXoQXi3m0YCpnQPNi6Qo2gggDKT2URR5/8c6vpb+cGT8KzmJkzv6pzkLM3CYSVf1rhEb4GI7vdI8lYl0vvLv/1Gld7fBXntWrSp19ZcC/kVUW/wXV4nhn6ajpsGMwEw5UlQ9YRtX2TE4B+aVEscX5jcZeIhjzatUWN3MYXJHMD0FaCfzXvM1sk2hR7KPTgTXiL2NSVwhye17w=",
+      "layer_level": 1
+    },
+    {
+      "id": "917a3cbd-3186-49aa-b3d0-6a1e1be8805b",
+      "repo_id": "88680e08-955a-451a-9880-773ecc4da749",
+      "name": "Internationalization \u0026 Localization",
+      "description": "internationalization",
+      "prompt": "Create comprehensive content for the Internationalization \u0026 Localization section focused on next-intl implementation in Flaq SaaS Template. Explain the i18n architecture, locale routing patterns, and content management strategies. Document how to add new languages, manage translation files, and implement locale-specific customizations. Cover the dynamic routing system that supports multiple locales, content adaptation for different regions, and cultural localization considerations. Include practical examples of implementing new language support, managing translation keys, and handling right-to-left languages. Address performance optimization for internationalized content, SEO considerations for multi-language sites, and best practices for maintaining consistency across locales.",
+      "order": 3,
+      "progress_status": "completed",
+      "dependent_files": "next.config.mjs,app/[locale]/(with-footer)/layout.tsx,app/[locale]/(with-footer)/(home)/page.tsx",
+      "gmt_create": "2026-04-26T15:58:16.750797+08:00",
+      "gmt_modified": "2026-04-26T16:00:09.75861+08:00",
+      "raw_data": "WikiEncrypted:jChb3OmzaVFSIUd8v38aRj785+6G5eZmMwJrXOjD0SQ+yJJSCdzJphShzK0RnsApP11OGklTz/gyYZTzC7TsRXWkAQolkhaobQfJ4e2tuMobPf/fQPS/itbpDaWwIwuU6RPaFfpxI7MH2peuLAPRuYg3rkqTvSsef1LrNaYLYGO78Juiy2fKM+C4Lt+ADYsJWMJWxS0j+japmqT5Y9vXuBkfjPmxdpkvwv3CrXyw0OaCFwnGyRd1FEa+EXoVdQoHR5nqxnG9exWiJfQdLcUKkKNzn+a8voBKObOCfdxwBO+vnIR29Rj9ikmpwEW9am/8QOIz1HsXLen5/CchP3XZnieAKtXTUND9uDTa96SJ9p02yc+erVCTVtwHlgP0vpV6qq0lEKbyakgKMKXy5UnRO/09GyNqeMUqb5SDCZlhtCX2UazTgVF5PGdcPnR2pmxtAPcqoi6a8dluFJFlL6sEMs5u7DWh3R7hN1ckvwgyk//elXaNBAg/Wb0ia2lVGlBpEndBSNOWnTPO2TH2vrNX3z9VRV1bPGc3k6zESvMerydpDW57xQYoYfDh7lYyiLvPnREY7gRmFADJlv4ENVtV44VBcPFeQV9BcfUYHcRDNsoPrC/+HRs+IJh7usue7EVaKyDDofUsqPCp9US1dwqvmL6Fcxve1gWYtoQGFoAXU7Bz6Fahttas7yz0H+G+LWHEtsoe2ShZ0JDTH0ByKZiVikCoKoPccyxOUn4v09bNta9YpT8oB6m2NGkTgTAOidzibiQwKCefskccUJkGzyQG725pRzJFffxv7ZPMPG/LrQrekgXA1cJP7S/FzwIU4xQXCV+C3TUeFtM07hBUOzsRPId5tT54b2EnrY8C92Vuw8ECCF6CoFMhxjtlYcqE52YyZkLsnf/uUwidBuZTGTIEB17mAfPfDyKvkAHjyoh2CPL4Vci11H0UBBQfF8l+Kjs6wdMG02ipIevu7p37Ka931hm5F0v6sbCVpHjIUgmhePcFXvw0kXe9oOAZDiIPRH8o88Cz7EULKQHN337yi+sbvQg9K0h5ByPavYjXCO7h54IzrMX2wmYTRBclyJo8H28tYFpAl9lu3t6HcqNBr3V11G5tMZIZ06qAMtooVCr4mh1gCM1n2CNs0V8fyHERPN+NQrlV+NVdwh3uyymg+kLThXMONUTrSvH+wxHLDYyuVRbg2yT3nKXNs1z9q9w5psUvynG8sGx/FcaxpQleJwSKg+mIUX2t6FJJHP8EBTR4XzSkOM4ZNdJ2+5AZQrFwzsF5gE4LEfeuCXUvkbvvwGRGrDWYBty1BOuT+8dU69GwBZGq7haOi6UxErYK4AzaFWgPH0jEpx4EDmqUXaqL1nutWnJp+2PgYHMp+yB9DXjMR8bUR3JJ3x6puz1tulmDPrzDjcfeyzM5eYjy7bbYA8uiTCT7a9M/rlEEuiD3T/RTLtpyHikGt9C6AP/qX1P7IRlYHhpQCXnCP860E4Cx6nqotyX0l6kkoBzGTXth+FIptVpebdHa5jTHwD6B9cwcfr5kJm9C7bjcLPStGzUmyIbraxsrD8LppgmrGdVW856Z1Kvr/k62RxB2wqWdcY4I2i1annvFZSdsMFsR3m+d7K4gETcSRzdrWLtxD+c5GtrAU/OiRyxTCH9vYfUOdOrgKDlvzqW7x0L6J4RTV66iyCEk+YmnhFgaq2wz4cAQn+SE/VpqgSk3BMyQg2z7kfgOE06xc2Y96CWLRR5rQ2rySM90/hOXkwLMIqEPBg7oXr5D5Fibl1NcCq/Cd741LR5VtG1a"
+    },
+    {
+      "id": "8473ae0b-86b3-42d2-96dd-ccf726e907a7",
+      "repo_id": "88680e08-955a-451a-9880-773ecc4da749",
+      "name": "Image-to-Video Converter",
+      "description": "image-to-video-converter",
+      "prompt": "Develop detailed content for the Image-to-Video Converter feature. Explain the AI-powered video generation from static images workflow, including static image input handling, animation settings configuration, duration controls, and style selection options. Document the specialized form component for video generation parameters, preview and download functionality, and batch processing capabilities. Cover the AI processing pipeline for video synthesis, frame interpolation techniques, and temporal consistency optimization. Include practical examples of different animation styles, duration recommendations, and quality settings for various use cases. Address computational requirements for video generation, memory optimization strategies, and integration with video hosting platforms.",
+      "parent_id": "b6b6eb1b-9d10-4683-a325-49570e8bf726",
+      "order": 3,
+      "progress_status": "completed",
+      "dependent_files": "app/[locale]/(with-footer)/(ai-features)/(video)/image-to-video/page.tsx,app/[locale]/(with-footer)/(ai-features)/(video)/image-to-video/form.tsx",
+      "gmt_create": "2026-04-26T15:58:30.86243+08:00",
+      "gmt_modified": "2026-04-26T16:05:45.498733+08:00",
+      "raw_data": "WikiEncrypted:vw8SwXDMWAcq3MVrbhINPPAm/F6p40TbO0eA74sQADSY48d+I8xBgRxn+u8y5oTccDEo3uxN8W5CSalZj+QYLGf9Jk88CvdbEID+4DW2ZUGVsYyq1lIZ1b7RH9wZ1EWVwLyAbX2jjuSeL2aUNayMLXTC8TInLrqlooVlGQtMd7DQ5OcSbrgRglKdo15DvBwmChBrd2F9wrhVGtTvZrFPWR2Hck5KYR1sRmHtA/FC8h2ZAQWrQAFuxyeAFRmcUtKFWjl+1Czr28h0oaayrEFGKoSuuQL7iJ0706lDeoAxLtjHSPynmZo1b9HNwMedN2sWTeyO8tE7gBJ5HxB5jZQ0+UTLmBCA25BCN9raFXp1utwMzPLS4qOfOffd/uJAGa9L8vmknK0kDh+5uAwTGYgryZsKmoLZFuEQUzYeooC48/xBjHQAS/ba771PEhaZ7acq/4pd8lBthaflGq6xwxQNNUH+tMzBUrc9ijdnJRASa4KSmXEnfvDHqbNIP0yf+6bMVxRwXBe7D/JC2Z9uQhH9ttimnSFc2hWDJu2UuDszmwjgPwRlLx9lvTeygs/TS8q02tWffStzOYgYRCsEoBWbfD74b6dtkXPreIffuM0vVyNMru9AGMWR5JQ/dCk/Zq/rE6/TB2Teu9LUkZHh9rjZXyPgO4+outcy9slVjQrDLuexTzZMKpyQ4bv3kJFZy48RJtfcP3Vc3iYJek49He0ZlUYig95huePRUP2/f16Hn/jhtNIgeH5gXNQZyqiwqHmduPo7MTPpPGQndw/8uFY6mzVLv6LRWQDRWehRr5Z3fugRm2JmQQ7pEQMHhMS7TE+rBndM6ajSPEiG+7reDn3dR7frRvoIGqYnwpZm4I8yUt7huWFsLqFdFvemenmgSYmnUjA5RNoxgj3W8/katXZZrmVyAVH33jEJ/SWLqRARY42FKaU9UJvAW0YIerd1SIOue0pYXDyxuzuXeVUk23tzVoPvdu1SsuMLtCSehDc3QXJO1nWPpbHTGYfOuz1UrBxMzm3SNTuUu7sDjZ/jVIwQXRD/12WwkipRyAo34tJmgLH6INwtMt8xngiQEbCRD4WR4iN6AGSQkLhj7+EI1e+C478X2ejLGNpT7zj4UoTGa730UAn2NRYa4k99zqnAANAIRugLt6BzY9wvJsmtKEAGPGJtw/wQjUb+r9VG22tLjx79bmz6sgITshXZ0nyYZ1mPMMNPN0fCROxQZMTXcpMuvn+2LVCE6Vgxpm0foL2FnM/2WWTYsccO6sRfm34shuUEqWeZEfeKpIKXXEAIzVbu+1c2X1iFDwO+s2sTg4ghr9r50po47kbQyzq6dky1pby8J00GY181NFlprzsNxyG3Me45QTkeIxNwHF5Ehr9KWc0NVPpPrZF7hA08Zgwq/WWtsMeyV2mqmJFItUYr0lzvU7dJbnUmgiLNvdpc77Xi8piurSm2l9tG8jVmZvF4BXqvvN6/5eyGwNGn6TTUqXHaStpdWFpNme5T8wgxsq3z5BZJ9RywZ2UuWgLeiymA/QtTJ6s1Mdo4THdA/EBr9V94LQ/houLd2Xp1c9oHLM4ncXQ5S31oFDxZiV97m8vqlTOfTRu4lAC3xtwjja2jXCS7NVNxa5dNIs7VUtLRb38XI4wdVo8q+2YdrBf3VXlC9sx/Qnc0zGaQwIlnBtHd5Nf+FCXFnw/Cno8MHM7iPDL4k6gsesdnuOxVvVgHaFQB1kCKGoj4l1soPbHQEXi5jlCcQa93oS1VE6lvozXHTHSs38In2oIb4nmBxNlaSmhbXpK0eaeTGSza9s1unzMhqbtW+w==",
+      "layer_level": 1
+    },
+    {
+      "id": "01fb895b-bb80-487b-a3c7-25868376f2fe",
+      "repo_id": "88680e08-955a-451a-9880-773ecc4da749",
+      "name": "Component Library",
+      "description": "component-library",
+      "prompt": "Create detailed documentation for the Component Library section focused on reusable UI components and design system in Flaq SaaS Template. Document the component architecture, shared patterns, and design tokens used throughout the application. Explain the component hierarchy including navigation, footer, sidebar, loading indicators, and dialog components. Cover component props, customization options, styling approaches using Tailwind CSS, and integration patterns. Include practical examples of component usage, composition techniques, and best practices for extending the component library. Address accessibility considerations, responsive design implementation, and performance optimization for component rendering.",
+      "order": 4,
+      "progress_status": "completed",
+      "dependent_files": "components/home/Footer.tsx,components/home/Navigation.tsx,components/sider/panel-sider/sider3.tsx,components/ui/sidebar.tsx,components/top-loading-bar.tsx,components/dialog/CookieConsentDialog.tsx",
+      "gmt_create": "2026-04-26T15:58:16.750883+08:00",
+      "gmt_modified": "2026-04-26T21:47:33.461437+08:00",
+      "raw_data": "WikiEncrypted:dXXzUVIQRod9bUGZC+gXlxesxXVXN4Q7SRTdHT9P5mHXiZrRlm5aWm4ajbOiAA8SNNVFJNOuH+XriKRdPyDjmMllabXrT5Yz9tQ1GZoYTZosqfU9juc3wDLAUiSsd1CCm7xeKJ/IE2TiUtp/0RgZNDPAlJYwquUTRZusxtCRut2bJiIoldPt59lizgDNTpfA5u3vs4mxWqC61qifce8huBTJnJi7fnu/Qm0N+psjoAwq/2QFcdHHdGL5vrk3hHgzmeLtiEJXwBBke08rsrJwQgWnmgmKz7aL8xbiIYee+G+a5Pokj+cM1rjvdOHbL9Up0OXiEwsOZvTb1k6JM05H35GaskSy7ARjCpUdCO0oYlK+WJ82dRjpFMmAtRdaJY5qAlcnfpiApy3e0/g/0a6hl+mcdU5ldZTLLMO3RDUecs1+9kuyjHu7bqWnDiWsToCGlcp9XN6/GngZVtuWqsJ7E6b0sWhSiVZFSTkznT4om4MFDvyGCWPzBXVHAUhPmgz4kWgdZGXP6zkCfTm14ad7p5SL5t7/QmTDhm1+94draEtpDUIZcEU/bC9S0ypQwC0vvMZED0Hn4tX9TexhIMJb396hgAzeomZN91smEppp8/xk33J2ohfj8q9CG0m8rQWGH66HOFCRTQ/8ivO2IDbMsCRb+6XqNk3M4D+sEk/HJ3CE+ZR5qtPxLlfrcMSdnF62xMazmljCCw3XZ7HfsUMSnGP/HZKIUGZruXkQTo0ys7GcxG+FfKk+Wl/02oOZCnXsGbbkPHSBN1na8/NsvWqfZvbiRLgI5ZgwVwQUNgaA28kJZx7zF0iW7+0CohU86RiQwCMcJ+iW479kggEb9fRRwZPFPbhuwEHxYIR6rpP43Z/6yMnaK6PjrEVzaHertfy4aRu+RrGXsoj1zf/IGn9dKI07wmf0SuOx5Hr30F3YCPTBaR5kUbq0O2Sv8S53LhaQBYat1gwqZa/lHAtDCum905cYKiWIk1pvXB7D5oQa6kHnQtlNh6QvRvxMvpcL56kpNlNlZevh3xxPMwhZOXC43SlvMnB5LBeo2dnlNcwcrTi39iOvYlvAL4q9yVpd4Nc4kFVSTP4evWmQLfWlsaigInJkg/Jg8ci9Ro9ZHc9h5Y/2JHgPofFL7nWM6s8zQy8JJIL1T81sHQpkeylKgAftsWVj4JAt6zzM7bjnxLm//OD//KejY/x7alU7wgePcoGWsQdyDk/9+qobeQ72EbeBBb6sNywnjG154lcxkmnpRh64b0QOHnXIyL3oGErgU7MCIzUzs2UkZRVH4EKlBk3IzC+95/Mlrh+SohG2t7E1nqiZsHuF6aCjCS+q4jNPQjBfblwFi3DnyBMCz1xeNxbvr+Cc3alNW7P8yYwQ+Io+9G68zR5VvuFvNu5oCF21EEm9IYSckYx2lMu+WVo5m00/bfr38Sv4MmjcYJbhYdX5ETL63o8SurZ0qjdq9QwI5zkOAfmcSeZ6DRfJMfa60VVGe/W74VsmwZReU8zvH0uZmP2NbYlpEGOydOKUIOUb4qNwq1gUohWMXHpak7h8z1otWxpn3Unk9P98Am9E8I70snY6JQb5Um0TUV854IxNJ9SBqE9HyXJcLeG/PJ0eUrnUpR5MMkCs5Gv5s45tYKAf1ajHvjjUU64tCyz0BcGuyegjShPDyD9RY8FKGHIlK8zQSFeTOJrgVYRtli3KnLZsgJyjJIAAZL8o9/y5psAaIxnxMB+EdCArJyPRv9oZ//wE6LrP2dKMM+XLAfUsX6gCOy71c5WPQDVLe1lax9Y2iEeOqiill5LJ/vZGvqyw5/joOBuXnMKFCrrUncXBcPaJ8Xo="
+    },
+    {
+      "id": "4bc9e3a5-23e0-40f9-8dce-9aae466a7dfa",
+      "repo_id": "88680e08-955a-451a-9880-773ecc4da749",
+      "name": "State Management",
+      "description": "state-management",
+      "prompt": "Create comprehensive content for the State Management section focused on Zustand implementation in Flaq SaaS Template. Explain the global state architecture, store organization, and state update patterns used across AI features. Document how state management integrates with component lifecycle, handles AI processing states, and manages user preferences. Cover state persistence strategies, performance optimization techniques, and debugging approaches. Include practical examples of state usage patterns, subscription management, and state composition. Address common state management challenges in AI applications, such as handling long-running processes, progress tracking, and error state management.",
+      "order": 5,
+      "progress_status": "completed",
+      "dependent_files": "components/ui/sidebar.tsx,components/GlobalTaskPolling.tsx",
+      "gmt_create": "2026-04-26T15:58:16.750968+08:00",
+      "gmt_modified": "2026-04-26T16:00:52.766706+08:00",
+      "raw_data": "WikiEncrypted:29DQGcj0Xkj5ar8OataJBBxhchc25ft/oSjDSUQ9oFMqkEmznfs18jsO8Qk/7qxOyzmw6WXtqMjp5xg7mxI4VSdvCYJd8xNAZnqjTaECbdKMHqWmiqxF81tGZTWg2tw9CIsDrRGGgg8eihHeH8+N8Z8pDOOOPlJDXavwAtVjR57TI6Byr8inW0Ss85ZfC25efzrJG3pgnkLwhUzSIGznl5/i99neFsRl5a/eHURMxPr700zUEm2zZjaih37SoEH3vMpuqugFnNg8FqqjYTfR2f8dNlX1twinwshjGO9YH0SewKLDYlDHQozZpnqV7o7NtwGNyA3HAB7lxJDI2CkxIkTBxVol91y21PCDVCfj0MlvYlgbhtA6Foo3I8fmUj/GwUJXf0GvGPQoBUpHubq9j9ZDR3TrZS+7LtnvCZcWlQeBcibGQF3EPBxmeyTqW+IRao5u7VOm3JQFKz9rDOcMsT4K+zmVvPWc475T2r5jxxtAJQ8uZEi8B+FaCD1+sXeaSDkY4bV5aP1DbsP+EFsATyiVXOdAq76J2roezISclkuwfbNbyjY/EcslyFECTI0KQ45BZ2GF91W5oJKhauzfMlhOx6WD9GhT/w3XnRunCy1y4++R0CsNhTpb8QUgiqLOz+sn4FMQ4h8OBPYQzrBfdomefD8aa/mHLLlVUK7WsqDkMKZ+OZ6DIqFXwt1VV96GdsChHa69RLMXCAEAd05Jc5YPWukkPf/KDILqgQj8LrsSqVV4wVxYC0VfG1uMO69KtGEXrcM2p4bdzAFRqUiPlFMn8F40EFY//8iY/E6xoznDeVeTX3JfaCC3P4p+0V9NqeEr9zODCgE3y1+3kRuoxzWnDikOVwQt0WCZ1DwmBrqTxYNTSIybOU1uMeCk7jWWRb2M77xWpcmBHmpVg20kfs+mhsVO3ZdVJq3KEp41YUEiEprrRAAA9rqSxt852yJ1M+Z91ZIBuF1Auzoo3A/9/vKMjiFPtQ1dHniYsK47oU6O07Rqj5SNjBYDdNLYg9COrBtFBF+7XGR1XZI+1ywoxylikwctbAHj06DTnFSJqPXux7nfRDaYn3EJDLygPWXOA6pDRTSLXZ8pLHvpspuKhY6QssDY8YUIXZmFdMluhIrARQaqVO5+POBbRQWDpmjozg2kaS8VMHx1us5tokhAe8TaFjMBb18VaYl3Obda7g39MbaHlN3AFHTcxCeC8Z7nKmrxUvTBiPIFGZ6/bNnkuz1REPo9tQl4wP0UbFjWZUdU7pj/8XIJoMA51Ilx0+pJFxyW4Gnzr0EGvbdFyz6Ut3c+R0XNshPrppssSHpV2JepMzsaR7H8rhQCB4tgViBl0BdcdS/mU6u8dp7OM++E9htGgt8hv/keZ5/L7RKRX7uHQTKcDpkA954lK58KsG7Axb77Ze6a9WpvJVCFGSjLmHOZwABtquZRvzSQ4JvZtHZUV2UPSKS13aE+Ur8AFiXqYtfKaecGZpIAaoq+4pHQt+hdzsC7084/11ghpGmYtp9jsrqz4yvs1bYOcn7+nwRWxr3PokF3dHeZO4GgWiiNlefFh7L+FdOd0vf1KWhwqPk="
+    },
+    {
+      "id": "1fb85ccd-085b-4411-a5c9-9179b0e9ef4d",
+      "repo_id": "88680e08-955a-451a-9880-773ecc4da749",
+      "name": "Form Handling \u0026 Validation",
+      "description": "form-handling",
+      "prompt": "Create detailed content for the Form Handling \u0026 Validation section focused on React Hook Form integration with Zod validation in Flaq SaaS Template. Explain the form architecture, validation schemas, and error handling patterns used across AI features. Document how forms manage complex AI parameters, handle file uploads, and validate user inputs in real-time. Cover form component composition, custom validation rules, and integration with AI processing workflows. Include practical examples of form configuration, error display patterns, and submission handling. Address accessibility considerations, progressive enhancement, and performance optimization for form validation in AI applications.",
+      "order": 6,
+      "progress_status": "completed",
+      "dependent_files": "components/image-ui-form/image-form.tsx,app/[locale]/(with-footer)/(ai-features)/(image)/virtual-try-on/form.tsx,app/[locale]/(with-footer)/(ai-features)/(video)/image-to-video/form.tsx",
+      "gmt_create": "2026-04-26T15:58:16.751054+08:00",
+      "gmt_modified": "2026-04-26T16:01:42.990122+08:00",
+      "raw_data": "WikiEncrypted:M04J9UjQdm5EUOrFn1Rr67jbQ+UYBnQowSBcyRNSj66h54hlbCkLJE5oKXa3LiAWfmmP4k9Xaj0wsuDVgkNSujNPdkcNqZDRGs6E8MnY3n4Upxh3iiB2ty1l+kwpEWHYapmGZ/WFokjYBA65kS0SjzxlTniinNwBelVLVweBrFbY+wf9MBJRjBKgm5IEPWLS16CJ6iDHEWQG1gmRfKdEhZZx9O+2lA9C8E2q0jt3ptm9bKRjq4cvpmvq0ct8AgAl6/gc+iuu6A13cGDPe30A/zaTvhz/KTMoCthRfw9v5dxLyFxbB7ztuI1AOn15K038JPuySR4ge/5UlpkjWXl9hgFfe5lef2p+rEZLMN2KD1ezabhpM1IL7swfGwdTf/vP0cMn8jamX9EcrBIY4/9X2JMoPWh5TGHMXY6TcRbYqswK1tHHJLmxdUE2zS3ZsHWsebh6YyioeXxm64bC0StuwaeBQwwvK0lvBPD+/n8nQ46Ou4XOMujFL2211ojgySqr/HILHlhx72sPS5UJqK7OxHwTzFXFy9w39kcSCpO2MwQNU5JHFoBid3mT8we6ptMcsWiyhWW7cIeRwYi6OHxxuTpleJZ/VQgBcqIYmQPsP8fJdvQdf39oZ7M9CmDfoK+7q52v0odg6q77U7m1rrepU0Y3X3o4c8PaXCCrE+yAGHT4VVohoZHap5JIc/IVBJtTLIbafsrQrWSQj6dwqAK0NsLzqZ4tqlXlNR8wYA88hGjZwnpa6Lzv+4lKcgrn1K3T0r+qrGo3qgYOdDt1ZlMvUUhNREBUx/QnvZb19v672RNJ/IvS5GUMlM3ZHAWEF5edD1rjaOw223212Vo50D2W/tBpB89cd2GUNHi9HI0PvbB/Z/fRs2sXUyiQMsy4Pk4Ocr5OPKPGXNXl0GBcOtJBP8uf0o6TkXNDyMWOtwKrreUtMEjepuj9RqDqrY+EZdfXvs9FdsU4+y9YG99n5GZ6GP64YddHWszGZaotPdf4/x5K4qtABUIuHYrWLo5gRX78uVx06Z1gL8cNRYWwUWydyHs2DY30vsOQEOjvYm2oRWeVOcD1d6T66bkUZS0BRx7ZtwhSneh6JLrtcOyuGKNWlltAUL+tQISnHDHkXWBVk5P0YFpEm7L1cMkNCJpwj26VnVFsRQLT2rfO18HapmnQj3jcCHCa8ZP05Q0J+WAXZKn2luJmU1HjMIow7GfyaKIfeuypUL1cVFq5KXVrDcRgDzojYaRZ7RFmx2fWLOsCPCG6lYGCTfwAk3bNyvby7ZyT8pVQXLWjPjWewaX8Psb1IcwInj8T7JNzMF9haXp2p4Wp1SeO9awmU7pgo69vM/dvKmKSMwKIzkJR8flArEQgcDs3Yj9/rot1XH/IPi7HnCW1yenNojYKfNAnMKSWKht+685htuHVLTUpb1V+Y8REQObrf4d9Gjh2ukvEbRm2GgmlTDj3SKfvUgRMd79K5lz/8pB4tEM+k/8jT2CN4b60mzqSNAacno7B0BMnCJzaaXH4oLveKKMzeJIc7PA+snLvgh56+jOUip1/6wXPNfuHcju+AEXvJORIrEewn6hc2Z2sy+zglyry/3LXTqGCLT6W/a77s7VjN4tMACIQlMZAuwZmvafNOoKv5MWazhtGSNHiAK6oQcflfAi741qtIWpBtYv/yNc79NzaRpzeqvL/kRxl/YczRsacmJBnDnTG0mFECyiXrAkhQYhXEe1pDA4MMeUalq4OgcNlmOMuRdsHyenFF4XF4sDepun5TGdnBpE="
+    },
+    {
+      "id": "5ede1ccc-46df-49ca-bd6f-de9ef0e0a5fa",
+      "repo_id": "88680e08-955a-451a-9880-773ecc4da749",
+      "name": "AWS Integration",
+      "description": "aws-integration",
+      "prompt": "Create comprehensive content for the AWS Integration section focused on S3 storage implementation in Flaq SaaS Template. Explain the AWS SDK configuration, asset upload processes, and presigned URL generation for secure file handling. Document the integration patterns for storing AI-generated assets, managing file metadata, and optimizing asset delivery. Cover security considerations including IAM roles, bucket policies, and access control. Include practical examples of upload workflows, error handling for network failures, and performance optimization for large file transfers. Address cost management, storage lifecycle policies, and monitoring approaches for AWS resource usage.",
+      "order": 7,
+      "progress_status": "completed",
+      "dependent_files": "package.json,next.config.mjs",
+      "gmt_create": "2026-04-26T15:58:16.751139+08:00",
+      "gmt_modified": "2026-04-26T16:01:43.580861+08:00",
+      "raw_data": "WikiEncrypted:SP8GUGDhnOCjBs5pxsW8MLyaVk+oZTOYYM0a2miYFOykfewFfJIU1a4Sdm58VZjYqZZEwtJyfHY+BBRO89ArpNjJ2v+KC6TUIgKocW52n3tgRN96+f2zrnHV3cIuZlWIeycJOOHIP5bJ6G2mxb+yok+ToTdCRLcKwx+6omogpXxu1qSwBOzY52EshbuFvS+Fm1HsaQBEvlaksiinsFrk4N1Xt/kx67LmuoyH2Y/RTEPcPSg3KMJemVXwdRC19PAv7pONHEmIhAB4tmiaHWDr7kC5MbE9BFVOUV+fb2p+PPgdbkAPUXkdtCmnUePav3OihzEZwxFGRQuSjEVI84AyV2Lq9GpLPJkRikWwb+IX6O8bu66BY+aCXpZWxsma7B/p3SylfsrGJ5QCn+sDq7tJTTDfKZzh2D2bWVTl45d7/OF9Trv0BGM2TOiZDc1h0lghsTO2qSrf66w17atx60jmoBr+Vsh2x7a4KXykmBQ6m6qqAYdWe1tyaBqYR7xNbe+SDVJw3F/7TcN5yByuYmxVufixEPXfonL1sbJ78qdUJQEpjRLTI65Z2JnHhnuMhYU4WBUzL4XVakS074kDBt4GtOQVfXEXncYdh5NoC1B+l2otRztCL4VKWWFMYHiRJBtJ3VCeQKmLnWCFdLFl4e4DuccUpnrCNytOqczBkjLVpckhBqzaASFUzdKT+dMCPlPx49L3gNfn7jQJUSGKt6mXSMVFg15O0Y5Php0RBZD6y0a7pfTxYOn8oufkMOLBg+YwXRVT54CQFiLYEgpqFs6SKSJCxDFw2oLbXdcy0sFxNuZqDh4QGLBj4WJIaGIoXKY6sJ3abg8JulhDaCdMHNxbqlyA7wDCTGBMXtnJLxZc3UFXHXbTuXYS4jFmRc7OC8W4/snKUHrOOe0hG2KInB9vej0nslhJDNNhy66mgzg/VJ8QzMkNK7cfZYzLIWF3zOtwiM8NHNqtkv3Pxz+Ys8zRGacm5uwO6dCUTqPIWwi55QBWnnYMuMOFYK5Wngflf03Q/xgEniBdU5w7Y4eo5jfPT3agsNNgldCBehul2Plule6Y1FU+EKIjn7fu3mMuMIX4VMSwkfwBD61Urg/u2vjNHC1TypSTJpzcFooH66DPdzy+gMefVN5i7cQiMyb7dTjOo+Osa6FING88ACzC8oE5JqmZkncf64F/K4LyounuqaT9xMKRNImgPrW2oLEJgXjERsHOwk6dzsGYdqyJuY9GbACgxDsSNK2UbcclINwb9MEOZGlh31DsJsuyZOZMA9RLEnA4GPxmXIbJGyxmgpXIZvaaHFnW2BUguNpEnriY4Ph2QUktXjFQo99L3IExWX2fz6x2eJIPKJCPoBlCbwFIcAv0wazjMlBSmmz5FVGWidgM0DZ7HFGYYtOM9DDDDVVyJjOI7qN0eRgonIkvmuCZ5VplHcZXKpDvqrssSMCgmW6mF9S4K4o7XzruXO5Mgc4di/vC6wupouBGAvJJRXtLD5hVlhHl24fBJoOety2Bf7Q="
+    },
+    {
+      "id": "8246b1e7-8745-4a6a-9283-1db49a080c05",
+      "repo_id": "88680e08-955a-451a-9880-773ecc4da749",
+      "name": "Performance \u0026 Optimization",
+      "description": "performance-optimization",
+      "prompt": "Create comprehensive content for the Performance \u0026 Optimization section focused on Next.js optimization strategies in Flaq SaaS Template. Explain image optimization, lazy loading implementations, and bundle optimization techniques used throughout the application. Document the dynamic import strategy for global UI components, loading state management, and performance monitoring approaches. Cover Next.js specific optimizations including ISR, SSR, and client-side hydration. Include practical examples of performance measurement, bottleneck identification, and optimization implementation. Address AI-specific performance considerations such as processing queue management, memory optimization for large assets, and CDN integration for asset delivery.",
+      "order": 8,
+      "progress_status": "completed",
+      "dependent_files": "next.config.mjs,app/[locale]/LazyGlobalUI.tsx,components/top-loading-bar.tsx",
+      "gmt_create": "2026-04-26T15:58:16.751222+08:00",
+      "gmt_modified": "2026-04-26T16:02:40.514007+08:00",
+      "raw_data": "WikiEncrypted:9uOBpMbLX4DyZqW4us3Wm3Q7klXxmeD+JMMoGiSO2oM1ncLZzA/fqddJBlYZCaLBfJ/yktqeKZhfxKclYrOPtmvgaR9as0eHtvmb37wGRtb6IWPJ3uagJbAWYP/SFOJA2KCHXjaegAd+uhpF5Q04bmPqSUzaJ+urF/ecqv31/KcpE36L2gW4CQ0vS/sz7d+L8qzaoukqH//0cre71FhHiTDf8osw1MpMXAOjqWFc4qWxsNAI/6B+guT0ryWpZN25QFaDRK9609i05ct+56YEg3XiLWYNwuMgUlP0v3aN5jArEjbjZvMpaClH3FUeAO1gpvBQRf1eaxZFz7xhFO7J1kV+1IRrU4jPN5glX586afohglmAaB0L+xG64/L8w7QELzl8utCQI+XADSnLXuDB1LA7BccM+rYlTTGpIi5Kmb2C2DTcfY001oBUTra/QIUqiIjyDihbUArFSNsp1WSK2xa2TPn2b6RMyr8mPWmupQIrE6XkS3G+ydntQwf3+icN0woswEODPfWAOVVb0M1+dQ64X/7wXUf2cw1fwla8jaMylcCILR+crRRHSvFqeIxmzJ1YoUoPnktxRyV5KjGkZ80ovWJRJDsdy0rYCjemSw3hQXqvRiLr8GlWloVNs5yFYilZBnwjY7GR1WNhlDbF4eTJlko+upaLxQvq8CAO7LNzbwyFH5Da68/IOAtgXyPBPBMqyOjAJHTOfhfwQHyf1I6GzXHQWDAXfkUhJrcwtjEWPIeUiiAammQzqPi4GvvtIbzaByOLSDYc9DYblONR5GnO6pAALkkNI5w5Z7ET+oC5NW7lDrmQmfWPhaDrRY6HtfY11jb3utv3a15+iI6/Zymv4CegLLycD+MyAdxWv/GuZItar5z8ODeKi1q7jbnxCC5pd6mP308gCBwHGG4NLrwc/4Ez1ARWZla99DVmKh0kLI7pR8taGTRwtkqVAjmw+biq+vaWFwngvFPvf6bgMFP3eZMWXc4lLxCMzqnV4etDOJprLKlMV9h6j3OfRp0Tszl7dksy+pE9wW2LoYy9yY+jOntAGK14Xt+ZDu66+CD5bIo7QdU1ZNm/oYeKhnUXtNkASVszJAdO1xKnAdL+dVuE4IjBwkTPxQBanZjUk7nQxIa3kgJJsQe8TlFfQhnbM8eveH9yIe0D63fJJQ9Sql4FJswG7yFuaawL5mWbhTnIOWNSJO/4NaK1kaYeTVKOAyp4Wt4yZjjLRpAP1pxMDT+DvIm8z86X+xW8Mg8u9uafcVsgxOnhCXJl2VC1Gi5NJ2lYsTujyg4G8wS9VdRLIciXwsX/gWkSbENw2gbylKUL3vkDq7woBm8wXA3cwyHS3O+oZSUe3F6946xIXCphMLtSMeiSsUTKJ5DXACZOrzusUAanLyaXrMMrpmxgILXoDhMMFmOvh2cEl5/uWBqNPdW4AFYkPsX/5fIChH2AUCqWvJwd+e4HY/q8PF15YoR01yKtY4XL9L6gJ1ZR19Jqhn+niJB7/KRMcduzwHgy5IemcdZ1FEyTorAWlQ+Q3nJAowQMDWATgHipqWQAL+2lPlfXgMfT50CbUXVNw+zUkWJJ1SeruftQrnwLsquISchEK4JKICUDig1qd7C3+mQHsLFnHTMR2qZSzuqGoqmITyWC6K1Z4yxLrdHCwNfU0H5qaYY2f0b7Q18sEw/JpYsrFPJ+V3tlinrXCcogLyPbmMozATqXSpm+PcJstzilNHkB/lSU1wVPy6NMUsPU1NsiOg=="
+    },
+    {
+      "id": "5c2c0981-a0fd-43f1-aec4-fbed11195566",
+      "repo_id": "88680e08-955a-451a-9880-773ecc4da749",
+      "name": "Styling \u0026 Design System",
+      "description": "styling-design-system",
+      "prompt": "Create comprehensive content for the Styling \u0026 Design System section focused on Tailwind CSS implementation and design token management in Flaq SaaS Template. Explain the design system architecture, component styling patterns, and responsive design implementation. Document the utility-first approach with Tailwind CSS, custom theme configuration, and design token usage. Cover component styling strategies, dark mode support, and accessibility compliance. Include practical examples of implementing design systems, maintaining visual consistency, and extending the design language. Address performance optimization for CSS delivery, browser compatibility considerations, and best practices for scalable styling in AI applications.",
+      "order": 9,
+      "progress_status": "completed",
+      "dependent_files": "tsconfig.json,eslint.config.mjs,components/home/new-section/HeroSection.tsx",
+      "gmt_create": "2026-04-26T15:58:16.751322+08:00",
+      "gmt_modified": "2026-04-26T16:02:54.409841+08:00",
+      "raw_data": "WikiEncrypted:X+chvTpGMuaXnCxQcH9R4I1whatW+C91gpuKsJq7VW6L1ZFDEAK4PvNOUvC6CqERNM0hQgwbt1AvoUPZWL7j+jmanXJlUOzxG3NJ8VukEtZ4z9/xmKqM/SOTcde3Bkd6m8cWL/8WEeIDfMAwzv34GihRYj2hn2G6XLOy31vDksqZg2IAMQ8AhWKCwA6tS4uMPaRe7ylwEdogaYC01rBQpPTxuwfjaH8EEzy26A3pfyU/74l8YiY26f8LHabpPe0mk79b6hOVfbsD2f212htpy1GNOwrGfU9GHFcP9sF31NrBMLHBMl2d+EKO6YVLzelBDxokzO71BqHM+sCXI4ZZ80EtK8zX0vPR8geMaqv/u+aCjDVB7DZ+V1udNaNnlV27FgetX2jYKw/dCA55/lzYrilJI5BL0cfXNlMPqS3l7zLfNtdAAR8V1LkzRXGfnz9JeF4vxcEWyEnS9iRV6i2TvhqXhClqUBVPZpmoVfy92Jjpv0PDSeFnN9bk00rn1ElArJPQkxzYpi4YM1XxQKRqtPSAlejEBSbVtfehK/Mr7zTf/2Jvuw7x5cAzD2xupf3VLwu6oODnuve+0CpR6O14ee86UAUl2wFm4IL3WjoQkhXxwsX9V/ZqISzkHE4aM15/3TYcGD5gfEIfHB6DbgU7ki9lbR5hveIYFT9ZtL7MzNm0A8oeWzmAHYiEhy3IWDkHsBehknSUca4zCvFBXR5GKsmUPcenC+dW9EDNujixXcQkoTjFpbUzM3AcoaeD3eNs6M8VczVc1xg/yhqMDrhLPjBsARSKlGKNUWLgMPa9/4f2onuF1sbOr3qth1UUQRBeIoLXumsdFvzf+20n4rCJmBrTqEkf9h7gfHyCsRAQZNHMy3yKGSuWQ8Gb3edRMaDLerrFP41mUZkitWmW2UdXrKm0VFOKVDO/Q5VA7fwIv6ejMPKlFV48nGJmghgRoRQuAMgQHICJqUganseDe+W839J6ZSs/VJaWatADF+B286VVU4eNswMuoKB6b1I5pvXkMc0VhJ0s7ZS2UAR5mCzVOY/tv3e9MqbMMLaW2DSnEBCaSiAKwdsulKme7+yucPrRWGDM5Eyq/KSsyvGblG82KwgOFGFTwJM9nsCJbC+MbUi/hL9rppuSYrYfbYsvjqmI/SoAP3mPYCusQfOSnbBIpZMAnLcVpJB567rrTonFgEJZswqZiYensDS03vLeUzq/v5ADx853KnJGkfYtq8Y++jyTi3SrUeb3m3dC5I5FZiqd6NrO1uFmsMaW/Ux5jgrTAh68j6sz/dsLK63TsP5EzhGboYUPu3M3gfitLhuw4/INK/0xAIYdehiAFUpDat6KbvxPY0gG9jDCmxRD4q2INaECETTxJZJVdcDCAwldCm7MO+xIcfIeiy4WVO9vceNgerM8r75VBfcBJB2d+sWtTmoKaLr35J3eGa5bWwXn0E0T+QDJUfERGFZsYUyTsOJ8EROxTk8/Z2wYKHfDKgzklzOI7LF8FNlZvcW/1OcI0INHe8ebPBW1njB3Yl8WKl8zFgxEFQIll9B0+DJJc3F7wRARSXZvKDm/zbkL53VDR6wA3x9D+ZqtCkYCwxIv78whgHx2uMaDI1wnQ3YgJnuZbw=="
+    },
+    {
+      "id": "f74a8388-e784-4303-8f3c-9d6d87b74da1",
+      "repo_id": "88680e08-955a-451a-9880-773ecc4da749",
+      "name": "Deployment \u0026 CI/CD",
+      "description": "deployment-ci-cd",
+      "prompt": "Create comprehensive content for the Deployment \u0026 CI/CD section focused on production deployment strategies for Flaq SaaS Template. Explain build configuration, environment variable management, and deployment pipeline setup. Document hosting options, domain configuration, and SSL certificate management. Cover CI/CD pipeline implementation, automated testing integration, and release management processes. Include practical examples of deployment scripts, environment configuration, and monitoring setup. Address security considerations for production environments, backup strategies, and disaster recovery planning. Provide guidance on scaling considerations, performance monitoring, and maintenance procedures for AI-powered SaaS applications.",
+      "order": 10,
+      "progress_status": "completed",
+      "dependent_files": "package.json,next.config.mjs,.gitignore",
+      "gmt_create": "2026-04-26T15:58:16.751409+08:00",
+      "gmt_modified": "2026-04-26T16:02:17.984642+08:00",
+      "raw_data": "WikiEncrypted:0IKfLNOWe9mZfG1jVts3w/M0qVzqC52U57hVmyGaz7D2Dw+x/P0WNGodsUBHDWrvz+dW1HDzXk0Y6w7Se95rOphy2GBIafUXPni2hpr2HmUdl1PKEcO4oB3EN0EDN12ieG/HQFG96OlNpW6EqFiow6w0eU/iJ6WfCslnTiROQeO3mVZfQ5CxWDXL21KcI19Q+jSFGWuiKGtEP7pZdJwJpph8rzDfaCAiVtD+hdL00Fy7dtV81o9rBioQE7nFgbN2nsASYPrElTGeq1m8nDxKfFdGGL76amQEjZFeidnHSWHlt+6nnYMpSx4w8Zl6bptyo66wgvuSa/UqQNovM/CXqq98tzV+zj31lD+e69h3nHL9DT9hQXhq7xfnvXWBgKLjLfNaB30QGhN3YIJQs8QFWPbqZEbOq9FE5OnaPIMZ8hzfB+M8h7fQaOfHgd1BLQokRCFF17b/OpSCQf05G62/DaPKcF9VKNJAXdEpdb3bUQspx+uvR2qN6W/0GqDmmBpv+Tv32ATyl/rIdTQ9MJ1rwIuntTwsOvCXy20vmTJx1xdkCR6zjORgs344/0NLXnG8n84oSJj12pFfFvj7cqLfQS8eBCOWUeD8eBZHNYALSBP5JEQrml01hb3qJ1Zkl8aTYjd2S9G9DAo2yD3fRtYpcJEviStGViKw++psOcTvO+I9dQ2rLRL5DNV/8tVOe0Wb+EW7oPs3Mn//Co4YbL0cZbQ7GhxqUnTdbfFptn8DahUSLem449oZ5a+6feh4WMrEKx3sSyS1AXSUx4WEU25iY+9V8iLkLd3s0Wa+4QM6igdaY4gCWT/d0Y38gesdD1KxsHzZndsFWozNxBp/CWiKgO0MxVt6ZQ/dUHINkVw50HfUX8p9JNFcp8tty5uMvcbcC8+nGAccpgM+Dmb72enSCeTCMKx0qx/wvhwqz+tPK76XekxddZAPvHZv3q+uKgnfQyB1GXKCL43CYokITXsscjjOoV2fFFUGdijW3pTn9D2g+Nj9ohdfW/jUBY2bRnInJoOpIOHw/o1QkQ803L8YrXgjUDz87MZvmdUzCiTh0ilaUdijhxrOEU79IEjSVWfmx/xPU1VOlzV8Kk4BQqla5AppZi94ockngfHXN1WuYl69uG+08xt08UAC5+CAdS0GlN36MPjHMxpz6D2z6rgKPLJYdcTcT5kJMxoMkN8DQ9cyWkqVONOZH4tr8xlZfg/5078QYc9WM5PzyVBRK999fVHepkQlptUyNl5bK4Vs9o1+B0pH0qWgUu7ZkoYH6oq/vNioSWOns6Rs9eBw9XtbXMDtDlHUTPanezRyJnq7nmGJ5wFTgHKUQl7NGGkMw6K+nKfXnVX+zTXakqFgV/WW0fkCAdBxabimC4O48ouGNv6fWFQz0rU2ae1H+247fKtlLq6qemwp8B3mbL7CbjE2lYpTgfI21zYRpNUHxge3ioSBsxqHbSqXScUf7WbNOZwvwAP2tq6fHISLmrFjp+/xFkoPuIHd/NpGFcxqc29ySEbB2kM5JMSNi81nsMtZV4X/bbPyvbqUpJLkkQmRC9LyLhT7gWpQsoKt9YtQ46FLnc5KdiFSDNXKDqV2qbkWZZKSO37GDZdCw7YCS7t9vOsqiQ6cz99tfm65rKSC4nJESM4="
+    }
+  ],
+  "wiki_items": [
+    {
+      "catalog_id": "fbdd80d7-d94d-4496-a919-0087693f9b29",
+      "title": "Getting Started",
+      "description": "getting-started",
+      "extend": "{}",
+      "progress_status": "completed",
+      "repo_id": "88680e08-955a-451a-9880-773ecc4da749",
+      "id": "443f22a1-1408-4221-a62e-851b73c7023e",
+      "gmt_create": "2026-04-26T15:59:02.351924+08:00",
+      "gmt_modified": "2026-04-26T21:36:27.992516+08:00"
+    },
+    {
+      "catalog_id": "db0b376f-83d0-4535-b7ef-695adea7ea1e",
+      "title": "Architecture Overview",
+      "description": "architecture-overview",
+      "extend": "{}",
+      "progress_status": "completed",
+      "repo_id": "88680e08-955a-451a-9880-773ecc4da749",
+      "id": "ad22777a-82f1-42fe-b6c2-c7a3e1f58a3f",
+      "gmt_create": "2026-04-26T15:59:29.842278+08:00",
+      "gmt_modified": "2026-04-26T15:59:29.847226+08:00"
+    },
+    {
+      "catalog_id": "b6b6eb1b-9d10-4683-a325-49570e8bf726",
+      "title": "AI Creative Tools",
+      "description": "ai-creative-tools",
+      "extend": "{}",
+      "progress_status": "completed",
+      "repo_id": "88680e08-955a-451a-9880-773ecc4da749",
+      "id": "9fa2bfad-333e-49bd-8e88-f6eadaf375e7",
+      "gmt_create": "2026-04-26T15:59:40.105986+08:00",
+      "gmt_modified": "2026-04-26T15:59:40.110804+08:00"
+    },
+    {
+      "catalog_id": "917a3cbd-3186-49aa-b3d0-6a1e1be8805b",
+      "title": "Internationalization \u0026 Localization",
+      "description": "internationalization",
+      "extend": "{}",
+      "progress_status": "completed",
+      "repo_id": "88680e08-955a-451a-9880-773ecc4da749",
+      "id": "c1e43fa3-c73d-4095-ab15-7b0e50657478",
+      "gmt_create": "2026-04-26T16:00:09.751158+08:00",
+      "gmt_modified": "2026-04-26T16:00:09.758741+08:00"
+    },
+    {
+      "catalog_id": "4bc9e3a5-23e0-40f9-8dce-9aae466a7dfa",
+      "title": "State Management",
+      "description": "state-management",
+      "extend": "{}",
+      "progress_status": "completed",
+      "repo_id": "88680e08-955a-451a-9880-773ecc4da749",
+      "id": "9a251f7e-aff4-4ad7-8940-0f6cc6c03d6e",
+      "gmt_create": "2026-04-26T16:00:52.764679+08:00",
+      "gmt_modified": "2026-04-26T16:00:52.766769+08:00"
+    },
+    {
+      "catalog_id": "01fb895b-bb80-487b-a3c7-25868376f2fe",
+      "title": "Component Library",
+      "description": "component-library",
+      "extend": "{}",
+      "progress_status": "completed",
+      "repo_id": "88680e08-955a-451a-9880-773ecc4da749",
+      "id": "8d932ac9-cd49-4763-a3ba-d9df215ce9f9",
+      "gmt_create": "2026-04-26T16:01:28.25376+08:00",
+      "gmt_modified": "2026-04-26T21:47:33.461672+08:00"
+    },
+    {
+      "catalog_id": "1fb85ccd-085b-4411-a5c9-9179b0e9ef4d",
+      "title": "Form Handling \u0026 Validation",
+      "description": "form-handling",
+      "extend": "{}",
+      "progress_status": "completed",
+      "repo_id": "88680e08-955a-451a-9880-773ecc4da749",
+      "id": "2a0cf0ce-6cf3-4fd1-913c-350b5e3c777e",
+      "gmt_create": "2026-04-26T16:01:42.98489+08:00",
+      "gmt_modified": "2026-04-26T16:01:42.990472+08:00"
+    },
+    {
+      "catalog_id": "5ede1ccc-46df-49ca-bd6f-de9ef0e0a5fa",
+      "title": "AWS Integration",
+      "description": "aws-integration",
+      "extend": "{}",
+      "progress_status": "completed",
+      "repo_id": "88680e08-955a-451a-9880-773ecc4da749",
+      "id": "9ccdd391-5469-4ccd-80d7-5271e65733f5",
+      "gmt_create": "2026-04-26T16:01:43.579208+08:00",
+      "gmt_modified": "2026-04-26T16:01:43.580961+08:00"
+    },
+    {
+      "catalog_id": "f74a8388-e784-4303-8f3c-9d6d87b74da1",
+      "title": "Deployment \u0026 CI/CD",
+      "description": "deployment-ci-cd",
+      "extend": "{}",
+      "progress_status": "completed",
+      "repo_id": "88680e08-955a-451a-9880-773ecc4da749",
+      "id": "00d8a14f-758f-4076-8275-18d5fb9ea49b",
+      "gmt_create": "2026-04-26T16:02:17.977268+08:00",
+      "gmt_modified": "2026-04-26T16:02:17.984781+08:00"
+    },
+    {
+      "catalog_id": "8246b1e7-8745-4a6a-9283-1db49a080c05",
+      "title": "Performance \u0026 Optimization",
+      "description": "performance-optimization",
+      "extend": "{}",
+      "progress_status": "completed",
+      "repo_id": "88680e08-955a-451a-9880-773ecc4da749",
+      "id": "01792587-dc3d-431f-ae62-2df170c9b6f7",
+      "gmt_create": "2026-04-26T16:02:40.509464+08:00",
+      "gmt_modified": "2026-04-26T16:02:40.514164+08:00"
+    },
+    {
+      "catalog_id": "5c2c0981-a0fd-43f1-aec4-fbed11195566",
+      "title": "Styling \u0026 Design System",
+      "description": "styling-design-system",
+      "extend": "{}",
+      "progress_status": "completed",
+      "repo_id": "88680e08-955a-451a-9880-773ecc4da749",
+      "id": "4c5e0ff6-e1ee-40b0-b18b-9da2f82004d2",
+      "gmt_create": "2026-04-26T16:02:54.402588+08:00",
+      "gmt_modified": "2026-04-26T16:02:54.409928+08:00"
+    },
+    {
+      "catalog_id": "387f6f0a-c0c9-40f5-9dd1-148905c51f41",
+      "title": "Text-to-Image Generator",
+      "description": "text-to-image-generator",
+      "extend": "{}",
+      "progress_status": "completed",
+      "repo_id": "88680e08-955a-451a-9880-773ecc4da749",
+      "id": "f17d45c9-2c2e-43ce-aa9c-eb273d90585e",
+      "gmt_create": "2026-04-26T16:03:36.328342+08:00",
+      "gmt_modified": "2026-04-26T16:03:36.336191+08:00"
+    },
+    {
+      "catalog_id": "515a2afb-3b18-42c9-a915-2bfdb16cb4ae",
+      "title": "Virtual Try-On",
+      "description": "virtual-try-on",
+      "extend": "{}",
+      "progress_status": "completed",
+      "repo_id": "88680e08-955a-451a-9880-773ecc4da749",
+      "id": "7a659045-10dc-497a-9b48-9353bd79ac86",
+      "gmt_create": "2026-04-26T16:03:57.069263+08:00",
+      "gmt_modified": "2026-04-26T16:03:57.076141+08:00"
+    },
+    {
+      "catalog_id": "1ced157f-6607-4f4a-a2d4-b77cea14d3cd",
+      "title": "Image-to-Image Transformer",
+      "description": "image-to-image-transformer",
+      "extend": "{}",
+      "progress_status": "completed",
+      "repo_id": "88680e08-955a-451a-9880-773ecc4da749",
+      "id": "a63f0023-bd9b-42fc-a160-e4f6fedb2b8e",
+      "gmt_create": "2026-04-26T16:04:25.697191+08:00",
+      "gmt_modified": "2026-04-26T16:04:25.705611+08:00"
+    },
+    {
+      "catalog_id": "8473ae0b-86b3-42d2-96dd-ccf726e907a7",
+      "title": "Image-to-Video Converter",
+      "description": "image-to-video-converter",
+      "extend": "{}",
+      "progress_status": "completed",
+      "repo_id": "88680e08-955a-451a-9880-773ecc4da749",
+      "id": "04d31cc8-e018-4143-a068-0c515cd8f23d",
+      "gmt_create": "2026-04-26T16:05:45.495811+08:00",
+      "gmt_modified": "2026-04-26T16:05:45.498958+08:00"
+    }
+  ],
+  "wiki_overview": {
+    "content": "\u003cblog\u003e\n\n# Flaq SaaS Template - Comprehensive Project Analysis\n\n## 1. Project Introduction\n\n### Purpose Statement\nFlaq SaaS Template is a modern, internationalized web application built with Next.js 16 that provides AI-powered creative tools including text-to-image generation, image-to-image transformation, virtual try-on functionality, and image-to-video conversion. The platform serves as a comprehensive SaaS solution for content creators and businesses seeking advanced AI capabilities.\n\n### Core Goals and Objectives\n- Deliver cutting-edge AI creative tools with intuitive user interfaces\n- Support multiple languages and regional markets through internationalization\n- Provide scalable, performant web application architecture\n- Enable seamless integration of AWS services for cloud-based operations\n- Offer modular component architecture for maintainability and extensibility\n\n### Target Audience\n- Content creators and digital artists\n- Marketing agencies and designers\n- E-commerce platforms requiring virtual try-on solutions\n- Businesses seeking automated content generation tools\n- International markets requiring localized experiences\n\n## 2. Technical Architecture\n\n### Component Breakdown\nThe project follows a hierarchical Next.js 16 architecture with route-based code splitting and internationalization support:\n\n```mermaid\ngraph TD\n    A[Root Layout] --\u003e B[Locale Wrapper]\n    B --\u003e C[With Footer Layout]\n    B --\u003e D[Without Footer Layout]\n    C --\u003e E[AI Features Layout]\n    C --\u003e F[Home Layout]\n    C --\u003e G[Footer Pages]\n    E --\u003e H[Text-to-Image]\n    E --\u003e I[Image-to-Image]\n    E --\u003e J[Virtual Try-On]\n    E --\u003e K[Image-to-Video]\n    E --\u003e L[Text-to-Video]\n```\n\n### Design Patterns\n- **Route-Based Architecture**: Uses Next.js App Router with dynamic routes and grouping\n- **Internationalization Pattern**: Implements next-intl for multi-language support\n- **Component Composition**: Modular UI components with shared layouts\n- **State Management**: Zustand for global state management\n- **Form Handling**: React Hook Form with Zod validation\n\n### System Relationships\n```mermaid\nflowchart TD\n    A[User Interface] --\u003e B[Next.js App Router]\n    B --\u003e C[AI Feature Components]\n    C --\u003e D[AWS S3 Integration]\n    C --\u003e E[External APIs]\n    B --\u003e F[Internationalization Layer]\n    B --\u003e G[Global UI Components]\n    G --\u003e H[Loading States]\n    G --\u003e I[Cookies \u0026 Dialogs]\n```\n\n## 3. Key Implementation\n\n### Main Entry Points\n- **Application Root**: `app/[locale]/(with-footer)/layout.tsx` - Primary application layout with navigation and footer\n- **Home Page**: `app/[locale]/(with-footer)/(home)/page.tsx` - Landing page showcasing AI capabilities\n- **AI Features**: `app/[locale]/(with-footer)/(ai-features)/layout.tsx` - Central hub for AI tools\n\n### Core Modules\n- **Configuration**: `next.config.mjs` - Next.js configuration with internationalization plugin\n- **Package Management**: `package.json` - Comprehensive dependency management\n- **TypeScript Config**: `tsconfig.json` - Strict TypeScript compilation settings\n- **Code Quality**: `eslint.config.mjs` - Modern ESLint configuration with Prettier integration\n\n### Configuration Approach\n- **Environment Variables**: Centralized configuration through environment variables\n- **Image Optimization**: Configurable remote patterns and local optimization settings\n- **Internationalization**: Dynamic locale-based routing with metadata generation\n- **Performance**: Production optimizations including console removal and source maps\n\n### External Dependencies\nKey dependencies include:\n- **React Ecosystem**: React 19.2.1, Next.js 16.0.7, React DOM 19.2.1\n- **UI Components**: Radix UI primitives, Framer Motion, Tailwind CSS v4\n- **State Management**: Zustand 5.0.6, SWR 2.3.3\n- **AWS Integration**: @aws-sdk/client-s3 3.1036.0, @aws-sdk/s3-request-presigner\n- **Form Handling**: React Hook Form 7.59.0, Zod 3.25.67\n- **Utilities**: Day.js 1.11.13, Lucide React 0.525.0, clsx 2.1.1\n\n### Integration Points\n- **AWS S3**: Cloud storage for generated assets and media\n- **Next.js Internationalization**: Multi-language support infrastructure\n- **Third-party Services**: Google Analytics, social media integrations\n- **CDN Integration**: Optimized image loading from remote sources\n\n### Component Relationship Diagram\n```mermaid\ngraph LR\n    A[Layout System] --\u003e B[Navigation Component]\n    A --\u003e C[Footer Component]\n    D[AI Feature Pages] --\u003e E[Image Form Components]\n    D --\u003e F[Example Showcase]\n    D --\u003e G[Frequently Asked Questions]\n    H[Global UI] --\u003e I[Loading Bar]\n    H --\u003e J[Cookie Consent]\n    H --\u003e K[Business Dialogs]\n```\n\n## 4. Key Features\n\n### Functionality Overview\nThe platform provides four primary AI creative tools:\n\n1. **Text-to-Image Generation**: Transform textual descriptions into high-quality images\n2. **Image-to-Image Transformation**: Modify existing images with various effects\n3. **Virtual Try-On**: AR-powered clothing visualization\n4. **Image-to-Video Conversion**: Generate videos from static images\n\n### Implementation Highlights\n- **Dynamic Form System**: `app/[locale]/(with-footer)/(ai-features)/(image)/text-to-image/page.tsx` - Configurable form with priority settings\n- **Example Showcase**: Interactive galleries demonstrating AI capabilities\n- **Responsive Design**: Mobile-first approach with adaptive layouts\n- **Performance Optimization**: Lazy loading and dynamic imports for optimal loading times\n\n### Feature Architecture Diagram\n```mermaid\nstateDiagram-v2\n    [*] --\u003e UserInput\n    UserInput --\u003e FormValidation: Submit\n    FormValidation --\u003e Processing: Valid Input\n    FormValidation --\u003e UserInput: Invalid Input\n    Processing --\u003e AIModel: Process Request\n    AIModel --\u003e ResultGeneration: Generate Output\n    ResultGeneration --\u003e UserOutput: Display Results\n    UserOutput --\u003e [*]: Complete\n    ResultGeneration --\u003e ErrorHandling: Processing Error\n    ErrorHandling --\u003e UserInput: Show Error Message\n```\n\n## 5. Conclusion and Recommendations\n\n### Project Architecture Summary\nFlaq SaaS Template demonstrates a well-structured Next.js 16 application with modern development practices. The architecture successfully balances scalability, internationalization, and user experience while maintaining clean separation of concerns through route-based organization and modular component design.\n\n### Architectural Strengths\n- **Modern Tech Stack**: Utilizes latest Next.js features with App Router\n- **Internationalization Ready**: Built-in multi-language support infrastructure\n- **Performance Focused**: Optimized loading strategies and component architecture\n- **Extensible Design**: Modular component system allows easy feature additions\n- **Cloud Integration**: AWS-ready architecture for scalable deployments\n\n### Potential Improvement Areas\n- **Testing Coverage**: Consider implementing comprehensive unit and integration tests\n- **Error Boundaries**: Add robust error handling and recovery mechanisms\n- **Performance Monitoring**: Integrate performance monitoring and analytics\n- **Accessibility**: Enhance accessibility compliance across all components\n- **Documentation**: Expand inline documentation for complex component interactions\n\n### Actionable Recommendations\n1. **Implement Comprehensive Testing**: Add Jest/React Testing Library for component testing\n2. **Enhance Error Handling**: Create centralized error boundary components\n3. **Add Performance Metrics**: Implement Next.js experimental performance monitoring\n4. **Improve Accessibility**: Audit components for WCAG compliance\n5. **Expand Documentation**: Create component documentation with usage examples\n\n### Next Steps for Project Evolution\n- **Feature Expansion**: Add more AI models and creative tools\n- **Monetization Strategy**: Implement subscription tiers and usage tracking\n- **Team Collaboration**: Set up CI/CD pipeline with automated testing\n- **Performance Optimization**: Implement advanced caching strategies\n- **Community Features**: Add user-generated content and sharing capabilities\n\n**Sources:**\n- [package.json](package.json)\n- [next.config.mjs](next.config.mjs)\n- [tsconfig.json](tsconfig.json)\n- [eslint.config.mjs](eslint.config.mjs)\n- [postcss.config.js](postcss.config.js)\n- [app/[locale]/(with-footer)/layout.tsx](app%5Blocale%5D/(with-footer)/layout.tsx)\n- [app/[locale]/(with-footer)/(ai-features)/layout.tsx](app%5Blocale%5D/(with-footer)/(ai-features)/layout.tsx)\n- [app/[locale]/(with-footer)/(ai-features)/(image)/text-to-image/page.tsx](app%5Blocale%5D/(with-footer)/(ai-features)/(image)/text-to-image/page.tsx)\n- [app/[locale]/(with-footer)/(home)/page.tsx](app%5Blocale%5D/(with-footer)/(home)/page.tsx)\n- [app/[locale]/LazyGlobalUI.tsx](app%5Blocale%5D/LazyGlobalUI.tsx)\n\n\u003c/blog\u003e",
+    "gmt_create": "2026-04-26T15:55:36.498319+08:00",
+    "gmt_modified": "2026-04-26T15:55:36.498319+08:00",
+    "id": "21c0679f-bbfd-4dbc-8cf5-bf4df66b9687",
+    "repo_id": "88680e08-955a-451a-9880-773ecc4da749"
+  },
+  "wiki_readme": {
+    "content": "No readme file",
+    "gmt_create": "2026-04-26T15:54:15.778736+08:00",
+    "gmt_modified": "2026-04-26T15:54:15.778736+08:00",
+    "id": "a2d72230-2561-4e35-9e0c-a8f124cf0ae9",
+    "repo_id": "88680e08-955a-451a-9880-773ecc4da749"
+  },
+  "wiki_repo": {
+    "id": "88680e08-955a-451a-9880-773ecc4da749",
+    "name": "flaq-saas-template",
+    "progress_status": "completed",
+    "wiki_present_status": "COMPLETED",
+    "optimized_catalog": "\".\\n├── .next/\\n├── node_modules/\\n├── .gitignore\\n├── README.md\\n├── next-env.d.ts\\n└── next.config.mjs\\n\"",
+    "current_document_structure": "WikiEncrypted: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",
+    "catalogue_think_content": "WikiEncrypted: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",
+    "recovery_checkpoint": "wiki_generation_completed",
+    "last_commit_id": "6de6c7b758cc68bc0d11c225ac696dd7bc49f7ed",
+    "last_commit_update": "2026-04-26T21:47:34.045301+08:00",
+    "gmt_create": "2026-04-26T15:16:42.685472+08:00",
+    "gmt_modified": "2026-04-26T21:47:34.045301+08:00",
+    "extend_info": "{\"language\":\"en\",\"active\":true,\"branch\":\"main\",\"shareStatus\":\"\",\"server_error_code\":\"\",\"cosy_version\":\"0.14.2\"}"
+  }
+}
