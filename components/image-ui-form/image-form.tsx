@@ -9,9 +9,11 @@ import { useForm } from 'react-hook-form';
 import { toast } from 'sonner';
 
 import { ALL_IMAGE_PROVIDERS } from '@/lib/constants/image';
+import { validImageDraft } from '@/lib/desktop/draft-validation';
 import { cn } from '@/lib/utils';
 import { supportsGenerationType } from '@/lib/utils/imageModelService';
 import { Form } from '@/components/ui/form';
+import FormDraft from '@/components/desktop/FormDraft';
 // Common form components
 import {
   ModelVersionField,
@@ -293,7 +295,7 @@ export default function ImageForm({
     <ImageContenxtProvider imageFormType={imageFormType}>
       <div
         className={cn(
-          'flex h-auto w-full flex-col gap-5 rounded-xl bg-[#232528] px-2 py-5',
+          'bg-card flex h-auto w-full flex-col gap-5 rounded-xl px-2 py-5',
           'lg:h-[calc(100vh-76px)] lg:flex-row lg:rounded-[36px] lg:p-5',
           className,
         )}
@@ -304,10 +306,22 @@ export default function ImageForm({
               e.stopPropagation(); // Prevent React Portal event bubbling to parent form
               form.handleSubmit(onSubmit)(e);
             }}
-            className='no-scrollbar relative isolate z-40 flex h-auto w-full shrink-0 flex-col gap-3 rounded-3xl bg-[#1c1d20] p-3.5 lg:h-full lg:w-[351px]'
+            className='no-scrollbar bg-card relative isolate z-40 flex h-auto w-full shrink-0 flex-col gap-3 rounded-3xl p-3.5 lg:h-full lg:w-[351px]'
           >
+            {imageObjContext === 'default' && (
+              <FormDraft
+                id={imageFormType}
+                form={form}
+                validate={(data) =>
+                  validImageDraft(data) &&
+                  (customVersionList || ALL_IMAGE_PROVIDERS.flatMap((provider) => provider.versions)).some(
+                    (version) => version.modelVersion === data.modelVersion,
+                  )
+                }
+              />
+            )}
             {formTitle && (
-              <div className='line-clamp-1 shrink-0 border-b border-[#303030] bg-[#1c1d20] pb-2.5 text-lg font-medium tracking-[0.36px] text-white'>
+              <div className='border-border bg-card text-foreground line-clamp-1 shrink-0 border-b pb-2.5 text-lg font-medium tracking-[0.36px]'>
                 {formTitle}
               </div>
             )}
@@ -340,7 +354,7 @@ export default function ImageForm({
                       onClick={() =>
                         setCurrentModelVersionDisplayMode((current) => (current === 'model' ? 'label' : 'model'))
                       }
-                      className='flex h-7 w-7 items-center justify-center rounded-lg bg-transparent text-white/70 transition-colors hover:bg-white/10 hover:text-white'
+                      className='text-foreground/70 hover:bg-foreground/10 hover:text-foreground flex h-7 w-7 items-center justify-center rounded-lg bg-transparent transition-colors'
                     >
                       <ArrowLeftRight className='h-3.5 w-3.5' />
                       <span className='sr-only'>

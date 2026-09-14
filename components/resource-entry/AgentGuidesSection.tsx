@@ -72,11 +72,11 @@ export default async function AgentGuidesSection() {
           >
             <article
               className={cn(
-                'border-color-b1 bg-color-1 flex h-full flex-col overflow-hidden rounded-lg border p-2.5 transition-colors duration-200 hover:border-white/20 hover:bg-[#212027]',
+                'border-color-b1 bg-color-1 hover:border-foreground/20 hover:bg-card flex h-full flex-col overflow-hidden rounded-lg border p-2.5 transition-colors duration-200',
                 guide.wide && 'lg:grid lg:grid-cols-2 lg:items-start lg:gap-3',
               )}
             >
-              <div className='aspect-video min-w-0 overflow-hidden rounded-md bg-white/5'>
+              <div className='bg-foreground/5 aspect-video min-w-0 overflow-hidden rounded-md'>
                 <img
                   src={guide.image}
                   alt={t(`items.${guide.key}.title`)}
@@ -86,8 +86,8 @@ export default async function AgentGuidesSection() {
                 />
               </div>
               <div className='flex min-w-0 items-start gap-2.5 pt-3 lg:self-start'>
-                <span className='flex size-[42px] shrink-0 items-center justify-center rounded-md bg-white/[0.07]'>
-                  <Bot className='size-[22px] text-white/80' />
+                <span className='bg-foreground/[0.07] flex size-[42px] shrink-0 items-center justify-center rounded-md'>
+                  <Bot className='text-foreground/80 size-[22px]' />
                 </span>
                 <div className='min-w-0 flex-1'>
                   <h3 className='text-color-t1 group-hover:text-color-main line-clamp-1 text-sm leading-5 font-medium transition-colors'>

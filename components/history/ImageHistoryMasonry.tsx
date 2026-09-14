@@ -65,24 +65,24 @@ export default function ImageHistoryMasonry({
   const emptyConfig = emptyStateConfig || defaultEmpty;
 
   return (
-    <div className='flex flex-1 flex-col overflow-hidden rounded-2xl bg-[#1c1d20] p-3 sm:rounded-3xl sm:p-3.5'>
+    <div className='bg-card flex flex-1 flex-col overflow-hidden rounded-2xl p-3 sm:rounded-3xl sm:p-3.5'>
       <div className='custom-scrollbar relative flex-1 overflow-y-auto'>
         {(() => {
           if (!imageHistory || imageHistory.length === 0) {
             if (isLoading) {
               return (
                 <div className='flex h-full items-center justify-center'>
-                  <div className='text-white/60'>{t('loading')}</div>
+                  <div className='text-foreground/60'>{t('loading')}</div>
                 </div>
               );
             }
 
             return (
               <div className='flex h-full flex-col items-center justify-center rounded-lg'>
-                <div className='mb-6 text-base text-white/70 md:text-lg'>{emptyConfig.message}</div>
+                <div className='text-foreground/70 mb-6 text-base md:text-lg'>{emptyConfig.message}</div>
                 <Link
                   href={emptyConfig.linkHref}
-                  className='bg-color-main rounded-lg px-10 py-3 text-base font-medium text-white transition-all hover:scale-[1.02] hover:shadow-lg md:px-12 md:py-4'
+                  className='bg-color-main text-primary-foreground rounded-lg px-10 py-3 text-base font-medium transition-all hover:scale-[1.02] hover:shadow-lg md:px-12 md:py-4'
                 >
                   {emptyConfig.linkText}
                 </Link>
@@ -126,7 +126,7 @@ export default function ImageHistoryMasonry({
                       />
                       {selectedImageUrl === image.url && (
                         <div className='absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2'>
-                          <div className='text-color-main flex size-12 items-center justify-center rounded-full bg-white shadow-lg'>
+                          <div className='text-color-main bg-foreground flex size-12 items-center justify-center rounded-full shadow-lg'>
                             <svg viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg' className='size-8'>
                               <path
                                 d='M20 6L9 17L4 12'
@@ -144,7 +144,7 @@ export default function ImageHistoryMasonry({
                 )}
               />
               {isLoading && (
-                <div className='absolute inset-0 flex items-center justify-center bg-[#1c1d20]/80'>
+                <div className='bg-card/80 absolute inset-0 flex items-center justify-center'>
                   <Spinning className='size-8' />
                 </div>
               )}
@@ -154,7 +154,7 @@ export default function ImageHistoryMasonry({
       </div>
 
       {total > 0 && (
-        <div className='mt-3 flex shrink-0 flex-col items-center gap-3 border-t border-white/10 pt-3 sm:mt-4 sm:gap-4 sm:pt-4 lg:flex-row lg:gap-0'>
+        <div className='border-foreground/10 mt-3 flex shrink-0 flex-col items-center gap-3 border-t pt-3 sm:mt-4 sm:gap-4 sm:pt-4 lg:flex-row lg:gap-0'>
           <div className='flex w-full justify-center lg:flex-1'>
             <StatePagination currentPage={pageNum} pageSize={pageSize} onChange={onPageChange} total={total} />
           </div>
@@ -164,7 +164,7 @@ export default function ImageHistoryMasonry({
                 type='button'
                 onClick={handleConfirm}
                 disabled={!selectedImageUrl}
-                className='bg-color-main w-full rounded-lg px-6 py-2.5 text-sm font-medium text-white transition-all hover:scale-[1.02] hover:shadow-lg disabled:cursor-not-allowed disabled:opacity-50 sm:w-auto sm:px-8 sm:py-3'
+                className='bg-color-main text-primary-foreground w-full rounded-lg px-6 py-2.5 text-sm font-medium transition-all hover:scale-[1.02] hover:shadow-lg disabled:cursor-not-allowed disabled:opacity-50 sm:w-auto sm:px-8 sm:py-3'
               >
                 {confirmButtonText}
               </button>

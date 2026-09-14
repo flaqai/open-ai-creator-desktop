@@ -35,7 +35,7 @@ function LinkTag({
       href={href}
       title={title}
       className={cn(
-        'flex-center size-8 rounded-[4px] border border-transparent bg-transparent text-white/40 hover:cursor-pointer hover:bg-[#2C2D36]',
+        'flex-center text-foreground/40 hover:bg-card size-8 rounded-[4px] border border-transparent bg-transparent hover:cursor-pointer',
         className,
       )}
     >
@@ -62,7 +62,7 @@ function itemRender({
       <LinkTag
         href={route}
         title={page.toString()}
-        className={page === currentPage ? 'border-white bg-[#2C2D36] text-white' : ''}
+        className={page === currentPage ? 'border-foreground bg-card text-foreground' : ''}
       >
         {page}
       </LinkTag>
@@ -126,7 +126,7 @@ export default function BasePagination({
   return (
     <div className={cn('mx-auto flex items-center justify-center gap-3', className)}>
       <Pagination
-        className='flex gap-3 text-xs text-white [&>li]:flex [&>li]:items-center [&>li]:justify-center'
+        className='text-foreground flex gap-3 text-xs [&>li]:flex [&>li]:items-center [&>li]:justify-center'
         pageSize={pageSize}
         defaultCurrent={currentPage}
         total={total}
@@ -146,11 +146,11 @@ export default function BasePagination({
           max={Math.ceil(total / pageSize)}
           name='page'
           defaultValue={currentPage}
-          className='hide-number-input flex h-8 max-w-[50px] items-center justify-center rounded border border-white/40 bg-transparent px-2 text-xs'
+          className='hide-number-input border-foreground/40 flex h-8 max-w-[50px] items-center justify-center rounded border bg-transparent px-2 text-xs'
         />
         <button
           type='submit'
-          className='flex size-8 items-center justify-center rounded border border-transparent bg-transparent text-white/40 hover:cursor-pointer hover:bg-[#2C2D36]'
+          className='text-foreground/40 hover:bg-card flex size-8 items-center justify-center rounded border border-transparent bg-transparent hover:cursor-pointer'
         >
           <ArrowBigRight className='size-6' />
         </button>

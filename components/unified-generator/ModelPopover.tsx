@@ -123,7 +123,7 @@ function ModelIcon({ value, name }: { value: string; name: string }) {
           alt={name}
           className={cn(
             'overflow-hidden rounded-md object-contain',
-            icon.background === 'light' ? 'size-[22px] bg-white' : 'size-full',
+            icon.background === 'light' ? 'bg-foreground size-[22px]' : 'size-full',
           )}
         />
       ) : (
@@ -201,13 +201,13 @@ export default function ModelPopover({
           type='button'
           variant='outline'
           aria-label={label}
-          className='!bg-color-c3 hover:!bg-color-c4 flex h-9 w-full min-w-0 flex-1 justify-between rounded-lg !border-0 px-3 py-0 text-sm text-[#b8b8b8] !shadow-none hover:text-[#b8b8b8] sm:max-w-[360px] sm:min-w-[280px]'
+          className='!bg-color-c3 hover:!bg-color-c4 text-muted-foreground hover:text-muted-foreground flex h-9 w-full min-w-0 flex-1 justify-between rounded-lg !border-0 px-3 py-0 text-sm !shadow-none sm:max-w-[360px] sm:min-w-[280px]'
         >
           <span className='flex min-w-0 items-center gap-2.5'>
             <ModelIcon value={selectedModel.modelVersion || selectedModel.model} name={selectedModel.name} />
-            <span className='min-w-0 truncate text-white'>{selectedModel.model}</span>
+            <span className='text-foreground min-w-0 truncate'>{selectedModel.model}</span>
           </span>
-          <ChevronDown className='size-4 shrink-0 text-white/50' />
+          <ChevronDown className='text-foreground/50 size-4 shrink-0' />
         </Button>
       </PopoverTrigger>
       <PopoverContent
@@ -216,7 +216,7 @@ export default function ModelPopover({
           const target = event.target as HTMLElement;
           if (providerOpen || typeOpen || target.closest('[data-slot="select-content"]')) event.preventDefault();
         }}
-        className='border-color-b1 bg-color-bg w-[var(--radix-popover-trigger-width)] overflow-hidden rounded-xl p-0 text-white'
+        className='border-color-b1 bg-color-bg text-foreground w-[var(--radix-popover-trigger-width)] overflow-hidden rounded-xl p-0'
       >
         <div className='border-color-b1 border-b p-2'>
           <div className='flex items-center gap-2'>
@@ -306,7 +306,7 @@ export default function ModelPopover({
               type='button'
               aria-label={t('scroll-up')}
               onClick={() => scrollList('up')}
-              className='bg-color-bg absolute inset-x-0 top-0 z-10 flex h-5 items-center justify-center text-white/90'
+              className='bg-color-bg text-foreground/90 absolute inset-x-0 top-0 z-10 flex h-5 items-center justify-center'
             >
               <ChevronUp className='size-4' />
             </button>
@@ -331,22 +331,22 @@ export default function ModelPopover({
                     setOpen(false);
                   }}
                   className={cn(
-                    'border-color-b1 flex w-full flex-col gap-2 border-b p-2 text-left last:border-b-0 hover:bg-white/5',
+                    'border-color-b1 hover:bg-foreground/5 flex w-full flex-col gap-2 border-b p-2 text-left last:border-b-0',
                     active && 'bg-color-main/10 hover:bg-color-main/10',
                   )}
                 >
                   <div className='flex items-start justify-between gap-3'>
                     <div className='flex min-w-0 flex-1 items-center gap-2.5'>
                       <ModelIcon value={model.modelVersion || model.model} name={model.name} />
-                      <span className='min-w-0 truncate text-base font-medium text-white'>{model.model}</span>
+                      <span className='text-foreground min-w-0 truncate text-base font-medium'>{model.model}</span>
                     </div>
                     <span
                       className={cn(
                         'flex size-5 shrink-0 items-center justify-center rounded-full border',
-                        active ? 'border-color-main bg-color-main' : 'border-white/25',
+                        active ? 'border-color-main bg-color-main' : 'border-foreground/25',
                       )}
                     >
-                      {active ? <Check className='size-3 text-white' /> : null}
+                      {active ? <Check className='text-foreground size-3' /> : null}
                     </span>
                   </div>
                   {tags.length ? (
@@ -354,7 +354,7 @@ export default function ModelPopover({
                       {tags.map((tag) => (
                         <span
                           key={tag.label}
-                          className='border-color-b1 bg-color-1 flex items-center gap-1 rounded-md border px-2 py-1 text-xs text-white/70'
+                          className='border-color-b1 bg-color-1 text-foreground/70 flex items-center gap-1 rounded-md border px-2 py-1 text-xs'
                         >
                           {tag.icon}
                           <span>{tag.label}</span>
@@ -371,7 +371,7 @@ export default function ModelPopover({
               type='button'
               aria-label={t('scroll-down')}
               onClick={() => scrollList('down')}
-              className='bg-color-bg absolute inset-x-0 bottom-0 z-10 flex h-5 items-center justify-center text-white/90'
+              className='bg-color-bg text-foreground/90 absolute inset-x-0 bottom-0 z-10 flex h-5 items-center justify-center'
             >
               <ChevronDown className='size-4' />
             </button>

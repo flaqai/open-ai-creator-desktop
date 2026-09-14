@@ -5,6 +5,7 @@ import { useSearchParams } from 'next/navigation';
 import { languages } from '@/i18n/languages';
 import { usePathname, useRouter } from '@/i18n/navigation';
 import { useLocale } from 'next-intl';
+import { toast } from 'sonner';
 
 import { isDesktopRuntime } from '@/lib/desktop/runtime';
 import { isEmptyObject } from '@/lib/utils/objectUtils';
@@ -29,13 +30,20 @@ export default function LocaleSwitcher() {
     }
 
     setLocaleVal(newLocale);
-    if (isDesktopRuntime()) localStorage.setItem('flaq-desktop-locale', newLocale);
+    if (isDesktopRuntime()) {
+      try {
+        localStorage.setItem('flaq-desktop-locale', newLocale);
+      } catch {
+        toast.error(currentLocale === 'zh' ? '语言设置无法保存' : 'Could not save language preference');
+        return;
+      }
+    }
     router.replace(url, { locale: newLocale });
   };
 
   return (
     <Select value={localeVal} defaultValue={currentLocale} onValueChange={onValueChange}>
-      <SelectTrigger className='flex h-8 w-[80px] items-center gap-1 rounded-lg border-none bg-transparent! px-2 text-white/40 lg:h-11'>
+      <SelectTrigger className='text-foreground/40 flex h-8 w-[80px] items-center gap-1 rounded-lg border-none bg-transparent! px-2 lg:h-11'>
         <Icon src='/icons/global.svg' />
         <SelectValue placeholder='locale'>{localeVal.toUpperCase()}</SelectValue>
       </SelectTrigger>
@@ -44,7 +52,7 @@ export default function LocaleSwitcher() {
           <SelectItem
             value={language.lang}
             key={language.code}
-            className='text-white/40 hover:cursor-pointer hover:bg-white/40! focus:bg-[#2C2D36]'
+            className='text-foreground/40 hover:bg-foreground/40! focus:bg-card hover:cursor-pointer'
           >
             {language.label}
           </SelectItem>

@@ -56,7 +56,7 @@ export default function CompressImageDialog({
       >
         <DialogClose asChild>
           <button type='button' className='absolute top-3 right-3'>
-            <CircleX className='size-4 text-white/70' />
+            <CircleX className='text-foreground/70 size-4' />
             <span className='sr-only'>close</span>
           </button>
         </DialogClose>
@@ -69,7 +69,7 @@ export default function CompressImageDialog({
             <button
               type='button'
               onClick={reUpload}
-              className='bg-main-gray flex h-10 items-center justify-center rounded-lg px-2.5 text-white/70'
+              className='bg-main-gray text-foreground/70 flex h-10 items-center justify-center rounded-lg px-2.5'
             >
               {t('reupload')}
             </button>
@@ -77,7 +77,7 @@ export default function CompressImageDialog({
               type='button'
               onClick={compressFile}
               disabled={startCompress}
-              className='bg-color-main flex h-10 flex-1 items-center justify-center rounded-lg px-2.5 text-black'
+              className='bg-color-main text-background flex h-10 flex-1 items-center justify-center rounded-lg px-2.5'
             >
               {startCompress ? <Spinning className='size-5' /> : t('compress')}
             </button>

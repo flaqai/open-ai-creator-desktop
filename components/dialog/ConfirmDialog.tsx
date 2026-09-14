@@ -49,7 +49,7 @@ export default function ConfirmDialog({
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogContent
-        className='box-border flex w-[calc(100vw-32px)] max-w-[420px] flex-col items-start justify-start gap-2.5 rounded-xl border-none bg-[#1a1a1a] p-3'
+        className='bg-muted box-border flex w-[calc(100vw-32px)] max-w-[420px] flex-col items-start justify-start gap-2.5 rounded-xl border-none p-3'
         hiddenTitle={titleText || t('title')}
       >
         <div className='box-border flex w-full flex-col items-stretch justify-start'>
@@ -59,7 +59,7 @@ export default function ConfirmDialog({
               onClick={onClose}
               className='relative flex size-6 shrink-0 items-center justify-center'
             >
-              <X className='size-6 text-white/40' />
+              <X className='text-foreground/40 size-6' />
             </button>
           </div>
 
@@ -74,12 +74,16 @@ export default function ConfirmDialog({
                     </text>
                   </svg>
                 </div>
-                <div className='text-[18px] leading-[27px] font-semibold text-white'>{titleText || t('title')}</div>
+                <div className='text-foreground text-[18px] leading-[27px] font-semibold'>
+                  {titleText || t('title')}
+                </div>
               </div>
 
               {children && (
                 <div className='box-border flex w-full flex-row items-center justify-center gap-1'>
-                  <div className='text-center text-[16px] leading-[24px] font-normal text-white/70'>{children}</div>
+                  <div className='text-foreground/70 text-center text-[16px] leading-[24px] font-normal'>
+                    {children}
+                  </div>
                 </div>
               )}
             </div>
@@ -89,7 +93,7 @@ export default function ConfirmDialog({
                 type='button'
                 onClick={onClose}
                 disabled={loading || disabled}
-                className='box-border flex h-10 grow basis-0 flex-row items-center justify-center gap-2.5 rounded-lg bg-white/10 p-[10px] text-sm leading-[24px] font-normal text-white/70 hover:opacity-80 disabled:cursor-not-allowed disabled:opacity-50 lg:text-[16px]'
+                className='bg-foreground/10 text-foreground/70 box-border flex h-10 grow basis-0 flex-row items-center justify-center gap-2.5 rounded-lg p-[10px] text-sm leading-[24px] font-normal hover:opacity-80 disabled:cursor-not-allowed disabled:opacity-50 lg:text-[16px]'
               >
                 {cancelText || t('cancel')}
               </button>
@@ -97,7 +101,7 @@ export default function ConfirmDialog({
                 type='button'
                 onClick={onOk}
                 disabled={loading || disabled}
-                className='bg-color-main box-border flex h-10 grow basis-0 flex-row items-center justify-center gap-2.5 rounded-lg p-[10px] text-sm leading-[24px] font-normal text-white hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-70 lg:text-[16px]'
+                className='bg-color-main text-primary-foreground box-border flex h-10 grow basis-0 flex-row items-center justify-center gap-2.5 rounded-lg p-[10px] text-sm leading-[24px] font-normal hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-70 lg:text-[16px]'
               >
                 {loading ? <Spinning className='size-4' /> : confirmText || t('confirm')}
               </button>

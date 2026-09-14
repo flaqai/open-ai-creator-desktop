@@ -27,19 +27,19 @@ function InfoList({
 }) {
   return (
     <div className='min-w-0'>
-      <p className='mb-4 text-xs font-semibold tracking-[0.18em] text-white/55 uppercase'>{title}</p>
+      <p className='text-foreground/55 mb-4 text-xs font-semibold tracking-[0.18em] uppercase'>{title}</p>
       <ul className='flex flex-col items-start gap-1.5'>
         {dataList.map((el, index) => (
           <li key={el.href || index}>
             {el.isBusinessButton ? (
-              <BusinessButton className='inline-flex min-h-8 items-center text-start text-sm text-white/65 transition-colors hover:text-white focus-visible:text-white focus-visible:outline-none'>
+              <BusinessButton className='text-foreground/65 hover:text-foreground focus-visible:text-foreground inline-flex min-h-8 items-center text-start text-sm transition-colors focus-visible:outline-none'>
                 {el.title}
               </BusinessButton>
             ) : (
               <Link
                 href={el.href!}
                 title={el.title}
-                className='inline-flex min-h-8 items-center text-sm text-white/65 transition-colors hover:text-white focus-visible:text-white focus-visible:outline-none'
+                className='text-foreground/65 hover:text-foreground focus-visible:text-foreground inline-flex min-h-8 items-center text-sm transition-colors focus-visible:outline-none'
                 target={el.target}
                 type={el.type}
                 prefetch={prefetch}
@@ -110,7 +110,7 @@ export default function Footer() {
     : INFO_LIST;
 
   return (
-    <footer className='relative isolate w-full overflow-hidden border-t border-white/10 bg-[#070708] text-white/70'>
+    <footer className='border-foreground/10 text-foreground/70 relative isolate w-full overflow-hidden border-t bg-[#070708]'>
       <div
         aria-hidden='true'
         className='pointer-events-none absolute inset-x-0 top-0 -z-10 h-64 bg-[radial-gradient(ellipse_at_top_left,rgba(76,82,254,0.13),transparent_58%)]'
@@ -120,7 +120,7 @@ export default function Footer() {
         <div className='grid gap-10 py-12 lg:grid-cols-[minmax(0,1.6fr)_minmax(160px,0.7fr)_minmax(160px,0.7fr)] lg:gap-14 lg:py-16'>
           <div className='max-w-2xl'>
             <Link href='/' className='mb-6 inline-flex items-center gap-3' aria-label='Flaq SaaS Template'>
-              <span className='flex size-11 items-center justify-center rounded-2xl border border-white/10 bg-white/[0.06] shadow-[0_12px_36px_rgba(0,0,0,0.25)]'>
+              <span className='border-foreground/10 bg-foreground/[0.06] flex size-11 items-center justify-center rounded-2xl border shadow-[0_12px_36px_rgba(0,0,0,0.25)]'>
                 <img
                   src='/images/logo.png'
                   alt=''
@@ -130,14 +130,14 @@ export default function Footer() {
                   decoding='async'
                 />
               </span>
-              <span className='text-sm font-semibold tracking-[0.12em] text-white/80 uppercase'>
+              <span className='text-foreground/80 text-sm font-semibold tracking-[0.12em] uppercase'>
                 Flaq SaaS Template
               </span>
             </Link>
-            <p className='max-w-xl text-2xl leading-tight font-semibold text-balance text-white sm:text-3xl'>
+            <p className='text-foreground max-w-xl text-2xl leading-tight font-semibold text-balance sm:text-3xl'>
               {t('title')}
             </p>
-            <p className='mt-4 max-w-xl text-sm leading-6 text-white/50'>{t('subTitle')}</p>
+            <p className='text-foreground/50 mt-4 max-w-xl text-sm leading-6'>{t('subTitle')}</p>
           </div>
 
           <div className='grid grid-cols-2 gap-x-8 gap-y-10 sm:gap-x-14 lg:contents'>
@@ -146,7 +146,7 @@ export default function Footer() {
           </div>
         </div>
 
-        <nav aria-label='Languages' className='border-t border-white/10 py-6'>
+        <nav aria-label='Languages' className='border-foreground/10 border-t py-6'>
           <div className='flex flex-wrap gap-2'>
             {languages.map((language) => {
               const isActive = language.lang === locale;
@@ -160,8 +160,8 @@ export default function Footer() {
                   aria-current={isActive ? 'page' : undefined}
                   className={`rounded-full border px-3 py-1.5 text-xs transition-colors focus-visible:outline-none ${
                     isActive
-                      ? 'border-white/25 bg-white/10 text-white'
-                      : 'border-white/10 bg-white/[0.025] text-white/50 hover:border-white/20 hover:bg-white/[0.06] hover:text-white'
+                      ? 'border-foreground/25 bg-foreground/10 text-foreground'
+                      : 'border-foreground/10 bg-foreground/[0.025] text-foreground/50 hover:border-foreground/20 hover:bg-foreground/[0.06] hover:text-foreground'
                   }`}
                 >
                   {language.label}
@@ -171,8 +171,8 @@ export default function Footer() {
           </div>
         </nav>
 
-        <div className='flex flex-col-reverse items-center justify-between gap-5 border-t border-white/10 py-6 sm:flex-row'>
-          <div className='flex flex-wrap items-center justify-center gap-x-2 gap-y-1 text-center text-xs text-white/50 sm:justify-start sm:text-start'>
+        <div className='border-foreground/10 flex flex-col-reverse items-center justify-between gap-5 border-t py-6 sm:flex-row'>
+          <div className='text-foreground/50 flex flex-wrap items-center justify-center gap-x-2 gap-y-1 text-center text-xs sm:justify-start sm:text-start'>
             <span>© {currentYear} Flaq AI.</span>
             <span>Flaq SaaS Template.</span>
           </div>
@@ -182,7 +182,7 @@ export default function Footer() {
               href='https://flaq.ai/'
               target='_blank'
               rel='noopener noreferrer nofollow'
-              className='flex size-10 items-center justify-center rounded-xl border border-white/10 bg-white/[0.035] transition-colors hover:border-white/20 hover:bg-white/[0.08] focus-visible:outline-none'
+              className='border-foreground/10 bg-foreground/[0.035] hover:border-foreground/20 hover:bg-foreground/[0.08] flex size-10 items-center justify-center rounded-xl border transition-colors focus-visible:outline-none'
               title='Flaq AI'
               aria-label='Flaq AI'
             >
@@ -192,7 +192,7 @@ export default function Footer() {
               href='https://github.com/flaqai/flaq-saas-template'
               target='_blank'
               rel='noopener noreferrer'
-              className='flex size-10 items-center justify-center rounded-xl border border-white/10 bg-white/[0.035] transition-colors hover:border-white/20 hover:bg-white/[0.08] focus-visible:outline-none'
+              className='border-foreground/10 bg-foreground/[0.035] hover:border-foreground/20 hover:bg-foreground/[0.08] flex size-10 items-center justify-center rounded-xl border transition-colors focus-visible:outline-none'
               title='GitHub Repository'
               aria-label='GitHub Repository'
             >

@@ -110,7 +110,7 @@ export default function VideoDetailModal({ open, onOpenChange, onDelete, video }
         >
           <div className='flex h-full w-full flex-col overflow-hidden rounded-lg shadow-lg lg:flex-row'>
             {/* Left: Video Section */}
-            <div className='flex h-full w-full flex-1 items-center justify-center bg-[#111214] p-3 lg:h-[700px] lg:p-6'>
+            <div className='bg-card flex h-full w-full flex-1 items-center justify-center p-3 lg:h-[700px] lg:p-6'>
               {video.videoUrl ? (
                 <video
                   src={video.videoUrl}
@@ -131,16 +131,16 @@ export default function VideoDetailModal({ open, onOpenChange, onDelete, video }
             </div>
 
             {/* Right: Info Panel */}
-            <div className='flex h-full w-full flex-col bg-[#16171b] lg:h-[700px] lg:w-[450px] lg:shrink-0'>
+            <div className='bg-card flex h-full w-full flex-col lg:h-[700px] lg:w-[450px] lg:shrink-0'>
               {/* Header - Fixed */}
-              <div className='flex shrink-0 items-center justify-between border-b border-[#34353b] p-3'>
-                <h2 className='text-2xl leading-8 font-medium text-white capitalize'>{t('title')}</h2>
+              <div className='border-border flex shrink-0 items-center justify-between border-b p-3'>
+                <h2 className='text-foreground text-2xl leading-8 font-medium capitalize'>{t('title')}</h2>
                 <button
                   type='button'
                   onClick={() => onOpenChange(false)}
-                  className='flex h-9 w-9 items-center justify-center rounded-[3px] transition-colors hover:bg-white/10'
+                  className='hover:bg-foreground/10 flex h-9 w-9 items-center justify-center rounded-[3px] transition-colors'
                 >
-                  <X className='h-5 w-5 text-white' />
+                  <X className='text-foreground h-5 w-5' />
                 </button>
               </div>
 
@@ -160,7 +160,7 @@ export default function VideoDetailModal({ open, onOpenChange, onDelete, video }
               </div>
 
               {/* Bottom Actions - Fixed */}
-              <div className='flex shrink-0 items-center gap-2 border-t border-[#34353b] p-3'>
+              <div className='border-border flex shrink-0 items-center gap-2 border-t p-3'>
                 <div className='flex shrink-0 gap-2'>
                   {/* Download Button */}
                   <DownloadButton onClick={handleDownload} disabled={!video.videoUrl} />

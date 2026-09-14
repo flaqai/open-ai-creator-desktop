@@ -126,22 +126,22 @@ const MultiImageUpload = forwardRef<MultiImageUploadRef, MultiImageUploadProps>(
           {...getRootProps()}
           className={cn(
             'relative flex w-full cursor-pointer flex-col rounded-xl border-2 border-dashed p-3 transition-all',
-            'border-color-b1 h-[150px] bg-white/40',
-            isDragActive && 'border-color-b1 bg-white/60',
+            'border-color-b1 bg-foreground/40 h-[150px]',
+            isDragActive && 'border-color-b1 bg-foreground/60',
             !canAddMore && 'cursor-not-allowed opacity-60',
           )}
         >
           {images.length === 0 ? (
             <div className='flex h-full flex-col items-center justify-center gap-3 lg:flex-row lg:gap-4'>
-              <div className='border-color-b1 flex size-[80px] shrink-0 items-center justify-center rounded-xl border-2 border-dashed bg-white/20 lg:size-[100px]'>
-                <Plus className='size-7 text-white lg:size-9' />
+              <div className='border-color-b1 bg-foreground/20 flex size-[80px] shrink-0 items-center justify-center rounded-xl border-2 border-dashed lg:size-[100px]'>
+                <Plus className='text-foreground size-7 lg:size-9' />
               </div>
 
               <div className='flex flex-col gap-1 text-center'>
-                <div className='text-xs text-black/60 lg:text-sm'>
+                <div className='text-background/60 text-xs lg:text-sm'>
                   {t('format-hint')}: {acceptedFormats}
                 </div>
-                <div className='text-xs text-black/40'>
+                <div className='text-background/40 text-xs'>
                   {images.length}/{maxImages} {t('image-count')}
                 </div>
               </div>
@@ -168,19 +168,19 @@ const MultiImageUpload = forwardRef<MultiImageUploadRef, MultiImageUploadProps>(
                       }}
                       className='absolute inset-0 flex items-center justify-center bg-black/40 transition-all lg:hidden lg:group-hover:flex'
                     >
-                      <Trash2 className='size-5 text-white' />
+                      <Trash2 className='text-foreground size-5' />
                     </button>
                   </div>
                 ))}
 
                 {canAddMore && (
-                  <div className='border-color-b1 hover:border-color-b2 flex size-[100px] shrink-0 items-center justify-center rounded-lg border-2 border-dashed bg-white/20 transition-all'>
-                    <Plus className='size-6 text-white' />
+                  <div className='border-color-b1 hover:border-color-b2 bg-foreground/20 flex size-[100px] shrink-0 items-center justify-center rounded-lg border-2 border-dashed transition-all'>
+                    <Plus className='text-foreground size-6' />
                   </div>
                 )}
               </div>
 
-              <div className='flex items-center justify-between text-xs leading-4 text-black/60'>
+              <div className='text-background/60 flex items-center justify-between text-xs leading-4'>
                 <span>
                   {t('format-hint')}: {acceptedFormats}
                 </span>

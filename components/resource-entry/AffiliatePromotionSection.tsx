@@ -16,15 +16,15 @@ export default async function AffiliatePromotionSection() {
         <div className='grid min-h-[420px] items-center lg:grid-cols-[minmax(0,1fr)_minmax(380px,0.85fr)]'>
           <div className='relative z-10 py-8 lg:py-10'>
             <p className='text-color-main text-sm font-semibold tracking-wider uppercase'>{t('eyebrow')}</p>
-            <h2 className='mt-4 max-w-2xl text-2xl font-medium text-white lg:text-[32px] lg:leading-[40px]'>
+            <h2 className='text-foreground mt-4 max-w-2xl text-2xl font-medium lg:text-[32px] lg:leading-[40px]'>
               {t('title')}
             </h2>
-            <p className='mt-5 max-w-2xl text-base leading-7 text-white/70'>{t('description')}</p>
+            <p className='text-foreground/70 mt-5 max-w-2xl text-base leading-7'>{t('description')}</p>
             <a
               href={getFlaqResourceUrl('/affiliate-program', locale)}
               target='_blank'
               rel='noopener noreferrer'
-              className='bg-color-main mt-8 inline-flex min-h-12 items-center justify-center gap-2 rounded-lg px-6 py-3 text-sm font-semibold text-white transition-opacity hover:opacity-90 md:text-base'
+              className='bg-color-main text-primary-foreground mt-8 inline-flex min-h-12 items-center justify-center gap-2 rounded-lg px-6 py-3 text-sm font-semibold transition-opacity hover:opacity-90 md:text-base'
             >
               {t('button')}
               <ArrowRight className='size-4' />

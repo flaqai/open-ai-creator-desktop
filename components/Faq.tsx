@@ -24,7 +24,7 @@ export default function Faq({
             <AccordionTrigger className='hover:text-color-main py-3 text-left text-base font-semibold hover:cursor-pointer hover:no-underline lg:text-lg [&>svg]:h-6 [&>svg]:w-6'>
               {item.question}
             </AccordionTrigger>
-            <AccordionContent className='pb-5 text-base whitespace-pre-line text-white/70'>
+            <AccordionContent className='text-foreground/70 pb-5 text-base whitespace-pre-line'>
               {item.answer}
             </AccordionContent>
           </AccordionItem>

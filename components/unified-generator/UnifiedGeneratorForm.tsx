@@ -13,6 +13,8 @@ import {
   EMPTY_REFERENCE_PROMPT_DOC,
   serializeReferencePrompt,
 } from '@/lib/utils/reference-video-prompt';
+import DraftStatus from '@/components/desktop/DraftStatus';
+import { useUnifiedDraft } from '@/components/desktop/use-unified-draft';
 
 import EndFrameToggle from './EndFrameToggle';
 import GenerationTypeTabs from './GenerationTypeTabs';
@@ -38,6 +40,7 @@ interface UnifiedGeneratorFormProps {
 export default function UnifiedGeneratorForm({ submitMode = 'generate' }: UnifiedGeneratorFormProps) {
   const t = useTranslations('UnifiedGenerator');
   const store = useUnifiedGeneratorStore();
+  const draft = useUnifiedDraft(submitMode === 'transfer');
   const { submit, isSubmitting } = useUnifiedGeneratorSubmit();
   const [openPopover, setOpenPopover] = useState<'parameters' | 'panel' | null>(null);
   const mentionInsertRequestKeyRef = useRef(0);
@@ -226,11 +229,17 @@ export default function UnifiedGeneratorForm({ submitMode = 'generate' }: Unifie
   };
 
   useEffect(() => {
-    if (submitMode !== 'generate' || !store.pendingCreatorSubmit || pendingSubmitHandledRef.current) return;
+    if (
+      draft.status === 'loading' ||
+      submitMode !== 'generate' ||
+      !store.pendingCreatorSubmit ||
+      pendingSubmitHandledRef.current
+    )
+      return;
     pendingSubmitHandledRef.current = true;
     store.clearPendingCreatorSubmit();
     void handleSubmit();
-  }, [store.pendingCreatorSubmit, submitMode]);
+  }, [draft.status, store.pendingCreatorSubmit, submitMode]);
 
   const handleReset = () => {
     if (isReferenceVideo) {
@@ -441,7 +450,8 @@ export default function UnifiedGeneratorForm({ submitMode = 'generate' }: Unifie
   };
 
   return (
-    <section className='flex w-full flex-col gap-3'>
+    <section className='flex w-full flex-col gap-3' inert={draft.status === 'loading'}>
+      <DraftStatus {...draft} />
       <div className='flex w-full justify-center'>
         <TypeTabs
           value={mediaType}
@@ -635,7 +645,7 @@ export default function UnifiedGeneratorForm({ submitMode = 'generate' }: Unifie
               <Link
                 href='/ai-media-creator'
                 onClick={store.requestCreatorSubmit}
-                className='bg-color-main inline-flex h-9 w-full min-w-[120px] shrink-0 items-center justify-center gap-2 rounded-md px-4 py-0 text-base leading-none font-medium whitespace-nowrap text-white transition-opacity hover:text-white hover:opacity-90 sm:w-auto'
+                className='bg-color-main text-primary-foreground hover:text-primary-foreground inline-flex h-9 w-full min-w-[120px] shrink-0 items-center justify-center gap-2 rounded-md px-4 py-0 text-base leading-none font-medium whitespace-nowrap transition-opacity hover:opacity-90 sm:w-auto'
               >
                 {t('generate')}
               </Link>
@@ -644,7 +654,7 @@ export default function UnifiedGeneratorForm({ submitMode = 'generate' }: Unifie
                 type='button'
                 onClick={() => void handleSubmit()}
                 disabled={isSubmitting || (mediaType === 'video' && !selectedVideoModel)}
-                className='bg-color-main inline-flex h-9 w-full min-w-[120px] shrink-0 items-center justify-center gap-2 rounded-md px-4 py-0 text-base leading-none font-medium whitespace-nowrap text-white transition-opacity hover:text-white hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-50 sm:w-auto'
+                className='bg-color-main text-primary-foreground hover:text-primary-foreground inline-flex h-9 w-full min-w-[120px] shrink-0 items-center justify-center gap-2 rounded-md px-4 py-0 text-base leading-none font-medium whitespace-nowrap transition-opacity hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-50 sm:w-auto'
               >
                 {t('generate')}
                 {isSubmitting ? <Loader2 className='size-4 animate-spin' /> : null}

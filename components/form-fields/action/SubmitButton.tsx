@@ -23,7 +23,7 @@ export default function SubmitButton({
     <button
       type='submit'
       disabled={isSubmitting || disabled}
-      className='bg-color-main flex h-9 flex-1 items-center justify-center gap-1.5 rounded-lg text-base font-semibold text-white uppercase disabled:cursor-not-allowed disabled:opacity-70'
+      className='bg-color-main text-primary-foreground flex h-9 flex-1 items-center justify-center gap-1.5 rounded-lg text-base font-semibold uppercase disabled:cursor-not-allowed disabled:opacity-70'
     >
       {isSubmitting ? <Spinning className='size-4' /> : <>{submitButtonText || t('generate')}</>}
     </button>

@@ -10,8 +10,9 @@ import { Settings2 } from 'lucide-react';
 import { useLocale, useTranslations } from 'next-intl';
 
 import { NAV_LINKS } from '@/lib/constants';
-import { OPEN_DESKTOP_SETTINGS_EVENT } from '@/lib/desktop/runtime';
+import { isDesktopRuntime, OPEN_DESKTOP_SETTINGS_EVENT } from '@/lib/desktop/runtime';
 import { cn } from '@/lib/utils';
+import { useDesktopRuntime } from '@/hooks/use-desktop-runtime';
 
 import LocaleSwitcher from '../LocaleSwitcher';
 import MenuBtn from './MenuBtn';
@@ -21,6 +22,7 @@ import NavPopover from './NavPopover';
 const OpenApiSettingsDialog = dynamic(() => import('../dialog/OpenApiSettingsDialog'), { ssr: false });
 
 export default function Navigation() {
+  const desktop = useDesktopRuntime();
   const t = useTranslations('Navigation');
   const tSettings = useTranslations('components.open-api-settings');
   const pathname = usePathname();
@@ -37,7 +39,9 @@ export default function Navigation() {
   }, []);
 
   useEffect(() => {
-    const openSettings = () => setSettingsOpen(true);
+    const openSettings = () => {
+      if (!isDesktopRuntime()) setSettingsOpen(true);
+    };
     window.addEventListener(OPEN_DESKTOP_SETTINGS_EVENT, openSettings);
     return () => window.removeEventListener(OPEN_DESKTOP_SETTINGS_EVENT, openSettings);
   }, []);
@@ -74,6 +78,7 @@ export default function Navigation() {
         })),
   }));
 
+  if (desktop) return null;
   return (
     <>
       {settingsOpen && <OpenApiSettingsDialog open={settingsOpen} onOpenChange={setSettingsOpen} />}
@@ -100,7 +105,7 @@ export default function Navigation() {
                   ) : (
                     <button
                       type='button'
-                      className='flex h-10 min-h-10 items-center gap-1 rounded-lg px-1 text-white/70 hover:bg-white/15'
+                      className='text-foreground/70 hover:bg-foreground/15 flex h-10 min-h-10 items-center gap-1 rounded-lg px-1'
                     >
                       <span className='text-base font-semibold'>{item.label}</span>
                     </button>
@@ -110,7 +115,7 @@ export default function Navigation() {
                     key={item.code}
                     href={item.href as string}
                     className={cn(
-                      'flex h-10 items-center justify-center rounded-lg px-1.5 font-semibold text-white/70 hover:bg-white/15',
+                      'text-foreground/70 hover:bg-foreground/15 flex h-10 items-center justify-center rounded-lg px-1.5 font-semibold',
                       pathname === item.href && 'text-color-main',
                       pathname.startsWith(item.href as string) && item.href !== '/' && 'text-color-main',
                       pathname.startsWith(`/${locale}${item.href}`) && item.href !== '/' && 'text-color-main',
@@ -125,14 +130,14 @@ export default function Navigation() {
               href='https://flaq.ai/docs'
               target='_blank'
               rel='noopener noreferrer'
-              className='flex h-10 items-center justify-center rounded-lg px-1.5 font-semibold text-white/70 hover:bg-white/15'
+              className='text-foreground/70 hover:bg-foreground/15 flex h-10 items-center justify-center rounded-lg px-1.5 font-semibold'
             >
               {t('docs')}
             </a>
             <button
               type='button'
               onClick={() => setBusinessDialogOpen(true)}
-              className='flex h-10 items-center justify-center rounded-lg px-1.5 font-semibold text-white/70 hover:bg-white/15'
+              className='text-foreground/70 hover:bg-foreground/15 flex h-10 items-center justify-center rounded-lg px-1.5 font-semibold'
             >
               {t('business')}
             </button>
@@ -142,13 +147,13 @@ export default function Navigation() {
               {mounted ? (
                 <LocaleSwitcher />
               ) : (
-                <div className='flex h-8 w-[80px] items-center gap-1 rounded-lg px-2 text-white/40 lg:h-11' />
+                <div className='text-foreground/40 flex h-8 w-[80px] items-center gap-1 rounded-lg px-2 lg:h-11' />
               )}
             </div>
             <button
               type='button'
               onClick={() => setSettingsOpen(true)}
-              className='bg-color-5 flex h-8 w-8 items-center justify-center rounded-lg text-white/70 transition-colors hover:bg-white/10 hover:text-white lg:h-11 lg:w-11'
+              className='bg-color-5 text-foreground/70 hover:bg-foreground/10 hover:text-foreground flex h-8 w-8 items-center justify-center rounded-lg transition-colors lg:h-11 lg:w-11'
               aria-label={tSettings('title')}
               title={tSettings('title')}
             >

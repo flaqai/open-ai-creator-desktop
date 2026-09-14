@@ -100,8 +100,8 @@ export default function ReferenceFileLinkInputs({
                 disabled={Boolean(linkValue.trim())}
                 onClick={open}
                 className={cn(
-                  'border-color-b1 bg-color-c1 flex min-h-16 w-full items-center gap-2.5 rounded-lg border border-dashed p-2.5 text-left transition-colors hover:border-white/30',
-                  isDragActive && 'bg-color-c4 border-white/40',
+                  'border-color-b1 bg-color-c1 hover:border-foreground/30 flex min-h-16 w-full items-center gap-2.5 rounded-lg border border-dashed p-2.5 text-left transition-colors',
+                  isDragActive && 'bg-color-c4 border-foreground/40',
                   linkValue.trim() && 'cursor-not-allowed opacity-50',
                 )}
               >
@@ -138,7 +138,7 @@ export default function ReferenceFileLinkInputs({
               }}
               placeholder={t('link-placeholder')}
               className={cn(
-                'border-color-b1 bg-color-c1 text-color-t1 placeholder:text-color-t3 h-9 w-full rounded-lg border pr-3 pl-9 text-xs leading-none transition-colors outline-none focus:border-white/20',
+                'border-color-b1 bg-color-c1 text-color-t1 placeholder:text-color-t3 focus:border-foreground/20 h-9 w-full rounded-lg border pr-3 pl-9 text-xs leading-none transition-colors outline-none',
                 selectedFile && 'cursor-not-allowed opacity-50',
                 hasInvalidLink && 'border-red-500/50',
               )}

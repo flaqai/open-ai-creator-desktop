@@ -25,15 +25,15 @@ export default async function ModelMarketPromotionSection() {
 
           <div className='relative z-10 flex flex-col justify-center px-6 py-10 sm:px-10 lg:px-12 lg:py-14'>
             <p className='text-color-main text-sm font-semibold tracking-wider uppercase'>{t('eyebrow')}</p>
-            <h2 className='mt-3 max-w-2xl text-2xl font-medium text-white lg:text-[32px] lg:leading-[40px]'>
+            <h2 className='text-foreground mt-3 max-w-2xl text-2xl font-medium lg:text-[32px] lg:leading-[40px]'>
               {t('title')}
             </h2>
-            <p className='mt-5 max-w-2xl text-base leading-7 text-white/70'>{t('description')}</p>
+            <p className='text-foreground/70 mt-5 max-w-2xl text-base leading-7'>{t('description')}</p>
             <a
               href={getFlaqResourceUrl('/model-market')}
               target='_blank'
               rel='noopener noreferrer'
-              className='mt-8 inline-flex min-h-12 w-fit items-center justify-center gap-2 rounded-lg border border-white/15 bg-white px-6 py-3 text-sm font-semibold text-black transition-opacity hover:opacity-90 md:text-base'
+              className='border-foreground/15 bg-foreground text-background mt-8 inline-flex min-h-12 w-fit items-center justify-center gap-2 rounded-lg border px-6 py-3 text-sm font-semibold transition-opacity hover:opacity-90 md:text-base'
             >
               {t('button')}
               <ArrowRight className='size-4' />

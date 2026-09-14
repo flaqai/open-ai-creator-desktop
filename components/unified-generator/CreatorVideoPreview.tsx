@@ -59,7 +59,7 @@ export default function CreatorVideoPreview({
   }
 
   return (
-    <div className='flex h-full items-center justify-center text-white/30'>
+    <div className='text-foreground/30 flex h-full items-center justify-center'>
       {item.status === 'processing' || item.status === 'pending' ? (
         <Loader2 className='animate-spin' />
       ) : (

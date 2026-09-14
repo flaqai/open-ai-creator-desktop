@@ -16,7 +16,7 @@ export default function Heading({
       <div className='flex items-center gap-3'>
         <h1 className='text-color-main text-4xl font-semibold text-balance lg:text-5xl'>{title}</h1>
         {showComingSoon && (
-          <span className='rounded-full bg-gradient-to-r from-[#6e51ff] to-[#e75df1] px-4 py-1 text-sm font-medium text-white'>
+          <span className='text-foreground rounded-full bg-gradient-to-r from-[#6e51ff] to-[#e75df1] px-4 py-1 text-sm font-medium'>
             Coming Soon
           </span>
         )}

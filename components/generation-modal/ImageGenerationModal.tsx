@@ -107,14 +107,14 @@ export default function ImageGenerationModal({
         onEscapeKeyDown={(e) => e.preventDefault()}
         onPointerDownOutside={(e) => e.preventDefault()}
       >
-        <DialogHeader className='border-b border-white/10 px-3 pt-2.5 sm:px-4 sm:pt-3 md:px-6 md:pt-4'>
+        <DialogHeader className='border-foreground/10 border-b px-3 pt-2.5 sm:px-4 sm:pt-3 md:px-6 md:pt-4'>
           <DialogTitle className='flex flex-row items-center gap-2 text-base font-normal sm:gap-3 sm:text-lg md:gap-4'>
             <button
               type='button'
               onClick={() => setActiveTab('generate')}
               className={cn(
                 'cursor-pointer whitespace-nowrap transition-all',
-                activeTab === 'generate' ? 'text-color-main' : 'text-white/40 hover:text-white/60',
+                activeTab === 'generate' ? 'text-color-main' : 'text-foreground/40 hover:text-foreground/60',
               )}
             >
               {generateTabTitle}
@@ -124,7 +124,7 @@ export default function ImageGenerationModal({
               onClick={() => setActiveTab('history')}
               className={cn(
                 'cursor-pointer whitespace-nowrap transition-all',
-                activeTab === 'history' ? 'text-color-main' : 'text-white/40 hover:text-white/60',
+                activeTab === 'history' ? 'text-color-main' : 'text-foreground/40 hover:text-foreground/60',
               )}
             >
               {historyTabTitle}

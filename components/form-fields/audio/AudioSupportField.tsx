@@ -22,7 +22,7 @@ export default function AudioSupportField({
   return (
     <div className='border-color-b1 bg-color-c2 flex w-full flex-row items-center gap-1 rounded-xl border p-3'>
       <div className='text-color-main text-sm font-medium'>{t('audio')}</div>
-      <div className='text-xs text-white/40'>{t('audio-support')}</div>
+      <div className='text-foreground/40 text-xs'>{t('audio-support')}</div>
     </div>
   );
 }

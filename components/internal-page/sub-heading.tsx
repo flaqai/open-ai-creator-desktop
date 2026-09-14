@@ -25,7 +25,7 @@ export default function SubHeading({
         {icon && <div className='flex items-center'>{icon}</div>}
         <h2
           className={cn(
-            'text-2xl font-semibold text-white md:text-[32px] md:leading-[48px] md:tracking-[1.44px]',
+            'text-foreground text-2xl font-semibold md:text-[32px] md:leading-[48px] md:tracking-[1.44px]',
             titleClassName,
           )}
         >
@@ -35,7 +35,7 @@ export default function SubHeading({
       {description && (
         <p
           className={cn(
-            'text-sm font-normal text-[#B8B8B8] md:text-[16px] md:leading-[24px]',
+            'text-muted-foreground text-sm font-normal md:text-[16px] md:leading-[24px]',
             icon ? 'w-full text-left' : 'text-center',
           )}
         >

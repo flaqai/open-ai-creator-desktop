@@ -8,9 +8,9 @@ import SubHeading from '@/components/internal-page/sub-heading';
 import { ExampleIcon } from '@/components/svg/section/common';
 
 // Unified color values, consistent with image-showcase-section, reference file_context_0
-const BG_COLOR = 'bg-[#141516]';
-const TEXT_COLOR = 'text-white/70';
-const BORDER_COLOR = 'border border-[#2f2f2f]';
+const BG_COLOR = 'bg-card';
+const TEXT_COLOR = 'text-foreground/70';
+const BORDER_COLOR = 'border border-border';
 
 interface ExampleCard {
   id: string;

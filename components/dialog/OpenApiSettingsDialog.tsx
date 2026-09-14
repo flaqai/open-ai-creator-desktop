@@ -43,11 +43,12 @@ import { Input } from '@/components/ui/input';
 const FLAQ_REGISTER_URL = 'https://flaq.ai/';
 
 type OpenApiSettingsDialogProps = {
+  embedded?: boolean;
   open: boolean;
   onOpenChange: (open: boolean) => void;
 };
 
-export default function OpenApiSettingsDialog({ open, onOpenChange }: OpenApiSettingsDialogProps) {
+export default function OpenApiSettingsDialog({ open, onOpenChange, embedded = false }: OpenApiSettingsDialogProps) {
   const t = useTranslations('components.open-api-settings');
   const tHosting = useTranslations('components.image-hosting');
   const tCommon = useTranslations('Common');
@@ -228,215 +229,231 @@ export default function OpenApiSettingsDialog({ open, onOpenChange }: OpenApiSet
     }
   };
 
-  return (
-    <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className='max-h-[90vh] overflow-y-auto border-white/10 bg-[#111214] text-white sm:max-w-[640px]'>
-        <DialogHeader className='space-y-2 text-left'>
-          <DialogTitle className='text-xl font-semibold text-white'>{t('title')}</DialogTitle>
-          <DialogDescription className='text-sm text-white/60'>
+  const content = (
+    <>
+      <DialogHeader className='space-y-2 text-left'>
+        {embedded ? (
+          <h2 className='text-xl font-semibold'>{t('title')}</h2>
+        ) : (
+          <DialogTitle className='text-foreground text-xl font-semibold'>{t('title')}</DialogTitle>
+        )}
+        {embedded ? (
+          <p className='text-muted-foreground text-sm'>
+            {desktop ? tDesktop('firstRunDescription') : t('description')}
+          </p>
+        ) : (
+          <DialogDescription className='text-foreground/60 text-sm'>
             {desktop ? tDesktop('firstRunDescription') : t('description')}
           </DialogDescription>
-        </DialogHeader>
+        )}
+      </DialogHeader>
 
-        <div className='space-y-4'>
-          <div className='rounded-xl border border-white/8 bg-white/[0.035] p-4'>
-            <div className='grid gap-3 sm:grid-cols-3'>
-              {[
-                { icon: UserRound, text: tDesktop('stepAccount') },
-                { icon: KeyRound, text: tDesktop('stepKey') },
-                { icon: PlugZap, text: tDesktop('stepCreate') },
-              ].map(({ icon: Icon, text }, index) => (
-                <div key={text} className='flex gap-2.5 text-xs leading-5 text-white/55'>
-                  <span className='flex size-6 shrink-0 items-center justify-center rounded-md bg-white/8 text-white/70'>
-                    <Icon className='size-3.5' />
-                  </span>
-                  <span>
-                    <b className='me-1 text-white/35'>{index + 1}.</b>
-                    {text}
-                  </span>
-                </div>
-              ))}
-            </div>
-            <a
-              href={FLAQ_REGISTER_URL}
-              target='_blank'
-              rel='noreferrer'
-              className='mt-4 flex items-center justify-center gap-2 rounded-lg bg-white px-3 py-2.5 text-sm font-semibold text-black transition hover:bg-white/90'
-            >
-              {t('register')}
-              <ExternalLink className='size-3.5' />
-            </a>
+      <div className='space-y-4'>
+        <div className='border-foreground/8 bg-foreground/[0.035] rounded-xl border p-4'>
+          <div className='grid gap-3 sm:grid-cols-3'>
+            {[
+              { icon: UserRound, text: tDesktop('stepAccount') },
+              { icon: KeyRound, text: tDesktop('stepKey') },
+              { icon: PlugZap, text: tDesktop('stepCreate') },
+            ].map(({ icon: Icon, text }, index) => (
+              <div key={text} className='text-foreground/55 flex gap-2.5 text-xs leading-5'>
+                <span className='bg-foreground/8 text-foreground/70 flex size-6 shrink-0 items-center justify-center rounded-md'>
+                  <Icon className='size-3.5' />
+                </span>
+                <span>
+                  <b className='text-foreground/35 me-1'>{index + 1}.</b>
+                  {text}
+                </span>
+              </div>
+            ))}
           </div>
+          <a
+            href={FLAQ_REGISTER_URL}
+            target='_blank'
+            rel='noreferrer'
+            className='bg-foreground text-background hover:bg-foreground/90 mt-4 flex items-center justify-center gap-2 rounded-lg px-3 py-2.5 text-sm font-semibold transition'
+          >
+            {t('register')}
+            <ExternalLink className='size-3.5' />
+          </a>
+        </div>
 
-          <div className='space-y-2'>
-            <label htmlFor='open-api-base-url' className='text-sm font-medium text-white/80'>
-              {t('base-url')}
-            </label>
-            <Input
-              id='open-api-base-url'
-              value={baseUrl}
-              onChange={(event) => setBaseUrl(event.target.value)}
-              placeholder={DEFAULT_OPEN_API_BASE_URL}
-              className='h-11 border-white/10 bg-white/5 text-white placeholder:text-white/30'
+        <div className='space-y-2'>
+          <label htmlFor='open-api-base-url' className='text-foreground/80 text-sm font-medium'>
+            {t('base-url')}
+          </label>
+          <Input
+            id='open-api-base-url'
+            value={baseUrl}
+            onChange={(event) => setBaseUrl(event.target.value)}
+            placeholder={DEFAULT_OPEN_API_BASE_URL}
+            className='border-foreground/10 bg-foreground/5 text-foreground placeholder:text-foreground/30 h-11'
+          />
+          <p className='text-foreground/45 text-xs'>{t('base-url-hint')}</p>
+        </div>
+
+        <div className='space-y-2'>
+          <label htmlFor='open-api-client-key' className='text-foreground/80 text-sm font-medium'>
+            {t('client-key')}
+          </label>
+          <Input
+            id='open-api-client-key'
+            type='password'
+            value={clientKey}
+            onChange={(event) => setClientKey(event.target.value)}
+            className='border-foreground/10 bg-foreground/5 text-foreground placeholder:text-foreground/30 h-11'
+          />
+
+          <div className='flex items-center space-x-2 pt-2'>
+            <Checkbox
+              id='remember-me'
+              checked={rememberMe}
+              onCheckedChange={(checked) => setRememberMe(checked === true)}
             />
-            <p className='text-xs text-white/45'>{t('base-url-hint')}</p>
-          </div>
-
-          <div className='space-y-2'>
-            <label htmlFor='open-api-client-key' className='text-sm font-medium text-white/80'>
-              {t('client-key')}
+            <label htmlFor='remember-me' className='text-foreground/70 cursor-pointer text-sm'>
+              {t('remember-me')}
             </label>
-            <Input
-              id='open-api-client-key'
-              type='password'
-              value={clientKey}
-              onChange={(event) => setClientKey(event.target.value)}
-              className='h-11 border-white/10 bg-white/5 text-white placeholder:text-white/30'
-            />
-
-            <div className='flex items-center space-x-2 pt-2'>
-              <Checkbox
-                id='remember-me'
-                checked={rememberMe}
-                onCheckedChange={(checked) => setRememberMe(checked === true)}
-              />
-              <label htmlFor='remember-me' className='cursor-pointer text-sm text-white/70'>
-                {t('remember-me')}
-              </label>
-            </div>
-            {!desktop && <p className='text-xs text-white/45'>{t('remember-me-hint')}</p>}
-
-            <div className='mt-3 rounded-md border border-yellow-500/20 bg-yellow-500/5 p-3'>
-              <p className='text-xs text-yellow-200/80'>⚠️ {t('security-warning')}</p>
-              <button
-                type='button'
-                onClick={handleClearAll}
-                className='mt-2 text-xs text-red-400 underline hover:text-red-300'
-              >
-                {t('clear-data')}
-              </button>
-            </div>
           </div>
+          {!desktop && <p className='text-foreground/45 text-xs'>{t('remember-me-hint')}</p>}
 
-          <div className='rounded-md border border-white/10'>
+          <div className='mt-3 rounded-md border border-[#fcd34d] bg-[#fffbeb] p-3 dark:border-[#735c28] dark:bg-[#292211]'>
+            <p className='text-xs leading-5 text-[#78350f] dark:text-[#fde68a]'>⚠️ {t('security-warning')}</p>
             <button
               type='button'
-              onClick={() => setHostingExpanded((prev) => !prev)}
-              className='flex w-full items-center justify-between px-3 py-2.5 text-sm font-medium text-white/70 hover:text-white/90'
+              onClick={handleClearAll}
+              className='mt-2 text-xs text-red-800 underline underline-offset-2 hover:text-red-950 dark:text-red-300 dark:hover:text-red-200'
             >
-              <span>{tHosting('title')}</span>
-              {hostingExpanded ? <ChevronDown className='h-4 w-4' /> : <ChevronRight className='h-4 w-4' />}
+              {t('clear-data')}
             </button>
-
-            {hostingExpanded && (
-              <div className='space-y-2 border-t border-white/10 px-3 pt-3 pb-3'>
-                {desktop && (
-                  <div className='grid gap-3 sm:grid-cols-2'>
-                    <div className='space-y-1.5'>
-                      <label htmlFor='r2-account-id' className='text-xs font-medium text-white/65'>
-                        {tDesktop('r2AccountId')}
-                      </label>
-                      <Input
-                        id='r2-account-id'
-                        value={r2AccountId}
-                        onChange={(event) => setR2AccountId(event.target.value)}
-                        className='h-10 border-white/10 bg-white/5 text-white'
-                      />
-                    </div>
-                    <div className='space-y-1.5'>
-                      <label htmlFor='r2-bucket-name' className='text-xs font-medium text-white/65'>
-                        {tDesktop('r2BucketName')}
-                      </label>
-                      <Input
-                        id='r2-bucket-name'
-                        value={r2BucketName}
-                        onChange={(event) => setR2BucketName(event.target.value)}
-                        className='h-10 border-white/10 bg-white/5 text-white'
-                      />
-                    </div>
-                    <div className='space-y-1.5'>
-                      <label htmlFor='r2-access-key' className='text-xs font-medium text-white/65'>
-                        {tDesktop('r2AccessKeyId')}
-                      </label>
-                      <Input
-                        id='r2-access-key'
-                        value={r2AccessKeyId}
-                        onChange={(event) => setR2AccessKeyId(event.target.value)}
-                        className='h-10 border-white/10 bg-white/5 text-white'
-                      />
-                    </div>
-                    <div className='space-y-1.5'>
-                      <label htmlFor='r2-secret-key' className='text-xs font-medium text-white/65'>
-                        {tDesktop('r2SecretAccessKey')}
-                      </label>
-                      <Input
-                        id='r2-secret-key'
-                        type='password'
-                        value={r2SecretAccessKey}
-                        onChange={(event) => setR2SecretAccessKey(event.target.value)}
-                        className='h-10 border-white/10 bg-white/5 text-white'
-                      />
-                    </div>
-                  </div>
-                )}
-                <label htmlFor='r2-public-domain' className='text-sm font-medium text-white/80'>
-                  {tHosting('public-domain')}
-                </label>
-                <Input
-                  id='r2-public-domain'
-                  value={r2PublicDomain}
-                  onChange={(event) => setR2PublicDomain(event.target.value)}
-                  placeholder={tHosting('public-domain-placeholder')}
-                  className='h-11 border-white/10 bg-white/5 text-white placeholder:text-white/30'
-                />
-                <p className='text-xs text-white/45'>{tHosting('public-domain-hint')}</p>
-                {!desktop && <p className='text-xs text-white/30'>{tHosting('not-configured')}</p>}
-                <Button
-                  type='button'
-                  variant='outline'
-                  onClick={handleTestR2}
-                  disabled={isTestingR2}
-                  className='mt-1 h-9 w-full border-white/10 bg-transparent text-sm text-white hover:bg-white/8 hover:text-white'
-                >
-                  {isTestingR2 ? tHosting('testing') : tHosting('test')}
-                </Button>
-              </div>
-            )}
           </div>
         </div>
 
-        <DialogFooter className='flex-col gap-2 sm:flex-row sm:justify-between'>
+        <div className='border-foreground/10 rounded-md border'>
+          <button
+            type='button'
+            onClick={() => setHostingExpanded((prev) => !prev)}
+            className='text-foreground/70 hover:text-foreground/90 flex w-full items-center justify-between px-3 py-2.5 text-sm font-medium'
+          >
+            <span>{tHosting('title')}</span>
+            {hostingExpanded ? <ChevronDown className='h-4 w-4' /> : <ChevronRight className='h-4 w-4' />}
+          </button>
+
+          {hostingExpanded && (
+            <div className='border-foreground/10 space-y-2 border-t px-3 pt-3 pb-3'>
+              {desktop && (
+                <div className='grid gap-3 sm:grid-cols-2'>
+                  <div className='space-y-1.5'>
+                    <label htmlFor='r2-account-id' className='text-foreground/65 text-xs font-medium'>
+                      {tDesktop('r2AccountId')}
+                    </label>
+                    <Input
+                      id='r2-account-id'
+                      value={r2AccountId}
+                      onChange={(event) => setR2AccountId(event.target.value)}
+                      className='border-foreground/10 bg-foreground/5 text-foreground h-10'
+                    />
+                  </div>
+                  <div className='space-y-1.5'>
+                    <label htmlFor='r2-bucket-name' className='text-foreground/65 text-xs font-medium'>
+                      {tDesktop('r2BucketName')}
+                    </label>
+                    <Input
+                      id='r2-bucket-name'
+                      value={r2BucketName}
+                      onChange={(event) => setR2BucketName(event.target.value)}
+                      className='border-foreground/10 bg-foreground/5 text-foreground h-10'
+                    />
+                  </div>
+                  <div className='space-y-1.5'>
+                    <label htmlFor='r2-access-key' className='text-foreground/65 text-xs font-medium'>
+                      {tDesktop('r2AccessKeyId')}
+                    </label>
+                    <Input
+                      id='r2-access-key'
+                      value={r2AccessKeyId}
+                      onChange={(event) => setR2AccessKeyId(event.target.value)}
+                      className='border-foreground/10 bg-foreground/5 text-foreground h-10'
+                    />
+                  </div>
+                  <div className='space-y-1.5'>
+                    <label htmlFor='r2-secret-key' className='text-foreground/65 text-xs font-medium'>
+                      {tDesktop('r2SecretAccessKey')}
+                    </label>
+                    <Input
+                      id='r2-secret-key'
+                      type='password'
+                      value={r2SecretAccessKey}
+                      onChange={(event) => setR2SecretAccessKey(event.target.value)}
+                      className='border-foreground/10 bg-foreground/5 text-foreground h-10'
+                    />
+                  </div>
+                </div>
+              )}
+              <label htmlFor='r2-public-domain' className='text-foreground/80 text-sm font-medium'>
+                {tHosting('public-domain')}
+              </label>
+              <Input
+                id='r2-public-domain'
+                value={r2PublicDomain}
+                onChange={(event) => setR2PublicDomain(event.target.value)}
+                placeholder={tHosting('public-domain-placeholder')}
+                className='border-foreground/10 bg-foreground/5 text-foreground placeholder:text-foreground/30 h-11'
+              />
+              <p className='text-foreground/45 text-xs'>{tHosting('public-domain-hint')}</p>
+              {!desktop && <p className='text-foreground/30 text-xs'>{tHosting('not-configured')}</p>}
+              <Button
+                type='button'
+                variant='outline'
+                onClick={handleTestR2}
+                disabled={isTestingR2}
+                className='border-foreground/10 text-foreground hover:bg-foreground/8 hover:text-foreground mt-1 h-9 w-full bg-transparent text-sm'
+              >
+                {isTestingR2 ? tHosting('testing') : tHosting('test')}
+              </Button>
+            </div>
+          )}
+        </div>
+      </div>
+
+      <DialogFooter className='flex-col gap-2 sm:flex-row sm:justify-between'>
+        <Button
+          type='button'
+          variant='outline'
+          onClick={handleReset}
+          className='border-foreground/10 text-foreground hover:bg-foreground/8 hover:text-foreground bg-transparent'
+        >
+          {tCommon('reset')}
+        </Button>
+        <div className='flex gap-2'>
           <Button
             type='button'
             variant='outline'
-            onClick={handleReset}
-            className='border-white/10 bg-transparent text-white hover:bg-white/8 hover:text-white'
+            onClick={handleTestConnection}
+            disabled={isTesting}
+            className='border-foreground/10 text-foreground hover:bg-foreground/8 hover:text-foreground bg-transparent'
           >
-            {tCommon('reset')}
+            {isTesting ? t('testing') : t('test')}
           </Button>
-          <div className='flex gap-2'>
-            <Button
-              type='button'
-              variant='outline'
-              onClick={handleTestConnection}
-              disabled={isTesting}
-              className='border-white/10 bg-transparent text-white hover:bg-white/8 hover:text-white'
-            >
-              {isTesting ? t('testing') : t('test')}
-            </Button>
-            <Button
-              type='button'
-              variant='ghost'
-              onClick={() => onOpenChange(false)}
-              className='text-white/70 hover:bg-white/8 hover:text-white'
-            >
-              {t('cancel')}
-            </Button>
-            <Button type='button' onClick={handleSave} className='bg-white text-black hover:bg-white/90'>
-              {t('save')}
-            </Button>
-          </div>
-        </DialogFooter>
+          <Button
+            type='button'
+            variant='ghost'
+            onClick={() => onOpenChange(false)}
+            className='text-foreground/70 hover:bg-foreground/8 hover:text-foreground'
+          >
+            {t('cancel')}
+          </Button>
+          <Button type='button' onClick={handleSave} className='bg-foreground text-background hover:bg-foreground/90'>
+            {t('save')}
+          </Button>
+        </div>
+      </DialogFooter>
+    </>
+  );
+  if (embedded) return <div className='space-y-5'>{content}</div>;
+  return (
+    <Dialog open={open} onOpenChange={onOpenChange}>
+      <DialogContent className='border-border bg-background text-foreground max-h-[90vh] overflow-y-auto sm:max-w-[640px]'>
+        {content}
       </DialogContent>
     </Dialog>
   );

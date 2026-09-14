@@ -12,6 +12,7 @@ import { toast } from 'sonner';
 import { cn } from '@/lib/utils';
 import { getFileByUrl } from '@/lib/utils/fileUtils';
 import { validateImagePx } from '@/lib/utils/imageUtils';
+import { useFormRestoration } from '@/hooks/use-form-restoration';
 import { FormControl, FormField, FormItem, FormLabel } from '@/components/ui/form';
 import SubHeading from '@/components/form/SubHeading';
 
@@ -82,6 +83,24 @@ const UnifiedImageUploadField = forwardRef<UnifiedImageUploadFieldRef, UnifiedIm
     const setImageFormSrc = useImageFormStore((state) => state.setImageFormSrc);
 
     const [images, setImages] = useState<ImageItem[]>([]);
+    useFormRestoration((data, preview) => {
+      const raw = data[name];
+      const values = Array.isArray(raw) ? raw : raw ? [raw] : [];
+      setImages(
+        values.flatMap((value) => {
+          const url = preview(value);
+          if (!url) return [];
+          return [
+            {
+              id: nanoid(),
+              file: value instanceof File ? value : new File([], 'remote-image'),
+              previewUrl: url,
+              ...(typeof value === 'string' ? { sourceUrl: value } : {}),
+            },
+          ];
+        }),
+      );
+    });
     const imgRef = useRef<HTMLImageElement>(null);
     const [imgSize, setImgSize] = useState<{ width: number | string; height: number | string }>({
       width: '100%',
@@ -173,6 +192,7 @@ const UnifiedImageUploadField = forwardRef<UnifiedImageUploadFieldRef, UnifiedIm
 
     useEffect(() => {
       // On submit, use URL strings directly; File objects also used directly
+      if (!hasReadInitialValue.current) return;
       methods.setValue(
         name,
         images.map((img) => img.sourceUrl || img.file),
@@ -341,9 +361,9 @@ const UnifiedImageUploadField = forwardRef<UnifiedImageUploadFieldRef, UnifiedIm
           <div
             {...getRootProps()}
             className={cn(
-              'relative h-[112px] w-full rounded-xl border border-dashed border-white/10 bg-[#232528] hover:border-white/30 hover:bg-[#2a2b2f]',
-              isDragActive && 'border-white/30 bg-[#2a2b2f]',
-              images.length > 0 && 'border-white/10 bg-[#232528] hover:border-white/10 hover:bg-[#232528]',
+              'border-foreground/10 bg-card hover:border-foreground/30 hover:bg-card relative h-[112px] w-full rounded-xl border border-dashed',
+              isDragActive && 'border-foreground/30 bg-card',
+              images.length > 0 && 'border-foreground/10 bg-card hover:border-foreground/10 hover:bg-card',
             )}
           >
             <FormField
@@ -367,12 +387,12 @@ const UnifiedImageUploadField = forwardRef<UnifiedImageUploadFieldRef, UnifiedIm
                           style={{ width: imgSize.width, height: imgSize.height }}
                           className='absolute-center absolute flex items-center justify-center bg-black/40 lg:hidden lg:group-hover:flex'
                         >
-                          <Trash2 className='size-5 text-white' />
+                          <Trash2 className='text-foreground size-5' />
                         </button>
                       </div>
                     ) : (
-                      <FormLabel className='flex h-full w-full flex-col items-center justify-center gap-3 text-center text-white/40'>
-                        <div className='flex size-8 items-center justify-center rounded-lg bg-white/5'>
+                      <FormLabel className='text-foreground/40 flex h-full w-full flex-col items-center justify-center gap-3 text-center'>
+                        <div className='bg-foreground/5 flex size-8 items-center justify-center rounded-lg'>
                           <Upload className='size-6' />
                         </div>
                         <div className='text-sm'>{label || t('label')}</div>
@@ -410,23 +430,23 @@ const UnifiedImageUploadField = forwardRef<UnifiedImageUploadFieldRef, UnifiedIm
                 role='button'
                 tabIndex={0}
                 className={cn(
-                  'relative flex w-full cursor-pointer flex-col rounded-xl border border-dashed border-white/10 bg-[#232528] p-3 transition-all hover:border-white/30 hover:bg-[#2a2b2f]',
-                  isDragActive && 'border-white/30 bg-[#2a2b2f]',
+                  'border-foreground/10 bg-card hover:border-foreground/30 hover:bg-card relative flex w-full cursor-pointer flex-col rounded-xl border border-dashed p-3 transition-all',
+                  isDragActive && 'border-foreground/30 bg-card',
                   images.length > 0 && 'gap-3',
                 )}
               >
                 {images.length === 0 ? (
                   <div className='flex items-center gap-3'>
-                    <div className='flex size-16 shrink-0 items-center justify-center rounded-lg border-2 border-dashed border-white/20 bg-[#1c1d20]'>
-                      <Plus className='size-6 text-white/40' />
+                    <div className='border-foreground/20 bg-card flex size-16 shrink-0 items-center justify-center rounded-lg border-2 border-dashed'>
+                      <Plus className='text-foreground/40 size-6' />
                     </div>
 
                     <div className='flex flex-1 flex-col items-center justify-center gap-0.5 text-center'>
-                      <div className='text-sm text-white/40'>{label || t('label')}</div>
-                      <div className='text-xs text-white/30'>
+                      <div className='text-foreground/40 text-sm'>{label || t('label')}</div>
+                      <div className='text-foreground/30 text-xs'>
                         {t('supported-formats')}: {acceptedFormats}
                       </div>
-                      <div className='text-xs text-white/30'>
+                      <div className='text-foreground/30 text-xs'>
                         {images.length}/{maxImages} {tCommon('images')}
                       </div>
                     </div>
@@ -453,19 +473,19 @@ const UnifiedImageUploadField = forwardRef<UnifiedImageUploadFieldRef, UnifiedIm
                             }}
                             className='absolute inset-0 flex items-center justify-center bg-black/40 transition-all lg:hidden lg:group-hover:flex'
                           >
-                            <Trash2 className='size-5 text-white' />
+                            <Trash2 className='text-foreground size-5' />
                           </button>
                         </div>
                       ))}
 
                       {canAddMore && (
-                        <div className='flex aspect-square items-center justify-center rounded-lg border-2 border-dashed border-white/20 bg-[#1c1d20] transition-all hover:border-white/30'>
-                          <Plus className='size-6 text-white/40' />
+                        <div className='border-foreground/20 bg-card hover:border-foreground/30 flex aspect-square items-center justify-center rounded-lg border-2 border-dashed transition-all'>
+                          <Plus className='text-foreground/40 size-6' />
                         </div>
                       )}
                     </div>
 
-                    <div className='mt-1 flex items-center justify-between text-xs text-white/30'>
+                    <div className='text-foreground/30 mt-1 flex items-center justify-between text-xs'>
                       <span>
                         {t('supported-formats')}: {acceptedFormats}
                       </span>

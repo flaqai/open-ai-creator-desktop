@@ -26,10 +26,10 @@ export default function NotFound() {
           loading='lazy'
           fetchPriority='low'
         />
-        <h1 className='text-sm text-white/40'>{t('title')}</h1>
+        <h1 className='text-foreground/40 text-sm'>{t('title')}</h1>
         <Link
           href='/'
-          className='flex h-9 items-center justify-center rounded-full border border-white/40 px-2.5 text-sm text-white/40 uppercase hover:cursor-pointer hover:opacity-80'
+          className='border-foreground/40 text-foreground/40 flex h-9 items-center justify-center rounded-full border px-2.5 text-sm uppercase hover:cursor-pointer hover:opacity-80'
         >
           {t('goHome')}
         </Link>

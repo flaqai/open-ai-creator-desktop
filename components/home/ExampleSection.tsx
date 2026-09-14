@@ -251,11 +251,11 @@ export default function ExampleSection({
         {/* Title and navigation buttons */}
         <div className='mx-auto flex max-w-[1200px] items-start justify-between px-4'>
           <div className='mx-0 flex flex-col items-start text-left'>
-            <h2 className='text-[18px] font-semibold text-white md:text-[18px] md:leading-[26px] md:tracking-[0.36px]'>
+            <h2 className='text-foreground text-[18px] font-semibold md:text-[18px] md:leading-[26px] md:tracking-[0.36px]'>
               {imageExamplesTitle}
             </h2>
             {imageExamplesDescription && (
-              <p className='mt-1 text-[14px] font-normal text-[#B8B8B8]'>{imageExamplesDescription}</p>
+              <p className='text-muted-foreground mt-1 text-[14px] font-normal'>{imageExamplesDescription}</p>
             )}
           </div>
 
@@ -263,14 +263,14 @@ export default function ExampleSection({
           <div className='flex items-center gap-3'>
             <button
               onClick={goToPreviousImage}
-              className='flex h-12 w-12 items-center justify-center rounded-full bg-[#1C1D23] text-white transition hover:bg-[#2C2D33]'
+              className='bg-card text-foreground hover:bg-card flex h-12 w-12 items-center justify-center rounded-full transition'
               aria-label='Previous image'
             >
               <ChevronLeft className='h-[18px] w-[18px]' />
             </button>
             <button
               onClick={goToNextImage}
-              className='flex h-12 w-12 items-center justify-center rounded-full bg-[#1C1D23] text-white transition hover:bg-[#2C2D33]'
+              className='bg-card text-foreground hover:bg-card flex h-12 w-12 items-center justify-center rounded-full transition'
               aria-label='Next image'
             >
               <ChevronRight className='h-[18px] w-[18px]' />
@@ -298,7 +298,7 @@ export default function ExampleSection({
                 className='group relative h-[200px] max-w-[85vw] flex-shrink-0 cursor-pointer md:h-[360px] md:max-w-none lg:h-[440px]'
                 onClick={() => handleImageClick(item.prompt)}
               >
-                <div className='relative h-full overflow-hidden rounded-xl bg-[#383838]'>
+                <div className='bg-card relative h-full overflow-hidden rounded-xl'>
                   <img
                     src={item.src}
                     alt={`Example ${index + 1}`}
@@ -308,7 +308,7 @@ export default function ExampleSection({
 
                   {/* Bottom gradient overlay and Prompt */}
                   <div className='absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/90 via-black/60 to-transparent px-4 pt-20 pb-4 opacity-0 transition-all duration-300 group-hover:opacity-100'>
-                    <p className='line-clamp-4 text-xs leading-relaxed text-white/90'>{item.prompt}</p>
+                    <p className='text-foreground/90 line-clamp-4 text-xs leading-relaxed'>{item.prompt}</p>
                   </div>
                 </div>
               </div>
@@ -322,24 +322,24 @@ export default function ExampleSection({
         {/* Title and navigation buttons */}
         <div className='flex items-start justify-between'>
           <div className='mx-0 flex flex-col items-start text-left'>
-            <h3 className='text-[18px] font-semibold text-white md:text-[18px] md:leading-[26px] md:tracking-[0.36px]'>
+            <h3 className='text-foreground text-[18px] font-semibold md:text-[18px] md:leading-[26px] md:tracking-[0.36px]'>
               {videoExamplesTitle}
             </h3>
-            <p className='mt-1 text-[14px] font-normal text-[#B8B8B8]'>{videoExamplesDescription}</p>
+            <p className='text-muted-foreground mt-1 text-[14px] font-normal'>{videoExamplesDescription}</p>
           </div>
 
           {/* Navigation buttons */}
           <div className='flex items-center gap-3'>
             <button
               onClick={goToPreviousVideo}
-              className='flex h-12 w-12 items-center justify-center rounded-full bg-[#1C1D23] text-white transition hover:bg-[#2C2D33]'
+              className='bg-card text-foreground hover:bg-card flex h-12 w-12 items-center justify-center rounded-full transition'
               aria-label='Previous video'
             >
               <ChevronLeft className='h-[18px] w-[18px]' />
             </button>
             <button
               onClick={goToNextVideo}
-              className='flex h-12 w-12 items-center justify-center rounded-full bg-[#1C1D23] text-white transition hover:bg-[#2C2D33]'
+              className='bg-card text-foreground hover:bg-card flex h-12 w-12 items-center justify-center rounded-full transition'
               aria-label='Next video'
             >
               <ChevronRight className='h-[18px] w-[18px]' />
@@ -350,7 +350,7 @@ export default function ExampleSection({
         {/* Video content area */}
         <div className='mt-3 grid grid-cols-1 gap-6 lg:grid-cols-[1fr_400px]'>
           {/* Video player */}
-          <div className='relative aspect-video overflow-hidden rounded-xl bg-[#383838]'>
+          <div className='bg-card relative aspect-video overflow-hidden rounded-xl'>
             {videos.map((video, index) => (
               <div
                 key={index}
@@ -375,7 +375,7 @@ export default function ExampleSection({
             <button
               type='button'
               onClick={() => setMuted((prev) => !prev)}
-              className='absolute bottom-3 left-3 z-20 flex h-9 w-9 cursor-pointer items-center justify-center rounded-full bg-white/15 text-white backdrop-blur-md transition hover:bg-white/25'
+              className='bg-foreground/15 text-foreground hover:bg-foreground/25 absolute bottom-3 left-3 z-20 flex h-9 w-9 cursor-pointer items-center justify-center rounded-full backdrop-blur-md transition'
               aria-label={muted ? 'Unmute' : 'Mute'}
             >
               {muted ? <VolumeOff className='h-4 w-4' /> : <Volume2 className='h-4 w-4' />}
@@ -383,13 +383,13 @@ export default function ExampleSection({
           </div>
 
           {/* Video info and Prompt */}
-          <div className='flex flex-col gap-4 rounded-xl bg-[#16171B] p-4'>
+          <div className='bg-card flex flex-col gap-4 rounded-xl p-4'>
             {/* Prompt title and copy button */}
             <div className='flex items-center justify-start gap-3'>
-              <p className='text-sm font-medium text-white'>{promptLabel}</p>
+              <p className='text-foreground text-sm font-medium'>{promptLabel}</p>
               <button
                 type='button'
-                className='flex cursor-pointer items-center gap-2 text-xs text-white/70 transition hover:text-white'
+                className='text-foreground/70 hover:text-foreground flex cursor-pointer items-center gap-2 text-xs transition'
                 onClick={() => {
                   navigator.clipboard.writeText(videos[videoCurrentIndex].prompt);
                   setCopied(true);
@@ -401,7 +401,7 @@ export default function ExampleSection({
             </div>
 
             {/* Video Prompt */}
-            <p className='line-clamp-10 text-xs text-white/70'>{videos[videoCurrentIndex].prompt}</p>
+            <p className='text-foreground/70 line-clamp-10 text-xs'>{videos[videoCurrentIndex].prompt}</p>
           </div>
         </div>
       </div>

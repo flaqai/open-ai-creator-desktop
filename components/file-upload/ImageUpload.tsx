@@ -23,7 +23,7 @@ function Text({ title, icon, className }: { title?: string; icon: React.ReactNod
   return (
     <div
       className={cn(
-        'border-main-gray flex h-8 w-full items-center justify-center rounded-lg border bg-black px-2 text-sm text-white/40',
+        'border-main-gray text-foreground/40 flex h-8 w-full items-center justify-center rounded-lg border bg-black px-2 text-sm',
         className,
       )}
     >
@@ -157,7 +157,7 @@ export default function ImageUpload({
     <>
       <div className='flex flex-col'>
         <div className='border-main-gray bg-card-black mr-auto flex h-8 w-full items-center gap-1.5 rounded-t-xl border border-b-0 p-3'>
-          <div className={cn('font-semibold', showDisabledBtn && !off && 'text-white/40')}>{title}</div>
+          <div className={cn('font-semibold', showDisabledBtn && !off && 'text-foreground/40')}>{title}</div>
           {showDisabledBtn && <AgSwitch checked={!!off} onCheckedChange={onClickDisabledBtn} />}
         </div>
         <div
@@ -177,7 +177,7 @@ export default function ImageUpload({
                   onClick={deleteFile}
                   className='absolute top-0.5 left-0.5 z-20 flex size-8 items-center justify-center rounded-lg bg-black/70 backdrop-blur-xs'
                 >
-                  <Trash2 className='size-4 text-white/40' />
+                  <Trash2 className='text-foreground/40 size-4' />
                   <span className='sr-only'>delete</span>
                 </button>
                 <img src={fileUrl} alt={name} className='max-h-full max-w-full bg-contain' />

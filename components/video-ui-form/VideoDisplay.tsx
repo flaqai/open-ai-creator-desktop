@@ -86,7 +86,7 @@ export default function VideoDisplay() {
   return (
     <>
       <div id='ImageDisplay' className={cn('flex h-full flex-1 flex-col gap-px px-3 pt-3 contain-strict lg:px-0')}>
-        <div className='relative flex h-auto max-h-[calc(100%-48px)] flex-1 items-center justify-center overflow-hidden rounded-lg bg-gradient-to-t from-[#111111] to-[#1f2022] p-3 lg:p-5'>
+        <div className='from-muted to-card relative flex h-auto max-h-[calc(100%-48px)] flex-1 items-center justify-center overflow-hidden rounded-lg bg-gradient-to-t p-3 lg:p-5'>
           {mode && (
             <button
               type='button'
@@ -121,24 +121,24 @@ export default function VideoDisplay() {
               height={520}
             />
           ) : (
-            <div className='flex flex-1 flex-col items-center justify-center gap-3 text-[#b8b8b8]'>
+            <div className='text-muted-foreground flex flex-1 flex-col items-center justify-center gap-3'>
               <VideoIcon className='size-10' />
               {t('noVideo')}
             </div>
           )}
         </div>
         {!btnDisabled && (
-          <div className='relative flex flex-none items-center justify-end gap-1 rounded-b-xl bg-[#1c1d20] p-2'>
+          <div className='bg-card relative flex flex-none items-center justify-end gap-1 rounded-b-xl p-2'>
             {/* Prompt */}
             {videoObj?.prompt && (
-              <div className='flex h-9 items-center gap-1 rounded-xl border border-[#303030] bg-[#1c1d20] px-2 lg:h-10'>
+              <div className='border-border bg-card flex h-9 items-center gap-1 rounded-xl border px-2 lg:h-10'>
                 <CopyBtn content={videoObj.prompt} />
                 <Popover open={showVideoInfo} onOpenChange={setShowVideoInfo}>
                   <PopoverTrigger asChild>
                     <button
                       type='button'
                       onClick={() => setShowVideoInfo(!showVideoInfo)}
-                      className='flex cursor-pointer items-center gap-1 text-xs text-[#e2e2e2] lg:text-sm'
+                      className='text-muted-foreground flex cursor-pointer items-center gap-1 text-xs lg:text-sm'
                     >
                       {t('prompt')}
                       <ChevronDown
@@ -148,7 +148,7 @@ export default function VideoDisplay() {
                   </PopoverTrigger>
                   <PopoverContent
                     side='top'
-                    className='max-h-60 overflow-auto border-[#2a2b2f] bg-[#1c1d20] p-3 text-white shadow-md'
+                    className='border-border bg-card text-foreground max-h-60 overflow-auto p-3 shadow-md'
                     sideOffset={15}
                   >
                     {videoObj.prompt}
@@ -161,7 +161,7 @@ export default function VideoDisplay() {
             <button
               type='button'
               onClick={onShowDetail}
-              className='flex h-9 cursor-pointer items-center rounded-xl border border-[#303030] bg-[#1c1d20] px-3 text-xs text-[#e2e2e2] hover:bg-[#252629] lg:h-10 lg:text-sm'
+              className='border-border bg-card text-muted-foreground hover:bg-card flex h-9 cursor-pointer items-center rounded-xl border px-3 text-xs lg:h-10 lg:text-sm'
             >
               {t('videoDetail')}
             </button>
@@ -171,16 +171,16 @@ export default function VideoDisplay() {
               type='button'
               onClick={onDownload}
               disabled={!videoObj?.videoSrc}
-              className='flex size-9 cursor-pointer items-center justify-center rounded-xl border border-[#303030] bg-[#1c1d20] hover:bg-[#252629] disabled:cursor-not-allowed disabled:opacity-50 lg:size-10'
+              className='border-border bg-card hover:bg-card flex size-9 cursor-pointer items-center justify-center rounded-xl border disabled:cursor-not-allowed disabled:opacity-50 lg:size-10'
             >
-              <Download className='size-4 text-white lg:size-5' />
+              <Download className='text-foreground size-4 lg:size-5' />
             </button>
 
             {/* Delete */}
             <button
               type='button'
               onClick={() => setOpenDeleteDialog(true)}
-              className='flex size-9 cursor-pointer items-center justify-center rounded-xl border border-[#303030] bg-[#1c1d20] text-[#e2e2e2] hover:text-red-500 lg:size-10'
+              className='border-border bg-card text-muted-foreground flex size-9 cursor-pointer items-center justify-center rounded-xl border hover:text-red-500 lg:size-10'
             >
               <Trash2 className='size-4 lg:size-5' strokeWidth={1} />
             </button>

@@ -92,14 +92,16 @@ const FrameImageUploadSection = forwardRef<FrameImageUploadSectionRef, FrameImag
               name={enableEndFrameName}
               render={({ field }) => (
                 <FormItem className='flex items-center gap-2 space-y-0'>
-                  <FormLabel className='cursor-pointer text-sm font-normal text-white/70'>{t('end-frame')}</FormLabel>
+                  <FormLabel className='text-foreground/70 cursor-pointer text-sm font-normal'>
+                    {t('end-frame')}
+                  </FormLabel>
                   <FormControl>
                     <Switch
                       className={cn(
-                        'data-[state=checked]:border-color-main h-[16px] w-[28px] rounded border border-white !bg-transparent focus:ring-0',
+                        'data-[state=checked]:border-color-main border-foreground h-[16px] w-[28px] rounded border !bg-transparent focus:ring-0',
                       )}
                       thumbClassName={cn(
-                        'h-3 w-3 rounded-[2px] bg-white data-[state=unchecked]:translate-x-[1px] data-[state=checked]:translate-x-[12px] data-[state=checked]:bg-color-main',
+                        'h-3 w-3 rounded-[2px] bg-foreground data-[state=unchecked]:translate-x-[1px] data-[state=checked]:translate-x-[12px] data-[state=checked]:bg-color-main',
                       )}
                       checked={!!field.value}
                       onCheckedChange={field.onChange}
@@ -111,9 +113,9 @@ const FrameImageUploadSection = forwardRef<FrameImageUploadSectionRef, FrameImag
           )}
         </div>
 
-        <div className='px-0 pt-0 text-xs text-white/40'>{t('product-image-description')}</div>
+        <div className='text-foreground/40 px-0 pt-0 text-xs'>{t('product-image-description')}</div>
 
-        <div className='rounded-xl border border-[#2a2b2f] bg-[#1c1d20]'>
+        <div className='border-border bg-card rounded-xl border'>
           <div className='flex flex-col gap-1 p-1'>
             <FrameImageUpload
               ref={startFrameRef}
@@ -136,7 +138,7 @@ const FrameImageUploadSection = forwardRef<FrameImageUploadSectionRef, FrameImag
             )}
           </div>
 
-          {usageTipsTitle && <div className='h-px bg-[#2a2b2f]' />}
+          {usageTipsTitle && <div className='bg-card h-px' />}
 
           {hintsSection}
 
@@ -148,7 +150,7 @@ const FrameImageUploadSection = forwardRef<FrameImageUploadSectionRef, FrameImag
                 videoUrl={usageTipsVideoUrl}
                 videoCover={usageTipsVideoCover}
                 buttonText={usageTipsButtonText}
-                className='text-color-main w-full justify-center rounded-lg bg-[#2a2b2f] px-4 py-3'
+                className='text-color-main bg-card w-full justify-center rounded-lg px-4 py-3'
               />
             </div>
           )}

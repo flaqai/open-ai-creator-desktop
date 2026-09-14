@@ -112,23 +112,23 @@ const ImageUploadForm: ForwardRefRenderFunction<
           <FormItem className='w-full space-y-0'>
             <FormLabel className='flex-1 cursor-pointer'>
               <div className='flex flex-1 justify-between'>
-                <div className='flex-center relative size-16 rounded bg-white/5'>
+                <div className='flex-center bg-foreground/5 relative size-16 rounded'>
                   {imageUrl ? (
                     <>
                       <button
                         type='button'
                         onClick={onRemoveButtonClick}
-                        className='absolute -top-2 -left-2 size-5 rounded-full bg-white/20 backdrop-blur-lg'
+                        className='bg-foreground/20 absolute -top-2 -left-2 size-5 rounded-full backdrop-blur-lg'
                       >
                         <CircleX className='size-full' />
                       </button>
                       <img src={imageUrl} alt='Upload' className='max-h-full max-w-full' />
                     </>
                   ) : (
-                    <Upload className='size-6 text-white/40' />
+                    <Upload className='text-foreground/40 size-6' />
                   )}
                 </div>
-                <div className='flex flex-1 flex-col items-center justify-center text-center text-sm whitespace-pre-line text-white/40'>
+                <div className='text-foreground/40 flex flex-1 flex-col items-center justify-center text-center text-sm whitespace-pre-line'>
                   {label}
                 </div>
               </div>

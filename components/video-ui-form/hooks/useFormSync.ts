@@ -114,7 +114,7 @@ export default function useFormSync(options: UseFormSyncOptions) {
       return;
     }
 
-    const currentRatio = isModelSwitch ? undefined : form.getValues('ratio');
+    const currentRatio = form.getValues('ratio');
 
     const nextRatio = pickBestValue({
       currentValue: currentRatio,
@@ -126,7 +126,7 @@ export default function useFormSync(options: UseFormSyncOptions) {
     });
 
     if (nextRatio && nextRatio !== form.getValues('ratio')) {
-      setTimeout(() => form.setValue('ratio', nextRatio), 0);
+      form.setValue('ratio', nextRatio);
     }
   }, [modelVersion, currentModel, ratioOptions, defaultValues?.ratio, defaultValuePriority?.ratio, isModelSwitch]);
 
@@ -138,7 +138,7 @@ export default function useFormSync(options: UseFormSyncOptions) {
     if (!durationOptions || durationOptions.length === 0) {
       form.setValue('duration', '');
     } else {
-      const currentDuration = isModelSwitch ? undefined : form.getValues('duration');
+      const currentDuration = form.getValues('duration');
       const modelDuration = currentModel?.options?.duration ? `${currentModel.options.duration}s` : undefined;
 
       const nextDuration = pickBestValue({
@@ -152,7 +152,7 @@ export default function useFormSync(options: UseFormSyncOptions) {
       });
 
       if (nextDuration && nextDuration !== form.getValues('duration')) {
-        setTimeout(() => form.setValue('duration', nextDuration), 0);
+        form.setValue('duration', nextDuration);
       }
     }
 
@@ -160,7 +160,7 @@ export default function useFormSync(options: UseFormSyncOptions) {
     if (!resolutionOptions || resolutionOptions.length === 0) {
       form.setValue('resolution', '');
     } else {
-      const currentResolution = isModelSwitch ? undefined : form.getValues('resolution');
+      const currentResolution = form.getValues('resolution');
       const modelResolution = currentModel?.options?.resolution;
 
       const nextResolution = pickBestValue({
@@ -174,7 +174,7 @@ export default function useFormSync(options: UseFormSyncOptions) {
       });
 
       if (nextResolution && nextResolution !== form.getValues('resolution')) {
-        setTimeout(() => form.setValue('resolution', nextResolution), 0);
+        form.setValue('resolution', nextResolution);
       }
     }
   }, [

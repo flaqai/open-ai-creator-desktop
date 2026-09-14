@@ -25,7 +25,7 @@ export default function TypeTabs({
     >
       <span
         aria-hidden='true'
-        className='pointer-events-none absolute top-1 bottom-1 left-1 z-0 w-[calc((100%_-_12px)/2)] rounded-md bg-white/15 shadow-[inset_0_1px_0_rgba(255,255,255,0.14)] transition-transform duration-[480ms] ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none'
+        className='bg-foreground/15 pointer-events-none absolute top-1 bottom-1 left-1 z-0 w-[calc((100%_-_12px)/2)] rounded-md shadow-[inset_0_1px_0_rgba(255,255,255,0.14)] transition-transform duration-[480ms] ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none'
         style={{ transform: value === 'image' ? 'translateX(calc(100% + 4px))' : 'translateX(0)' }}
       />
       {ITEMS.map((item) => {
@@ -38,8 +38,8 @@ export default function TypeTabs({
             className={cn(
               'group relative z-10 inline-flex h-9 min-w-[132px] items-center justify-start gap-0 overflow-visible rounded-md border py-0 pr-4 pl-1 text-sm font-medium transition-colors sm:h-10 sm:min-w-[164px]',
               active
-                ? 'border-transparent text-white'
-                : 'text-color-t2 hover:text-color-t1 focus-visible:text-color-t1 border-transparent hover:bg-white/10 focus-visible:bg-white/10',
+                ? 'text-foreground border-transparent'
+                : 'text-color-t2 hover:text-color-t1 focus-visible:text-color-t1 hover:bg-foreground/10 focus-visible:bg-foreground/10 border-transparent',
             )}
             role='tab'
             aria-selected={active}

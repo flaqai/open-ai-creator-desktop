@@ -31,8 +31,8 @@ export default function UnifiedUploadSlot({
       {...getRootProps()}
       title={file?.name}
       className={cn(
-        'group border-color-b1 bg-color-c3 text-color-t3 hover:bg-color-c4 hover:text-color-t1 relative flex h-[68px] w-[52px] shrink-0 cursor-pointer flex-col items-center justify-center rounded-xl border border-dashed transition-colors hover:border-white/40',
-        isDragActive && 'bg-color-c4 border-white/40',
+        'group border-color-b1 bg-color-c3 text-color-t3 hover:bg-color-c4 hover:text-color-t1 hover:border-foreground/40 relative flex h-[68px] w-[52px] shrink-0 cursor-pointer flex-col items-center justify-center rounded-xl border border-dashed transition-colors',
+        isDragActive && 'bg-color-c4 border-foreground/40',
       )}
     >
       <input {...getInputProps()} />

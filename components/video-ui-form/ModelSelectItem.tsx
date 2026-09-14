@@ -56,8 +56,8 @@ export default function ModelSelectItem({
   return (
     <div
       className={cn(
-        'box-border flex w-full max-w-full min-w-full cursor-pointer flex-col gap-3 border-b border-white/10 p-2',
-        isSelected && 'bg-white/5',
+        'border-foreground/10 box-border flex w-full max-w-full min-w-full cursor-pointer flex-col gap-3 border-b p-2',
+        isSelected && 'bg-foreground/5',
         isDisabled && 'cursor-not-allowed opacity-60',
       )}
       onClick={!isDisabled ? onClick : undefined}
@@ -81,7 +81,7 @@ export default function ModelSelectItem({
                 <span
                   className={cn(
                     'flex size-5 flex-shrink-0 items-center justify-center overflow-hidden rounded',
-                    modelIcon.background === 'light' && 'bg-white p-0.5',
+                    modelIcon.background === 'light' && 'bg-foreground p-0.5',
                   )}
                 >
                   <img src={modelIcon.src} alt={value} className='size-full object-contain' />
@@ -89,7 +89,7 @@ export default function ModelSelectItem({
               ) : (
                 <div className='h-5 w-5 flex-shrink-0' />
               )}
-              <h3 className='text-base font-medium text-white'>{label}</h3>
+              <h3 className='text-foreground text-base font-medium'>{label}</h3>
               {/* Coming Soon badge */}
               {showComingSoon && (
                 <span className='rounded bg-[#f3eeff] px-2 py-0.5 text-xs text-[#7D52FF]'>Coming Soon</span>
@@ -115,7 +115,7 @@ export default function ModelSelectItem({
                   </svg>
                 </div>
               ) : (
-                <div className='flex h-5 w-5 items-center justify-center rounded-full border border-white/20' />
+                <div className='border-foreground/20 flex h-5 w-5 items-center justify-center rounded-full border' />
               )}
             </div>
           </div>
@@ -124,7 +124,7 @@ export default function ModelSelectItem({
             {features.map((feature, index) => (
               <div
                 key={index}
-                className='flex items-center gap-1 rounded-md border border-white/10 px-2 py-1 text-xs text-white/70'
+                className='border-foreground/10 text-foreground/70 flex items-center gap-1 rounded-md border px-2 py-1 text-xs'
               >
                 {renderFeatureIcon(feature.icon)}
                 {feature.label}

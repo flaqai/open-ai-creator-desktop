@@ -61,7 +61,7 @@ export default function HintsPresets({
 
   return (
     <div className='flex items-center gap-1.5'>
-      {title && <span className='text-sm text-white/40'>{title}</span>}
+      {title && <span className='text-foreground/40 text-sm'>{title}</span>}
       <div className='relative flex items-center gap-1.5'>
         {presets.map((preset) => (
           <div key={preset.id} className='relative flex items-center justify-center'>
@@ -73,7 +73,7 @@ export default function HintsPresets({
               onClick={() => onPresetClick?.(preset)}
               onMouseEnter={(e) => handleMouseEnter(preset, e.currentTarget)}
               onMouseLeave={handleMouseLeave}
-              className='relative h-12 w-12 overflow-hidden rounded-lg bg-[#2a2b2f] transition-all'
+              className='bg-card relative h-12 w-12 overflow-hidden rounded-lg transition-all'
             >
               <img src={preset.aiGeneration} alt={`Hint ${preset.id}`} className='size-full object-contain' />
               {hoveredId === preset.id && (
@@ -102,12 +102,12 @@ export default function HintsPresets({
               transform: 'translateY(calc(-100% - 0px))',
             }}
           >
-            <div className='flex gap-1 rounded-xl bg-[#1c1d20] p-1'>
+            <div className='bg-card flex gap-1 rounded-xl p-1'>
               {/* Subject */}
-              <div className='relative aspect-square w-[120px] overflow-hidden rounded-lg bg-[#2a2b2f]'>
+              <div className='bg-card relative aspect-square w-[120px] overflow-hidden rounded-lg'>
                 <img src={hoveredPreset.subject} alt='Subject' className='h-full w-full object-cover' />
                 <div className='absolute right-1 bottom-1 left-1'>
-                  <span className='inline-flex h-5 max-w-full items-center justify-center rounded bg-[#000000B2] px-2 py-0.5 text-xs font-medium text-white backdrop-blur-[5.33px]'>
+                  <span className='text-primary-foreground inline-flex h-5 max-w-full items-center justify-center rounded bg-[#000000B2] px-2 py-0.5 text-xs font-medium backdrop-blur-[5.33px]'>
                     <span className='truncate'>{subjectLabel}</span>
                   </span>
                 </div>
@@ -115,10 +115,10 @@ export default function HintsPresets({
 
               {/* Object(s) */}
               {objectImages.map((src, idx) => (
-                <div key={idx} className='relative aspect-square w-[120px] overflow-hidden rounded-lg bg-[#2a2b2f]'>
+                <div key={idx} className='bg-card relative aspect-square w-[120px] overflow-hidden rounded-lg'>
                   <img src={src} alt={`Object ${idx + 1}`} className='h-full w-full object-cover' />
                   <div className='absolute right-1 bottom-1 left-1'>
-                    <span className='inline-flex h-5 max-w-full items-center justify-center rounded bg-[#000000B2] px-2 py-0.5 text-xs font-medium text-white backdrop-blur-[5.33px]'>
+                    <span className='text-primary-foreground inline-flex h-5 max-w-full items-center justify-center rounded bg-[#000000B2] px-2 py-0.5 text-xs font-medium backdrop-blur-[5.33px]'>
                       <span className='truncate'>
                         {objectImages.length > 1 ? `${objectLabel} ${idx + 1}` : objectLabel}
                       </span>
@@ -128,7 +128,7 @@ export default function HintsPresets({
               ))}
 
               {/* AI Generation */}
-              <div className='relative aspect-square w-[120px] overflow-hidden rounded-lg bg-[#2a2b2f]'>
+              <div className='bg-card relative aspect-square w-[120px] overflow-hidden rounded-lg'>
                 <img src={hoveredPreset.aiGeneration} alt='AI Generation' className='h-full w-full object-cover' />
                 <div className='absolute right-1 bottom-1 left-1'>
                   <span className='inline-flex h-5 max-w-full items-center justify-center rounded bg-[#000000B2] px-2 py-0.5 text-xs font-medium backdrop-blur-[5.33px]'>

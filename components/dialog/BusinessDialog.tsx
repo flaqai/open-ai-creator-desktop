@@ -33,23 +33,27 @@ export default function BusinessDialog() {
   return (
     <Dialog open={open} onOpenChange={handleOpenChange}>
       <DialogContent
-        className='w-[351px] rounded-xl border-white/10 bg-[#111214] p-6 text-white lg:w-[480px] lg:p-8'
+        className='border-foreground/10 bg-card text-foreground w-[351px] rounded-xl p-6 lg:w-[480px] lg:p-8'
         aria-describedby={undefined}
       >
         <DialogTitle className='text-center text-lg font-bold lg:text-xl'>{t('title')}</DialogTitle>
         <div className='flex flex-col gap-6'>
-          <div className='flex flex-col gap-4 text-sm text-white/70 lg:text-base'>
+          <div className='text-foreground/70 flex flex-col gap-4 text-sm lg:text-base'>
             <p>{t('description')}</p>
-            <div className='flex items-center gap-2 rounded-lg bg-white/5 p-3'>
-              <Mail className='size-5 text-white/40' />
-              <span className='flex-1 text-white/90'>{process.env.NEXT_PUBLIC_CONTACT_US_EMAIL}</span>
+            <div className='bg-foreground/5 flex items-center gap-2 rounded-lg p-3'>
+              <Mail className='text-foreground/40 size-5' />
+              <span className='text-foreground/90 flex-1'>{process.env.NEXT_PUBLIC_CONTACT_US_EMAIL}</span>
               <button
                 type='button'
                 onClick={handleCopyEmail}
-                className='flex size-8 items-center justify-center rounded-md hover:bg-white/10'
+                className='hover:bg-foreground/10 flex size-8 items-center justify-center rounded-md'
                 title='Copy email'
               >
-                {isCopied ? <Check className='size-4 text-green-500' /> : <Copy className='size-4 text-white/40' />}
+                {isCopied ? (
+                  <Check className='size-4 text-green-500' />
+                ) : (
+                  <Copy className='text-foreground/40 size-4' />
+                )}
               </button>
             </div>
           </div>
@@ -57,7 +61,7 @@ export default function BusinessDialog() {
           <button
             type='button'
             onClick={handleEmailClick}
-            className='flex h-11 items-center justify-center gap-2 rounded-lg bg-white font-semibold text-black hover:opacity-90'
+            className='bg-foreground text-background flex h-11 items-center justify-center gap-2 rounded-lg font-semibold hover:opacity-90'
           >
             <Mail className='size-4' />
             {t('contactButton')}

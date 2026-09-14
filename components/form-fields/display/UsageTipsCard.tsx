@@ -41,19 +41,19 @@ export default function UsageTipsCard({
 
       <div
         className={cn(
-          'absolute top-1/2 left-[391px] z-50 h-[533px] w-[624px] -translate-y-1/2 rounded-lg bg-[#1c1d20] shadow-2xl transition-all duration-300',
+          'bg-card absolute top-1/2 left-[391px] z-50 h-[533px] w-[624px] -translate-y-1/2 rounded-lg shadow-2xl transition-all duration-300',
           'flex flex-col gap-1 p-3',
           isOpen ? 'opacity-100' : 'pointer-events-none opacity-0',
         )}
       >
         <div className='flex items-center justify-between'>
-          <h3 className='text-xl font-semibold text-white'>{title}</h3>
-          <button type='button' onClick={onClose} className='rounded-lg p-1 hover:bg-white/10' aria-label='Close'>
-            <X className='size-5 text-white/60' />
+          <h3 className='text-foreground text-xl font-semibold'>{title}</h3>
+          <button type='button' onClick={onClose} className='hover:bg-foreground/10 rounded-lg p-1' aria-label='Close'>
+            <X className='text-foreground/60 size-5' />
           </button>
         </div>
 
-        <div className='text-sm leading-relaxed text-white/60'>{description}</div>
+        <div className='text-foreground/60 text-sm leading-relaxed'>{description}</div>
 
         {videoUrl && (
           <div className='relative flex-1 overflow-hidden rounded-lg'>

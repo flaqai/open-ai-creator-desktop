@@ -22,8 +22,8 @@ export default function EndFrameToggle({
         checked={checked}
         onCheckedChange={(nextChecked) => onCheckedChange(Boolean(nextChecked))}
         aria-label={label}
-        className='data-[state=checked]:border-color-main h-4 w-7 rounded-[4px] border bg-transparent data-[state=checked]:bg-transparent data-[state=unchecked]:border-white data-[state=unchecked]:bg-transparent'
-        thumbClassName='h-3 w-3 rounded-[2px] !bg-white shadow-none data-[state=unchecked]:translate-x-[1px] data-[state=unchecked]:!bg-white data-[state=checked]:translate-x-[13px] data-[state=checked]:!bg-color-main'
+        className='data-[state=checked]:border-color-main data-[state=unchecked]:border-foreground h-4 w-7 rounded-[4px] border bg-transparent data-[state=checked]:bg-transparent data-[state=unchecked]:bg-transparent'
+        thumbClassName='h-3 w-3 rounded-[2px] !bg-foreground shadow-none data-[state=unchecked]:translate-x-[1px] data-[state=unchecked]:!bg-foreground data-[state=checked]:translate-x-[13px] data-[state=checked]:!bg-color-main'
       />
     </div>
   );

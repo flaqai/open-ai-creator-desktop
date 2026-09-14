@@ -20,8 +20,8 @@ import Scroll, { ScrollRef } from './shared/scroll';
 
 function LoadingPlaceholder() {
   return (
-    <div className='relative flex h-[130px] w-[130px] shrink-0 items-center justify-center overflow-hidden rounded-lg bg-[#1c1d20]'>
-      <div className='size-8 animate-spin rounded-full border-4 border-[#303030] border-t-white/60' />
+    <div className='bg-card relative flex h-[130px] w-[130px] shrink-0 items-center justify-center overflow-hidden rounded-lg'>
+      <div className='border-border size-8 animate-spin rounded-full border-4 border-t-white/60' />
     </div>
   );
 }
@@ -67,7 +67,7 @@ function ImageItem({
 
   return (
     <div
-      className='group relative flex h-[130px] shrink-0 items-center justify-center overflow-hidden rounded-lg bg-[#1c1d20] hover:cursor-pointer'
+      className='group bg-card relative flex h-[130px] shrink-0 items-center justify-center overflow-hidden rounded-lg hover:cursor-pointer'
       onClick={onClick}
     >
       <img
@@ -78,7 +78,7 @@ function ImageItem({
         className='h-full w-auto transition-transform duration-200 group-hover:scale-110'
       />
 
-      <div className='absolute bottom-0 left-0 flex items-center justify-center rounded-tr-lg rounded-bl-lg bg-[rgba(128,128,128,0.5)] p-2.5 py-1 text-xs text-white backdrop-blur'>
+      <div className='text-foreground absolute bottom-0 left-0 flex items-center justify-center rounded-tr-lg rounded-bl-lg bg-[rgba(128,128,128,0.5)] p-2.5 py-1 text-xs backdrop-blur'>
         {formatDate(createTime)}
       </div>
     </div>
@@ -150,14 +150,14 @@ const ImageHistory = forwardRef<ScrollRef, ImageHistoryProps>(
     return (
       <Scroll ref={ref} onScrollChange={onScrollChange}>
         {!isLoading && !hasData && (
-          <div className='flex h-[130px] w-[195px] shrink-0 items-center justify-center rounded-lg border border-[#303030] bg-[#2a2b2f]'>
-            <div className='text-sm font-normal text-[#b8b8b8]'>{t('noImage')}</div>
+          <div className='border-border bg-card flex h-[130px] w-[195px] shrink-0 items-center justify-center rounded-lg border'>
+            <div className='text-muted-foreground text-sm font-normal'>{t('noImage')}</div>
           </div>
         )}
         {isLoading && (
           <div className='flex shrink-0 flex-nowrap gap-2 overflow-x-auto'>
             {numberList(8).map((num) => (
-              <div key={num} className='size-[130px] animate-pulse rounded bg-[#1c1d20]' />
+              <div key={num} className='bg-card size-[130px] animate-pulse rounded' />
             ))}
           </div>
         )}

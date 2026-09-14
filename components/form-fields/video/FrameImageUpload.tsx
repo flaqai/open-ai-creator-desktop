@@ -124,11 +124,11 @@ const FrameImageUpload = forwardRef<FrameImageUploadRef, FrameImageUploadProps>(
 
     return (
       <div className={cn('flex flex-col gap-3', className)}>
-        <div className='flex items-stretch gap-1 rounded-xl bg-[#232528] p-1'>
+        <div className='bg-card flex items-stretch gap-1 rounded-xl p-1'>
           {showIcon && (
             <>
               <div className='flex shrink-0 items-center'>{icon || <ImageIcon className='size-5' />}</div>
-              <div className='w-px border-l border-dashed border-white/10' />
+              <div className='border-foreground/10 w-px border-l border-dashed' />
             </>
           )}
 
@@ -137,7 +137,7 @@ const FrameImageUpload = forwardRef<FrameImageUploadRef, FrameImageUploadProps>(
               <button
                 type='button'
                 onClick={handleGenerateClick}
-                className='flex flex-1 items-center justify-center gap-1 rounded-lg bg-[#1c1d20] px-3 py-2 hover:opacity-80'
+                className='bg-card flex flex-1 items-center justify-center gap-1 rounded-lg px-3 py-2 hover:opacity-80'
               >
                 <AiGenerationIcon />
                 <div className='text-color-main text-[14px] leading-[21px] font-normal'>{t('ai-generation')}</div>
@@ -147,14 +147,14 @@ const FrameImageUpload = forwardRef<FrameImageUploadRef, FrameImageUploadProps>(
             <button
               type='button'
               onClick={handleUploadClick}
-              className='text-center text-[14px] leading-[21px] font-normal text-white/40 underline hover:opacity-80'
+              className='text-foreground/40 text-center text-[14px] leading-[21px] font-normal underline hover:opacity-80'
               style={showAiGeneration ? { height: '21px' } : undefined}
             >
               {label}
             </button>
           </div>
 
-          <div className='group relative h-[100px] w-[100px] shrink-0 overflow-hidden rounded-lg bg-[#1c1d20]'>
+          <div className='group bg-card relative h-[100px] w-[100px] shrink-0 overflow-hidden rounded-lg'>
             {imageUrl && (
               <>
                 <img src={imageUrl} alt={label} className='h-full w-full object-contain' />
@@ -162,7 +162,7 @@ const FrameImageUpload = forwardRef<FrameImageUploadRef, FrameImageUploadProps>(
                   <button
                     type='button'
                     onClick={handleRemoveImage}
-                    className='flex size-10 items-center justify-center rounded-lg bg-black/40 text-white backdrop-blur-md transition-transform hover:scale-110'
+                    className='text-foreground flex size-10 items-center justify-center rounded-lg bg-black/40 backdrop-blur-md transition-transform hover:scale-110'
                   >
                     <Trash2 className='size-5' />
                   </button>
@@ -176,7 +176,7 @@ const FrameImageUpload = forwardRef<FrameImageUploadRef, FrameImageUploadProps>(
                   <button
                     type='button'
                     onClick={handleRemoveSample}
-                    className='flex size-10 items-center justify-center rounded-lg bg-black/40 text-white backdrop-blur-md transition-transform hover:scale-110'
+                    className='text-foreground flex size-10 items-center justify-center rounded-lg bg-black/40 backdrop-blur-md transition-transform hover:scale-110'
                   >
                     <Trash2 className='size-5' />
                   </button>
@@ -185,7 +185,7 @@ const FrameImageUpload = forwardRef<FrameImageUploadRef, FrameImageUploadProps>(
             )}
             {!imageUrl && (!sampleImage || !showSample) && (
               <div className='flex size-full items-center justify-center'>
-                <ImageIcon className='size-8 text-white/20' />
+                <ImageIcon className='text-foreground/20 size-8' />
               </div>
             )}
           </div>

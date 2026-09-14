@@ -54,7 +54,7 @@ export default function GenerationTypeTabs({
     <>
       <div className='min-w-0 flex-1 sm:hidden'>
         <Select value={value} onValueChange={handleChange}>
-          <SelectTrigger className='text-color-t1 h-12 w-full min-w-0 justify-start rounded-none border-0 bg-transparent px-0 shadow-none focus-visible:ring-0 [&>svg:last-child]:size-6 [&>svg:last-child]:text-white [&>svg:last-child]:opacity-100'>
+          <SelectTrigger className='text-color-t1 [&>svg:last-child]:text-foreground h-12 w-full min-w-0 justify-start rounded-none border-0 bg-transparent px-0 shadow-none focus-visible:ring-0 [&>svg:last-child]:size-6 [&>svg:last-child]:opacity-100'>
             <span className='flex min-w-0 items-center gap-2'>
               <SelectedIcon className='size-4 shrink-0' />
               <span className='truncate'>{selectedOption.label}</span>

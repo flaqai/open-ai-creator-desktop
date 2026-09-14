@@ -127,7 +127,10 @@ export default function StatePagination({ currentPage, pageSize, onChange, total
       <ButtonTag
         disabled={currentPage <= 1}
         onClick={handlePrev}
-        className={cn('bg-white/10 text-white/70', currentPage <= 1 ? 'cursor-not-allowed' : 'hover:bg-white/15')}
+        className={cn(
+          'bg-foreground/10 text-foreground/70',
+          currentPage <= 1 ? 'cursor-not-allowed' : 'hover:bg-foreground/15',
+        )}
       >
         <ChevronLeft className='size-4 sm:size-5' />
       </ButtonTag>
@@ -137,7 +140,7 @@ export default function StatePagination({ currentPage, pageSize, onChange, total
           return (
             <span
               key={`ellipsis-${index}`}
-              className='flex h-8 w-8 items-center justify-center text-white/40 sm:h-9 sm:w-9'
+              className='text-foreground/40 flex h-8 w-8 items-center justify-center sm:h-9 sm:w-9'
             >
               ...
             </span>
@@ -150,7 +153,9 @@ export default function StatePagination({ currentPage, pageSize, onChange, total
             key={page}
             onClick={() => onChange(page)}
             className={cn(
-              isActive ? 'bg-white/20 font-semibold text-white' : 'bg-white/10 text-white/70 hover:bg-white/15',
+              isActive
+                ? 'bg-foreground/20 text-foreground font-semibold'
+                : 'bg-foreground/10 text-foreground/70 hover:bg-foreground/15',
             )}
           >
             {page}
@@ -162,8 +167,8 @@ export default function StatePagination({ currentPage, pageSize, onChange, total
         disabled={currentPage >= totalPages}
         onClick={handleNext}
         className={cn(
-          'bg-white/10 text-white/70',
-          currentPage >= totalPages ? 'cursor-not-allowed' : 'hover:bg-white/15',
+          'bg-foreground/10 text-foreground/70',
+          currentPage >= totalPages ? 'cursor-not-allowed' : 'hover:bg-foreground/15',
         )}
       >
         <ChevronRight className='size-4 sm:size-5' />

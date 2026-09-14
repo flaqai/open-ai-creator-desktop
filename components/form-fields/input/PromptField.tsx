@@ -56,7 +56,7 @@ export default function PromptField({
         render={({ field }) => (
           <FormItem className='space-y-0'>
             <FormLabel htmlFor={field.name} className='p-0'>
-              <div className='relative w-full rounded-xl border border-white/5 bg-[#232528]'>
+              <div className='border-foreground/5 bg-card relative w-full rounded-xl border'>
                 <Textarea
                   {...field}
                   ref={(el) => {
@@ -65,7 +65,7 @@ export default function PromptField({
                   }}
                   maxLength={maxLength}
                   placeholder={placeholder || t('promptPlaceholder')}
-                  className='custom-scrollbar [field-sizing:initial] resize-none rounded-t-xl border-0 bg-transparent p-3 text-white/80 placeholder:text-white/40 focus:ring-0 focus-visible:ring-0'
+                  className='custom-scrollbar text-foreground/80 placeholder:text-foreground/40 [field-sizing:initial] resize-none rounded-t-xl border-0 bg-transparent p-3 focus:ring-0 focus-visible:ring-0'
                   style={{
                     height: `${MIN_HEIGHT}px`,
                     maxHeight: `${MAX_HEIGHT}px`,
@@ -81,7 +81,7 @@ export default function PromptField({
                 />
 
                 {/* Bottom Action Area with Copy, Clear Buttons and Length Indicator */}
-                <div className='flex items-center justify-between rounded-b-xl border-t border-white/5 bg-[#232528] px-3 py-2'>
+                <div className='border-foreground/5 bg-card flex items-center justify-between rounded-b-xl border-t px-3 py-2'>
                   <button
                     type='button'
                     onClick={() => {
@@ -90,15 +90,15 @@ export default function PromptField({
                         textareaRef.current.style.height = `${MIN_HEIGHT}px`;
                       }
                     }}
-                    className='flex items-center justify-center rounded text-white/40 transition hover:scale-105 disabled:cursor-not-allowed disabled:opacity-70'
+                    className='text-foreground/40 flex items-center justify-center rounded transition hover:scale-105 disabled:cursor-not-allowed disabled:opacity-70'
                   >
                     <Trash2 className='size-5' />
                   </button>
                   <div className='flex items-center gap-2'>
                     <div className='flex items-center gap-2'>
-                      <CopyBtn content={field.value ?? ''} className='text-white/40' />
+                      <CopyBtn content={field.value ?? ''} className='text-foreground/40' />
                     </div>
-                    <span className='text-xs text-white/40'>
+                    <span className='text-foreground/40 text-xs'>
                       {String(field.value ?? '').length}/{maxLength}
                     </span>
                   </div>

@@ -120,13 +120,13 @@ export default function ModelVersionField({
                 onChange?.(value);
               }}
             >
-              <SelectTrigger className='h-11 w-full rounded-xl border border-[#303030] bg-[#1f1f1f] text-sm font-medium text-white'>
+              <SelectTrigger className='border-border bg-card text-foreground h-11 w-full rounded-xl border text-sm font-medium'>
                 <div className='flex min-w-0 items-center gap-2'>
                   {selectedVersion && selectedIcon?.src ? (
                     <span
                       className={cn(
                         'flex size-4 shrink-0 items-center justify-center overflow-hidden rounded',
-                        selectedIcon.background === 'light' && 'bg-white p-0.5',
+                        selectedIcon.background === 'light' && 'bg-foreground p-0.5',
                       )}
                     >
                       <Image
@@ -145,7 +145,7 @@ export default function ModelVersionField({
                   </SelectValue>
                 </div>
               </SelectTrigger>
-              <SelectContent className='w-[var(--radix-select-trigger-width)] max-w-[var(--radix-select-trigger-width)] min-w-[var(--radix-select-trigger-width)] rounded-xl border border-[#303030] bg-[#1f1f1f]'>
+              <SelectContent className='border-border bg-card w-[var(--radix-select-trigger-width)] max-w-[var(--radix-select-trigger-width)] min-w-[var(--radix-select-trigger-width)] rounded-xl border'>
                 {sortedVersions.map((version) => {
                   const icon = getModelIconConfig(version.modelVersion);
                   const isDisabled = version.isComingSoon;
@@ -157,14 +157,14 @@ export default function ModelVersionField({
                       value={version.modelVersion}
                       disabled={isDisabled}
                       className={cn(
-                        'w-full cursor-pointer rounded-none p-0 text-white hover:bg-white/10 focus:bg-white/10 [&>span:first-child]:hidden [&>span:last-child]:w-full',
+                        'text-foreground hover:bg-foreground/10 focus:bg-foreground/10 w-full cursor-pointer rounded-none p-0 [&>span:first-child]:hidden [&>span:last-child]:w-full',
                         isDisabled && 'cursor-not-allowed opacity-50 hover:bg-transparent',
                       )}
                     >
                       <div
                         className={cn(
-                          'box-border flex w-full max-w-full min-w-full cursor-pointer flex-col gap-3 border-b border-white/10 p-2 last:border-b-0',
-                          isSelected && 'bg-white/5',
+                          'border-foreground/10 box-border flex w-full max-w-full min-w-full cursor-pointer flex-col gap-3 border-b p-2 last:border-b-0',
+                          isSelected && 'bg-foreground/5',
                         )}
                       >
                         <div className='flex items-start justify-between gap-3'>
@@ -173,7 +173,7 @@ export default function ModelVersionField({
                               <span
                                 className={cn(
                                   'flex size-5 shrink-0 items-center justify-center overflow-hidden rounded',
-                                  icon.background === 'light' && 'bg-white p-0.5',
+                                  icon.background === 'light' && 'bg-foreground p-0.5',
                                 )}
                               >
                                 <Image
@@ -187,7 +187,9 @@ export default function ModelVersionField({
                             ) : (
                               <div className='h-5 w-5 shrink-0' />
                             )}
-                            <span className='truncate text-base font-medium text-white'>{getDisplayText(version)}</span>
+                            <span className='text-foreground truncate text-base font-medium'>
+                              {getDisplayText(version)}
+                            </span>
                           </div>
                           <div className='flex shrink-0 items-center gap-2'>
                             {version.isComingSoon && (
@@ -213,7 +215,7 @@ export default function ModelVersionField({
                                 </svg>
                               </div>
                             ) : (
-                              <div className='flex h-5 w-5 items-center justify-center rounded-full border border-white/20' />
+                              <div className='border-foreground/20 flex h-5 w-5 items-center justify-center rounded-full border' />
                             )}
                           </div>
                         </div>
@@ -221,7 +223,7 @@ export default function ModelVersionField({
                           {tags.map((tag) => (
                             <div
                               key={tag.label}
-                              className='flex items-center gap-1 rounded-md border border-white/10 px-2 py-1 text-xs text-white/70'
+                              className='border-foreground/10 text-foreground/70 flex items-center gap-1 rounded-md border px-2 py-1 text-xs'
                             >
                               {tag.icon}
                               <span>{tag.label}</span>

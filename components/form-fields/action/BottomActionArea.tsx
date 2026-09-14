@@ -40,21 +40,21 @@ export default function BottomActionArea({
   // Add icons to options
   const durationOptionsWithIcon = durationOptions?.map((opt) => ({
     ...opt,
-    leftIcon: <Clock className='size-4 text-[#777777]' />,
+    leftIcon: <Clock className='text-muted-foreground size-4' />,
   }));
 
   const ratioOptionsWithIcon = ratioOptions?.map((opt) => ({
     ...opt,
-    leftIcon: <Square className='size-4 text-[#777777]' />,
+    leftIcon: <Square className='text-muted-foreground size-4' />,
   }));
 
   const resolutionOptionsWithIcon = resolutionOptions?.map((opt) => ({
     ...opt,
-    leftIcon: <MonitorPlay className='size-4 text-[#777777]' />,
+    leftIcon: <MonitorPlay className='text-muted-foreground size-4' />,
   }));
 
   return (
-    <div className='mt-auto flex flex-col gap-1 bg-[#1c1d20]'>
+    <div className='bg-card mt-auto flex flex-col gap-1'>
       {/* Top layer: Form options integration area */}
       <div className='flex flex-wrap items-center gap-1'>
         {/* Duration */}
@@ -121,7 +121,7 @@ export default function BottomActionArea({
         <button
           type='submit'
           disabled={isSubmitting}
-          className='bg-color-main flex h-9 flex-1 items-center justify-center gap-1.5 rounded-lg text-base font-semibold text-white uppercase hover:cursor-pointer hover:opacity-80 disabled:cursor-not-allowed'
+          className='bg-color-main text-primary-foreground flex h-9 flex-1 items-center justify-center gap-1.5 rounded-lg text-base font-semibold uppercase hover:cursor-pointer hover:opacity-80 disabled:cursor-not-allowed'
         >
           {isSubmitting ? <Spinning className='size-4' /> : <>{submitButtonText || t('generate')}</>}
         </button>

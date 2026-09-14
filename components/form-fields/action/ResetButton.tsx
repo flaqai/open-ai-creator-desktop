@@ -16,7 +16,7 @@ export default function ResetButton({ onReset, disabled = false }: ResetButtonPr
       type='button'
       onClick={onReset}
       disabled={disabled}
-      className='flex items-center gap-1 text-sm text-white/60 transition hover:text-white/80 disabled:cursor-not-allowed disabled:opacity-40'
+      className='text-foreground/60 hover:text-foreground/80 flex items-center gap-1 text-sm transition disabled:cursor-not-allowed disabled:opacity-40'
     >
       <RotateCcw className='size-4' />
       {t('reset')}

@@ -119,7 +119,7 @@ export default function ImageDisplay() {
       id='ImageDisplay'
       className='flex h-[440px] w-full flex-col overflow-hidden rounded-2xl contain-strict lg:flex-1'
     >
-      <div className='relative flex size-full flex-col rounded-2xl bg-[#1c1d20]'>
+      <div className='bg-card relative flex size-full flex-col rounded-2xl'>
         {/* Image display area - uses flex-1 to automatically occupy remaining space */}
         <div className='relative flex flex-1 items-center justify-center overflow-hidden p-2'>
           {previewImgSrc && (
@@ -145,8 +145,8 @@ export default function ImageDisplay() {
           )}
 
           {!imageHasData && imageObj !== 'loading' && !isPolling && (
-            <div className='flex flex-col items-center gap-3 text-white/60'>
-              <ImageIcon className='size-10 text-white/40' />
+            <div className='text-foreground/60 flex flex-col items-center gap-3'>
+              <ImageIcon className='text-foreground/40 size-10' />
               {t('noImage')}
             </div>
           )}
@@ -160,9 +160,9 @@ export default function ImageDisplay() {
 
         {/* Toolbar area */}
         {!btnDisabled && (
-          <div className='relative flex flex-none flex-wrap items-start justify-between gap-2 rounded-b-xl bg-[#1c1d20] p-2 lg:items-center lg:gap-3'>
+          <div className='bg-card relative flex flex-none flex-wrap items-start justify-between gap-2 rounded-b-xl p-2 lg:items-center lg:gap-3'>
             {/* Left info: time, resolution, model */}
-            <div className='flex flex-col gap-1 text-xs text-white/60'>
+            <div className='text-foreground/60 flex flex-col gap-1 text-xs'>
               <div className='flex items-center gap-1.5'>
                 {imageObj.createTime && <span>{formatDate(imageObj.createTime)}</span>}
                 {imageObj.createTime && (imageObj.resolution || (imageObj.width && imageObj.height)) && (
@@ -177,7 +177,7 @@ export default function ImageDisplay() {
                 ) : null}
               </div>
               {imageObj.modelName && (
-                <div className='text-white/80'>
+                <div className='text-foreground/80'>
                   {tCommon('model')}: {getImageModelVersionName(imageObj.modelName) || imageObj.modelName}
                 </div>
               )}
@@ -187,14 +187,14 @@ export default function ImageDisplay() {
             <div className='flex flex-wrap items-center gap-1'>
               {/* Prompt */}
               {imageObj.prompt && (
-                <div className='flex h-9 items-center gap-1 rounded-xl border border-[#303030] bg-[#1c1d20] px-2 lg:h-10'>
+                <div className='border-border bg-card flex h-9 items-center gap-1 rounded-xl border px-2 lg:h-10'>
                   <CopyBtn content={imageObj.prompt} />
                   <Popover open={showVideoInfo} onOpenChange={setShowVideoInfo}>
                     <PopoverTrigger asChild>
                       <button
                         type='button'
                         onClick={() => setShowVideoInfo(!showVideoInfo)}
-                        className='flex cursor-pointer items-center gap-1 text-xs text-[#e2e2e2] lg:text-sm'
+                        className='text-muted-foreground flex cursor-pointer items-center gap-1 text-xs lg:text-sm'
                       >
                         {t('prompt')}
                         <ChevronDown
@@ -204,7 +204,7 @@ export default function ImageDisplay() {
                     </PopoverTrigger>
                     <PopoverContent
                       side='top'
-                      className='max-h-60 overflow-auto border-[#2a2b2f] bg-[#1c1d20] p-3 text-white shadow-md'
+                      className='border-border bg-card text-foreground max-h-60 overflow-auto p-3 shadow-md'
                       sideOffset={15}
                     >
                       {imageObj.prompt}
@@ -217,38 +217,38 @@ export default function ImageDisplay() {
               <button
                 type='button'
                 onClick={onShowDetail}
-                className='flex h-9 cursor-pointer items-center rounded-xl border border-[#303030] bg-[#1c1d20] px-3 text-xs text-[#e2e2e2] hover:bg-[#252629] lg:h-10 lg:text-sm'
+                className='border-border bg-card text-muted-foreground hover:bg-card flex h-9 cursor-pointer items-center rounded-xl border px-3 text-xs lg:h-10 lg:text-sm'
               >
                 {t('imageDetail')}
               </button>
 
               {/* Download button + format selection */}
-              <div className='relative flex h-9 items-center rounded-xl border border-[#303030] bg-[#1c1d20] lg:h-10'>
+              <div className='border-border bg-card relative flex h-9 items-center rounded-xl border lg:h-10'>
                 <button
                   type='button'
                   onClick={onDownload}
                   disabled={isLoading}
-                  className='flex h-full cursor-pointer items-center justify-center rounded-l-xl px-2.5 hover:bg-[#252629] disabled:cursor-not-allowed disabled:opacity-50'
+                  className='hover:bg-card flex h-full cursor-pointer items-center justify-center rounded-l-xl px-2.5 disabled:cursor-not-allowed disabled:opacity-50'
                 >
                   {isLoading ? (
-                    <Spinning className='size-4 text-white lg:size-5' />
+                    <Spinning className='text-foreground size-4 lg:size-5' />
                   ) : (
-                    <Download className='size-4 text-white lg:size-5' />
+                    <Download className='text-foreground size-4 lg:size-5' />
                   )}
                 </button>
-                <div className='h-full w-px bg-[#303030]' />
+                <div className='bg-card h-full w-px' />
                 <button
                   type='button'
                   onClick={() => setShowFormatMenu(!showFormatMenu)}
-                  className='flex h-full cursor-pointer items-center gap-1 rounded-r-xl px-2.5 hover:bg-[#252629]'
+                  className='hover:bg-card flex h-full cursor-pointer items-center gap-1 rounded-r-xl px-2.5'
                 >
-                  <span className='text-xs text-white uppercase lg:text-sm'>{imageType}</span>
-                  <ChevronDown className='size-3.5 text-white' />
+                  <span className='text-foreground text-xs uppercase lg:text-sm'>{imageType}</span>
+                  <ChevronDown className='text-foreground size-3.5' />
                 </button>
 
                 {/* Format Menu */}
                 {showFormatMenu && (
-                  <div className='absolute right-0 bottom-full z-50 mb-2 flex flex-col gap-1 rounded-xl border border-[#303030] bg-[#1c1d20] p-1 shadow-lg'>
+                  <div className='border-border bg-card absolute right-0 bottom-full z-50 mb-2 flex flex-col gap-1 rounded-xl border p-1 shadow-lg'>
                     {imageTypesList.map((type) => (
                       <button
                         key={type}
@@ -257,7 +257,7 @@ export default function ImageDisplay() {
                           setImageType(type);
                           setShowFormatMenu(false);
                         }}
-                        className='rounded-lg px-3 py-1.5 text-sm text-white uppercase transition-colors hover:bg-white/10'
+                        className='text-foreground hover:bg-foreground/10 rounded-lg px-3 py-1.5 text-sm uppercase transition-colors'
                       >
                         {type}
                       </button>
@@ -271,7 +271,7 @@ export default function ImageDisplay() {
                 type='button'
                 onClick={() => setOpenDeleteDialog(true)}
                 disabled={isDeleting}
-                className='flex size-9 cursor-pointer items-center justify-center rounded-xl border border-[#303030] bg-[#1c1d20] text-[#e2e2e2] hover:text-red-500 disabled:cursor-not-allowed disabled:opacity-50 lg:size-10'
+                className='border-border bg-card text-muted-foreground flex size-9 cursor-pointer items-center justify-center rounded-xl border hover:text-red-500 disabled:cursor-not-allowed disabled:opacity-50 lg:size-10'
               >
                 <Trash2 className='size-4 lg:size-5' strokeWidth={1} />
               </button>

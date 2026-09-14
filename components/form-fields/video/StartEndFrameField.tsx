@@ -66,15 +66,15 @@ const StartEndFrameField = forwardRef<ImageUploadFieldRef, StartEndFrameFieldPro
                   <>
                     {shouldShowStartFrame && (
                       <>
-                        <span className='text-white/70'>{t('startFrame')}</span>
-                        <span className='mx-2 text-white/20'>/</span>
+                        <span className='text-foreground/70'>{t('startFrame')}</span>
+                        <span className='text-foreground/20 mx-2'>/</span>
                       </>
                     )}
-                    <span className='text-white/70'>{t('endFrame')}</span>
+                    <span className='text-foreground/70'>{t('endFrame')}</span>
                   </>
                 ) : (
                   /* If only start frame, show custom title or default "Upload Image" */
-                  <span className='text-white/70'>{uploadImageTitle || t('image')}</span>
+                  <span className='text-foreground/70'>{uploadImageTitle || t('image')}</span>
                 )}
               </FormLabel>
               {/* Only show toggle when end frame is displayed */}
@@ -82,10 +82,10 @@ const StartEndFrameField = forwardRef<ImageUploadFieldRef, StartEndFrameFieldPro
                 <FormControl>
                   <Switch
                     className={cn(
-                      'data-[state=checked]:border-color-main h-[16px] w-[28px] rounded border border-white !bg-transparent focus:ring-0',
+                      'data-[state=checked]:border-color-main border-foreground h-[16px] w-[28px] rounded border !bg-transparent focus:ring-0',
                     )}
                     thumbClassName={cn(
-                      'h-3 w-3 rounded-[2px] bg-white data-[state=unchecked]:translate-x-[1px] data-[state=checked]:translate-x-[12px] data-[state=checked]:bg-color-main',
+                      'h-3 w-3 rounded-[2px] bg-foreground data-[state=unchecked]:translate-x-[1px] data-[state=checked]:translate-x-[12px] data-[state=checked]:bg-color-main',
                     )}
                     checked={!!field.value}
                     onCheckedChange={(checked) => {

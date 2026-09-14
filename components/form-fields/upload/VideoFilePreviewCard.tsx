@@ -476,8 +476,8 @@ export default function VideoFilePreviewCard({
   const progressPosition = timeToPosition(currentTime);
 
   return (
-    <div className='group border-color-b1 bg-color-1 hover:bg-color-2 rounded-lg border p-2.5 transition-all hover:border-white/20'>
-      <div className='overflow-hidden rounded-md border border-white/10 bg-black'>
+    <div className='group border-color-b1 bg-color-1 hover:bg-color-2 hover:border-foreground/20 rounded-lg border p-2.5 transition-all'>
+      <div className='border-foreground/10 overflow-hidden rounded-md border bg-black'>
         <video
           key={previewUrl}
           ref={videoRef}
@@ -492,14 +492,14 @@ export default function VideoFilePreviewCard({
 
       <div className='mt-3 flex min-w-0 flex-col gap-1.5'>
         <div className='flex w-full items-center justify-between gap-2'>
-          <p className='line-clamp-1 text-sm font-medium text-white'>{file.name}</p>
+          <p className='text-foreground line-clamp-1 text-sm font-medium'>{file.name}</p>
           <div className='flex shrink-0 items-center gap-2'>
             <button
               type='button'
               onClick={handlePlayPause}
               className={cn(
-                'flex size-8 items-center justify-center rounded-full border border-white/10 bg-white/5 text-white/70 transition hover:border-white/20 hover:bg-white/10',
-                isPlaying && 'border-white/20 bg-white/12 text-white',
+                'border-foreground/10 bg-foreground/5 text-foreground/70 hover:border-foreground/20 hover:bg-foreground/10 flex size-8 items-center justify-center rounded-full border transition',
+                isPlaying && 'border-foreground/20 bg-foreground/12 text-foreground',
               )}
               title={isPlaying ? t('video-upload.pause') : t('video-upload.play')}
             >
@@ -508,7 +508,10 @@ export default function VideoFilePreviewCard({
             <button
               type='button'
               onClick={handleToggleTrimmer}
-              className={cn('hover:text-color-main text-white/40 transition-colors', showTrimmer && 'text-color-main')}
+              className={cn(
+                'hover:text-color-main text-foreground/40 transition-colors',
+                showTrimmer && 'text-color-main',
+              )}
               title={showTrimmer ? t('video-upload.hide-trim') : t('video-upload.show-trim')}
             >
               <Scissors className='size-4' />
@@ -516,7 +519,7 @@ export default function VideoFilePreviewCard({
             <button
               type='button'
               onClick={handleDelete}
-              className='text-white/40 transition-colors hover:text-white/70'
+              className='text-foreground/40 hover:text-foreground/70 transition-colors'
             >
               <Trash2 className='size-4' />
             </button>
@@ -524,7 +527,7 @@ export default function VideoFilePreviewCard({
         </div>
 
         <div className='w-full space-y-1'>
-          <span className='text-xs text-white/60'>
+          <span className='text-foreground/60 text-xs'>
             {formatTime(currentTime)}/{formatTime(duration, true)}
           </span>
 
@@ -532,7 +535,7 @@ export default function VideoFilePreviewCard({
             ref={trackContainerRef}
             role='button'
             tabIndex={0}
-            className='relative h-10 w-full cursor-pointer overflow-hidden rounded-none bg-white/6'
+            className='bg-foreground/6 relative h-10 w-full cursor-pointer overflow-hidden rounded-none'
             onClick={handleTrackClick}
             onKeyDown={(e) => {
               if (e.key === 'Enter' || e.key === ' ') {
@@ -541,7 +544,7 @@ export default function VideoFilePreviewCard({
               }
             }}
           >
-            <div className='absolute inset-x-0 top-1/2 h-1.5 -translate-y-1/2 rounded-full bg-white/10' />
+            <div className='bg-foreground/10 absolute inset-x-0 top-1/2 h-1.5 -translate-y-1/2 rounded-full' />
 
             {showTrimmer && (
               <>
@@ -571,7 +574,7 @@ export default function VideoFilePreviewCard({
                   onTouchStart={handleTrimBoundaryMouseDown('start')}
                 >
                   <div className='bg-color-main absolute top-1/2 left-1/2 flex size-4 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full shadow-md'>
-                    <div className='h-2 w-0.5 bg-white/80' />
+                    <div className='bg-foreground/80 h-2 w-0.5' />
                   </div>
                 </div>
 
@@ -588,7 +591,7 @@ export default function VideoFilePreviewCard({
                   onTouchStart={handleTrimBoundaryMouseDown('end')}
                 >
                   <div className='bg-color-main absolute top-1/2 left-1/2 flex size-4 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full shadow-md'>
-                    <div className='h-2 w-0.5 bg-white/80' />
+                    <div className='bg-foreground/80 h-2 w-0.5' />
                   </div>
                 </div>
               </>
@@ -614,29 +617,30 @@ export default function VideoFilePreviewCard({
                 onMouseEnter={() => setIsProgressHandleHovered(true)}
                 onMouseLeave={() => setIsProgressHandleHovered(false)}
               >
-                <div className='size-1.5 rounded-full bg-white' />
+                <div className='bg-foreground size-1.5 rounded-full' />
               </div>
             </div>
           </div>
 
           {showTrimmer && (
-            <div className='space-y-1 text-xs text-white/60'>
+            <div className='text-foreground/60 space-y-1 text-xs'>
               {defaultShowTrimmer && (
                 <p>{t('video-upload.range-tip', { min: minDuration, max: resolvedMaxDuration ?? duration })}</p>
               )}
               <div className='flex items-center justify-between'>
                 <span>
                   {t('video-upload.trim-start')}:{' '}
-                  <span className='font-medium text-white'>{formatTime(startTime)}</span>
+                  <span className='text-foreground font-medium'>{formatTime(startTime)}</span>
                 </span>
                 <span>
-                  {t('video-upload.trim-end')}: <span className='font-medium text-white'>{formatTime(endTime)}</span>
+                  {t('video-upload.trim-end')}:{' '}
+                  <span className='text-foreground font-medium'>{formatTime(endTime)}</span>
                 </span>
               </div>
             </div>
           )}
 
-          <div className='text-xs text-white/50'>
+          <div className='text-foreground/50 text-xs'>
             {t('video-upload.selected-range', {
               start: formatTime(startTime),
               end: formatTime(endTime),

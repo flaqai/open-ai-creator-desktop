@@ -24,7 +24,7 @@ function Btn({
       disabled={disabled}
       onClick={onClick}
       className={cn(
-        'h-10 flex-1 rounded-lg border border-white text-center text-xs text-nowrap hover:opacity-80 lg:text-base',
+        'border-foreground h-10 flex-1 rounded-lg border text-center text-xs text-nowrap hover:opacity-80 lg:text-base',
         className,
       )}
     >
@@ -76,7 +76,7 @@ export default function BaseDialog({
       >
         <DialogClose asChild>
           <button type='button' onClick={onClose} className='absolute top-3 right-3'>
-            <CircleX className='size-5 text-white/70' />
+            <CircleX className='text-foreground/70 size-5' />
           </button>
         </DialogClose>
         {title && <div className='text-center text-sm font-bold lg:text-base'>{title}</div>}
@@ -91,7 +91,7 @@ export default function BaseDialog({
             disabled={disabled || loading}
             onClick={onOk}
             className={cn(
-              'flex-center border-none bg-white font-bold text-black',
+              'flex-center bg-foreground text-background border-none font-bold',
               disabled && 'cursor-not-allowed opacity-70',
               okBtnClassName,
             )}

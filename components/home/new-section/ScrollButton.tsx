@@ -26,7 +26,7 @@ export default function ScrollButton({ children, className, style, scrollTarget 
       data-scroll-target={scrollTarget}
       onClick={handleClick}
       className={cn(
-        'bg-color-main hover:bg-color-main/80 flex items-center justify-center rounded-lg px-8 py-2.5 font-semibold text-white backdrop-blur-sm hover:text-white',
+        'bg-color-main hover:bg-color-main/80 text-foreground hover:text-foreground flex items-center justify-center rounded-lg px-8 py-2.5 font-semibold backdrop-blur-sm',
         className,
       )}
       style={style}

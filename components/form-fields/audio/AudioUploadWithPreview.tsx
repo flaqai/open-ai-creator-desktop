@@ -10,6 +10,7 @@ import { useFormContext } from 'react-hook-form';
 import { toast } from 'sonner';
 
 import { cn } from '@/lib/utils';
+import { useFormRestoration } from '@/hooks/use-form-restoration';
 import SubHeading from '@/components/form/SubHeading';
 import AudioFilePreviewCard from '@/components/generation-modal/AudioFilePreviewCard';
 
@@ -52,6 +53,15 @@ const AudioUploadWithPreview = forwardRef<AudioUploadWithPreviewRef, AudioUpload
     const [audioDuration, setAudioDuration] = useState<number>(0);
     const [trimRange, setTrimRange] = useState<{ startTime: number; endTime: number } | null>(null);
     const [isDragging, setIsDragging] = useState(false);
+    useFormRestoration((data) => {
+      setAudioFile(data[name] instanceof File ? data[name] : null);
+      const range = data.audioTrimRange as { startTime?: unknown; endTime?: unknown } | null;
+      setTrimRange(
+        range && typeof range.startTime === 'number' && typeof range.endTime === 'number'
+          ? { startTime: range.startTime, endTime: range.endTime }
+          : null,
+      );
+    });
     const fileInputRef = useRef<HTMLInputElement>(null);
 
     const previewAudio = useCallback(
@@ -183,15 +193,15 @@ const AudioUploadWithPreview = forwardRef<AudioUploadWithPreviewRef, AudioUpload
               onDragLeave={handleDragLeave}
               onDrop={handleDrop}
               className={cn(
-                'relative flex h-[112px] w-full cursor-pointer flex-col items-center justify-center gap-2 rounded-xl border border-dashed border-white/10 bg-[#232528] hover:border-white/30 hover:bg-[#2a2b2f]',
-                isDragging && 'border-white/30 bg-[#2a2b2f]',
+                'border-foreground/10 bg-card hover:border-foreground/30 hover:bg-card relative flex h-[112px] w-full cursor-pointer flex-col items-center justify-center gap-2 rounded-xl border border-dashed',
+                isDragging && 'border-foreground/30 bg-card',
               )}
             >
-              <div className='flex size-8 items-center justify-center rounded-lg bg-white/5'>
-                <Upload className='size-6 text-white/40' />
+              <div className='bg-foreground/5 flex size-8 items-center justify-center rounded-lg'>
+                <Upload className='text-foreground/40 size-6' />
               </div>
-              <div className='text-center text-sm text-white/40'>{uploadText || tUpload('upload-audio')}</div>
-              <div className='text-xs text-white/40'>{supportedFormatsText || tUpload('supported-formats')}</div>
+              <div className='text-foreground/40 text-center text-sm'>{uploadText || tUpload('upload-audio')}</div>
+              <div className='text-foreground/40 text-xs'>{supportedFormatsText || tUpload('supported-formats')}</div>
             </div>
           )}
         </div>

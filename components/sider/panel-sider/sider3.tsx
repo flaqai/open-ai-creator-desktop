@@ -4,11 +4,14 @@ import { Image, Sparkles, Video } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 
 import { NAV_LINKS } from '@/lib/constants/navigation';
+import { useDesktopRuntime } from '@/hooks/use-desktop-runtime';
 
 import TreeSider from './tree-sider';
 
 export default function PanelSider() {
   const t = useTranslations('Navigation');
+  const desktop = useDesktopRuntime();
+  if (desktop) return null;
 
   const group = [
     {
@@ -36,7 +39,7 @@ export default function PanelSider() {
   ];
 
   return (
-    <div className='no-scrollbar sticky top-16 hidden h-[calc(100dvh-64px)] w-[232px] shrink-0 overflow-y-auto border-e border-white/10 bg-black/20 lg:block'>
+    <div className='no-scrollbar border-foreground/10 sticky top-16 hidden h-[calc(100dvh-64px)] w-[232px] shrink-0 overflow-y-auto border-e bg-black/20 lg:block'>
       <TreeSider
         group={group}
         primaryItems={[

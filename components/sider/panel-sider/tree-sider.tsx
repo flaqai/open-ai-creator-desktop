@@ -19,8 +19,8 @@ function SiderItem({ title, icon, href, isActive }: SiderGroupType['items'][numb
     <Link
       href={href}
       className={cn(
-        'group flex items-center gap-2 rounded-lg p-2 text-sm font-normal text-white/70 hover:bg-white/5',
-        isActive && 'bg-white/10 font-medium',
+        'group text-foreground/70 hover:bg-foreground/5 flex items-center gap-2 rounded-lg p-2 text-sm font-normal',
+        isActive && 'bg-foreground/10 font-medium',
       )}
     >
       {icon && <span className={cn('shrink-0', isActive && 'text-color-main')}>{icon}</span>}
@@ -49,13 +49,13 @@ function SiderGroup({ title, items, icon }: SiderGroupType) {
         type='button'
         aria-expanded={shouldOpen}
         onClick={handleClick}
-        className='mx-1 flex items-center gap-1 rounded-md p-2 text-sm font-medium text-white/80 hover:cursor-pointer hover:bg-white/5'
+        className='text-foreground/80 hover:bg-foreground/5 mx-1 flex items-center gap-1 rounded-md p-2 text-sm font-medium hover:cursor-pointer'
       >
         <span>{icon}</span>
         <div>{title}</div>
         {items.length > 0 && (
           <ChevronUpIcon
-            className={cn('ms-auto h-4 w-4 rotate-0 text-white/60 transition-all', shouldOpen && 'rotate-180')}
+            className={cn('text-foreground/60 ms-auto h-4 w-4 rotate-0 transition-all', shouldOpen && 'rotate-180')}
           />
         )}
       </button>
@@ -70,7 +70,7 @@ function SiderGroup({ title, items, icon }: SiderGroupType) {
         >
           <div className='overflow-hidden'>
             <div className='px-5'>
-              <div className='border-s border-white/10 ps-3'>
+              <div className='border-foreground/10 border-s ps-3'>
                 <div className='flex flex-col gap-1'>
                   {items.map((item) => (
                     <SiderItem key={item.id} {...item} isActive={matchRoute(item.href)} />

@@ -215,7 +215,7 @@ export default function ImageCropDialog({
             <Btn onClick={onClose}>{t('cancel')}</Btn>
             <Btn
               onClick={handleComplete}
-              className='border-none bg-gradient-to-r from-purple-600 to-blue-500 font-semibold text-white'
+              className='text-foreground border-none bg-gradient-to-r from-purple-600 to-blue-500 font-semibold'
             >
               {t('done')}
             </Btn>

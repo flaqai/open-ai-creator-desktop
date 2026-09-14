@@ -41,14 +41,16 @@ export default function CoreFeaturesCards({
             {/* Title area */}
             <div className='mb-2 flex items-center gap-2'>
               <div className='h-[20px] w-[4px] flex-shrink-0 rounded-full bg-[#1677FF]' />
-              <h3 className='text-[18px] leading-[28px] font-semibold text-white md:text-[20px]'>{feature.title}</h3>
+              <h3 className='text-foreground text-[18px] leading-[28px] font-semibold md:text-[20px]'>
+                {feature.title}
+              </h3>
             </div>
 
             {/* Divider */}
-            <div className='mb-3 h-px w-full flex-shrink-0 bg-white/10' />
+            <div className='bg-foreground/10 mb-3 h-px w-full flex-shrink-0' />
 
             {/* Description */}
-            <p className='flex-1 text-sm leading-[22px] font-normal text-white/70'>{feature.description}</p>
+            <p className='text-foreground/70 flex-1 text-sm leading-[22px] font-normal'>{feature.description}</p>
           </div>
         ))}
       </div>

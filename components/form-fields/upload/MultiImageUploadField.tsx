@@ -10,6 +10,7 @@ import { toast } from 'sonner';
 
 import { cn } from '@/lib/utils';
 import { validateImagePx } from '@/lib/utils/imageUtils';
+import { useFormRestoration } from '@/hooks/use-form-restoration';
 import { FormControl, FormField, FormItem } from '@/components/ui/form';
 import SubHeading from '@/components/form/SubHeading';
 
@@ -70,6 +71,16 @@ const MultiImageUploadFieldWithDrag = forwardRef<
     const methods = useFormContext<{ [key: string]: File[] | null }>();
 
     const [images, setImages] = useState<ImageItem[]>([]);
+    const firstSync = useRef(true);
+    useFormRestoration((data, preview) => {
+      const values = Array.isArray(data[name]) ? data[name] : [];
+      setImages(
+        values.flatMap((value) => {
+          const url = preview(value);
+          return value instanceof File && url ? [{ id: nanoid(), file: value, previewUrl: url }] : [];
+        }),
+      );
+    });
     const fileInputRef = useRef<HTMLInputElement>(null);
 
     const clearInputValue = () => {
@@ -121,6 +132,10 @@ const MultiImageUploadFieldWithDrag = forwardRef<
     };
 
     useEffect(() => {
+      if (firstSync.current) {
+        firstSync.current = false;
+        return;
+      }
       const formFiles = images.map((img) => img.file);
       methods.setValue(name, formFiles);
 
@@ -213,23 +228,23 @@ const MultiImageUploadFieldWithDrag = forwardRef<
                 role='button'
                 tabIndex={0}
                 className={cn(
-                  'relative flex w-full cursor-pointer flex-col rounded-xl border border-dashed border-white/10 bg-[#232528] p-3 transition-all hover:border-white/30 hover:bg-[#2a2b2f]',
-                  isDragActive && 'border-white/30 bg-[#2a2b2f]',
+                  'border-foreground/10 bg-card hover:border-foreground/30 hover:bg-card relative flex w-full cursor-pointer flex-col rounded-xl border border-dashed p-3 transition-all',
+                  isDragActive && 'border-foreground/30 bg-card',
                   images.length > 0 && 'gap-3',
                 )}
               >
                 {images.length === 0 ? (
                   <div className='flex items-center gap-3'>
-                    <div className='flex size-16 shrink-0 items-center justify-center rounded-lg border-2 border-dashed border-white/20 bg-[#1c1d20]'>
-                      <Plus className='size-6 text-white/40' />
+                    <div className='border-foreground/20 bg-card flex size-16 shrink-0 items-center justify-center rounded-lg border-2 border-dashed'>
+                      <Plus className='text-foreground/40 size-6' />
                     </div>
 
                     <div className='flex flex-1 flex-col items-center justify-center gap-0.5 text-center'>
-                      <div className='text-sm text-white/40'>{label || t('label')}</div>
-                      <div className='text-xs text-white/30'>
+                      <div className='text-foreground/40 text-sm'>{label || t('label')}</div>
+                      <div className='text-foreground/30 text-xs'>
                         {t('supported-formats')}: {acceptedFormats}
                       </div>
-                      <div className='text-xs text-white/30'>
+                      <div className='text-foreground/30 text-xs'>
                         {images.length}/{maxImages} {tCommon('images')}
                       </div>
                     </div>
@@ -256,19 +271,19 @@ const MultiImageUploadFieldWithDrag = forwardRef<
                             }}
                             className='absolute inset-0 flex items-center justify-center bg-black/40 transition-all lg:hidden lg:group-hover:flex'
                           >
-                            <Trash2 className='size-5 text-white' />
+                            <Trash2 className='text-foreground size-5' />
                           </button>
                         </div>
                       ))}
 
                       {canAddMore && (
-                        <div className='flex aspect-square items-center justify-center rounded-lg border-2 border-dashed border-white/20 bg-[#1c1d20] transition-all hover:border-white/30'>
-                          <Plus className='size-6 text-white/40' />
+                        <div className='border-foreground/20 bg-card hover:border-foreground/30 flex aspect-square items-center justify-center rounded-lg border-2 border-dashed transition-all'>
+                          <Plus className='text-foreground/40 size-6' />
                         </div>
                       )}
                     </div>
 
-                    <div className='mt-1 flex items-center justify-between text-xs text-white/30'>
+                    <div className='text-foreground/30 mt-1 flex items-center justify-between text-xs'>
                       <span>
                         {t('supported-formats')}: {acceptedFormats}
                       </span>

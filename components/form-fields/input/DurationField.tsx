@@ -25,7 +25,7 @@ export default function DurationField({
 
   const optionsWithIcon = durationOptions.map((opt) => ({
     ...opt,
-    leftIcon: <Clock className='size-4 text-[#777777]' />,
+    leftIcon: <Clock className='text-muted-foreground size-4' />,
   }));
 
   return (

@@ -56,7 +56,7 @@ export default function RangeInputForm({
             <FormControl className='w-full'>
               <div className='flex w-full items-center gap-1'>
                 <button type='button' onClick={() => handleButtonClick(-step)}>
-                  <Minus className='hover:text-main size-4 text-[#C2C2C2]' />
+                  <Minus className='hover:text-main text-muted-foreground size-4' />
                 </button>
                 <Slider
                   value={[field.value?.[0]]}
@@ -66,11 +66,11 @@ export default function RangeInputForm({
                   min={min}
                   className='h-3.5 w-full'
                   rangeClassName='bg-color-main'
-                  trackClassName='bg-[#171D1D] h-full'
-                  thumbClassName={cn('size-5 bg-[#4C4C4C]', field.value?.[0] <= (max - min) / 2 && '-translate-x-1')}
+                  trackClassName='bg-card h-full'
+                  thumbClassName={cn('size-5 bg-card', field.value?.[0] <= (max - min) / 2 && '-translate-x-1')}
                 />
                 <button type='button' onClick={() => handleButtonClick(step)}>
-                  <Plus className='hover:text-main size-4 text-[#C2C2C2]' />
+                  <Plus className='hover:text-main text-muted-foreground size-4' />
                 </button>
                 <input
                   type='number'
@@ -80,7 +80,7 @@ export default function RangeInputForm({
                   step={step}
                   value={field?.value?.[0]}
                   onChange={handleInputChange}
-                  className='hide-number-input h-7 w-12 rounded-sm bg-[#121212] text-center text-xs text-white/70'
+                  className='hide-number-input bg-card text-foreground/70 h-7 w-12 rounded-sm text-center text-xs'
                 />
               </div>
             </FormControl>

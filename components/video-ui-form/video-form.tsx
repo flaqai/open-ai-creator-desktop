@@ -12,9 +12,11 @@ import { useForm } from 'react-hook-form';
 import { toast } from 'sonner';
 
 import { getVersionConfig, selectVideoModelByGenerationType } from '@/lib/constants/video/';
+import { validVideoDraft } from '@/lib/desktop/draft-validation';
 import { cn } from '@/lib/utils';
 import * as VideoModelService from '@/lib/utils/videoModelService';
 import { Form } from '@/components/ui/form';
+import FormDraft from '@/components/desktop/FormDraft';
 // Generic form components
 import {
   AudioSupportField,
@@ -302,16 +304,17 @@ export default function VideoFormBase({
     <VideoContenxtProvider videoType={videoType} showAllVideoHistory={showAllVideoHistory}>
       <div
         id='video-form-container'
-        className='relative flex h-auto w-full flex-col items-stretch gap-5 overflow-hidden rounded-[36px] bg-[#232528] lg:h-[calc(100vh-76px)] lg:flex-row lg:p-5'
+        className='bg-card relative flex h-auto w-full flex-col items-stretch gap-5 overflow-hidden rounded-[36px] lg:h-[calc(100vh-76px)] lg:flex-row lg:p-5'
       >
         <Form {...form}>
           <form
             onSubmit={form.handleSubmit(onSubmit)}
             id='VideoForm'
-            className='no-scrollbar relative isolate z-40 flex h-[600px] w-full shrink-0 flex-col gap-2.5 overflow-y-auto rounded-3xl border border-[#303030] bg-[#1c1d20] p-3 lg:h-full lg:w-[351px]'
+            className='no-scrollbar border-border bg-card relative isolate z-40 flex h-[600px] w-full shrink-0 flex-col gap-2.5 overflow-y-auto rounded-3xl border p-3 lg:h-full lg:w-[351px]'
           >
+            <FormDraft id={(videoType || 'Text-to-video').toLowerCase()} form={form} validate={validVideoDraft} />
             {formTitle && (
-              <div className='line-clamp-1 shrink-0 border-b border-white/10 bg-[#1c1d20] pb-2.5 text-lg font-medium tracking-[0.36px] text-white'>
+              <div className='border-foreground/10 bg-card text-foreground line-clamp-1 shrink-0 border-b pb-2.5 text-lg font-medium tracking-[0.36px]'>
                 {formTitle}
               </div>
             )}
@@ -328,7 +331,7 @@ export default function VideoFormBase({
                       onClick={() =>
                         setCurrentModelVersionDisplayMode((current) => (current === 'model' ? 'label' : 'model'))
                       }
-                      className='flex h-7 w-7 items-center justify-center rounded-lg bg-transparent text-white/70 transition-colors hover:bg-white/10 hover:text-white'
+                      className='text-foreground/70 hover:bg-foreground/10 hover:text-foreground flex h-7 w-7 items-center justify-center rounded-lg bg-transparent transition-colors'
                     >
                       <ArrowLeftRight className='h-3.5 w-3.5' />
                       <span className='sr-only'>
@@ -397,7 +400,7 @@ export default function VideoFormBase({
 
         {/* Right side content: Display + History */}
         <div className='flex flex-1 flex-col items-start justify-start gap-3'>
-          <div className='h-[360px] w-full rounded-2xl border border-[#2a2b2f] bg-[#1c1d20] contain-strict lg:h-auto lg:flex-1'>
+          <div className='border-border bg-card h-[360px] w-full rounded-2xl border contain-strict lg:h-auto lg:flex-1'>
             <VideoDisplay />
           </div>
 

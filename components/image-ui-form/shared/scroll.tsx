@@ -111,20 +111,18 @@ const Scroll = forwardRef<
 
   return (
     <div className='w-full max-w-full'>
-      <div
-        className={cn('flex h-[154px] w-full items-center rounded-2xl border border-[#333333] bg-[#1A1A1A]', className)}
-      >
+      <div className={cn('border-border bg-muted flex h-[154px] w-full items-center rounded-2xl border', className)}>
         <button
           type='button'
           onClick={() => onScroll('left')}
           disabled={!canScrollLeft}
           className={cn(
             'flex h-full w-8 shrink-0 items-center justify-center rounded-l-2xl transition-opacity',
-            canScrollLeft ? 'opacity-100 hover:bg-[#2A2A2A]' : 'cursor-not-allowed opacity-70',
+            canScrollLeft ? 'hover:bg-card opacity-100' : 'cursor-not-allowed opacity-70',
           )}
           aria-label='Scroll left'
         >
-          <ChevronLeft className='h-5 w-5 text-white/70' />
+          <ChevronLeft className='text-foreground/70 h-5 w-5' />
         </button>
         <div
           ref={scrollRef}
@@ -144,11 +142,11 @@ const Scroll = forwardRef<
           disabled={!canScrollRight}
           className={cn(
             'flex h-full w-8 shrink-0 items-center justify-center rounded-r-2xl transition-opacity',
-            canScrollRight ? 'opacity-100 hover:bg-[#2A2A2A]' : 'cursor-not-allowed opacity-70',
+            canScrollRight ? 'hover:bg-card opacity-100' : 'cursor-not-allowed opacity-70',
           )}
           aria-label='Scroll right'
         >
-          <ChevronRight className='h-5 w-5 text-white/70' />
+          <ChevronRight className='text-foreground/70 h-5 w-5' />
         </button>
       </div>
     </div>

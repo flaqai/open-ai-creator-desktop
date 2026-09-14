@@ -12,12 +12,16 @@ export default function VideoHistoryTitle({
   const t = useTranslations('components.video-form.history');
 
   return (
-    <div className='flex items-center gap-2 text-sm text-[#e1e1e1]'>
+    <div className='text-muted-foreground flex items-center gap-2 text-sm'>
       <div>{t('title')}</div>
       {showBackToStart && onBackToStart && (
         <>
-          <div className='h-4 w-px rounded-full bg-[#2a2b2f]' />
-          <button type='button' onClick={onBackToStart} className='cursor-pointer text-[#e1e1e1] hover:text-[#1677ff]'>
+          <div className='bg-card h-4 w-px rounded-full' />
+          <button
+            type='button'
+            onClick={onBackToStart}
+            className='text-muted-foreground cursor-pointer hover:text-[#1677ff]'
+          >
             {t('backToStart')}
           </button>
         </>

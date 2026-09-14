@@ -118,7 +118,7 @@ export default function ReferenceImagePreviewDialog({
                   onClick={() => onSelectedIndexChange(index)}
                   className={cn(
                     'bg-color-c3 flex size-[58px] shrink-0 items-center justify-center overflow-hidden rounded-md border transition-colors',
-                    index === selectedIndex ? 'border-color-main' : 'border-transparent hover:border-white/35',
+                    index === selectedIndex ? 'border-color-main' : 'hover:border-foreground/35 border-transparent',
                   )}
                 >
                   <Thumbnail asset={asset} />

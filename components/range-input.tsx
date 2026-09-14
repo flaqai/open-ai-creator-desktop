@@ -42,9 +42,9 @@ export default function RangeInput({
   };
 
   return (
-    <div className='flex h-8 w-[264px] items-center gap-1 rounded border border-white/10 bg-white/5 px-2'>
+    <div className='border-foreground/10 bg-foreground/5 flex h-8 w-[264px] items-center gap-1 rounded border px-2'>
       <button type='button' onClick={() => handleButtonClick(-step)}>
-        <Minus className='hover:text-main size-4 text-[#C2C2C2]' />
+        <Minus className='hover:text-main text-muted-foreground size-4' />
       </button>
       <Slider
         value={[value]}
@@ -54,11 +54,11 @@ export default function RangeInput({
         min={min}
         className='h-3.5 w-full'
         rangeClassName='bg-color-main'
-        trackClassName='bg-[#171D1D] h-full'
-        thumbClassName={cn('size-5 bg-[#4C4C4C]', value <= (max - min) / 2 && '-translate-x-1')}
+        trackClassName='bg-card h-full'
+        thumbClassName={cn('size-5 bg-card', value <= (max - min) / 2 && '-translate-x-1')}
       />
       <button type='button' onClick={() => handleButtonClick(step)}>
-        <Plus className='hover:text-main size-4 text-[#C2C2C2]' />
+        <Plus className='hover:text-main text-muted-foreground size-4' />
       </button>
       <input
         type='number'
@@ -67,7 +67,7 @@ export default function RangeInput({
         step={step}
         value={value}
         onChange={onInputChange}
-        className='hide-number-input h-7 w-12 rounded-sm bg-[#121212] text-center text-xs text-white/70'
+        className='hide-number-input bg-card text-foreground/70 h-7 w-12 rounded-sm text-center text-xs'
       />
     </div>
   );

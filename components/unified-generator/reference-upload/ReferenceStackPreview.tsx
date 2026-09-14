@@ -48,7 +48,7 @@ function StackTile({
   return (
     <div
       className={cn(
-        'group/item border-color-b1 bg-color-c3 text-color-t3 hover:text-color-t1 relative flex h-[68px] w-[52px] shrink-0 items-center justify-center overflow-hidden rounded-xl border border-dashed shadow-[0_10px_28px_rgba(0,0,0,0.18)] transition-[border-color,color,transform] duration-300 hover:border-white/50',
+        'group/item border-color-b1 bg-color-c3 text-color-t3 hover:text-color-t1 hover:border-foreground/50 relative flex h-[68px] w-[52px] shrink-0 items-center justify-center overflow-hidden rounded-xl border border-dashed shadow-[0_10px_28px_rgba(0,0,0,0.18)] transition-[border-color,color,transform] duration-300',
         isStacked && 'absolute top-0 left-0 [transform:var(--stack-transform)]',
         isStacked && expandOnHover && 'lg:group-hover/stack:[transform:var(--spread-transform)]',
         className,
@@ -115,8 +115,8 @@ export default function ReferenceStackPreview({
           aria-label={emptyLabel}
           disabled={disabled}
           className={cn(
-            'border-color-b1 bg-color-c3 text-color-t3 hover:text-color-t1 flex h-[68px] w-[52px] shrink-0 items-center justify-center rounded-xl border border-dashed transition-colors hover:border-white/50 disabled:pointer-events-none disabled:opacity-50',
-            isDragActive && 'text-color-t1 border-white/40',
+            'border-color-b1 bg-color-c3 text-color-t3 hover:text-color-t1 hover:border-foreground/50 flex h-[68px] w-[52px] shrink-0 items-center justify-center rounded-xl border border-dashed transition-colors disabled:pointer-events-none disabled:opacity-50',
+            isDragActive && 'text-color-t1 border-foreground/40',
           )}
         >
           <EmptyIcon className='size-5' />
@@ -213,7 +213,7 @@ export default function ReferenceStackPreview({
                   onClick={handleOpenPicker}
                   style={shouldStack ? getAddSlotStyle(totalItems) : undefined}
                   className={cn(
-                    'border-color-b1 bg-color-c3 text-color-t3 hover:text-color-t1 flex h-[68px] w-[52px] shrink-0 items-center justify-center rounded-xl border border-dashed transition-[border-color,color,opacity,transform] duration-300 hover:border-white/50 disabled:pointer-events-none disabled:opacity-50',
+                    'border-color-b1 bg-color-c3 text-color-t3 hover:text-color-t1 hover:border-foreground/50 flex h-[68px] w-[52px] shrink-0 items-center justify-center rounded-xl border border-dashed transition-[border-color,color,opacity,transform] duration-300 disabled:pointer-events-none disabled:opacity-50',
                     shouldStack &&
                       'pointer-events-none absolute top-0 left-0 z-0 [transform:var(--stack-transform)] opacity-0',
                     shouldStack &&
@@ -235,7 +235,7 @@ export default function ReferenceStackPreview({
                     disabled={disabled}
                     onClick={handleOpenPicker}
                     className={cn(
-                      'border-color-b1 bg-color-c3 text-color-t2 hover:text-color-t1 absolute -right-1 -bottom-1 z-[90] flex size-6 items-center justify-center rounded-full border shadow-[0_8px_18px_rgba(0,0,0,0.35)] transition-[border-color,color,opacity] hover:border-white/50 disabled:pointer-events-none disabled:opacity-50',
+                      'border-color-b1 bg-color-c3 text-color-t2 hover:text-color-t1 hover:border-foreground/50 absolute -right-1 -bottom-1 z-[90] flex size-6 items-center justify-center rounded-full border shadow-[0_8px_18px_rgba(0,0,0,0.35)] transition-[border-color,color,opacity] disabled:pointer-events-none disabled:opacity-50',
                       !isExpansionSuppressed &&
                         'lg:group-hover/stack:pointer-events-none lg:group-hover/stack:opacity-0',
                       isPanelExpansionActive && 'lg:pointer-events-none lg:opacity-0',

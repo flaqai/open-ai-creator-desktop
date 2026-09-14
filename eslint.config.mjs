@@ -19,6 +19,7 @@ export default defineConfig([
     '**/components/ui/**',
     '**/components/magicui/**',
     '**/src-tauri/target/**',
+    '**/public/vendor/**',
     '**/.desktop-build-backup/**',
     '**/.desktop-build-*/**',
   ]),

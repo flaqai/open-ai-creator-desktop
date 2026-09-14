@@ -23,8 +23,8 @@ export function ImageExpiredPlaceholder({
 
   return (
     <div className={`flex h-full w-full flex-col items-center justify-center gap-1 px-2 ${className}`}>
-      <ImageExpiredIcon className={`text-[#777] ${iconClassName}`} />
-      <span className={`text-center text-[#777] ${textClassName}`}>{t('expiredImage')}</span>
+      <ImageExpiredIcon className={`text-muted-foreground ${iconClassName}`} />
+      <span className={`text-muted-foreground text-center ${textClassName}`}>{t('expiredImage')}</span>
     </div>
   );
 }
@@ -41,8 +41,8 @@ export function MetadataRow({ items }: { items: MetadataItem[] }) {
     <div className='flex flex-wrap items-center gap-2 text-sm leading-[22px]'>
       {items.map((item, index) => (
         <span key={index}>
-          <span className='text-[#777]'>{item.label}：</span>
-          <span className='text-[#cfcfcf]'>{item.value}</span>
+          <span className='text-muted-foreground'>{item.label}：</span>
+          <span className='text-muted-foreground'>{item.value}</span>
         </span>
       ))}
     </div>
@@ -54,8 +54,8 @@ export function ModelTag({ modelName }: { modelName?: string }) {
   if (!modelName) return null;
 
   return (
-    <div className='inline-flex w-fit items-center rounded-lg border border-[#34353b] bg-[#191a20] p-2'>
-      <span className='rounded bg-black/10 text-sm leading-[22px] text-[#cfcfcf] capitalize'>{modelName}</span>
+    <div className='border-border inline-flex w-fit items-center rounded-lg border bg-[#191a20] p-2'>
+      <span className='text-muted-foreground rounded bg-black/10 text-sm leading-[22px] capitalize'>{modelName}</span>
     </div>
   );
 }
@@ -76,18 +76,22 @@ export function PromptSection({
   return (
     <div className='custom-scrollbar flex flex-col gap-3'>
       <div className='flex items-center gap-2'>
-        <p className='text-base leading-6 text-white'>{t('prompt')}</p>
+        <p className='text-foreground text-base leading-6'>{t('prompt')}</p>
         <button
           type='button'
           onClick={() => copyToClipboard(prompt)}
-          className='flex h-6 w-6 cursor-pointer items-center justify-center rounded transition-colors hover:bg-white/10'
+          className='hover:bg-foreground/10 flex h-6 w-6 cursor-pointer items-center justify-center rounded transition-colors'
           title={isCopied ? t('copied') : t('copyPrompt')}
         >
-          {isCopied ? <Check className='h-4 w-4 text-white/70' /> : <Copy className='h-4 w-4 text-white/70' />}
+          {isCopied ? (
+            <Check className='text-foreground/70 h-4 w-4' />
+          ) : (
+            <Copy className='text-foreground/70 h-4 w-4' />
+          )}
         </button>
       </div>
-      <div className='rounded-lg border border-[#34353b] bg-[#111214] p-2'>
-        <p className='text-sm leading-[22px] text-[#cfcfcf]'>{prompt}</p>
+      <div className='border-border bg-card rounded-lg border p-2'>
+        <p className='text-muted-foreground text-sm leading-[22px]'>{prompt}</p>
       </div>
     </div>
   );
@@ -97,7 +101,7 @@ export function PromptSection({
 export function CopyrightText({ translationKey = 'Profile.image-history.detail' }: { translationKey?: string }) {
   const t = useTranslations('Common.copy-right');
   return (
-    <p className='text-sm leading-[22px] text-[#777]'>
+    <p className='text-muted-foreground text-sm leading-[22px]'>
       <span className='font-medium'>{t('title')}</span> {t('content')}
     </p>
   );
@@ -105,7 +109,7 @@ export function CopyrightText({ translationKey = 'Profile.image-history.detail' 
 
 // Bottom action button container
 export function ModalActions({ children }: { children: React.ReactNode }) {
-  return <div className='flex shrink-0 items-center gap-2 border-t border-[#34353b] p-3'>{children}</div>;
+  return <div className='border-border flex shrink-0 items-center gap-2 border-t p-3'>{children}</div>;
 }
 
 // Action button group (left side)
@@ -120,9 +124,9 @@ export function DownloadButton({ onClick, disabled = false }: { onClick: () => v
       type='button'
       onClick={onClick}
       disabled={disabled}
-      className='flex aspect-square h-[42px] items-center justify-center rounded-lg bg-[#1c1d23] transition-colors hover:bg-[#252629] disabled:cursor-not-allowed disabled:opacity-50'
+      className='bg-card hover:bg-card flex aspect-square h-[42px] items-center justify-center rounded-lg transition-colors disabled:cursor-not-allowed disabled:opacity-50'
     >
-      <Download className='h-5 w-5 text-white' />
+      <Download className='text-foreground h-5 w-5' />
     </button>
   );
 }
@@ -134,9 +138,9 @@ export function DeleteButton({ onClick, disabled = false }: { onClick: () => voi
       type='button'
       onClick={onClick}
       disabled={disabled}
-      className='group flex aspect-square h-[42px] cursor-pointer items-center justify-center rounded-lg bg-[#1c1d23] transition-colors hover:bg-red-500/10 disabled:cursor-not-allowed disabled:opacity-50'
+      className='group bg-card flex aspect-square h-[42px] cursor-pointer items-center justify-center rounded-lg transition-colors hover:bg-red-500/10 disabled:cursor-not-allowed disabled:opacity-50'
     >
-      <Trash2 className='h-[18px] w-4 text-white transition-colors group-hover:text-red-500' />
+      <Trash2 className='text-foreground h-[18px] w-4 transition-colors group-hover:text-red-500' />
     </button>
   );
 }
@@ -144,14 +148,14 @@ export function DeleteButton({ onClick, disabled = false }: { onClick: () => voi
 // Modal header
 export function ModalHeader({ title, onClose }: { title: string; onClose: () => void }) {
   return (
-    <div className='flex shrink-0 items-center justify-between border-b border-[#34353b] p-3'>
-      <h2 className='text-2xl leading-8 font-medium text-white capitalize'>{title}</h2>
+    <div className='border-border flex shrink-0 items-center justify-between border-b p-3'>
+      <h2 className='text-foreground text-2xl leading-8 font-medium capitalize'>{title}</h2>
       <button
         type='button'
         onClick={onClose}
-        className='flex h-9 w-9 items-center justify-center rounded-[3px] transition-colors hover:bg-white/10'
+        className='hover:bg-foreground/10 flex h-9 w-9 items-center justify-center rounded-[3px] transition-colors'
       >
-        <svg className='h-5 w-5 text-white' fill='none' viewBox='0 0 24 24' stroke='currentColor'>
+        <svg className='text-foreground h-5 w-5' fill='none' viewBox='0 0 24 24' stroke='currentColor'>
           <path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M6 18L18 6M6 6l12 12' />
         </svg>
       </button>
@@ -216,15 +220,15 @@ export function MediaGrid({
   return (
     <div className='flex flex-col gap-2'>
       <div className='flex items-center gap-2'>
-        <p className='text-base leading-6 text-white'>{title}</p>
+        <p className='text-foreground text-base leading-6'>{title}</p>
         {onDownloadAll && (
           <button
             type='button'
             onClick={onDownloadAll}
-            className='flex h-6 w-6 cursor-pointer items-center justify-center rounded transition-colors hover:bg-white/10'
+            className='hover:bg-foreground/10 flex h-6 w-6 cursor-pointer items-center justify-center rounded transition-colors'
             title={downloadButtonTitle}
           >
-            <Download className='h-4 w-4 text-white/70' />
+            <Download className='text-foreground/70 h-4 w-4' />
           </button>
         )}
       </div>
@@ -234,7 +238,7 @@ export function MediaGrid({
           const widthClass = itemHeight.includes('aspect-square') ? '' : 'w-full';
 
           return (
-            <div key={index} className={`relative ${itemHeight} ${widthClass} overflow-hidden rounded bg-[#111214]`}>
+            <div key={index} className={`relative ${itemHeight} ${widthClass} bg-card overflow-hidden rounded`}>
               {isExpired ? (
                 <ImageExpiredPlaceholder translationKey={translationKey} />
               ) : (

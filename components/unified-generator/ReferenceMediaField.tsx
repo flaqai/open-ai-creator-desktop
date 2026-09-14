@@ -99,7 +99,7 @@ export default function ReferenceMediaField({
           type='button'
           aria-label={label}
           onClick={() => inputRef.current?.click()}
-          className='border-color-b1 bg-color-c3 text-color-t3 hover:text-color-t1 flex h-[68px] w-[52px] items-center justify-center rounded-xl border border-dashed transition-colors hover:border-white/50'
+          className='border-color-b1 bg-color-c3 text-color-t3 hover:text-color-t1 hover:border-foreground/50 flex h-[68px] w-[52px] items-center justify-center rounded-xl border border-dashed transition-colors'
         >
           <EmptyIcon kind={kind} />
         </button>
@@ -108,7 +108,7 @@ export default function ReferenceMediaField({
           type='button'
           aria-label={label}
           onClick={() => inputRef.current?.click()}
-          className='border-color-b1 bg-color-c3 text-color-t2 hover:text-color-t1 absolute -right-1 -bottom-1 z-30 flex size-6 items-center justify-center rounded-full border shadow-[0_8px_18px_rgba(0,0,0,0.35)] transition-colors hover:border-white/50'
+          className='border-color-b1 bg-color-c3 text-color-t2 hover:text-color-t1 hover:border-foreground/50 absolute -right-1 -bottom-1 z-30 flex size-6 items-center justify-center rounded-full border shadow-[0_8px_18px_rgba(0,0,0,0.35)] transition-colors'
         >
           <Plus className='size-4' />
         </button>

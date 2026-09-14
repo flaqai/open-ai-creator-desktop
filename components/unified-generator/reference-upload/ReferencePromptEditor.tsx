@@ -106,7 +106,7 @@ function ReferenceMentionMedia({
 
   if (item.kind === 'audio') {
     return (
-      <span className={cn(className, 'inline-flex items-center justify-center bg-white/10 text-white')}>
+      <span className={cn(className, 'bg-foreground/10 text-foreground inline-flex items-center justify-center')}>
         <Music2 className='size-3.5' />
       </span>
     );
@@ -196,7 +196,7 @@ function ReferenceMentionNodeView({ node }: ReactNodeViewProps) {
             <>
               <span
                 className={cn(
-                  'absolute inset-x-0 bottom-0 h-[2px] overflow-hidden rounded-full bg-white/15 transition-opacity',
+                  'bg-foreground/15 absolute inset-x-0 bottom-0 h-[2px] overflow-hidden rounded-full transition-opacity',
                   isAudioPreviewing ? 'opacity-100' : 'opacity-0',
                 )}
               >
@@ -331,8 +331,8 @@ function ReferenceMentionSuggestionItem({
       data-selected={isSelected}
       className={cn(
         'border-color-b1 text-color-t1 flex w-full items-center gap-2 rounded-lg border px-2 py-2 text-left text-sm outline-none',
-        'hover:border-white/40',
-        isSelected && 'border-white/60 bg-white/10',
+        'hover:border-foreground/40',
+        isSelected && 'border-foreground/60 bg-foreground/10',
       )}
       onMouseDown={(event) => {
         event.preventDefault();
@@ -613,7 +613,7 @@ export function ReferenceMentionPickerPopover({
           aria-label={t('mention')}
           className={cn(
             'border-color-b1 text-color-t1 flex size-9 shrink-0 items-center justify-center rounded-full border text-sm font-medium transition',
-            isDisabled ? 'cursor-not-allowed opacity-40' : 'hover:border-white/40 hover:bg-white/10',
+            isDisabled ? 'cursor-not-allowed opacity-40' : 'hover:border-foreground/40 hover:bg-foreground/10',
           )}
         >
           @

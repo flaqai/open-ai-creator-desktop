@@ -167,7 +167,7 @@ const MultiImageUploadForm: ForwardRefRenderFunction<
   return (
     <Box
       variant='input'
-      className='flex h-auto min-h-[72px] shrink-0 flex-col border border-dashed border-[#303030] bg-[#080808] p-1'
+      className='border-border bg-muted flex h-auto min-h-[72px] shrink-0 flex-col border border-dashed p-1'
     >
       <FormField
         control={methods.control}
@@ -178,11 +178,11 @@ const MultiImageUploadForm: ForwardRefRenderFunction<
             <FormLabel className='m-0 flex cursor-pointer flex-col'>
               <div className='flex w-full justify-between'>
                 <div className='flex-center relative size-16 rounded bg-transparent'>
-                  <Upload className='size-6 text-[#b8b8b8]' />
+                  <Upload className='text-muted-foreground size-6' />
                 </div>
-                <div className='flex flex-1 flex-col items-center justify-center text-center text-sm whitespace-pre-line text-[#b8b8b8]'>
+                <div className='text-muted-foreground flex flex-1 flex-col items-center justify-center text-center text-sm whitespace-pre-line'>
                   {label}
-                  <div className='text-xs text-[#b8b8b8]'>
+                  <div className='text-muted-foreground text-xs'>
                     {images.length}/{maxImages} {t('images')}
                   </div>
                 </div>
@@ -197,9 +197,9 @@ const MultiImageUploadForm: ForwardRefRenderFunction<
                     <button
                       type='button'
                       onClick={(e) => onRemoveButtonClick(e, image.id)}
-                      className='absolute -top-1 -right-1 z-20 flex size-5 items-center justify-center rounded-full bg-[#1C1D20]/90'
+                      className='bg-card/90 absolute -top-1 -right-1 z-20 flex size-5 items-center justify-center rounded-full'
                     >
-                      <X className='size-3 text-[#b8b8b8]' />
+                      <X className='text-muted-foreground size-3' />
                     </button>
                     <img src={image.url} alt='Upload' className='aspect-square w-full rounded object-cover' />
                   </div>

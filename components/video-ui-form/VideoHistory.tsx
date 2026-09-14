@@ -48,7 +48,7 @@ function VideoItem({
       <div
         style={{ width: `${width}px` }}
         className={cn(
-          'relative flex h-[130px] shrink-0 items-center justify-center rounded-lg border border-[#303030] bg-[#2a2b2f]',
+          'border-border bg-card relative flex h-[130px] shrink-0 items-center justify-center rounded-lg border',
         )}
       >
         <Spinning />
@@ -79,7 +79,7 @@ function VideoItem({
     <div
       style={{ width: `${width}px` }}
       className={cn(
-        'group relative flex h-[130px] shrink-0 cursor-pointer items-center justify-center overflow-hidden rounded-lg bg-[#2a2b2f] transition-all duration-200 hover:bg-[#323339]',
+        'group bg-card hover:bg-muted relative flex h-[130px] shrink-0 cursor-pointer items-center justify-center overflow-hidden rounded-lg transition-all duration-200',
       )}
       onClick={onClick}
     >
@@ -91,7 +91,7 @@ function VideoItem({
         decoding='async'
         fetchPriority='high'
       />
-      <div className='absolute bottom-0 left-0 flex items-center justify-center rounded-tr-lg rounded-bl-lg bg-[rgba(128,128,128,0.5)] p-2.5 py-1 text-xs text-white backdrop-blur'>
+      <div className='text-foreground absolute bottom-0 left-0 flex items-center justify-center rounded-tr-lg rounded-bl-lg bg-[rgba(128,128,128,0.5)] p-2.5 py-1 text-xs backdrop-blur'>
         {formatDate(createTime)}
       </div>
     </div>
@@ -166,16 +166,13 @@ const VideoHistory = forwardRef<ScrollRef, VideoHistoryProps>(({ onClickImage, o
   return (
     <Scroll ref={ref} onScrollChange={onScrollChange}>
       {!isLoading && !hasData && (
-        <div className='flex h-[130px] w-[195px] shrink-0 items-center justify-center rounded-lg border border-[#303030] bg-[#2a2b2f]'>
-          <div className='text-sm font-normal text-[#b8b8b8]'>{t('noHistory')}</div>
+        <div className='border-border bg-card flex h-[130px] w-[195px] shrink-0 items-center justify-center rounded-lg border'>
+          <div className='text-muted-foreground text-sm font-normal'>{t('noHistory')}</div>
         </div>
       )}
       {isLoading &&
         numberList(8).map((num) => (
-          <div
-            key={num}
-            className='size-[130px] shrink-0 animate-pulse rounded-lg border border-[#303030] bg-[#2a2b2f]'
-          />
+          <div key={num} className='border-border bg-card size-[130px] shrink-0 animate-pulse rounded-lg border' />
         ))}
       {!isLoading &&
         hasData &&

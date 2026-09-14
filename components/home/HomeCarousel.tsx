@@ -152,7 +152,7 @@ export default function HomeCarousel({
 
                   {/* Top-left type label - frosted glass effect */}
                   <div className='absolute top-3 left-3 flex flex-row items-center justify-center gap-2.5 rounded-lg bg-black/20 px-4 py-2.5 backdrop-blur-[9px]'>
-                    <span className='text-sm font-medium text-white lg:text-base'>{card.type}</span>
+                    <span className='text-foreground text-sm font-medium lg:text-base'>{card.type}</span>
                   </div>
                 </div>
               </div>
@@ -163,14 +163,14 @@ export default function HomeCarousel({
         {/* Left and right navigation buttons */}
         <button
           onClick={goToPrevious}
-          className='absolute top-1/2 left-0 z-40 -translate-y-1/2 text-white transition hover:scale-110 lg:left-[2%]'
+          className='text-foreground absolute top-1/2 left-0 z-40 -translate-y-1/2 transition hover:scale-110 lg:left-[2%]'
           aria-label='Previous'
         >
           <ChevronLeft className='size-10 lg:size-12' strokeWidth={2.5} />
         </button>
         <button
           onClick={goToNext}
-          className='absolute top-1/2 right-0 z-40 -translate-y-1/2 text-white transition hover:scale-110 lg:right-[2%]'
+          className='text-foreground absolute top-1/2 right-0 z-40 -translate-y-1/2 transition hover:scale-110 lg:right-[2%]'
           aria-label='Next'
         >
           <ChevronRight className='size-10 lg:size-12' strokeWidth={2.5} />
@@ -184,7 +184,7 @@ export default function HomeCarousel({
               onClick={() => setCurrentIndex(index)}
               className={cn(
                 'h-2 rounded-full transition-all',
-                index === currentIndex ? 'w-8 bg-white' : 'w-2 bg-white/50',
+                index === currentIndex ? 'bg-foreground w-8' : 'bg-foreground/50 w-2',
               )}
               aria-label={`Go to slide ${index + 1}`}
             />

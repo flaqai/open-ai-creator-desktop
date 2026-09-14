@@ -27,7 +27,7 @@ export default function ReferenceMentionBar({
 
   return (
     <div className='space-y-2'>
-      <div className='flex items-center gap-1.5 text-xs text-white/45'>
+      <div className='text-foreground/45 flex items-center gap-1.5 text-xs'>
         <AtSign className='size-3.5' />
         {label}
       </div>
@@ -36,7 +36,7 @@ export default function ReferenceMentionBar({
           <button
             key={mention}
             type='button'
-            className='shrink-0 rounded-full border border-white/10 bg-white/5 px-2.5 py-1 text-xs text-white/65 hover:bg-white/10 hover:text-white'
+            className='border-foreground/10 bg-foreground/5 text-foreground/65 hover:bg-foreground/10 hover:text-foreground shrink-0 rounded-full border px-2.5 py-1 text-xs'
             onClick={() => onInsert(mention)}
           >
             {mention}

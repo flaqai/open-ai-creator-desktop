@@ -6,7 +6,7 @@ export default function SubHeading({
   rightNode?: React.ReactNode;
 }) {
   return (
-    <div className='flex h-3.5 items-center gap-0.5 text-sm text-white capitalize'>
+    <div className='text-foreground flex h-3.5 items-center gap-0.5 text-sm capitalize'>
       {children}
       {/* <ArrowDown /> */}
       {rightNode}

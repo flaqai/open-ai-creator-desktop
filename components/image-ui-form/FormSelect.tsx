@@ -48,22 +48,22 @@ export default function FormSelect({
             <FormControl>
               <SelectTrigger
                 className={cn(
-                  'h-9 w-full rounded-xl border border-[#303030] bg-[#1f1f1f] px-3 py-3 text-sm text-[#b8b8b8] hover:cursor-pointer hover:bg-[#303030]/80',
+                  'border-border bg-card text-muted-foreground hover:bg-card/80 h-9 w-full rounded-xl border px-3 py-3 text-sm hover:cursor-pointer',
                   className,
                 )}
               >
                 <SelectValue placeholder='' />
               </SelectTrigger>
             </FormControl>
-            <SelectContent className='flex rounded-xl border-[#303030] bg-[#1f1f1f]'>
+            <SelectContent className='border-border bg-card flex rounded-xl'>
               {options.map((item) => (
                 <SelectItem
                   key={item.value}
                   value={item.value}
                   disabled={item.disabled}
                   className={cn(
-                    'cursor-pointer rounded text-[#b8b8b8] focus:bg-[#303030]',
-                    item.value === field.value && 'text-[#b8b8b8]',
+                    'text-muted-foreground focus:bg-card cursor-pointer rounded',
+                    item.value === field.value && 'text-muted-foreground',
                     item.disabled && 'cursor-not-allowed opacity-50',
                   )}
                 >

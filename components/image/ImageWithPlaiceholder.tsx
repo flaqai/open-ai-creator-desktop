@@ -54,7 +54,7 @@ export default function ImageWithPlaiceholder({
             isFailed ? 'flex' : 'hidden group-hover:flex',
           )}
         >
-          <Trash2 className='size-5 text-white/40' />
+          <Trash2 className='text-foreground/40 size-5' />
           <span className='sr-only'>delete</span>
         </button>
       )}

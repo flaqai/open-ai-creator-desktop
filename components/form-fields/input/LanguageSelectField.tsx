@@ -22,7 +22,9 @@ export default function LanguageSelectField({ options, show = true, label }: Lan
 
   return (
     <div className='flex w-full flex-col gap-2'>
-      <div className='text-[14px] leading-[21px] font-normal text-white/60 capitalize'>{label || t('language')}</div>
+      <div className='text-foreground/60 text-[14px] leading-[21px] font-normal capitalize'>
+        {label || t('language')}
+      </div>
       <FormSelect options={options} name='language' />
     </div>
   );

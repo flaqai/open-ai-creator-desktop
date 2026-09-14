@@ -9,7 +9,7 @@ export default function CoreFeaturesCard({ title, content, src }: { title: strin
         <img src={src} alt={title} title={title} className='size-16' />
         <div className='flex flex-col items-center gap-1 text-center'>
           <h3 className='text-lg font-semibold'>{title}</h3>
-          <p className='text-sm text-white/70'>{content}</p>
+          <p className='text-foreground/70 text-sm'>{content}</p>
         </div>
       </div>
     </li>

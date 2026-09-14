@@ -40,7 +40,7 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
       <ul>
         <li>
           {t('4-p')}{' '}
-          <Link href='/terms-of-service' className='font-bold text-white hover:text-white'>
+          <Link href='/terms-of-service' className='text-foreground hover:text-foreground font-bold'>
             {t('terms-of-service')}
           </Link>
         </li>

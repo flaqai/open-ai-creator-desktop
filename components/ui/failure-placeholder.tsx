@@ -69,7 +69,7 @@ export default function FailurePlaceholder({
 
       <div className='flex flex-col items-center justify-center gap-2 p-2'>
         <FailureIcon size={iconSize} />
-        <p className='text-center text-xs font-normal text-[#bfbfbf]'>{textContent}</p>
+        <p className='text-muted-foreground text-center text-xs font-normal'>{textContent}</p>
       </div>
     </div>
   );

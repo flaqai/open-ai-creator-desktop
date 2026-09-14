@@ -99,7 +99,7 @@ export default function ModalImageDisplay({ onImageSelect, imageObjContext = 'de
 
   return (
     <div id='ModalImageDisplay' className='flex h-[440px] w-full flex-col overflow-hidden rounded-2xl lg:flex-1'>
-      <div className='relative flex size-full flex-col rounded-2xl bg-[#1c1d20]'>
+      <div className='bg-card relative flex size-full flex-col rounded-2xl'>
         <div className='relative flex flex-1 items-center justify-center overflow-hidden p-5'>
           {previewImgSrc && (
             <>
@@ -123,7 +123,7 @@ export default function ModalImageDisplay({ onImageSelect, imageObjContext = 'de
             </>
           )}
           {!imageHasData && !isPolling && (
-            <div className='flex flex-col items-center gap-3 text-white/60'>
+            <div className='text-foreground/60 flex flex-col items-center gap-3'>
               <ImageIcon className='size-10' />
               {t('noImage')}
             </div>
@@ -135,13 +135,13 @@ export default function ModalImageDisplay({ onImageSelect, imageObjContext = 'de
           )}
         </div>
         {shouldShowButtons && (
-          <div className='relative flex flex-none flex-wrap justify-end gap-2 rounded-b-xl bg-[#1c1d20] p-2 lg:items-center lg:gap-3'>
+          <div className='bg-card relative flex flex-none flex-wrap justify-end gap-2 rounded-b-xl p-2 lg:items-center lg:gap-3'>
             {/* Use this image */}
             <Box className='bg-color-main order-3 w-full gap-1 rounded-lg p-1 lg:order-none lg:w-auto'>
               <button
                 type='button'
                 onClick={handleImageSelect}
-                className='flex w-full cursor-pointer items-center justify-center gap-1 rounded-lg p-1 px-2 text-[#e2e2e2] transition-opacity hover:opacity-70 lg:w-auto'
+                className='text-muted-foreground flex w-full cursor-pointer items-center justify-center gap-1 rounded-lg p-1 px-2 transition-opacity hover:opacity-70 lg:w-auto'
               >
                 {t('useImage')}
               </button>
@@ -149,7 +149,7 @@ export default function ModalImageDisplay({ onImageSelect, imageObjContext = 'de
 
             {/* Download button + format selection */}
             <Box className='order-2 gap-1 rounded-lg p-1 lg:order-none'>
-              <div className='relative flex h-full items-center rounded-lg bg-[#1c1d20]'>
+              <div className='bg-card relative flex h-full items-center rounded-lg'>
                 <button
                   type='button'
                   onClick={onDownload}
@@ -157,24 +157,24 @@ export default function ModalImageDisplay({ onImageSelect, imageObjContext = 'de
                   className='flex cursor-pointer items-center justify-center rounded-l-lg px-3 disabled:cursor-not-allowed disabled:opacity-50'
                 >
                   {isLoading ? (
-                    <Spinning className='h-5 w-5 text-white' />
+                    <Spinning className='text-foreground h-5 w-5' />
                   ) : (
-                    <Download className='h-5 w-5 text-white' />
+                    <Download className='text-foreground h-5 w-5' />
                   )}
                 </button>
-                <div className='h-full w-px bg-[#34353b]' />
+                <div className='bg-card h-full w-px' />
                 <button
                   type='button'
                   onClick={() => setShowFormatMenu(!showFormatMenu)}
                   className='flex cursor-pointer items-center gap-1 rounded-r-lg px-3'
                 >
-                  <span className='text-sm text-white uppercase'>{imageType}</span>
-                  <ChevronDown className='h-3.5 w-3.5 text-white' />
+                  <span className='text-foreground text-sm uppercase'>{imageType}</span>
+                  <ChevronDown className='text-foreground h-3.5 w-3.5' />
                 </button>
 
                 {/* Format Menu */}
                 {showFormatMenu && (
-                  <div className='absolute right-0 bottom-full z-50 mb-2 flex flex-col gap-1 rounded-lg bg-[#1c1d20] p-1 shadow-lg'>
+                  <div className='bg-card absolute right-0 bottom-full z-50 mb-2 flex flex-col gap-1 rounded-lg p-1 shadow-lg'>
                     {imageTypesList.map((type) => (
                       <button
                         key={type}
@@ -183,7 +183,7 @@ export default function ModalImageDisplay({ onImageSelect, imageObjContext = 'de
                           setImageType(type);
                           setShowFormatMenu(false);
                         }}
-                        className='rounded px-3 py-1.5 text-sm text-white uppercase transition-colors hover:bg-white/10'
+                        className='text-foreground hover:bg-foreground/10 rounded px-3 py-1.5 text-sm uppercase transition-colors'
                       >
                         {type}
                       </button>

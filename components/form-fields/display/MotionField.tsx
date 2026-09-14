@@ -66,7 +66,7 @@ export default function MotionField({
         <DialogTrigger asChild disabled={isSingleOption}>
           <div
             className={cn(
-              'rounded-xl border border-[#303030] bg-[#1f1f1f] p-3',
+              'border-border bg-card rounded-xl border p-3',
               !isSingleOption && 'hover:border-color-main cursor-pointer',
             )}
           >
@@ -79,10 +79,10 @@ export default function MotionField({
                 className='h-12 w-[85px] shrink-0 rounded-lg object-cover'
               />
               <div className='flex items-center justify-center gap-2'>
-                <span className='text-[14px] leading-[21px] font-medium tracking-[0.28px] text-white/80 capitalize'>
+                <span className='text-foreground/80 text-[14px] leading-[21px] font-medium tracking-[0.28px] capitalize'>
                   {selectedMotion.name.toLowerCase()}
                 </span>
-                {!isSingleOption && <ArrowRightLeft className='size-4 text-white/60' />}
+                {!isSingleOption && <ArrowRightLeft className='text-foreground/60 size-4' />}
               </div>
             </div>
           </div>
@@ -109,7 +109,7 @@ export default function MotionField({
                   height={118}
                   className='h-auto w-full shrink-0 rounded-lg object-cover'
                 />
-                <span className='text-center text-xs text-white/70'>{motion.name}</span>
+                <span className='text-foreground/70 text-center text-xs'>{motion.name}</span>
               </button>
             ))}
           </div>

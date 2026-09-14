@@ -73,7 +73,7 @@ export default function VideoCarousel({
             onClick={handlePrev}
             className='hidden size-10 items-center justify-center rounded bg-black/10 px-2 lg:flex'
           >
-            <ChevronLeft className='size-6 text-white/70' />
+            <ChevronLeft className='text-foreground/70 size-6' />
           </button>
           <AnimatePresence mode='wait'>
             <MotionDiv
@@ -101,11 +101,11 @@ export default function VideoCarousel({
                     />
                   </>
                 )}
-                <div className='flex flex-1 flex-col gap-3 rounded-xl bg-[#141516] p-3 lg:w-auto lg:p-5'>
-                  <div className='text-base font-semibold text-white capitalize lg:text-[24px]'>{t('prompt')}</div>
+                <div className='bg-card flex flex-1 flex-col gap-3 rounded-xl p-3 lg:w-auto lg:p-5'>
+                  <div className='text-foreground text-base font-semibold capitalize lg:text-[24px]'>{t('prompt')}</div>
                   <div
                     className={cn(
-                      'w-full text-sm text-white/70 lg:text-base',
+                      'text-foreground/70 w-full text-sm lg:text-base',
                       list[currentIndex].imgSrc ? 'lg:line-clamp-4' : 'lg:line-clamp-[8]',
                     )}
                   >
@@ -153,7 +153,7 @@ export default function VideoCarousel({
             onClick={handleNext}
             className='hidden size-10 items-center justify-center rounded bg-black/10 px-2 lg:flex'
           >
-            <ChevronRight className='size-6 text-white/70' />
+            <ChevronRight className='text-foreground/70 size-6' />
           </button>
         </div>
         <div className='flex flex-col gap-5'>
@@ -163,7 +163,7 @@ export default function VideoCarousel({
                 key={el.id}
                 type='button'
                 onClick={() => setCurrentIndex(idx)}
-                className={cn('h-2 w-2 rounded-[2px] bg-white/40', idx === currentIndex && 'bg-color-main')}
+                className={cn('bg-foreground/40 h-2 w-2 rounded-[2px]', idx === currentIndex && 'bg-color-main')}
               />
             ))}
           </div>
@@ -174,14 +174,14 @@ export default function VideoCarousel({
             onClick={handlePrev}
             className='flex size-10 items-center justify-center rounded bg-black/10 px-2'
           >
-            <ChevronLeft className='size-6 text-white/70' />
+            <ChevronLeft className='text-foreground/70 size-6' />
           </button>
           <button
             type='button'
             onClick={handleNext}
             className='flex size-10 items-center justify-center rounded bg-black/10 px-2'
           >
-            <ChevronRight className='size-6 text-white/70' />
+            <ChevronRight className='text-foreground/70 size-6' />
           </button>
         </div>
       </div>

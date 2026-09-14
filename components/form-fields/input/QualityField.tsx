@@ -30,14 +30,14 @@ export default function QualityField({
       name='quality'
       render={({ field }) => (
         <FormItem className='space-y-1.5'>
-          <Label className='text-sm font-normal text-white/70'>{t('quality')}</Label>
+          <Label className='text-foreground/70 text-sm font-normal'>{t('quality')}</Label>
           <Select value={field.value || qualityOptions[0]?.value || 'medium'} onValueChange={field.onChange}>
             <FormControl>
-              <SelectTrigger className='h-10 w-full rounded-xl border border-white/5 bg-[#232528] text-white/80'>
+              <SelectTrigger className='border-foreground/5 bg-card text-foreground/80 h-10 w-full rounded-xl border'>
                 <SelectValue placeholder='' />
               </SelectTrigger>
             </FormControl>
-            <SelectContent className='border-[#303030] bg-[#232528] text-white'>
+            <SelectContent className='border-border bg-card text-foreground'>
               {qualityOptions.map((quality) => (
                 <SelectItem key={quality.value} value={quality.value}>
                   {quality.name}

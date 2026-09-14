@@ -33,17 +33,17 @@ export default function FormSelect({
         <FormItem className='h-auto w-full space-y-0'>
           <Select onValueChange={field.onChange} value={field.value}>
             <FormControl>
-              <SelectTrigger className='h-9 w-full border border-[#303030] bg-[#1f1f1f] text-sm text-white hover:cursor-pointer hover:opacity-80'>
+              <SelectTrigger className='border-border bg-card text-foreground h-9 w-full border text-sm hover:cursor-pointer hover:opacity-80'>
                 <SelectValue />
               </SelectTrigger>
             </FormControl>
-            <SelectContent className='flex border border-[#303030] bg-[#1f1f1f] shadow-lg' side={side}>
+            <SelectContent className='border-border bg-card flex border shadow-lg' side={side}>
               {options.map((item) => (
                 <SelectItem
                   key={item.value}
                   value={item.value}
                   disabled={item.disabled}
-                  className={cn('cursor-pointer rounded text-white hover:bg-white/20 focus:bg-white/20')}
+                  className={cn('text-foreground hover:bg-foreground/20 focus:bg-foreground/20 cursor-pointer rounded')}
                 >
                   <span className='flex items-center gap-1.5'>
                     {item?.leftIcon}

@@ -216,7 +216,7 @@ export default function ImageDetailModal({ open, onOpenChange, onDelete, image }
         >
           <div className='flex h-full w-full flex-col overflow-hidden rounded-lg shadow-lg lg:flex-row'>
             {/* Left: Image Section */}
-            <div className='flex h-full w-full flex-1 items-center justify-center bg-[#111214] p-3 lg:h-[700px] lg:p-6'>
+            <div className='bg-card flex h-full w-full flex-1 items-center justify-center p-3 lg:h-[700px] lg:p-6'>
               <img
                 src={image.url}
                 alt={image.title || 'Image'}
@@ -225,16 +225,16 @@ export default function ImageDetailModal({ open, onOpenChange, onDelete, image }
             </div>
 
             {/* Right: Info Panel */}
-            <div className='flex h-full w-full flex-col bg-[#16171b] lg:h-[700px] lg:w-[450px] lg:shrink-0'>
+            <div className='bg-card flex h-full w-full flex-col lg:h-[700px] lg:w-[450px] lg:shrink-0'>
               {/* Header - Fixed */}
-              <div className='flex shrink-0 items-center justify-between border-b border-[#34353b] p-3'>
-                <h2 className='text-2xl leading-8 font-medium text-white capitalize'>{t('title')}</h2>
+              <div className='border-border flex shrink-0 items-center justify-between border-b p-3'>
+                <h2 className='text-foreground text-2xl leading-8 font-medium capitalize'>{t('title')}</h2>
                 <button
                   type='button'
                   onClick={() => onOpenChange(false)}
-                  className='flex h-9 w-9 cursor-pointer items-center justify-center rounded-[3px] transition-colors hover:bg-white/10'
+                  className='hover:bg-foreground/10 flex h-9 w-9 cursor-pointer items-center justify-center rounded-[3px] transition-colors'
                 >
-                  <X className='h-5 w-5 text-white' />
+                  <X className='text-foreground h-5 w-5' />
                 </button>
               </div>
 
@@ -254,22 +254,22 @@ export default function ImageDetailModal({ open, onOpenChange, onDelete, image }
               </div>
 
               {/* Bottom Actions - Fixed */}
-              <div className='flex shrink-0 flex-col gap-2 border-t border-[#34353b] p-3'>
+              <div className='border-border flex shrink-0 flex-col gap-2 border-t p-3'>
                 {/* Row 1: Download + Delete */}
                 <div className='flex items-center gap-2'>
                   {/* Download Button with Format Selector */}
-                  <div className='relative flex h-[42px] cursor-pointer rounded-lg bg-[#1c1d23] transition-colors hover:bg-[#252629]'>
+                  <div className='bg-card hover:bg-card relative flex h-[42px] cursor-pointer rounded-lg transition-colors'>
                     {/* Download Icon Button */}
                     <button
                       type='button'
                       onClick={handleDownload}
                       className='flex cursor-pointer items-center justify-center px-3'
                     >
-                      <Download className='h-5 w-5 text-white' />
+                      <Download className='text-foreground h-5 w-5' />
                     </button>
 
                     {/* Divider */}
-                    <div className='w-px bg-[#34353b]' />
+                    <div className='bg-card w-px' />
 
                     {/* Format Selector */}
                     <button
@@ -277,13 +277,13 @@ export default function ImageDetailModal({ open, onOpenChange, onDelete, image }
                       onClick={() => setShowFormatMenu(!showFormatMenu)}
                       className='flex cursor-pointer items-center gap-1 px-3'
                     >
-                      <span className='text-sm text-white capitalize'>{selectedFormat}</span>
-                      <ChevronDown className='h-3.5 w-3.5 scale-y-[-1] rotate-180 text-white' />
+                      <span className='text-foreground text-sm capitalize'>{selectedFormat}</span>
+                      <ChevronDown className='text-foreground h-3.5 w-3.5 scale-y-[-1] rotate-180' />
                     </button>
 
                     {/* Format Menu */}
                     {showFormatMenu && (
-                      <div className='absolute right-0 bottom-full mb-1 flex flex-col gap-1 rounded-lg bg-[#1c1d23] p-1 shadow-lg'>
+                      <div className='bg-card absolute right-0 bottom-full mb-1 flex flex-col gap-1 rounded-lg p-1 shadow-lg'>
                         {['WEBP', 'PNG', 'JPG'].map((format) => (
                           <button
                             key={format}
@@ -292,7 +292,7 @@ export default function ImageDetailModal({ open, onOpenChange, onDelete, image }
                               setSelectedFormat(format);
                               setShowFormatMenu(false);
                             }}
-                            className='cursor-pointer rounded px-3 py-1.5 text-sm text-white capitalize transition-colors hover:bg-white/10'
+                            className='text-foreground hover:bg-foreground/10 cursor-pointer rounded px-3 py-1.5 text-sm capitalize transition-colors'
                           >
                             {format}
                           </button>

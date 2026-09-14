@@ -29,7 +29,7 @@ export default function UsageTipsButton({
       <button
         type='button'
         onClick={() => setIsOpen(true)}
-        className={`flex items-center gap-1 text-sm font-normal hover:opacity-80 ${className || 'rounded-lg border border-[#d9d9d9] bg-white px-4 py-2 text-[#777777]'}`}
+        className={`flex items-center gap-1 text-sm font-normal hover:opacity-80 ${className || 'bg-foreground text-muted-foreground rounded-lg border border-[#d9d9d9] px-4 py-2'}`}
       >
         <CircleHelp className='size-5' />
         <div className='text-color-main text-[16px] leading-[24px] font-normal'>{buttonText}</div>

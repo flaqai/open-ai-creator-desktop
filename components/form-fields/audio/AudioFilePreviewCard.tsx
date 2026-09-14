@@ -546,27 +546,27 @@ export default function AudioFilePreviewCard({
   const progressPosition = timeToPosition(currentTime);
 
   return (
-    <div className='group border-color-b1 relative rounded-lg border bg-[#1c1d20] p-2.5 transition-all hover:border-white/20'>
+    <div className='group border-color-b1 bg-card hover:border-foreground/20 relative rounded-lg border p-2.5 transition-all'>
       <div className='flex items-center gap-2.5'>
         <button
           type='button'
           onClick={handlePlayPause}
           className={cn(
             'flex size-11 shrink-0 items-center justify-center rounded-full transition-all',
-            isPlaying ? 'bg-color-main text-white' : 'bg-[#2a2b2f] text-white/70 hover:bg-[#34353b]',
+            isPlaying ? 'bg-color-main text-foreground' : 'bg-card text-foreground/70 hover:bg-card',
           )}
         >
           {isPlaying ? <Pause className='size-5 fill-current' /> : <Play className='size-5 fill-current' />}
         </button>
         <div className='flex min-w-0 flex-1 flex-col items-start gap-1.5'>
           <div className='flex w-full items-center justify-between gap-2'>
-            <p className='line-clamp-1 text-sm font-medium text-white'>{file.name}</p>
+            <p className='text-foreground line-clamp-1 text-sm font-medium'>{file.name}</p>
             <div className='flex shrink-0 items-center gap-2'>
               <button
                 type='button'
                 onClick={handleToggleTrimmer}
                 className={cn(
-                  'hover:text-color-main text-white/40 transition-colors',
+                  'hover:text-color-main text-foreground/40 transition-colors',
                   showTrimmer && 'text-color-main',
                 )}
                 title={showTrimmer ? t('hide-trim') : t('show-trim')}
@@ -576,7 +576,7 @@ export default function AudioFilePreviewCard({
               <button
                 type='button'
                 onClick={handleDelete}
-                className='text-white/40 transition-colors hover:text-white/70'
+                className='text-foreground/40 hover:text-foreground/70 transition-colors'
               >
                 <Trash2 className='size-4' />
               </button>
@@ -585,7 +585,7 @@ export default function AudioFilePreviewCard({
 
           {/* 波形 + 进度指示器 + 裁剪边界器 */}
           <div className='w-full space-y-1'>
-            <span className='text-xs text-white/60'>
+            <span className='text-foreground/60 text-xs'>
               {formatTime(currentTime)}/{formatTime(duration, true)}
             </span>
 
@@ -603,7 +603,7 @@ export default function AudioFilePreviewCard({
               }}
             >
               {isGeneratingWaveform ? (
-                <div className='flex h-full w-full items-center justify-center rounded-md bg-[#2a2b2f]'>
+                <div className='bg-card flex h-full w-full items-center justify-center rounded-md'>
                   <Loader2 className='text-color-main size-6 animate-spin' />
                 </div>
               ) : (
@@ -652,7 +652,7 @@ export default function AudioFilePreviewCard({
                       >
                         {/* 区间框提示文字 */}
                         <div className='pointer-events-none absolute inset-0 flex items-center justify-center'>
-                          <span className='text-xs font-medium text-white/60'>
+                          <span className='text-foreground/60 text-xs font-medium'>
                             {isDraggingRegion ? t('dragging-region') : t('drag-region')}
                           </span>
                         </div>
@@ -692,7 +692,7 @@ export default function AudioFilePreviewCard({
                         }}
                       >
                         <div className='bg-color-main absolute top-1/2 left-1/2 flex size-5 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full shadow-md'>
-                          <div className='h-2.5 w-0.5 bg-white' />
+                          <div className='bg-foreground h-2.5 w-0.5' />
                         </div>
                       </div>
 
@@ -730,7 +730,7 @@ export default function AudioFilePreviewCard({
                         }}
                       >
                         <div className='bg-color-main absolute top-1/2 left-1/2 flex size-5 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full shadow-md'>
-                          <div className='h-2.5 w-0.5 bg-white' />
+                          <div className='bg-foreground h-2.5 w-0.5' />
                         </div>
                       </div>
                     </>
@@ -776,7 +776,7 @@ export default function AudioFilePreviewCard({
                         }
                       }}
                     >
-                      <div className='size-2 rounded-full bg-white' />
+                      <div className='bg-foreground size-2 rounded-full' />
                     </div>
                   </div>
                 </>
@@ -785,7 +785,7 @@ export default function AudioFilePreviewCard({
 
             {/* 裁剪信息 - 仅在裁剪模式显示 */}
             {showTrimmer && (
-              <div className='flex items-center justify-between text-xs text-white/60'>
+              <div className='text-foreground/60 flex items-center justify-between text-xs'>
                 <span>
                   {t('start-time')}: <span className='text-color-main font-medium'>{formatTime(startTime)}</span>
                 </span>

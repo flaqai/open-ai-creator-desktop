@@ -20,6 +20,79 @@ body.desktop-app {
   overscroll-behavior: none;
 }
 
+body.desktop-app [data-sidebar='sidebar'],
+body.desktop-app [data-slot='sidebar-gap'],
+body.desktop-app [data-slot='sidebar-container'] {
+  display: none;
+}
+.desktop-shell {
+  width: 100%;
+}
+.desktop-shell > main {
+  min-width: 0;
+}
+html.light {
+  --background: #f6f7fb;
+  --foreground: #20222c;
+  --card: #ffffff;
+  --card-foreground: #20222c;
+  --popover: #ffffff;
+  --popover-foreground: #20222c;
+  --primary: #5c24ff;
+  --primary-foreground: #ffffff;
+  --secondary: #edf0f6;
+  --secondary-foreground: #20222c;
+  --muted: #edf0f6;
+  --muted-foreground: #596174;
+  --accent: #ebe7fb;
+  --accent-foreground: #29233f;
+  --border: #d8dce6;
+  --input: #c7ccda;
+  --ring: #5c24ff;
+  --sidebar: #ffffff;
+  --sidebar-foreground: #20222c;
+  --sidebar-primary: #5c24ff;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #ebe7fb;
+  --sidebar-accent-foreground: #29233f;
+  --sidebar-border: #d8dce6;
+  --color-t1: #20222c;
+  --color-t2: #596174;
+  --color-t3: #646b7b;
+  --color-t4: #737b8d;
+  --color-inverse-t1: #ffffff;
+  --color-bg0: #f6f7fb;
+  --color-bg1: #ffffff;
+  --color-bg2: #f0f2f7;
+  --color-bg3: #e8eaf2;
+  --color-c1: #ffffff;
+  --color-c2: #f0f2f7;
+  --color-c3: #e8eaf2;
+  --color-c4: #e9ecf4;
+  --color-b1: #d8dce6;
+  --color-b2: #a1a8ba;
+  --color-green: #14763b;
+  --color-red: #b52332;
+  --color-100: #20222c;
+  --color-40: #646b7b;
+  --color-30: #9199aa;
+  --color-5: #edf0f6;
+}
+html.dark {
+  --primary-foreground: #ffffff;
+}
+html.light .desktop-app :focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 3px;
+}
+
+/* Keep settings focus visible without stacking an outer outline and a thick ring. */
+html .desktop-app .desktop-settings-panel [data-slot='input']:focus-visible {
+  border-color: var(--ring);
+  outline: none;
+  box-shadow: none;
+}
+
 body.desktop-app footer {
   display: none;
 }

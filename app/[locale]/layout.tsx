@@ -12,6 +12,7 @@ import { locales } from '@/i18n/languages';
 import { NavigationGuardProvider } from 'next-navigation-guard';
 
 import { createLocalizedMetadata } from '@/lib/seo/metadata';
+import DesktopShell from '@/components/desktop/DesktopShell';
 import JsonLdScript from '@/components/scripts/JsonLdScript';
 
 import LazyGlobalUI from './LazyGlobalUI';
@@ -98,7 +99,7 @@ export default async function RootLayout(props: { children: React.ReactNode; par
         <JsonLdScript locale={locale} title={metadata('title')} description={metadata('description')} />
       </head>
       <body
-        className={`${process.env.FLAQ_DESKTOP_BUILD === 'true' ? 'desktop-app' : ''} ${notoSans.className} ${din.variable} ${notoSans.variable} relative mx-auto flex min-h-screen flex-col bg-black text-white`}
+        className={`${process.env.FLAQ_DESKTOP_BUILD === 'true' ? 'desktop-app' : ''} ${notoSans.className} ${din.variable} ${notoSans.variable} bg-background text-foreground relative mx-auto flex min-h-screen flex-col`}
       >
         <NavigationGuardProvider>
           <NextIntlClientProvider locale={locale} messages={messages}>
@@ -116,8 +117,10 @@ export default async function RootLayout(props: { children: React.ReactNode; par
                 },
               }}
             />
-            <LazyGlobalUI />
-            {children}
+            <DesktopShell>
+              <LazyGlobalUI />
+              {children}
+            </DesktopShell>
           </NextIntlClientProvider>
         </NavigationGuardProvider>
       </body>

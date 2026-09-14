@@ -209,13 +209,13 @@ export default function ModelSelect({
           <Select onValueChange={field.onChange} value={field.value ?? ''} name={name}>
             <FormControl>
               {/* Model version list, selector trigger button */}
-              <SelectTrigger className='w-full rounded-xl border border-[#303030] bg-[#1f1f1f] text-sm text-white'>
+              <SelectTrigger className='border-border bg-card text-foreground w-full rounded-xl border text-sm'>
                 <div className='flex items-center gap-2'>
                   {selectedModelVersion && selectedModelIcon?.src ? (
                     <span
                       className={cn(
                         'flex size-4 items-center justify-center overflow-hidden rounded',
-                        selectedModelIcon.background === 'light' && 'bg-white p-0.5',
+                        selectedModelIcon.background === 'light' && 'bg-foreground p-0.5',
                       )}
                     >
                       <img
@@ -238,7 +238,7 @@ export default function ModelSelect({
                 </div>
               </SelectTrigger>
             </FormControl>
-            <SelectContent className='rounded-xl border border-[#303030] bg-[#1f1f1f]'>
+            <SelectContent className='border-border bg-card rounded-xl border'>
               {sortedVersions.map((version) => {
                 const isDisabled = version.isComingSoon || false;
                 const showComingSoon = version.isComingSoon || false;
@@ -249,7 +249,7 @@ export default function ModelSelect({
                     value={version.modelVersion}
                     disabled={isDisabled}
                     className={cn(
-                      'w-full cursor-pointer rounded-none p-0 text-white hover:bg-white/10 focus:bg-white/10 [&>span:first-child]:hidden [&>span:last-child]:w-full',
+                      'text-foreground hover:bg-foreground/10 focus:bg-foreground/10 w-full cursor-pointer rounded-none p-0 [&>span:first-child]:hidden [&>span:last-child]:w-full',
                       isDisabled && 'cursor-not-allowed opacity-50 hover:bg-transparent',
                     )}
                   >

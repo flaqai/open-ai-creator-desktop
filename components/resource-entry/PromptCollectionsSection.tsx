@@ -50,13 +50,13 @@ export default async function PromptCollectionsSection() {
         {PROMPT_COLLECTIONS.map((collection) => (
           <article
             key={collection.key}
-            className='border-color-b1 bg-color-1 flex min-h-[280px] flex-col overflow-hidden rounded-lg border p-2.5 transition-colors duration-200 hover:border-white/20 hover:bg-[#212027]'
+            className='border-color-b1 bg-color-1 hover:border-foreground/20 hover:bg-card flex min-h-[280px] flex-col overflow-hidden rounded-lg border p-2.5 transition-colors duration-200'
           >
             <a
               href={getFlaqResourceUrl(collection.href)}
               target='_blank'
               rel='noopener noreferrer'
-              className='group relative aspect-video w-full shrink-0 overflow-hidden rounded-md bg-white/5'
+              className='group bg-foreground/5 relative aspect-video w-full shrink-0 overflow-hidden rounded-md'
             >
               <img
                 src={collection.image}
@@ -85,7 +85,7 @@ export default async function PromptCollectionsSection() {
                   href={getFlaqResourceUrl(collection.href)}
                   target='_blank'
                   rel='noopener noreferrer'
-                  className='border-color-b1 bg-color-2 text-color-t1 hover:border-color-main/50 flex h-9 flex-1 items-center justify-center rounded-md border px-3 text-xs font-medium transition-colors hover:bg-white/10'
+                  className='border-color-b1 bg-color-2 text-color-t1 hover:border-color-main/50 hover:bg-foreground/10 flex h-9 flex-1 items-center justify-center rounded-md border px-3 text-xs font-medium transition-colors'
                 >
                   {t('viewPrompts')}
                 </a>
@@ -93,7 +93,7 @@ export default async function PromptCollectionsSection() {
                   href={collection.repository}
                   target='_blank'
                   rel='nofollow noopener noreferrer'
-                  className='border-color-b1 bg-color-2 text-color-t2 hover:border-color-main/50 hover:text-color-t1 flex h-9 items-center gap-1.5 rounded-md border px-3 text-xs font-medium transition-colors hover:bg-white/10'
+                  className='border-color-b1 bg-color-2 text-color-t2 hover:border-color-main/50 hover:text-color-t1 hover:bg-foreground/10 flex h-9 items-center gap-1.5 rounded-md border px-3 text-xs font-medium transition-colors'
                 >
                   <Github className='size-4' />
                   {t('repository')}

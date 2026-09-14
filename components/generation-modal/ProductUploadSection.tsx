@@ -50,12 +50,12 @@ const ProductUploadSection = forwardRef<ProductUploadSectionRef, ProductUploadSe
       <div className='flex flex-col gap-2.5'>
         {title && <SubHeading>{title}</SubHeading>}
 
-        <div className='flex flex-col gap-1 rounded-xl border border-[#2a2b2f] bg-[#1c1d20] p-1'>
+        <div className='border-border bg-card flex flex-col gap-1 rounded-xl border p-1'>
           <FrameImageUpload
             ref={subjectRef}
             name='subjectImage'
             label={subjectLabel}
-            icon={<SubjectIcon className='size-5 text-white/70' />}
+            icon={<SubjectIcon className='text-foreground/70 size-5' />}
             sampleImage={sampleImages?.subject}
             showAiGeneration={false}
             modalComponent={<EmptyModal />}
@@ -65,7 +65,7 @@ const ProductUploadSection = forwardRef<ProductUploadSectionRef, ProductUploadSe
             ref={objectRef}
             name='objectImage'
             label={objectLabel}
-            icon={<ObjectIcon className='size-5 text-white/70' />}
+            icon={<ObjectIcon className='text-foreground/70 size-5' />}
             sampleImage={sampleImages?.object}
             showAiGeneration={false}
             modalComponent={<EmptyModal />}
@@ -73,7 +73,7 @@ const ProductUploadSection = forwardRef<ProductUploadSectionRef, ProductUploadSe
 
           {hintsSection && (
             <>
-              <div className='border-t border-[#2a2b2f]' />
+              <div className='border-border border-t' />
               {hintsSection}
             </>
           )}

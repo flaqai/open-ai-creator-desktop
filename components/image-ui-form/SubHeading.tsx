@@ -8,7 +8,7 @@ import ArrowDown from './svg/ArrowDown';
 
 export default function SubHeading({ children, tips }: { children: React.ReactNode; tips?: string }) {
   return (
-    <div className='flex h-3.5 items-center justify-between text-sm text-white/60 capitalize'>
+    <div className='text-foreground/60 flex h-3.5 items-center justify-between text-sm capitalize'>
       <div className='flex items-center gap-0.5'>
         {children}
         <ArrowDown />
@@ -18,7 +18,7 @@ export default function SubHeading({ children, tips }: { children: React.ReactNo
           <Tooltip delayDuration={150}>
             <TooltipTrigger asChild>
               <button type='button'>
-                <CircleHelp className='size-3.5 text-[#404142] hover:text-white' />
+                <CircleHelp className='hover:text-foreground size-3.5 text-[#404142]' />
               </button>
             </TooltipTrigger>
             <TooltipContent side='right' className='border-main-gray bg-card-black isolate max-w-[206px] rounded p-2'>

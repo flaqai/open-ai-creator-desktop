@@ -30,7 +30,7 @@ function NavDrawerItem({
       <div
         className={cn(
           'flex h-10 w-full items-center rounded-lg pr-3 pl-6 transition-colors',
-          isActive ? 'bg-color-main text-white' : 'text-white/60 hover:bg-white/5',
+          isActive ? 'bg-color-main text-foreground' : 'text-foreground/60 hover:bg-foreground/5',
         )}
       >
         <span className='truncate text-sm whitespace-nowrap'>{name}</span>
@@ -42,13 +42,16 @@ function NavDrawerItem({
     <div
       className={cn(
         'flex h-11 w-full items-center justify-between rounded-lg px-3 transition-colors',
-        isActive && !hasChild ? 'bg-color-main text-white' : 'text-white/80 hover:bg-white/5',
+        isActive && !hasChild ? 'bg-color-main text-foreground' : 'text-foreground/80 hover:bg-foreground/5',
       )}
     >
       <span className='truncate text-base font-medium whitespace-nowrap'>{name}</span>
       {hasChild && (
         <ChevronDown
-          className={cn('size-5 shrink-0 text-white/40 transition-transform duration-200', isExpanded && 'rotate-180')}
+          className={cn(
+            'text-foreground/40 size-5 shrink-0 transition-transform duration-200',
+            isExpanded && 'rotate-180',
+          )}
         />
       )}
     </div>

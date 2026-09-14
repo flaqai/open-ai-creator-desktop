@@ -42,21 +42,21 @@ export default function SimpleImagePreviewModal({ open, onOpenChange, image }: S
         >
           <div className='flex h-full w-full flex-col overflow-hidden rounded-lg shadow-lg lg:flex-row'>
             {/* Left: Image Section */}
-            <div className='flex h-[40vh] w-full shrink-0 items-center justify-center bg-[#111214] p-3 lg:h-full lg:flex-1 lg:p-6'>
+            <div className='bg-card flex h-[40vh] w-full shrink-0 items-center justify-center p-3 lg:h-full lg:flex-1 lg:p-6'>
               <img src={image.url} alt='Preview' className='max-h-full max-w-full rounded object-contain' />
             </div>
 
             {/* Right: Info Panel */}
-            <div className='flex min-h-0 w-full flex-1 flex-col bg-[#16171b] lg:h-full lg:w-[450px] lg:flex-none'>
+            <div className='bg-card flex min-h-0 w-full flex-1 flex-col lg:h-full lg:w-[450px] lg:flex-none'>
               {/* Header - Fixed */}
-              <div className='flex shrink-0 items-center justify-between border-b border-[#34353b] p-3'>
-                <h2 className='text-2xl leading-8 font-medium text-white capitalize'>{t('title')}</h2>
+              <div className='border-border flex shrink-0 items-center justify-between border-b p-3'>
+                <h2 className='text-foreground text-2xl leading-8 font-medium capitalize'>{t('title')}</h2>
                 <button
                   type='button'
                   onClick={() => onOpenChange(false)}
-                  className='flex h-9 w-9 cursor-pointer items-center justify-center rounded-[3px] transition-colors hover:bg-white/10'
+                  className='hover:bg-foreground/10 flex h-9 w-9 cursor-pointer items-center justify-center rounded-[3px] transition-colors'
                 >
-                  <X className='h-5 w-5 text-white' />
+                  <X className='text-foreground h-5 w-5' />
                 </button>
               </div>
 
@@ -80,12 +80,12 @@ export default function SimpleImagePreviewModal({ open, onOpenChange, image }: S
               </div>
 
               {/* Bottom Actions - Fixed */}
-              <div className='flex shrink-0 gap-2 border-t border-[#34353b] p-3'>
+              <div className='border-border flex shrink-0 gap-2 border-t p-3'>
                 {/* Recreate Button */}
                 <button
                   type='button'
                   onClick={handleRecreate}
-                  className='bg-color-main hover:bg-color-main/80 flex h-[42px] flex-1 cursor-pointer items-center justify-center gap-2 rounded-lg text-sm font-semibold text-white transition-colors'
+                  className='bg-color-main hover:bg-color-main/80 text-primary-foreground flex h-[42px] flex-1 cursor-pointer items-center justify-center gap-2 rounded-lg text-sm font-semibold transition-colors'
                 >
                   {t('recreate')}
                 </button>

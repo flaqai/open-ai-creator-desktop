@@ -80,7 +80,7 @@ const SingleImageUpload = forwardRef<SingleImageUploadRef, SingleImageUploadProp
           {...getRootProps()}
           className={cn(
             'relative flex h-full w-full cursor-pointer items-center justify-center gap-4 rounded-xl border-2 border-dashed p-3 transition-all',
-            'border-color-b1 bg-white/40',
+            'border-color-b1 bg-foreground/40',
             isDragActive && 'border-color-b1 bg-color-c2',
             image && 'cursor-default',
           )}
@@ -101,17 +101,17 @@ const SingleImageUpload = forwardRef<SingleImageUploadRef, SingleImageUploadProp
                 }}
                 className='absolute inset-0 flex items-center justify-center bg-black/40 lg:hidden lg:group-hover:flex'
               >
-                <Trash2 className='size-6 text-white' />
+                <Trash2 className='text-foreground size-6' />
               </button>
             </div>
           ) : (
             <div className='flex flex-col items-center justify-center gap-3 lg:flex-row lg:gap-4'>
-              <div className='border-color-b1 flex size-[80px] shrink-0 items-center justify-center rounded-xl border-2 border-dashed bg-white/20 lg:size-[100px]'>
-                <Plus className='size-7 text-white lg:size-9' />
+              <div className='border-color-b1 bg-foreground/20 flex size-[80px] shrink-0 items-center justify-center rounded-xl border-2 border-dashed lg:size-[100px]'>
+                <Plus className='text-foreground size-7 lg:size-9' />
               </div>
               <div className='flex max-w-[220px] flex-col gap-1 text-center'>
-                <p className='text-xs break-words text-black/60 lg:text-sm'>{label || t('upload-hint')}</p>
-                <p className='text-xs break-words text-black/40'>
+                <p className='text-background/60 text-xs break-words lg:text-sm'>{label || t('upload-hint')}</p>
+                <p className='text-background/40 text-xs break-words'>
                   {t('format-hint')}: {acceptedFormats}
                 </p>
               </div>

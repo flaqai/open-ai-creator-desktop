@@ -115,7 +115,7 @@ const AudioUploadFormWithDrag: ForwardRefRenderFunction<
         <FormItem className={cn('relative space-y-0', className)}>
           <FormLabel
             className={cn(
-              'group border-input hover:border-color-main relative flex h-[140px] w-full cursor-pointer flex-col items-center justify-center gap-2 rounded-2xl border-2 border-dashed bg-white transition-colors',
+              'group border-input hover:border-color-main bg-foreground relative flex h-[140px] w-full cursor-pointer flex-col items-center justify-center gap-2 rounded-2xl border-2 border-dashed transition-colors',
               audioFile && 'border-color-main bg-color-bg/10',
             )}
             onDragOver={handleDragOver}
@@ -125,7 +125,7 @@ const AudioUploadFormWithDrag: ForwardRefRenderFunction<
               <>
                 <div className='flex flex-col items-center gap-2'>
                   <Music className='text-color-main size-10' />
-                  <div className='max-w-full truncate px-4 text-center text-sm font-medium text-black'>
+                  <div className='text-background max-w-full truncate px-4 text-center text-sm font-medium'>
                     {audioFile.name}
                   </div>
                   <div className='text-xs text-[var(--c-gray)]'>{(audioFile.size / 1024 / 1024).toFixed(2)} MB</div>
@@ -135,7 +135,7 @@ const AudioUploadFormWithDrag: ForwardRefRenderFunction<
                   onClick={onRemoveButtonClick}
                   type='button'
                 >
-                  <Trash2 className='size-4 text-black/60' />
+                  <Trash2 className='text-background/60 size-4' />
                 </button>
               </>
             ) : (
@@ -143,7 +143,7 @@ const AudioUploadFormWithDrag: ForwardRefRenderFunction<
                 <div className='bg-color-bg flex size-12 items-center justify-center rounded-full'>
                   <Upload className='group-hover:text-color-main size-6 text-[var(--c-gray)]' />
                 </div>
-                <div className='text-center text-sm font-medium text-black'>{label || t('upload-audio')}</div>
+                <div className='text-background text-center text-sm font-medium'>{label || t('upload-audio')}</div>
                 <div className='text-xs text-[var(--c-gray)]'>{t('supported-formats')}</div>
               </>
             )}

@@ -86,7 +86,7 @@ const TemplateSelector = forwardRef<{ resetSelection: () => void }, TemplateSele
               {selectedTemplate === template.key && (
                 <div className='absolute inset-0 flex items-center justify-center'>
                   <div className='bg-color-main rounded-full p-1'>
-                    <svg className='h-4 w-4 text-white' fill='currentColor' viewBox='0 0 20 20'>
+                    <svg className='text-foreground h-4 w-4' fill='currentColor' viewBox='0 0 20 20'>
                       <path
                         fillRule='evenodd'
                         d='M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z'

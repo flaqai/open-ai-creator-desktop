@@ -9,6 +9,7 @@ import { useFormContext } from 'react-hook-form';
 
 import { cn } from '@/lib/utils';
 import { getFileByUrl } from '@/lib/utils/fileUtils';
+import { useFormRestoration } from '@/hooks/use-form-restoration';
 import { FormControl, FormField, FormItem, FormLabel } from '@/components/ui/form';
 
 const ACCEPTED_IMAGE_TYPES: Record<string, string[]> = {
@@ -62,6 +63,7 @@ const ImageUploadField = forwardRef<ImageUploadFieldRef, ImageUploadFieldProps>(
     const fileInputRef = useRef<HTMLInputElement>(null);
 
     const [fileUrl, setFileUrl] = useState<string | null>(null);
+    useFormRestoration((data, preview) => setFileUrl(preview(data[name])));
 
     const clearInputValue = () => {
       if (fileInputRef.current) {
@@ -167,9 +169,9 @@ const ImageUploadField = forwardRef<ImageUploadFieldRef, ImageUploadFieldProps>(
         <div
           {...getRootProps()}
           className={cn(
-            'relative h-[112px] w-full rounded-xl border border-dashed border-white/10 bg-[#232528] hover:border-white/30 hover:bg-[#2a2b2f]',
-            isDragActive && 'border-white/30 bg-[#2a2b2f]',
-            fileUrl && 'border-white/10 bg-[#232528] hover:border-white/10 hover:bg-[#232528]',
+            'border-foreground/10 bg-card hover:border-foreground/30 hover:bg-card relative h-[112px] w-full rounded-xl border border-dashed',
+            isDragActive && 'border-foreground/30 bg-card',
+            fileUrl && 'border-foreground/10 bg-card hover:border-foreground/10 hover:bg-card',
           )}
         >
           <FormField
@@ -193,12 +195,12 @@ const ImageUploadField = forwardRef<ImageUploadFieldRef, ImageUploadFieldProps>(
                         style={{ width: imgSize.width, height: imgSize.height }}
                         className='absolute-center absolute flex items-center justify-center bg-black/40 lg:hidden lg:group-hover:flex'
                       >
-                        <Trash2 className='size-5 text-white' />
+                        <Trash2 className='text-foreground size-5' />
                       </button>
                     </div>
                   ) : (
-                    <FormLabel className='flex h-full w-full flex-col items-center justify-center gap-3 text-center text-white/40'>
-                      <div className='flex size-8 items-center justify-center rounded-lg bg-white/5'>
+                    <FormLabel className='text-foreground/40 flex h-full w-full flex-col items-center justify-center gap-3 text-center'>
+                      <div className='bg-foreground/5 flex size-8 items-center justify-center rounded-lg'>
                         <Upload className='size-6' />
                       </div>
                       <div className='text-sm'>{label || t('label')}</div>

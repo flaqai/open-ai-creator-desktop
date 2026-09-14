@@ -412,26 +412,29 @@ export default function AudioFilePreviewCard({
   const progressPosition = timeToPosition(currentTime);
 
   return (
-    <div className='group relative rounded-xl border border-white/10 bg-[#232528] p-2.5 transition-all hover:border-[#427cf1]/50'>
+    <div className='group border-foreground/10 bg-card relative rounded-xl border p-2.5 transition-all hover:border-[#427cf1]/50'>
       <div className='flex items-center gap-2.5'>
         <button
           type='button'
           onClick={handlePlayPause}
           className={cn(
             'flex size-11 shrink-0 items-center justify-center rounded-full transition-all',
-            isPlaying ? 'bg-[#427cf1] text-white' : 'bg-white/5 text-white/60 hover:bg-white/10',
+            isPlaying ? 'text-foreground bg-[#427cf1]' : 'bg-foreground/5 text-foreground/60 hover:bg-foreground/10',
           )}
         >
           {isPlaying ? <Pause className='size-5 fill-current' /> : <Play className='size-5 fill-current' />}
         </button>
         <div className='flex min-w-0 flex-1 flex-col items-start gap-1.5'>
           <div className='flex w-full items-center justify-between gap-2'>
-            <p className='line-clamp-1 text-sm font-medium text-white'>{file.name}</p>
+            <p className='text-foreground line-clamp-1 text-sm font-medium'>{file.name}</p>
             <div className='flex shrink-0 items-center gap-2'>
               <button
                 type='button'
                 onClick={handleToggleTrimmer}
-                className={cn('text-white/40 transition-colors hover:text-[#427cf1]', showTrimmer && 'text-[#427cf1]')}
+                className={cn(
+                  'text-foreground/40 transition-colors hover:text-[#427cf1]',
+                  showTrimmer && 'text-[#427cf1]',
+                )}
                 title={showTrimmer ? t('hide-trim') : t('show-trim')}
               >
                 <Scissors className='size-4' />
@@ -439,7 +442,7 @@ export default function AudioFilePreviewCard({
               <button
                 type='button'
                 onClick={handleDelete}
-                className='text-white/40 transition-colors hover:text-white/60'
+                className='text-foreground/40 hover:text-foreground/60 transition-colors'
               >
                 <Trash2 className='size-4' />
               </button>
@@ -448,7 +451,7 @@ export default function AudioFilePreviewCard({
 
           {/* Waveform + progress indicator + trim boundaries */}
           <div className='w-full space-y-1'>
-            <span className='text-xs text-white/40'>
+            <span className='text-foreground/40 text-xs'>
               {formatTime(currentTime)}/{formatTime(duration, true)}
             </span>
 
@@ -466,7 +469,7 @@ export default function AudioFilePreviewCard({
               }}
             >
               {isGeneratingWaveform ? (
-                <div className='flex h-full w-full items-center justify-center rounded-md bg-white/5'>
+                <div className='bg-foreground/5 flex h-full w-full items-center justify-center rounded-md'>
                   <Loader2 className='size-6 animate-spin text-[#427cf1]' />
                 </div>
               ) : (
@@ -506,7 +509,7 @@ export default function AudioFilePreviewCard({
                         }}
                       >
                         <div className='absolute top-1/2 left-1/2 flex size-5 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-[#427cf1] shadow-md'>
-                          <div className='h-2.5 w-0.5 bg-white' />
+                          <div className='bg-foreground h-2.5 w-0.5' />
                         </div>
                       </div>
 
@@ -539,7 +542,7 @@ export default function AudioFilePreviewCard({
                         }}
                       >
                         <div className='absolute top-1/2 left-1/2 flex size-5 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-[#427cf1] shadow-md'>
-                          <div className='h-2.5 w-0.5 bg-white' />
+                          <div className='bg-foreground h-2.5 w-0.5' />
                         </div>
                       </div>
                     </>
@@ -585,7 +588,7 @@ export default function AudioFilePreviewCard({
                         }
                       }}
                     >
-                      <div className='size-2 rounded-full bg-white' />
+                      <div className='bg-foreground size-2 rounded-full' />
                     </div>
                   </div>
                 </>
@@ -594,7 +597,7 @@ export default function AudioFilePreviewCard({
 
             {/* Trim info - only shown in trim mode */}
             {showTrimmer && (
-              <div className='flex items-center justify-between text-xs text-white/60'>
+              <div className='text-foreground/60 flex items-center justify-between text-xs'>
                 <span>
                   {t('start-time')}: <span className='font-medium text-[#427cf1]'>{formatTime(startTime)}</span>
                 </span>

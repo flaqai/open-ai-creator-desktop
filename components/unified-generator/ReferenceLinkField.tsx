@@ -17,7 +17,7 @@ export default function ReferenceLinkField({ label, placeholder, links, max, onC
 
   return (
     <div className='space-y-2'>
-      <div className='flex items-center justify-between text-sm text-white/70'>
+      <div className='text-foreground/70 flex items-center justify-between text-sm'>
         <span>{label}</span>
         <span>
           {links.filter(Boolean).length}/{max}
@@ -26,12 +26,12 @@ export default function ReferenceLinkField({ label, placeholder, links, max, onC
       {visibleLinks.map((link, index) => (
         <div key={index} className='flex items-center gap-2'>
           <div className='relative flex-1'>
-            <Link2 className='absolute top-1/2 left-3 size-4 -translate-y-1/2 text-white/40' />
+            <Link2 className='text-foreground/40 absolute top-1/2 left-3 size-4 -translate-y-1/2' />
             <Input
               type='url'
               value={link}
               placeholder={placeholder}
-              className='border-white/10 bg-black/20 pl-9 text-white'
+              className='border-foreground/10 text-foreground bg-black/20 pl-9'
               onChange={(event) => {
                 const next = [...visibleLinks];
                 next[index] = event.target.value;
@@ -42,7 +42,7 @@ export default function ReferenceLinkField({ label, placeholder, links, max, onC
           {visibleLinks.length > 1 && (
             <button
               type='button'
-              className='flex size-9 items-center justify-center rounded-lg text-white/50 hover:bg-white/10 hover:text-white'
+              className='text-foreground/50 hover:bg-foreground/10 hover:text-foreground flex size-9 items-center justify-center rounded-lg'
               onClick={() => onChange(visibleLinks.filter((_, linkIndex) => linkIndex !== index))}
               aria-label={`${label} ${index + 1}`}
             >
@@ -54,7 +54,7 @@ export default function ReferenceLinkField({ label, placeholder, links, max, onC
       {visibleLinks.length < max && visibleLinks.every(Boolean) && (
         <button
           type='button'
-          className='flex items-center gap-1 text-xs text-white/50 hover:text-white/80'
+          className='text-foreground/50 hover:text-foreground/80 flex items-center gap-1 text-xs'
           onClick={() => onChange([...visibleLinks, ''])}
         >
           <Plus className='size-3.5' />

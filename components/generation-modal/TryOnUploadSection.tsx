@@ -9,6 +9,7 @@ import { useFormContext } from 'react-hook-form';
 import { toast } from 'sonner';
 
 import { cn } from '@/lib/utils';
+import { useFormRestoration } from '@/hooks/use-form-restoration';
 import SubHeading from '@/components/form/SubHeading';
 import { ObjectIcon, SubjectIcon } from '@/components/svg/form/image-upload-with-frame';
 
@@ -47,6 +48,19 @@ const TryOnUploadSection = forwardRef<TryOnUploadSectionRef, TryOnUploadSectionP
 
     // Object state
     const [objectImages, setObjectImages] = useState<ImageItem[]>([]);
+    useFormRestoration((data, preview) => {
+      const url = preview(data.subjectImage);
+      setSubjectImageState(
+        url ? { url, file: data.subjectImage instanceof File ? data.subjectImage : undefined } : null,
+      );
+      const values = Array.isArray(data.objectImages) ? data.objectImages : [];
+      setObjectImages(
+        values.flatMap((value) => {
+          const url = preview(value);
+          return url ? [{ id: nanoid(), file: value instanceof File ? value : undefined, previewUrl: url }] : [];
+        }),
+      );
+    });
     const objectInputRef = useRef<HTMLInputElement>(null);
 
     // === Subject handlers ===
@@ -149,19 +163,19 @@ const TryOnUploadSection = forwardRef<TryOnUploadSectionRef, TryOnUploadSectionP
     return (
       <div className='flex flex-col gap-2.5'>
         {title && <SubHeading>{title}</SubHeading>}
-        <div className='flex flex-col gap-1 rounded-xl border border-[#2a2b2f] bg-[#1c1d20] p-1'>
+        <div className='border-border bg-card flex flex-col gap-1 rounded-xl border p-1'>
           {/* Subject - single image dropzone */}
-          <div className='flex items-stretch gap-1 rounded-xl bg-[#232528] p-1'>
+          <div className='bg-card flex items-stretch gap-1 rounded-xl p-1'>
             <div className='flex shrink-0 items-center'>
-              <SubjectIcon className='size-5 text-white/70' />
+              <SubjectIcon className='text-foreground/70 size-5' />
             </div>
-            <div className='w-px border-l border-dashed border-white/10' />
+            <div className='border-foreground/10 w-px border-l border-dashed' />
 
             <div
               {...subjectDropzone.getRootProps()}
               className={cn(
-                'relative flex h-[100px] flex-1 cursor-pointer items-center justify-center overflow-hidden rounded-lg border border-dashed border-white/10 transition-all hover:border-white/30 hover:bg-[#2a2b2f]',
-                subjectDropzone.isDragActive && 'border-white/30 bg-[#2a2b2f]',
+                'border-foreground/10 hover:border-foreground/30 hover:bg-card relative flex h-[100px] flex-1 cursor-pointer items-center justify-center overflow-hidden rounded-lg border border-dashed transition-all',
+                subjectDropzone.isDragActive && 'border-foreground/30 bg-card',
                 subjectImage && 'border-transparent hover:border-transparent hover:bg-transparent',
               )}
             >
@@ -182,24 +196,24 @@ const TryOnUploadSection = forwardRef<TryOnUploadSectionRef, TryOnUploadSectionP
                     }}
                     className='absolute inset-0 flex items-center justify-center bg-black/40 transition-all lg:hidden lg:group-hover:flex'
                   >
-                    <Trash2 className='size-5 text-white' />
+                    <Trash2 className='text-foreground size-5' />
                   </button>
                 </div>
               ) : (
                 <div className='flex flex-col items-center justify-center gap-1'>
-                  <Upload className='size-5 text-white/40' />
-                  <span className='text-sm text-white/40'>{subjectLabel}</span>
+                  <Upload className='text-foreground/40 size-5' />
+                  <span className='text-foreground/40 text-sm'>{subjectLabel}</span>
                 </div>
               )}
             </div>
           </div>
 
           {/* Object - multi image dropzone */}
-          <div className='flex items-stretch gap-1 rounded-xl bg-[#232528] p-1'>
+          <div className='bg-card flex items-stretch gap-1 rounded-xl p-1'>
             <div className='flex shrink-0 items-center'>
-              <ObjectIcon className='size-5 text-white/70' />
+              <ObjectIcon className='text-foreground/70 size-5' />
             </div>
-            <div className='w-px border-l border-dashed border-white/10' />
+            <div className='border-foreground/10 w-px border-l border-dashed' />
 
             <div
               {...objectDropzone.getRootProps()}
@@ -213,21 +227,21 @@ const TryOnUploadSection = forwardRef<TryOnUploadSectionRef, TryOnUploadSectionP
               role='button'
               tabIndex={0}
               className={cn(
-                'relative flex flex-1 cursor-pointer flex-col rounded-lg border border-dashed border-white/10 p-2 transition-all hover:border-white/30 hover:bg-[#2a2b2f]',
-                objectDropzone.isDragActive && 'border-white/30 bg-[#2a2b2f]',
+                'border-foreground/10 hover:border-foreground/30 hover:bg-card relative flex flex-1 cursor-pointer flex-col rounded-lg border border-dashed p-2 transition-all',
+                objectDropzone.isDragActive && 'border-foreground/30 bg-card',
               )}
             >
               {objectImages.length === 0 ? (
                 <div className='flex items-center gap-3 py-3'>
-                  <div className='flex size-12 shrink-0 items-center justify-center rounded-lg border-2 border-dashed border-white/20 bg-[#1c1d20]'>
-                    <Plus className='size-5 text-white/40' />
+                  <div className='border-foreground/20 bg-card flex size-12 shrink-0 items-center justify-center rounded-lg border-2 border-dashed'>
+                    <Plus className='text-foreground/40 size-5' />
                   </div>
                   <div className='flex flex-1 flex-col items-center gap-0.5 text-center'>
-                    <span className='text-sm text-white/40'>{objectLabel}</span>
-                    <span className='text-xs text-white/30'>
+                    <span className='text-foreground/40 text-sm'>{objectLabel}</span>
+                    <span className='text-foreground/30 text-xs'>
                       {tUpload('supported-formats')}: {ACCEPTED_FORMATS_LABEL}
                     </span>
-                    <span className='text-xs text-white/30'>
+                    <span className='text-foreground/30 text-xs'>
                       {objectImages.length}/{maxObjectImages} {tCommon('images')}
                     </span>
                   </div>
@@ -236,10 +250,7 @@ const TryOnUploadSection = forwardRef<TryOnUploadSectionRef, TryOnUploadSectionP
                 <div className='flex flex-col gap-1.5'>
                   <div className='grid grid-cols-4 gap-1.5'>
                     {objectImages.map((image) => (
-                      <div
-                        key={image.id}
-                        className='group relative aspect-square overflow-hidden rounded-lg bg-[#2a2b2f]'
-                      >
+                      <div key={image.id} className='group bg-card relative aspect-square overflow-hidden rounded-lg'>
                         <img src={image.previewUrl} alt='Object' className='size-full object-cover' decoding='async' />
                         <button
                           type='button'
@@ -249,17 +260,17 @@ const TryOnUploadSection = forwardRef<TryOnUploadSectionRef, TryOnUploadSectionP
                           }}
                           className='absolute inset-0 flex items-center justify-center bg-black/40 transition-all lg:hidden lg:group-hover:flex'
                         >
-                          <Trash2 className='size-4 text-white' />
+                          <Trash2 className='text-foreground size-4' />
                         </button>
                       </div>
                     ))}
                     {canAddMore && (
-                      <div className='flex aspect-square items-center justify-center rounded-lg border-2 border-dashed border-white/20 bg-[#1c1d20]'>
-                        <Plus className='size-5 text-white/40' />
+                      <div className='border-foreground/20 bg-card flex aspect-square items-center justify-center rounded-lg border-2 border-dashed'>
+                        <Plus className='text-foreground/40 size-5' />
                       </div>
                     )}
                   </div>
-                  <div className='flex items-center justify-between text-xs text-white/30'>
+                  <div className='text-foreground/30 flex items-center justify-between text-xs'>
                     <span>
                       {tUpload('supported-formats')}: {ACCEPTED_FORMATS_LABEL}
                     </span>
@@ -282,7 +293,7 @@ const TryOnUploadSection = forwardRef<TryOnUploadSectionRef, TryOnUploadSectionP
 
           {hintsSection && (
             <>
-              <div className='border-t border-[#2a2b2f]' />
+              <div className='border-border border-t' />
               {hintsSection}
             </>
           )}
