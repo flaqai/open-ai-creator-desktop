@@ -1,4 +1,5 @@
 import { ALL_IMAGE_MODELS, ALL_IMAGE_PROVIDERS } from '@/lib/constants/image';
+import { hasReferenceMediaSource } from '@/lib/constants/unified-generator/types';
 import { ALL_VIDEO_MODELS, getVersionConfig } from '@/lib/constants/video';
 
 type Option = string | { value: string };
@@ -60,4 +61,19 @@ export function validUnifiedDraft(data: Record<string, unknown>) {
       })
     );
   });
+}
+
+export function sanitizeUnifiedDraft(data: Record<string, unknown>) {
+  const next = { ...data };
+  for (const key of ['imageInputs', 'referenceImages', 'referenceVideos', 'referenceAudios']) {
+    next[key] = Array.isArray(data[key]) ? data[key].filter(hasReferenceMediaSource) : [];
+  }
+  for (const key of ['videoStartInput', 'videoEndInput']) {
+    next[key] = hasReferenceMediaSource(data[key]) ? data[key] : null;
+  }
+  next.videoAudioInput = data.videoAudioInput instanceof File ? data.videoAudioInput : null;
+  next.referenceFiles = Array.isArray(data.referenceFiles)
+    ? data.referenceFiles.filter((value): value is File => value instanceof File)
+    : [];
+  return next;
 }

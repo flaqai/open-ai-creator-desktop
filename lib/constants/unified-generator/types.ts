@@ -13,6 +13,16 @@ export interface UnifiedGeneratorReferenceMediaAsset {
   };
 }
 
+export function hasReferenceMediaSource(value: unknown): value is UnifiedGeneratorReferenceMediaAsset {
+  if (!value || typeof value !== 'object') return false;
+  const asset = value as Partial<UnifiedGeneratorReferenceMediaAsset>;
+  return (
+    typeof asset.id === 'string' &&
+    ['image', 'video', 'audio'].includes(String(asset.kind)) &&
+    (asset.source instanceof File || (typeof asset.source === 'string' && asset.source.trim().length > 0))
+  );
+}
+
 export interface UnifiedGeneratorReferencePromptNode {
   type?: string;
   text?: string;

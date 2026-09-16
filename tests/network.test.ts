@@ -1,12 +1,14 @@
 import assert from 'node:assert/strict';
 import { afterEach, test } from 'node:test';
 
+import { prepareNativeRequestInit } from '../lib/platform/http';
 import { mediaFileName, mediaRequestUrl } from '../lib/platform/media';
 import { detectImageFormat, imageFormatFromUrl } from '../lib/utils/fileUtils';
 import { fetchWithRetry } from '../lib/utils/promiseUtils';
 import { buildOpenApiUrl, createOpenApiHeaders, openApiFetchJson } from '../network/clientFetch';
 import { testApiConnection } from '../network/connection-test';
 import { createImageTask, getImageTask } from '../network/image/client';
+import { createFlaqSignedUrls } from '../network/upload/flaq-storage';
 import { uploadFiles } from '../network/upload/upload-files';
 import { createVideoTask, getVideoTask } from '../network/video/client';
 
@@ -30,6 +32,23 @@ test('image format detection uses the URL first and degrades quietly when probin
   assert.equal(requests, 0);
   assert.equal(await detectImageFormat('https://asset.test/image', failingFetcher), null);
   assert.equal(requests, 1);
+});
+
+test('native requests materialize Blob bodies before the Tauri transport reads them', async () => {
+  const source = new Blob(['stable upload'], { type: 'image/png' });
+  const prepared = await prepareNativeRequestInit({ method: 'PUT', body: source });
+  assert.ok(prepared?.body instanceof ArrayBuffer);
+  assert.equal(new TextDecoder().decode(prepared.body), 'stable upload');
+
+  class UnreadableBlob extends Blob {
+    override arrayBuffer(): Promise<ArrayBuffer> {
+      return Promise.reject(new Error('Blob loading failed'));
+    }
+  }
+  await assert.rejects(
+    prepareNativeRequestInit({ method: 'PUT', body: new UnreadableBlob(['lost']) }),
+    /select the file again/,
+  );
 });
 
 test('base URL validation and Headers instances preserve custom headers', () => {
@@ -129,6 +148,43 @@ test('connection test uses the dedicated key status endpoint and its availabilit
     }),
     /network unavailable/,
   );
+});
+
+test('built-in Flaq storage requests authenticated presigned URLs without R2 credentials', async () => {
+  let request: { url: string; init?: RequestInit } | undefined;
+  globalThis.fetch = async (url, init) => {
+    request = { url: String(url), init };
+    return json({
+      code: 200,
+      total: 2,
+      msg: 'success',
+      rows: [
+        { signedUrl: 'https://upload.test/1', url: 'https://asset.test/1' },
+        { signedUrl: 'https://upload.test/2', url: 'https://asset.test/2' },
+      ],
+    });
+  };
+
+  const result = await createFlaqSignedUrls(['image/png', 'video/mp4'], true, {
+    config,
+    site: 'desktop-test',
+  });
+
+  assert.equal(request?.url, 'https://api.example.test/image/presignedUrl');
+  assert.equal(request?.init?.method, 'POST');
+  assert.equal(new Headers(request?.init?.headers).get('Authorization'), 'Bearer test-only-key');
+  assert.deepEqual(JSON.parse(request?.init?.body as string), {
+    mineType: ['image/png', 'video/mp4'],
+    site: 'desktop-test',
+    isForever: true,
+  });
+  assert.deepEqual(
+    result.rows.map((row) => row.mimeType),
+    ['image/png', 'video/mp4'],
+  );
+
+  globalThis.fetch = async () => json({ code: 401, msg: 'not authorized', data: null });
+  await assert.rejects(createFlaqSignedUrls(['image/png'], false, { config, site: 'desktop-test' }), /not authorized/);
 });
 
 test('retry handles transient failures, avoids permanent retries and respects cancellation', async () => {

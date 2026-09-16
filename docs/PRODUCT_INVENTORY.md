@@ -28,9 +28,9 @@ build emits explicit locale paths and chooses the saved language, supported syst
 - Flaq Open API configuration: custom API base URL, client key, connection test, remember-for-later preference, and
   clear/reset actions.
 - Flaq setup guidance: account/API-key entry points and direct links to Flaq documentation.
-- Media upload transport: the provisioned Flaq R2 configuration is selected by default. Desktop users can instead select
-  a separately stored custom Cloudflare R2 account from Image Hosting settings. Files upload to R2 first, and generation
-  requests receive only the resulting public URLs.
+- Media upload transport: the Flaq Client Key requests short-lived upload URLs by default, so shared storage credentials
+  are never shipped in the desktop app. Desktop users can instead select a separately stored custom Cloudflare R2
+  account from Image Hosting settings. Files upload to storage first, and generation requests receive only public URLs.
 - Asynchronous generation: task submission, polling, recovery of active tasks, success/failure states, and result
   rendering.
 - Local history and archive: metadata remains in the application WebView profile; newly completed desktop image and
@@ -79,7 +79,7 @@ The imported project currently ships 15 locales:
 | Dependency           | Original web behavior                                   | Desktop behavior                                                                                                 |
 | -------------------- | ------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- |
 | Flaq Open API        | Called from the browser with the configured client key  | Same API and forms; setup is presented as a first-run workflow                                                   |
-| Media upload signing | Next.js server routes can read deployment `R2_*` values | Desktop signs direct R2 uploads locally, using provisioned defaults or separately stored custom credentials      |
+| Media upload signing | Next.js server routes can read deployment `R2_*` values | Desktop requests Flaq-signed URLs with its Client Key; only optional custom R2 credentials are signed locally    |
 | Image proxy          | Next.js GET route                                       | Desktop uses native HTTP media fetch; web keeps the original proxy                                               |
 | Next.js middleware   | Locale detection and URL rewriting                      | Desktop uses statically generated locale routes and a small launch redirect                                      |
 | Browser storage      | Encrypted API configuration and local history           | Stored in the isolated desktop WebView profile; native secret-store migration is listed as a hardening follow-up |

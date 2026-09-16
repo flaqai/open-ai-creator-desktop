@@ -10,7 +10,10 @@ import { Music2 } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import { createRoot, type Root } from 'react-dom/client';
 
-import type { UnifiedGeneratorReferencePromptNode } from '@/lib/constants/unified-generator/types';
+import {
+  hasReferenceMediaSource,
+  type UnifiedGeneratorReferencePromptNode,
+} from '@/lib/constants/unified-generator/types';
 import { cn } from '@/lib/utils';
 import {
   createReferencePromptDocFromText,
@@ -58,7 +61,7 @@ function useReferenceMentionItems(assets: UnifiedGeneratorReferenceMentionAsset[
 
   useEffect(() => {
     const objectUrls: string[] = [];
-    const nextItems = assets.map((asset) => {
+    const nextItems = assets.filter(hasReferenceMediaSource).map((asset) => {
       if (typeof asset.source === 'string') {
         return toReferenceMentionItem(asset, asset.source);
       }

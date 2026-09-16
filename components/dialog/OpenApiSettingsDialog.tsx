@@ -10,10 +10,28 @@ import {
 } from '@/network/clientFetch';
 import { setApiConnectionAuthorized } from '@/network/connection-status';
 import { testApiConnection } from '@/network/connection-test';
-import { ChevronDown, ChevronRight, ExternalLink, KeyRound, PlugZap, UserRound } from 'lucide-react';
-import { useTranslations } from 'next-intl';
+import {
+  ChevronDown,
+  ChevronRight,
+  ExternalLink,
+  KeyRound,
+  PlugZap,
+  Plus,
+  Save,
+  Trash2,
+  UserRound,
+} from 'lucide-react';
+import { useLocale, useTranslations } from 'next-intl';
 import { toast } from 'sonner';
 
+import {
+  initialR2Preset,
+  loadR2Presets,
+  removeR2Preset,
+  saveR2Presets,
+  upsertR2Preset,
+  type R2Preset,
+} from '@/lib/desktop/r2-presets';
 import { isDesktopRuntime } from '@/lib/desktop/runtime';
 import {
   CUSTOM_R2_ACCESS_KEY_ID_STORAGE_KEY,
@@ -43,6 +61,7 @@ import {
 } from '@/components/ui/dialog';
 import { Input } from '@/components/ui/input';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 
 const FLAQ_REGISTER_URL = 'https://flaq.ai/';
 
@@ -57,6 +76,8 @@ export default function OpenApiSettingsDialog({ open, onOpenChange, embedded = f
   const tHosting = useTranslations('components.image-hosting');
   const tCommon = useTranslations('Common');
   const tDesktop = useTranslations('Desktop');
+  const locale = useLocale();
+  const zh = locale === 'zh' || locale === 'tw';
   const [baseUrl, setBaseUrl] = useState(DEFAULT_OPEN_API_BASE_URL);
   const [clientKey, setClientKey] = useState('');
   const [rememberMe, setRememberMe] = useState(false);
@@ -70,13 +91,23 @@ export default function OpenApiSettingsDialog({ open, onOpenChange, embedded = f
   const [r2SecretAccessKey, setR2SecretAccessKey] = useState('');
   const [r2BucketName, setR2BucketName] = useState('');
   const [isTestingR2, setIsTestingR2] = useState(false);
+  const [r2Presets, setR2Presets] = useState<R2Preset[]>([]);
+  const [selectedPresetId, setSelectedPresetId] = useState('');
+  const [presetName, setPresetName] = useState('');
+  const [isSavingPreset, setIsSavingPreset] = useState(false);
 
   useEffect(() => {
     if (!open || typeof window === 'undefined') return;
 
     const loadSettings = async () => {
-      const savedBaseUrl = await getSecureItem(OPEN_API_BASE_URL_STORAGE_KEY);
-      const savedClientKey = await getSecureItem(OPEN_API_CLIENT_KEY_STORAGE_KEY);
+      const [savedBaseUrl, savedClientKey, savedPresets] = await Promise.all([
+        getSecureItem(OPEN_API_BASE_URL_STORAGE_KEY),
+        getSecureItem(OPEN_API_CLIENT_KEY_STORAGE_KEY),
+        loadR2Presets().catch((error) => {
+          toast.error(error instanceof Error ? error.message : String(error));
+          return [];
+        }),
+      ]);
       const [customDomain, customAccountId, customAccessKeyId, customSecretAccessKey, customBucketName] =
         await Promise.all([
           getSecureItem(CUSTOM_R2_PUBLIC_DOMAIN_STORAGE_KEY),
@@ -105,13 +136,24 @@ export default function OpenApiSettingsDialog({ open, onOpenChange, embedded = f
       setBaseUrl(savedBaseUrl || DEFAULT_OPEN_API_BASE_URL);
       setClientKey(savedClientKey || '');
       setUploadProviderDraft(getUploadProvider());
-      setR2PublicDomain(customDomain || defaultDomain || '');
-      setR2AccountId(customAccountId || defaultAccountId || '');
-      setR2AccessKeyId(customAccessKeyId || defaultAccessKeyId || '');
-      setR2SecretAccessKey(customSecretAccessKey || defaultSecretAccessKey || '');
-      setR2BucketName(customBucketName || defaultBucketName || '');
+      const currentR2 = {
+        publicDomain: customDomain || defaultDomain || '',
+        accountId: customAccountId || defaultAccountId || '',
+        accessKeyId: customAccessKeyId || defaultAccessKeyId || '',
+        secretAccessKey: customSecretAccessKey || defaultSecretAccessKey || '',
+        bucketName: customBucketName || defaultBucketName || '',
+      };
+      const initialPreset = initialR2Preset(savedPresets, currentR2);
+      setR2PublicDomain(initialPreset?.publicDomain || currentR2.publicDomain);
+      setR2AccountId(initialPreset?.accountId || currentR2.accountId);
+      setR2AccessKeyId(initialPreset?.accessKeyId || currentR2.accessKeyId);
+      setR2SecretAccessKey(initialPreset?.secretAccessKey || currentR2.secretAccessKey);
+      setR2BucketName(initialPreset?.bucketName || currentR2.bucketName);
       setRememberMe(isRememberMeEnabled());
       setDesktop(isDesktopRuntime());
+      setR2Presets(savedPresets);
+      setSelectedPresetId(initialPreset?.id || '');
+      setPresetName(initialPreset?.name || '');
     };
 
     void loadSettings().catch((error: unknown) => toast.error(error instanceof Error ? error.message : String(error)));
@@ -220,6 +262,64 @@ export default function OpenApiSettingsDialog({ open, onOpenChange, embedded = f
       toast.error(`${tHosting('test-failed')} ${message}`);
     } finally {
       setIsTestingR2(false);
+    }
+  };
+
+  const applyR2Preset = (id: string) => {
+    const preset = r2Presets.find((item) => item.id === id);
+    if (!preset) return;
+    setSelectedPresetId(id);
+    setPresetName(preset.name);
+    setR2AccountId(preset.accountId);
+    setR2AccessKeyId(preset.accessKeyId);
+    setR2SecretAccessKey(preset.secretAccessKey);
+    setR2BucketName(preset.bucketName);
+    setR2PublicDomain(preset.publicDomain);
+  };
+
+  const startNewR2Preset = () => {
+    setSelectedPresetId('');
+    setPresetName('');
+  };
+
+  const handleSaveR2Preset = async () => {
+    setIsSavingPreset(true);
+    try {
+      const { validateR2Config } = await import('@/network/upload/desktop-r2');
+      const config = validateR2Config({
+        accountId: r2AccountId,
+        accessKeyId: r2AccessKeyId,
+        secretAccessKey: r2SecretAccessKey,
+        bucketName: r2BucketName,
+        publicDomain: r2PublicDomain,
+      });
+      const next = upsertR2Preset(r2Presets, { name: presetName, ...config }, selectedPresetId || undefined);
+      await saveR2Presets(next);
+      const saved = selectedPresetId ? next.find((preset) => preset.id === selectedPresetId) : next[next.length - 1];
+      setR2Presets(next);
+      setSelectedPresetId(saved?.id || '');
+      setPresetName(saved?.name || presetName.trim());
+      toast.success(zh ? '自定义图床预设已加密保存。' : 'Custom storage preset saved securely.');
+    } catch (error) {
+      toast.error(error instanceof Error ? error.message : String(error));
+    } finally {
+      setIsSavingPreset(false);
+    }
+  };
+
+  const handleDeleteR2Preset = async () => {
+    const preset = r2Presets.find((item) => item.id === selectedPresetId);
+    if (!preset) return;
+    if (!window.confirm(zh ? `删除预设“${preset.name}”？` : `Delete preset “${preset.name}”?`)) return;
+    try {
+      const next = removeR2Preset(r2Presets, preset.id);
+      await saveR2Presets(next);
+      setR2Presets(next);
+      setSelectedPresetId('');
+      setPresetName('');
+      toast.success(zh ? '预设已删除。' : 'Preset deleted.');
+    } catch (error) {
+      toast.error(error instanceof Error ? error.message : String(error));
     }
   };
 
@@ -398,6 +498,70 @@ export default function OpenApiSettingsDialog({ open, onOpenChange, embedded = f
                 </p>
               ) : (
                 <div className='space-y-3'>
+                  <div className='border-foreground/10 bg-foreground/[0.025] space-y-3 rounded-lg border p-3'>
+                    <div className='flex items-center justify-between gap-3'>
+                      <div>
+                        <p className='text-foreground/80 text-sm font-medium'>
+                          {zh ? '自定义图床预设' : 'Custom storage presets'}
+                        </p>
+                        <p className='text-foreground/45 mt-0.5 text-xs'>
+                          {zh ? '参数和密钥会加密保存在此设备。' : 'Parameters and keys are encrypted on this device.'}
+                        </p>
+                      </div>
+                      <Button type='button' variant='ghost' size='sm' onClick={startNewR2Preset}>
+                        <Plus aria-hidden='true' className='size-4' />
+                        {zh ? '新建' : 'New'}
+                      </Button>
+                    </div>
+                    <Select value={selectedPresetId || undefined} onValueChange={applyR2Preset}>
+                      <SelectTrigger className='border-foreground/10 bg-foreground/5 w-full'>
+                        <SelectValue placeholder={zh ? '选择已保存的预设' : 'Choose a saved preset'} />
+                      </SelectTrigger>
+                      <SelectContent>
+                        {r2Presets.map((preset) => (
+                          <SelectItem key={preset.id} value={preset.id}>
+                            {preset.name}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                    <Input
+                      value={presetName}
+                      onChange={(event) => setPresetName(event.target.value)}
+                      maxLength={40}
+                      placeholder={zh ? '预设名称，例如：生产环境' : 'Preset name, e.g. Production'}
+                      aria-label={zh ? '预设名称' : 'Preset name'}
+                      className='border-foreground/10 bg-foreground/5 h-10'
+                    />
+                    <div className='flex flex-wrap gap-2'>
+                      <Button
+                        type='button'
+                        size='sm'
+                        onClick={() => void handleSaveR2Preset()}
+                        disabled={isSavingPreset}
+                      >
+                        <Save aria-hidden='true' className='size-4' />
+                        {selectedPresetId
+                          ? zh
+                            ? '更新当前预设'
+                            : 'Update preset'
+                          : zh
+                            ? '保存为新预设'
+                            : 'Save as new preset'}
+                      </Button>
+                      <Button
+                        type='button'
+                        size='sm'
+                        variant='ghost'
+                        onClick={() => void handleDeleteR2Preset()}
+                        disabled={!selectedPresetId || isSavingPreset}
+                        className='text-destructive hover:text-destructive'
+                      >
+                        <Trash2 aria-hidden='true' className='size-4' />
+                        {zh ? '删除预设' : 'Delete preset'}
+                      </Button>
+                    </div>
+                  </div>
                   <div className='grid gap-3 sm:grid-cols-2'>
                     <div className='space-y-1.5'>
                       <label htmlFor='r2-account-id' className='text-foreground/70 text-xs font-medium'>

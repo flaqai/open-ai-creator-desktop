@@ -2,6 +2,13 @@ import assert from 'node:assert/strict';
 import { beforeEach, test } from 'node:test';
 
 import {
+  initialR2Preset,
+  loadR2Presets,
+  removeR2Preset,
+  saveR2Presets,
+  upsertR2Preset,
+} from '../lib/desktop/r2-presets';
+import {
   CUSTOM_R2_ACCOUNT_ID_STORAGE_KEY,
   getUploadProvider,
   R2_ACCOUNT_ID_STORAGE_KEY,
@@ -22,6 +29,9 @@ class MemoryStorage {
   }
   removeItem(key: string) {
     this.data.delete(key);
+  }
+  values() {
+    return [...this.data.values()];
   }
 }
 beforeEach(() => {
@@ -80,6 +90,33 @@ test('clearing API connection settings preserves separately managed custom R2 cr
   clearAllSecureStorage();
   assert.equal(await getSecureItem(R2_ACCOUNT_ID_STORAGE_KEY), 'existing-r2-account');
   assert.equal(await getSecureItem(CUSTOM_R2_ACCOUNT_ID_STORAGE_KEY), 'custom-r2-account');
+});
+
+test('R2 presets are encrypted, can be selected for reuse and reject duplicate names', async () => {
+  const input = {
+    name: 'Production',
+    accountId: 'account',
+    accessKeyId: 'access',
+    secretAccessKey: 'secret',
+    bucketName: 'bucket',
+    publicDomain: 'https://assets.example.test',
+  };
+  const created = upsertR2Preset([], input);
+  await saveR2Presets(created);
+  const rawValues = (localStorage as unknown as MemoryStorage).values();
+  assert.equal(
+    rawValues.some((value) => value.includes('secret')),
+    false,
+  );
+  assert.deepEqual(await loadR2Presets(), created);
+  assert.equal(initialR2Preset(created, {})?.id, created[0].id);
+  assert.equal(initialR2Preset(created, input)?.id, created[0].id);
+  assert.equal(initialR2Preset(created, { ...input, bucketName: 'different' }), undefined);
+
+  const updated = upsertR2Preset(created, { ...input, bucketName: 'new-bucket' }, created[0].id);
+  assert.equal(updated[0].bucketName, 'new-bucket');
+  assert.throws(() => upsertR2Preset(updated, { ...input, name: 'Production' }), /already exists/);
+  assert.deepEqual(removeR2Preset(updated, updated[0].id), []);
 });
 
 test('history tolerates malformed storage and notifies only active subscribers', () => {

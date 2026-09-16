@@ -8,6 +8,7 @@ import { isApiConnectionAuthorized } from '@/network/connection-status';
 import packageInfo from '@/package.json';
 import {
   ExternalLink,
+  FileText,
   FolderOpen,
   HelpCircle,
   Home,
@@ -26,6 +27,7 @@ import {
 import { useLocale, useTranslations } from 'next-intl';
 import { toast } from 'sonner';
 
+import { openDesktopLogDirectory, writeDesktopLog } from '@/lib/desktop/logging';
 import {
   chooseMediaStorageDirectory,
   getMediaStorageSettings,
@@ -110,6 +112,19 @@ export default function DesktopShell({ children }: { children: ReactNode }) {
     window.addEventListener(OPEN_DESKTOP_SETTINGS_EVENT, connection);
     window.addEventListener(OPEN_API_CONFIG_CHANGED_EVENT, refreshConnection);
     window.addEventListener('keydown', key);
+    const reportWindowError = (event: ErrorEvent) => {
+      void writeDesktopLog(
+        'error',
+        'webview',
+        `${event.message || 'Unhandled window error'} (${event.filename || 'unknown'}:${event.lineno || 0})`,
+      );
+    };
+    const reportUnhandledRejection = (event: PromiseRejectionEvent) => {
+      const reason = event.reason instanceof Error ? event.reason.message : String(event.reason || 'Unknown rejection');
+      void writeDesktopLog('error', 'webview', `Unhandled promise rejection: ${reason}`);
+    };
+    window.addEventListener('error', reportWindowError);
+    window.addEventListener('unhandledrejection', reportUnhandledRejection);
     let disposed = false;
     let unlisten: (() => void) | undefined;
     if (isNativeDesktop())
@@ -128,6 +143,8 @@ export default function DesktopShell({ children }: { children: ReactNode }) {
       window.removeEventListener(OPEN_DESKTOP_SETTINGS_EVENT, connection);
       window.removeEventListener(OPEN_API_CONFIG_CHANGED_EVENT, refreshConnection);
       window.removeEventListener('keydown', key);
+      window.removeEventListener('error', reportWindowError);
+      window.removeEventListener('unhandledrejection', reportUnhandledRejection);
     };
   }, [desktop, zh]);
 
@@ -182,6 +199,13 @@ export default function DesktopShell({ children }: { children: ReactNode }) {
   const openMediaDirectory = async () => {
     try {
       await openMediaStorageDirectory();
+    } catch (error) {
+      toast.error(error instanceof Error ? error.message : String(error));
+    }
+  };
+  const openLogDirectory = async () => {
+    try {
+      await openDesktopLogDirectory();
     } catch (error) {
       toast.error(error instanceof Error ? error.message : String(error));
     }
@@ -329,41 +353,61 @@ export default function DesktopShell({ children }: { children: ReactNode }) {
                     </p>
                   </div>
                   {isNativeDesktop() ? (
-                    <div className='border-border space-y-4 border-t pt-6'>
-                      <div>
-                        <h2 className='font-semibold'>{zh ? '作品存储位置' : 'Media storage location'}</h2>
-                        <p className='text-muted-foreground mt-1 text-sm'>
-                          {zh
-                            ? '生成的图片和视频会自动按年、月、日归档。'
-                            : 'Generated images and videos are automatically organized by year, month, and day.'}
-                        </p>
+                    <div className='border-border space-y-6 border-t pt-6'>
+                      <div className='space-y-4'>
+                        <div>
+                          <h2 className='font-semibold'>{zh ? '作品存储位置' : 'Media storage location'}</h2>
+                          <p className='text-muted-foreground mt-1 text-sm'>
+                            {zh
+                              ? '生成的图片和视频会自动按年、月、日归档。'
+                              : 'Generated images and videos are automatically organized by year, month, and day.'}
+                          </p>
+                        </div>
+                        <Input
+                          value={mediaSettings?.directory || (zh ? '正在读取…' : 'Loading…')}
+                          readOnly
+                          aria-label={zh ? '当前作品存储位置' : 'Current media storage location'}
+                          className='bg-muted/40 font-mono text-xs'
+                        />
+                        <div className='flex flex-wrap gap-2'>
+                          <Button
+                            type='button'
+                            onClick={() => void chooseMediaDirectory()}
+                            disabled={mediaSettingsBusy}
+                          >
+                            {zh ? '选择文件夹' : 'Choose folder'}
+                          </Button>
+                          <Button
+                            type='button'
+                            variant='outline'
+                            onClick={() => void openMediaDirectory()}
+                            disabled={!mediaSettings || mediaSettingsBusy}
+                          >
+                            <FolderOpen aria-hidden='true' className='size-4' />
+                            {zh ? '打开文件夹' : 'Open folder'}
+                          </Button>
+                          <Button
+                            type='button'
+                            variant='ghost'
+                            onClick={() => void resetMediaDirectory()}
+                            disabled={!mediaSettings || mediaSettings.isDefault || mediaSettingsBusy}
+                          >
+                            {zh ? '恢复默认' : 'Restore default'}
+                          </Button>
+                        </div>
                       </div>
-                      <Input
-                        value={mediaSettings?.directory || (zh ? '正在读取…' : 'Loading…')}
-                        readOnly
-                        aria-label={zh ? '当前作品存储位置' : 'Current media storage location'}
-                        className='bg-muted/40 font-mono text-xs'
-                      />
-                      <div className='flex flex-wrap gap-2'>
-                        <Button type='button' onClick={() => void chooseMediaDirectory()} disabled={mediaSettingsBusy}>
-                          {zh ? '选择文件夹' : 'Choose folder'}
-                        </Button>
-                        <Button
-                          type='button'
-                          variant='outline'
-                          onClick={() => void openMediaDirectory()}
-                          disabled={!mediaSettings || mediaSettingsBusy}
-                        >
-                          <FolderOpen aria-hidden='true' className='size-4' />
-                          {zh ? '打开文件夹' : 'Open folder'}
-                        </Button>
-                        <Button
-                          type='button'
-                          variant='ghost'
-                          onClick={() => void resetMediaDirectory()}
-                          disabled={!mediaSettings || mediaSettings.isDefault || mediaSettingsBusy}
-                        >
-                          {zh ? '恢复默认' : 'Restore default'}
+                      <div className='border-border space-y-3 border-t pt-5'>
+                        <div>
+                          <h2 className='font-semibold'>{zh ? '诊断与日志' : 'Diagnostics and logs'}</h2>
+                          <p className='text-muted-foreground mt-1 text-sm'>
+                            {zh
+                              ? '日志只记录请求阶段、状态码和错误信息，不记录 Client Key 或请求内容。'
+                              : 'Logs record request stages, status codes and errors, never the Client Key or request bodies.'}
+                          </p>
+                        </div>
+                        <Button type='button' variant='outline' onClick={() => void openLogDirectory()}>
+                          <FileText aria-hidden='true' className='size-4' />
+                          {zh ? '打开日志文件目录' : 'Open log folder'}
                         </Button>
                       </div>
                     </div>

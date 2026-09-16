@@ -3,6 +3,7 @@
 import { defaultLocale, languages } from '@/i18n/languages';
 
 import { STORE_PREFIX } from '@/lib/constants/config';
+import { writeDesktopLog } from '@/lib/desktop/logging';
 import { fetchWithTimeout } from '@/lib/platform/http';
 import { getSecureItem } from '@/lib/utils/secureStorage';
 import { clientSideGetCookie } from '@/lib/utils/stringUtils';
@@ -111,20 +112,35 @@ export async function openApiFetchJson<TResponse>(
   path: string,
   init?: RequestInit,
 ): Promise<TResponse> {
-  const res = await fetchWithTimeout(buildOpenApiUrl(config.baseUrl, path), {
-    ...init,
-    headers: createOpenApiHeaders(config.clientKey, init?.headers),
-  });
+  const method = init?.method || 'GET';
+  let res: Response;
+  try {
+    res = await fetchWithTimeout(buildOpenApiUrl(config.baseUrl, path), {
+      ...init,
+      headers: createOpenApiHeaders(config.clientKey, init?.headers),
+    });
+  } catch (error) {
+    void writeDesktopLog(
+      'error',
+      'open-api',
+      `${method} ${path} failed before receiving a response: ${error instanceof Error ? error.message : String(error)}`,
+    );
+    throw error;
+  }
 
   const data = (await res.json().catch(() => null)) as null | TResponse | OpenApiErrorPayload;
 
   if (!res.ok) {
     const errorMessage =
       (data as OpenApiErrorPayload | null)?.error?.message || res.statusText || 'Open API request failed';
+    void writeDesktopLog('error', 'open-api', `${method} ${path} returned HTTP ${res.status}: ${errorMessage}`);
     throw new Error(errorMessage);
   }
 
-  if (!data || typeof data !== 'object') throw new Error('Open API returned an invalid JSON response.');
+  if (!data || typeof data !== 'object') {
+    void writeDesktopLog('error', 'open-api', `${method} ${path} returned HTTP ${res.status} with invalid JSON`);
+    throw new Error('Open API returned an invalid JSON response.');
+  }
   return data as TResponse;
 }
 

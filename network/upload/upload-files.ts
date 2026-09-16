@@ -1,3 +1,4 @@
+import { writeDesktopLog } from '@/lib/desktop/logging';
 import type { FileType } from '@/lib/utils/fileUtils';
 import { fetchWithRetry } from '@/lib/utils/promiseUtils';
 
@@ -31,11 +32,17 @@ export async function uploadFiles(
             headers: { 'Content-Type': files[index].type },
           });
         } catch (error) {
+          void writeDesktopLog(
+            'error',
+            'media-upload',
+            `Upload ${index + 1}/${files.length} failed: ${error instanceof Error ? error.message : String(error)}`,
+          );
           failure = error;
         }
       }
     }),
   );
   if (failure) throw failure;
+  void writeDesktopLog('info', 'media-upload', `Uploaded ${files.length} media file(s)`);
   return rows.map((row) => row.url!);
 }

@@ -11,7 +11,10 @@ pub fn run() {
         .plugin(tauri_plugin_http::init())
         .plugin(tauri_plugin_dialog::init())
         .plugin(tauri_plugin_fs::init())
-        .setup(desktop::setup)
+        .setup(|app| {
+            logs::initialize(app.handle());
+            desktop::setup(app)
+        })
         .on_page_load(|webview, payload| {
             if payload.event() == tauri::webview::PageLoadEvent::Finished
                 && desktop::should_show_initial_window(payload.url().path())
@@ -37,7 +40,9 @@ pub fn run() {
             media::choose_media_storage_directory,
             media::set_media_storage_directory,
             media::open_media_storage_directory,
-            media::archive_generated_media
+            media::archive_generated_media,
+            logs::write_desktop_log,
+            logs::open_log_directory
         ])
         .build(tauri::generate_context!())
         .expect("error while building Flaq Creator")
@@ -48,5 +53,6 @@ pub fn run() {
         });
 }
 mod desktop;
+mod logs;
 mod media;
 use tauri::Manager;

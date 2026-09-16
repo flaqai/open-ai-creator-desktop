@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from 'react';
 import { useLocale } from 'next-intl';
 import { toast } from 'sonner';
 
-import { deleteDraft, readDraft, saveDraft } from '@/lib/desktop/drafts';
+import { deleteDraft, draftHasMissingMedia, readDraft, saveDraft } from '@/lib/desktop/drafts';
 import { isDesktopRuntime } from '@/lib/desktop/runtime';
 
 export type DraftAdapter = {
@@ -74,6 +74,14 @@ export function useLocalDraft(key: string | null, adapter: DraftAdapter) {
       .then((data) => {
         if (disposed) return;
         if (data && shouldRestore) {
+          if (draftHasMissingMedia(data)) {
+            toast.warning(
+              zh
+                ? '旧草稿的参考素材已失效，提示词和参数已恢复。请重新选择素材，之后将使用新的本地缓存格式。'
+                : 'Old draft media is unavailable. Prompt and settings were restored; select the media once more.',
+              { id: `draft-media-${key}` },
+            );
+          }
           if (current.current.validate && !current.current.validate(data)) {
             toast.warning(
               zh

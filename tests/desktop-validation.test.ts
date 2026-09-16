@@ -3,7 +3,12 @@ import test from 'node:test';
 
 import { ALL_IMAGE_PROVIDERS } from '../lib/constants/image';
 import { ALL_VIDEO_MODELS, getVersionConfig } from '../lib/constants/video';
-import { validImageDraft, validUnifiedDraft, validVideoDraft } from '../lib/desktop/draft-validation';
+import {
+  sanitizeUnifiedDraft,
+  validImageDraft,
+  validUnifiedDraft,
+  validVideoDraft,
+} from '../lib/desktop/draft-validation';
 import useUnifiedGeneratorStore from '../store/unified-generator/useUnifiedGeneratorStore';
 
 test('draft validation recognizes current models and rejects removed models or parameters', () => {
@@ -23,4 +28,21 @@ test('draft validation recognizes current models and rejects removed models or p
     validUnifiedDraft({ ...useUnifiedGeneratorStore.getInitialState(), imageModel: 'retired-model' }),
     false,
   );
+});
+
+test('unified draft cleanup removes media shells whose cached source was lost', () => {
+  const file = new File(['ok'], 'ok.png', { type: 'image/png' });
+  const cleaned = sanitizeUnifiedDraft({
+    imageInputs: [
+      { id: 'lost', kind: 'image', name: 'lost.png' },
+      { id: 'kept', kind: 'image', source: file },
+    ],
+    referenceVideos: [{ id: 'lost-video', kind: 'video' }],
+    videoStartInput: { id: 'lost-start', kind: 'image' },
+    referenceFiles: [undefined, file],
+  });
+  assert.deepEqual(cleaned.imageInputs, [{ id: 'kept', kind: 'image', source: file }]);
+  assert.deepEqual(cleaned.referenceVideos, []);
+  assert.equal(cleaned.videoStartInput, null);
+  assert.deepEqual(cleaned.referenceFiles, [file]);
 });

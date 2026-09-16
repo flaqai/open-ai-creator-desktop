@@ -8,6 +8,7 @@ import type {
   UnifiedGeneratorReferenceMediaAsset,
   UnifiedGeneratorReferenceMediaKind,
 } from '@/lib/constants/unified-generator/types';
+import { hasReferenceMediaSource } from '@/lib/constants/unified-generator/types';
 import { cn } from '@/lib/utils';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 
@@ -142,9 +143,7 @@ export default function ReferenceMediaPicker({
   const [tab, setTab] = useState<PickerTab>('upload');
   const supportsHistory = kind !== 'audio';
   const visibleLocalMediaAssets = localMediaAssets.filter((item) => item.url.trim().length > 0);
-  const visibleHistoryAssets = historyAssets.filter(
-    (asset) => asset.source instanceof File || asset.source.trim().length > 0,
-  );
+  const visibleHistoryAssets = historyAssets.filter(hasReferenceMediaSource);
 
   const handleOpenChange = (nextOpen: boolean) => {
     if (!nextOpen) onPanelHoverChange?.(false);

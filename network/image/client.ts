@@ -1,3 +1,5 @@
+import { writeDesktopLog } from '@/lib/desktop/logging';
+
 import { openApiFetchJson } from '../clientFetch';
 import type { OpenApiConfig, OpenApiPollResponse, OpenApiSubmitResponse, TaskCreditResult } from '../clientFetch';
 import { deleteImageHistoryItem } from './history';
@@ -29,10 +31,20 @@ export type CreateImageTaskResponse = OpenApiSubmitResponse;
 export type GetImageTaskResponse = OpenApiPollResponse<ImageTaskResult>;
 
 export async function createImageTask(config: OpenApiConfig, body: CreateImageTaskRequest) {
-  return openApiFetchJson<CreateImageTaskResponse>(config, '/api/v1/image/task', {
+  const response = await openApiFetchJson<CreateImageTaskResponse>(config, '/api/v1/image/task', {
     method: 'POST',
     body: JSON.stringify(body),
   });
+  if (response.code !== 0 || !response.data?.task_id) {
+    void writeDesktopLog(
+      'error',
+      'image-generation',
+      `Task submission was rejected with business code ${response.code}: ${response.message || 'No message'}`,
+    );
+  } else {
+    void writeDesktopLog('info', 'image-generation', `Image task submitted: ${response.data.task_id}`);
+  }
+  return response;
 }
 
 export async function getImageTask(config: OpenApiConfig, taskId: string, signal?: AbortSignal) {

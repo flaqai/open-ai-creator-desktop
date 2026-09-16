@@ -40,11 +40,18 @@ trimming is requested. A serial queue protects the shared runtime and temporary 
 ## Network and media
 
 Desktop HTTP(S) API requests, signed uploads and media fetches use the native HTTP adapter, avoiding browser CORS
-dependence. Normal web requests retain the original server signing/proxy adapters. Desktop uploads use the original R2
-flow: sign a PUT locally, upload the file directly to R2, then send only its public URL in the generation request. The
-default provider reads the existing provisioned R2 configuration; users can select a separately stored custom R2
-configuration. AWS signing code is lazy-loaded only when an upload or connection test needs it. Uploads validate all
-signed rows before sending and run at most three transfers per batch, preserving reference order.
+dependence. Normal web requests retain the original server signing/proxy adapters. The built-in Flaq storage provider
+uses the configured Client Key to request short-lived PUT URLs from `/image/presignedUrl`; shared R2 credentials never
+enter the desktop process or bundle. Users can alternatively select a separately stored custom R2 configuration, which
+is signed locally. AWS signing code is lazy-loaded only for that custom provider. Uploads validate all signed rows
+before sending and run at most three transfers per batch, preserving reference order.
+
+Preview object URLs are session-only views over in-memory files and never become durable form values. Desktop drafts
+store media as owned ArrayBuffer bytes plus file metadata in IndexedDB; this avoids WebKit's external Blob references
+becoming unreadable after a restart. Version 1 Blob drafts migrate on read. If WebKit can no longer read an old Blob,
+the migration keeps the prompt and parameters, removes only that media value and asks the user to select it once more.
+R2 upload starts only when generation is submitted. A custom R2 PUT signature lasts one hour; uploaded-object retention
+is controlled by the bucket lifecycle. Built-in Flaq retention remains a server policy.
 
 Newly completed desktop image and video results stream into the configured native media root under `YYYY/MM/DD` and
 publish atomically only after successful completion. Stable task-based names make retries idempotent. The default root
@@ -59,7 +66,7 @@ deployment environment.
 ## Credentials and task recovery
 
 Remembered API values and optional custom R2 values use versioned AES-GCM storage in the application-isolated WebView
-profile. The non-secret upload-provider preference defaults to the provisioned Flaq R2 configuration. Custom R2 uses a
+profile. The non-secret upload-provider preference defaults to the Flaq presigned-upload service. Custom R2 uses a
 separate set of encrypted keys, so saving it cannot overwrite the default configuration. Both R2 configurations remain
 untouched when only API connection data is cleared. New-format encryption is independent of browser version and locale.
 The expensive derived key is cached; encryption failures never silently persist plaintext.

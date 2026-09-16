@@ -2,7 +2,7 @@
 
 import useUnifiedGeneratorStore from '@/store/unified-generator/useUnifiedGeneratorStore';
 
-import { validUnifiedDraft } from '@/lib/desktop/draft-validation';
+import { sanitizeUnifiedDraft, validUnifiedDraft } from '@/lib/desktop/draft-validation';
 import { useLocalDraft } from '@/hooks/use-local-draft';
 
 export function useUnifiedDraft(reference: boolean) {
@@ -21,8 +21,9 @@ export function useUnifiedDraft(reference: boolean) {
       ),
     restore: (data) => {
       const initial = store.getInitialState();
+      const sanitized = sanitizeUnifiedDraft(data);
       const safe = Object.fromEntries(
-        Object.entries(data).filter(
+        Object.entries(sanitized).filter(
           ([key]) =>
             key in initial &&
             typeof initial[key as keyof typeof initial] !== 'function' &&

@@ -26,15 +26,18 @@ export interface UploadAdapter {
 }
 
 export async function createSignedUrl(mineType: string[], isForever?: boolean): Promise<CreateSignedUrlResponse> {
-  void isForever;
   if (typeof window === 'undefined') {
     throw new Error('createSignedUrl can only be called from the browser.');
   }
 
   if (isDesktopRuntime()) {
-    const { createDesktopSignedUrls, getCustomDesktopR2Config } = await import('./desktop-r2');
     const provider = getUploadProvider();
-    return createDesktopSignedUrls(mineType, provider === 'custom-r2' ? await getCustomDesktopR2Config() : undefined);
+    if (provider === 'custom-r2') {
+      const { createDesktopSignedUrls, getCustomDesktopR2Config } = await import('./desktop-r2');
+      return createDesktopSignedUrls(mineType, await getCustomDesktopR2Config());
+    }
+    const { createFlaqSignedUrls } = await import('./flaq-storage');
+    return createFlaqSignedUrls(mineType, isForever);
   }
 
   const publicDomain = await getSecureItem(R2_PUBLIC_DOMAIN_STORAGE_KEY);
