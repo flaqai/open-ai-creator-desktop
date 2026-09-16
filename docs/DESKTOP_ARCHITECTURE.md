@@ -40,14 +40,17 @@ trimming is requested. A serial queue protects the shared runtime and temporary 
 ## Network and media
 
 Desktop HTTP(S) API requests, signed uploads and media fetches use the native HTTP adapter, avoiding browser CORS
-dependence. Normal web requests retain the original server signing/proxy adapters. R2 signing is lazy-loaded and
-validates the entire draft before testing or saving. Uploads validate all signed rows before sending and run at most
-three transfers per batch, preserving reference order.
+dependence. Normal web requests retain the original server signing/proxy adapters. Desktop uploads use the original R2
+flow: sign a PUT locally, upload the file directly to R2, then send only its public URL in the generation request. The
+default provider reads the existing provisioned R2 configuration; users can select a separately stored custom R2
+configuration. AWS signing code is lazy-loaded only when an upload or connection test needs it. Uploads validate all
+signed rows before sending and run at most three transfers per batch, preserving reference order.
 
-Native video downloads stream to a temporary file next to the chosen destination and publish only after successful
-completion. Failed requests preserve an existing destination. Image conversion changes actual PNG/JPEG/WebP bytes and
-uses the native save dialog; unsupported encoders fail explicitly. Dialog-selected paths scope filesystem writes.
-Programmatic and anchor-based external links use the system browser.
+Newly completed desktop image and video results stream into the configured native media root under `YYYY/MM/DD` and
+publish atomically only after successful completion. Stable task-based names make retries idempotent. The default root
+is the platform application data directory and can be changed from General settings. Manual video downloads retain the
+save dialog; image conversion changes actual PNG/JPEG/WebP bytes before manual export. Programmatic and anchor-based
+external links use the system browser.
 
 Broad HTTP(S) access is intentionally required for user-configured gateways and asset hosts. Embedded URL credentials
 and non-HTTP(S) media downloads are rejected. Distribution hardening should review CSP and gateway allowlisting for the
@@ -55,9 +58,11 @@ deployment environment.
 
 ## Credentials and task recovery
 
-Remembered API/R2 values use versioned AES-GCM storage in the application-isolated WebView profile. Disabling remember
-removes the persistent copy; enabling it removes the session copy. New-format encryption is independent of browser
-version and locale. The expensive derived key is cached; encryption failures never silently persist plaintext.
+Remembered API values and optional custom R2 values use versioned AES-GCM storage in the application-isolated WebView
+profile. The non-secret upload-provider preference defaults to the provisioned Flaq R2 configuration. Custom R2 uses a
+separate set of encrypted keys, so saving it cannot overwrite the default configuration. Both R2 configurations remain
+untouched when only API connection data is cleared. New-format encryption is independent of browser version and locale.
+The expensive derived key is cached; encryption failures never silently persist plaintext.
 
 This is not an OS credential vault: a local attacker with profile access or injected JavaScript can compromise
 credentials. Stronghold/Keychain/Credential Manager integration remains a release-hardening item. Never embed user keys

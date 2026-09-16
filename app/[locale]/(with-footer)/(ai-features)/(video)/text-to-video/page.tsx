@@ -1,6 +1,7 @@
 import { Metadata } from 'next';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 
+import { isDesktopServerRender } from '@/lib/desktop/server';
 import { createLocalizedMetadata } from '@/lib/seo/metadata';
 import { numberList } from '@/lib/utils/arrayUtils';
 import DesktopFeatureInfo from '@/components/desktop/DesktopFeatureInfo';
@@ -41,7 +42,7 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
     <div className='flex-1'>
       <div className='container-centered container-gap'>
         <div className='flex w-full flex-col gap-5'>
-          {process.env.FLAQ_DESKTOP_BUILD === 'true' ? <DesktopTextToVideoForm /> : <Form />}
+          {isDesktopServerRender ? <DesktopTextToVideoForm /> : <Form />}
         </div>
         <div className='desktop-marketing-heading'>
           <Heading title={t('heading.title')} description={t('heading.description')} />

@@ -1,9 +1,5 @@
 {
   "Desktop": {
-    "r2AccountId": "ID de cuenta R2",
-    "r2BucketName": "Nombre del bucket",
-    "r2AccessKeyId": "ID de clave de acceso",
-    "r2SecretAccessKey": "Clave de acceso secreta",
     "workspace": "Espacio creativo",
     "workspaceDescription": "Elige un flujo y empieza a crear. Los ajustes y trabajos recientes quedan a mano.",
     "configure": "Conectar Flaq",
@@ -16,7 +12,11 @@
     "skip": "Explorar primero",
     "toolGuide": "Guía de la herramienta",
     "toolGuideDescription": "Ejemplos, funciones y preguntas frecuentes de este flujo",
-    "close": "Volver a crear"
+    "close": "Volver a crear",
+    "r2AccountId": "R2 account ID",
+    "r2BucketName": "Bucket name",
+    "r2AccessKeyId": "Access key ID",
+    "r2SecretAccessKey": "Secret access key"
   },
   "Common": {
     "loading": "cargando...",
@@ -102,6 +102,14 @@
         }
       }
     },
+    "image-crop-dialog": {
+      "title": "Crop image",
+      "content": "Move the crop area and adjust zoom or rotation.",
+      "scale": "Zoom",
+      "rotate": "Rotate",
+      "cancel": "Cancel",
+      "done": "Done"
+    },
     "video-carousel": {
       "original-image": "Imagen original",
       "video": "Video",
@@ -116,31 +124,23 @@
       "remember-me": "Remember me (store locally)",
       "remember-me-hint": "If unchecked, the key will be cleared when you close the tab.",
       "security-warning": "Security Notice: Your client key is encrypted before storage, but XSS attacks can still intercept it during API requests. Keep your key secure.",
-      "clear-data": "Clear All Data",
-      "clear-data-confirm": "Are you sure you want to clear all stored settings?",
-      "data-cleared": "All stored data has been cleared.",
+      "clear-data": "Clear connection data",
+      "clear-data-confirm": "Are you sure you want to clear the stored Open API connection settings?",
+      "data-cleared": "Connection data has been cleared.",
       "register": "Register",
       "test": "Test Connection",
       "testing": "Testing...",
       "cancel": "Cancel",
       "save": "Save",
+      "save-and-test": "Save and verify",
+      "saving-and-testing": "Verifying...",
+      "authorization-passed-saved": "Authorization passed and settings were saved.",
+      "authorization-failed-saved": "Authorization could not be verified. Settings were saved.",
       "required": "Client key is required.",
       "saved": "Open API settings saved.",
       "test-success": "Connection succeeded.",
       "test-success-validation": "La API es accesible. La tarea de prueba no existe; aún no se ha confirmado la validez de la clave.",
       "test-failed": "Connection failed."
-    },
-    "image-hosting": {
-      "title": "Image Hosting (R2)",
-      "public-domain": "Public Domain",
-      "public-domain-hint": "The CDN domain for accessing uploaded files. Recommended to use https:// protocol.",
-      "public-domain-placeholder": "https://assets.example.com",
-      "not-configured": "R2 credentials should be set in .env (server-side only). Click \"Test R2\" to verify.",
-      "saved": "Image hosting settings saved.",
-      "test": "Test R2 Connection",
-      "testing": "Testing...",
-      "test-success": "R2 connection succeeded.",
-      "test-failed": "R2 connection failed."
     },
     "dialog": {
       "business": {
@@ -354,6 +354,24 @@
       "content": "El tamaño de la imagen supera los 10MB y no es adecuado para la generación de video AI. ¿Desea comprimirla?",
       "reupload": "Volver a subir",
       "compress": "Comprimir"
+    },
+    "image-hosting": {
+      "title": "Image hosting",
+      "builtin": "Flaq storage (default)",
+      "builtin-description": "Use the Flaq R2 configuration already provisioned in the app.",
+      "builtin-hint": "Local media uploads directly to R2 first. After upload, only the public URL is sent to the generation API.",
+      "custom": "Custom Cloudflare R2",
+      "custom-description": "Use your own R2 account, bucket, and public asset domain.",
+      "custom-desktop-only": "Custom R2 is available in the desktop app only.",
+      "public-domain": "Public domain",
+      "public-domain-hint": "The CDN domain used to access uploaded media. HTTPS is recommended.",
+      "public-domain-placeholder": "https://assets.example.com",
+      "test": "Test custom R2",
+      "testing": "Testing...",
+      "test-success": "Custom R2 connection succeeded.",
+      "test-failed": "Custom R2 connection failed.",
+      "clear-custom": "Clear custom settings",
+      "custom-cleared": "Custom R2 settings were cleared and Flaq storage is active again."
     }
   },
   "Navigation": {
@@ -1290,7 +1308,8 @@
         "delete": "Delete",
         "copyPrompt": "Copy Prompt",
         "copied": "Copied",
-        "expiredImage": "Image Expired"
+        "expiredImage": "Image Expired",
+        "cropLoadFailed": "Unable to load the image for cropping"
       },
       "delete-success": "Image deleted successfully",
       "delete-fail": "Failed to delete image"

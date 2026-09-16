@@ -57,10 +57,14 @@ test('every supported language has desktop and tool guide translation keys', () 
         : [prefix + key],
     );
   const required = flatten(english.Desktop);
+  const requiredHosting = flatten(english.components['image-hosting']);
   for (const locale of languages) {
     const messages = JSON.parse(readFileSync(path.join('messages', locale.lang + '.json'), 'utf8'));
     const keys = new Set(flatten(messages.Desktop));
     for (const key of required) assert.ok(keys.has(key), `${locale.lang}: Desktop.${key}`);
+    const hostingKeys = new Set(flatten(messages.components['image-hosting']));
+    for (const key of requiredHosting)
+      assert.ok(hostingKeys.has(key), `${locale.lang}: components.image-hosting.${key}`);
     for (const tool of FEATURE_MODULES) {
       assert.ok(messages.Navigation[tool.code], `${locale.lang}: ${tool.code}`);
       assert.ok(messages[tool.id]?.manual, `${locale.lang}: missing ${tool.id} manual`);

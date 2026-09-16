@@ -5,6 +5,14 @@ import path from 'node:path';
 import { test } from 'node:test';
 
 import { buildDesktop } from '../scripts/desktop-build.mjs';
+import { desktopDevEnvironment } from '../scripts/desktop-dev.mjs';
+
+test('desktop development enables desktop rendering before Next starts', () => {
+  const environment = desktopDevEnvironment({ EXISTING_VALUE: 'kept' });
+  assert.equal(environment.EXISTING_VALUE, 'kept');
+  assert.equal(environment.FLAQ_DESKTOP_RUNTIME, 'true');
+  assert.equal(environment.NEXT_PUBLIC_FLAQ_DESKTOP_RUNTIME, 'true');
+});
 
 test('failed isolated builds preserve source routes and the last usable output', async () => {
   const dir = await mkdtemp(path.join(os.tmpdir(), 'flaq-build-test-'));

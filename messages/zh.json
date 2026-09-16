@@ -102,6 +102,14 @@
         }
       }
     },
+    "image-crop-dialog": {
+      "title": "裁剪图片",
+      "content": "拖动裁剪框并调整缩放或旋转。",
+      "scale": "缩放",
+      "rotate": "旋转",
+      "cancel": "取消",
+      "done": "完成"
+    },
     "video-carousel": {
       "original-image": "原始图片",
       "video": "视频",
@@ -116,14 +124,18 @@
       "remember-me": "记住我（存储到本地）",
       "remember-me-hint": "不勾选时，关闭标签页后将清除密钥。",
       "security-warning": "安全提示：您的 client key 已加密存储，但 XSS 攻击仍可能在 API 请求时拦截。请妥善保管密钥。",
-      "clear-data": "清除所有数据",
-      "clear-data-confirm": "确定要清除所有已存储的设置吗？",
-      "data-cleared": "所有存储数据已清除。",
+      "clear-data": "清除连接信息",
+      "clear-data-confirm": "确定要清除已存储的 Open API 连接设置吗？",
+      "data-cleared": "连接信息已清除。",
       "register": "注册",
       "test": "测试联通",
       "testing": "测试中...",
       "cancel": "取消",
       "save": "保存",
+      "save-and-test": "保存并验证",
+      "saving-and-testing": "验证中...",
+      "authorization-passed-saved": "授权通过并保存",
+      "authorization-failed-saved": "未能通过授权，已保存",
       "required": "Client key 不能为空。",
       "saved": "Open API 设置已保存。",
       "test-success": "联通成功。",
@@ -131,16 +143,22 @@
       "test-failed": "联通失败。"
     },
     "image-hosting": {
-      "title": "图床配置 (R2)",
+      "title": "图床设置",
+      "builtin": "Flaq 自带图床（默认）",
+      "builtin-description": "使用应用已配置的 Flaq R2，无需额外设置。",
+      "builtin-hint": "本地素材会先直传 R2，上传成功后再将公开 URL 发送给生成接口，文件本体不经过生成后端。",
+      "custom": "自定义 Cloudflare R2",
+      "custom-description": "使用你自己的 R2 账户、存储桶和公开域名。",
+      "custom-desktop-only": "自定义 R2 仅在桌面端可用。",
       "public-domain": "公开域名",
-      "public-domain-hint": "上传文件的 CDN 访问域名，推荐使用 https:// 协议。",
+      "public-domain-hint": "上传后素材的 CDN 访问域名，建议使用 HTTPS。",
       "public-domain-placeholder": "https://assets.example.com",
-      "not-configured": "R2 凭证需在 .env 中配置（仅服务端）。可点击「测试 R2」验证是否生效。",
-      "saved": "图床配置已保存。",
-      "test": "测试 R2 连接",
+      "test": "测试自定义 R2",
       "testing": "测试中...",
-      "test-success": "R2 连通成功。",
-      "test-failed": "R2 连通失败。"
+      "test-success": "自定义 R2 联通成功。",
+      "test-failed": "自定义 R2 联通失败。",
+      "clear-custom": "清除自定义配置",
+      "custom-cleared": "已清除自定义 R2 配置，并恢复使用 Flaq 自带图床。"
     },
     "dialog": {
       "business": {
@@ -1290,7 +1308,8 @@
         "delete": "删除",
         "copyPrompt": "复制提示词",
         "copied": "已复制",
-        "expiredImage": "图片已过期"
+        "expiredImage": "图片已过期",
+        "cropLoadFailed": "无法加载图片进行裁剪"
       },
       "delete-success": "图片删除成功",
       "delete-fail": "图片删除失败"

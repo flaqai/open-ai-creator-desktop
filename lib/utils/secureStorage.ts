@@ -1,5 +1,3 @@
-import { DESKTOP_R2_STORAGE_KEYS } from '@/lib/desktop/storage';
-
 import { decryptValue, encryptValue } from './cryptoUtils';
 
 const REMEMBER_ME_KEY = 'FLAQ-SAAS-TEMPLATE-remember-me';
@@ -54,17 +52,10 @@ export function isRememberMeEnabled(): boolean {
   return localStorage.getItem(REMEMBER_ME_KEY) === 'true';
 }
 
-/**
- * Clear all secure storage
- */
+/** Clear user-visible API connection data without erasing provisioned desktop upload credentials. */
 export function clearAllSecureStorage(): void {
   // Clear specific keys
-  const keys = [
-    'FLAQ-SAAS-TEMPLATE-open-api-base-url',
-    'FLAQ-SAAS-TEMPLATE-open-api-client-key',
-    ...DESKTOP_R2_STORAGE_KEYS,
-    REMEMBER_ME_KEY,
-  ];
+  const keys = ['FLAQ-SAAS-TEMPLATE-open-api-base-url', 'FLAQ-SAAS-TEMPLATE-open-api-client-key', REMEMBER_ME_KEY];
 
   keys.forEach((key) => {
     sessionStorage.removeItem(key);

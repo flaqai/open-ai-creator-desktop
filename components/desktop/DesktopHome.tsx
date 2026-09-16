@@ -5,10 +5,8 @@ import { Link } from '@/i18n/navigation';
 import { ArrowUpRight, ImageIcon, Layers3, Play, Shirt, Sparkles, Video } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 
-import { openDesktopSettings } from '@/lib/desktop/runtime';
 import { FEATURE_MODULES } from '@/lib/features/catalog';
 import { useDesktopRuntime } from '@/hooks/use-desktop-runtime';
-import { Button } from '@/components/ui/button';
 
 const icons = { sparkles: Sparkles, image: ImageIcon, layers: Layers3, shirt: Shirt, video: Video, play: Play };
 
@@ -23,7 +21,7 @@ export default function DesktopHome({ children }: { children?: ReactNode }) {
     <div className='relative w-full overflow-hidden px-5 py-8 lg:px-10 lg:py-12'>
       <div className='pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(circle_at_12%_5%,rgba(92,36,255,0.14),transparent_25%),radial-gradient(circle_at_90%_10%,rgba(98,82,255,0.12),transparent_30%)]' />
       <div className='mx-auto max-w-[1180px]'>
-        <div className='mb-9 flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between'>
+        <div className='mb-9'>
           <div>
             <div className='border-foreground/8 bg-foreground/[0.04] text-foreground/60 mb-3 inline-flex items-center gap-2 rounded-full border px-3 py-1 text-xs'>
               <Sparkles className='size-3.5 text-violet-300' />
@@ -32,14 +30,6 @@ export default function DesktopHome({ children }: { children?: ReactNode }) {
             <h1 className='text-foreground text-3xl font-semibold tracking-tight lg:text-4xl'>{t('workspace')}</h1>
             <p className='text-foreground/60 mt-2 max-w-2xl text-sm leading-6'>{t('workspaceDescription')}</p>
           </div>
-          <Button
-            type='button'
-            onClick={openDesktopSettings}
-            variant='outline'
-            className='border-foreground/10 bg-foreground/[0.04] text-foreground hover:bg-foreground/8 hover:text-foreground'
-          >
-            {t('configure')}
-          </Button>
         </div>
 
         <div className='grid gap-4 sm:grid-cols-2 xl:grid-cols-3'>

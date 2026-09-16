@@ -54,9 +54,8 @@ pub fn setup(app: &mut tauri::App) -> Result<(), Box<dyn std::error::Error>> {
     )?;
     app.on_menu_event(|app, event| match event.id().as_ref() {
         "settings" | "about" => {
+            focus_main_window(app);
             if let Some(window) = app.get_webview_window("main") {
-                let _ = window.show();
-                let _ = window.set_focus();
                 let _ = window.emit("desktop-menu", event.id().as_ref());
             }
         }
@@ -130,6 +129,18 @@ pub fn setup(app: &mut tauri::App) -> Result<(), Box<dyn std::error::Error>> {
         }
     });
     Ok(())
+}
+
+pub fn focus_main_window(app: &tauri::AppHandle) {
+    if let Some(window) = app.get_webview_window("main") {
+        let _ = window.unminimize();
+        let _ = window.show();
+        let _ = window.set_focus();
+    }
+}
+
+pub(crate) fn should_show_initial_window(path: &str) -> bool {
+    path != "/" && !path.ends_with("/index.html")
 }
 
 fn fit_geometry(
@@ -271,5 +282,13 @@ mod tests {
         assert_eq!((w, h, x, y), (1100.0, 750.0, -1700, 100));
         let (w, h, _, _) = fit_geometry(&saved, 0, 0, 1024, 768, 1.0);
         assert_eq!((w, h), (1024.0, 696.0));
+    }
+
+    #[test]
+    fn bootstrap_page_stays_hidden_until_the_localized_workspace_loads() {
+        assert!(!should_show_initial_window("/"));
+        assert!(!should_show_initial_window("/index.html"));
+        assert!(should_show_initial_window("/zh/"));
+        assert!(should_show_initial_window("/zh/image-to-image/"));
     }
 }

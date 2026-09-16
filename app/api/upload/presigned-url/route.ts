@@ -64,7 +64,7 @@ export async function POST(req: NextRequest) {
 
   const rows = await Promise.all(
     mimeTypes.map(async (mimeType) => {
-      const path = generateR2Path('upload', mimeType);
+      const path = generateR2Path(mimeType);
       const command = new PutObjectCommand({
         Bucket: bucketName,
         Key: path,

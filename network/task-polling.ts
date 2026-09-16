@@ -6,6 +6,7 @@ import {
   completeImageHistory,
   failImageHistory,
   imageHistoryKey,
+  updateImageArchive,
   type ImageHistoryItem,
 } from '@/network/image/history';
 import { readLocalHistory } from '@/network/local-history';
@@ -13,13 +14,35 @@ import { getVideoTask } from '@/network/video/client';
 import {
   completeVideoHistory,
   failVideoHistory,
+  updateVideoArchive,
   videoHistoryKey,
   type VideoHistoryItem,
 } from '@/network/video/history';
 import useGenerationPollingStore from '@/store/useGenerationPollingStore';
 import { toast } from 'sonner';
 
+import { attemptMediaArchive, type MediaKind } from '@/lib/desktop/media-storage';
+import { isNativeDesktop } from '@/lib/desktop/runtime';
+
 import { PollingManager } from './polling-manager';
+
+function archiveFailureMessage() {
+  return navigator.language.toLowerCase().startsWith('zh')
+    ? '作品已生成，但自动保存到本地失败。应用下次启动时会重试。'
+    : 'The result was generated, but automatic local saving failed. The app will retry next time it starts.';
+}
+
+async function archiveResult(type: MediaKind, taskId: string, url: string, completedAt: number) {
+  const outcome = await attemptMediaArchive({ url, mediaType: type, taskId, completedAt });
+  if (outcome.status === 'skipped') return;
+  const payload =
+    outcome.status === 'saved'
+      ? { archiveStatus: 'saved' as const, localPath: outcome.localPath }
+      : { archiveStatus: 'failed' as const };
+  if (type === 'image') updateImageArchive(taskId, payload);
+  else updateVideoArchive(taskId, payload);
+  if (outcome.status === 'failed') toast.error(archiveFailureMessage());
+}
 
 const manager = new PollingManager({
   timeout: (task) => {
@@ -44,11 +67,15 @@ const manager = new PollingManager({
       if (res.data?.task_status === 'succeed') {
         const result = res.data.task_result?.images?.[0];
         if (!result?.url) throw new Error('Image result is not available yet.');
+        const completedAt = Date.now();
         completeImageHistory(task.traceId, {
           url: result.url,
           thumbnailUrl: result.thumbnail_url,
           resolution: result.resolution,
+          archiveStatus: isNativeDesktop() ? 'pending' : undefined,
+          archiveCompletedAt: isNativeDesktop() ? completedAt : undefined,
         });
+        await archiveResult('image', task.traceId, result.url, completedAt);
         return 'done';
       }
       if (res.data?.task_status === 'failed') {
@@ -62,12 +89,16 @@ const manager = new PollingManager({
       if (res.data?.task_status === 'succeed') {
         const result = res.data.task_result?.videos?.[0];
         if (!result?.url) throw new Error('Video result is not available yet.');
+        const completedAt = Date.now();
         completeVideoHistory(task.traceId, {
           videoUrl: result.url,
           videoThumbnailUrl: result.cover_url,
           duration: result.duration,
           ratio: result.ratio,
+          archiveStatus: isNativeDesktop() ? 'pending' : undefined,
+          archiveCompletedAt: isNativeDesktop() ? completedAt : undefined,
         });
+        await archiveResult('video', task.traceId, result.url, completedAt);
         return 'done';
       }
       if (res.data?.task_status === 'failed') {
@@ -102,6 +133,46 @@ export function restorePendingTaskPolling() {
   pendingVideos.forEach((item) => {
     startTaskPolling(item.traceId || item.id, 'video', item.createTime || Date.now());
   });
+}
+
+let archiveRecovery: Promise<void> | null = null;
+
+export function restorePendingMediaArchives() {
+  if (typeof window === 'undefined' || !isNativeDesktop() || archiveRecovery) return archiveRecovery;
+  const images = readLocalHistory<ImageHistoryItem>(imageHistoryKey)
+    .filter(
+      (item) =>
+        item.status === 'completed' &&
+        item.url &&
+        (item.archiveStatus === 'pending' || item.archiveStatus === 'failed'),
+    )
+    .map((item) => ({
+      type: 'image' as const,
+      id: item.taskId || item.id,
+      url: item.url,
+      at: item.archiveCompletedAt,
+    }));
+  const videos = readLocalHistory<VideoHistoryItem>(videoHistoryKey)
+    .filter(
+      (item) =>
+        item.status === 'completed' &&
+        item.videoUrl &&
+        (item.archiveStatus === 'pending' || item.archiveStatus === 'failed'),
+    )
+    .map((item) => ({
+      type: 'video' as const,
+      id: item.traceId || item.id,
+      url: item.videoUrl,
+      at: item.archiveCompletedAt,
+    }));
+  archiveRecovery = (async () => {
+    for (const item of [...images, ...videos]) {
+      await archiveResult(item.type, item.id, item.url, item.at || Date.now());
+    }
+  })().finally(() => {
+    archiveRecovery = null;
+  });
+  return archiveRecovery;
 }
 
 export function stopAllTaskPolling() {

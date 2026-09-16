@@ -15,8 +15,8 @@ available, while the desktop build adds a focused creator workspace for macOS, W
 ## Desktop app
 
 The desktop edition keeps the template's seven creative workflows and visual language, while replacing the long
-marketing layout with a compact workspace, contextual guide dialogs, a first-run Flaq.ai setup flow, and local R2
-configuration. All 15 UI locales are included, with RTL layout for Arabic.
+marketing layout with a compact workspace, contextual guide dialogs, a first-run Flaq.ai setup flow, and automatic
+date-based local media archiving. All 15 UI locales are included, with RTL layout for Arabic.
 
 - Product and route inventory: [`docs/PRODUCT_INVENTORY.md`](./docs/PRODUCT_INVENTORY.md)
 - Desktop architecture and service boundaries: [`docs/DESKTOP_ARCHITECTURE.md`](./docs/DESKTOP_ARCHITECTURE.md)
@@ -161,9 +161,9 @@ This template uses Cloudflare R2 for storing user-uploaded images and generated 
    - In your R2 bucket settings, enable **Public Access** via a custom domain or `r2.dev` subdomain
    - Note down the **Public Domain** URL (e.g., `https://your-bucket.your-account.r2.cloudflarestorage.com`)
 6. **Set environment variables** in `.env.local` (see above)
-7. **Configure the public domain** in the app's **Open API Settings** dialog (gear icon in the header)
-
-After setup, use the **Test R2 Connection** button in the settings dialog to verify your configuration.
+7. **Configure the public domain** for the web deployment. The desktop app uses its provisioned Flaq R2 configuration by
+   default; users who select Custom Cloudflare R2 can enter a separate credential set encrypted in the local app
+   profile. In both cases files upload to R2 first and only their public URLs are sent to generation APIs.
 
 ### Flaq.ai API Key Setup
 

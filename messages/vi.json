@@ -1,9 +1,5 @@
 {
   "Desktop": {
-    "r2AccountId": "ID tài khoản R2",
-    "r2BucketName": "Tên bucket",
-    "r2AccessKeyId": "ID khóa truy cập",
-    "r2SecretAccessKey": "Khóa truy cập bí mật",
     "workspace": "Không gian sáng tạo",
     "workspaceDescription": "Chọn quy trình và bắt đầu sáng tạo. Cài đặt và tác phẩm gần đây luôn trong tầm tay.",
     "configure": "Kết nối Flaq",
@@ -16,7 +12,11 @@
     "skip": "Khám phá trước",
     "toolGuide": "Hướng dẫn công cụ",
     "toolGuideDescription": "Ví dụ, tính năng và câu hỏi thường gặp cho quy trình này",
-    "close": "Quay lại sáng tạo"
+    "close": "Quay lại sáng tạo",
+    "r2AccountId": "R2 account ID",
+    "r2BucketName": "Bucket name",
+    "r2AccessKeyId": "Access key ID",
+    "r2SecretAccessKey": "Secret access key"
   },
   "Common": {
     "loading": "Đang tải...",
@@ -102,6 +102,14 @@
         }
       }
     },
+    "image-crop-dialog": {
+      "title": "Crop image",
+      "content": "Move the crop area and adjust zoom or rotation.",
+      "scale": "Zoom",
+      "rotate": "Rotate",
+      "cancel": "Cancel",
+      "done": "Done"
+    },
     "video-carousel": {
       "original-image": "Hình ảnh gốc",
       "video": "Video",
@@ -116,31 +124,23 @@
       "remember-me": "Remember me (store locally)",
       "remember-me-hint": "If unchecked, the key will be cleared when you close the tab.",
       "security-warning": "Security Notice: Your client key is encrypted before storage, but XSS attacks can still intercept it during API requests. Keep your key secure.",
-      "clear-data": "Clear All Data",
-      "clear-data-confirm": "Are you sure you want to clear all stored settings?",
-      "data-cleared": "All stored data has been cleared.",
+      "clear-data": "Clear connection data",
+      "clear-data-confirm": "Are you sure you want to clear the stored Open API connection settings?",
+      "data-cleared": "Connection data has been cleared.",
       "register": "Register",
       "test": "Test Connection",
       "testing": "Testing...",
       "cancel": "Cancel",
       "save": "Save",
+      "save-and-test": "Save and verify",
+      "saving-and-testing": "Verifying...",
+      "authorization-passed-saved": "Authorization passed and settings were saved.",
+      "authorization-failed-saved": "Authorization could not be verified. Settings were saved.",
       "required": "Client key is required.",
       "saved": "Open API settings saved.",
       "test-success": "Connection succeeded.",
       "test-success-validation": "API có thể truy cập. Tác vụ thử nghiệm không tồn tại nên chưa xác nhận được tính hợp lệ của khóa.",
       "test-failed": "Connection failed."
-    },
-    "image-hosting": {
-      "title": "Image Hosting (R2)",
-      "public-domain": "Public Domain",
-      "public-domain-hint": "The CDN domain for accessing uploaded files. Recommended to use https:// protocol.",
-      "public-domain-placeholder": "https://assets.example.com",
-      "not-configured": "R2 credentials should be set in .env (server-side only). Click \"Test R2\" to verify.",
-      "saved": "Image hosting settings saved.",
-      "test": "Test R2 Connection",
-      "testing": "Testing...",
-      "test-success": "R2 connection succeeded.",
-      "test-failed": "R2 connection failed."
     },
     "dialog": {
       "business": {
@@ -354,6 +354,24 @@
       "content": "Kích thước ảnh vượt quá 10MB và không phù hợp để tạo video AI. Bạn có muốn nén ảnh này không?",
       "reupload": "Tải lại",
       "compress": "Nén"
+    },
+    "image-hosting": {
+      "title": "Image hosting",
+      "builtin": "Flaq storage (default)",
+      "builtin-description": "Use the Flaq R2 configuration already provisioned in the app.",
+      "builtin-hint": "Local media uploads directly to R2 first. After upload, only the public URL is sent to the generation API.",
+      "custom": "Custom Cloudflare R2",
+      "custom-description": "Use your own R2 account, bucket, and public asset domain.",
+      "custom-desktop-only": "Custom R2 is available in the desktop app only.",
+      "public-domain": "Public domain",
+      "public-domain-hint": "The CDN domain used to access uploaded media. HTTPS is recommended.",
+      "public-domain-placeholder": "https://assets.example.com",
+      "test": "Test custom R2",
+      "testing": "Testing...",
+      "test-success": "Custom R2 connection succeeded.",
+      "test-failed": "Custom R2 connection failed.",
+      "clear-custom": "Clear custom settings",
+      "custom-cleared": "Custom R2 settings were cleared and Flaq storage is active again."
     }
   },
   "Navigation": {
@@ -1290,7 +1308,8 @@
         "delete": "Delete",
         "copyPrompt": "Copy Prompt",
         "copied": "Copied",
-        "expiredImage": "Image Expired"
+        "expiredImage": "Image Expired",
+        "cropLoadFailed": "Unable to load the image for cropping"
       },
       "delete-success": "Image deleted successfully",
       "delete-fail": "Failed to delete image"

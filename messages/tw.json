@@ -1,9 +1,5 @@
 {
   "Desktop": {
-    "r2AccountId": "R2 帳戶 ID",
-    "r2BucketName": "儲存桶名稱",
-    "r2AccessKeyId": "存取金鑰 ID",
-    "r2SecretAccessKey": "存取金鑰 Secret",
     "workspace": "創作工作台",
     "workspaceDescription": "選擇工作流程即可開始創作，設定與最近作品都在手邊。",
     "configure": "連接 Flaq",
@@ -16,7 +12,11 @@
     "skip": "先看看",
     "toolGuide": "工具指南",
     "toolGuideDescription": "查看此工作流程的範例、功能與常見問題",
-    "close": "返回創作"
+    "close": "返回創作",
+    "r2AccountId": "R2 account ID",
+    "r2BucketName": "Bucket name",
+    "r2AccessKeyId": "Access key ID",
+    "r2SecretAccessKey": "Secret access key"
   },
   "Common": {
     "loading": "載入中...",
@@ -102,6 +102,14 @@
         }
       }
     },
+    "image-crop-dialog": {
+      "title": "裁剪圖片",
+      "content": "拖動裁剪框並調整縮放或旋轉。",
+      "scale": "縮放",
+      "rotate": "旋轉",
+      "cancel": "取消",
+      "done": "完成"
+    },
     "video-carousel": {
       "original-image": "原始圖片",
       "video": "影片",
@@ -116,31 +124,23 @@
       "remember-me": "Remember me (store locally)",
       "remember-me-hint": "If unchecked, the key will be cleared when you close the tab.",
       "security-warning": "Security Notice: Your client key is encrypted before storage, but XSS attacks can still intercept it during API requests. Keep your key secure.",
-      "clear-data": "Clear All Data",
-      "clear-data-confirm": "Are you sure you want to clear all stored settings?",
-      "data-cleared": "All stored data has been cleared.",
+      "clear-data": "Clear connection data",
+      "clear-data-confirm": "Are you sure you want to clear the stored Open API connection settings?",
+      "data-cleared": "Connection data has been cleared.",
       "register": "Register",
       "test": "Test Connection",
       "testing": "Testing...",
       "cancel": "Cancel",
       "save": "Save",
+      "save-and-test": "儲存並驗證",
+      "saving-and-testing": "驗證中...",
+      "authorization-passed-saved": "授權通過並已儲存",
+      "authorization-failed-saved": "未能通過授權，已儲存",
       "required": "Client key is required.",
       "saved": "Open API settings saved.",
       "test-success": "Connection succeeded.",
       "test-success-validation": "API 已連通。測試任務不存在，因此暫時無法確認金鑰是否有效。",
       "test-failed": "Connection failed."
-    },
-    "image-hosting": {
-      "title": "Image Hosting (R2)",
-      "public-domain": "Public Domain",
-      "public-domain-hint": "The CDN domain for accessing uploaded files. Recommended to use https:// protocol.",
-      "public-domain-placeholder": "https://assets.example.com",
-      "not-configured": "R2 credentials should be set in .env (server-side only). Click \"Test R2\" to verify.",
-      "saved": "Image hosting settings saved.",
-      "test": "Test R2 Connection",
-      "testing": "Testing...",
-      "test-success": "R2 connection succeeded.",
-      "test-failed": "R2 connection failed."
     },
     "dialog": {
       "business": {
@@ -354,6 +354,24 @@
       "content": "圖片大小超過 10MB，不適合 AI 影片生成。是否需要壓縮？",
       "reupload": "重新上傳",
       "compress": "壓縮"
+    },
+    "image-hosting": {
+      "title": "Image hosting",
+      "builtin": "Flaq storage (default)",
+      "builtin-description": "Use the Flaq R2 configuration already provisioned in the app.",
+      "builtin-hint": "Local media uploads directly to R2 first. After upload, only the public URL is sent to the generation API.",
+      "custom": "Custom Cloudflare R2",
+      "custom-description": "Use your own R2 account, bucket, and public asset domain.",
+      "custom-desktop-only": "Custom R2 is available in the desktop app only.",
+      "public-domain": "Public domain",
+      "public-domain-hint": "The CDN domain used to access uploaded media. HTTPS is recommended.",
+      "public-domain-placeholder": "https://assets.example.com",
+      "test": "Test custom R2",
+      "testing": "Testing...",
+      "test-success": "Custom R2 connection succeeded.",
+      "test-failed": "Custom R2 connection failed.",
+      "clear-custom": "Clear custom settings",
+      "custom-cleared": "Custom R2 settings were cleared and Flaq storage is active again."
     }
   },
   "Navigation": {
@@ -1290,7 +1308,8 @@
         "delete": "Delete",
         "copyPrompt": "Copy Prompt",
         "copied": "Copied",
-        "expiredImage": "Image Expired"
+        "expiredImage": "Image Expired",
+        "cropLoadFailed": "無法載入圖片進行裁剪"
       },
       "delete-success": "Image deleted successfully",
       "delete-fail": "Failed to delete image"

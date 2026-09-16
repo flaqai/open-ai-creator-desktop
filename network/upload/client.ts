@@ -1,5 +1,5 @@
 import { isDesktopRuntime } from '@/lib/desktop/runtime';
-import { R2_PUBLIC_DOMAIN_STORAGE_KEY } from '@/lib/desktop/storage';
+import { getUploadProvider, R2_PUBLIC_DOMAIN_STORAGE_KEY } from '@/lib/desktop/storage';
 import { getSecureItem } from '@/lib/utils/secureStorage';
 
 export interface CreateSignedUrlRequest {
@@ -20,29 +20,26 @@ export interface CreateSignedUrlResponse {
   rows: SignedUrlItem[];
 }
 
-/**
- * Generic upload interface placeholder:
- * Currently using createSignedUrl naming, will switch to image hosting or backend proxy later.
- */
+/** R2 signing adapter used before generation requests submit public media URLs. */
 export interface UploadAdapter {
   createSignedUrl(input: CreateSignedUrlRequest): Promise<SignedUrlItem[]>;
 }
 
 export async function createSignedUrl(mineType: string[], isForever?: boolean): Promise<CreateSignedUrlResponse> {
   void isForever;
-
   if (typeof window === 'undefined') {
     throw new Error('createSignedUrl can only be called from the browser.');
   }
 
   if (isDesktopRuntime()) {
-    const { createDesktopSignedUrls } = await import('./desktop-r2');
-    return createDesktopSignedUrls(mineType);
+    const { createDesktopSignedUrls, getCustomDesktopR2Config } = await import('./desktop-r2');
+    const provider = getUploadProvider();
+    return createDesktopSignedUrls(mineType, provider === 'custom-r2' ? await getCustomDesktopR2Config() : undefined);
   }
 
   const publicDomain = await getSecureItem(R2_PUBLIC_DOMAIN_STORAGE_KEY);
   if (!publicDomain) {
-    throw new Error('R2 public domain is not configured. Please set it in Open API Settings.');
+    throw new Error('Custom R2 is not configured. Open Settings → Image Hosting.');
   }
 
   const response = await fetch('/api/upload/presigned-url', {

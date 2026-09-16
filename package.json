@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
+    "dev:desktop": "node scripts/desktop-dev.mjs",
     "dev:turbo": "next dev --turbo",
     "build": "next build --webpack",
     "build:desktop": "node scripts/desktop-build.mjs",
@@ -19,6 +20,7 @@
     "seo:sync-copy": "node scripts/sync-seo-copy.mjs",
     "ts-check": "tsc --noEmit",
     "test": "node --import tsx --test tests/*.test.ts tests/*.test.mts",
+    "test:ui-layout": "playwright test --config playwright.ui.config.ts",
     "check": "pnpm ts-check && pnpm test && pnpm lint"
   },
   "lint-staged": {
@@ -111,6 +113,7 @@
   },
   "devDependencies": {
     "@ianvs/prettier-plugin-sort-imports": "4.4.2",
+    "@playwright/test": "1.62.1",
     "@tailwindcss/postcss": "4.1.11",
     "@tailwindcss/typography": "0.5.16",
     "@tauri-apps/cli": "2.11.4",

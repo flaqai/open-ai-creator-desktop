@@ -28,12 +28,13 @@ build emits explicit locale paths and chooses the saved language, supported syst
 - Flaq Open API configuration: custom API base URL, client key, connection test, remember-for-later preference, and
   clear/reset actions.
 - Flaq setup guidance: account/API-key entry points and direct links to Flaq documentation.
-- Cloudflare R2 upload configuration: public asset domain in the original web UI; desktop mode also supports local
-  credential configuration so uploads do not depend on a Next.js server.
+- Media upload transport: the provisioned Flaq R2 configuration is selected by default. Desktop users can instead select
+  a separately stored custom Cloudflare R2 account from Image Hosting settings. Files upload to R2 first, and generation
+  requests receive only the resulting public URLs.
 - Asynchronous generation: task submission, polling, recovery of active tasks, success/failure states, and result
   rendering.
-- Local history: generated images and videos are stored in the application WebView profile and updated across active
-  views.
+- Local history and archive: metadata remains in the application WebView profile; newly completed desktop image and
+  video results are also written under a configurable native media directory organized as `YYYY/MM/DD`.
 - Media handling: drag/drop and picker uploads, previews, image conversion/cropping, video last-frame extraction,
   audio/video previews, and FFmpeg-based helpers.
 - Model-aware forms: controls are shown only when the selected model supports them.
@@ -75,13 +76,13 @@ The imported project currently ships 15 locales:
 
 ## Service dependencies and desktop impact
 
-| Dependency            | Original web behavior                                   | Desktop behavior                                                                                                 |
-| --------------------- | ------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- |
-| Flaq Open API         | Called from the browser with the configured client key  | Same API and forms; setup is presented as a first-run workflow                                                   |
-| Cloudflare R2 signing | Next.js server routes read `R2_*` environment variables | Desktop static build signs uploads locally from user-provided R2 credentials; web build keeps the server routes  |
-| Image proxy           | Next.js GET route                                       | Desktop uses native HTTP media fetch; web keeps the original proxy                                               |
-| Next.js middleware    | Locale detection and URL rewriting                      | Desktop uses statically generated locale routes and a small launch redirect                                      |
-| Browser storage       | Encrypted API configuration and local history           | Stored in the isolated desktop WebView profile; native secret-store migration is listed as a hardening follow-up |
+| Dependency           | Original web behavior                                   | Desktop behavior                                                                                                 |
+| -------------------- | ------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- |
+| Flaq Open API        | Called from the browser with the configured client key  | Same API and forms; setup is presented as a first-run workflow                                                   |
+| Media upload signing | Next.js server routes can read deployment `R2_*` values | Desktop signs direct R2 uploads locally, using provisioned defaults or separately stored custom credentials      |
+| Image proxy          | Next.js GET route                                       | Desktop uses native HTTP media fetch; web keeps the original proxy                                               |
+| Next.js middleware   | Locale detection and URL rewriting                      | Desktop uses statically generated locale routes and a small launch redirect                                      |
+| Browser storage      | Encrypted API configuration and local history           | Stored in the isolated desktop WebView profile; native secret-store migration is listed as a hardening follow-up |
 
 ## Desktop UX decisions
 

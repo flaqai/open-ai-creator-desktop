@@ -1,5 +1,6 @@
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 
+import { isDesktopServerRender } from '@/lib/desktop/server';
 import { numberList } from '@/lib/utils/arrayUtils';
 import DesktopHome from '@/components/desktop/DesktopHome';
 import Faq from '@/components/Faq';
@@ -100,7 +101,7 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
     },
   ];
 
-  return process.env.FLAQ_DESKTOP_BUILD === 'true' ? (
+  return isDesktopServerRender ? (
     <DesktopHome />
   ) : (
     <DesktopHome>

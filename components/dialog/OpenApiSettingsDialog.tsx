@@ -8,6 +8,7 @@ import {
   OPEN_API_CLIENT_KEY_STORAGE_KEY,
   OPEN_API_CONFIG_CHANGED_EVENT,
 } from '@/network/clientFetch';
+import { setApiConnectionAuthorized } from '@/network/connection-status';
 import { testApiConnection } from '@/network/connection-test';
 import { ChevronDown, ChevronRight, ExternalLink, KeyRound, PlugZap, UserRound } from 'lucide-react';
 import { useTranslations } from 'next-intl';
@@ -15,19 +16,21 @@ import { toast } from 'sonner';
 
 import { isDesktopRuntime } from '@/lib/desktop/runtime';
 import {
+  CUSTOM_R2_ACCESS_KEY_ID_STORAGE_KEY,
+  CUSTOM_R2_ACCOUNT_ID_STORAGE_KEY,
+  CUSTOM_R2_BUCKET_NAME_STORAGE_KEY,
+  CUSTOM_R2_PUBLIC_DOMAIN_STORAGE_KEY,
+  CUSTOM_R2_SECRET_ACCESS_KEY_STORAGE_KEY,
+  getUploadProvider,
   R2_ACCESS_KEY_ID_STORAGE_KEY,
   R2_ACCOUNT_ID_STORAGE_KEY,
   R2_BUCKET_NAME_STORAGE_KEY,
   R2_PUBLIC_DOMAIN_STORAGE_KEY,
   R2_SECRET_ACCESS_KEY_STORAGE_KEY,
+  setUploadProvider,
+  type UploadProvider,
 } from '@/lib/desktop/storage';
-import {
-  clearAllSecureStorage,
-  getSecureItem,
-  isRememberMeEnabled,
-  removeSecureItem,
-  setSecureItem,
-} from '@/lib/utils/secureStorage';
+import { clearAllSecureStorage, getSecureItem, isRememberMeEnabled, setSecureItem } from '@/lib/utils/secureStorage';
 import { Button } from '@/components/ui/button';
 import { Checkbox } from '@/components/ui/checkbox';
 import {
@@ -39,6 +42,7 @@ import {
   DialogTitle,
 } from '@/components/ui/dialog';
 import { Input } from '@/components/ui/input';
+import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 
 const FLAQ_REGISTER_URL = 'https://flaq.ai/';
 
@@ -57,14 +61,15 @@ export default function OpenApiSettingsDialog({ open, onOpenChange, embedded = f
   const [clientKey, setClientKey] = useState('');
   const [rememberMe, setRememberMe] = useState(false);
   const [isTesting, setIsTesting] = useState(false);
-  const [hostingExpanded, setHostingExpanded] = useState(false);
-  const [r2PublicDomain, setR2PublicDomain] = useState('');
-  const [isTestingR2, setIsTestingR2] = useState(false);
   const [desktop, setDesktop] = useState(false);
+  const [hostingExpanded, setHostingExpanded] = useState(false);
+  const [uploadProvider, setUploadProviderDraft] = useState<UploadProvider>('builtin');
+  const [r2PublicDomain, setR2PublicDomain] = useState('');
   const [r2AccountId, setR2AccountId] = useState('');
   const [r2AccessKeyId, setR2AccessKeyId] = useState('');
   const [r2SecretAccessKey, setR2SecretAccessKey] = useState('');
   const [r2BucketName, setR2BucketName] = useState('');
+  const [isTestingR2, setIsTestingR2] = useState(false);
 
   useEffect(() => {
     if (!open || typeof window === 'undefined') return;
@@ -72,21 +77,39 @@ export default function OpenApiSettingsDialog({ open, onOpenChange, embedded = f
     const loadSettings = async () => {
       const savedBaseUrl = await getSecureItem(OPEN_API_BASE_URL_STORAGE_KEY);
       const savedClientKey = await getSecureItem(OPEN_API_CLIENT_KEY_STORAGE_KEY);
-      const [savedDomain, savedAccountId, savedAccessKeyId, savedSecretAccessKey, savedBucketName] = await Promise.all([
-        getSecureItem(R2_PUBLIC_DOMAIN_STORAGE_KEY),
-        getSecureItem(R2_ACCOUNT_ID_STORAGE_KEY),
-        getSecureItem(R2_ACCESS_KEY_ID_STORAGE_KEY),
-        getSecureItem(R2_SECRET_ACCESS_KEY_STORAGE_KEY),
-        getSecureItem(R2_BUCKET_NAME_STORAGE_KEY),
-      ]);
-
+      const [customDomain, customAccountId, customAccessKeyId, customSecretAccessKey, customBucketName] =
+        await Promise.all([
+          getSecureItem(CUSTOM_R2_PUBLIC_DOMAIN_STORAGE_KEY),
+          getSecureItem(CUSTOM_R2_ACCOUNT_ID_STORAGE_KEY),
+          getSecureItem(CUSTOM_R2_ACCESS_KEY_ID_STORAGE_KEY),
+          getSecureItem(CUSTOM_R2_SECRET_ACCESS_KEY_STORAGE_KEY),
+          getSecureItem(CUSTOM_R2_BUCKET_NAME_STORAGE_KEY),
+        ]);
+      const hasCustomR2 = [
+        customDomain,
+        customAccountId,
+        customAccessKeyId,
+        customSecretAccessKey,
+        customBucketName,
+      ].every(Boolean);
+      const [defaultDomain, defaultAccountId, defaultAccessKeyId, defaultSecretAccessKey, defaultBucketName] =
+        hasCustomR2
+          ? [null, null, null, null, null]
+          : await Promise.all([
+              getSecureItem(R2_PUBLIC_DOMAIN_STORAGE_KEY),
+              getSecureItem(R2_ACCOUNT_ID_STORAGE_KEY),
+              getSecureItem(R2_ACCESS_KEY_ID_STORAGE_KEY),
+              getSecureItem(R2_SECRET_ACCESS_KEY_STORAGE_KEY),
+              getSecureItem(R2_BUCKET_NAME_STORAGE_KEY),
+            ]);
       setBaseUrl(savedBaseUrl || DEFAULT_OPEN_API_BASE_URL);
       setClientKey(savedClientKey || '');
-      setR2PublicDomain(savedDomain || '');
-      setR2AccountId(savedAccountId || '');
-      setR2AccessKeyId(savedAccessKeyId || '');
-      setR2SecretAccessKey(savedSecretAccessKey || '');
-      setR2BucketName(savedBucketName || '');
+      setUploadProviderDraft(getUploadProvider());
+      setR2PublicDomain(customDomain || defaultDomain || '');
+      setR2AccountId(customAccountId || defaultAccountId || '');
+      setR2AccessKeyId(customAccessKeyId || defaultAccessKeyId || '');
+      setR2SecretAccessKey(customSecretAccessKey || defaultSecretAccessKey || '');
+      setR2BucketName(customBucketName || defaultBucketName || '');
       setRememberMe(isRememberMeEnabled());
       setDesktop(isDesktopRuntime());
     };
@@ -97,17 +120,14 @@ export default function OpenApiSettingsDialog({ open, onOpenChange, embedded = f
   const handleReset = () => {
     setBaseUrl(DEFAULT_OPEN_API_BASE_URL);
     setClientKey('');
-    setR2PublicDomain('');
-    setR2AccountId('');
-    setR2AccessKeyId('');
-    setR2SecretAccessKey('');
-    setR2BucketName('');
     setRememberMe(false);
+    setUploadProviderDraft('builtin');
   };
 
   const handleClearAll = () => {
     if (window.confirm(t('clear-data-confirm'))) {
       clearAllSecureStorage();
+      setApiConnectionAuthorized(false, false);
       window.dispatchEvent(new Event(OPEN_API_CONFIG_CHANGED_EVENT));
       handleReset();
       toast.success(t('data-cleared'));
@@ -125,9 +145,19 @@ export default function OpenApiSettingsDialog({ open, onOpenChange, embedded = f
 
     try {
       normalizeBaseUrl(normalizedBaseUrl);
-      if (desktop && [r2AccountId, r2AccessKeyId, r2SecretAccessKey, r2BucketName, r2PublicDomain].some(Boolean)) {
+      let normalizedR2Config:
+        | {
+            accountId: string;
+            accessKeyId: string;
+            secretAccessKey: string;
+            bucketName: string;
+            publicDomain: string;
+          }
+        | undefined;
+      if (uploadProvider === 'custom-r2') {
+        if (!desktop) throw new Error(tHosting('custom-desktop-only'));
         const { validateR2Config } = await import('@/network/upload/desktop-r2');
-        validateR2Config({
+        normalizedR2Config = validateR2Config({
           accountId: r2AccountId,
           accessKeyId: r2AccessKeyId,
           secretAccessKey: r2SecretAccessKey,
@@ -135,34 +165,61 @@ export default function OpenApiSettingsDialog({ open, onOpenChange, embedded = f
           publicDomain: r2PublicDomain,
         });
       }
+      setIsTesting(true);
+      setApiConnectionAuthorized(false, rememberMe);
       await setSecureItem(OPEN_API_BASE_URL_STORAGE_KEY, normalizedBaseUrl, rememberMe);
       await setSecureItem(OPEN_API_CLIENT_KEY_STORAGE_KEY, normalizedClientKey, rememberMe);
-
-      const normalizedDomain = r2PublicDomain.trim();
-      if (normalizedDomain) {
-        await setSecureItem(R2_PUBLIC_DOMAIN_STORAGE_KEY, normalizedDomain, rememberMe);
-      } else {
-        removeSecureItem(R2_PUBLIC_DOMAIN_STORAGE_KEY);
+      setUploadProvider(uploadProvider);
+      if (normalizedR2Config) {
+        await Promise.all([
+          setSecureItem(CUSTOM_R2_ACCOUNT_ID_STORAGE_KEY, normalizedR2Config.accountId, rememberMe),
+          setSecureItem(CUSTOM_R2_ACCESS_KEY_ID_STORAGE_KEY, normalizedR2Config.accessKeyId, rememberMe),
+          setSecureItem(CUSTOM_R2_SECRET_ACCESS_KEY_STORAGE_KEY, normalizedR2Config.secretAccessKey, rememberMe),
+          setSecureItem(CUSTOM_R2_BUCKET_NAME_STORAGE_KEY, normalizedR2Config.bucketName, rememberMe),
+          setSecureItem(CUSTOM_R2_PUBLIC_DOMAIN_STORAGE_KEY, normalizedR2Config.publicDomain, rememberMe),
+        ]);
       }
+    } catch (error) {
+      window.dispatchEvent(new Event(OPEN_API_CONFIG_CHANGED_EVENT));
+      toast.error(error instanceof Error ? error.message : String(error));
+      setIsTesting(false);
+      return;
+    }
 
-      const r2Entries = [
-        [R2_ACCOUNT_ID_STORAGE_KEY, r2AccountId],
-        [R2_ACCESS_KEY_ID_STORAGE_KEY, r2AccessKeyId],
-        [R2_SECRET_ACCESS_KEY_STORAGE_KEY, r2SecretAccessKey],
-        [R2_BUCKET_NAME_STORAGE_KEY, r2BucketName],
-      ] as const;
-      await Promise.all(
-        r2Entries.map(async ([key, value]) => {
-          if (value.trim()) await setSecureItem(key, value.trim(), rememberMe);
-          else removeSecureItem(key);
-        }),
-      );
-
-      toast.success(t('saved'));
+    try {
+      await testApiConnection({ baseUrl: normalizedBaseUrl, clientKey: normalizedClientKey });
+      setApiConnectionAuthorized(true, rememberMe);
       window.dispatchEvent(new Event(OPEN_API_CONFIG_CHANGED_EVENT));
       onOpenChange(false);
+      toast.success(t('authorization-passed-saved'));
     } catch (error) {
-      toast.error(error instanceof Error ? error.message : String(error));
+      setApiConnectionAuthorized(false, rememberMe);
+      window.dispatchEvent(new Event(OPEN_API_CONFIG_CHANGED_EVENT));
+      toast.error(t('authorization-failed-saved'), {
+        description: error instanceof Error ? error.message : undefined,
+      });
+    } finally {
+      setIsTesting(false);
+    }
+  };
+
+  const handleTestR2 = async () => {
+    setIsTestingR2(true);
+    try {
+      const { testDesktopR2Connection } = await import('@/network/upload/desktop-r2');
+      await testDesktopR2Connection({
+        accountId: r2AccountId,
+        accessKeyId: r2AccessKeyId,
+        secretAccessKey: r2SecretAccessKey,
+        bucketName: r2BucketName,
+        publicDomain: r2PublicDomain,
+      });
+      toast.success(tHosting('test-success'));
+    } catch (error) {
+      const message = error instanceof Error ? error.message : tHosting('test-failed');
+      toast.error(`${tHosting('test-failed')} ${message}`);
+    } finally {
+      setIsTestingR2(false);
     }
   };
 
@@ -185,47 +242,6 @@ export default function OpenApiSettingsDialog({ open, onOpenChange, embedded = f
       toast.error(`${t('test-failed')} ${message}`);
     } finally {
       setIsTesting(false);
-    }
-  };
-
-  const handleTestR2 = async () => {
-    setIsTestingR2(true);
-
-    try {
-      if (desktop) {
-        const values = [
-          [R2_ACCOUNT_ID_STORAGE_KEY, r2AccountId],
-          [R2_ACCESS_KEY_ID_STORAGE_KEY, r2AccessKeyId],
-          [R2_SECRET_ACCESS_KEY_STORAGE_KEY, r2SecretAccessKey],
-          [R2_BUCKET_NAME_STORAGE_KEY, r2BucketName],
-          [R2_PUBLIC_DOMAIN_STORAGE_KEY, r2PublicDomain],
-        ] as const;
-        if (values.some(([, value]) => !value.trim())) throw new Error(tHosting('not-configured'));
-        const { testDesktopR2Connection } = await import('@/network/upload/desktop-r2');
-        await testDesktopR2Connection({
-          accountId: r2AccountId,
-          accessKeyId: r2AccessKeyId,
-          secretAccessKey: r2SecretAccessKey,
-          bucketName: r2BucketName,
-          publicDomain: r2PublicDomain,
-        });
-        toast.success(tHosting('test-success'));
-        return;
-      }
-
-      const response = await fetch('/api/upload/test-r2', { method: 'GET' });
-      const result = (await response.json()) as { ok?: boolean; error?: string };
-
-      if (response.ok && result.ok) {
-        toast.success(tHosting('test-success'));
-      } else {
-        toast.error(`${tHosting('test-failed')} ${result.error || ''}`);
-      }
-    } catch (error) {
-      const message = error instanceof Error ? error.message : tHosting('test-failed');
-      toast.error(`${tHosting('test-failed')} ${message}`);
-    } finally {
-      setIsTestingR2(false);
     }
   };
 
@@ -328,90 +344,135 @@ export default function OpenApiSettingsDialog({ open, onOpenChange, embedded = f
           </div>
         </div>
 
-        <div className='border-foreground/10 rounded-md border'>
+        <div className='border-foreground/10 rounded-xl border'>
           <button
             type='button'
-            onClick={() => setHostingExpanded((prev) => !prev)}
-            className='text-foreground/70 hover:text-foreground/90 flex w-full items-center justify-between px-3 py-2.5 text-sm font-medium'
+            onClick={() => setHostingExpanded((previous) => !previous)}
+            className='text-foreground/75 hover:text-foreground flex w-full items-center justify-between px-4 py-3 text-sm font-medium'
           >
             <span>{tHosting('title')}</span>
-            {hostingExpanded ? <ChevronDown className='h-4 w-4' /> : <ChevronRight className='h-4 w-4' />}
+            {hostingExpanded ? <ChevronDown className='size-4' /> : <ChevronRight className='size-4' />}
           </button>
 
-          {hostingExpanded && (
-            <div className='border-foreground/10 space-y-2 border-t px-3 pt-3 pb-3'>
-              {desktop && (
-                <div className='grid gap-3 sm:grid-cols-2'>
-                  <div className='space-y-1.5'>
-                    <label htmlFor='r2-account-id' className='text-foreground/65 text-xs font-medium'>
-                      {tDesktop('r2AccountId')}
-                    </label>
-                    <Input
-                      id='r2-account-id'
-                      value={r2AccountId}
-                      onChange={(event) => setR2AccountId(event.target.value)}
-                      className='border-foreground/10 bg-foreground/5 text-foreground h-10'
-                    />
+          {hostingExpanded ? (
+            <div className='border-foreground/10 space-y-4 border-t p-4'>
+              <RadioGroup
+                value={uploadProvider}
+                onValueChange={(value) => setUploadProviderDraft(value as UploadProvider)}
+                className='grid gap-3 sm:grid-cols-2'
+              >
+                <label
+                  htmlFor='upload-provider-builtin'
+                  className='border-foreground/10 has-[[data-state=checked]]:border-primary has-[[data-state=checked]]:bg-primary/5 flex cursor-pointer gap-3 rounded-lg border p-3'
+                >
+                  <RadioGroupItem id='upload-provider-builtin' value='builtin' className='mt-0.5' />
+                  <span>
+                    <span className='text-foreground block text-sm font-medium'>{tHosting('builtin')}</span>
+                    <span className='text-foreground/50 mt-1 block text-xs leading-5'>
+                      {tHosting('builtin-description')}
+                    </span>
+                  </span>
+                </label>
+                <label
+                  htmlFor='upload-provider-custom'
+                  className='border-foreground/10 has-[[data-state=checked]]:border-primary has-[[data-state=checked]]:bg-primary/5 flex cursor-pointer gap-3 rounded-lg border p-3'
+                >
+                  <RadioGroupItem
+                    id='upload-provider-custom'
+                    value='custom-r2'
+                    disabled={!desktop}
+                    className='mt-0.5'
+                  />
+                  <span>
+                    <span className='text-foreground block text-sm font-medium'>{tHosting('custom')}</span>
+                    <span className='text-foreground/50 mt-1 block text-xs leading-5'>
+                      {desktop ? tHosting('custom-description') : tHosting('custom-desktop-only')}
+                    </span>
+                  </span>
+                </label>
+              </RadioGroup>
+
+              {uploadProvider === 'builtin' ? (
+                <p className='bg-foreground/[0.035] text-foreground/55 rounded-lg px-3 py-2.5 text-xs leading-5'>
+                  {tHosting('builtin-hint')}
+                </p>
+              ) : (
+                <div className='space-y-3'>
+                  <div className='grid gap-3 sm:grid-cols-2'>
+                    <div className='space-y-1.5'>
+                      <label htmlFor='r2-account-id' className='text-foreground/70 text-xs font-medium'>
+                        {tDesktop('r2AccountId')}
+                      </label>
+                      <Input
+                        id='r2-account-id'
+                        value={r2AccountId}
+                        onChange={(event) => setR2AccountId(event.target.value)}
+                        className='border-foreground/10 bg-foreground/5 text-foreground h-10'
+                      />
+                    </div>
+                    <div className='space-y-1.5'>
+                      <label htmlFor='r2-bucket-name' className='text-foreground/70 text-xs font-medium'>
+                        {tDesktop('r2BucketName')}
+                      </label>
+                      <Input
+                        id='r2-bucket-name'
+                        value={r2BucketName}
+                        onChange={(event) => setR2BucketName(event.target.value)}
+                        className='border-foreground/10 bg-foreground/5 text-foreground h-10'
+                      />
+                    </div>
+                    <div className='space-y-1.5'>
+                      <label htmlFor='r2-access-key' className='text-foreground/70 text-xs font-medium'>
+                        {tDesktop('r2AccessKeyId')}
+                      </label>
+                      <Input
+                        id='r2-access-key'
+                        value={r2AccessKeyId}
+                        onChange={(event) => setR2AccessKeyId(event.target.value)}
+                        className='border-foreground/10 bg-foreground/5 text-foreground h-10'
+                      />
+                    </div>
+                    <div className='space-y-1.5'>
+                      <label htmlFor='r2-secret-key' className='text-foreground/70 text-xs font-medium'>
+                        {tDesktop('r2SecretAccessKey')}
+                      </label>
+                      <Input
+                        id='r2-secret-key'
+                        type='password'
+                        value={r2SecretAccessKey}
+                        onChange={(event) => setR2SecretAccessKey(event.target.value)}
+                        className='border-foreground/10 bg-foreground/5 text-foreground h-10'
+                      />
+                    </div>
                   </div>
                   <div className='space-y-1.5'>
-                    <label htmlFor='r2-bucket-name' className='text-foreground/65 text-xs font-medium'>
-                      {tDesktop('r2BucketName')}
+                    <label htmlFor='r2-public-domain' className='text-foreground/70 text-xs font-medium'>
+                      {tHosting('public-domain')}
                     </label>
                     <Input
-                      id='r2-bucket-name'
-                      value={r2BucketName}
-                      onChange={(event) => setR2BucketName(event.target.value)}
+                      id='r2-public-domain'
+                      value={r2PublicDomain}
+                      onChange={(event) => setR2PublicDomain(event.target.value)}
+                      placeholder={tHosting('public-domain-placeholder')}
                       className='border-foreground/10 bg-foreground/5 text-foreground h-10'
                     />
+                    <p className='text-foreground/45 text-xs'>{tHosting('public-domain-hint')}</p>
                   </div>
-                  <div className='space-y-1.5'>
-                    <label htmlFor='r2-access-key' className='text-foreground/65 text-xs font-medium'>
-                      {tDesktop('r2AccessKeyId')}
-                    </label>
-                    <Input
-                      id='r2-access-key'
-                      value={r2AccessKeyId}
-                      onChange={(event) => setR2AccessKeyId(event.target.value)}
-                      className='border-foreground/10 bg-foreground/5 text-foreground h-10'
-                    />
-                  </div>
-                  <div className='space-y-1.5'>
-                    <label htmlFor='r2-secret-key' className='text-foreground/65 text-xs font-medium'>
-                      {tDesktop('r2SecretAccessKey')}
-                    </label>
-                    <Input
-                      id='r2-secret-key'
-                      type='password'
-                      value={r2SecretAccessKey}
-                      onChange={(event) => setR2SecretAccessKey(event.target.value)}
-                      className='border-foreground/10 bg-foreground/5 text-foreground h-10'
-                    />
+                  <div>
+                    <Button
+                      type='button'
+                      variant='outline'
+                      onClick={handleTestR2}
+                      disabled={isTestingR2}
+                      className='border-foreground/10 bg-transparent'
+                    >
+                      {isTestingR2 ? tHosting('testing') : tHosting('test')}
+                    </Button>
                   </div>
                 </div>
               )}
-              <label htmlFor='r2-public-domain' className='text-foreground/80 text-sm font-medium'>
-                {tHosting('public-domain')}
-              </label>
-              <Input
-                id='r2-public-domain'
-                value={r2PublicDomain}
-                onChange={(event) => setR2PublicDomain(event.target.value)}
-                placeholder={tHosting('public-domain-placeholder')}
-                className='border-foreground/10 bg-foreground/5 text-foreground placeholder:text-foreground/30 h-11'
-              />
-              <p className='text-foreground/45 text-xs'>{tHosting('public-domain-hint')}</p>
-              {!desktop && <p className='text-foreground/30 text-xs'>{tHosting('not-configured')}</p>}
-              <Button
-                type='button'
-                variant='outline'
-                onClick={handleTestR2}
-                disabled={isTestingR2}
-                className='border-foreground/10 text-foreground hover:bg-foreground/8 hover:text-foreground mt-1 h-9 w-full bg-transparent text-sm'
-              >
-                {isTestingR2 ? tHosting('testing') : tHosting('test')}
-              </Button>
             </div>
-          )}
+          ) : null}
         </div>
       </div>
 
@@ -442,8 +503,13 @@ export default function OpenApiSettingsDialog({ open, onOpenChange, embedded = f
           >
             {t('cancel')}
           </Button>
-          <Button type='button' onClick={handleSave} className='bg-foreground text-background hover:bg-foreground/90'>
-            {t('save')}
+          <Button
+            type='button'
+            onClick={handleSave}
+            disabled={isTesting}
+            className='bg-primary text-primary-foreground hover:bg-primary/90'
+          >
+            {isTesting ? t('saving-and-testing') : t('save-and-test')}
           </Button>
         </div>
       </DialogFooter>

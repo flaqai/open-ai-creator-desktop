@@ -5,7 +5,7 @@ import NextTopLoader from 'nextjs-toploader';
 export default function TopLoadingBar() {
   return (
     <NextTopLoader
-      color='#417CF1'
+      color='#7C3AED'
       initialPosition={0.08}
       crawlSpeed={200}
       height={2}
@@ -13,7 +13,7 @@ export default function TopLoadingBar() {
       showSpinner={false}
       easing='ease'
       speed={200}
-      shadow='0 0 10px #417CF1,0 0 5px #417CF1'
+      shadow='0 0 10px #7C3AED,0 0 5px #7C3AED'
       zIndex={1600}
       showAtBottom={false}
     />

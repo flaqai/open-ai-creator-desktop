@@ -10,7 +10,12 @@ export function isDesktopRuntime() {
   const isLocalPreview =
     ['localhost', '127.0.0.1'].includes(window.location.hostname) &&
     new URLSearchParams(window.location.search).has('desktop-preview');
-  return process.env.NEXT_PUBLIC_FLAQ_DESKTOP_BUILD === 'true' || isNativeDesktop() || isLocalPreview;
+  return (
+    process.env.NEXT_PUBLIC_FLAQ_DESKTOP_BUILD === 'true' ||
+    process.env.NEXT_PUBLIC_FLAQ_DESKTOP_RUNTIME === 'true' ||
+    isNativeDesktop() ||
+    isLocalPreview
+  );
 }
 
 export function openDesktopSettings() {

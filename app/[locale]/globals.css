@@ -27,9 +27,19 @@ body.desktop-app [data-slot='sidebar-container'] {
 }
 .desktop-shell {
   width: 100%;
+  transition: padding-inline-start 340ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+.desktop-sidebar {
+  transition: width 340ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 .desktop-shell > main {
   min-width: 0;
+}
+@media (prefers-reduced-motion: reduce) {
+  .desktop-shell,
+  .desktop-sidebar {
+    transition: none;
+  }
 }
 html.light {
   --background: #f6f7fb;
@@ -128,6 +138,205 @@ body.desktop-app [data-cookie-consent] {
 
   button {
     cursor: pointer;
+  }
+}
+
+/* Flaq feedback toasts: the motion is concentrated in the status seal so the
+   message remains calm and readable while success still feels celebratory. */
+.flaq-toaster [data-sonner-toast].flaq-toast {
+  min-width: min(390px, calc(100vw - 32px));
+  overflow: visible;
+  gap: 13px;
+  padding: 14px 42px 14px 14px;
+  border: 1px solid color-mix(in oklab, var(--border) 78%, transparent) !important;
+  border-radius: 17px !important;
+  background: linear-gradient(
+    115deg,
+    color-mix(in oklab, var(--popover) 96%, var(--primary) 4%),
+    var(--popover)
+  ) !important;
+  color: var(--popover-foreground) !important;
+  box-shadow:
+    0 18px 55px rgb(15 12 30 / 16%),
+    0 3px 12px rgb(15 12 30 / 8%),
+    inset 0 1px 0 rgb(255 255 255 / 12%) !important;
+  backdrop-filter: blur(18px) saturate(135%);
+}
+
+.flaq-toaster [data-sonner-toast].flaq-toast-success {
+  border-color: color-mix(in oklab, #10b981 38%, var(--border)) !important;
+  background: linear-gradient(110deg, color-mix(in oklab, #10b981 10%, var(--popover)), var(--popover) 62%) !important;
+}
+
+.flaq-toaster [data-sonner-toast].flaq-toast-error {
+  border-color: color-mix(in oklab, #ef4444 40%, var(--border)) !important;
+  background: linear-gradient(110deg, color-mix(in oklab, #ef4444 10%, var(--popover)), var(--popover) 62%) !important;
+}
+
+.flaq-toaster .flaq-toast-title {
+  color: var(--popover-foreground) !important;
+  font-size: 13px;
+  font-weight: 650;
+  line-height: 1.35;
+  letter-spacing: -0.01em;
+}
+
+.flaq-toaster .flaq-toast-description {
+  margin-top: 3px;
+  color: color-mix(in oklab, var(--popover-foreground) 64%, transparent) !important;
+  font-size: 12px;
+  line-height: 1.45;
+}
+
+.flaq-toast-glyph {
+  position: relative;
+  display: grid;
+  width: 30px;
+  height: 30px;
+  flex: 0 0 30px;
+  place-items: center;
+}
+
+.flaq-toast-glyph-core {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  width: 28px;
+  height: 28px;
+  place-items: center;
+  border: 1px solid rgb(255 255 255 / 28%);
+  border-radius: 999px;
+  color: #fff;
+  box-shadow:
+    0 7px 16px rgb(16 24 40 / 20%),
+    inset 0 1px 1px rgb(255 255 255 / 32%);
+}
+
+.flaq-toast-glyph-success .flaq-toast-glyph-core {
+  background: linear-gradient(145deg, #24c98b, #079968);
+  animation: flaq-toast-success-pop 560ms cubic-bezier(0.2, 1.5, 0.42, 1) both;
+}
+
+.flaq-toast-glyph-error .flaq-toast-glyph-core {
+  background: linear-gradient(145deg, #fb7185, #dc2626);
+  animation: flaq-toast-error-shake 440ms cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+}
+
+.flaq-toast-glyph::before {
+  position: absolute;
+  z-index: 0;
+  width: 28px;
+  height: 28px;
+  border: 2px solid transparent;
+  border-radius: 999px;
+  content: '';
+}
+
+.flaq-toast-glyph-success::before {
+  border-color: rgb(16 185 129 / 35%);
+  animation: flaq-toast-ring 700ms ease-out both;
+}
+
+.flaq-toast-glyph-error::before {
+  border-color: rgb(239 68 68 / 34%);
+  animation: flaq-toast-ring 600ms ease-out both;
+}
+
+.flaq-toast-confetti {
+  position: absolute;
+  z-index: 1;
+  top: 13px;
+  left: 13px;
+  width: 4px;
+  height: 8px;
+  border-radius: 2px;
+  background: var(--confetti-color);
+  opacity: 0;
+  animation: flaq-toast-confetti 720ms cubic-bezier(0.17, 0.67, 0.32, 1) var(--confetti-delay) both;
+}
+
+.flaq-toaster .flaq-toast-close {
+  top: 10px !important;
+  right: 10px !important;
+  left: auto !important;
+  border-color: color-mix(in oklab, var(--border) 70%, transparent) !important;
+  background: color-mix(in oklab, var(--popover) 88%, transparent) !important;
+  color: color-mix(in oklab, var(--popover-foreground) 62%, transparent) !important;
+}
+
+@keyframes flaq-toast-success-pop {
+  0% {
+    transform: scale(0.45) rotate(-18deg);
+    opacity: 0;
+  }
+  62% {
+    transform: scale(1.12) rotate(3deg);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1) rotate(0);
+    opacity: 1;
+  }
+}
+
+@keyframes flaq-toast-error-shake {
+  0% {
+    transform: scale(0.65);
+    opacity: 0;
+  }
+  45% {
+    transform: scale(1.06) translateX(0);
+    opacity: 1;
+  }
+  58% {
+    transform: translateX(-2px);
+  }
+  72% {
+    transform: translateX(2px);
+  }
+  86% {
+    transform: translateX(-1px);
+  }
+  100% {
+    transform: scale(1) translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes flaq-toast-ring {
+  0% {
+    transform: scale(0.72);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(1.75);
+    opacity: 0;
+  }
+}
+
+@keyframes flaq-toast-confetti {
+  0% {
+    transform: translate(-2px, -2px) scale(0.5) rotate(0);
+    opacity: 0;
+  }
+  22% {
+    opacity: 1;
+  }
+  100% {
+    transform: translate(var(--confetti-x), var(--confetti-y)) scale(0.85) rotate(var(--confetti-r));
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .flaq-toast-glyph-core,
+  .flaq-toast-glyph::before,
+  .flaq-toast-confetti {
+    animation: none !important;
+  }
+
+  .flaq-toast-confetti {
+    display: none;
   }
 }
 
@@ -249,8 +458,8 @@ body.desktop-app [data-cookie-consent] {
     --card-foreground: #ffffff;
     --popover: #1b1c23;
     --popover-foreground: #ffffff;
-    --primary: #4c52fe;
-    --primary-foreground: #111111;
+    --primary: #7c3aed;
+    --primary-foreground: #ffffff;
     --secondary: #1b1c23;
     --secondary-foreground: #ffffff;
     --muted: #1b1c23;
@@ -261,15 +470,15 @@ body.desktop-app [data-cookie-consent] {
     --destructive-foreground: #ffffff;
     --border: #34343c;
     --input: #34343c;
-    --ring: #4c52fe;
+    --ring: #8b5cf6;
     --sidebar: #16161a;
     --sidebar-foreground: #ffffff;
-    --sidebar-primary: #4c52fe;
-    --sidebar-primary-foreground: #111111;
+    --sidebar-primary: #7c3aed;
+    --sidebar-primary-foreground: #ffffff;
     --sidebar-accent: #1b1c23;
     --sidebar-accent-foreground: #ffffff;
     --sidebar-border: #34343c;
-    --sidebar-ring: #4c52fe;
+    --sidebar-ring: #8b5cf6;
 
     /* project semantic tokens */
     --color-t1: #ffffff;
@@ -292,7 +501,7 @@ body.desktop-app [data-cookie-consent] {
     --color-b1: #34343c;
     --color-b2: #ffffff66;
 
-    --color-main: #4c52fe;
+    --color-main: #7c3aed;
     --color-green: #8aefb9;
     --color-red: #fff6f6;
     --color-100: #ffffff;

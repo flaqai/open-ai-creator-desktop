@@ -11,6 +11,7 @@ import './globals.css';
 import { locales } from '@/i18n/languages';
 import { NavigationGuardProvider } from 'next-navigation-guard';
 
+import { isDesktopServerRender } from '@/lib/desktop/server';
 import { createLocalizedMetadata } from '@/lib/seo/metadata';
 import DesktopShell from '@/components/desktop/DesktopShell';
 import JsonLdScript from '@/components/scripts/JsonLdScript';
@@ -95,28 +96,15 @@ export default async function RootLayout(props: { children: React.ReactNode; par
   return (
     <html lang={locale} dir={getLanguageDirection(locale)} suppressHydrationWarning className='dark'>
       <head>
-        {process.env.FLAQ_DESKTOP_BUILD !== 'true' && <link rel='describedby' href='/llms.txt' type='text/markdown' />}
+        {!isDesktopServerRender && <link rel='describedby' href='/llms.txt' type='text/markdown' />}
         <JsonLdScript locale={locale} title={metadata('title')} description={metadata('description')} />
       </head>
       <body
-        className={`${process.env.FLAQ_DESKTOP_BUILD === 'true' ? 'desktop-app' : ''} ${notoSans.className} ${din.variable} ${notoSans.variable} bg-background text-foreground relative mx-auto flex min-h-screen flex-col`}
+        className={`${isDesktopServerRender ? 'desktop-app' : ''} ${notoSans.className} ${din.variable} ${notoSans.variable} bg-background text-foreground relative mx-auto flex min-h-screen flex-col`}
       >
         <NavigationGuardProvider>
           <NextIntlClientProvider locale={locale} messages={messages}>
-            <Toaster
-              duration={2000}
-              icons={{
-                success: <span className='sr-only'>icon</span>,
-                error: <span className='sr-only'>icon</span>,
-              }}
-              position='top-center'
-              toastOptions={{
-                classNames: {
-                  success: 'text-color-green border-color-green',
-                  error: 'text-color-red border-color-red',
-                },
-              }}
-            />
+            <Toaster duration={2800} position='top-center' />
             <DesktopShell>
               <LazyGlobalUI />
               {children}

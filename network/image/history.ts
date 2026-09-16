@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from 'react';
 
 import { STORE_PREFIX } from '@/lib/constants/config';
+import type { MediaArchiveStatus } from '@/lib/desktop/media-storage';
 import { ImageFormType } from '@/components/image-ui-form/image-context-provider';
 
 import { notifyLocalHistory, readLocalHistory, subscribeLocalHistory, writeLocalHistory } from '../local-history';
@@ -34,6 +35,9 @@ export type ImageHistoryItem = {
   status?: 'processing' | 'completed' | 'fail';
   taskId?: string;
   errorInfo?: string;
+  localPath?: string;
+  archiveStatus?: MediaArchiveStatus;
+  archiveCompletedAt?: number;
 };
 
 export type ImageHistoryFilterType = ImageFormType;
@@ -81,6 +85,9 @@ export function completeImageHistory(
     thumbnailUrl?: string;
     resolution?: string;
     credit?: number;
+    localPath?: string;
+    archiveStatus?: MediaArchiveStatus;
+    archiveCompletedAt?: number;
   },
 ) {
   const current = readLocalHistory<ImageHistoryItem>(imageHistoryKey);
@@ -94,7 +101,25 @@ export function completeImageHistory(
             url: payload.url || item.url,
             thumbnailUrl: payload.thumbnailUrl || payload.url || item.thumbnailUrl,
             resolution: payload.resolution || item.resolution,
+            localPath: payload.localPath ?? item.localPath,
+            archiveStatus: payload.archiveStatus ?? item.archiveStatus,
+            archiveCompletedAt: payload.archiveCompletedAt ?? item.archiveCompletedAt,
           }
+        : item,
+    ),
+  );
+}
+
+export function updateImageArchive(
+  taskId: string,
+  payload: Pick<ImageHistoryItem, 'archiveStatus'> & Pick<ImageHistoryItem, 'localPath'>,
+) {
+  const current = readLocalHistory<ImageHistoryItem>(imageHistoryKey);
+  writeLocalHistory(
+    imageHistoryKey,
+    current.map((item) =>
+      item.id === taskId || item.taskId === taskId
+        ? { ...item, archiveStatus: payload.archiveStatus, localPath: payload.localPath ?? item.localPath }
         : item,
     ),
   );

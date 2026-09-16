@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from 'react';
 
 import { STORE_PREFIX } from '@/lib/constants/config';
+import type { MediaArchiveStatus } from '@/lib/desktop/media-storage';
 
 import { notifyLocalHistory, readLocalHistory, subscribeLocalHistory, writeLocalHistory } from '../local-history';
 
@@ -43,6 +44,9 @@ export type VideoHistoryItem = {
   videoUrl: string;
   videoType: VideoHistoryRequest['videoType'];
   ratio?: string;
+  localPath?: string;
+  archiveStatus?: MediaArchiveStatus;
+  archiveCompletedAt?: number;
 };
 
 export const pageSize = 8;
@@ -86,6 +90,9 @@ export function completeVideoHistory(
     videoThumbnailUrl?: string;
     duration?: number;
     ratio?: string;
+    localPath?: string;
+    archiveStatus?: MediaArchiveStatus;
+    archiveCompletedAt?: number;
   },
 ) {
   const current = readLocalHistory<VideoHistoryItem>(videoHistoryKey);
@@ -101,7 +108,25 @@ export function completeVideoHistory(
             coverImage: payload.videoThumbnailUrl || item.coverImage,
             duration: payload.duration ?? item.duration,
             ratio: payload.ratio || item.ratio,
+            localPath: payload.localPath ?? item.localPath,
+            archiveStatus: payload.archiveStatus ?? item.archiveStatus,
+            archiveCompletedAt: payload.archiveCompletedAt ?? item.archiveCompletedAt,
           }
+        : item,
+    ),
+  );
+}
+
+export function updateVideoArchive(
+  taskId: string,
+  payload: Pick<VideoHistoryItem, 'archiveStatus'> & Pick<VideoHistoryItem, 'localPath'>,
+) {
+  const current = readLocalHistory<VideoHistoryItem>(videoHistoryKey);
+  writeLocalHistory(
+    videoHistoryKey,
+    current.map((item) =>
+      item.id === taskId || item.traceId === taskId
+        ? { ...item, archiveStatus: payload.archiveStatus, localPath: payload.localPath ?? item.localPath }
         : item,
     ),
   );

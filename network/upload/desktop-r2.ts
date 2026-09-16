@@ -1,4 +1,9 @@
 import {
+  CUSTOM_R2_ACCESS_KEY_ID_STORAGE_KEY,
+  CUSTOM_R2_ACCOUNT_ID_STORAGE_KEY,
+  CUSTOM_R2_BUCKET_NAME_STORAGE_KEY,
+  CUSTOM_R2_PUBLIC_DOMAIN_STORAGE_KEY,
+  CUSTOM_R2_SECRET_ACCESS_KEY_STORAGE_KEY,
   R2_ACCESS_KEY_ID_STORAGE_KEY,
   R2_ACCOUNT_ID_STORAGE_KEY,
   R2_BUCKET_NAME_STORAGE_KEY,
@@ -6,6 +11,7 @@ import {
   R2_SECRET_ACCESS_KEY_STORAGE_KEY,
 } from '@/lib/desktop/storage';
 import { fetchWithTimeout } from '@/lib/platform/http';
+import { generateR2Path } from '@/lib/utils/r2PathUtils';
 import { getSecureItem } from '@/lib/utils/secureStorage';
 
 import type { CreateSignedUrlResponse } from './client';
@@ -18,37 +24,6 @@ export type R2Config = {
   publicDomain: string;
 };
 
-function getFileExtension(mimeType: string) {
-  const extensions: Record<string, string> = {
-    'image/jpeg': 'jpg',
-    'image/png': 'png',
-    'image/webp': 'webp',
-    'image/gif': 'gif',
-    'image/avif': 'avif',
-    'audio/mpeg': 'mp3',
-    'audio/wav': 'wav',
-    'audio/mp4': 'm4a',
-    'video/mp4': 'mp4',
-    'video/webm': 'webm',
-    'video/quicktime': 'mov',
-    'application/pdf': 'pdf',
-    'application/json': 'json',
-    'text/plain': 'txt',
-  };
-  return extensions[mimeType] || 'bin';
-}
-
-function createObjectPath(mimeType: string) {
-  const now = new Date();
-  const datePath = [
-    now.getFullYear(),
-    String(now.getMonth() + 1).padStart(2, '0'),
-    String(now.getDate()).padStart(2, '0'),
-  ].join('/');
-  const id = crypto.randomUUID().replaceAll('-', '').slice(0, 20);
-  return `${datePath}/${id}.${getFileExtension(mimeType)}`;
-}
-
 export async function getDesktopR2Config() {
   const [accountId, accessKeyId, secretAccessKey, bucketName, publicDomain] = await Promise.all([
     getSecureItem(R2_ACCOUNT_ID_STORAGE_KEY),
@@ -59,7 +34,23 @@ export async function getDesktopR2Config() {
   ]);
 
   if (!accountId || !accessKeyId || !secretAccessKey || !bucketName || !publicDomain) {
-    throw new Error('Cloudflare R2 is not fully configured. Open Settings → Image Hosting.');
+    throw new Error('The built-in Flaq R2 configuration is unavailable. Please contact your administrator.');
+  }
+
+  return { accountId, accessKeyId, secretAccessKey, bucketName, publicDomain };
+}
+
+export async function getCustomDesktopR2Config() {
+  const [accountId, accessKeyId, secretAccessKey, bucketName, publicDomain] = await Promise.all([
+    getSecureItem(CUSTOM_R2_ACCOUNT_ID_STORAGE_KEY),
+    getSecureItem(CUSTOM_R2_ACCESS_KEY_ID_STORAGE_KEY),
+    getSecureItem(CUSTOM_R2_SECRET_ACCESS_KEY_STORAGE_KEY),
+    getSecureItem(CUSTOM_R2_BUCKET_NAME_STORAGE_KEY),
+    getSecureItem(CUSTOM_R2_PUBLIC_DOMAIN_STORAGE_KEY),
+  ]);
+
+  if (!accountId || !accessKeyId || !secretAccessKey || !bucketName || !publicDomain) {
+    throw new Error('Custom R2 is not configured. Open Settings → Image Hosting.');
   }
 
   return { accountId, accessKeyId, secretAccessKey, bucketName, publicDomain };
@@ -85,7 +76,7 @@ export async function createDesktopSignedUrls(mimeTypes: string[], input?: R2Con
 
   const rows = await Promise.all(
     mimeTypes.map(async (mimeType) => {
-      const objectPath = createObjectPath(mimeType);
+      const objectPath = generateR2Path(mimeType);
       const command = new PutObjectCommand({
         Bucket: config.bucketName,
         Key: objectPath,

@@ -4,7 +4,7 @@
   "version": "1.0.0",
   "identifier": "ai.flaq.creator",
   "build": {
-    "beforeDevCommand": "pnpm desktop:prepare && pnpm dev",
+    "beforeDevCommand": "pnpm dev:desktop",
     "devUrl": "http://localhost:3000",
     "beforeBuildCommand": "pnpm build:desktop",
     "frontendDist": "../out"
@@ -22,7 +22,8 @@
         "resizable": true,
         "fullscreen": false,
         "decorations": true,
-        "transparent": false
+        "transparent": false,
+        "visible": false
       }
     ],
     "security": {

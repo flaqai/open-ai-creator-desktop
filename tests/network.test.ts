@@ -2,6 +2,7 @@ import assert from 'node:assert/strict';
 import { afterEach, test } from 'node:test';
 
 import { mediaFileName, mediaRequestUrl } from '../lib/platform/media';
+import { detectImageFormat, imageFormatFromUrl } from '../lib/utils/fileUtils';
 import { fetchWithRetry } from '../lib/utils/promiseUtils';
 import { buildOpenApiUrl, createOpenApiHeaders, openApiFetchJson } from '../network/clientFetch';
 import { testApiConnection } from '../network/connection-test';
@@ -16,6 +17,20 @@ afterEach(() => {
 const config = { baseUrl: 'https://api.example.test', clientKey: 'test-only-key' };
 const json = (data: unknown, status = 200) =>
   new Response(JSON.stringify(data), { status, headers: { 'Content-Type': 'application/json' } });
+
+test('image format detection uses the URL first and degrades quietly when probing fails', async () => {
+  let requests = 0;
+  const failingFetcher = async () => {
+    requests += 1;
+    throw new Error('network unavailable');
+  };
+
+  assert.equal(imageFormatFromUrl('https://asset.test/image.JPEG?token=secret'), 'JPG');
+  assert.equal(await detectImageFormat('https://asset.test/image.png', failingFetcher), 'PNG');
+  assert.equal(requests, 0);
+  assert.equal(await detectImageFormat('https://asset.test/image', failingFetcher), null);
+  assert.equal(requests, 1);
+});
 
 test('base URL validation and Headers instances preserve custom headers', () => {
   assert.equal(
@@ -79,17 +94,41 @@ test('invalid success body is rejected rather than treated as a generated task',
   await assert.rejects(openApiFetchJson(config, '/api'), /invalid JSON/);
 });
 
-test('connection test distinguishes auth errors, outages, invalid endpoints and reachability', async () => {
-  for (const status of [401, 403, 429, 500, 502]) {
+test('connection test uses the dedicated key status endpoint and its availability result', async () => {
+  let request: { url: string; init?: RequestInit } | undefined;
+  assert.equal(
+    await testApiConnection(config, async (url, init) => {
+      request = { url: String(url), init };
+      return json({ code: 0, msg: 'ok', data: { client_key: 'redacted', status: 1 } });
+    }),
+    'verified',
+  );
+  assert.equal(request?.url, 'https://api.example.test/api/v1/key/status');
+  assert.equal(request?.init?.method, 'POST');
+  assert.equal(new Headers(request?.init?.headers).get('Authorization'), null);
+  assert.deepEqual(JSON.parse(request?.init?.body as string), { client_key: 'test-only-key' });
+
+  for (const status of [401, 403]) {
     await assert.rejects(testApiConnection(config, async () => json({ message: 'service error' }, status)));
   }
-  await assert.rejects(testApiConnection(config, async () => new Response('<html>404</html>', { status: 404 })));
-  await assert.rejects(testApiConnection(config, async () => json({ message: 'route not found' }, 404)));
-  assert.equal(
-    await testApiConnection(config, async () => json({ error: { message: 'Task not found' } }, 404)),
-    'reachable',
+  await assert.rejects(
+    testApiConnection(config, async () => json({ code: 0, msg: 'key unavailable', data: { status: 0 } })),
+    /key unavailable/,
   );
-  assert.equal(await testApiConnection(config, async () => json({ data: { task_status: 'processing' } })), 'verified');
+  await assert.rejects(
+    testApiConnection(config, async () => json({ message: 'service unavailable' }, 503)),
+    /503/,
+  );
+  await assert.rejects(
+    testApiConnection(config, async () => new Response('<html>gateway</html>')),
+    /not authorized/,
+  );
+  await assert.rejects(
+    testApiConnection(config, async () => {
+      throw new Error('network unavailable');
+    }),
+    /network unavailable/,
+  );
 });
 
 test('retry handles transient failures, avoids permanent retries and respects cancellation', async () => {

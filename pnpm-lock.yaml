@@ -29,7 +29,7 @@ importers:
         version: 0.12.2
       '@next/third-parties':
         specifier: 16.3.4
-        version: 16.3.4(next@16.3.4(@babel/core@7.28.5)(@types/node@24.7.2)(react-dom@19.2.1(react@19.2.1))(react@19.2.1))(react@19.2.1)
+        version: 16.3.4(next@16.3.4(@babel/core@7.28.5)(@playwright/test@1.62.1)(@types/node@24.7.2)(react-dom@19.2.1(react@19.2.1))(react@19.2.1))(react@19.2.1)
       '@radix-ui/react-accordion':
         specifier: 1.2.11
         version: 1.2.11(@types/react-dom@19.2.3(@types/react@19.2.7))(@types/react@19.2.7)(react-dom@19.2.1(react@19.2.1))(react@19.2.1)
@@ -173,19 +173,19 @@ importers:
         version: 5.1.5
       next:
         specifier: 16.3.4
-        version: 16.3.4(@babel/core@7.28.5)(@types/node@24.7.2)(react-dom@19.2.1(react@19.2.1))(react@19.2.1)
+        version: 16.3.4(@babel/core@7.28.5)(@playwright/test@1.62.1)(@types/node@24.7.2)(react-dom@19.2.1(react@19.2.1))(react@19.2.1)
       next-intl:
         specifier: 4.3.4
-        version: 4.3.4(next@16.3.4(@babel/core@7.28.5)(@types/node@24.7.2)(react-dom@19.2.1(react@19.2.1))(react@19.2.1))(react@19.2.1)(typescript@5.9.3)
+        version: 4.3.4(next@16.3.4(@babel/core@7.28.5)(@playwright/test@1.62.1)(@types/node@24.7.2)(react-dom@19.2.1(react@19.2.1))(react@19.2.1))(react@19.2.1)(typescript@5.9.3)
       next-navigation-guard:
         specifier: 0.2.0
-        version: 0.2.0(next@16.3.4(@babel/core@7.28.5)(@types/node@24.7.2)(react-dom@19.2.1(react@19.2.1))(react@19.2.1))(react@19.2.1)
+        version: 0.2.0(next@16.3.4(@babel/core@7.28.5)(@playwright/test@1.62.1)(@types/node@24.7.2)(react-dom@19.2.1(react@19.2.1))(react@19.2.1))(react@19.2.1)
       next-themes:
         specifier: 0.4.6
         version: 0.4.6(react-dom@19.2.1(react@19.2.1))(react@19.2.1)
       nextjs-toploader:
         specifier: 3.8.16
-        version: 3.8.16(next@16.3.4(@babel/core@7.28.5)(@types/node@24.7.2)(react-dom@19.2.1(react@19.2.1))(react@19.2.1))(react-dom@19.2.1(react@19.2.1))(react@19.2.1)
+        version: 3.8.16(next@16.3.4(@babel/core@7.28.5)(@playwright/test@1.62.1)(@types/node@24.7.2)(react-dom@19.2.1(react@19.2.1))(react@19.2.1))(react-dom@19.2.1(react@19.2.1))(react@19.2.1)
       query-string:
         specifier: 9.2.1
         version: 9.2.1
@@ -256,6 +256,9 @@ importers:
       '@ianvs/prettier-plugin-sort-imports':
         specifier: 4.4.2
         version: 4.4.2(prettier@3.6.2)
+      '@playwright/test':
+        specifier: 1.62.1
+        version: 1.62.1
       '@tailwindcss/postcss':
         specifier: 4.1.11
         version: 4.1.11
@@ -1155,6 +1158,11 @@ packages:
   '@pkgr/core@0.1.2':
     resolution: {integrity: sha512-fdDH1LSGfZdTH2sxdpVMw31BanV28K/Gry0cVFxaNP77neJSkd82mM8ErPNYs9e+0O7SdHBLTDzDgwUuy18RnQ==}
     engines: {node: ^12.20.0 || ^14.18.0 || >=16.0.0}
+
+  '@playwright/test@1.62.1':
+    resolution: {integrity: sha512-DTcUc8qii+cpHvtOwggMtBRMjKZHXYWdw8syRYu2vtzuq4Wxphqq4NfCs5Zt44L6mA8rfDfj+PHnxFc/FeK6mQ==}
+    engines: {node: '>=20'}
+    hasBin: true
 
   '@radix-ui/number@1.1.1':
     resolution: {integrity: sha512-MkKCwxlXTgz6CFoJx3pCwn07GKp36+aZyu/u2Ln2VrA5DcdyCZkASEDBTd8x5whTQQL5CiYf4prXKLcgQdv29g==}
@@ -3394,6 +3402,11 @@ packages:
       react-dom:
         optional: true
 
+  fsevents@2.3.2:
+    resolution: {integrity: sha512-xiqMQR4xAeHTuB9uWm+fFRcIOgKBMiOBP+eXiyT7jsgVCq1bkVygt00oASowB7EdtpOHaaPgKt812P9ab+DDKA==}
+    engines: {node: ^8.16.0 || ^10.6.0 || >=11.0.0}
+    os: [darwin]
+
   fsevents@2.3.3:
     resolution: {integrity: sha512-5xoDfX+fL7faATnagmWPpbFtwh/R77WmMMqqHGS65C3vvB0YHrgF+B1YmZ3441tMj5n63k0212XNoJwzlhffQw==}
     engines: {node: ^8.16.0 || ^10.6.0 || >=11.0.0}
@@ -4182,6 +4195,16 @@ packages:
   picomatch@4.0.3:
     resolution: {integrity: sha512-5gTmgEY/sqK6gFXLIsQNH19lWb4ebPDLA4SdLP7dsWkIXHWlG66oPuVvXSGFPppYZz8ZDZq0dYYrbHfBCVUb1Q==}
     engines: {node: '>=12'}
+
+  playwright-core@1.62.1:
+    resolution: {integrity: sha512-wPYSwEBJY9GHraISXqyqtx0na0LpO3XEX7jNDhntbex7tzUS7kLnZsOlFruFJB4Hi/rhDMjXGqHewDZ68nYZVw==}
+    engines: {node: '>=20'}
+    hasBin: true
+
+  playwright@1.62.1:
+    resolution: {integrity: sha512-0M+L3LAD8/nm554LOla9Ayx0j0tmFZ0FBcoQ7F1VuVHpM/XpiC8RcDzBQB8W5+hA8L22THxELzeF+2WcUzvcLg==}
+    engines: {node: '>=20'}
+    hasBin: true
 
   possible-typed-array-names@1.1.0:
     resolution: {integrity: sha512-/+5VFTchJDoVj3bhoqi6UeymcD00DAwb1nJwamzPvHEszJ4FpF6SNNbUbOS8yI56qHzdV8eK0qEfOSiodkTdxg==}
@@ -5947,9 +5970,9 @@ snapshots:
   '@next/swc-win32-x64-msvc@16.3.4':
     optional: true
 
-  '@next/third-parties@16.3.4(next@16.3.4(@babel/core@7.28.5)(@types/node@24.7.2)(react-dom@19.2.1(react@19.2.1))(react@19.2.1))(react@19.2.1)':
+  '@next/third-parties@16.3.4(next@16.3.4(@babel/core@7.28.5)(@playwright/test@1.62.1)(@types/node@24.7.2)(react-dom@19.2.1(react@19.2.1))(react@19.2.1))(react@19.2.1)':
     dependencies:
-      next: 16.3.4(@babel/core@7.28.5)(@types/node@24.7.2)(react-dom@19.2.1(react@19.2.1))(react@19.2.1)
+      next: 16.3.4(@babel/core@7.28.5)(@playwright/test@1.62.1)(@types/node@24.7.2)(react-dom@19.2.1(react@19.2.1))(react@19.2.1)
       react: 19.2.1
       third-party-capital: 1.0.20
 
@@ -5970,6 +5993,10 @@ snapshots:
   '@nolyfill/is-core-module@1.0.39': {}
 
   '@pkgr/core@0.1.2': {}
+
+  '@playwright/test@1.62.1':
+    dependencies:
+      playwright: 1.62.1
 
   '@radix-ui/number@1.1.1': {}
 
@@ -8498,6 +8525,9 @@ snapshots:
       react: 19.2.1
       react-dom: 19.2.1(react@19.2.1)
 
+  fsevents@2.3.2:
+    optional: true
+
   fsevents@2.3.3:
     optional: true
 
@@ -9321,19 +9351,19 @@ snapshots:
 
   negotiator@1.0.0: {}
 
-  next-intl@4.3.4(next@16.3.4(@babel/core@7.28.5)(@types/node@24.7.2)(react-dom@19.2.1(react@19.2.1))(react@19.2.1))(react@19.2.1)(typescript@5.9.3):
+  next-intl@4.3.4(next@16.3.4(@babel/core@7.28.5)(@playwright/test@1.62.1)(@types/node@24.7.2)(react-dom@19.2.1(react@19.2.1))(react@19.2.1))(react@19.2.1)(typescript@5.9.3):
     dependencies:
       '@formatjs/intl-localematcher': 0.5.10
       negotiator: 1.0.0
-      next: 16.3.4(@babel/core@7.28.5)(@types/node@24.7.2)(react-dom@19.2.1(react@19.2.1))(react@19.2.1)
+      next: 16.3.4(@babel/core@7.28.5)(@playwright/test@1.62.1)(@types/node@24.7.2)(react-dom@19.2.1(react@19.2.1))(react@19.2.1)
       react: 19.2.1
       use-intl: 4.3.12(react@19.2.1)
     optionalDependencies:
       typescript: 5.9.3
 
-  next-navigation-guard@0.2.0(next@16.3.4(@babel/core@7.28.5)(@types/node@24.7.2)(react-dom@19.2.1(react@19.2.1))(react@19.2.1))(react@19.2.1):
+  next-navigation-guard@0.2.0(next@16.3.4(@babel/core@7.28.5)(@playwright/test@1.62.1)(@types/node@24.7.2)(react-dom@19.2.1(react@19.2.1))(react@19.2.1))(react@19.2.1):
     dependencies:
-      next: 16.3.4(@babel/core@7.28.5)(@types/node@24.7.2)(react-dom@19.2.1(react@19.2.1))(react@19.2.1)
+      next: 16.3.4(@babel/core@7.28.5)(@playwright/test@1.62.1)(@types/node@24.7.2)(react-dom@19.2.1(react@19.2.1))(react@19.2.1)
       react: 19.2.1
 
   next-themes@0.4.6(react-dom@19.2.1(react@19.2.1))(react@19.2.1):
@@ -9341,7 +9371,7 @@ snapshots:
       react: 19.2.1
       react-dom: 19.2.1(react@19.2.1)
 
-  next@16.3.4(@babel/core@7.28.5)(@types/node@24.7.2)(react-dom@19.2.1(react@19.2.1))(react@19.2.1):
+  next@16.3.4(@babel/core@7.28.5)(@playwright/test@1.62.1)(@types/node@24.7.2)(react-dom@19.2.1(react@19.2.1))(react@19.2.1):
     dependencies:
       '@next/env': 16.3.4
       '@swc/helpers': 0.5.23
@@ -9360,15 +9390,16 @@ snapshots:
       '@next/swc-linux-x64-musl': 16.3.4
       '@next/swc-win32-arm64-msvc': 16.3.4
       '@next/swc-win32-x64-msvc': 16.3.4
+      '@playwright/test': 1.62.1
       sharp: 0.35.4(@types/node@24.7.2)
     transitivePeerDependencies:
       - '@babel/core'
       - '@types/node'
       - babel-plugin-macros
 
-  nextjs-toploader@3.8.16(next@16.3.4(@babel/core@7.28.5)(@types/node@24.7.2)(react-dom@19.2.1(react@19.2.1))(react@19.2.1))(react-dom@19.2.1(react@19.2.1))(react@19.2.1):
+  nextjs-toploader@3.8.16(next@16.3.4(@babel/core@7.28.5)(@playwright/test@1.62.1)(@types/node@24.7.2)(react-dom@19.2.1(react@19.2.1))(react@19.2.1))(react-dom@19.2.1(react@19.2.1))(react@19.2.1):
     dependencies:
-      next: 16.3.4(@babel/core@7.28.5)(@types/node@24.7.2)(react-dom@19.2.1(react@19.2.1))(react@19.2.1)
+      next: 16.3.4(@babel/core@7.28.5)(@playwright/test@1.62.1)(@types/node@24.7.2)(react-dom@19.2.1(react@19.2.1))(react@19.2.1)
       nprogress: 0.2.0
       prop-types: 15.8.1
       react: 19.2.1
@@ -9474,6 +9505,14 @@ snapshots:
   picomatch@2.3.1: {}
 
   picomatch@4.0.3: {}
+
+  playwright-core@1.62.1: {}
+
+  playwright@1.62.1:
+    dependencies:
+      playwright-core: 1.62.1
+    optionalDependencies:
+      fsevents: 2.3.2
 
   possible-typed-array-names@1.1.0: {}
 
