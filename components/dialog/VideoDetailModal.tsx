@@ -25,10 +25,17 @@ interface VideoDetailModalProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
   onDelete?: () => void;
+  onDeleteRequest?: () => Promise<void> | void;
   video: VideoHistoryItem & { imageUrl?: string | null; imageEndUrl?: string | null };
 }
 
-export default function VideoDetailModal({ open, onOpenChange, onDelete, video }: VideoDetailModalProps) {
+export default function VideoDetailModal({
+  open,
+  onOpenChange,
+  onDelete,
+  onDeleteRequest,
+  video,
+}: VideoDetailModalProps) {
   const t = useTranslations('Profile.video-history.detail');
   const tHistory = useTranslations('Profile.video-history');
   const [isDeleting, setIsDeleting] = useState(false);
@@ -44,8 +51,12 @@ export default function VideoDetailModal({ open, onOpenChange, onDelete, video }
 
     setIsDeleting(true);
     try {
-      await deleteVideoById(video.id);
-      refreshVideoHistory();
+      if (onDeleteRequest) {
+        await onDeleteRequest();
+      } else {
+        await deleteVideoById(video.id);
+        refreshVideoHistory();
+      }
       toast.success(tHistory('delete-success'));
       onDelete?.();
       onOpenChange(false);

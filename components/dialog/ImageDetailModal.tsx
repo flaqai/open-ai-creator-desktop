@@ -32,6 +32,7 @@ interface ImageDetailModalProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
   onDelete?: () => void;
+  onDeleteRequest?: () => Promise<void> | void;
   image: {
     id: string;
     url: string;
@@ -47,7 +48,13 @@ interface ImageDetailModalProps {
   };
 }
 
-export default function ImageDetailModal({ open, onOpenChange, onDelete, image }: ImageDetailModalProps) {
+export default function ImageDetailModal({
+  open,
+  onOpenChange,
+  onDelete,
+  onDeleteRequest,
+  image,
+}: ImageDetailModalProps) {
   const t = useTranslations('Profile.image-history.detail');
   const tHistory = useTranslations('Profile.image-history');
   const tCommon = useTranslations('Common');
@@ -240,6 +247,14 @@ export default function ImageDetailModal({ open, onOpenChange, onDelete, image }
 
     setIsDeleting(true);
     try {
+      if (onDeleteRequest) {
+        await onDeleteRequest();
+        toast.success(tHistory('delete-success'));
+        onDelete?.();
+        onOpenChange(false);
+        return;
+      }
+
       const res = await deleteImageById(image.id);
       if (res.code === 200) {
         refreshImageHistory();
