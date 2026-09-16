@@ -106,7 +106,7 @@ const TryOnUploadSection = forwardRef<TryOnUploadSectionRef, TryOnUploadSectionP
       methods.setValue('objectImages', imgs.map((img) => img.file || img.previewUrl).filter(Boolean));
     };
 
-    const addObjectFiles = async (files: File[]) => {
+    const addObjectFiles = (files: File[]) => {
       const remaining = maxObjectImages - objectImages.length;
       if (remaining <= 0) {
         toast.error(`Max ${maxObjectImages} images`);
@@ -117,19 +117,15 @@ const TryOnUploadSection = forwardRef<TryOnUploadSectionRef, TryOnUploadSectionP
         file,
         previewUrl: URL.createObjectURL(file),
       }));
-      setObjectImages((prev) => {
-        const updated = [...prev, ...newItems];
-        syncObjectFormValue(updated);
-        return updated;
-      });
+      const updated = [...objectImages, ...newItems];
+      setObjectImages(updated);
+      syncObjectFormValue(updated);
     };
 
     const removeObjectImage = (id: string) => {
-      setObjectImages((prev) => {
-        const updated = prev.filter((img) => img.id !== id);
-        syncObjectFormValue(updated);
-        return updated;
-      });
+      const updated = objectImages.filter((img) => img.id !== id);
+      setObjectImages(updated);
+      syncObjectFormValue(updated);
     };
 
     const objectDropzone = useDropzone({
@@ -140,9 +136,9 @@ const TryOnUploadSection = forwardRef<TryOnUploadSectionRef, TryOnUploadSectionP
       noClick: true,
     });
 
-    const handleObjectInputChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const handleObjectInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
       const files = Array.from(e.target.files || []);
-      if (files.length > 0) await addObjectFiles(files);
+      if (files.length > 0) addObjectFiles(files);
       if (objectInputRef.current) objectInputRef.current.value = '';
     };
 

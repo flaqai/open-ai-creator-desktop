@@ -20,7 +20,7 @@ export default function VideoHistoryTitle({
           <button
             type='button'
             onClick={onBackToStart}
-            className='text-muted-foreground cursor-pointer hover:text-[#1677ff]'
+            className='text-muted-foreground hover:text-color-main cursor-pointer'
           >
             {t('backToStart')}
           </button>

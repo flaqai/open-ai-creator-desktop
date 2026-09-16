@@ -208,14 +208,14 @@ export default function ImageCropDialog({
           <div className='relative hidden flex-1 lg:block'>
             <canvas
               ref={previewCanvasRef}
-              className='absolute-center absolute inset-0 max-h-full rounded-lg bg-contain'
+              className='absolute-center absolute inset-0 max-h-full max-w-full rounded-lg object-contain'
             />
           </div>
           <div className='flex items-center gap-3'>
             <Btn onClick={onClose}>{t('cancel')}</Btn>
             <Btn
               onClick={handleComplete}
-              className='text-foreground border-none bg-gradient-to-r from-purple-600 to-blue-500 font-semibold'
+              className='text-primary-foreground border-none bg-gradient-to-r from-violet-700 to-purple-500 font-semibold'
             >
               {t('done')}
             </Btn>

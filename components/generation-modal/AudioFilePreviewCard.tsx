@@ -109,7 +109,7 @@ export default function AudioFilePreviewCard({
       const isPlayed = time <= currentTime;
 
       if (isInRange) {
-        ctx.fillStyle = isPlayed ? '#427cf1' : '#6b9aff';
+        ctx.fillStyle = isPlayed ? '#7c3aed' : '#a78bfa';
       } else {
         ctx.fillStyle = '#404040';
       }
@@ -412,14 +412,16 @@ export default function AudioFilePreviewCard({
   const progressPosition = timeToPosition(currentTime);
 
   return (
-    <div className='group border-foreground/10 bg-card relative rounded-xl border p-2.5 transition-all hover:border-[#427cf1]/50'>
+    <div className='group border-foreground/10 hover:border-color-main/50 bg-card relative rounded-xl border p-2.5 transition-all'>
       <div className='flex items-center gap-2.5'>
         <button
           type='button'
           onClick={handlePlayPause}
           className={cn(
             'flex size-11 shrink-0 items-center justify-center rounded-full transition-all',
-            isPlaying ? 'text-foreground bg-[#427cf1]' : 'bg-foreground/5 text-foreground/60 hover:bg-foreground/10',
+            isPlaying
+              ? 'bg-color-main text-primary-foreground'
+              : 'bg-foreground/5 text-foreground/60 hover:bg-foreground/10',
           )}
         >
           {isPlaying ? <Pause className='size-5 fill-current' /> : <Play className='size-5 fill-current' />}
@@ -432,8 +434,8 @@ export default function AudioFilePreviewCard({
                 type='button'
                 onClick={handleToggleTrimmer}
                 className={cn(
-                  'text-foreground/40 transition-colors hover:text-[#427cf1]',
-                  showTrimmer && 'text-[#427cf1]',
+                  'text-foreground/40 hover:text-color-main transition-colors',
+                  showTrimmer && 'text-color-main',
                 )}
                 title={showTrimmer ? t('hide-trim') : t('show-trim')}
               >
@@ -470,7 +472,7 @@ export default function AudioFilePreviewCard({
             >
               {isGeneratingWaveform ? (
                 <div className='bg-foreground/5 flex h-full w-full items-center justify-center rounded-md'>
-                  <Loader2 className='size-6 animate-spin text-[#427cf1]' />
+                  <Loader2 className='text-color-main size-6 animate-spin' />
                 </div>
               ) : (
                 <>
@@ -488,7 +490,7 @@ export default function AudioFilePreviewCard({
                         aria-valuemin={0}
                         aria-valuemax={duration}
                         aria-valuenow={startTime}
-                        className='absolute top-0 z-20 h-full w-0.5 cursor-ew-resize bg-[#427cf1]'
+                        className='bg-color-main absolute top-0 z-20 h-full w-0.5 cursor-ew-resize'
                         style={{ left: `${timeToPosition(startTime)}px` }}
                         onMouseDown={handleTrimBoundaryMouseDown('start')}
                         onTouchStart={handleTrimBoundaryMouseDown('start')}
@@ -508,7 +510,7 @@ export default function AudioFilePreviewCard({
                           }
                         }}
                       >
-                        <div className='absolute top-1/2 left-1/2 flex size-5 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-[#427cf1] shadow-md'>
+                        <div className='bg-color-main absolute top-1/2 left-1/2 flex size-5 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full shadow-md'>
                           <div className='bg-foreground h-2.5 w-0.5' />
                         </div>
                       </div>
@@ -521,7 +523,7 @@ export default function AudioFilePreviewCard({
                         aria-valuemin={0}
                         aria-valuemax={duration}
                         aria-valuenow={endTime}
-                        className='absolute top-0 z-20 h-full w-0.5 cursor-ew-resize bg-[#427cf1]'
+                        className='bg-color-main absolute top-0 z-20 h-full w-0.5 cursor-ew-resize'
                         style={{ left: `${timeToPosition(endTime)}px` }}
                         onMouseDown={handleTrimBoundaryMouseDown('end')}
                         onTouchStart={handleTrimBoundaryMouseDown('end')}
@@ -541,7 +543,7 @@ export default function AudioFilePreviewCard({
                           }
                         }}
                       >
-                        <div className='absolute top-1/2 left-1/2 flex size-5 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-[#427cf1] shadow-md'>
+                        <div className='bg-color-main absolute top-1/2 left-1/2 flex size-5 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full shadow-md'>
                           <div className='bg-foreground h-2.5 w-0.5' />
                         </div>
                       </div>
@@ -550,7 +552,7 @@ export default function AudioFilePreviewCard({
 
                   {/* Progress indicator - always shown */}
                   <div
-                    className='pointer-events-none absolute top-0 z-30 h-full w-0.5 bg-[#427cf1]'
+                    className='bg-color-main pointer-events-none absolute top-0 z-30 h-full w-0.5'
                     style={{ left: `${progressPosition}px` }}
                   >
                     {/* Top circular drag handle */}
@@ -562,7 +564,7 @@ export default function AudioFilePreviewCard({
                       aria-valuemax={duration}
                       aria-valuenow={currentTime}
                       className={cn(
-                        'pointer-events-auto absolute -top-1 -left-2.5 flex size-5 cursor-grab items-center justify-center rounded-full bg-[#427cf1] shadow-md ring-2 ring-white transition-transform active:cursor-grabbing',
+                        'bg-color-main pointer-events-auto absolute -top-1 -left-2.5 flex size-5 cursor-grab items-center justify-center rounded-full shadow-md ring-2 ring-white transition-transform active:cursor-grabbing',
                         (isProgressHandleHovered || isDraggingProgress) && 'scale-125',
                       )}
                       onMouseDown={handleProgressHandleMouseDown}
@@ -599,14 +601,14 @@ export default function AudioFilePreviewCard({
             {showTrimmer && (
               <div className='text-foreground/60 flex items-center justify-between text-xs'>
                 <span>
-                  {t('start-time')}: <span className='font-medium text-[#427cf1]'>{formatTime(startTime)}</span>
+                  {t('start-time')}: <span className='text-color-main font-medium'>{formatTime(startTime)}</span>
                 </span>
                 <span>
-                  {t('end-time')}: <span className='font-medium text-[#427cf1]'>{formatTime(endTime)}</span>
+                  {t('end-time')}: <span className='text-color-main font-medium'>{formatTime(endTime)}</span>
                 </span>
                 <span>
                   {t('duration')}:{' '}
-                  <span className='font-medium text-[#427cf1]'>{formatTime(endTime - startTime, true)}</span>
+                  <span className='text-color-main font-medium'>{formatTime(endTime - startTime, true)}</span>
                 </span>
               </div>
             )}

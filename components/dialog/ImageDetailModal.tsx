@@ -1,28 +1,32 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState, type PointerEvent, type WheelEvent } from 'react';
 import dynamic from 'next/dynamic';
 import { deleteImageById } from '@/network/image/client';
 import { refreshImageHistory } from '@/network/image/history';
-import { ChevronDown, Download, X } from 'lucide-react';
+import { ChevronDown, Crop, Download, RotateCcw, Trash2, X, ZoomIn, ZoomOut } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import { toast } from 'sonner';
 
 import { getImageModelVersionName } from '@/lib/constants/image';
 import { exportImage, type ImageType } from '@/lib/platform/image-export';
+import { fetchMedia } from '@/lib/platform/media';
 import { detectImageFormat } from '@/lib/utils/fileUtils';
+import type { CroppedImage } from '@/lib/utils/imageUtils';
 import { Dialog, DialogContent, DialogPortal } from '@/components/ui/dialog';
 
-import {
-  CopyrightText,
-  DeleteButton,
-  MetadataRow,
-  ModelTag,
-  PromptSection,
-  type MetadataItem,
-} from './DetailModalComponents';
+import { ModelTag, type MetadataItem } from './DetailModalComponents';
 
 const ConfirmDialog = dynamic(() => import('@/components/dialog/ConfirmDialog'), { ssr: false });
+const ImageCropDialog = dynamic(() => import('@/components/image/ImageCropDialog'), { ssr: false });
+
+const MIN_ZOOM = 0.5;
+const MAX_ZOOM = 5;
+const ZOOM_STEP = 0.25;
+
+function clampZoom(value: number) {
+  return Math.min(MAX_ZOOM, Math.max(MIN_ZOOM, value));
+}
 
 interface ImageDetailModalProps {
   open: boolean;
@@ -46,30 +50,131 @@ interface ImageDetailModalProps {
 export default function ImageDetailModal({ open, onOpenChange, onDelete, image }: ImageDetailModalProps) {
   const t = useTranslations('Profile.image-history.detail');
   const tHistory = useTranslations('Profile.image-history');
+  const tCommon = useTranslations('Common');
+  const tCrop = useTranslations('components.video-image-upload-form');
 
   const [isDeleting, setIsDeleting] = useState(false);
   const [selectedFormat, setSelectedFormat] = useState('WEBP');
   const [showFormatMenu, setShowFormatMenu] = useState(false);
   const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
+  const [displayUrl, setDisplayUrl] = useState(image.url);
+  const [zoom, setZoom] = useState(1);
+  const [position, setPosition] = useState({ x: 0, y: 0 });
+  const [isDragging, setIsDragging] = useState(false);
+  const [cropSource, setCropSource] = useState('');
+  const [isCropOpen, setIsCropOpen] = useState(false);
+  const [isPreparingCrop, setIsPreparingCrop] = useState(false);
+  const dragRef = useRef<null | {
+    pointerId: number;
+    startX: number;
+    startY: number;
+    originX: number;
+    originY: number;
+  }>(null);
+  const ownedObjectUrlsRef = useRef(new Set<string>());
+
+  const resetView = () => {
+    setZoom(1);
+    setPosition({ x: 0, y: 0 });
+  };
+
+  const updateZoom = (nextZoom: number) => {
+    const clampedZoom = clampZoom(nextZoom);
+    setZoom(clampedZoom);
+    if (clampedZoom <= 1) setPosition({ x: 0, y: 0 });
+  };
+
+  const handleWheel = (event: WheelEvent<HTMLDivElement>) => {
+    event.preventDefault();
+    updateZoom(zoom + (event.deltaY < 0 ? ZOOM_STEP : -ZOOM_STEP));
+  };
+
+  const handlePointerDown = (event: PointerEvent<HTMLDivElement>) => {
+    if (event.button !== 0) return;
+    event.currentTarget.setPointerCapture(event.pointerId);
+    dragRef.current = {
+      pointerId: event.pointerId,
+      startX: event.clientX,
+      startY: event.clientY,
+      originX: position.x,
+      originY: position.y,
+    };
+    setIsDragging(true);
+  };
+
+  const handlePointerMove = (event: PointerEvent<HTMLDivElement>) => {
+    const drag = dragRef.current;
+    if (!drag || drag.pointerId !== event.pointerId) return;
+    setPosition({
+      x: drag.originX + event.clientX - drag.startX,
+      y: drag.originY + event.clientY - drag.startY,
+    });
+  };
+
+  const handlePointerEnd = (event: PointerEvent<HTMLDivElement>) => {
+    if (dragRef.current?.pointerId !== event.pointerId) return;
+    dragRef.current = null;
+    setIsDragging(false);
+    if (event.currentTarget.hasPointerCapture(event.pointerId)) {
+      event.currentTarget.releasePointerCapture(event.pointerId);
+    }
+  };
 
   // Detect actual image format and set as default
   useEffect(() => {
-    if (!open || !image.url) return;
+    if (!open || !image.url) return undefined;
+
+    setDisplayUrl(image.url);
+    setZoom(1);
+    setPosition({ x: 0, y: 0 });
 
     detectImageFormat(image.url).then((format) => {
       if (format) setSelectedFormat(format);
     });
+
+    const ownedObjectUrls = ownedObjectUrlsRef.current;
+    return () => {
+      ownedObjectUrls.forEach((url) => URL.revokeObjectURL(url));
+      ownedObjectUrls.clear();
+    };
   }, [open, image.url]);
 
   const handleDownload = async () => {
-    if (!image.url) return;
+    if (!displayUrl) return;
 
     try {
-      await exportImage(image.url, selectedFormat.toLowerCase() as ImageType, `image-${image.id}`);
+      await exportImage(displayUrl, selectedFormat.toLowerCase() as ImageType, `image-${image.id}`);
     } catch (error) {
       console.error('Download failed:', error);
       toast.error('Download failed');
     }
+  };
+
+  const handleOpenCrop = async () => {
+    if (!displayUrl || isPreparingCrop) return;
+    setIsPreparingCrop(true);
+
+    try {
+      let source = displayUrl;
+      if (/^https?:\/\//i.test(source)) {
+        const blob = await (await fetchMedia(source)).blob();
+        source = URL.createObjectURL(blob);
+        ownedObjectUrlsRef.current.add(source);
+      }
+      setCropSource(source);
+      setIsCropOpen(true);
+    } catch {
+      toast.error(t('cropLoadFailed'));
+    } finally {
+      setIsPreparingCrop(false);
+    }
+  };
+
+  const handleCropComplete = ({ imageUrl }: CroppedImage) => {
+    ownedObjectUrlsRef.current.add(imageUrl);
+    setDisplayUrl(imageUrl);
+    setSelectedFormat('PNG');
+    resetView();
   };
 
   const getResolution = () => {
@@ -209,107 +314,167 @@ export default function ImageDetailModal({ open, onOpenChange, onDelete, image }
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogPortal>
         <DialogContent
-          className='h-[calc(100vh-24px)] max-h-[700px] w-[calc(100vw-16px)] max-w-[1453px] border-none bg-transparent p-0 shadow-none sm:max-w-[1453px]'
+          className='h-screen max-h-none w-screen max-w-none overflow-hidden border-none bg-black p-0 shadow-none sm:max-w-none'
           showCloseButton={false}
-          overlayClassName='bg-black/80'
+          overlayClassName='bg-black/95 backdrop-blur-sm'
           hiddenTitle={t('title')}
         >
-          <div className='flex h-full w-full flex-col overflow-hidden rounded-lg shadow-lg lg:flex-row'>
-            {/* Left: Image Section */}
-            <div className='bg-card flex h-full w-full flex-1 items-center justify-center p-3 lg:h-[700px] lg:p-6'>
-              <img
-                src={image.url}
-                alt={image.title || 'Image'}
-                className='max-h-[576px] max-w-full rounded object-contain'
-              />
+          <div
+            className={`relative flex size-full touch-none items-center justify-center overflow-hidden select-none ${isDragging ? 'cursor-grabbing' : 'cursor-grab'}`}
+            onWheel={handleWheel}
+            onPointerDown={handlePointerDown}
+            onPointerMove={handlePointerMove}
+            onPointerUp={handlePointerEnd}
+            onPointerCancel={handlePointerEnd}
+            onDoubleClick={resetView}
+          >
+            <img
+              src={displayUrl}
+              alt={image.title || 'Image'}
+              draggable={false}
+              className='max-h-[calc(100vh-128px)] max-w-[calc(100vw-48px)] object-contain will-change-transform'
+              style={{
+                transform: `translate3d(${position.x}px, ${position.y}px, 0) scale(${zoom})`,
+                transition: isDragging ? 'none' : 'transform 160ms ease-out',
+              }}
+            />
+
+            <div className='pointer-events-none absolute top-5 left-5 z-20 max-w-[min(420px,calc(100vw-104px))] rounded-xl border border-white/10 bg-black/55 p-3 text-white shadow-xl backdrop-blur-md'>
+              <div className='flex flex-wrap items-center gap-2'>
+                <p className='truncate text-sm font-semibold'>{image.title || t('title')}</p>
+                <ModelTag modelName={getModelVersionName()} />
+              </div>
+              {image.prompt && <p className='mt-2 line-clamp-2 text-xs leading-5 text-white/65'>{image.prompt}</p>}
+              {getMetadataItems().length > 0 && (
+                <div className='mt-2 flex flex-wrap gap-x-3 gap-y-1 text-xs text-white/50'>
+                  {getMetadataItems().map((item) => (
+                    <span key={item.label}>
+                      {item.label}: {item.value}
+                    </span>
+                  ))}
+                </div>
+              )}
             </div>
 
-            {/* Right: Info Panel */}
-            <div className='bg-card flex h-full w-full flex-col lg:h-[700px] lg:w-[450px] lg:shrink-0'>
-              {/* Header - Fixed */}
-              <div className='border-border flex shrink-0 items-center justify-between border-b p-3'>
-                <h2 className='text-foreground text-2xl leading-8 font-medium capitalize'>{t('title')}</h2>
+            <button
+              type='button'
+              onClick={() => onOpenChange(false)}
+              onPointerDown={(event) => event.stopPropagation()}
+              className='absolute top-5 right-5 z-30 flex size-11 items-center justify-center rounded-full border border-white/15 bg-black/55 text-white/75 shadow-lg backdrop-blur-md transition hover:bg-white/10 hover:text-white focus-visible:ring-2 focus-visible:ring-violet-400 focus-visible:outline-none'
+              aria-label='Close'
+            >
+              <X className='size-5' />
+            </button>
+
+            <div
+              className='absolute bottom-5 left-1/2 z-30 flex max-w-[calc(100vw-24px)] -translate-x-1/2 items-center gap-1 rounded-2xl border border-white/12 bg-black/65 p-1.5 text-white shadow-2xl backdrop-blur-xl'
+              onPointerDown={(event) => event.stopPropagation()}
+              onWheel={(event) => event.stopPropagation()}
+            >
+              <button
+                type='button'
+                onClick={() => updateZoom(zoom - ZOOM_STEP)}
+                disabled={zoom <= MIN_ZOOM}
+                className='flex size-10 items-center justify-center rounded-xl text-white/70 transition hover:bg-white/10 hover:text-white disabled:opacity-30'
+                aria-label='Zoom out'
+                title='Zoom out'
+              >
+                <ZoomOut className='size-5' />
+              </button>
+              <span className='w-14 text-center text-xs font-medium text-white/70 tabular-nums'>
+                {Math.round(zoom * 100)}%
+              </span>
+              <button
+                type='button'
+                onClick={() => updateZoom(zoom + ZOOM_STEP)}
+                disabled={zoom >= MAX_ZOOM}
+                className='flex size-10 items-center justify-center rounded-xl text-white/70 transition hover:bg-white/10 hover:text-white disabled:opacity-30'
+                aria-label='Zoom in'
+                title='Zoom in'
+              >
+                <ZoomIn className='size-5' />
+              </button>
+              <div className='mx-1 h-6 w-px bg-white/12' />
+              <button
+                type='button'
+                onClick={resetView}
+                className='flex size-10 items-center justify-center rounded-xl text-white/70 transition hover:bg-white/10 hover:text-white'
+                aria-label={tCommon('reset')}
+                title={tCommon('reset')}
+              >
+                <RotateCcw className='size-5' />
+              </button>
+              <button
+                type='button'
+                onClick={handleOpenCrop}
+                disabled={isPreparingCrop}
+                className='flex h-10 items-center gap-2 rounded-xl px-3 text-sm text-white/70 transition hover:bg-white/10 hover:text-white disabled:opacity-40'
+                title={tCrop('crop')}
+              >
+                <Crop className='size-5' />
+                <span className='hidden sm:inline'>{tCrop('crop')}</span>
+              </button>
+              <div className='mx-1 h-6 w-px bg-white/12' />
+              <button
+                type='button'
+                onClick={handleDownload}
+                className='flex size-10 items-center justify-center rounded-xl text-white/70 transition hover:bg-white/10 hover:text-white'
+                aria-label={t('download')}
+                title={t('download')}
+              >
+                <Download className='size-5' />
+              </button>
+              <div className='relative'>
                 <button
                   type='button'
-                  onClick={() => onOpenChange(false)}
-                  className='hover:bg-foreground/10 flex h-9 w-9 cursor-pointer items-center justify-center rounded-[3px] transition-colors'
+                  onClick={() => setShowFormatMenu(!showFormatMenu)}
+                  className='flex h-10 items-center gap-1 rounded-xl px-2 text-xs font-medium text-white/70 transition hover:bg-white/10 hover:text-white'
                 >
-                  <X className='text-foreground h-5 w-5' />
+                  {selectedFormat}
+                  <ChevronDown className='size-3.5' />
                 </button>
-              </div>
-
-              {/* Scrollable Content Section */}
-              <div className='custom-scrollbar flex flex-1 flex-col gap-3 overflow-y-auto p-3'>
-                {/* Prompt Section */}
-                <PromptSection prompt={image.prompt} />
-
-                {/* Model Version Tag */}
-                <ModelTag modelName={getModelVersionName()} />
-
-                {/* Metadata - Integrated */}
-                <MetadataRow items={getMetadataItems()} />
-
-                {/* Copyright */}
-                <CopyrightText />
-              </div>
-
-              {/* Bottom Actions - Fixed */}
-              <div className='border-border flex shrink-0 flex-col gap-2 border-t p-3'>
-                {/* Row 1: Download + Delete */}
-                <div className='flex items-center gap-2'>
-                  {/* Download Button with Format Selector */}
-                  <div className='bg-card hover:bg-card relative flex h-[42px] cursor-pointer rounded-lg transition-colors'>
-                    {/* Download Icon Button */}
-                    <button
-                      type='button'
-                      onClick={handleDownload}
-                      className='flex cursor-pointer items-center justify-center px-3'
-                    >
-                      <Download className='text-foreground h-5 w-5' />
-                    </button>
-
-                    {/* Divider */}
-                    <div className='bg-card w-px' />
-
-                    {/* Format Selector */}
-                    <button
-                      type='button'
-                      onClick={() => setShowFormatMenu(!showFormatMenu)}
-                      className='flex cursor-pointer items-center gap-1 px-3'
-                    >
-                      <span className='text-foreground text-sm capitalize'>{selectedFormat}</span>
-                      <ChevronDown className='text-foreground h-3.5 w-3.5 scale-y-[-1] rotate-180' />
-                    </button>
-
-                    {/* Format Menu */}
-                    {showFormatMenu && (
-                      <div className='bg-card absolute right-0 bottom-full mb-1 flex flex-col gap-1 rounded-lg p-1 shadow-lg'>
-                        {['WEBP', 'PNG', 'JPG'].map((format) => (
-                          <button
-                            key={format}
-                            type='button'
-                            onClick={() => {
-                              setSelectedFormat(format);
-                              setShowFormatMenu(false);
-                            }}
-                            className='text-foreground hover:bg-foreground/10 cursor-pointer rounded px-3 py-1.5 text-sm capitalize transition-colors'
-                          >
-                            {format}
-                          </button>
-                        ))}
-                      </div>
-                    )}
+                {showFormatMenu && (
+                  <div className='absolute right-0 bottom-full mb-2 flex min-w-24 flex-col rounded-xl border border-white/12 bg-black/85 p-1 shadow-xl backdrop-blur-xl'>
+                    {['WEBP', 'PNG', 'JPG'].map((format) => (
+                      <button
+                        key={format}
+                        type='button'
+                        onClick={() => {
+                          setSelectedFormat(format);
+                          setShowFormatMenu(false);
+                        }}
+                        className='rounded-lg px-3 py-2 text-left text-xs text-white/70 transition hover:bg-white/10 hover:text-white'
+                      >
+                        {format}
+                      </button>
+                    ))}
                   </div>
-
-                  {/* Delete Button */}
-                  <DeleteButton onClick={handleDeleteClick} disabled={isDeleting} />
-                </div>
+                )}
               </div>
+              <button
+                type='button'
+                onClick={handleDeleteClick}
+                disabled={isDeleting}
+                className='flex size-10 items-center justify-center rounded-xl text-white/55 transition hover:bg-red-500/15 hover:text-red-300 disabled:opacity-40'
+                aria-label={t('delete')}
+                title={t('delete')}
+              >
+                <Trash2 className='size-4' />
+              </button>
             </div>
           </div>
         </DialogContent>
       </DialogPortal>
       <ConfirmDialog open={showDeleteConfirm} setOpen={setShowDeleteConfirm} callback={handleDelete} />
+      {cropSource && (
+        <ImageCropDialog
+          open={isCropOpen}
+          setOpen={setIsCropOpen}
+          originalImage={cropSource}
+          onCropComplete={handleCropComplete}
+          aspect={image.width && image.height ? image.width / image.height : 1}
+        />
+      )}
     </Dialog>
   );
 }

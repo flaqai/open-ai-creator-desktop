@@ -8,8 +8,8 @@ import { toast } from 'sonner';
 import { cn } from '@/lib/utils';
 import { videoAudioContext } from '@/components/video-ui-form/VideoContenxtProvider';
 
-const THEME_MAIN = '#4c52fe';
-const THEME_MAIN_SOFT = 'rgba(76, 82, 254, 0.35)';
+const THEME_MAIN = '#7c3aed';
+const THEME_MAIN_SOFT = 'rgba(124, 58, 237, 0.35)';
 
 interface AudioFilePreviewCardProps {
   file: File;

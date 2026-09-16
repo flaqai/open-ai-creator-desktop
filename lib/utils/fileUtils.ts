@@ -112,28 +112,45 @@ export async function shouldCompressImageFileList(fileList: FileType[], xMB: num
 
 export type ImageFormatType = 'WEBP' | 'PNG' | 'JPG';
 
+const imageFormatByExtension: Record<string, ImageFormatType> = {
+  webp: 'WEBP',
+  png: 'PNG',
+  jpeg: 'JPG',
+  jpg: 'JPG',
+};
+
+export function imageFormatFromUrl(imageUrl: string): ImageFormatType | null {
+  try {
+    const pathname = new URL(imageUrl, 'https://local.invalid').pathname;
+    const extension = pathname.split('.').pop()?.toLowerCase();
+    return extension ? imageFormatByExtension[extension] || null : null;
+  } catch {
+    return null;
+  }
+}
+
 /**
  * Detect the actual format of an image
  * @param imageUrl Image URL
  * @returns Format string (WEBP/PNG/JPG) or null
  */
-export async function detectImageFormat(imageUrl: string): Promise<ImageFormatType | null> {
+export async function detectImageFormat(
+  imageUrl: string,
+  fetcher: (url: string) => Promise<Response> = fetchMedia,
+): Promise<ImageFormatType | null> {
+  const urlFormat = imageFormatFromUrl(imageUrl);
+  if (urlFormat) return urlFormat;
+
   try {
-    const response = await fetchMedia(imageUrl);
+    const response = await fetcher(imageUrl);
     const blob = await response.blob();
     const mimeType = blob.type;
     const format = mimeType.split('/')[1]?.toLowerCase();
 
-    const formatMap: Record<string, ImageFormatType> = {
-      webp: 'WEBP',
-      png: 'PNG',
-      jpeg: 'JPG',
-      jpg: 'JPG',
-    };
-
-    return formatMap[format] || null;
-  } catch (error) {
-    console.error('Failed to detect image format:', error);
+    return imageFormatByExtension[format] || null;
+  } catch {
+    // Format detection is optional. Keep the default download format when a
+    // remote host cannot be queried instead of surfacing a development error.
     return null;
   }
 }

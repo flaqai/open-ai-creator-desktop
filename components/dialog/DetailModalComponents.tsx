@@ -54,8 +54,8 @@ export function ModelTag({ modelName }: { modelName?: string }) {
   if (!modelName) return null;
 
   return (
-    <div className='border-border inline-flex w-fit items-center rounded-lg border bg-[#191a20] p-2'>
-      <span className='text-muted-foreground rounded bg-black/10 text-sm leading-[22px] capitalize'>{modelName}</span>
+    <div className='border-primary/25 bg-primary/10 inline-flex w-fit items-center rounded-lg border px-3 py-1.5'>
+      <span className='text-primary text-sm leading-[22px] font-medium capitalize'>{modelName}</span>
     </div>
   );
 }

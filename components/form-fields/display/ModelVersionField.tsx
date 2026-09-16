@@ -198,7 +198,7 @@ export default function ModelVersionField({
                               </span>
                             )}
                             {isSelected ? (
-                              <div className='flex h-5 w-5 items-center justify-center rounded-full border-2 border-[#427cf1] bg-[#427cf1]'>
+                              <div className='border-color-main bg-color-main flex h-5 w-5 items-center justify-center rounded-full border-2'>
                                 <svg
                                   xmlns='http://www.w3.org/2000/svg'
                                   width='12'

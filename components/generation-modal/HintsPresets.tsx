@@ -80,7 +80,7 @@ export default function HintsPresets({
                 <div
                   className='pointer-events-none absolute inset-0 rounded-lg'
                   style={{
-                    boxShadow: 'inset 0 0 0 2px #4c52fe',
+                    boxShadow: 'inset 0 0 0 2px var(--color-main)',
                   }}
                 />
               )}
