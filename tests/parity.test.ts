@@ -37,7 +37,7 @@ test('seven creative routes are registered once and backed by actual Next pages'
   assert.deepEqual(FEATURE_MODULES.map((f) => f.id).sort(), expected.sort());
   assert.equal(new Set(ALL_FEATURE_ROUTES.map((f) => f.href)).size, expected.length);
   const pages = readdirSync('app', { recursive: true })
-    .map(String)
+    .map((file) => String(file).split(path.sep).join('/'))
     .filter((file) => file.endsWith('/page.tsx'));
   for (const id of expected)
     assert.ok(
