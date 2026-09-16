@@ -56,16 +56,20 @@ export default function PromptField({
         render={({ field }) => (
           <FormItem className='space-y-0'>
             <FormLabel htmlFor={field.name} className='p-0'>
-              <div className='border-foreground/5 bg-card relative w-full rounded-xl border'>
+              <div
+                data-testid='prompt-field-boundary'
+                className='border-foreground/5 bg-card focus-within:border-ring! relative w-full rounded-xl border transition-colors'
+              >
                 <Textarea
                   {...field}
+                  data-testid='prompt-textarea'
                   ref={(el) => {
                     field.ref(el);
                     (textareaRef as React.MutableRefObject<HTMLTextAreaElement | null>).current = el;
                   }}
                   maxLength={maxLength}
                   placeholder={placeholder || t('promptPlaceholder')}
-                  className='custom-scrollbar text-foreground/80 placeholder:text-foreground/40 [field-sizing:initial] resize-none rounded-t-xl border-0 bg-transparent p-3 focus:ring-0 focus-visible:ring-0'
+                  className='custom-scrollbar text-foreground/80 placeholder:text-foreground/40 [field-sizing:initial] resize-none rounded-t-xl border-0 bg-transparent p-3 focus:ring-0 focus-visible:ring-0 focus-visible:outline-none!'
                   style={{
                     height: `${MIN_HEIGHT}px`,
                     maxHeight: `${MAX_HEIGHT}px`,

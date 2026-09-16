@@ -302,6 +302,7 @@ export default function ImageForm({
       >
         <Form {...form}>
           <form
+            data-testid='image-generation-form'
             onSubmit={(e) => {
               e.stopPropagation(); // Prevent React Portal event bubbling to parent form
               form.handleSubmit(onSubmit)(e);
