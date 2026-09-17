@@ -64,9 +64,53 @@ jobs:
           tagName: desktop-v__VERSION__
           releaseName: Flaq Creator Desktop v__VERSION__
           releaseBody: |
-            Desktop installers for macOS Apple Silicon, macOS Intel, and Windows x64.
+            ## 中文
 
-            These builds are currently unsigned. macOS Gatekeeper and Windows SmartScreen may display a warning on first launch.
+            Flaq Creator 是一款面向 AI 图片与视频创作的跨平台桌面工作台。本版本提供 macOS Apple Silicon、macOS Intel 和 Windows x64 安装包。
+
+            ### 主要功能
+
+            - 集中式设置中心，包含通用、外观、连接与关于页面。
+            - 浅色、深色和跟随系统三种主题，以及可折叠的桌面导航。
+            - 支持七类图片与视频创作工作流，草稿与参考素材可在本机自动恢复。
+            - 生成历史支持图片缩放、拖动、裁剪和视频详情预览。
+            - 改进 Flaq Client Key 授权检测、内置存储、自定义 Cloudflare R2 预设和本地日志。
+            - macOS 单实例锁、窗口状态恢复、原生菜单与快捷键支持。
+
+            ### 下载选择
+
+            - Apple Silicon Mac（M1/M2/M3/M4 等）：`aarch64.dmg`
+            - Intel Mac：`x64.dmg`
+            - Windows 10/11 x64：推荐 `x64-setup.exe`；需要 MSI 部署时选择 `x64_en-US.msi`
+
+            ### 安装提示
+
+            当前安装包尚未使用 Apple Developer ID 或 Windows 代码签名。首次打开时，macOS Gatekeeper 或 Windows SmartScreen 可能显示安全提示。
+
+            ---
+
+            ## English
+
+            Flaq Creator is a cross-platform desktop workspace for AI image and video creation. This release includes installers for macOS Apple Silicon, macOS Intel, and Windows x64.
+
+            ### Highlights
+
+            - A centralized Settings center covering General, Appearance, Connection, and About.
+            - Light, dark, and system themes with a collapsible desktop navigation sidebar.
+            - Seven image and video creation workflows with automatic local recovery of drafts and reference media.
+            - Rich generation-history previews with image zoom, pan, crop, and video detail playback.
+            - Improved Flaq Client Key authorization checks, built-in storage, reusable custom Cloudflare R2 presets, and local logs.
+            - macOS single-instance locking, restored window state, native menus, and keyboard shortcuts.
+
+            ### Which file should I download?
+
+            - Apple Silicon Mac (M1/M2/M3/M4 and later): `aarch64.dmg`
+            - Intel Mac: `x64.dmg`
+            - Windows 10/11 x64: use `x64-setup.exe`, or `x64_en-US.msi` for MSI deployment.
+
+            ### Installation note
+
+            These installers are not yet signed with an Apple Developer ID or Windows code-signing certificate. macOS Gatekeeper or Windows SmartScreen may display a security warning on first launch.
           releaseDraft: false
           prerelease: false
           generateReleaseNotes: true
