@@ -19,6 +19,16 @@ function migrateOldVideoData() {
   }
 }
 
+export function readVideoHistoryItems() {
+  migrateOldVideoData();
+  return readLocalHistory<VideoHistoryItem>(videoHistoryKey);
+}
+
+export function subscribeVideoHistory(callback: () => void) {
+  migrateOldVideoData();
+  return subscribeLocalHistory(videoHistoryKey, callback);
+}
+
 export type VideoHistoryRequest = {
   pageNum: number;
   pageSize: number;
@@ -56,11 +66,10 @@ export default function useVideoHistory(reqData: VideoHistoryRequest) {
   const [data, setData] = useState<VideoHistoryItem[]>([]);
 
   useEffect(() => {
-    migrateOldVideoData();
-    setData(readLocalHistory<VideoHistoryItem>(videoHistoryKey));
+    setData(readVideoHistoryItems());
 
-    return subscribeLocalHistory(videoHistoryKey, () => {
-      setData(readLocalHistory<VideoHistoryItem>(videoHistoryKey));
+    return subscribeVideoHistory(() => {
+      setData(readVideoHistoryItems());
     });
   }, []);
 
@@ -79,7 +88,7 @@ export function refreshVideoHistory() {
 }
 
 export function addPendingVideoHistory(item: Omit<VideoHistoryItem, 'status'>) {
-  const current = readLocalHistory<VideoHistoryItem>(videoHistoryKey);
+  const current = readVideoHistoryItems();
   writeLocalHistory(videoHistoryKey, [{ ...item, status: 'processing' }, ...current]);
 }
 
@@ -95,7 +104,7 @@ export function completeVideoHistory(
     archiveCompletedAt?: number;
   },
 ) {
-  const current = readLocalHistory<VideoHistoryItem>(videoHistoryKey);
+  const current = readVideoHistoryItems();
   writeLocalHistory(
     videoHistoryKey,
     current.map((item) =>
@@ -121,7 +130,7 @@ export function updateVideoArchive(
   taskId: string,
   payload: Pick<VideoHistoryItem, 'archiveStatus'> & Pick<VideoHistoryItem, 'localPath'>,
 ) {
-  const current = readLocalHistory<VideoHistoryItem>(videoHistoryKey);
+  const current = readVideoHistoryItems();
   writeLocalHistory(
     videoHistoryKey,
     current.map((item) =>
@@ -133,7 +142,7 @@ export function updateVideoArchive(
 }
 
 export function failVideoHistory(taskId: string, errorInfo?: string) {
-  const current = readLocalHistory<VideoHistoryItem>(videoHistoryKey);
+  const current = readVideoHistoryItems();
   writeLocalHistory(
     videoHistoryKey,
     current.map((item) =>
@@ -149,7 +158,7 @@ export function failVideoHistory(taskId: string, errorInfo?: string) {
 }
 
 export function deleteVideoHistoryItem(id: string) {
-  const current = readLocalHistory<VideoHistoryItem>(videoHistoryKey);
+  const current = readVideoHistoryItems();
   writeLocalHistory(
     videoHistoryKey,
     current.filter((item) => item.id !== id && item.traceId !== id),

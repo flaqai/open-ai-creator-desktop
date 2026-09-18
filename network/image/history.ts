@@ -21,6 +21,16 @@ function migrateOldData() {
   }
 }
 
+export function readImageHistoryItems() {
+  migrateOldData();
+  return readLocalHistory<ImageHistoryItem>(imageHistoryKey);
+}
+
+export function subscribeImageHistory(callback: () => void) {
+  migrateOldData();
+  return subscribeLocalHistory(imageHistoryKey, callback);
+}
+
 export type ImageHistoryItem = {
   id: string;
   prompt: string;
@@ -48,11 +58,10 @@ export default function useImageHistory(pageNum: number, pageSize: number, filte
   const [data, setData] = useState<ImageHistoryItem[]>([]);
 
   useEffect(() => {
-    migrateOldData();
-    setData(readLocalHistory<ImageHistoryItem>(imageHistoryKey));
+    setData(readImageHistoryItems());
 
-    return subscribeLocalHistory(imageHistoryKey, () => {
-      setData(readLocalHistory<ImageHistoryItem>(imageHistoryKey));
+    return subscribeImageHistory(() => {
+      setData(readImageHistoryItems());
     });
   }, []);
 
@@ -71,7 +80,7 @@ export function refreshImageHistory() {
 }
 
 export function addPendingImageHistory(item: Omit<ImageHistoryItem, 'status'>) {
-  const current = readLocalHistory<ImageHistoryItem>(imageHistoryKey);
+  const current = readImageHistoryItems();
   writeLocalHistory(imageHistoryKey, [
     { ...item, status: 'processing', taskId: item.id, thumbnailUrl: item.thumbnailUrl || '', url: item.url || '' },
     ...current,
@@ -90,7 +99,7 @@ export function completeImageHistory(
     archiveCompletedAt?: number;
   },
 ) {
-  const current = readLocalHistory<ImageHistoryItem>(imageHistoryKey);
+  const current = readImageHistoryItems();
   writeLocalHistory(
     imageHistoryKey,
     current.map((item) =>
@@ -114,7 +123,7 @@ export function updateImageArchive(
   taskId: string,
   payload: Pick<ImageHistoryItem, 'archiveStatus'> & Pick<ImageHistoryItem, 'localPath'>,
 ) {
-  const current = readLocalHistory<ImageHistoryItem>(imageHistoryKey);
+  const current = readImageHistoryItems();
   writeLocalHistory(
     imageHistoryKey,
     current.map((item) =>
@@ -126,7 +135,7 @@ export function updateImageArchive(
 }
 
 export function failImageHistory(taskId: string, errorInfo?: string) {
-  const current = readLocalHistory<ImageHistoryItem>(imageHistoryKey);
+  const current = readImageHistoryItems();
   writeLocalHistory(
     imageHistoryKey,
     current.map((item) =>
@@ -142,7 +151,7 @@ export function failImageHistory(taskId: string, errorInfo?: string) {
 }
 
 export function deleteImageHistoryItem(id: string) {
-  const current = readLocalHistory<ImageHistoryItem>(imageHistoryKey);
+  const current = readImageHistoryItems();
   writeLocalHistory(
     imageHistoryKey,
     current.filter((item) => item.id !== id && item.taskId !== id),

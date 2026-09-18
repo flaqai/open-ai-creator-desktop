@@ -14,6 +14,7 @@ import {
   Home,
   Image,
   Info,
+  LibraryBig,
   Palette,
   PanelLeftClose,
   PanelLeftOpen,
@@ -28,13 +29,7 @@ import { useLocale, useTranslations } from 'next-intl';
 import { toast } from 'sonner';
 
 import { openDesktopLogDirectory, writeDesktopLog } from '@/lib/desktop/logging';
-import {
-  chooseMediaStorageDirectory,
-  getMediaStorageSettings,
-  openMediaStorageDirectory,
-  setMediaStorageDirectory,
-  type MediaStorageSettings,
-} from '@/lib/desktop/media-storage';
+import { mediaDirectoryPreferences, type MediaStorageSettings } from '@/lib/desktop/media-storage';
 import { DEFAULT_PREFERENCES, parsePreferences, PREFERENCES_KEY, type AppPreferences } from '@/lib/desktop/preferences';
 import { isNativeDesktop, OPEN_DESKTOP_SETTINGS_EVENT } from '@/lib/desktop/runtime';
 import { FEATURE_MODULES } from '@/lib/features/catalog';
@@ -98,7 +93,8 @@ export default function DesktopShell({ children }: { children: ReactNode }) {
     };
     refreshConnection();
     if (isNativeDesktop()) {
-      void getMediaStorageSettings()
+      void mediaDirectoryPreferences
+        .load()
         .then(setMediaSettings)
         .catch((error) => toast.error(error instanceof Error ? error.message : String(error)));
     }
@@ -178,8 +174,8 @@ export default function DesktopShell({ children }: { children: ReactNode }) {
   const chooseMediaDirectory = async () => {
     setMediaSettingsBusy(true);
     try {
-      const directory = await chooseMediaStorageDirectory();
-      if (directory) setMediaSettings(await setMediaStorageDirectory(directory));
+      const settings = await mediaDirectoryPreferences.choose();
+      if (settings) setMediaSettings(settings);
     } catch (error) {
       toast.error(error instanceof Error ? error.message : String(error));
     } finally {
@@ -189,7 +185,7 @@ export default function DesktopShell({ children }: { children: ReactNode }) {
   const resetMediaDirectory = async () => {
     setMediaSettingsBusy(true);
     try {
-      setMediaSettings(await setMediaStorageDirectory());
+      setMediaSettings(await mediaDirectoryPreferences.reset());
     } catch (error) {
       toast.error(error instanceof Error ? error.message : String(error));
     } finally {
@@ -198,7 +194,7 @@ export default function DesktopShell({ children }: { children: ReactNode }) {
   };
   const openMediaDirectory = async () => {
     try {
-      await openMediaStorageDirectory();
+      await mediaDirectoryPreferences.open();
     } catch (error) {
       toast.error(error instanceof Error ? error.message : String(error));
     }
@@ -239,6 +235,15 @@ export default function DesktopShell({ children }: { children: ReactNode }) {
           >
             <Home className='size-5 shrink-0' />
             <SidebarLabel collapsed={collapsed}>{zh ? '工作台' : 'Workspace'}</SidebarLabel>
+          </Link>
+          <Link
+            href='/media-library'
+            title={zh ? '素材库' : 'Media library'}
+            aria-current={pathname.replace(/\/$/, '') === '/media-library' ? 'page' : undefined}
+            className={`${linkClass} ${pathname.replace(/\/$/, '') === '/media-library' ? 'bg-accent text-primary font-semibold' : ''}`}
+          >
+            <LibraryBig className='size-5 shrink-0' />
+            <SidebarLabel collapsed={collapsed}>{zh ? '素材库' : 'Media library'}</SidebarLabel>
           </Link>
           {(['workspace', 'image', 'video'] as const).map((group) => (
             <div key={group} className='space-y-1'>

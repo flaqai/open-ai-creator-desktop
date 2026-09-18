@@ -7,6 +7,8 @@ import useVideoHistory, { deleteVideoHistoryItem, type VideoHistoryItem } from '
 import { Eye, Loader2 } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 
+import { beginHistoryImageDrag, endHistoryImageDrag } from '@/lib/desktop/image-history-drag';
+
 import CreatorVideoPreview from './CreatorVideoPreview';
 
 const ImageDetailModal = dynamic(() => import('@/components/dialog/ImageDetailModal'), { ssr: false });
@@ -80,7 +82,13 @@ export default function CreatorHistory() {
                 const card = (
                   <div className='border-foreground/10 bg-foreground/5 relative aspect-square overflow-hidden rounded-xl border'>
                     {src ? (
-                      <img src={src} alt={item.prompt} loading='lazy' className='h-full w-full object-cover' />
+                      <img
+                        src={src}
+                        alt={item.prompt}
+                        loading='lazy'
+                        draggable={false}
+                        className='h-full w-full object-cover'
+                      />
                     ) : (
                       <div className='text-foreground/30 flex h-full items-center justify-center'>
                         {item.status === 'processing' ? <Loader2 className='animate-spin' /> : t('no-preview')}
@@ -103,8 +111,16 @@ export default function CreatorHistory() {
                   <button
                     key={item.id}
                     type='button'
+                    draggable
+                    onDragStart={(event) => {
+                      beginHistoryImageDrag(event.dataTransfer, {
+                        url: item.url,
+                        name: item.url.split('/').pop() || 'history-image',
+                      });
+                    }}
+                    onDragEnd={endHistoryImageDrag}
                     onClick={() => setSelectedItem({ type: 'image', item })}
-                    className='group w-full rounded-xl text-left focus-visible:ring-2 focus-visible:ring-violet-500 focus-visible:ring-offset-2 focus-visible:outline-none'
+                    className='group w-full cursor-grab rounded-xl text-left focus-visible:ring-2 focus-visible:ring-violet-500 focus-visible:ring-offset-2 focus-visible:outline-none active:cursor-grabbing'
                     aria-label={tImageDisplay('imageDetail')}
                   >
                     {card}

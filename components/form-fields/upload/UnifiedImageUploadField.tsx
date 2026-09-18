@@ -9,8 +9,8 @@ import { useDropzone } from 'react-dropzone';
 import { useFormContext } from 'react-hook-form';
 import { toast } from 'sonner';
 
+import { endHistoryImageDrag, hasHistoryImageDrag, readHistoryImageDrag } from '@/lib/desktop/image-history-drag';
 import { cn } from '@/lib/utils';
-import { getFileByUrl } from '@/lib/utils/fileUtils';
 import { validateImagePx } from '@/lib/utils/imageUtils';
 import { useFormRestoration } from '@/hooks/use-form-restoration';
 import { FormControl, FormField, FormItem, FormLabel } from '@/components/ui/form';
@@ -83,6 +83,7 @@ const UnifiedImageUploadField = forwardRef<UnifiedImageUploadFieldRef, UnifiedIm
     const setImageFormSrc = useImageFormStore((state) => state.setImageFormSrc);
 
     const [images, setImages] = useState<ImageItem[]>([]);
+    const [isHistoryDragActive, setIsHistoryDragActive] = useState(false);
     useFormRestoration((data, preview) => {
       const raw = data[name];
       const values = Array.isArray(raw) ? raw : raw ? [raw] : [];
@@ -300,10 +301,47 @@ const UnifiedImageUploadField = forwardRef<UnifiedImageUploadFieldRef, UnifiedIm
       if (images.length > maxImages) {
         setImages((prev) => prev.slice(0, maxImages));
       }
-    }, [maxImages]);
+    }, [images.length, maxImages]);
 
     const onDrop = async (acceptedFiles: File[]) => {
       await addImages(acceptedFiles);
+    };
+
+    const handleHistoryDragEnter = (event: React.DragEvent<HTMLDivElement>) => {
+      if (!hasHistoryImageDrag(event.dataTransfer)) return;
+      event.preventDefault();
+      setIsHistoryDragActive(true);
+    };
+
+    const handleHistoryDragOver = (event: React.DragEvent<HTMLDivElement>) => {
+      if (!hasHistoryImageDrag(event.dataTransfer)) return;
+      event.preventDefault();
+      event.dataTransfer.dropEffect = 'copy';
+    };
+
+    const handleHistoryDragLeave = (event: React.DragEvent<HTMLDivElement>) => {
+      const nextTarget = event.relatedTarget;
+      if (nextTarget instanceof Node && event.currentTarget.contains(nextTarget)) return;
+      setIsHistoryDragActive(false);
+    };
+
+    const handleHistoryDrop = (event: React.DragEvent<HTMLDivElement>) => {
+      const payload = readHistoryImageDrag(event.dataTransfer);
+      if (!payload) return;
+      event.preventDefault();
+      event.stopPropagation();
+      setIsHistoryDragActive(false);
+      endHistoryImageDrag();
+      setImages((previous) => {
+        if (!isSingleMode && previous.length >= maxImages) return previous;
+        const item: ImageItem = {
+          id: nanoid(),
+          file: new File([], payload.name || 'history-image', { type: 'image/jpeg' }),
+          previewUrl: payload.url,
+          sourceUrl: payload.url,
+        };
+        return isSingleMode ? [item] : [...previous, item];
+      });
     };
 
     const accepted = acceptTypes && acceptTypes.length > 0 ? acceptTypes : ACCEPTED_IMAGE_TYPES;
@@ -320,6 +358,12 @@ const UnifiedImageUploadField = forwardRef<UnifiedImageUploadFieldRef, UnifiedIm
       multiple: !isSingleMode,
       disabled: !isSingleMode && images.length >= maxImages,
       noClick: !isSingleMode,
+    });
+    const uploadRootProps = getRootProps({
+      onDragEnter: handleHistoryDragEnter,
+      onDragOver: handleHistoryDragOver,
+      onDragLeave: handleHistoryDragLeave,
+      onDrop: handleHistoryDrop,
     });
 
     const handleFileInputChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -359,11 +403,11 @@ const UnifiedImageUploadField = forwardRef<UnifiedImageUploadFieldRef, UnifiedIm
         <div className={cn('flex w-full flex-col gap-2', className)}>
           <SubHeading>{title || tCommon('uploadImages')}</SubHeading>
           <div
-            {...getRootProps()}
+            {...uploadRootProps}
             className={cn(
               'border-foreground/10 bg-card hover:border-foreground/30 hover:bg-card relative h-[112px] w-full rounded-xl border border-dashed',
-              isDragActive && 'border-foreground/30 bg-card',
               images.length > 0 && 'border-foreground/10 bg-card hover:border-foreground/10 hover:bg-card',
+              (isDragActive || isHistoryDragActive) && 'border-primary bg-primary/5',
             )}
           >
             <FormField
@@ -419,7 +463,7 @@ const UnifiedImageUploadField = forwardRef<UnifiedImageUploadFieldRef, UnifiedIm
           render={() => (
             <FormItem className='w-full space-y-0'>
               <div
-                {...getRootProps()}
+                {...uploadRootProps}
                 onClick={handleAddClick}
                 onKeyDown={(e) => {
                   if (e.key === 'Enter' || e.key === ' ') {
@@ -431,7 +475,7 @@ const UnifiedImageUploadField = forwardRef<UnifiedImageUploadFieldRef, UnifiedIm
                 tabIndex={0}
                 className={cn(
                   'border-foreground/10 bg-card hover:border-foreground/30 hover:bg-card relative flex w-full cursor-pointer flex-col rounded-xl border border-dashed p-3 transition-all',
-                  isDragActive && 'border-foreground/30 bg-card',
+                  (isDragActive || isHistoryDragActive) && 'border-primary bg-primary/5',
                   images.length > 0 && 'gap-3',
                 )}
               >

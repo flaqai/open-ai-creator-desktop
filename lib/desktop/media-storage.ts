@@ -20,21 +20,36 @@ async function invokeCommand<T>(command: string, args?: Record<string, unknown>)
   return invoke<T>(command, args);
 }
 
-export function getMediaStorageSettings() {
-  return invokeCommand<MediaStorageSettings>('get_media_storage_settings');
+type MediaDirectoryAdapter = {
+  read: () => Promise<MediaStorageSettings>;
+  choose: () => Promise<string | null>;
+  persist: (directory?: string) => Promise<MediaStorageSettings>;
+  open: () => Promise<void>;
+};
+
+const nativeMediaDirectoryAdapter: MediaDirectoryAdapter = {
+  read: () => invokeCommand<MediaStorageSettings>('get_media_storage_settings'),
+  choose: () => invokeCommand<string | null>('choose_media_storage_directory'),
+  persist: (directory) =>
+    invokeCommand<MediaStorageSettings>('set_media_storage_directory', { directory: directory || null }),
+  open: () => invokeCommand<void>('open_media_storage_directory'),
+};
+
+/** User-intent seam for media-directory settings; native command ordering stays private. */
+export function createMediaDirectoryPreferences(adapter: MediaDirectoryAdapter = nativeMediaDirectoryAdapter) {
+  return {
+    load: () => adapter.read(),
+    async choose(): Promise<MediaStorageSettings | null> {
+      const directory = await adapter.choose();
+      if (!directory) return null;
+      return adapter.persist(directory);
+    },
+    reset: () => adapter.persist(),
+    open: () => adapter.open(),
+  };
 }
 
-export function chooseMediaStorageDirectory() {
-  return invokeCommand<string | null>('choose_media_storage_directory');
-}
-
-export function setMediaStorageDirectory(directory?: string) {
-  return invokeCommand<MediaStorageSettings>('set_media_storage_directory', { directory: directory || null });
-}
-
-export function openMediaStorageDirectory() {
-  return invokeCommand<void>('open_media_storage_directory');
-}
+export const mediaDirectoryPreferences = createMediaDirectoryPreferences();
 
 export function archiveGeneratedMedia(input: ArchiveMediaInput) {
   return invokeCommand<string>('archive_generated_media', input);

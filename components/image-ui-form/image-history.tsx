@@ -1,8 +1,5 @@
 'use client';
 
-/* eslint-disable react/jsx-indent */
-/* eslint-disable jsx-a11y/no-static-element-interactions */
-/* eslint-disable jsx-a11y/click-events-have-key-events */
 import { forwardRef, useEffect, useMemo, useState } from 'react';
 import { deleteImageById } from '@/network/image/client';
 import useUserImageHistory, { refreshImageHistory } from '@/network/image/history';
@@ -11,6 +8,7 @@ import { Trash2 } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import { toast } from 'sonner';
 
+import { beginHistoryImageDrag, endHistoryImageDrag } from '@/lib/desktop/image-history-drag';
 import { numberList } from '@/lib/utils/arrayUtils';
 import { formatDate } from '@/lib/utils/timeUtils';
 import FailurePlaceholder from '@/components/ui/failure-placeholder';
@@ -33,6 +31,7 @@ function ImageItem({
   isFailed,
   isLoading,
   onDelete,
+  dragUrl,
 }: {
   imgSrc: string;
   createTime: number;
@@ -40,6 +39,7 @@ function ImageItem({
   isFailed?: boolean;
   isLoading?: boolean;
   onDelete?: () => void;
+  dragUrl?: string;
 }) {
   if (isLoading) {
     return <LoadingPlaceholder />;
@@ -67,7 +67,16 @@ function ImageItem({
 
   return (
     <div
-      className='group bg-card relative flex h-[130px] shrink-0 items-center justify-center overflow-hidden rounded-lg hover:cursor-pointer'
+      draggable={Boolean(dragUrl)}
+      onDragStart={(event) => {
+        if (!dragUrl) return;
+        beginHistoryImageDrag(event.dataTransfer, {
+          url: dragUrl,
+          name: dragUrl.split('/').pop() || 'history-image',
+        });
+      }}
+      onDragEnd={endHistoryImageDrag}
+      className='group bg-card relative flex h-[130px] shrink-0 cursor-grab items-center justify-center overflow-hidden rounded-lg active:cursor-grabbing'
       onClick={onClick}
     >
       <img
@@ -75,6 +84,7 @@ function ImageItem({
         alt='imgSrc'
         fetchPriority='low'
         loading='lazy'
+        draggable={false}
         className='h-full w-auto transition-transform duration-200 group-hover:scale-110'
       />
 
@@ -142,7 +152,7 @@ const ImageHistory = forwardRef<ScrollRef, ImageHistoryProps>(
         } else {
           toast.error(res.msg || t('deleteFailed'));
         }
-      } catch (error) {
+      } catch {
         toast.error(t('deleteFailed'));
       }
     };
@@ -169,6 +179,7 @@ const ImageHistory = forwardRef<ScrollRef, ImageHistoryProps>(
               <ImageItem
                 key={el.id}
                 imgSrc={el.thumbnailUrl || el.url}
+                dragUrl={!isProcessing && !isFailed && el.url ? el.url : undefined}
                 createTime={el.createTime}
                 onClick={() => {
                   if (!isProcessing) {
