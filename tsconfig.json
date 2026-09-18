@@ -30,7 +30,9 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
-    ".next/dev/types/**/*.ts"
+    ".next/dev/types/**/*.ts",
+    ".next-desktop-dev/types/**/*.ts",
+    ".next-desktop-dev/dev/types/**/*.ts"
   ],
   "exclude": ["node_modules", ".desktop-build-*", "src-tauri/target"]
 }

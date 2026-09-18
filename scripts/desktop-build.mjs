@@ -4,6 +4,7 @@ import { createRequire } from 'node:module';
 import path from 'node:path';
 import { pathToFileURL } from 'node:url';
 
+import { prepareBundledR2 } from './prepare-bundled-r2.mjs';
 import { prepareMedia } from './prepare-media.mjs';
 
 const require = createRequire(import.meta.url);
@@ -46,6 +47,7 @@ async function exists(file) {
 }
 
 export async function buildDesktop(projectRoot, runBuild = runNextBuild) {
+  await prepareBundledR2(projectRoot);
   // Build in an isolated copy: crashes and concurrent web development can never
   // remove or alter the source route tree.
   const work = await mkdtemp(path.join(projectRoot, '.desktop-build-'));

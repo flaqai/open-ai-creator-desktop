@@ -13,12 +13,14 @@
 
 # next.js
 /.next/
+/.next-desktop-dev/
 /out/
 /.desktop-build-backup/
 /.desktop-build-*/
 
 # tauri
 /src-tauri/target/
+/src-tauri/.generated/
 /public/vendor/ffmpeg/
 
 # production

@@ -10,7 +10,7 @@
     "build:desktop": "node scripts/desktop-build.mjs",
     "build:analyze": "ANALYZE=true next build",
     "desktop": "tauri",
-    "desktop:dev": "tauri dev",
+    "desktop:dev": "node scripts/tauri-dev.mjs && tauri dev --config src-tauri/tauri.dev.conf.json",
     "desktop:prepare": "node scripts/prepare-media.mjs",
     "desktop:build": "tauri build",
     "start": "next start",

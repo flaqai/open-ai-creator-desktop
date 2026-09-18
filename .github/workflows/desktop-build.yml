@@ -60,6 +60,12 @@ jobs:
         uses: tauri-apps/tauri-action@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          FLAQ_REQUIRE_BUNDLED_R2: 'true'
+          FLAQ_BUNDLED_R2_ACCOUNT_ID: ${{ secrets.FLAQ_BUNDLED_R2_ACCOUNT_ID }}
+          FLAQ_BUNDLED_R2_ACCESS_KEY_ID: ${{ secrets.FLAQ_BUNDLED_R2_ACCESS_KEY_ID }}
+          FLAQ_BUNDLED_R2_SECRET_ACCESS_KEY: ${{ secrets.FLAQ_BUNDLED_R2_SECRET_ACCESS_KEY }}
+          FLAQ_BUNDLED_R2_BUCKET_NAME: ${{ secrets.FLAQ_BUNDLED_R2_BUCKET_NAME }}
+          FLAQ_BUNDLED_R2_PUBLIC_DOMAIN: ${{ secrets.FLAQ_BUNDLED_R2_PUBLIC_DOMAIN }}
         with:
           tagName: desktop-v__VERSION__
           releaseName: Flaq Creator Desktop v__VERSION__

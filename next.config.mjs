@@ -25,10 +25,12 @@ function parseImageRemotePatterns(value) {
 const imageRemotePatterns = parseImageRemotePatterns(process.env.IMAGE_REMOTE_PATTERNS);
 const allowLocalImageOptimization = process.env.ALLOW_LOCAL_IMAGE_OPTIMIZATION === 'true';
 const isDesktopBuild = process.env.FLAQ_DESKTOP_BUILD === 'true';
+const isDesktopRuntime = process.env.FLAQ_DESKTOP_RUNTIME === 'true';
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   ...(isDesktopBuild ? { output: 'export' } : {}),
+  ...(isDesktopRuntime ? { distDir: '.next-desktop-dev' } : {}),
   htmlLimitedBots: /.*/,
   env: {
     NEXT_BASE_API: process.env.NEXT_BASE_API,

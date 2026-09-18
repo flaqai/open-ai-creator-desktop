@@ -35,6 +35,7 @@ pub fn run() {
             }
         })
         .invoke_handler(tauri::generate_handler![
+            bundled_r2::get_bundled_r2_config,
             media::save_media,
             media::get_media_storage_settings,
             media::choose_media_storage_directory,
@@ -52,6 +53,7 @@ pub fn run() {
             }
         });
 }
+mod bundled_r2;
 mod desktop;
 mod logs;
 mod media;

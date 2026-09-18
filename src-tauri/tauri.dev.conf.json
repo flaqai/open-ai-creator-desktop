@@ -1,0 +1,26 @@
+{
+  "$schema": "https://schema.tauri.app/config/2",
+  "productName": "Flaq Creator Dev",
+  "identifier": "ai.flaq.creator.dev",
+  "build": {
+    "beforeDevCommand": "pnpm dev:desktop -- --hostname localhost --port 31415",
+    "devUrl": "http://localhost:31415"
+  },
+  "app": {
+    "windows": [
+      {
+        "title": "Flaq Creator Dev",
+        "width": 1440,
+        "height": 920,
+        "minWidth": 1040,
+        "minHeight": 720,
+        "center": true,
+        "resizable": true,
+        "fullscreen": false,
+        "decorations": true,
+        "transparent": false,
+        "visible": false
+      }
+    ]
+  }
+}

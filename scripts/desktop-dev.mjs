@@ -12,6 +12,7 @@ export function desktopDevEnvironment(environment = process.env) {
     ...environment,
     FLAQ_DESKTOP_RUNTIME: 'true',
     NEXT_PUBLIC_FLAQ_DESKTOP_RUNTIME: 'true',
+    NEXT_PUBLIC_SITE_URL: environment.NEXT_PUBLIC_SITE_URL || 'http://localhost:31415',
   };
 }
 
