@@ -21,7 +21,9 @@ boundaries. See [Adding modules](ADDING_MODULES.md).
 ## Build modes and safety
 
 - `pnpm dev` / `pnpm build`: normal web development/production, including Next.js API routes.
-- `pnpm desktop:dev`: copies local FFmpeg assets, starts Next.js and opens Tauri.
+- `pnpm desktop:dev`: copies local FFmpeg assets, starts Next.js and opens Tauri with the isolated `ai.flaq.creator.dev`
+  identity. Development WebView storage, IndexedDB, logs, window state, and the default media directory therefore remain
+  separate from the installed `ai.flaq.creator` app.
 - `pnpm build:desktop`: static export to `out/`, all 15 locales.
 - `pnpm desktop:build`: static export and current-platform package.
 - `pnpm check`: TypeScript, regression tests and ESLint.
@@ -41,10 +43,12 @@ trimming is requested. A serial queue protects the shared runtime and temporary 
 
 Desktop HTTP(S) API requests, signed uploads and media fetches use the native HTTP adapter, avoiding browser CORS
 dependence. Normal web requests retain the original server signing/proxy adapters. The built-in Flaq storage provider
-uses the configured Client Key to request short-lived PUT URLs from `/image/presignedUrl`; shared R2 credentials never
-enter the desktop process or bundle. Users can alternatively select a separately stored custom R2 configuration, which
-is signed locally. AWS signing code is lazy-loaded only for that custom provider. Uploads validate all signed rows
-before sending and run at most three transfers per batch, preserving reference order.
+first reads the encrypted R2 preset packaged for the desktop build and signs short-lived PUT URLs locally. If that
+preset is absent, it falls back to the configured Client Key and `/image/presignedUrl`. Users can alternatively select a
+separately stored custom R2 configuration, which is also signed locally. AWS signing code is lazy-loaded until a direct
+R2 path is selected. Uploads validate every signed row before sending, run at most three transfers per batch and
+preserve reference order. A failed transfer rejects the batch; successful objects from an earlier transfer are not
+deleted automatically.
 
 Preview object URLs are session-only views over in-memory files and never become durable form values. Desktop drafts
 store media as owned ArrayBuffer bytes plus file metadata in IndexedDB; this avoids WebKit's external Blob references
@@ -66,10 +70,15 @@ deployment environment.
 ## Credentials and task recovery
 
 Remembered API values and optional custom R2 values use versioned AES-GCM storage in the application-isolated WebView
-profile. The non-secret upload-provider preference defaults to the Flaq presigned-upload service. Custom R2 uses a
-separate set of encrypted keys, so saving it cannot overwrite the default configuration. Both R2 configurations remain
+profile. The non-secret upload-provider preference defaults to the built-in Flaq R2 strategy. Custom R2 uses a separate
+set of encrypted keys, so saving it cannot overwrite the default configuration. Both legacy and custom R2 values remain
 untouched when only API connection data is cleared. New-format encryption is independent of browser version and locale.
 The expensive derived key is cached; encryption failures never silently persist plaintext.
+
+The packaged built-in R2 preset is a temporary distribution choice. Encrypting it in the application package is
+obfuscation, not secret isolation: a determined user can extract both the encrypted payload and the code needed to
+decrypt it. The `/image/presignedUrl` fallback is the safer long-term boundary because shared credentials remain on the
+service. Do not describe the packaged preset as a credential vault or rely on it to resist reverse engineering.
 
 This is not an OS credential vault: a local attacker with profile access or injected JavaScript can compromise
 credentials. Stronghold/Keychain/Credential Manager integration remains a release-hardening item. Never embed user keys

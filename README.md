@@ -165,6 +165,10 @@ This template uses Cloudflare R2 for storing user-uploaded images and generated 
    default; users who select Custom Cloudflare R2 can enter a separate credential set encrypted in the local app
    profile. In both cases files upload to R2 first and only their public URLs are sent to generation APIs.
 
+> The current desktop build may package an encrypted built-in R2 preset and fall back to the Flaq presigned-URL service
+> when that preset is absent. Package encryption is obfuscation, not a secure vault; embedded credentials can be
+> extracted by a determined user. Prefer the server-issued presigned-URL path for stronger production isolation.
+
 ### Flaq.ai API Key Setup
 
 1. **Register/Sign in** at [flaq.ai](https://flaq.ai)
