@@ -10,6 +10,7 @@ import { testApiConnection } from '../network/connection-test';
 import { createImageTask, getImageTask } from '../network/image/client';
 import { createFlaqSignedUrls } from '../network/upload/flaq-storage';
 import { uploadFiles } from '../network/upload/upload-files';
+import { createUploadAuthorizer } from '../network/upload/upload-policy';
 import { createVideoTask, getVideoTask } from '../network/video/client';
 
 const originalFetch = globalThis.fetch;
@@ -243,6 +244,78 @@ test('uploads keep reference order and use at most three transfers', async () =>
     result,
     files.map((_, i) => `https://asset.test/${i}`),
   );
+});
+
+test('upload pipeline authorizes, transfers and treats catalog recording as best effort', async () => {
+  Object.defineProperty(globalThis, 'window', { value: new EventTarget(), configurable: true });
+  const files = [
+    { data: new File(['image'], 'reference.png'), type: 'image/png' },
+    { data: new File(['video'], 'reference.mp4'), type: 'video/mp4' },
+  ];
+  const transferred: string[] = [];
+  let recorded = 0;
+  const sign = createUploadAuthorizer({
+    desktop: () => true,
+    provider: () => 'builtin',
+    bundledConfig: async () => ({
+      accountId: 'account',
+      accessKeyId: 'access',
+      secretAccessKey: 'secret',
+      bucketName: 'bucket',
+      publicDomain: 'assets.test',
+    }),
+    directR2: async (mimeTypes) => ({
+      rows: mimeTypes.map((mimeType, index) => ({
+        signedUrl: `https://upload.test/${index}`,
+        url: `https://asset.test/${index}`,
+        mimeType,
+      })),
+    }),
+  });
+
+  const urls = await uploadFiles(files, undefined, {
+    sign,
+    put: async (url) => {
+      transferred.push(String(url));
+      return new Response();
+    },
+    record: () => {
+      recorded++;
+      return false;
+    },
+  });
+
+  assert.deepEqual(transferred.toSorted(), ['https://upload.test/0', 'https://upload.test/1']);
+  assert.deepEqual(urls, ['https://asset.test/0', 'https://asset.test/1']);
+  assert.equal(recorded, 1);
+});
+
+test('one failed transfer rejects the whole batch and skips catalog recording', async () => {
+  const files = Array.from({ length: 4 }, (_, index) => ({
+    data: new File([String(index)], `${index}.png`),
+    type: 'image/png',
+  }));
+  let recorded = 0;
+  await assert.rejects(
+    uploadFiles(files, undefined, {
+      sign: async () => ({
+        rows: files.map((_, index) => ({
+          signedUrl: `https://upload.test/${index}`,
+          url: `https://asset.test/${index}`,
+        })),
+      }),
+      put: async (url) => {
+        if (String(url).endsWith('/1')) throw new Error('upload denied');
+        return new Response();
+      },
+      record: () => {
+        recorded++;
+        return true;
+      },
+    }),
+    /upload denied/,
+  );
+  assert.equal(recorded, 0);
 });
 
 test('desktop media bypasses unavailable web proxy and signed URL filenames remain valid', () => {

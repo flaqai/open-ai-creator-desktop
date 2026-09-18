@@ -1,56 +1,9 @@
-import {
-  CUSTOM_R2_ACCESS_KEY_ID_STORAGE_KEY,
-  CUSTOM_R2_ACCOUNT_ID_STORAGE_KEY,
-  CUSTOM_R2_BUCKET_NAME_STORAGE_KEY,
-  CUSTOM_R2_PUBLIC_DOMAIN_STORAGE_KEY,
-  CUSTOM_R2_SECRET_ACCESS_KEY_STORAGE_KEY,
-  R2_ACCESS_KEY_ID_STORAGE_KEY,
-  R2_ACCOUNT_ID_STORAGE_KEY,
-  R2_BUCKET_NAME_STORAGE_KEY,
-  R2_PUBLIC_DOMAIN_STORAGE_KEY,
-  R2_SECRET_ACCESS_KEY_STORAGE_KEY,
-} from '@/lib/desktop/storage';
 import { fetchWithTimeout } from '@/lib/platform/http';
 import { generateR2Path } from '@/lib/utils/r2PathUtils';
-import { getSecureItem } from '@/lib/utils/secureStorage';
 
-import type { CreateSignedUrlResponse } from './client';
+import type { CreateSignedUrlResponse, R2Config } from './types';
 
-export type R2Config = {
-  accountId: string;
-  accessKeyId: string;
-  secretAccessKey: string;
-  bucketName: string;
-  publicDomain: string;
-};
-
-export async function getCustomDesktopR2Config() {
-  let [accountId, accessKeyId, secretAccessKey, bucketName, publicDomain] = await Promise.all([
-    getSecureItem(CUSTOM_R2_ACCOUNT_ID_STORAGE_KEY),
-    getSecureItem(CUSTOM_R2_ACCESS_KEY_ID_STORAGE_KEY),
-    getSecureItem(CUSTOM_R2_SECRET_ACCESS_KEY_STORAGE_KEY),
-    getSecureItem(CUSTOM_R2_BUCKET_NAME_STORAGE_KEY),
-    getSecureItem(CUSTOM_R2_PUBLIC_DOMAIN_STORAGE_KEY),
-  ]);
-
-  // Earlier desktop builds stored the user-managed R2 values under the unscoped
-  // keys. Keep those installations usable when the user selects Custom R2.
-  if (![accountId, accessKeyId, secretAccessKey, bucketName, publicDomain].every(Boolean)) {
-    [accountId, accessKeyId, secretAccessKey, bucketName, publicDomain] = await Promise.all([
-      getSecureItem(R2_ACCOUNT_ID_STORAGE_KEY),
-      getSecureItem(R2_ACCESS_KEY_ID_STORAGE_KEY),
-      getSecureItem(R2_SECRET_ACCESS_KEY_STORAGE_KEY),
-      getSecureItem(R2_BUCKET_NAME_STORAGE_KEY),
-      getSecureItem(R2_PUBLIC_DOMAIN_STORAGE_KEY),
-    ]);
-  }
-
-  if (!accountId || !accessKeyId || !secretAccessKey || !bucketName || !publicDomain) {
-    throw new Error('Custom R2 is not configured. Open Settings → Image Hosting.');
-  }
-
-  return { accountId, accessKeyId, secretAccessKey, bucketName, publicDomain };
-}
+export type { R2Config } from './types';
 
 export async function createDesktopSignedUrls(mimeTypes: string[], input: R2Config): Promise<CreateSignedUrlResponse> {
   const config = validateR2Config(input);

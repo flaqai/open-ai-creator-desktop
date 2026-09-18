@@ -25,6 +25,11 @@ import { useLocale, useTranslations } from 'next-intl';
 import { toast } from 'sonner';
 
 import {
+  loadImageHostingSettings,
+  saveImageHostingSettings,
+  type UploadProvider,
+} from '@/lib/desktop/image-hosting-settings';
+import {
   initialR2Preset,
   loadR2Presets,
   removeR2Preset,
@@ -33,21 +38,6 @@ import {
   type R2Preset,
 } from '@/lib/desktop/r2-presets';
 import { isDesktopRuntime } from '@/lib/desktop/runtime';
-import {
-  CUSTOM_R2_ACCESS_KEY_ID_STORAGE_KEY,
-  CUSTOM_R2_ACCOUNT_ID_STORAGE_KEY,
-  CUSTOM_R2_BUCKET_NAME_STORAGE_KEY,
-  CUSTOM_R2_PUBLIC_DOMAIN_STORAGE_KEY,
-  CUSTOM_R2_SECRET_ACCESS_KEY_STORAGE_KEY,
-  getUploadProvider,
-  R2_ACCESS_KEY_ID_STORAGE_KEY,
-  R2_ACCOUNT_ID_STORAGE_KEY,
-  R2_BUCKET_NAME_STORAGE_KEY,
-  R2_PUBLIC_DOMAIN_STORAGE_KEY,
-  R2_SECRET_ACCESS_KEY_STORAGE_KEY,
-  setUploadProvider,
-  type UploadProvider,
-} from '@/lib/desktop/storage';
 import { clearAllSecureStorage, getSecureItem, isRememberMeEnabled, setSecureItem } from '@/lib/utils/secureStorage';
 import { Button } from '@/components/ui/button';
 import { Checkbox } from '@/components/ui/checkbox';
@@ -83,7 +73,8 @@ export default function OpenApiSettingsDialog({ open, onOpenChange, embedded = f
   const [rememberMe, setRememberMe] = useState(false);
   const [isTesting, setIsTesting] = useState(false);
   const [desktop, setDesktop] = useState(false);
-  const [hostingExpanded, setHostingExpanded] = useState(false);
+  const [securityNoticeExpanded, setSecurityNoticeExpanded] = useState(false);
+  const [hostingExpanded, setHostingExpanded] = useState(true);
   const [uploadProvider, setUploadProviderDraft] = useState<UploadProvider>('builtin');
   const [r2PublicDomain, setR2PublicDomain] = useState('');
   const [r2AccountId, setR2AccountId] = useState('');
@@ -99,50 +90,23 @@ export default function OpenApiSettingsDialog({ open, onOpenChange, embedded = f
   useEffect(() => {
     if (!open || typeof window === 'undefined') return;
 
+    setSecurityNoticeExpanded(false);
+    setHostingExpanded(true);
+
     const loadSettings = async () => {
-      const [savedBaseUrl, savedClientKey, savedPresets] = await Promise.all([
+      const [savedBaseUrl, savedClientKey, savedPresets, hosting] = await Promise.all([
         getSecureItem(OPEN_API_BASE_URL_STORAGE_KEY),
         getSecureItem(OPEN_API_CLIENT_KEY_STORAGE_KEY),
         loadR2Presets().catch((error) => {
           toast.error(error instanceof Error ? error.message : String(error));
           return [];
         }),
+        loadImageHostingSettings(),
       ]);
-      const [customDomain, customAccountId, customAccessKeyId, customSecretAccessKey, customBucketName] =
-        await Promise.all([
-          getSecureItem(CUSTOM_R2_PUBLIC_DOMAIN_STORAGE_KEY),
-          getSecureItem(CUSTOM_R2_ACCOUNT_ID_STORAGE_KEY),
-          getSecureItem(CUSTOM_R2_ACCESS_KEY_ID_STORAGE_KEY),
-          getSecureItem(CUSTOM_R2_SECRET_ACCESS_KEY_STORAGE_KEY),
-          getSecureItem(CUSTOM_R2_BUCKET_NAME_STORAGE_KEY),
-        ]);
-      const hasCustomR2 = [
-        customDomain,
-        customAccountId,
-        customAccessKeyId,
-        customSecretAccessKey,
-        customBucketName,
-      ].every(Boolean);
-      const [defaultDomain, defaultAccountId, defaultAccessKeyId, defaultSecretAccessKey, defaultBucketName] =
-        hasCustomR2
-          ? [null, null, null, null, null]
-          : await Promise.all([
-              getSecureItem(R2_PUBLIC_DOMAIN_STORAGE_KEY),
-              getSecureItem(R2_ACCOUNT_ID_STORAGE_KEY),
-              getSecureItem(R2_ACCESS_KEY_ID_STORAGE_KEY),
-              getSecureItem(R2_SECRET_ACCESS_KEY_STORAGE_KEY),
-              getSecureItem(R2_BUCKET_NAME_STORAGE_KEY),
-            ]);
       setBaseUrl(savedBaseUrl || DEFAULT_OPEN_API_BASE_URL);
       setClientKey(savedClientKey || '');
-      setUploadProviderDraft(getUploadProvider());
-      const currentR2 = {
-        publicDomain: customDomain || defaultDomain || '',
-        accountId: customAccountId || defaultAccountId || '',
-        accessKeyId: customAccessKeyId || defaultAccessKeyId || '',
-        secretAccessKey: customSecretAccessKey || defaultSecretAccessKey || '',
-        bucketName: customBucketName || defaultBucketName || '',
-      };
+      setUploadProviderDraft(hosting.provider);
+      const currentR2 = hosting.customR2;
       const initialPreset = initialR2Preset(savedPresets, currentR2);
       setR2PublicDomain(initialPreset?.publicDomain || currentR2.publicDomain);
       setR2AccountId(initialPreset?.accountId || currentR2.accountId);
@@ -211,16 +175,7 @@ export default function OpenApiSettingsDialog({ open, onOpenChange, embedded = f
       setApiConnectionAuthorized(false, rememberMe);
       await setSecureItem(OPEN_API_BASE_URL_STORAGE_KEY, normalizedBaseUrl, rememberMe);
       await setSecureItem(OPEN_API_CLIENT_KEY_STORAGE_KEY, normalizedClientKey, rememberMe);
-      setUploadProvider(uploadProvider);
-      if (normalizedR2Config) {
-        await Promise.all([
-          setSecureItem(CUSTOM_R2_ACCOUNT_ID_STORAGE_KEY, normalizedR2Config.accountId, rememberMe),
-          setSecureItem(CUSTOM_R2_ACCESS_KEY_ID_STORAGE_KEY, normalizedR2Config.accessKeyId, rememberMe),
-          setSecureItem(CUSTOM_R2_SECRET_ACCESS_KEY_STORAGE_KEY, normalizedR2Config.secretAccessKey, rememberMe),
-          setSecureItem(CUSTOM_R2_BUCKET_NAME_STORAGE_KEY, normalizedR2Config.bucketName, rememberMe),
-          setSecureItem(CUSTOM_R2_PUBLIC_DOMAIN_STORAGE_KEY, normalizedR2Config.publicDomain, rememberMe),
-        ]);
-      }
+      await saveImageHostingSettings(uploadProvider, normalizedR2Config, rememberMe);
     } catch (error) {
       window.dispatchEvent(new Event(OPEN_API_CONFIG_CHANGED_EVENT));
       toast.error(error instanceof Error ? error.message : String(error));
@@ -420,7 +375,7 @@ export default function OpenApiSettingsDialog({ open, onOpenChange, embedded = f
             className='border-foreground/10 bg-foreground/5 text-foreground placeholder:text-foreground/30 h-11'
           />
 
-          <div className='flex items-center space-x-2 pt-2'>
+          <div className='flex flex-wrap items-center gap-x-2 gap-y-1 pt-2'>
             <Checkbox
               id='remember-me'
               checked={rememberMe}
@@ -429,19 +384,34 @@ export default function OpenApiSettingsDialog({ open, onOpenChange, embedded = f
             <label htmlFor='remember-me' className='text-foreground/70 cursor-pointer text-sm'>
               {t('remember-me')}
             </label>
+            <button
+              type='button'
+              aria-expanded={securityNoticeExpanded}
+              aria-controls='client-key-security-notice'
+              onClick={() => setSecurityNoticeExpanded((previous) => !previous)}
+              className='text-sm font-medium text-blue-600 underline decoration-blue-600/35 underline-offset-4 transition-colors hover:text-blue-700 hover:decoration-blue-700 focus-visible:rounded-sm focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-500 dark:text-blue-400 dark:hover:text-blue-300'
+            >
+              {zh ? '安全提示' : 'Security notice'}
+            </button>
           </div>
           {!desktop && <p className='text-foreground/45 text-xs'>{t('remember-me-hint')}</p>}
 
-          <div className='mt-3 rounded-md border border-[#fcd34d] bg-[#fffbeb] p-3 dark:border-[#735c28] dark:bg-[#292211]'>
-            <p className='text-xs leading-5 text-[#78350f] dark:text-[#fde68a]'>⚠️ {t('security-warning')}</p>
-            <button
-              type='button'
-              onClick={handleClearAll}
-              className='mt-2 text-xs text-red-800 underline underline-offset-2 hover:text-red-950 dark:text-red-300 dark:hover:text-red-200'
+          {securityNoticeExpanded ? (
+            <div
+              id='client-key-security-notice'
+              role='note'
+              className='mt-3 rounded-md border border-[#fcd34d] bg-[#fffbeb] p-3 dark:border-[#735c28] dark:bg-[#292211]'
             >
-              {t('clear-data')}
-            </button>
-          </div>
+              <p className='text-xs leading-5 text-[#78350f] dark:text-[#fde68a]'>⚠️ {t('security-warning')}</p>
+              <button
+                type='button'
+                onClick={handleClearAll}
+                className='mt-2 text-xs text-red-800 underline underline-offset-2 hover:text-red-950 dark:text-red-300 dark:hover:text-red-200'
+              >
+                {t('clear-data')}
+              </button>
+            </div>
+          ) : null}
         </div>
 
         <div className='border-foreground/10 rounded-xl border'>

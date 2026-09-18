@@ -1,6 +1,7 @@
 import assert from 'node:assert/strict';
 import { beforeEach, test } from 'node:test';
 
+import { loadImageHostingSettings, saveImageHostingSettings } from '../lib/desktop/image-hosting-settings';
 import {
   initialR2Preset,
   loadR2Presets,
@@ -9,9 +10,17 @@ import {
   upsertR2Preset,
 } from '../lib/desktop/r2-presets';
 import {
+  CUSTOM_R2_ACCESS_KEY_ID_STORAGE_KEY,
   CUSTOM_R2_ACCOUNT_ID_STORAGE_KEY,
+  CUSTOM_R2_BUCKET_NAME_STORAGE_KEY,
+  CUSTOM_R2_PUBLIC_DOMAIN_STORAGE_KEY,
+  CUSTOM_R2_SECRET_ACCESS_KEY_STORAGE_KEY,
   getUploadProvider,
+  R2_ACCESS_KEY_ID_STORAGE_KEY,
   R2_ACCOUNT_ID_STORAGE_KEY,
+  R2_BUCKET_NAME_STORAGE_KEY,
+  R2_PUBLIC_DOMAIN_STORAGE_KEY,
+  R2_SECRET_ACCESS_KEY_STORAGE_KEY,
   setUploadProvider,
 } from '../lib/desktop/storage';
 import { decryptValue, encryptValue } from '../lib/utils/cryptoUtils';
@@ -61,6 +70,45 @@ test('upload provider defaults to Flaq storage and persists an explicit custom R
   assert.equal(getUploadProvider(), 'custom-r2');
   localStorage.setItem('FLAQ-CREATOR-DESKTOP-upload-provider-v1', 'invalid');
   assert.equal(getUploadProvider(), 'builtin');
+});
+
+test('image hosting settings read legacy credentials and keep custom credentials separate', async () => {
+  const legacy = ['legacy-account', 'legacy-access', 'legacy-secret', 'legacy-bucket', 'legacy.assets.test'];
+  const legacyKeys = [
+    R2_ACCOUNT_ID_STORAGE_KEY,
+    R2_ACCESS_KEY_ID_STORAGE_KEY,
+    R2_SECRET_ACCESS_KEY_STORAGE_KEY,
+    R2_BUCKET_NAME_STORAGE_KEY,
+    R2_PUBLIC_DOMAIN_STORAGE_KEY,
+  ];
+  await Promise.all(legacyKeys.map((key, index) => setSecureItem(key, legacy[index], true)));
+  assert.deepEqual((await loadImageHostingSettings()).customR2, {
+    accountId: 'legacy-account',
+    accessKeyId: 'legacy-access',
+    secretAccessKey: 'legacy-secret',
+    bucketName: 'legacy-bucket',
+    publicDomain: 'legacy.assets.test',
+  });
+
+  const custom = {
+    accountId: 'custom-account',
+    accessKeyId: 'custom-access',
+    secretAccessKey: 'custom-secret',
+    bucketName: 'custom-bucket',
+    publicDomain: 'custom.assets.test',
+  };
+  await saveImageHostingSettings('custom-r2', custom, false);
+  assert.deepEqual(await loadImageHostingSettings(), { provider: 'custom-r2', customR2: custom });
+  assert.equal(await getSecureItem(R2_ACCOUNT_ID_STORAGE_KEY), 'legacy-account');
+  for (const key of [
+    CUSTOM_R2_ACCOUNT_ID_STORAGE_KEY,
+    CUSTOM_R2_ACCESS_KEY_ID_STORAGE_KEY,
+    CUSTOM_R2_SECRET_ACCESS_KEY_STORAGE_KEY,
+    CUSTOM_R2_BUCKET_NAME_STORAGE_KEY,
+    CUSTOM_R2_PUBLIC_DOMAIN_STORAGE_KEY,
+  ]) {
+    assert.notEqual(await getSecureItem(key), null);
+  }
 });
 
 test('connection authorization status follows the key storage lifetime', async () => {

@@ -7,7 +7,7 @@ import {
 
 import { writeDesktopLog } from '@/lib/desktop/logging';
 
-import type { CreateSignedUrlResponse, SignedUrlItem } from './client';
+import type { CreateSignedUrlResponse, SignedUrlItem } from './types';
 
 const DEFAULT_FLAQ_UPLOAD_SITE = 'online';
 

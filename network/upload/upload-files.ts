@@ -1,14 +1,22 @@
 import { writeDesktopLog } from '@/lib/desktop/logging';
+import { recordReferenceUploads } from '@/lib/desktop/media-library';
 import type { FileType } from '@/lib/utils/fileUtils';
 import { fetchWithRetry } from '@/lib/utils/promiseUtils';
 
-import { createSignedUrl } from './client';
+import type { CreateSignedUrlResponse } from './types';
+import { authorizeUploads } from './upload-policy';
+
+type UploadDependencies = {
+  sign: (mimeTypes: string[], isForever?: boolean) => Promise<CreateSignedUrlResponse>;
+  put: typeof fetchWithRetry;
+  record?: typeof recordReferenceUploads;
+};
 
 /** Limit parallel transfers while preserving reference ordering for multi-input models. */
 export async function uploadFiles(
   files: FileType[],
   options?: { isForever?: boolean },
-  dependencies = { sign: createSignedUrl, put: fetchWithRetry },
+  dependencies: UploadDependencies = { sign: authorizeUploads, put: fetchWithRetry, record: recordReferenceUploads },
 ): Promise<string[]> {
   if (!files.length) return [];
   if (files.some((file) => !file.data)) throw new Error('An upload file is missing.');
@@ -44,5 +52,8 @@ export async function uploadFiles(
   );
   if (failure) throw failure;
   void writeDesktopLog('info', 'media-upload', `Uploaded ${files.length} media file(s)`);
-  return rows.map((row) => row.url!);
+  const urls = rows.map((row) => row.url!);
+  const recorded = (dependencies.record || recordReferenceUploads)(files, urls);
+  if (!recorded) void writeDesktopLog('warn', 'media-upload', 'Uploaded media could not be added to the local catalog');
+  return urls;
 }
