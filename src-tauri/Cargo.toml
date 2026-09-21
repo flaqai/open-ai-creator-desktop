@@ -1,6 +1,6 @@
 [package]
 name = "flaq-creator"
-version = "1.0.0"
+version = "1.1.0"
 description = "A focused desktop workspace for creating images and videos with Flaq AI"
 authors = ["Flaq AI"]
 edition = "2021"

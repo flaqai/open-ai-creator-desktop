@@ -72,16 +72,17 @@ jobs:
           releaseBody: |
             ## 中文
 
-            Flaq Creator 是一款面向 AI 图片与视频创作的跨平台桌面工作台。本版本提供 macOS Apple Silicon、macOS Intel 和 Windows x64 安装包。
+            Flaq Creator 1.1.0 是一次桌面端内容体验、媒体管理与连接稳定性更新。本版本提供 macOS Apple Silicon、macOS Intel 和 Windows x64 安装包。
 
-            ### 主要功能
+            ### 新功能与改进
 
-            - 集中式设置中心，包含通用、外观、连接与关于页面。
-            - 浅色、深色和跟随系统三种主题，以及可折叠的桌面导航。
-            - 支持七类图片与视频创作工作流，草稿与参考素材可在本机自动恢复。
-            - 生成历史支持图片缩放、拖动、裁剪和视频详情预览。
-            - 改进 Flaq Client Key 授权检测、内置存储、自定义 Cloudflare R2 预设和本地日志。
-            - macOS 单实例锁、窗口状态恢复、原生菜单与快捷键支持。
+            - 新增素材库，内置 Qwen Image 3.0、Wan 3.0、MiniMax H3 和 Seedance 2.5 分类的完整提示词与示例素材。
+            - 全新提示词详情查看器：保留原图比例，支持 100%–300% 缩放、拖动查看、三态分栏和小屏响应式布局。
+            - 生成历史移入设置中心，支持图片与视频预览、下载和本地媒体管理。
+            - 桌面端“记住我”改用与端口无关的 `auth.json` 保存 Client Key，并补充授权检测和脱敏日志。
+            - 改进生成请求与媒体归档的瞬时网络错误重试，降低“生成成功但保存失败”的概率。
+            - 安装包可携带打包时加密的默认 Cloudflare R2 预设，同时保留自定义 R2 预设。
+            - Windows 新增与应用主题一致的桌面标题栏和窗口控件。
 
             ### 下载选择
 
@@ -97,16 +98,17 @@ jobs:
 
             ## English
 
-            Flaq Creator is a cross-platform desktop workspace for AI image and video creation. This release includes installers for macOS Apple Silicon, macOS Intel, and Windows x64.
+            Flaq Creator 1.1.0 improves desktop content discovery, media management, and connection reliability. This release includes installers for macOS Apple Silicon, macOS Intel, and Windows x64.
 
-            ### Highlights
+            ### What’s new
 
-            - A centralized Settings center covering General, Appearance, Connection, and About.
-            - Light, dark, and system themes with a collapsible desktop navigation sidebar.
-            - Seven image and video creation workflows with automatic local recovery of drafts and reference media.
-            - Rich generation-history previews with image zoom, pan, crop, and video detail playback.
-            - Improved Flaq Client Key authorization checks, built-in storage, reusable custom Cloudflare R2 presets, and local logs.
-            - macOS single-instance locking, restored window state, native menus, and keyboard shortcuts.
+            - Added a curated media library with complete prompt examples for Qwen Image 3.0, Wan 3.0, MiniMax H3, and Seedance 2.5.
+            - Introduced a redesigned prompt-detail viewer that preserves source aspect ratios and supports 100%–300% zoom, panning, three panel modes, and responsive small-screen layouts.
+            - Moved generation history into Settings with image and video previews, downloads, and local media management.
+            - Desktop “Remember me” now stores the Client Key in a port-independent `auth.json`, with improved authorization diagnostics and redacted logs.
+            - Added retry handling for transient generation-request and media-archive failures, reducing cases where generation succeeds but local saving fails.
+            - Packaged installers can include a build-time encrypted default Cloudflare R2 preset while retaining reusable custom R2 presets.
+            - Added a theme-aware native-style title bar and window controls on Windows.
 
             ### Which file should I download?
 
