@@ -69,20 +69,28 @@ deployment environment.
 
 ## Credentials and task recovery
 
-Remembered API values and optional custom R2 values use versioned AES-GCM storage in the application-isolated WebView
-profile. The non-secret upload-provider preference defaults to the built-in Flaq R2 strategy. Custom R2 uses a separate
-set of encrypted keys, so saving it cannot overwrite the default configuration. Both legacy and custom R2 values remain
-untouched when only API connection data is cleared. New-format encryption is independent of browser version and locale.
-The expensive derived key is cached; encryption failures never silently persist plaintext.
+Remembered desktop API values are stored as readable, versioned JSON in `auth.json` under the native application
+configuration directory. They do not use macOS Keychain, Windows Credential Manager, Linux Secret Service or application
+encryption. The application identifier separates development and installed data, while changing the WebView hostname or
+port no longer changes the credential location. Native writes use a private temporary file, publish atomically where the
+platform permits, and are read back before the UI reports success. On Unix, the directory and file retain `0700` and
+`0600` permissions. Session-only credentials never reach the native file. The web-preview adapter retains versioned
+encrypted Web Storage and migrates current-origin remembered values when the native store is empty.
+
+Optional custom R2 values still use versioned AES-GCM storage in the application-isolated WebView profile. The
+non-secret upload-provider preference defaults to the built-in Flaq R2 strategy. Custom R2 uses a separate set of
+encrypted keys, so saving it cannot overwrite the default configuration. Both legacy and custom R2 values remain
+untouched when only API connection data is cleared. New-format browser encryption is independent of browser version and
+locale. The expensive derived key is cached; encryption failures never silently persist plaintext.
 
 The packaged built-in R2 preset is a temporary distribution choice. Encrypting it in the application package is
 obfuscation, not secret isolation: a determined user can extract both the encrypted payload and the code needed to
 decrypt it. The `/image/presignedUrl` fallback is the safer long-term boundary because shared credentials remain on the
 service. Do not describe the packaged preset as a credential vault or rely on it to resist reverse engineering.
 
-This is not an OS credential vault: a local attacker with profile access or injected JavaScript can compromise
-credentials. Stronghold/Keychain/Credential Manager integration remains a release-hardening item. Never embed user keys
-in source, environment defaults or installers.
+The native `auth.json` is deliberately readable by the local user and is not a credential vault. Injected JavaScript can
+also observe a key while the app is using it for a request. Custom R2 browser storage has the weaker WebView threat model
+described above. Never embed user keys in source, environment defaults or installers.
 
 Polling reserves a task before its first asynchronous request, carries abort signals, and cannot restart a stopped
 timer. Missing session keys pause restoration rather than fail paid jobs. Older pending tasks are queried once before
