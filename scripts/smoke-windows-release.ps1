@@ -1,6 +1,5 @@
 param(
   [Parameter(Mandatory = $true)][string]$Installer,
-  [Parameter(Mandatory = $true)][string]$Msi,
   [Parameter(Mandatory = $true)][string]$Version
 )
 
@@ -39,7 +38,6 @@ function Assert-AppExecutable($File) {
 
 $root = Join-Path $env:RUNNER_TEMP "flaq-release-smoke-$PID"
 $installRoot = Join-Path $root 'nsis-install'
-$msiRoot = Join-Path $root 'msi-extract'
 $process = $null
 $uninstaller = $null
 
@@ -67,13 +65,7 @@ try {
   $uninstallers = @(Get-ChildItem -Path $installRoot -Filter 'uninstall*.exe' -File -Recurse)
   if ($uninstallers.Count -eq 1) { $uninstaller = $uninstallers[0].FullName }
 
-  New-Item -ItemType Directory -Path $msiRoot -Force | Out-Null
-  $msiArgs = @('/a', "`"$((Resolve-Path $Msi).Path)`"", '/qn', "TARGETDIR=`"$msiRoot`"")
-  $extract = Start-Process -FilePath 'msiexec.exe' -ArgumentList $msiArgs -Wait -PassThru
-  if ($extract.ExitCode -ne 0) { throw "MSI administrative extraction exited with $($extract.ExitCode)." }
-  $msiApp = Find-FlaqExecutable $msiRoot
-  Assert-AppExecutable $msiApp
-  Write-Host "PASS Windows packages: $Version, x64, NSIS install/start and MSI extraction."
+  Write-Host "PASS Windows package: $Version, x64, NSIS install/start/uninstall."
 } finally {
   if ($null -ne $uninstaller -and (Test-Path $uninstaller)) {
     Start-Process -FilePath $uninstaller -ArgumentList '/S' -Wait | Out-Null

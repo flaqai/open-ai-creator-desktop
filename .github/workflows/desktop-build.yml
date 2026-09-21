@@ -140,6 +140,24 @@ jobs:
         run: >-
           pnpm exec tauri build --ci --no-sign --target ${{ matrix.rustTarget }} --bundles ${{ matrix.bundles }}
 
+      - name: Archive macOS app bundle
+        if: startsWith(matrix.id, 'macos-')
+        shell: bash
+        env:
+          CANDIDATE_TARGET: ${{ matrix.id }}
+          RUST_TARGET: ${{ matrix.rustTarget }}
+        run: |
+          bundle_root="src-tauri/target/$RUST_TARGET/release/bundle"
+          apps=()
+          while IFS= read -r -d '' app; do apps+=("$app"); done < <(find "$bundle_root" -type d -name '*.app' -prune -print0)
+          if [ "${#apps[@]}" -ne 1 ]; then
+            echo "Expected exactly one macOS app bundle, found ${#apps[@]}." >&2
+            exit 1
+          fi
+          ditto -c -k --sequesterRsrc --keepParent \
+            "${apps[0]}" \
+            "$bundle_root/Flaq-Creator-$CANDIDATE_TARGET.zip"
+
       - name: Normalize candidate filenames
         shell: bash
         env:
@@ -160,6 +178,7 @@ jobs:
         run: |
           node scripts/smoke-macos-release.mjs \
             "dist/candidate/Flaq-Creator-$CANDIDATE_TARGET.dmg" \
+            "dist/candidate/Flaq-Creator-$CANDIDATE_TARGET.zip" \
             "$RELEASE_VERSION" \
             "$EXPECTED_ARCH"
 
@@ -171,7 +190,6 @@ jobs:
         run: |
           & scripts/smoke-windows-release.ps1 `
             -Installer dist/candidate/Flaq-Creator-windows-x64-setup.exe `
-            -Msi dist/candidate/Flaq-Creator-windows-x64.msi `
             -Version $env:RELEASE_VERSION
 
       - uses: actions/upload-artifact@v4

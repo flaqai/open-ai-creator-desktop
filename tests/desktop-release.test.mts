@@ -52,18 +52,38 @@ test('candidate normalization produces stable public names and rejects extra ins
     const bundle = path.join(root, 'bundle');
     const output = path.join(root, 'output');
     await mkdir(path.join(bundle, 'nsis'), { recursive: true });
-    await mkdir(path.join(bundle, 'msi'), { recursive: true });
     await writeFile(path.join(bundle, 'nsis', 'Flaq Creator_1.1.0_x64-setup.exe'), 'exe');
-    await writeFile(path.join(bundle, 'msi', 'Flaq Creator_1.1.0_x64_en-US.msi'), 'msi');
     assert.deepEqual(await normalizeCandidate({ target: 'windows-x64', bundleRoot: bundle, output }), [
       'Flaq-Creator-windows-x64-setup.exe',
-      'Flaq-Creator-windows-x64.msi',
     ]);
 
-    await writeFile(path.join(bundle, 'nsis', 'unexpected.exe'), 'duplicate');
+    await writeFile(path.join(bundle, 'nsis', 'unexpected.msi'), 'stale-msi');
     await assert.rejects(
       normalizeCandidate({ target: 'windows-x64', bundleRoot: bundle, output }),
-      /produced 3 installer\(s\), expected 2/,
+      /produced 2 installer\(s\), expected 1/,
+    );
+  } finally {
+    await rm(root, { recursive: true, force: true });
+  }
+});
+
+test('macOS candidates require both the DMG and app ZIP', async () => {
+  const root = await mkdtemp(path.join(os.tmpdir(), 'flaq-macos-candidate-test-'));
+  try {
+    const bundle = path.join(root, 'bundle');
+    const output = path.join(root, 'output');
+    await mkdir(path.join(bundle, 'dmg'), { recursive: true });
+    await writeFile(path.join(bundle, 'dmg', 'Flaq Creator_1.1.0_aarch64.dmg'), 'dmg');
+    await writeFile(path.join(bundle, 'Flaq-Creator-macos-arm64.zip'), 'zip');
+    assert.deepEqual(await normalizeCandidate({ target: 'macos-arm64', bundleRoot: bundle, output }), [
+      'Flaq-Creator-macos-arm64.dmg',
+      'Flaq-Creator-macos-arm64.zip',
+    ]);
+
+    await rm(path.join(bundle, 'Flaq-Creator-macos-arm64.zip'));
+    await assert.rejects(
+      normalizeCandidate({ target: 'macos-arm64', bundleRoot: bundle, output }),
+      /produced 1 installer\(s\), expected 2/,
     );
   } finally {
     await rm(root, { recursive: true, force: true });
@@ -78,9 +98,10 @@ test('release assembly emits an exact deterministic file set with verified check
     await mkdir(input, { recursive: true });
     const inputs = {
       'Flaq-Creator-macos-arm64.dmg': 'arm64-dmg',
+      'Flaq-Creator-macos-arm64.zip': 'arm64-zip',
       'Flaq-Creator-macos-x64.dmg': 'x64-dmg',
+      'Flaq-Creator-macos-x64.zip': 'x64-zip',
       'Flaq-Creator-windows-x64-setup.exe': 'windows-exe',
-      'Flaq-Creator-windows-x64.msi': 'windows-msi',
     };
     for (const [name, value] of Object.entries(inputs)) await writeFile(path.join(input, name), value);
 
@@ -91,16 +112,17 @@ test('release assembly emits an exact deterministic file set with verified check
       tag: 'desktop-v1.1.0',
       commit,
     });
-    assert.equal(assembled.assets.length, 4);
-    assert.equal(assembled.checksums.length, 5);
+    assert.equal(assembled.assets.length, 5);
+    assert.equal(assembled.checksums.length, 6);
     const manifest = await verifyReleaseDirectory(output);
     assert.deepEqual(
       manifest.assets.map((asset: { name: string }) => asset.name),
       [
         'Flaq-Creator-macos-arm64.dmg',
+        'Flaq-Creator-macos-arm64.zip',
         'Flaq-Creator-macos-x64.dmg',
+        'Flaq-Creator-macos-x64.zip',
         'Flaq-Creator-windows-x64-setup.exe',
-        'Flaq-Creator-windows-x64.msi',
       ],
     );
     assert.deepEqual((await readdir(output)).sort(), [...RELEASE_FILE_NAMES].sort());
@@ -140,5 +162,8 @@ test('desktop workflow publishes only after the candidate matrix and keeps manua
   assert.match(workflow, /release:\n[\s\S]*if: startsWith\(github\.ref, 'refs\/tags\/desktop-v'\)/);
   assert.match(workflow, /needs: \[preflight, package\]/);
   assert.match(workflow, /permissions:\n\s+contents: write/);
+  assert.match(workflow, /ditto -c -k --sequesterRsrc --keepParent/);
+  assert.match(workflow, /--bundles \$\{\{ matrix\.bundles \}\}/);
+  assert.doesNotMatch(workflow, /-Msi /);
   assert.doesNotMatch(workflow.match(/package:[\s\S]*?\n  release:/)?.[0] || '', /gh release create/);
 });

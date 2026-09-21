@@ -14,6 +14,14 @@ export const RELEASE_ASSETS = [
     extension: '.dmg',
   },
   {
+    name: 'Flaq-Creator-macos-arm64.zip',
+    target: 'macos-arm64',
+    platform: 'macos',
+    arch: 'arm64',
+    type: 'app-zip',
+    extension: '.zip',
+  },
+  {
     name: 'Flaq-Creator-macos-x64.dmg',
     target: 'macos-x64',
     platform: 'macos',
@@ -22,20 +30,20 @@ export const RELEASE_ASSETS = [
     extension: '.dmg',
   },
   {
+    name: 'Flaq-Creator-macos-x64.zip',
+    target: 'macos-x64',
+    platform: 'macos',
+    arch: 'x64',
+    type: 'app-zip',
+    extension: '.zip',
+  },
+  {
     name: 'Flaq-Creator-windows-x64-setup.exe',
     target: 'windows-x64',
     platform: 'windows',
     arch: 'x64',
     type: 'nsis',
     extension: '.exe',
-  },
-  {
-    name: 'Flaq-Creator-windows-x64.msi',
-    target: 'windows-x64',
-    platform: 'windows',
-    arch: 'x64',
-    type: 'msi',
-    extension: '.msi',
   },
 ];
 
@@ -61,11 +69,13 @@ const TARGETS = {
     name: 'Windows x64',
     runner: 'windows-2025',
     rustTarget: 'x86_64-pc-windows-msvc',
-    bundles: 'nsis,msi',
+    bundles: 'nsis',
   },
 };
 
-const INSTALLER_EXTENSIONS = new Set(['.dmg', '.exe', '.msi']);
+// Keep .msi in the rejected installer set so a stale or accidentally produced MSI
+// cannot silently enter a candidate or formal release.
+const INSTALLER_EXTENSIONS = new Set(['.dmg', '.zip', '.exe', '.msi']);
 
 async function exists(file) {
   try {
