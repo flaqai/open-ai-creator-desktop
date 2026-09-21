@@ -1,6 +1,7 @@
 import assert from 'node:assert/strict';
 import { afterEach, test } from 'node:test';
 
+import type { DesktopLogLevel } from '../lib/desktop/logging';
 import { prepareNativeRequestInit } from '../lib/platform/http';
 import { mediaFileName, mediaRequestUrl } from '../lib/platform/media';
 import { detectImageFormat, imageFormatFromUrl } from '../lib/utils/fileUtils';
@@ -109,6 +110,33 @@ test('image/video submit and poll use exact upstream contracts including multimo
   assert.deepEqual(JSON.parse(requests[2].init?.body as string), video);
 });
 
+test('generation submission retries one transient transport failure without retrying HTTP errors', async () => {
+  let calls = 0;
+  globalThis.fetch = async () => {
+    calls++;
+    if (calls === 1) throw new TypeError('error sending request for url');
+    return json({ code: 0, data: { task_id: 'task-after-retry', task_status: 'submitted' } });
+  };
+
+  const response = await createVideoTask(config, {
+    model_name: 'video-model',
+    prompt: 'test retry',
+  });
+  assert.equal(response.data.task_id, 'task-after-retry');
+  assert.equal(calls, 2);
+
+  calls = 0;
+  globalThis.fetch = async () => {
+    calls++;
+    return json({ error: { message: 'not authorized' } }, 403);
+  };
+  await assert.rejects(
+    createVideoTask(config, { model_name: 'video-model', prompt: 'do not retry' }),
+    /not authorized/,
+  );
+  assert.equal(calls, 1);
+});
+
 test('invalid success body is rejected rather than treated as a generated task', async () => {
   globalThis.fetch = async () => new Response('<html>gateway</html>');
   await assert.rejects(openApiFetchJson(config, '/api'), /invalid JSON/);
@@ -149,6 +177,52 @@ test('connection test uses the dedicated key status endpoint and its availabilit
     }),
     /network unavailable/,
   );
+});
+
+test('connection test logs redacted request outcomes and transport failures', async () => {
+  const logs: Array<{ level: DesktopLogLevel; scope: string; message: string }> = [];
+  const logger = async (level: DesktopLogLevel, scope: string, message: string) => {
+    logs.push({ level, scope, message });
+  };
+
+  await testApiConnection(
+    config,
+    async () => json({ code: 200, msg: 'success', data: { client_key: config.clientKey, status: 1 } }),
+    logger,
+  );
+
+  assert.equal(logs.length, 2);
+  assert.match(logs[0].message, /POST \/api\/v1\/key\/status started/);
+  assert.match(logs[1].message, /HTTP 200/);
+  assert.match(logs[1].message, /code=200/);
+  assert.match(logs[1].message, /keyStatus=1/);
+  assert.ok(logs.every((entry) => entry.scope === 'api-connection'));
+  assert.ok(logs.every((entry) => !entry.message.includes(config.clientKey)));
+
+  logs.length = 0;
+  await assert.rejects(
+    testApiConnection(config, async () => json({ message: 'forbidden' }, 403), logger),
+    /forbidden/,
+  );
+  assert.equal(logs.length, 2);
+  assert.equal(logs[1].level, 'warn');
+  assert.match(logs[1].message, /HTTP 403/);
+
+  logs.length = 0;
+  await assert.rejects(
+    testApiConnection(
+      config,
+      async () => {
+        throw new TypeError(`fetch failed for ${config.clientKey}`);
+      },
+      logger,
+    ),
+    /fetch failed/,
+  );
+  assert.equal(logs.length, 2);
+  assert.match(logs[1].message, /failed before response/);
+  assert.match(logs[1].message, /TypeError: fetch failed for <REDACTED>/);
+  assert.ok(logs.every((entry) => !entry.message.includes(config.clientKey)));
 });
 
 test('built-in Flaq storage requests authenticated presigned URLs without R2 credentials', async () => {

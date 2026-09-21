@@ -15,6 +15,7 @@ test('desktop development enables desktop rendering before Next starts', () => {
   assert.equal(environment.EXISTING_VALUE, 'kept');
   assert.equal(environment.FLAQ_DESKTOP_RUNTIME, 'true');
   assert.equal(environment.NEXT_PUBLIC_FLAQ_DESKTOP_RUNTIME, 'true');
+  assert.equal(environment.NEXT_PUBLIC_FLAQ_NATIVE_DESKTOP, 'true');
   assert.equal(environment.NEXT_PUBLIC_SITE_URL, 'http://localhost:31415');
 });
 

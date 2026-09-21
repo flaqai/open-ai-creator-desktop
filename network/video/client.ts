@@ -50,10 +50,15 @@ export type CreateVideoTaskResponse = OpenApiSubmitResponse;
 export type GetVideoTaskResponse = OpenApiPollResponse<VideoTaskResult>;
 
 export async function createVideoTask(config: OpenApiConfig, body: CreateVideoTaskRequest) {
-  return openApiFetchJson<CreateVideoTaskResponse>(config, '/api/v1/video/task', {
-    method: 'POST',
-    body: JSON.stringify(body),
-  });
+  return openApiFetchJson<CreateVideoTaskResponse>(
+    config,
+    '/api/v1/video/task',
+    {
+      method: 'POST',
+      body: JSON.stringify(body),
+    },
+    { transportRetries: 1 },
+  );
 }
 
 export async function getVideoTask(config: OpenApiConfig, taskId: string, signal?: AbortSignal) {

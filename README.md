@@ -179,8 +179,8 @@ This template uses Cloudflare R2 for storing user-uploaded images and generated 
 6. **Paste** your Client Key and click **Test Connection** to verify
 7. **Save** the settings
 
-> **💡 Tip**: Enable "Remember Me" to securely persist your API key across sessions. The key is stored using encrypted
-> local storage. For shared or public devices, leave this option unchecked for maximum security.
+> **💡 Tip**: In the desktop app, enabling "Remember Me" stores the API key as readable text in `auth.json` under
+> the current user's application configuration directory. On shared or public devices, leave this option unchecked.
 
 > **🔑 API Credits**: You need sufficient API credits to generate images and videos. Top up your balance at
 > [flaq.ai](https://flaq.ai) if needed.

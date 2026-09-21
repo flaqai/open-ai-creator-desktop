@@ -123,7 +123,7 @@
       "client-key": "Client Key",
       "remember-me": "Remember me (store locally)",
       "remember-me-hint": "If unchecked, the key will be cleared when you close the tab.",
-      "security-warning": "Security Notice: Your client key is encrypted before storage, but XSS attacks can still intercept it during API requests. Keep your key secure.",
+      "security-warning": "安全提示：桌面版勾選「記住我」後，client key 會以明文儲存在使用者設定目錄的 auth.json 中。能存取您系統帳戶的人可以讀取該密鑰。",
       "clear-data": "Clear connection data",
       "clear-data-confirm": "Are you sure you want to clear the stored Open API connection settings?",
       "data-cleared": "Connection data has been cleared.",

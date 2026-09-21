@@ -1,13 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import {
-  DEFAULT_OPEN_API_BASE_URL,
-  normalizeBaseUrl,
-  OPEN_API_BASE_URL_STORAGE_KEY,
-  OPEN_API_CLIENT_KEY_STORAGE_KEY,
-  OPEN_API_CONFIG_CHANGED_EVENT,
-} from '@/network/clientFetch';
+import { DEFAULT_OPEN_API_BASE_URL, normalizeBaseUrl, OPEN_API_CONFIG_CHANGED_EVENT } from '@/network/clientFetch';
 import { setApiConnectionAuthorized } from '@/network/connection-status';
 import { testApiConnection } from '@/network/connection-test';
 import {
@@ -25,6 +19,11 @@ import { useLocale, useTranslations } from 'next-intl';
 import { toast } from 'sonner';
 
 import {
+  clearConnectionSettings,
+  loadConnectionSettings,
+  saveConnectionSettings,
+} from '@/lib/desktop/connection-settings';
+import {
   loadImageHostingSettings,
   saveImageHostingSettings,
   type UploadProvider,
@@ -38,7 +37,6 @@ import {
   type R2Preset,
 } from '@/lib/desktop/r2-presets';
 import { isDesktopRuntime } from '@/lib/desktop/runtime';
-import { clearAllSecureStorage, getSecureItem, isRememberMeEnabled, setSecureItem } from '@/lib/utils/secureStorage';
 import { Button } from '@/components/ui/button';
 import { Checkbox } from '@/components/ui/checkbox';
 import {
@@ -94,17 +92,16 @@ export default function OpenApiSettingsDialog({ open, onOpenChange, embedded = f
     setHostingExpanded(true);
 
     const loadSettings = async () => {
-      const [savedBaseUrl, savedClientKey, savedPresets, hosting] = await Promise.all([
-        getSecureItem(OPEN_API_BASE_URL_STORAGE_KEY),
-        getSecureItem(OPEN_API_CLIENT_KEY_STORAGE_KEY),
+      const [connection, savedPresets, hosting] = await Promise.all([
+        loadConnectionSettings(),
         loadR2Presets().catch((error) => {
           toast.error(error instanceof Error ? error.message : String(error));
           return [];
         }),
         loadImageHostingSettings(),
       ]);
-      setBaseUrl(savedBaseUrl || DEFAULT_OPEN_API_BASE_URL);
-      setClientKey(savedClientKey || '');
+      setBaseUrl(connection?.baseUrl || DEFAULT_OPEN_API_BASE_URL);
+      setClientKey(connection?.clientKey || '');
       setUploadProviderDraft(hosting.provider);
       const currentR2 = hosting.customR2;
       const initialPreset = initialR2Preset(savedPresets, currentR2);
@@ -113,7 +110,7 @@ export default function OpenApiSettingsDialog({ open, onOpenChange, embedded = f
       setR2AccessKeyId(initialPreset?.accessKeyId || currentR2.accessKeyId);
       setR2SecretAccessKey(initialPreset?.secretAccessKey || currentR2.secretAccessKey);
       setR2BucketName(initialPreset?.bucketName || currentR2.bucketName);
-      setRememberMe(isRememberMeEnabled());
+      setRememberMe(connection?.remember || false);
       setDesktop(isDesktopRuntime());
       setR2Presets(savedPresets);
       setSelectedPresetId(initialPreset?.id || '');
@@ -130,13 +127,16 @@ export default function OpenApiSettingsDialog({ open, onOpenChange, embedded = f
     setUploadProviderDraft('builtin');
   };
 
-  const handleClearAll = () => {
+  const handleClearAll = async () => {
     if (window.confirm(t('clear-data-confirm'))) {
-      clearAllSecureStorage();
-      setApiConnectionAuthorized(false, false);
-      window.dispatchEvent(new Event(OPEN_API_CONFIG_CHANGED_EVENT));
-      handleReset();
-      toast.success(t('data-cleared'));
+      try {
+        await clearConnectionSettings();
+        window.dispatchEvent(new Event(OPEN_API_CONFIG_CHANGED_EVENT));
+        handleReset();
+        toast.success(t('data-cleared'));
+      } catch (error) {
+        toast.error(error instanceof Error ? error.message : String(error));
+      }
     }
   };
 
@@ -172,9 +172,12 @@ export default function OpenApiSettingsDialog({ open, onOpenChange, embedded = f
         });
       }
       setIsTesting(true);
-      setApiConnectionAuthorized(false, rememberMe);
-      await setSecureItem(OPEN_API_BASE_URL_STORAGE_KEY, normalizedBaseUrl, rememberMe);
-      await setSecureItem(OPEN_API_CLIENT_KEY_STORAGE_KEY, normalizedClientKey, rememberMe);
+      await saveConnectionSettings({
+        baseUrl: normalizedBaseUrl,
+        clientKey: normalizedClientKey,
+        remember: rememberMe,
+        authorized: false,
+      });
       await saveImageHostingSettings(uploadProvider, normalizedR2Config, rememberMe);
     } catch (error) {
       window.dispatchEvent(new Event(OPEN_API_CONFIG_CHANGED_EVENT));
@@ -185,12 +188,12 @@ export default function OpenApiSettingsDialog({ open, onOpenChange, embedded = f
 
     try {
       await testApiConnection({ baseUrl: normalizedBaseUrl, clientKey: normalizedClientKey });
-      setApiConnectionAuthorized(true, rememberMe);
+      await setApiConnectionAuthorized(true, rememberMe);
       window.dispatchEvent(new Event(OPEN_API_CONFIG_CHANGED_EVENT));
       onOpenChange(false);
       toast.success(t('authorization-passed-saved'));
     } catch (error) {
-      setApiConnectionAuthorized(false, rememberMe);
+      await setApiConnectionAuthorized(false, rememberMe);
       window.dispatchEvent(new Event(OPEN_API_CONFIG_CHANGED_EVENT));
       toast.error(t('authorization-failed-saved'), {
         description: error instanceof Error ? error.message : undefined,

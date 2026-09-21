@@ -31,10 +31,15 @@ export type CreateImageTaskResponse = OpenApiSubmitResponse;
 export type GetImageTaskResponse = OpenApiPollResponse<ImageTaskResult>;
 
 export async function createImageTask(config: OpenApiConfig, body: CreateImageTaskRequest) {
-  const response = await openApiFetchJson<CreateImageTaskResponse>(config, '/api/v1/image/task', {
-    method: 'POST',
-    body: JSON.stringify(body),
-  });
+  const response = await openApiFetchJson<CreateImageTaskResponse>(
+    config,
+    '/api/v1/image/task',
+    {
+      method: 'POST',
+      body: JSON.stringify(body),
+    },
+    { transportRetries: 1 },
+  );
   if (response.code !== 0 || !response.data?.task_id) {
     void writeDesktopLog(
       'error',

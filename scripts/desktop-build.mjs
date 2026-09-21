@@ -93,7 +93,12 @@ function runNextBuild(cwd) {
         // executed directly by spawn without a shell).
         const child = spawn(process.execPath, [require.resolve('next/dist/bin/next'), 'build', '--webpack'], {
           cwd,
-          env: { ...process.env, FLAQ_DESKTOP_BUILD: 'true', NEXT_PUBLIC_FLAQ_DESKTOP_BUILD: 'true' },
+          env: {
+            ...process.env,
+            FLAQ_DESKTOP_BUILD: 'true',
+            NEXT_PUBLIC_FLAQ_DESKTOP_BUILD: 'true',
+            NEXT_PUBLIC_FLAQ_NATIVE_DESKTOP: 'true',
+          },
           stdio: 'inherit',
         });
         child.once('error', reject);

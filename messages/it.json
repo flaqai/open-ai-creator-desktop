@@ -123,7 +123,7 @@
       "client-key": "Client Key",
       "remember-me": "Remember me (store locally)",
       "remember-me-hint": "If unchecked, the key will be cleared when you close the tab.",
-      "security-warning": "Security Notice: Your client key is encrypted before storage, but XSS attacks can still intercept it during API requests. Keep your key secure.",
+      "security-warning": "Security notice: When Remember Me is enabled in the desktop app, the client key is stored as readable text in auth.json under your user configuration directory. Anyone with access to your system account can read it.",
       "clear-data": "Clear connection data",
       "clear-data-confirm": "Are you sure you want to clear the stored Open API connection settings?",
       "data-cleared": "Connection data has been cleared.",

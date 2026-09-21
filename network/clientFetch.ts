@@ -3,9 +3,9 @@
 import { defaultLocale, languages } from '@/i18n/languages';
 
 import { STORE_PREFIX } from '@/lib/constants/config';
+import { loadConnectionSettings } from '@/lib/desktop/connection-settings';
 import { writeDesktopLog } from '@/lib/desktop/logging';
 import { fetchWithTimeout } from '@/lib/platform/http';
-import { getSecureItem } from '@/lib/utils/secureStorage';
 import { clientSideGetCookie } from '@/lib/utils/stringUtils';
 
 export type OpenApiTaskStatus = 'submitted' | 'processing' | 'succeed' | 'failed';
@@ -23,6 +23,11 @@ export interface OpenApiErrorPayload {
     type?: string;
   };
 }
+
+type OpenApiRequestOptions = {
+  transportRetries?: number;
+  retryDelayMs?: number;
+};
 
 export interface OpenApiSubmitResponse {
   code: number;
@@ -59,28 +64,8 @@ export class MissingApiKeyError extends Error {
   }
 }
 
-const OLD_OPEN_API_BASE_URL_STORAGE_KEY = 'flaq_open_api_base_url';
-const OLD_OPEN_API_CLIENT_KEY_STORAGE_KEY = 'flaq_open_api_client_key';
-
 export const OPEN_API_BASE_URL_STORAGE_KEY = `${STORE_PREFIX}-open-api-base-url`;
 export const OPEN_API_CLIENT_KEY_STORAGE_KEY = `${STORE_PREFIX}-open-api-client-key`;
-
-function migrateOldApiKeys() {
-  if (typeof window === 'undefined') return;
-
-  const oldBaseUrl = localStorage.getItem(OLD_OPEN_API_BASE_URL_STORAGE_KEY);
-  const oldClientKey = localStorage.getItem(OLD_OPEN_API_CLIENT_KEY_STORAGE_KEY);
-
-  if (oldBaseUrl && !localStorage.getItem(OPEN_API_BASE_URL_STORAGE_KEY)) {
-    localStorage.setItem(OPEN_API_BASE_URL_STORAGE_KEY, oldBaseUrl);
-    localStorage.removeItem(OLD_OPEN_API_BASE_URL_STORAGE_KEY);
-  }
-
-  if (oldClientKey && !localStorage.getItem(OPEN_API_CLIENT_KEY_STORAGE_KEY)) {
-    localStorage.setItem(OPEN_API_CLIENT_KEY_STORAGE_KEY, oldClientKey);
-    localStorage.removeItem(OLD_OPEN_API_CLIENT_KEY_STORAGE_KEY);
-  }
-}
 
 function getContentLanguage(code?: string): string {
   return languages.find((item) => item.lang === code)?.backendValue || defaultLocale;
@@ -107,25 +92,55 @@ export function createOpenApiHeaders(clientKey: string, init?: HeadersInit): Hea
   return headers;
 }
 
+function redactTransportError(error: unknown, clientKey: string) {
+  const message = error instanceof Error ? `${error.name}: ${error.message}` : String(error);
+  return clientKey ? message.replaceAll(clientKey, '<REDACTED>') : message;
+}
+
+function waitForRetry(delayMs: number, signal?: AbortSignal) {
+  return new Promise<void>((resolve, reject) => {
+    const abort = () => {
+      clearTimeout(timer);
+      reject(signal?.reason);
+    };
+    const timer = setTimeout(() => {
+      signal?.removeEventListener('abort', abort);
+      resolve();
+    }, delayMs);
+    signal?.addEventListener('abort', abort, { once: true });
+    if (signal?.aborted) abort();
+  });
+}
+
 export async function openApiFetchJson<TResponse>(
   config: OpenApiConfig,
   path: string,
   init?: RequestInit,
+  options: OpenApiRequestOptions = {},
 ): Promise<TResponse> {
   const method = init?.method || 'GET';
   let res: Response;
-  try {
-    res = await fetchWithTimeout(buildOpenApiUrl(config.baseUrl, path), {
-      ...init,
-      headers: createOpenApiHeaders(config.clientKey, init?.headers),
-    });
-  } catch (error) {
-    void writeDesktopLog(
-      'error',
-      'open-api',
-      `${method} ${path} failed before receiving a response: ${error instanceof Error ? error.message : String(error)}`,
-    );
-    throw error;
+  const retries = Math.max(0, options.transportRetries || 0);
+  for (let attempt = 0; ; attempt++) {
+    try {
+      res = await fetchWithTimeout(buildOpenApiUrl(config.baseUrl, path), {
+        ...init,
+        headers: createOpenApiHeaders(config.clientKey, init?.headers),
+      });
+      break;
+    } catch (error) {
+      const retrying = !init?.signal?.aborted && attempt < retries;
+      const detail = redactTransportError(error, config.clientKey);
+      void writeDesktopLog(
+        retrying ? 'warn' : 'error',
+        'open-api',
+        retrying
+          ? `${method} ${path} transport failed before response; retrying (${attempt + 1}/${retries}): ${detail}`
+          : `${method} ${path} failed before receiving a response after ${attempt + 1} attempt(s): ${detail}`,
+      );
+      if (!retrying) throw error;
+      await waitForRetry((options.retryDelayMs ?? 750) * 2 ** attempt, init?.signal || undefined);
+    }
   }
 
   const data = (await res.json().catch(() => null)) as null | TResponse | OpenApiErrorPayload;
@@ -155,11 +170,9 @@ export async function getClientOpenApiConfigAsync(): Promise<OpenApiConfig> {
     };
   }
 
-  migrateOldApiKeys();
-
-  // Try to get from secure storage (encrypted)
-  const baseUrl = (await getSecureItem(OPEN_API_BASE_URL_STORAGE_KEY)) || envBaseUrl;
-  const clientKey = (await getSecureItem(OPEN_API_CLIENT_KEY_STORAGE_KEY)) || '';
+  const settings = await loadConnectionSettings();
+  const baseUrl = settings?.baseUrl || envBaseUrl;
+  const clientKey = settings?.clientKey || '';
 
   if (!clientKey) {
     throw new MissingApiKeyError();

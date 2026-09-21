@@ -123,7 +123,7 @@
       "client-key": "Client Key",
       "remember-me": "记住我（存储到本地）",
       "remember-me-hint": "不勾选时，关闭标签页后将清除密钥。",
-      "security-warning": "安全提示：您的 client key 已加密存储，但 XSS 攻击仍可能在 API 请求时拦截。请妥善保管密钥。",
+      "security-warning": "安全提示：桌面版勾选“记住我”后，client key 会以明文保存在用户配置目录的 auth.json 中。能够访问您系统账户的人可以读取该密钥。",
       "clear-data": "清除连接信息",
       "clear-data-confirm": "确定要清除已存储的 Open API 连接设置吗？",
       "data-cleared": "连接信息已清除。",

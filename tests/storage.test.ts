@@ -1,6 +1,11 @@
 import assert from 'node:assert/strict';
 import { beforeEach, test } from 'node:test';
 
+import {
+  clearConnectionSettings,
+  loadConnectionSettings,
+  saveConnectionSettings,
+} from '../lib/desktop/connection-settings';
 import { loadImageHostingSettings, saveImageHostingSettings } from '../lib/desktop/image-hosting-settings';
 import {
   initialR2Preset,
@@ -9,6 +14,7 @@ import {
   saveR2Presets,
   upsertR2Preset,
 } from '../lib/desktop/r2-presets';
+import { isNativeDesktop } from '../lib/desktop/runtime';
 import {
   CUSTOM_R2_ACCESS_KEY_ID_STORAGE_KEY,
   CUSTOM_R2_ACCOUNT_ID_STORAGE_KEY,
@@ -47,6 +53,26 @@ beforeEach(() => {
   Object.defineProperty(globalThis, 'localStorage', { value: new MemoryStorage(), configurable: true });
   Object.defineProperty(globalThis, 'sessionStorage', { value: new MemoryStorage(), configurable: true });
   Object.defineProperty(globalThis, 'window', { value: new EventTarget(), configurable: true });
+});
+
+test('native runtime detection supports Tauri custom protocol without global injection', () => {
+  Object.defineProperty(globalThis, 'window', {
+    value: Object.assign(new EventTarget(), { location: new URL('tauri://localhost/zh/') }),
+    configurable: true,
+  });
+  assert.equal(isNativeDesktop(), true);
+
+  Object.defineProperty(globalThis, 'window', {
+    value: Object.assign(new EventTarget(), { location: new URL('https://example.test/') }),
+    configurable: true,
+  });
+  assert.equal(isNativeDesktop(), false);
+
+  Object.defineProperty(globalThis, 'window', {
+    value: Object.assign(new EventTarget(), { location: new URL('http://localhost:3000/?desktop-preview') }),
+    configurable: true,
+  });
+  assert.equal(isNativeDesktop(), false);
 });
 
 test('switching remember preference never leaves a stale key in the other store', async () => {
@@ -112,15 +138,54 @@ test('image hosting settings read legacy credentials and keep custom credentials
 });
 
 test('connection authorization status follows the key storage lifetime', async () => {
-  const key = 'FLAQ-SAAS-TEMPLATE-open-api-client-key';
-  await setSecureItem(key, 'session-key', false);
-  setApiConnectionAuthorized(true, false);
+  await saveConnectionSettings({
+    baseUrl: 'https://api.example.test',
+    clientKey: 'session-key',
+    remember: false,
+    authorized: false,
+  });
+  await setApiConnectionAuthorized(true, false);
   assert.equal(await isApiConnectionAuthorized(), true);
-  sessionStorage.removeItem(key);
+  sessionStorage.removeItem('FLAQ-SAAS-TEMPLATE-open-api-client-key');
   assert.equal(await isApiConnectionAuthorized(), false);
-  setApiConnectionAuthorized(false, false);
+  await setApiConnectionAuthorized(false, false);
   assert.equal(sessionStorage.getItem('FLAQ-SAAS-TEMPLATE-open-api-authorized'), null);
   assert.equal(localStorage.getItem('FLAQ-SAAS-TEMPLATE-open-api-authorized'), null);
+});
+
+test('browser connection settings preserve remember choice and can be cleared through one interface', async () => {
+  await saveConnectionSettings({
+    baseUrl: 'https://api.example.test/',
+    clientKey: 'remembered-key',
+    remember: true,
+    authorized: true,
+  });
+  assert.deepEqual(await loadConnectionSettings(), {
+    version: 1,
+    baseUrl: 'https://api.example.test/',
+    clientKey: 'remembered-key',
+    remember: true,
+    authorized: true,
+    updatedAt: '',
+  });
+  assert.equal(sessionStorage.getItem('FLAQ-SAAS-TEMPLATE-open-api-client-key'), null);
+
+  await clearConnectionSettings();
+  assert.equal(await loadConnectionSettings(), null);
+});
+
+test('legacy browser connection keys migrate behind the connection settings interface', async () => {
+  localStorage.setItem('flaq_open_api_base_url', 'https://legacy.example.test');
+  localStorage.setItem('flaq_open_api_client_key', 'legacy-key');
+  localStorage.setItem('FLAQ-SAAS-TEMPLATE-remember-me', 'true');
+  assert.deepEqual(await loadConnectionSettings(), {
+    version: 1,
+    baseUrl: 'https://legacy.example.test',
+    clientKey: 'legacy-key',
+    remember: true,
+    authorized: false,
+    updatedAt: '',
+  });
 });
 
 test('settings encrypt with unique IVs and damaged ciphertext never becomes an API key', async () => {
