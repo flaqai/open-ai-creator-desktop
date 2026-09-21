@@ -45,6 +45,32 @@ export async function saveBlob(blob: Blob, filename: string): Promise<boolean> {
   return true;
 }
 
+export async function downloadBlob(blob: Blob, filename: string): Promise<boolean> {
+  if (isNativeDesktop()) {
+    const [{ downloadDir, join }, { writeFile }] = await Promise.all([
+      import('@tauri-apps/api/path'),
+      import('@tauri-apps/plugin-fs'),
+    ]);
+    const path = await join(await downloadDir(), filename);
+    await writeFile(path, new Uint8Array(await blob.arrayBuffer()));
+    return true;
+  }
+
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement('a');
+  link.href = url;
+  link.download = filename;
+  document.body.appendChild(link);
+  link.click();
+  link.remove();
+  setTimeout(() => URL.revokeObjectURL(url), 30_000);
+  return true;
+}
+
+export async function downloadMedia(url: string, filename: string): Promise<boolean> {
+  return downloadBlob(await (await fetchMedia(url)).blob(), filename);
+}
+
 export async function saveMedia(url: string, filename: string): Promise<boolean> {
   if (isNativeDesktop() && /^https?:\/\//i.test(url)) {
     const { invoke } = await import('@tauri-apps/api/core');

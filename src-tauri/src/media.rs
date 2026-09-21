@@ -133,6 +133,27 @@ fn http_client() -> Result<reqwest::Client, String> {
         .map_err(|e| e.to_string())
 }
 
+async fn send_download_request(
+    client: &reqwest::Client,
+    url: &reqwest::Url,
+) -> Result<reqwest::Response, String> {
+    const RETRY_DELAYS: [Duration; 2] = [Duration::from_millis(500), Duration::from_millis(1500)];
+    for (attempt, delay) in RETRY_DELAYS.iter().enumerate() {
+        match client.get(url.clone()).send().await {
+            Ok(response) => return Ok(response),
+            Err(_) => tokio::time::sleep(*delay).await,
+        }
+        if attempt + 1 == RETRY_DELAYS.len() {
+            break;
+        }
+    }
+    client
+        .get(url.clone())
+        .send()
+        .await
+        .map_err(|error| format!("{error} after 3 attempts"))
+}
+
 async fn persist_response(
     mut response: reqwest::Response,
     path: &Path,
@@ -158,9 +179,8 @@ async fn persist_response(
 }
 
 async fn download_to_path(url: reqwest::Url, path: &Path) -> Result<(), String> {
-    let response = http_client()?
-        .get(url)
-        .send()
+    let client = http_client()?;
+    let response = send_download_request(&client, &url)
         .await
         .map_err(|e| e.to_string())?
         .error_for_status()
@@ -312,9 +332,8 @@ async fn archive_url_to_root(
     if let Some(path) = existing_archive(&directory, &prefix) {
         return Ok(path);
     }
-    let response = http_client()?
-        .get(url.clone())
-        .send()
+    let client = http_client()?;
+    let response = send_download_request(&client, &url)
         .await
         .map_err(|e| e.to_string())?
         .error_for_status()
@@ -426,6 +445,37 @@ mod tests {
         ))
         .unwrap();
         assert_eq!(second, first);
+    }
+
+    #[test]
+    fn archive_retries_a_transient_connection_failure() {
+        let root = tempfile::tempdir().unwrap();
+        let listener = std::net::TcpListener::bind("127.0.0.1:0").unwrap();
+        let address = listener.local_addr().unwrap();
+        let worker = std::thread::spawn(move || {
+            let (first, _) = listener.accept().unwrap();
+            drop(first);
+
+            let (mut second, _) = listener.accept().unwrap();
+            let mut buf = [0; 4096];
+            let _ = second.read(&mut buf);
+            write!(
+                second,
+                "HTTP/1.1 200 OK\r\nContent-Type: video/mp4\r\nContent-Length: 13\r\nConnection: close\r\n\r\nvideo-content"
+            )
+            .unwrap();
+        });
+
+        let path = tauri::async_runtime::block_on(archive_url_to_root(
+            root.path(),
+            &format!("http://{address}/generated"),
+            "video",
+            "task-retry",
+            1_725_955_200_000,
+        ))
+        .unwrap();
+        worker.join().unwrap();
+        assert_eq!(std::fs::read_to_string(path).unwrap(), "video-content");
     }
 
     #[test]

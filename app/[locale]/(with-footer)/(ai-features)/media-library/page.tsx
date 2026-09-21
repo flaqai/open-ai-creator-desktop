@@ -5,7 +5,7 @@ import MediaLibrary from '@/components/media-library/MediaLibrary';
 
 export const metadata: Metadata = {
   title: 'Media Library — Flaq Creator',
-  description: 'Browse uploaded references and generated images, videos, audio, and files on this device.',
+  description: 'Browse uploaded media and generated creations stored on this device.',
 };
 
 export default async function Page({ params }: { params: Promise<{ locale: string }> }) {

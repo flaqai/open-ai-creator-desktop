@@ -1,3 +1,4 @@
+import { writeDesktopLog, type DesktopLogLevel } from './logging';
 import { isNativeDesktop } from './runtime';
 
 export type MediaKind = 'image' | 'video';
@@ -62,7 +63,11 @@ export type MediaArchiveOutcome =
 
 export async function attemptMediaArchive(
   input: ArchiveMediaInput,
-  dependencies?: { native?: boolean; archive?: (value: ArchiveMediaInput) => Promise<string> },
+  dependencies?: {
+    native?: boolean;
+    archive?: (value: ArchiveMediaInput) => Promise<string>;
+    log?: (level: DesktopLogLevel, scope: string, message: string) => Promise<void> | void;
+  },
 ): Promise<MediaArchiveOutcome> {
   const native = dependencies?.native ?? isNativeDesktop();
   if (!native) return { status: 'skipped' };
@@ -70,6 +75,18 @@ export async function attemptMediaArchive(
     const localPath = await (dependencies?.archive || archiveGeneratedMedia)(input);
     return { status: 'saved', localPath };
   } catch (error) {
+    const raw = error instanceof Error ? `${error.name}: ${error.message}` : String(error);
+    const redacted = raw.replace(/https?:\/\/[^\s)]+/gi, '<URL>');
+    const safeTaskId = input.taskId.replace(/[^a-zA-Z0-9_-]/g, '_').slice(0, 180);
+    try {
+      await (dependencies?.log || writeDesktopLog)(
+        'error',
+        'media-archive',
+        `Failed to archive ${input.mediaType} task ${safeTaskId}: ${redacted}`,
+      );
+    } catch {
+      // Logging must not replace the archive failure the caller is handling.
+    }
     return { status: 'failed', error };
   }
 }

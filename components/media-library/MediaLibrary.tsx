@@ -171,7 +171,7 @@ function MediaPreviewDialog({ item, onClose, zh }: { item: MediaLibraryItem; onC
   );
 }
 
-export default function MediaLibrary() {
+export default function MediaLibrary({ embedded = false }: { embedded?: boolean }) {
   const locale = useLocale();
   const zh = locale === 'zh' || locale === 'tw';
   const items = useMediaCatalog();
@@ -208,41 +208,63 @@ export default function MediaLibrary() {
   ];
 
   return (
-    <main className='min-h-[calc(100vh-64px)] w-full px-5 py-6 md:px-8 lg:px-10'>
-      <div className='mx-auto max-w-[1500px]'>
-        <header className='border-border relative overflow-hidden rounded-[28px] border bg-[radial-gradient(circle_at_top_right,hsl(var(--primary)/0.16),transparent_38%)] p-6 md:p-8'>
-          <div className='relative z-10 max-w-2xl'>
-            <div className='text-primary mb-3 flex items-center gap-2 text-xs font-semibold tracking-[0.18em] uppercase'>
-              <LibraryBig className='size-4' />
-              {zh ? '本机创作资产' : 'On-device creative assets'}
+    <div className={embedded ? 'w-full' : 'min-h-[calc(100vh-64px)] w-full px-5 py-6 md:px-8 lg:px-10'}>
+      <div className={embedded ? 'w-full' : 'mx-auto max-w-[1500px]'}>
+        {embedded ? (
+          <header className='border-border bg-card mb-5 rounded-2xl border p-5'>
+            <div className='flex items-start justify-between gap-4'>
+              <div>
+                <div className='text-primary mb-2 flex items-center gap-2 text-xs font-semibold tracking-[0.14em] uppercase'>
+                  <LibraryBig className='size-4' />
+                  {zh ? '历史记录' : 'History'}
+                </div>
+                <h2 className='text-xl font-semibold'>{zh ? '我的素材与作品' : 'My assets and creations'}</h2>
+                <p className='text-muted-foreground mt-2 text-sm leading-6'>
+                  {zh
+                    ? '查看上传过的参考素材和已生成的图片、视频。'
+                    : 'Browse uploaded references and generated images or videos stored by this app.'}
+                </p>
+              </div>
+              <span className='bg-primary/10 text-primary shrink-0 rounded-full px-3 py-1 text-xs font-semibold'>
+                {zh ? `${items.length} 项` : `${items.length} items`}
+              </span>
             </div>
-            <h1 className='text-foreground text-3xl font-semibold tracking-tight md:text-4xl'>
-              {zh ? '素材库' : 'Media library'}
-            </h1>
-            <p className='text-muted-foreground mt-3 max-w-xl text-sm leading-6 md:text-base'>
-              {zh
-                ? '集中查看您上传过的参考素材和已经生成的作品。图片可以直接拖回创作区继续使用。'
-                : 'Find your uploaded references and generated work in one place. Drag images back into a creation form to reuse them.'}
-            </p>
-          </div>
-          <div className='text-muted-foreground relative z-10 mt-6 flex flex-wrap gap-x-5 gap-y-2 text-sm'>
-            <span>{zh ? `共 ${items.length} 项素材` : `${items.length} assets`}</span>
-            <span>
-              {zh
-                ? `${items.filter((item) => item.origin === 'upload').length} 项上传`
-                : `${items.filter((item) => item.origin === 'upload').length} uploads`}
-            </span>
-            <span>
-              {zh
-                ? `${items.filter((item) => item.origin === 'generated').length} 项生成`
-                : `${items.filter((item) => item.origin === 'generated').length} generated`}
-            </span>
-          </div>
-          <div className='border-primary/15 pointer-events-none absolute -top-20 -right-10 size-64 rounded-full border' />
-          <div className='border-primary/10 pointer-events-none absolute top-10 right-28 size-36 rounded-full border' />
-        </header>
+          </header>
+        ) : (
+          <header className='border-border relative overflow-hidden rounded-[28px] border bg-[radial-gradient(circle_at_top_right,hsl(var(--primary)/0.16),transparent_38%)] p-6 md:p-8'>
+            <div className='relative z-10 max-w-2xl'>
+              <div className='text-primary mb-3 flex items-center gap-2 text-xs font-semibold tracking-[0.18em] uppercase'>
+                <LibraryBig className='size-4' />
+                {zh ? '本机创作资产' : 'On-device creative assets'}
+              </div>
+              <h1 className='text-foreground text-3xl font-semibold tracking-tight md:text-4xl'>
+                {zh ? '素材库' : 'Media library'}
+              </h1>
+              <p className='text-muted-foreground mt-3 max-w-xl text-sm leading-6 md:text-base'>
+                {zh
+                  ? '集中查看您上传过的参考素材和已经生成的作品。图片可以直接拖回创作区继续使用。'
+                  : 'Find your uploaded references and generated work in one place. Drag images back into a creation form to reuse them.'}
+              </p>
+            </div>
+            <div className='text-muted-foreground relative z-10 mt-6 flex flex-wrap gap-x-5 gap-y-2 text-sm'>
+              <span>{zh ? `共 ${items.length} 项素材` : `${items.length} assets`}</span>
+              <span>
+                {zh
+                  ? `${items.filter((item) => item.origin === 'upload').length} 项上传`
+                  : `${items.filter((item) => item.origin === 'upload').length} uploads`}
+              </span>
+              <span>
+                {zh
+                  ? `${items.filter((item) => item.origin === 'generated').length} 项生成`
+                  : `${items.filter((item) => item.origin === 'generated').length} generated`}
+              </span>
+            </div>
+            <div className='border-primary/15 pointer-events-none absolute -top-20 -right-10 size-64 rounded-full border' />
+            <div className='border-primary/10 pointer-events-none absolute top-10 right-28 size-36 rounded-full border' />
+          </header>
+        )}
 
-        <section className='mt-6 space-y-4'>
+        <section className={embedded ? 'space-y-4' : 'mt-6 space-y-4'}>
           <div className='flex flex-col gap-3 xl:flex-row xl:items-center xl:justify-between'>
             <div className='flex flex-wrap gap-2'>
               <div className='bg-muted/70 flex rounded-xl p-1'>
@@ -294,7 +316,13 @@ export default function MediaLibrary() {
           </div>
 
           {visibleItems.length ? (
-            <div className='grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4'>
+            <div
+              className={
+                embedded
+                  ? 'grid grid-cols-1 gap-3 sm:grid-cols-2'
+                  : 'grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4'
+              }
+            >
               {visibleItems.map((item) => {
                 const displayName = item.name || (zh ? '未命名素材' : 'Untitled asset');
                 return (
@@ -378,6 +406,6 @@ export default function MediaLibrary() {
       ) : selected ? (
         <MediaPreviewDialog item={selected} onClose={() => setSelected(null)} zh={zh} />
       ) : null}
-    </main>
+    </div>
   );
 }

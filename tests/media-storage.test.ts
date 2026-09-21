@@ -21,13 +21,24 @@ test('web media completion skips native archiving', async () => {
 });
 
 test('archive failures are returned as local state instead of rejecting generation completion', async () => {
+  const logs: Array<{ level: string; scope: string; message: string }> = [];
   const result = await attemptMediaArchive(input, {
     native: true,
     archive: async () => {
-      throw new Error('disk full');
+      throw new Error('error sending request for url (https://assets.example.test/result.png?token=secret)');
+    },
+    log: async (level, scope, message) => {
+      logs.push({ level, scope, message });
     },
   });
   assert.equal(result.status, 'failed');
+  assert.deepEqual(
+    logs.map(({ level, scope }) => ({ level, scope })),
+    [{ level: 'error', scope: 'media-archive' }],
+  );
+  assert.match(logs[0].message, /image task image-task/);
+  assert.match(logs[0].message, /<URL>/);
+  assert.doesNotMatch(logs[0].message, /assets\.example\.test|token=secret/);
 });
 
 test('successful archive returns the native local path', async () => {
