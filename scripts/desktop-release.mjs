@@ -55,14 +55,14 @@ const TARGETS = {
     name: 'macOS Apple Silicon',
     runner: 'macos-15',
     rustTarget: 'aarch64-apple-darwin',
-    bundles: 'dmg',
+    bundles: 'app,dmg',
   },
   'macos-x64': {
     id: 'macos-x64',
     name: 'macOS Intel',
     runner: 'macos-15-intel',
     rustTarget: 'x86_64-apple-darwin',
-    bundles: 'dmg',
+    bundles: 'app,dmg',
   },
   'windows-x64': {
     id: 'windows-x64',

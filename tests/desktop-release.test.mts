@@ -31,18 +31,24 @@ test('desktop release metadata keeps all application versions and tags aligned',
 });
 
 test('manual candidate targets select one platform without changing the release contract', () => {
+  const arm64 = releaseMatrix('macos-arm64');
+  const intel = releaseMatrix('macos-x64');
+  const windows = releaseMatrix('windows-x64');
   assert.deepEqual(
-    releaseMatrix('macos-arm64').map((entry) => entry.id),
+    arm64.map((entry) => entry.id),
     ['macos-arm64'],
   );
   assert.deepEqual(
-    releaseMatrix('macos-x64').map((entry) => entry.id),
+    intel.map((entry) => entry.id),
     ['macos-x64'],
   );
   assert.deepEqual(
-    releaseMatrix('windows-x64').map((entry) => entry.id),
+    windows.map((entry) => entry.id),
     ['windows-x64'],
   );
+  assert.equal(arm64[0].bundles, 'app,dmg');
+  assert.equal(intel[0].bundles, 'app,dmg');
+  assert.equal(windows[0].bundles, 'nsis');
   assert.throws(() => releaseMatrix('linux-x64'), /Unsupported desktop release target/);
 });
 
