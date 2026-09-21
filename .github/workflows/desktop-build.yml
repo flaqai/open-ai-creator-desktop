@@ -141,6 +141,7 @@ jobs:
           pnpm exec tauri build --ci --no-sign --target ${{ matrix.rustTarget }} --bundles ${{ matrix.bundles }}
 
       - name: Normalize candidate filenames
+        shell: bash
         env:
           CANDIDATE_TARGET: ${{ matrix.id }}
           RUST_TARGET: ${{ matrix.rustTarget }}
