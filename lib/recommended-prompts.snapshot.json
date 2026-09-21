@@ -1,0 +1,302 @@
+{
+  "version": 1,
+  "snapshotDate": "2026-09-20",
+  "collections": [
+    {
+      "id": "qwen-image-3-0",
+      "model": "Qwen Image 3.0",
+      "type": "image",
+      "sourceUrl": "https://flaq.ai/awesome-prompt/qwen-image-3-0-prompts/",
+      "toolHref": "/text-to-image",
+      "description": {
+        "zh": "图像生成与视觉设计提示词合集",
+        "en": "Image generation and visual design prompt collection"
+      },
+      "prompts": [
+        {
+          "id": "qwen-image-3-0-01",
+          "title": "Qwen Image 3.0 Example 1",
+          "prompt": "Cozy Aesthetic Girl in Park + Cozy Reading & Coffee Setup: Aesthetic lifestyle photography of a cute young woman sitting on a wooden park bench during autumn morning, wearing an oversized beige hoodie, white pants, and cream baseball cap, holding a takeaway coffee cup with eyes closed and peaceful smile, soft natural lighting, warm earthy tones, tote bag with kawaii face design beside her, bouquet of baby's breath flowers, cozy calm vibe, cinematic depth of field, Pinterest aesthetic, soft brown and beige color palette. Add hand-drawn white doodles around the image including hearts, sparkles, arrows, clouds, smiley faces, and handwritten text like “coffee = my love”, “good morning”, “little things”, “Focus Believe Achieve”. Whimsical scrapbook style overlay, dreamy cozy mood, ultra detailed, realistic photography, Instagram aesthetic, soft shadows, candid composition. Also show a warm cozy morning aesthetic near a window with an open book beside a cup of coffee and lit candle, soft sunlight entering through the window, baby's breath flowers in a glass vase, beige and cream minimal decor, calming self-care atmosphere, soft fabric textures, neutral warm tones, peaceful hygge mood, cinematic lifestyle photography, Pinterest-inspired cozy setup, realistic details, shallow depth of field. Add cute white hand-drawn doodles and kawaii faces on the mug, candle, and vase, with handwritten notes like “Take time to make your soul happy”, “Cozy mood”, “little things”, “Book + coffee = perfect day”, plus hearts, arrows, sparkles, and cloud doodles. Dreamy soft aesthetic, warm natural glow, highly detailed, relaxing cozy-core vibe.",
+          "media": {
+            "type": "image",
+            "image": "/images/recommended-prompts/qwen-image-3-0/01.webp"
+          }
+        },
+        {
+          "id": "qwen-image-3-0-02",
+          "title": "Qwen Image 3.0 Example 2",
+          "prompt": "Input A is a famous dish. Study its origin, credited creator, preparation ritual, cultural importance, and core ingredients. Optional Input B is style reference. Default: cinematic still meets gourmet collectible. Goal: Transparent acrylic cube staged as a single frozen frame from an imagined biographical film about the dish’s creation. Center: the inventor dramatically preparing the dish under theatrical miniature lighting, mid-gesture, with steam or flame effects. Surrounding compartments contain ingredients arranged as film props (close-ups of herbs, spices, vessels). Background subtly recreates the historical kitchen or street setting with tiny architectural details made from food. Include a tiny clapperboard or film reel element showing the dish name and origin year. Color palette drawn from classic cinema posters of the origin country. Bilingual title in period-appropriate font. Output: ONE image, 1:1 horizontal, moody cinematic lighting with high contrast and subtle lens flare.",
+          "media": {
+            "type": "image",
+            "image": "/images/recommended-prompts/qwen-image-3-0/02.webp"
+          }
+        },
+        {
+          "id": "qwen-image-3-0-03",
+          "title": "Qwen Image 3.0 Example 3",
+          "prompt": "A high-impact, cinematic sports advertising poster featuring a young European female athlete crouching dynamically on a professional red running track inside a large open-air stadium. She is wearing a bold yellow Adidas tracksuit with iconic white three-stripe detailing on the sleeves and pants, paired with a black smartwatch. Her expression is confident and composed, gazing directly into the camera with a slight forward lean. The hero product is a vibrant yellow Adidas ZoomX-style high-performance running shoe with a chunky foam midsole, dark olive Adidas trefoil/stripe logo on the side, and a multicolored gradient (magenta, purple, dark blue) on the sole unit, placed in extreme foreground close-up and dominating the lower half in sharp focus while the athlete is rendered in medium depth behind it. Wide athletic stadium with tiered concrete bleachers, tall stadium floodlights, partly cloudy dramatic sky with soft sunlight, and faint background athletes on the track. Typography reads “Own the Track”, “the”, “Engineered for speed, built to dominate every stride.”, and “Lightweight · Track Grip · Breathable Mesh · Speed Design”, with a white Adidas logo in the top-right. Natural bright daylight with soft fill, high contrast, vibrant warm-yellow color grading, commercial product photography meets athletic lifestyle campaign, hyper-realistic, ultra-sharp, 4K, shallow depth of field on the shoe, 16:9.",
+          "media": {
+            "type": "image",
+            "image": "/images/recommended-prompts/qwen-image-3-0/03.webp"
+          }
+        },
+        {
+          "id": "qwen-image-3-0-04",
+          "title": "Qwen Image 3.0 Example 4",
+          "prompt": "Ultra-realistic FIFA World Cup Final live broadcast at a massive floodlit stadium at night. Use the uploaded image only as inspiration for stadium atmosphere, crowd density, sports broadcast framing, cinematic lighting, and telephoto camera style. Authentic FIFA World Cup television broadcast with live scorebug, running match clock, LIVE indicator, sports ticker, subtle TV grain, chromatic aberration, HD compression artifacts, LED reflections, realistic crowd atmosphere. 0:00–0:04 the woman sits beside her boyfriend near the front-row pitch barrier, laughing and talking naturally while stadium chants echo; wind moves her balayage lob under floodlights. 0:04–0:07 a football deflects toward the crowd; nearby fans react in shock and she notices it. 0:07–0:10 she catches it while seated; her boyfriend reacts with disbelief and excitement; commentators shout “WHAT A CATCH!” 0:10–0:15 she climbs over the advertising barrier, lands elegantly on the pitch, and begins lightly dribbling as broadcast cameras follow. 0:15–0:19 she controls the ball, performs a body feint, and dodges a defender while grass particles rise. 0:19–0:23 dynamic live-broadcast cuts show a step-over, nutmeg, heel-tap direction change, and quick acceleration burst; players react with surprise while the crowd erupts.",
+          "media": {
+            "type": "image",
+            "image": "/images/recommended-prompts/qwen-image-3-0/04.webp"
+          }
+        },
+        {
+          "id": "qwen-image-3-0-05",
+          "title": "Qwen Image 3.0 Example 5",
+          "prompt": "Create a premium 1:1 luxury fashion collage advertisement featuring the same beautiful college girl in multiple portrait styles in one image composition: a soft cinematic close-up, trendy Korean campus look, candid walking shot with handbag, luxury editorial studio pose, and playful Gen-Z selfie frame. Keep the same character identity, with soft glowing skin, natural beauty, expressive eyes, fashionable college outfits, and a luxury pink designer handbag in every frame. High-end fashion magazine collage with asymmetrical composition, overlapping frames, torn paper effects, glossy textures, reflections, fashion graphics, and premium advertising elements. Dreamy pink tones, cinematic lighting, shallow depth of field, soft shadows, luxury atmosphere, modern graphic design. Huge bold typography integrated into the background: “PINK ERA”, “ICONIC”, “CAMPUS LUXE”, and “FASHION”. Expensive luxury brand campaign mixed with Vogue editorial design, ultra-realistic, highly detailed, cinematic color grading, 8K.",
+          "media": {
+            "type": "image",
+            "image": "/images/recommended-prompts/qwen-image-3-0/05.webp"
+          }
+        },
+        {
+          "id": "qwen-image-3-0-06",
+          "title": "Qwen Image 3.0 Example 6",
+          "prompt": "A young boy sitting on a stool, wearing a beige hoodie and black pants, calm confident expression, surrounded by multiple cute mini cartoon versions of himself in different poses (sitting, climbing rope, taking photos, waving using phone), warm yellow-orange gradient background, modern motivational poster style, soft cinematic lighting, highly detailed face, 3D cartoon characters, depth of field, aesthetic composition, books stacked beside him for a self-improvement theme, notebook on floor.",
+          "media": {
+            "type": "image",
+            "image": "/images/recommended-prompts/qwen-image-3-0/06.webp"
+          }
+        },
+        {
+          "id": "qwen-image-3-0-07",
+          "title": "Qwen Image 3.0 Example 7",
+          "prompt": "Cinematic night-time selfie of a young European woman riding through a city, shot from a low wide-angle perspective. Soft, dreamy motion blur with long light trails from streetlights and traffic creating a cyberpunk glow. Neon blue, teal, and warm amber lights streak across the background. Shallow depth of field, slightly grainy film texture, subtle chromatic aberration. Natural makeup, loose hair flowing in the wind, calm and introspective expression. Urban nightlife atmosphere, moody and ethereal, analog photography feel, high contrast lighting, artistic street photography, 35mm film look.",
+          "media": {
+            "type": "image",
+            "image": "/images/recommended-prompts/qwen-image-3-0/07.webp"
+          }
+        },
+        {
+          "id": "qwen-image-3-0-08",
+          "title": "Qwen Image 3.0 Example 8",
+          "prompt": "Don’t alter my facial feature. Create me a wide editorial shot of a girl leaning dramatically across a cluttered floor/desk in a chaotic Y2K cyber-pop room, low front-facing angle with cinematic framing. Moody cool-toned lighting mixed with warm highlights, glossy flash photography feel, dreamy magazine-editorial atmosphere. Long sleek jet-black hair with center part, soft pale glam makeup, subtle blush, glossy gradient red lips, large doll-like eyes with soft eyeliner and lashes. Red fitted tank top and dark mini skirt, colorful manicure, slightly messy dramatic pose with arms stretched forward, intense direct gaze at camera. Surrounding scene filled with scattered random objects, cables, gadgets, accessories, glittery props, and bedroom clutter for a chaotic pop-girl aesthetic. Collage-style edit layered with floating heart gems, cut-out eyes, sticker elements, scrapbook graphics, fake text-message popups, polaroid frames, magazine cutout of the girl, bold typography overlays, hyperpop/K-pop editorial vibe, nostalgic Y2K internet aesthetic, glossy fashion-campaign energy. Scale ratio 4:3",
+          "media": {
+            "type": "image",
+            "image": "/images/recommended-prompts/qwen-image-3-0/08.webp"
+          }
+        }
+      ]
+    },
+    {
+      "id": "wan-3-0",
+      "model": "Wan 3.0",
+      "type": "video",
+      "sourceUrl": "https://flaq.ai/awesome-prompt/wan-3-0-prompts/",
+      "toolHref": "/text-to-video",
+      "description": {
+        "zh": "视频叙事与电影镜头提示词合集",
+        "en": "Video storytelling and cinematic prompt collection"
+      },
+      "prompts": [
+        {
+          "id": "wan-3-0-01",
+          "title": "The Unsent Letter on the Last Ferry",
+          "prompt": "15 seconds, 2.39:1, restrained realist cinema at a winter harbor at night. Identity lock: a 28-year-old woman with shoulder-length black hair, faint freckles across her nose, a dark gray wool coat, and an old silver ring on her right hand. Keep the same face and wardrobe in every shot.\n\n0–4 seconds: Static medium shot in an empty lower-deck ferry cabin. She sits by the window pressing an unstamped letter under her palm. Harbor lights sway with the vessel and rain runs backward across the glass.\n\n4–9 seconds: Slide slowly along the table into a profile close-up. An announcement says the ferry will soon return. She looks toward the small red shape of a mailbox on the opposite shore but says nothing.\n\n9–15 seconds: Cut to the stern without crossing the axis. She runs from the cabin, stops at the railing, and places the letter back inside her coat instead of throwing it into the sea. Pull back as the ferry leaves the pier.\n\nSound: diesel engine, rain on glass, hydraulic door, quiet announcement, then only the wake. No music, subtitles, crying, slow-motion running, face changes, or sudden extra passengers.",
+          "media": {
+            "type": "image",
+            "image": "/images/recommended-prompts/wan-3-0/01.webp"
+          }
+        },
+        {
+          "id": "wan-3-0-02",
+          "title": "The Bakery After the Blackout",
+          "prompt": "10 seconds, 16:9, warm slice-of-life cinema. A storm causes a neighborhood blackout inside a small bakery. A 58-year-old shop owner with short gray hair and a dark green apron stands across the counter from a nine-year-old boy carrying a yellow schoolbag. Keep their identities, apron, and bag consistent.\n\n0–3 seconds: The lights go out and the oven fan stops. Only blue-gray lightning outlines the room. Both freeze; the boy holds his paper bag close.\n\n3–7 seconds: The owner strikes one match, lights a small counter candle, and slides a fresh round loaf toward the boy. Rack focus slowly from the flame to their faces as warm light builds.\n\n7–10 seconds: The boy breaks the loaf in half and offers the larger piece back. She pauses for 0.4 seconds, then smiles. Power returns along the street outside, but the bakery remains primarily candlelit. End on their hands and the bread steam.\n\nSound: rain, power cut, match strike, bread crust, and distant cheers. No dialogue, subtitles, brands, changing candle position, restored loaf, or altered ages.",
+          "media": {
+            "type": "image",
+            "image": "/images/recommended-prompts/wan-3-0/02.webp"
+          }
+        },
+        {
+          "id": "wan-3-0-03",
+          "title": "Three Seconds Too Late on the Platform",
+          "prompt": "12 seconds, 2.39:1, modern urban mystery at a terminal metro station in the early morning. Identity locks: a male reporter in a sand trench coat holding a folded newspaper in his left hand; a female station worker in a navy uniform with a blank name badge.\n\n0–3 seconds: Ultra-wide empty platform as a passengerless train prepares to close. Track low and parallel as the reporter runs from deep background, leaving continuous wet footprints.\n\n3–6 seconds: The doors close in front of him. Inside, a man with the exact same face but a black coat raises his hand in sync behind the glass. Keep the image stable and avoid horror distortion.\n\n6–9 seconds: The train starts moving, but the duplicate remains in place like a reflection for half a second before being carried away. The reporter steps back and drops the newspaper.\n\n9–12 seconds: The station worker enters foreground and picks it up. Its layout suggests tomorrow's date without requiring readable text. Push slowly toward her confused eyes as tunnel wind lifts one page corner.\n\nSound: door tone, footsteps, train acceleration, paper impact, one low sustained note. No gore, monsters, garbled headlines, or axis violations.",
+          "media": {
+            "type": "image",
+            "image": "/images/recommended-prompts/wan-3-0/03.webp"
+          }
+        },
+        {
+          "id": "wan-3-0-04",
+          "title": "Kitchen to Cosmos Match Transition",
+          "prompt": "8 seconds, 9:16, poetic vertical short using one natural occlusion to move from reality into imagination. In a small kitchen at night, a 12-year-old girl in loose white pajamas places blueberries in a glass bowl. Her father appears only as hands with dark blue sweater cuffs.\n\n0–3 seconds: Overhead macro. The final blueberry rolls once around the bowl edge and stops. The father pours milk slowly from above frame until white liquid covers the lens.\n\n3–5 seconds: As milk fully occludes the view, transform it seamlessly into a milky-white nebula while the blueberries become deep blue planets. Maintain position and motion direction as the camera continues downward.\n\n5–8 seconds: The nebula returns gradually to the breakfast bowl. The girl stirs once, dawn appears at the window, and she looks toward her father and smiles without revealing his face.\n\nUse blue, milk white, and dawn gold. Bridge pouring sound into a low cosmic ambience, then return to a spoon touching glass. No dialogue, text, hard cuts, astronauts, or changes to the kitchen layout.",
+          "media": {
+            "type": "image",
+            "image": "/images/recommended-prompts/wan-3-0/04.webp"
+          }
+        },
+        {
+          "id": "wan-3-0-05",
+          "title": "The Umbrella Left at Dawn",
+          "prompt": "Create a 12-second quiet story at a city bus stop just after rain. A delivery rider in a faded green jacket notices a red umbrella left beneath the bench as an elderly passenger boards a departing bus. Track from the wet pavement to the umbrella, hold as the rider looks between it and the bus, then follow him running only a few steps and passing it through the closing door. Preserve faces, clothing, bus direction, umbrella color, and street layout. End with the rider reflected in the bus window as it leaves. Sound: rain drip, idling engine, door warning, footsteps. No dialogue, heroic slow motion, extra passengers, changing props, text, or watermark.",
+          "media": {
+            "type": "image",
+            "image": "/images/recommended-prompts/wan-3-0/05.webp"
+          }
+        },
+        {
+          "id": "wan-3-0-06",
+          "title": "Desert Radio Signal",
+          "prompt": "10 seconds, restrained near-future science fiction in a desert research cabin at sunset. A field engineer wearing a sand-colored utility suit adjusts one analog radio while a narrow antenna turns outside the window. Start with a macro of the frequency needle, pull back to reveal the engineer, then let a repeating signal synchronize with distant lights appearing one by one across the horizon. Keep the radio geometry, hand position, cabin layout, horizon, and wardrobe consistent. The engineer stays calm and records the pattern on blank graph paper. Sound: static, three clean tones, wind, pencil. No aliens, holograms, readable writing, equipment morphing, lens explosions, or watermark.",
+          "media": {
+            "type": "image",
+            "image": "/images/recommended-prompts/wan-3-0/06.webp"
+          }
+        },
+        {
+          "id": "wan-3-0-07",
+          "title": "Apartment Seasons Window Match",
+          "prompt": "Create a 12-second locked-camera transition through four seasons in the same small apartment. The composition never changes: one window, wooden table, blue chair, ceramic plant pot, and a young adult reading in profile. Move from spring rain to summer afternoon, autumn leaves, and winter snow using natural occlusion as the reader turns one page at each transition. Preserve identity, pose progression, furniture geometry, book size, and camera height. Only wardrobe layers, exterior weather, plant growth, and motivated light may change. Sound should blend rain, insects, leaves, and muted snow ambience. No time-lapse flicker, room redesign, duplicated objects, text, or watermark.",
+          "media": {
+            "type": "image",
+            "image": "/images/recommended-prompts/wan-3-0/07.webp"
+          }
+        },
+        {
+          "id": "wan-3-0-08",
+          "title": "One Take Through the Theater",
+          "prompt": "Create a 15-second continuous take through an old theater five minutes before opening. Begin behind a stagehand carrying one coil of rope, pass through the wing as two performers cross in opposite directions, follow a warm practical light into the auditorium, and end facing the curtain as it begins to rise. Maintain the stagehand's identity, rope, performer costumes, architecture, screen direction, and plausible walking speed. Camera movement should be smooth but human, with natural focus transitions and no hidden teleport cuts. Sound: footsteps, rope fibers, distant tuning, audience murmur, curtain mechanism. No changing faces, duplicated crew, impossible corridors, readable posters, or watermark.",
+          "media": {
+            "type": "image",
+            "image": "/images/recommended-prompts/wan-3-0/08.webp"
+          }
+        }
+      ]
+    },
+    {
+      "id": "minimax-h3",
+      "model": "MiniMax H3",
+      "type": "video",
+      "sourceUrl": "https://flaq.ai/awesome-prompt/minimax-h3-prompts/",
+      "toolHref": "/text-to-video",
+      "description": {
+        "zh": "人物表演与商业视频提示词合集",
+        "en": "Character performance and commercial video prompt collection"
+      },
+      "prompts": [
+        {
+          "id": "minimax-h3-01",
+          "title": "Beauty Serum Bathroom Vlog",
+          "prompt": "Cinematic vertical 9:16 beauty vlog style, 4k resolution, ultra-realistic textures, clean lighting, and smooth camera stabilization. Scene & Timeline Choreography 00:00 - 00:02 Visual: A young woman with short, platinum-blonde hair and a glowing complexion looks directly into the camera with an excited expression inside a bright, modern white-tiled bathroom while holding a small yellow rubber duck under her chin. Voice Over: (Playful, surprised intake of breath or light chuckle) 00:02 - 00:05 Visual: She smiles warmly while looking down at the yellow rubber duck in her hand, then looks back up toward the camera with a playful expression. Voice Over: \"Okay, wait...\" 00:05 - 00:07 Visual: She brings a bottle of orange skincare serum up close to the camera, showcasing the label clearly while speaking with an enthusiastic expression. Voice Over: \"I literally cannot believe how good this is.\" 00:07 - 00:08 Visual: A close-up shot of her hands dispensing a drop of the translucent, glossy serum onto her fingertip and rubbing it gently against her palm. Voice Over: (Soft ambient bathroom sounds / gentle product texture application) 00:08 - 00:10 Visual: Close-up of her face as she gently pats and applies the serum onto her cheek, highlighting her radiant skin and smooth application. Voice Over: \"Look how it just melts in...\" 00:10 - 00:13 Visual: Medium shot showing her full outfit—an off-the-shoulder white long-sleeve top, dark brown leather shorts, and white thigh-high stockings—standing by the bathroom counter with plants and a towel, gently touching her glowing cheek. Voice Over: \"...my skin already feels insane.\" 00:13 - 00:15 Visual: She holds up the orange serum bottle again, flashing a wide, radiant smile directly at the camera while speaking excitedly. Voice Over: \"Okay, I'm obsessed. I'm not going back!\"",
+          "media": {
+            "type": "video",
+            "image": "/images/recommended-prompts/minimax-h3/01.webp",
+            "url": "https://cdn.flaq.ai/flaq/awesome_prompt/minimax_h3/example/1.mp4"
+          }
+        },
+        {
+          "id": "minimax-h3-02",
+          "title": "Pirates Meet Their Match",
+          "prompt": "[Style + Lens + Atmosphere] Rugged and realistic live-action film shots, full HD, photo-realistic, open sea under natural daylight, handheld camera with slight natural shake, authentic film grain, pure live-action energy. [Image Reference] Use the provided photo as the strict facial, bald head, dense black beard, facial structure, and stocky body reference for the main pirate. Keep his exact portrait. Only have him wear rough classic pirate clothing. [Timeline by seconds] 0-3 seconds: [Medium close-up] Bald pirate on his deck, face full of pure malice, shouting loudly and fiercely pointing at the nearby merchant ship. Strong commanding energy. Handheld shot. 3-6 seconds: [Dynamic wide-angle tracking] Boarding action erupts. Pirates sway and leap onto the deck of another ship, chaotic real action. Camera follows with natural shake and motion blur. 6-8 seconds: [Wide shot] Pirates freeze. Elderly ladies calmly sitting on the deck knitting, completely unmoved. 8-10 seconds: [Close-up] One old lady looks up, making the exact \"Oh, damn, here we go again\" expression—an exasperated eye roll, tired smirk. 10-13 seconds: [Handheld action] The old ladies burst out: fierce slaps, kicks, punches. Real impact effects, bodies responding with real weight. Chaotic handheld shot, strong motion blur. 13-15 seconds: [Medium wide shot] All other pirates fall. Bald pirate alone, tightly surrounded by the advancing old ladies. Shock filled on his face. Final tense freeze frame. [Style and Quality Enhancement] Photo-realistic live-action full HD, heavy natural film grain, detailed textures, perfect real-world physics and impact effects, coherent faces, stable portraits, cinematic lighting, pure cinematic realism.",
+          "media": {
+            "type": "video",
+            "image": "/images/recommended-prompts/minimax-h3/02.webp",
+            "url": "https://cdn.flaq.ai/flaq/awesome_prompt/minimax_h3/example/2.mp4"
+          }
+        },
+        {
+          "id": "minimax-h3-03",
+          "title": "Summer Beverage Campaign",
+          "prompt": "Create a premium beverage commercial featuring Luna, a photorealistic 24-year-old woman with long honey-brown wavy hair, radiant skin, expressive hazel eyes, and a bright natural smile. She wears a fitted white crop top, high-waisted light blue denim shorts, white sneakers, layered gold necklaces, and stylish sunglasses resting on her head. Bright tropical summer atmosphere, premium commercial quality, vibrant citrus color palette, ultra-realistic lifestyle storytelling, cinematic camera work. The video opens with Luna already on screen, relaxing on the hood of a vintage yellow convertible parked beside a beach road. She catches an ice-cold Fanta tossed from off-camera, smiles, and says, \"Summer starts now!\" She flips the can playfully before popping it open. Crisp fizz escapes as sunlight glistens across the chilled aluminum. Macro close-ups showcase sparkling condensation, vibrant orange bubbles, and refreshing citrus slices splashing through the air as Luna enjoys her first sip. The scene shifts to a lively beach volleyball court where she joins friends for a fun match. Between plays, everyone grabs ice-cold Fanta cans from a cooler, laughing and celebrating every point. As golden hour arrives, Luna and her friends gather around a retro food truck serving burgers and fries. They share food, toast their Fanta cans together, and dance to live street musicians nearby while colorful lights begin glowing overhead. The final sequence takes place on the beach at sunset. Friends light sparklers, laugh around a bonfire, and run toward the shoreline. Luna raises her chilled Fanta toward the camera and smiles, Luna: \"Taste the sunshine!\" The camera pulls back to reveal the glowing beach, crashing waves, warm sunset sky, and joyful summer celebration. Premium beverage advertising, cinematic lifestyle photography, realistic water and lighting effects, smooth gimbal movements, shallow depth of field, vibrant orange tones, ultra-realistic commercial quality, 4K HDR, 16:9 wides",
+          "media": {
+            "type": "video",
+            "image": "/images/recommended-prompts/minimax-h3/03.webp",
+            "url": "https://cdn.flaq.ai/flaq/awesome_prompt/minimax_h3/example/3.mp4"
+          }
+        },
+        {
+          "id": "minimax-h3-04",
+          "title": "Balcony Plant-Care Vlog",
+          "prompt": "15-second cinematic 16:9 cozy plant-care mini-DV vlog. Preserve the same young man, apron, cramped plant, empty larger pot and warm balcony table; use slight hand shake, gentle focus hunting, tape grain and authentic ASMR. 0-3s — He smiles at camera, pulls on gloves and opens the soil bag. Quietly: “This one needs more room.” 3-6s — Overhead cut. He scoops soil into the empty larger pot, then loosens the plant from its old pot. Soil grains, pot scrape and leaf rustle are clear; one small spill remains on the newspaper. 6-10s — Close detail. He settles the intact root ball into the new pot, fills the sides and pats the soil level. He trims one dry leaf with a single clean snip. 10-13s — He writes a short date on the blank label, inserts it and waters slowly until the soil darkens without overflowing. 13-15s — Propped medium shot. He sets the finished plant beside the others, smiles, then reaches toward the lens. Natural body language and imperfect framing. No duplicate plant, changing pot, severed roots, extra hands, captions or watermark.",
+          "media": {
+            "type": "video",
+            "image": "/images/recommended-prompts/minimax-h3/04.webp",
+            "url": "https://cdn.flaq.ai/flaq/awesome_prompt/minimax_h3/example/4.mp4"
+          }
+        },
+        {
+          "id": "minimax-h3-05",
+          "title": "Fanta Summer Commercial",
+          "prompt": "Use the uploaded reference image as the strict character, wardrobe, and styling reference. Create a continuous 15-second premium Fanta summer commercial featuring Luna. Use the reference image as the strict identity and styling guide: preserve her exact face, honey-brown wavy hair, hazel eyes, radiant skin, bright natural smile, white crop top, light-blue denim shorts, white sneakers, layered gold necklaces, sunglasses, yellow vintage convertible, and orange Fanta can. Never output a still image or storyboard layout. [0:00–0:04] Beach road in bright tropical daylight. Luna relaxes on the hood of the yellow convertible, catches an ice-cold Fanta tossed from off-camera, smiles and says, “Summer starts now!” She flips the can and pops it open; crisp fizz bursts out and sunlight glints across condensation. [0:04–0:07] Macro sensory montage: chilled aluminum, sparkling droplets, orange bubbles, citrus slices splashing, then Luna takes a refreshing sip. [0:07–0:10] Smooth gimbal move through a lively beach-volleyball game. Luna and friends celebrate a point, grab cold Fanta cans from a cooler, and laugh together. [0:10–0:13] Golden hour at a retro food truck: burgers and fries, friends toast cans, colorful bulbs glow, street musicians play, and everyone dances. [0:13–0:15] Sunset beach and bonfire. Sparklers glow as Luna raises her chilled can toward camera and says, “Taste the sunshine!” Camera pulls back to reveal friends, crashing waves, and the warm horizon. Photorealistic lifestyle advertising, vibrant citrus-orange palette, natural performances, stable faces and product shape, readable authentic Fanta branding, realistic liquid and lighting, shallow depth of field, smooth cinematic movement, upbeat summer music, crisp dialogue, 4K HDR, 16:9. No subtitles, added text, watermarks, or duplicate people.",
+          "media": {
+            "type": "video",
+            "image": "/images/recommended-prompts/minimax-h3/05.webp",
+            "url": "https://cdn.flaq.ai/flaq/awesome_prompt/minimax_h3/example/5.mp4"
+          }
+        },
+        {
+          "id": "minimax-h3-06",
+          "title": "Live-Action Pirate Comedy",
+          "prompt": "Use the uploaded reference image as the strict character reference. Create a continuous 15-second photorealistic live-action pirate comedy on the open sea. Use the supplied portrait as the strict identity reference for the lead pirate: preserve his exact bald head, dense black beard, facial structure, scars, eyes, and stocky build. Dress him only in rough classic pirate clothing. Do not output a portrait or storyboard page. [0:00–0:03] Medium close-up on his ship deck. Full of malice, he roars an order and fiercely points toward a nearby merchant ship. Handheld camera, commanding energy. [0:03–0:06] Dynamic wide tracking shot: his pirates swing on ropes and leap aboard the merchant vessel. Chaotic real action, natural camera shake and motion blur. [0:06–0:08] Wide reveal: the attackers freeze. A group of elderly ladies sits calmly on deck knitting, completely unmoved. [0:08–0:10] Close-up: one old lady looks up with an exhausted eye roll and tired, knowing smirk—“here we go again” energy, without dialogue or text. [0:10–0:13] The ladies erupt into action with fierce slaps, kicks, and punches. Comedic but physically convincing impacts; bodies react with real weight. Chaotic handheld coverage. [0:13–0:15] Medium-wide shot: every pirate is down except the bald captain, now tightly surrounded by advancing old ladies. His face turns from rage to shock. End on a tense freeze frame. Natural daylight, rugged period textures, realistic ocean and ship physics, coherent faces, stable lead identity, detailed skin and fabric, cinematic exposure, authentic film grain, 4K live action, 16:9. No gore, captions, subtitles, watermarks, or extra limbs.",
+          "media": {
+            "type": "video",
+            "image": "/images/recommended-prompts/minimax-h3/06.webp",
+            "url": "https://cdn.flaq.ai/flaq/awesome_prompt/minimax_h3/example/6.mp4"
+          }
+        }
+      ]
+    },
+    {
+      "id": "seedance-2-5",
+      "model": "Seedance 2.5",
+      "type": "video",
+      "sourceUrl": "https://flaq.ai/awesome-prompt/seedance-2-5-prompts/",
+      "toolHref": "/text-to-video",
+      "description": {
+        "zh": "镜头语言与动态创意提示词合集",
+        "en": "Camera language and motion design prompt collection"
+      },
+      "prompts": [
+        {
+          "id": "seedance-2-5-01",
+          "title": "Backstage Day-in-the-Life Montage",
+          "prompt": "Use the uploaded reference image of the woman as a locked character reference. CAMERA: Handheld DV 16mm camcorder aesthetic. She records herself throughout, mostly holding camera, occasional hands-free. Natural hand tremors, crooked framing, slow autofocus, awkward zooms, accidental face crops, brief framing losses. Camcorder never visible. LOOK: Soft tape texture, mild blur, electronic grain, glowing highlights, auto-exposure fluctuations, restrained contrast, natural skin tones. Lighting: warm morning apartment → cooler van daylight → intense colorful backstage/stage. STYLE: Fast energetic day-in-life montage, sharp cuts, accelerated transitions. Reflective VO over footage (no sync dialogue). Pace builds from sleepy morning to high-energy finale. Character: Young beautiful white woman, 20s. Long glossy dark-brown hair, striking features, large eyes, glowing skin, soft pink lips. Slim toned figure. Outfits change: cozy loungewear home, stylish casual in van, glamorous stage look. All fully cover arms/torso. Settings: Stylish apt bedroom morning → luxury van day → busy backstage + concert stage night. Storyboard 15s, 5 cuts: (~3s bedroom, cam on table, soft morning light) Sits up slowly, stretches, fixes messy hair, packs bag. VO: “Some mornings begin before I’m even fully awake.” (~3s van, handheld selfie, window light) By window, sunlight on face, checks phone. VO: “I spend so much time on the road, this place almost feels like home.” (~3s van macro) Close-up fingers choosing song, sunlight flickers on screen/hand. Road noise only. (~3s backstage, fast handheld) Makeup, hair, costume, staff rushing, focused breath. VO: “And then everything suddenly starts moving at once.” (~3s stage, wide to close-up) Lights ignite, steps through curtains, silhouette then confident smile, cut to black. VO: “This moment is why I keep doing it.”",
+          "media": {
+            "type": "video",
+            "image": "/images/recommended-prompts/seedance-2-5/01.webp",
+            "url": "https://cdn.flaq.ai/flaq/awesome_prompt/seedance_2_5/example/1.mp4"
+          }
+        },
+        {
+          "id": "seedance-2-5-02",
+          "title": "Morning Dog Walk Vlog",
+          "prompt": "Use the uploaded reference image of the woman as a locked character reference. Handheld DV 16mm daily vlog, camera never visible. Start in selfie mode at arm’s length as Emma exits her apartment with her golden retriever. Keep the first 20–30 seconds entirely handheld; later set it on a park bench or low wall for wide shots. Imperfect operation: subtle shake, drifting composition, autofocus hunting, rushed reframing, uneven zoom, exposure breathing, occasional face crop and natural motion blur. EMMA: white woman, mid-20s, long light-brown messy ponytail, green eyes, minimal makeup, oversized gray hoodie, black biker shorts, white sneakers, small crossbody bag. Warm analog tape texture, gentle grain, soft sharpness, sunlight halation, realistic skin, low contrast, tiny exposure shifts. Sunny quiet suburb: tree-lined sidewalks, homes, birds, a small green park, few people, golden morning light. Selfie: the excited dog pulls Emma outside. She smiles: “Good morning.” “Someone couldn't wait.” On the sidewalk the dog sniffs every tree; she laughs, adjusts the leash: “He has to inspect every single tree.” Still handheld entering the park, the dog freezes on a squirrel. Emma shakes her head: “Oh... there we go.” After the handheld opening, she sets the camera on a bench, throws a tennis ball and the dog races after it: “Worth waking up early.” She picks it up, walks beneath the trees, brushes back her hair and looks up: “It's actually really peaceful out here.” The dog returns but drops the ball halfway; she laughs: “Close enough.” On the bench, the dog lies beside her; she scratches behind his ears: “I think he's happier than I am.” Walking home in selfie mode: “Coffee is definitely next.” She smiles into the lens: “See you later,” waves, and ends recording. Audio: birds, leash jingle, footsteps, dog panting, quiet neighborhood. Authentic spontaneous lifestyle vlog, not polished advertising; stable character, dog and wardrobe. No text, subtitles, logos, watermarks, extra people, visible camera, or artifacts.",
+          "media": {
+            "type": "video",
+            "image": "/images/recommended-prompts/seedance-2-5/02.webp",
+            "url": "https://cdn.flaq.ai/flaq/awesome_prompt/seedance_2_5/example/2.mp4"
+          }
+        },
+        {
+          "id": "seedance-2-5-03",
+          "title": "Iced Coffee UGC Commercial",
+          "prompt": "Create a 15-second vertical 16:9 premium UGC iced-coffee commercial. Use the uploaded reference image as the exact woman in every shot; preserve her identity perfectly with natural expressions, realistic hands and no face drift. Use the same iced-coffee bottle throughout with identical branding, label, colors, packaging and cap. Setting: a warm modern apartment with soft window light, wooden surfaces, neutral cozy décor, realistic reflections, shallow depth of field, cinematic commercial lighting and luxury café color grading. Premium photorealistic coffee, ice, milk swirls and condensation. Smooth handheld/gimbal movement, quick elegant cuts. TIMELINE: 0.0–1.5s — Close-up: she smiles directly at camera, holding the chilled bottle beside her face with an excited, natural presentation. 1.5–2.7s — Clean macro: bottle standing on a wooden table; condensation beads, premium label sharp and clear. 2.7–3.7s — Extreme macro: hand slowly twists the cap open; satisfying opening motion, fresh droplets. 3.7–5.7s — Cinematic macro: rich iced coffee pours over crystal-clear ice; ice gently clinks. 5.7–7.0s — Close-up inside glass: milk blends into smooth, elegant marbled coffee swirls. 7.0–8.8s — She takes a refreshing sip, briefly closes her eyes, then smiles naturally. 8.8–10.0s — She holds the bottle toward camera and gives a confident thumbs-up. 10.0–11.5s — Fast lifestyle insert: bottle beside laptop, sunglasses and book on the wooden table. 11.5–12.8s — Brief outdoor warm-sun shot: she walks naturally holding the bottle, relaxed smile. 12.8–15.0s — Premium hero shot: bottle on wood surrounded by roasted coffee beans, warm sunlight; her hand enters beside the bottle. Slow push-in as she says: “Good coffee. Good mood. Anytime.” Fade out. Natural English lip sync. No on-screen text, subtitles, added logos beyond product packaging, watermarks, duplicate people, distorted hands, flicker, cartoon style, AI artifacts, oversaturated colors or low-resolution textures.",
+          "media": {
+            "type": "video",
+            "image": "/images/recommended-prompts/seedance-2-5/03.webp",
+            "url": "https://cdn.flaq.ai/flaq/awesome_prompt/seedance_2_5/example/5.mp4"
+          }
+        },
+        {
+          "id": "seedance-2-5-04",
+          "title": "Olympic Badminton Smash",
+          "prompt": "A cinematic slow-motion shot of a professional Caucasian male badminton player competing in the Olympic finals. He leaps high into the air with explosive power for a powerful smash. Focus on the intense facial expression and the flexed muscles of his arm. As he hits the shuttlecock, a subtle motion blur and wind effect are visible. The background shows a packed Olympic arena with blurred crowds and bright stadium lights. Smooth camera tracking following his jump. 4K, ultra-realistic, high frame rate, vivid colors, athletic anatomy, professional sports photography style.",
+          "media": {
+            "type": "video",
+            "image": "/images/recommended-prompts/seedance-2-5/04.webp",
+            "url": "https://cdn.flaq.ai/flaq/awesome_prompt/seedance_2_5/example/6.mp4"
+          }
+        }
+      ]
+    }
+  ]
+}

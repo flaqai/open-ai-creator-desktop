@@ -17,6 +17,7 @@
     "lint": "eslint .",
     "lint:fix": "eslint --fix .",
     "prettier": "prettier --write .",
+    "prompts:sync": "node scripts/sync-recommended-prompts.mjs",
     "seo:sync-copy": "node scripts/sync-seo-copy.mjs",
     "ts-check": "tsc --noEmit",
     "test": "node --import tsx --test tests/*.test.ts tests/*.test.mts",

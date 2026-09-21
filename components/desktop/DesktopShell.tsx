@@ -7,6 +7,7 @@ import { OPEN_API_CONFIG_CHANGED_EVENT } from '@/network/clientFetch';
 import { isApiConnectionAuthorized } from '@/network/connection-status';
 import packageInfo from '@/package.json';
 import {
+  BookOpenText,
   ExternalLink,
   FileText,
   FolderOpen,
@@ -38,11 +39,19 @@ import { useDesktopRuntime } from '@/hooks/use-desktop-runtime';
 import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogDescription, DialogTitle } from '@/components/ui/dialog';
 import { Input } from '@/components/ui/input';
+import DesktopTitleBar, { useWindowsDesktopFrame } from '@/components/desktop/DesktopTitleBar';
 import LocaleSwitcher from '@/components/LocaleSwitcher';
 
 const ConnectionSettings = dynamic(() => import('@/components/dialog/OpenApiSettingsDialog'));
-type Section = 'general' | 'appearance' | 'connection' | 'about';
-const sectionIcons = { general: SlidersHorizontal, appearance: Palette, connection: Plug, about: Info };
+const MediaLibrary = dynamic(() => import('@/components/media-library/MediaLibrary'));
+type Section = 'general' | 'appearance' | 'connection' | 'library' | 'about';
+const sectionIcons = {
+  general: SlidersHorizontal,
+  appearance: Palette,
+  connection: Plug,
+  library: LibraryBig,
+  about: Info,
+};
 
 function SidebarLabel({ collapsed, children }: { collapsed: boolean; children: ReactNode }) {
   return (
@@ -59,6 +68,7 @@ function SidebarLabel({ collapsed, children }: { collapsed: boolean; children: R
 
 export default function DesktopShell({ children }: { children: ReactNode }) {
   const desktop = useDesktopRuntime();
+  const windowsFrame = useWindowsDesktopFrame();
   const locale = useLocale();
   const zh = locale === 'zh' || locale === 'tw';
   const t = useTranslations('Navigation');
@@ -71,8 +81,14 @@ export default function DesktopShell({ children }: { children: ReactNode }) {
   const [open, setOpen] = useState(false);
   const [connected, setConnected] = useState(false);
   const labels = zh
-    ? { general: '通用', appearance: '外观', connection: '连接', about: '关于' }
-    : { general: 'General', appearance: 'Appearance', connection: 'Connections', about: 'About' };
+    ? { general: '通用', appearance: '外观', connection: '连接', library: '历史记录', about: '关于' }
+    : {
+        general: 'General',
+        appearance: 'Appearance',
+        connection: 'Connections',
+        library: 'History',
+        about: 'About',
+      };
   const showSettings = (next: Section = 'general') => {
     setSection(next);
     setOpen(true);
@@ -208,24 +224,35 @@ export default function DesktopShell({ children }: { children: ReactNode }) {
   };
   if (!desktop) return children;
   const collapsed = preferences.collapsed;
+  const sidebarWidth = collapsed ? 76 : 224;
   const linkClass =
     `flex min-h-11 items-center rounded-xl text-sm hover:bg-accent focus-visible:outline-2 focus-visible:outline-ring ` +
     `transition-[gap,padding,background-color,color] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none ${collapsed ? 'gap-0 px-4' : 'gap-3 px-3'}`;
   return (
-    <div className='desktop-shell min-h-screen' style={{ paddingInlineStart: collapsed ? 76 : 224 }}>
+    <div
+      className='desktop-shell min-h-screen'
+      style={{
+        paddingInlineStart: sidebarWidth,
+        paddingBlockStart: windowsFrame ? 44 : 0,
+        minHeight: windowsFrame ? 'calc(100vh - 44px)' : '100vh',
+      }}
+    >
+      <DesktopTitleBar sidebarWidth={sidebarWidth} zh={zh} />
       <aside
         aria-label={zh ? '主导航' : 'Main navigation'}
         className='desktop-sidebar border-border bg-card fixed inset-y-0 start-0 z-40 flex flex-col overflow-x-hidden border-e p-3'
-        style={{ width: collapsed ? 76 : 224 }}
+        style={{ width: sidebarWidth, top: windowsFrame ? 44 : 0 }}
       >
-        <div
-          className={`mb-6 flex h-12 items-center transition-[gap,padding] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none ${collapsed ? 'gap-0 px-2' : 'gap-2 px-1'}`}
-        >
-          <img src='/images/logo.png' alt='Flaq Creator' className='size-9 shrink-0' />
-          <SidebarLabel collapsed={collapsed}>
-            <strong className='text-sm'>Flaq Creator</strong>
-          </SidebarLabel>
-        </div>
+        {!windowsFrame && (
+          <div
+            className={`mb-6 flex h-12 items-center transition-[gap,padding] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none ${collapsed ? 'gap-0 px-2' : 'gap-2 px-1'}`}
+          >
+            <img src='/images/logo.png' alt='Flaq Creator' className='size-9 shrink-0' />
+            <SidebarLabel collapsed={collapsed}>
+              <strong className='text-sm'>Flaq Creator</strong>
+            </SidebarLabel>
+          </div>
+        )}
         <nav className='flex-1 space-y-1 overflow-y-auto'>
           <Link
             href='/'
@@ -237,12 +264,12 @@ export default function DesktopShell({ children }: { children: ReactNode }) {
             <SidebarLabel collapsed={collapsed}>{zh ? '工作台' : 'Workspace'}</SidebarLabel>
           </Link>
           <Link
-            href='/media-library'
+            href='/recommended-prompts'
             title={zh ? '素材库' : 'Media library'}
-            aria-current={pathname.replace(/\/$/, '') === '/media-library' ? 'page' : undefined}
-            className={`${linkClass} ${pathname.replace(/\/$/, '') === '/media-library' ? 'bg-accent text-primary font-semibold' : ''}`}
+            aria-current={pathname.replace(/\/$/, '') === '/recommended-prompts' ? 'page' : undefined}
+            className={`${linkClass} ${pathname.replace(/\/$/, '') === '/recommended-prompts' ? 'bg-accent text-primary font-semibold' : ''}`}
           >
-            <LibraryBig className='size-5 shrink-0' />
+            <BookOpenText className='size-5 shrink-0' />
             <SidebarLabel collapsed={collapsed}>{zh ? '素材库' : 'Media library'}</SidebarLabel>
           </Link>
           {(['workspace', 'image', 'video'] as const).map((group) => (
@@ -441,6 +468,7 @@ export default function DesktopShell({ children }: { children: ReactNode }) {
                 </div>
               )}
               {section === 'connection' && <ConnectionSettings embedded open={open} onOpenChange={setOpen} />}
+              {section === 'library' && <MediaLibrary embedded />}
               {section === 'about' && (
                 <div className='space-y-4'>
                   <div className='border-primary/20 relative overflow-hidden rounded-2xl border bg-[linear-gradient(135deg,color-mix(in_oklab,var(--primary)_14%,var(--background)),var(--background)_54%,color-mix(in_oklab,var(--primary)_7%,var(--background)))] p-6'>

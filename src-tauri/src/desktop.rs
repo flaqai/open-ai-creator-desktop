@@ -69,6 +69,9 @@ pub fn setup(app: &mut tauri::App) -> Result<(), Box<dyn std::error::Error>> {
         _ => {}
     });
     if let Some(window) = app.get_webview_window("main") {
+        #[cfg(target_os = "windows")]
+        window.set_decorations(false)?;
+
         if let Ok(bytes) = std::fs::read(app.path().app_config_dir()?.join("window-v1.json")) {
             if let Ok(saved) = serde_json::from_slice::<Geometry>(&bytes) {
                 if saved.version == 1 && saved.width.is_finite() && saved.height.is_finite() {
