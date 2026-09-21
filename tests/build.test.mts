@@ -5,7 +5,7 @@ import os from 'node:os';
 import path from 'node:path';
 import { test } from 'node:test';
 
-import { buildDesktop } from '../scripts/desktop-build.mjs';
+import { buildDesktop, validatePrebuiltDesktopOutput } from '../scripts/desktop-build.mjs';
 import { desktopDevEnvironment } from '../scripts/desktop-dev.mjs';
 import { prepareBundledR2 } from '../scripts/prepare-bundled-r2.mjs';
 import { assertDesktopDevPortAvailable, DESKTOP_DEV_HOST, DESKTOP_DEV_PORT } from '../scripts/tauri-dev.mjs';
@@ -142,6 +142,31 @@ test('successful isolated builds publish output and locale-aware entry without t
     });
     assert.equal(await readFile(path.join(dir, 'out/zh/index.html'), 'utf8'), 'Chinese workspace');
     assert.match(await readFile(path.join(dir, 'out/index.html'), 'utf8'), /flaq-desktop-locale/);
+  } finally {
+    await rm(dir, { recursive: true, force: true });
+  }
+});
+
+test('packaging can reuse a validated desktop frontend without rebuilding it', async () => {
+  const dir = await mkdtemp(path.join(os.tmpdir(), 'flaq-prebuilt-test-'));
+  try {
+    await mkdir(path.join(dir, 'out/en'), { recursive: true });
+    await writeFile(path.join(dir, 'out/index.html'), '<script>localStorage.getItem("flaq-desktop-locale")</script>');
+    await writeFile(path.join(dir, 'out/en/index.html'), 'English workspace');
+    assert.equal(await validatePrebuiltDesktopOutput(dir), path.join(dir, 'out'));
+
+    let builds = 0;
+    await buildDesktop(
+      dir,
+      async () => {
+        builds++;
+      },
+      { FLAQ_DESKTOP_PREBUILT_OUT: 'true' },
+    );
+    assert.equal(builds, 0);
+
+    await rm(path.join(dir, 'out/en/index.html'));
+    await assert.rejects(validatePrebuiltDesktopOutput(dir), /missing out\/en\/index\.html/);
   } finally {
     await rm(dir, { recursive: true, force: true });
   }

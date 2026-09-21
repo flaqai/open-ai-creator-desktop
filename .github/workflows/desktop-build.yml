@@ -1,132 +1,257 @@
-name: Publish desktop release
+name: Desktop release
+run-name: Desktop ${{ github.event_name == 'push' && github.ref_name || inputs.target }} @ ${{ github.sha }}
 
 on:
   workflow_dispatch:
+    inputs:
+      target:
+        description: Candidate package target (manual runs never publish a Release)
+        required: true
+        type: choice
+        default: all
+        options:
+          - all
+          - macos-arm64
+          - macos-x64
+          - windows-x64
   push:
     tags:
       - 'desktop-v*'
 
 permissions:
-  contents: write
+  contents: read
 
 concurrency:
-  group: desktop-release-${{ github.ref }}
+  group: desktop-release-${{ github.ref }}-${{ github.event_name == 'workflow_dispatch' && inputs.target || 'all' }}
   cancel-in-progress: false
 
+env:
+  NODE_VERSION: '22'
+
 jobs:
-  build-and-publish:
-    name: ${{ matrix.name }}
-    strategy:
-      fail-fast: false
-      matrix:
-        include:
-          - name: macOS Apple Silicon
-            platform: macos-15
-            target: aarch64-apple-darwin
-          - name: macOS Intel
-            platform: macos-15-intel
-            target: x86_64-apple-darwin
-          - name: Windows x64
-            platform: windows-latest
-            target: x86_64-pc-windows-msvc
-
-    runs-on: ${{ matrix.platform }}
-
+  preflight:
+    name: Preflight and desktop web build
+    runs-on: ubuntu-24.04
+    outputs:
+      version: ${{ steps.metadata.outputs.version }}
+      tag: ${{ steps.metadata.outputs.tag }}
+      notes: ${{ steps.metadata.outputs.notes }}
+      matrix: ${{ steps.metadata.outputs.matrix }}
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
 
       - uses: pnpm/action-setup@v4
 
       - uses: actions/setup-node@v4
         with:
-          node-version: 22
+          node-version: ${{ env.NODE_VERSION }}
           cache: pnpm
 
-      - name: Install Rust toolchain
-        uses: dtolnay/rust-toolchain@stable
+      - uses: dtolnay/rust-toolchain@stable
+
+      - uses: Swatinem/rust-cache@v2
         with:
-          targets: ${{ matrix.target }}
+          workspaces: src-tauri -> target
+          shared-key: desktop-preflight
+
+      - name: Verify release metadata
+        id: metadata
+        env:
+          RELEASE_TAG: ${{ github.event_name == 'push' && github.ref_name || '' }}
+          RELEASE_TARGET: ${{ github.event_name == 'workflow_dispatch' && inputs.target || 'all' }}
+        run: >-
+          node scripts/desktop-release.mjs metadata --tag "${RELEASE_TAG}" --target "${RELEASE_TARGET}"
 
       - name: Install frontend dependencies
         run: pnpm install --frozen-lockfile
 
-      - name: Run frontend checks
+      - name: Run frontend checks once
         run: pnpm check
 
-      - name: Run Rust tests
+      - name: Run Rust tests once
         run: cargo test --manifest-path src-tauri/Cargo.toml --locked
 
-      - name: Build and publish desktop bundles
-        uses: tauri-apps/tauri-action@v1
+      - name: Build reusable desktop frontend
+        run: pnpm build:desktop
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: desktop-web-${{ github.sha }}
+          path: out
+          if-no-files-found: error
+          retention-days: 3
+
+  package:
+    name: Package and smoke ${{ matrix.name }}
+    needs: preflight
+    strategy:
+      fail-fast: false
+      matrix: ${{ fromJSON(needs.preflight.outputs.matrix) }}
+    runs-on: ${{ matrix.runner }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
+      - uses: pnpm/action-setup@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: pnpm
+
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          targets: ${{ matrix.rustTarget }}
+
+      - uses: Swatinem/rust-cache@v2
+        with:
+          workspaces: src-tauri -> target
+          shared-key: desktop-${{ matrix.id }}
+
+      - name: Install frontend dependencies
+        run: pnpm install --frozen-lockfile
+
+      - uses: actions/download-artifact@v4
+        with:
+          name: desktop-web-${{ github.sha }}
+          path: out
+
+      - name: Build native bundles from the reusable frontend
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          FLAQ_DESKTOP_PREBUILT_OUT: 'true'
           FLAQ_REQUIRE_BUNDLED_R2: 'true'
           FLAQ_BUNDLED_R2_ACCOUNT_ID: ${{ secrets.FLAQ_BUNDLED_R2_ACCOUNT_ID }}
           FLAQ_BUNDLED_R2_ACCESS_KEY_ID: ${{ secrets.FLAQ_BUNDLED_R2_ACCESS_KEY_ID }}
           FLAQ_BUNDLED_R2_SECRET_ACCESS_KEY: ${{ secrets.FLAQ_BUNDLED_R2_SECRET_ACCESS_KEY }}
           FLAQ_BUNDLED_R2_BUCKET_NAME: ${{ secrets.FLAQ_BUNDLED_R2_BUCKET_NAME }}
           FLAQ_BUNDLED_R2_PUBLIC_DOMAIN: ${{ secrets.FLAQ_BUNDLED_R2_PUBLIC_DOMAIN }}
+        run: >-
+          pnpm exec tauri build --ci --no-sign --target ${{ matrix.rustTarget }} --bundles ${{ matrix.bundles }}
+
+      - name: Normalize candidate filenames
+        env:
+          CANDIDATE_TARGET: ${{ matrix.id }}
+          RUST_TARGET: ${{ matrix.rustTarget }}
+        run: |
+          node scripts/desktop-release.mjs normalize \
+            --target "$CANDIDATE_TARGET" \
+            --bundle-root "src-tauri/target/$RUST_TARGET/release/bundle" \
+            --output dist/candidate
+
+      - name: Smoke macOS package
+        if: startsWith(matrix.id, 'macos-')
+        env:
+          CANDIDATE_TARGET: ${{ matrix.id }}
+          RELEASE_VERSION: ${{ needs.preflight.outputs.version }}
+          EXPECTED_ARCH: ${{ matrix.id == 'macos-arm64' && 'arm64' || 'x86_64' }}
+        run: |
+          node scripts/smoke-macos-release.mjs \
+            "dist/candidate/Flaq-Creator-$CANDIDATE_TARGET.dmg" \
+            "$RELEASE_VERSION" \
+            "$EXPECTED_ARCH"
+
+      - name: Smoke Windows packages
+        if: matrix.id == 'windows-x64'
+        shell: pwsh
+        env:
+          RELEASE_VERSION: ${{ needs.preflight.outputs.version }}
+        run: |
+          & scripts/smoke-windows-release.ps1 `
+            -Installer dist/candidate/Flaq-Creator-windows-x64-setup.exe `
+            -Msi dist/candidate/Flaq-Creator-windows-x64.msi `
+            -Version $env:RELEASE_VERSION
+
+      - uses: actions/upload-artifact@v4
         with:
-          tagName: desktop-v__VERSION__
-          releaseName: Flaq Creator Desktop v__VERSION__
-          releaseBody: |
-            ## 中文
-
-            Flaq Creator 1.1.0 是一次桌面端内容体验、媒体管理与连接稳定性更新。本版本提供 macOS Apple Silicon、macOS Intel 和 Windows x64 安装包。
-
-            ### 新功能与改进
-
-            - 新增素材库，内置 Qwen Image 3.0、Wan 3.0、MiniMax H3 和 Seedance 2.5 分类的完整提示词与示例素材。
-            - 全新提示词详情查看器：保留原图比例，支持 100%–300% 缩放、拖动查看、三态分栏和小屏响应式布局。
-            - 生成历史移入设置中心，支持图片与视频预览、下载和本地媒体管理。
-            - 桌面端“记住我”改用与端口无关的 `auth.json` 保存 Client Key，并补充授权检测和脱敏日志。
-            - 改进生成请求与媒体归档的瞬时网络错误重试，降低“生成成功但保存失败”的概率。
-            - 安装包可携带打包时加密的默认 Cloudflare R2 预设，同时保留自定义 R2 预设。
-            - Windows 新增与应用主题一致的桌面标题栏和窗口控件。
-
-            ### 下载选择
-
-            - Apple Silicon Mac（M1/M2/M3/M4 等）：`aarch64.dmg`
-            - Intel Mac：`x64.dmg`
-            - Windows 10/11 x64：推荐 `x64-setup.exe`；需要 MSI 部署时选择 `x64_en-US.msi`
-
-            ### 安装提示
-
-            当前安装包尚未使用 Apple Developer ID 或 Windows 代码签名。首次打开时，macOS Gatekeeper 或 Windows SmartScreen 可能显示安全提示。
-
-            ---
-
-            ## English
-
-            Flaq Creator 1.1.0 improves desktop content discovery, media management, and connection reliability. This release includes installers for macOS Apple Silicon, macOS Intel, and Windows x64.
-
-            ### What’s new
-
-            - Added a curated media library with complete prompt examples for Qwen Image 3.0, Wan 3.0, MiniMax H3, and Seedance 2.5.
-            - Introduced a redesigned prompt-detail viewer that preserves source aspect ratios and supports 100%–300% zoom, panning, three panel modes, and responsive small-screen layouts.
-            - Moved generation history into Settings with image and video previews, downloads, and local media management.
-            - Desktop “Remember me” now stores the Client Key in a port-independent `auth.json`, with improved authorization diagnostics and redacted logs.
-            - Added retry handling for transient generation-request and media-archive failures, reducing cases where generation succeeds but local saving fails.
-            - Packaged installers can include a build-time encrypted default Cloudflare R2 preset while retaining reusable custom R2 presets.
-            - Added a theme-aware native-style title bar and window controls on Windows.
-
-            ### Which file should I download?
-
-            - Apple Silicon Mac (M1/M2/M3/M4 and later): `aarch64.dmg`
-            - Intel Mac: `x64.dmg`
-            - Windows 10/11 x64: use `x64-setup.exe`, or `x64_en-US.msi` for MSI deployment.
-
-            ### Installation note
-
-            These installers are not yet signed with an Apple Developer ID or Windows code-signing certificate. macOS Gatekeeper or Windows SmartScreen may display a security warning on first launch.
-          releaseDraft: false
-          prerelease: false
-          generateReleaseNotes: true
-          args: --target ${{ matrix.target }}
-
-      - name: Upload workflow artifacts
-        uses: actions/upload-artifact@v4
-        with:
-          name: flaq-creator-${{ matrix.target }}
-          path: src-tauri/target/${{ matrix.target }}/release/bundle/**/*
+          name: desktop-candidate-${{ matrix.id }}
+          path: dist/candidate/*
           if-no-files-found: error
+          retention-days: 14
+          compression-level: 0
+
+  release:
+    name: Verify and publish complete Release
+    if: startsWith(github.ref, 'refs/tags/desktop-v')
+    needs: [preflight, package]
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: desktop-candidate-*
+          path: dist/candidates
+
+      - name: Assemble and verify release files
+        env:
+          RELEASE_VERSION: ${{ needs.preflight.outputs.version }}
+          RELEASE_TAG: ${{ needs.preflight.outputs.tag }}
+          RELEASE_COMMIT: ${{ github.sha }}
+        run: |
+          node scripts/desktop-release.mjs assemble \
+            --input dist/candidates \
+            --output dist/release \
+            --version "$RELEASE_VERSION" \
+            --tag "$RELEASE_TAG" \
+            --commit "$RELEASE_COMMIT"
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: desktop-release-${{ needs.preflight.outputs.version }}
+          path: dist/release/*
+          if-no-files-found: error
+          retention-days: 14
+          compression-level: 0
+
+      - name: Refuse to overwrite a published release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RELEASE_TAG: ${{ needs.preflight.outputs.tag }}
+        run: |
+          if release_json=$(gh release view "$RELEASE_TAG" --json isDraft 2>/dev/null); then
+            if [ "$(printf '%s' "$release_json" | jq -r .isDraft)" != 'true' ]; then
+              echo "Published release $RELEASE_TAG already exists and is immutable." >&2
+              exit 1
+            fi
+            gh release delete "$RELEASE_TAG" --yes
+          fi
+
+      - name: Upload a hidden draft release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RELEASE_TAG: ${{ needs.preflight.outputs.tag }}
+          RELEASE_VERSION: ${{ needs.preflight.outputs.version }}
+          RELEASE_NOTES: ${{ needs.preflight.outputs.notes }}
+        run: |
+          gh release create "$RELEASE_TAG" \
+            --draft \
+            --verify-tag \
+            --target "${{ github.sha }}" \
+            --title "Flaq Creator Desktop v${RELEASE_VERSION}" \
+            --notes-file "$RELEASE_NOTES" \
+            dist/release/*
+
+      - name: Verify uploaded draft assets
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RELEASE_TAG: ${{ needs.preflight.outputs.tag }}
+        run: |
+          gh release view "$RELEASE_TAG" --json isDraft,targetCommitish,assets > dist/remote-release.json
+          node scripts/desktop-release.mjs verify-remote \
+            --directory dist/release \
+            --metadata dist/remote-release.json \
+            --commit "${{ github.sha }}"
+
+      - name: Publish verified release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RELEASE_TAG: ${{ needs.preflight.outputs.tag }}
+        run: gh release edit "$RELEASE_TAG" --draft=false --latest

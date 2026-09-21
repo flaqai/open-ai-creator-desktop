@@ -11,6 +11,7 @@ export default defineConfig([
     '**/dist/**',
     '**/node_modules/**',
     '**/.next/**',
+    '**/.next-desktop-dev/**',
     '**/out/**',
     '**/.vscode/**',
     '**/build/**',

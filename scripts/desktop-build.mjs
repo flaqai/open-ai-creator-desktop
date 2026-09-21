@@ -1,5 +1,5 @@
 import { spawn } from 'node:child_process';
-import { access, cp, mkdtemp, rename, rm, symlink, writeFile } from 'node:fs/promises';
+import { access, cp, mkdtemp, readFile, rename, rm, symlink, writeFile } from 'node:fs/promises';
 import { createRequire } from 'node:module';
 import path from 'node:path';
 import { pathToFileURL } from 'node:url';
@@ -46,8 +46,27 @@ async function exists(file) {
   }
 }
 
-export async function buildDesktop(projectRoot, runBuild = runNextBuild) {
-  await prepareBundledR2(projectRoot);
+export async function validatePrebuiltDesktopOutput(projectRoot) {
+  const output = path.join(projectRoot, 'out');
+  const required = ['index.html', 'en/index.html'];
+  for (const relative of required) {
+    const file = path.join(output, relative);
+    if (!(await exists(file))) throw new Error(`Prebuilt desktop output is incomplete: missing out/${relative}`);
+  }
+  const entry = await readFile(path.join(output, 'index.html'), 'utf8');
+  if (!entry.includes('flaq-desktop-locale')) {
+    throw new Error('Prebuilt desktop output is invalid: out/index.html is not the desktop locale entry.');
+  }
+  return output;
+}
+
+export async function buildDesktop(projectRoot, runBuild = runNextBuild, environment = process.env) {
+  await prepareBundledR2(projectRoot, { environment });
+  if (environment.FLAQ_DESKTOP_PREBUILT_OUT === 'true') {
+    await validatePrebuiltDesktopOutput(projectRoot);
+    console.log('Using validated prebuilt desktop frontend output.');
+    return;
+  }
   // Build in an isolated copy: crashes and concurrent web development can never
   // remove or alter the source route tree.
   const work = await mkdtemp(path.join(projectRoot, '.desktop-build-'));
