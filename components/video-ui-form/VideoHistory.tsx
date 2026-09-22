@@ -1,8 +1,5 @@
 'use client';
 
-/* eslint-disable react/jsx-indent */
-/* eslint-disable jsx-a11y/no-static-element-interactions */
-/* eslint-disable jsx-a11y/click-events-have-key-events */
 import { forwardRef, useContext, useState } from 'react';
 import { deleteVideoById } from '@/network/video/client';
 import useVideoHistory, { refreshVideoHistory, VideoHistoryItem, VideoHistoryRequest } from '@/network/video/history';
@@ -28,7 +25,7 @@ function VideoItem({
   onDelete,
   ratio,
 }: {
-  imgSrc: string;
+  imgSrc?: string;
   onClick: () => void;
   createTime: number;
   status: VideoHistoryItem['status'];
@@ -39,7 +36,7 @@ function VideoItem({
     if (!ratioStr) return 130;
     const [w, h] = ratioStr.split(':').map(Number);
     if (!w || !h) return 130;
-    return Math.min(Math.round((130 * w) / h), 195);
+    return Math.round((130 * w) / h);
   };
 
   const width = calculateWidth(ratio);
@@ -83,14 +80,33 @@ function VideoItem({
       )}
       onClick={onClick}
     >
-      <img
-        src={imgSrc}
-        alt='imgSrc'
-        className='h-full w-full object-cover transition-all duration-200 group-hover:scale-110'
-        loading='lazy'
-        decoding='async'
-        fetchPriority='high'
-      />
+      {imgSrc ? (
+        <img
+          src={imgSrc}
+          alt='imgSrc'
+          className='h-full w-full object-contain'
+          loading='lazy'
+          decoding='async'
+          fetchPriority='high'
+        />
+      ) : (
+        <>
+          <img
+            src='/images/cover/video-cover-light.svg'
+            alt=''
+            className='size-12 object-contain dark:hidden'
+            loading='lazy'
+            decoding='async'
+          />
+          <img
+            src='/images/cover/video-cover.png'
+            alt=''
+            className='hidden h-full w-full object-contain dark:block'
+            loading='lazy'
+            decoding='async'
+          />
+        </>
+      )}
       <div className='text-foreground absolute bottom-0 left-0 flex items-center justify-center rounded-tr-lg rounded-bl-lg bg-[rgba(128,128,128,0.5)] p-2.5 py-1 text-xs backdrop-blur'>
         {formatDate(createTime)}
       </div>
@@ -158,7 +174,7 @@ const VideoHistory = forwardRef<ScrollRef, VideoHistoryProps>(({ onClickImage, o
       } else {
         toast.error(res.msg || t('deleteFailed'));
       }
-    } catch (error) {
+    } catch {
       toast.error(t('deleteFailed'));
     }
   };
@@ -179,7 +195,7 @@ const VideoHistory = forwardRef<ScrollRef, VideoHistoryProps>(({ onClickImage, o
         data.map((el) => (
           <VideoItem
             key={el.id}
-            imgSrc={el.coverImage || el.imageUrl || '/images/cover/video-cover.png'}
+            imgSrc={el.coverImage || el.videoThumbnailUrl || el.imageUrl || undefined}
             onClick={() => handleClickImg(el)}
             createTime={el.createTime}
             status={el.status}

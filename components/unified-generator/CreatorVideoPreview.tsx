@@ -33,7 +33,7 @@ export default function CreatorVideoPreview({
         src={cover}
         alt={item.prompt}
         loading='lazy'
-        className='h-full w-full object-cover'
+        className='block h-auto w-full object-contain'
         onError={() => setCoverIndex((index) => index + 1)}
       />
     );
@@ -46,7 +46,7 @@ export default function CreatorVideoPreview({
         muted
         playsInline
         preload='metadata'
-        className='h-full w-full object-cover'
+        className='block h-auto w-full object-contain'
         onMouseEnter={(event) => void event.currentTarget.play()}
         onMouseLeave={(event) => {
           event.currentTarget.pause();

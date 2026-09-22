@@ -85,7 +85,7 @@ function ImageItem({
         fetchPriority='low'
         loading='lazy'
         draggable={false}
-        className='h-full w-auto transition-transform duration-200 group-hover:scale-110'
+        className='h-full w-auto object-contain'
       />
 
       <div className='text-foreground absolute bottom-0 left-0 flex items-center justify-center rounded-tr-lg rounded-bl-lg bg-[rgba(128,128,128,0.5)] p-2.5 py-1 text-xs backdrop-blur'>
