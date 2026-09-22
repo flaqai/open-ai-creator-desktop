@@ -4,6 +4,14 @@
 
 @custom-variant dark (&:is(.dark *));
 
+:root {
+  --brand-primary: #4c52fe;
+  --brand-primary-rgb: 76 82 254;
+  --brand-primary-soft: #8589ff;
+  --brand-primary-tint: #e8e9ff;
+  --brand-primary-ink: #242957;
+}
+
 @utility container {
   margin-inline: auto;
   padding-inline: 2rem;
@@ -115,23 +123,23 @@ html.light {
   --card-foreground: #20222c;
   --popover: #ffffff;
   --popover-foreground: #20222c;
-  --primary: #5c24ff;
+  --primary: var(--brand-primary);
   --primary-foreground: #ffffff;
   --secondary: #edf0f6;
   --secondary-foreground: #20222c;
   --muted: #edf0f6;
   --muted-foreground: #596174;
-  --accent: #ebe7fb;
-  --accent-foreground: #29233f;
+  --accent: var(--brand-primary-tint);
+  --accent-foreground: var(--brand-primary-ink);
   --border: #d8dce6;
   --input: #c7ccda;
-  --ring: #5c24ff;
+  --ring: var(--brand-primary);
   --sidebar: #ffffff;
   --sidebar-foreground: #20222c;
-  --sidebar-primary: #5c24ff;
+  --sidebar-primary: var(--brand-primary);
   --sidebar-primary-foreground: #ffffff;
-  --sidebar-accent: #ebe7fb;
-  --sidebar-accent-foreground: #29233f;
+  --sidebar-accent: var(--brand-primary-tint);
+  --sidebar-accent-foreground: var(--brand-primary-ink);
   --sidebar-border: #d8dce6;
   --color-t1: #20222c;
   --color-t2: #596174;
@@ -184,6 +192,80 @@ body.desktop-app .desktop-top-nav-links {
 
 body.desktop-app [data-cookie-consent] {
   display: none;
+}
+
+.desktop-home-glow {
+  background:
+    radial-gradient(circle at 12% 5%, rgb(var(--brand-primary-rgb) / 14%), transparent 25%),
+    radial-gradient(circle at 90% 10%, rgb(var(--brand-primary-rgb) / 10%), transparent 30%);
+}
+
+.desktop-featured-card {
+  border-color: color-mix(in oklab, var(--brand-primary) 25%, transparent);
+  background: linear-gradient(145deg, rgb(var(--brand-primary-rgb) / 22%), rgb(var(--brand-primary-rgb) / 10%));
+}
+
+.desktop-guide-icon {
+  color: var(--brand-primary);
+  background: linear-gradient(135deg, rgb(var(--brand-primary-rgb) / 24%), rgb(var(--brand-primary-rgb) / 12%));
+}
+
+.desktop-onboarding-mark {
+  box-shadow: 0 16px 50px rgb(var(--brand-primary-rgb) / 18%);
+}
+
+.footer-brand-glow {
+  background: radial-gradient(ellipse at top left, rgb(var(--brand-primary-rgb) / 13%), transparent 58%);
+}
+
+/*
+  Marketing sections inside the desktop tool guide were authored against the
+  original dark palette. Keep that presentation isolated from the user's app
+  theme while allowing the dialog chrome itself to follow light/dark mode.
+*/
+.desktop-tool-guide-content {
+  color-scheme: dark;
+  --background: #0f1113;
+  --foreground: #ffffff;
+  --card: #16161a;
+  --card-foreground: #ffffff;
+  --popover: #1b1c23;
+  --popover-foreground: #ffffff;
+  --secondary: #1b1c23;
+  --secondary-foreground: #ffffff;
+  --muted: #1b1c23;
+  --muted-foreground: #b8b8b8;
+  --accent: #353443;
+  --accent-foreground: #ffffff;
+  --border: #34343c;
+  --input: #34343c;
+  --color-t1: #ffffff;
+  --color-t2: #b8b8b8;
+  --color-t3: #737373;
+  --color-t4: #5c5c5c;
+  --color-inverse-t1: #111111;
+  --color-bg0: #020202;
+  --color-bg1: #141516;
+  --color-bg2: #141516;
+  --color-bg3: #222129;
+  --color-c1: #16161a;
+  --color-c2: #1b1c23;
+  --color-c3: #353443;
+  --color-c4: #232528;
+  --color-b1: #34343c;
+  --color-b2: #ffffff66;
+  --color-100: #ffffff;
+  --color-40: #737373;
+  --color-30: #5c5c5c;
+  --color-5: #212121;
+  background: var(--color-bg0);
+  color: var(--color-t1);
+}
+
+/* Keep full-bleed guide artwork while giving its text-heavy FAQ a safe gutter. */
+.desktop-tool-guide-content [data-faq-section] {
+  box-sizing: border-box;
+  padding-inline: clamp(1.25rem, 3vw, 2rem);
 }
 
 /*
@@ -525,7 +607,7 @@ body.desktop-app [data-cookie-consent] {
     --card-foreground: #ffffff;
     --popover: #1b1c23;
     --popover-foreground: #ffffff;
-    --primary: #7c3aed;
+    --primary: var(--brand-primary);
     --primary-foreground: #ffffff;
     --secondary: #1b1c23;
     --secondary-foreground: #ffffff;
@@ -537,15 +619,15 @@ body.desktop-app [data-cookie-consent] {
     --destructive-foreground: #ffffff;
     --border: #34343c;
     --input: #34343c;
-    --ring: #8b5cf6;
+    --ring: var(--brand-primary);
     --sidebar: #16161a;
     --sidebar-foreground: #ffffff;
-    --sidebar-primary: #7c3aed;
+    --sidebar-primary: var(--brand-primary);
     --sidebar-primary-foreground: #ffffff;
     --sidebar-accent: #1b1c23;
     --sidebar-accent-foreground: #ffffff;
     --sidebar-border: #34343c;
-    --sidebar-ring: #8b5cf6;
+    --sidebar-ring: var(--brand-primary);
 
     /* project semantic tokens */
     --color-t1: #ffffff;
@@ -568,7 +650,7 @@ body.desktop-app [data-cookie-consent] {
     --color-b1: #34343c;
     --color-b2: #ffffff66;
 
-    --color-main: #7c3aed;
+    --color-main: var(--brand-primary);
     --color-green: #8aefb9;
     --color-red: #fff6f6;
     --color-100: #ffffff;

@@ -4,6 +4,7 @@ import { useCallback, useContext, useEffect, useRef, useState } from 'react';
 import { Loader2, Pause, Play, Scissors, Trash2 } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 
+import { readBrandColor } from '@/lib/theme/colors';
 import { cn } from '@/lib/utils';
 import { videoAudioContext } from '@/components/video-ui-form/VideoContenxtProvider';
 
@@ -99,6 +100,8 @@ export default function AudioFilePreviewCard({
     ctx.scale(2, 2);
 
     ctx.clearRect(0, 0, width, height);
+    const primaryColor = readBrandColor('primary');
+    const primarySoftColor = readBrandColor('primarySoft');
 
     waveformData.forEach((value, index) => {
       const x = index * barWidth;
@@ -109,7 +112,7 @@ export default function AudioFilePreviewCard({
       const isPlayed = time <= currentTime;
 
       if (isInRange) {
-        ctx.fillStyle = isPlayed ? '#7c3aed' : '#a78bfa';
+        ctx.fillStyle = isPlayed ? primaryColor : primarySoftColor;
       } else {
         ctx.fillStyle = '#404040';
       }

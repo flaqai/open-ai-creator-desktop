@@ -43,7 +43,7 @@ export default function DesktopOnboarding() {
     >
       <DialogContent className='border-foreground/10 bg-card text-foreground overflow-hidden p-0 sm:max-w-[610px]'>
         <div className='border-border from-accent to-card relative border-b bg-gradient-to-br px-7 pt-8 pb-7'>
-          <div className='border-foreground/10 bg-foreground/8 mb-5 flex size-12 items-center justify-center rounded-2xl border shadow-[0_16px_50px_rgba(92,36,255,0.18)]'>
+          <div className='desktop-onboarding-mark border-foreground/10 bg-foreground/8 mb-5 flex size-12 items-center justify-center rounded-2xl border'>
             <img src='/images/logo.png' alt='' className='size-10' />
           </div>
           <DialogHeader className='text-left'>
@@ -64,7 +64,7 @@ export default function DesktopOnboarding() {
                 <Icon className='size-4' />
               </div>
               <div className='text-foreground/82 min-w-0 flex-1 text-sm font-medium'>{label}</div>
-              <div className='border-foreground/10 text-foreground/35 flex size-6 items-center justify-center rounded-full border text-[11px] group-hover:border-violet-400/30 group-hover:text-violet-300'>
+              <div className='border-foreground/10 text-foreground/35 group-hover:border-primary/30 group-hover:text-primary flex size-6 items-center justify-center rounded-full border text-[11px]'>
                 {index + 1}
               </div>
             </div>
@@ -78,7 +78,7 @@ export default function DesktopOnboarding() {
             >
               {t('skip')}
             </Button>
-            <Button onClick={configure} className='text-primary-foreground gap-2 bg-[#5c24ff] hover:bg-[#6d3bff]'>
+            <Button onClick={configure} className='bg-primary text-primary-foreground hover:bg-primary/90 gap-2'>
               <Check className='size-4' />
               {t('openSettings')}
             </Button>

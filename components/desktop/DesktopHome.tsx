@@ -19,12 +19,12 @@ export default function DesktopHome({ children }: { children?: ReactNode }) {
 
   return (
     <div className='relative w-full overflow-hidden px-5 py-8 lg:px-10 lg:py-12'>
-      <div className='pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(circle_at_12%_5%,rgba(92,36,255,0.14),transparent_25%),radial-gradient(circle_at_90%_10%,rgba(98,82,255,0.12),transparent_30%)]' />
+      <div className='desktop-home-glow pointer-events-none absolute inset-0 -z-10' />
       <div className='mx-auto max-w-[1180px]'>
         <div className='mb-9'>
           <div>
             <div className='border-foreground/8 bg-foreground/[0.04] text-foreground/60 mb-3 inline-flex items-center gap-2 rounded-full border px-3 py-1 text-xs'>
-              <Sparkles className='size-3.5 text-violet-300' />
+              <Sparkles className='text-primary size-3.5' />
               Flaq Creator
             </div>
             <h1 className='text-foreground text-3xl font-semibold tracking-tight lg:text-4xl'>{t('workspace')}</h1>
@@ -44,7 +44,7 @@ export default function DesktopHome({ children }: { children?: ReactNode }) {
               <Link
                 key={code}
                 href={href}
-                className={`group relative min-h-44 overflow-hidden rounded-2xl border p-5 transition duration-200 hover:-translate-y-0.5 ${featured ? 'border-violet-300/20 bg-[linear-gradient(145deg,rgba(92,36,255,.22),rgba(104,86,255,.12))] sm:col-span-2' : 'border-foreground/8 bg-foreground/[0.035] hover:border-foreground/15 hover:bg-foreground/[0.055]'}`}
+                className={`group relative min-h-44 overflow-hidden rounded-2xl border p-5 transition duration-200 hover:-translate-y-0.5 ${featured ? 'desktop-featured-card sm:col-span-2' : 'border-foreground/8 bg-foreground/[0.035] hover:border-foreground/15 hover:bg-foreground/[0.055]'}`}
               >
                 {featured && (
                   <img
@@ -56,7 +56,7 @@ export default function DesktopHome({ children }: { children?: ReactNode }) {
                 )}
                 <div className='relative flex h-full flex-col justify-between gap-8'>
                   <div
-                    className={`flex size-11 items-center justify-center rounded-xl ${featured ? 'bg-foreground/10 text-violet-200' : 'bg-foreground/[0.06] text-foreground/65'}`}
+                    className={`flex size-11 items-center justify-center rounded-xl ${featured ? 'bg-primary/15 text-primary' : 'bg-foreground/[0.06] text-foreground/65'}`}
                   >
                     <Icon className='size-5' />
                   </div>

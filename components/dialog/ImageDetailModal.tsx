@@ -389,7 +389,7 @@ export default function ImageDetailModal({
               type='button'
               onClick={() => onOpenChange(false)}
               onPointerDown={(event) => event.stopPropagation()}
-              className='absolute top-5 right-5 z-30 flex size-11 items-center justify-center rounded-full border border-white/15 bg-black/55 text-white/75 shadow-lg backdrop-blur-md transition hover:bg-white/10 hover:text-white focus-visible:ring-2 focus-visible:ring-violet-400 focus-visible:outline-none'
+              className='focus-visible:ring-primary absolute top-5 right-5 z-30 flex size-11 items-center justify-center rounded-full border border-white/15 bg-black/55 text-white/75 shadow-lg backdrop-blur-md transition hover:bg-white/10 hover:text-white focus-visible:ring-2 focus-visible:outline-none'
               aria-label='Close'
             >
               <X className='size-5' />

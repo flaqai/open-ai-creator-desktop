@@ -4,12 +4,14 @@ import { useEffect, useState } from 'react';
 import { Check, X } from 'lucide-react';
 import { Toaster as Sonner, ToasterProps } from 'sonner';
 
+import { BRAND_COLOR_CSS } from '@/lib/theme/colors';
+
 const CONFETTI = [
-  { x: '-18px', y: '-18px', r: '-35deg', color: '#7c3aed', delay: '0ms' },
+  { x: '-18px', y: '-18px', r: '-35deg', color: BRAND_COLOR_CSS.primary, delay: '0ms' },
   { x: '2px', y: '-24px', r: '28deg', color: '#f59e0b', delay: '30ms' },
   { x: '19px', y: '-16px', r: '68deg', color: '#06b6d4', delay: '65ms' },
   { x: '23px', y: '3px', r: '115deg', color: '#ec4899', delay: '20ms' },
-  { x: '-21px', y: '5px', r: '-72deg', color: '#8b5cf6', delay: '75ms' },
+  { x: '-21px', y: '5px', r: '-72deg', color: BRAND_COLOR_CSS.primarySoft, delay: '75ms' },
   { x: '-12px', y: '19px', r: '-18deg', color: '#10b981', delay: '45ms' },
 ] as const;
 

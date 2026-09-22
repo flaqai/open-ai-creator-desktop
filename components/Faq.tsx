@@ -12,7 +12,7 @@ export default function Faq({
   className?: string;
 }) {
   return (
-    <section className={cn('max-w-pc mx-auto w-full space-y-8', className)}>
+    <section data-faq-section className={cn('max-w-pc mx-auto w-full space-y-8', className)}>
       <h2 className='text-center text-2xl font-bold lg:pb-3 lg:text-3xl'>{title}</h2>
       <Accordion type='single' collapsible className='w-full px-3 lg:px-0'>
         {faqList.map((item, index) => (

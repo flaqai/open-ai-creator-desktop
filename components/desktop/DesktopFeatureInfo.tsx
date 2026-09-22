@@ -29,7 +29,7 @@ export default function DesktopFeatureInfo({ children, title, description }: Des
         onClick={() => setOpen(true)}
         className='group border-foreground/8 bg-foreground/[0.035] hover:border-foreground/15 hover:bg-foreground/[0.055] flex w-full items-center gap-4 rounded-2xl border px-5 py-4 text-left transition'
       >
-        <span className='flex size-10 shrink-0 items-center justify-center rounded-xl bg-[linear-gradient(135deg,rgba(92,36,255,.25),rgba(110,88,255,.25))] text-violet-200'>
+        <span className='desktop-guide-icon flex size-10 shrink-0 items-center justify-center rounded-xl'>
           <BookOpenText className='size-5' />
         </span>
         <span className='min-w-0 flex-1'>
@@ -62,7 +62,7 @@ export default function DesktopFeatureInfo({ children, title, description }: Des
             </div>
           </DialogHeader>
           <div
-            className='min-h-0 flex-1 overflow-y-auto'
+            className='desktop-tool-guide-content min-h-0 flex-1 overflow-y-auto'
             onClickCapture={(event) => {
               const target = event.target;
               if (
@@ -76,7 +76,7 @@ export default function DesktopFeatureInfo({ children, title, description }: Des
           >
             {children || (
               <div className='mx-auto flex h-full max-w-xl flex-col items-center justify-center px-8 py-16 text-center'>
-                <BookOpenText className='mb-5 size-9 text-violet-200/70' />
+                <BookOpenText className='text-primary/70 mb-5 size-9' />
                 <h2 className='text-foreground/85 text-xl font-semibold'>{title || t('toolGuide')}</h2>
                 <p className='text-foreground/45 mt-3 text-sm leading-6'>{description || t('toolGuideDescription')}</p>
               </div>

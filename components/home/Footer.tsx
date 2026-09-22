@@ -111,10 +111,7 @@ export default function Footer() {
 
   return (
     <footer className='border-foreground/10 text-foreground/70 relative isolate w-full overflow-hidden border-t bg-[#070708]'>
-      <div
-        aria-hidden='true'
-        className='pointer-events-none absolute inset-x-0 top-0 -z-10 h-64 bg-[radial-gradient(ellipse_at_top_left,rgba(76,82,254,0.13),transparent_58%)]'
-      />
+      <div aria-hidden='true' className='footer-brand-glow pointer-events-none absolute inset-x-0 top-0 -z-10 h-64' />
 
       <div className='max-w-pc mx-auto px-5 sm:px-8 xl:px-0'>
         <div className='grid gap-10 py-12 lg:grid-cols-[minmax(0,1.6fr)_minmax(160px,0.7fr)_minmax(160px,0.7fr)] lg:gap-14 lg:py-16'>
