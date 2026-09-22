@@ -37,17 +37,12 @@ test('R2 validation rejects incomplete or malformed config before persisting', (
 });
 
 test('desktop upload policy selects custom R2 without consulting built-in storage', async () => {
-  let bundledCalls = 0;
   let flaqCalls = 0;
   const custom = { ...config, bucketName: 'custom-bucket' };
   const authorize = createUploadAuthorizer({
     desktop: () => true,
     provider: () => 'custom-r2',
     customConfig: async () => custom,
-    bundledConfig: async () => {
-      bundledCalls++;
-      return config;
-    },
     directR2: async (mimeTypes, input) => ({
       rows: mimeTypes.map((mimeType) => ({ signedUrl: 'https://upload.test', url: input.bucketName, mimeType })),
     }),
@@ -59,11 +54,10 @@ test('desktop upload policy selects custom R2 without consulting built-in storag
 
   const result = await authorize(['image/png']);
   assert.equal(result.rows[0].url, 'custom-bucket');
-  assert.equal(bundledCalls, 0);
   assert.equal(flaqCalls, 0);
 });
 
-test('built-in desktop storage prefers the packaged R2 preset and falls back to the Flaq service', async () => {
+test('built-in desktop storage always requests upload URLs from the Flaq service', async () => {
   let directCalls = 0;
   let flaqCalls = 0;
   const direct = async (mimeTypes: string[], input: typeof config) => {
@@ -80,26 +74,14 @@ test('built-in desktop storage prefers the packaged R2 preset and falls back to 
     };
   };
 
-  const withBundle = createUploadAuthorizer({
+  const authorize = createUploadAuthorizer({
     desktop: () => true,
     provider: () => 'builtin',
-    bundledConfig: async () => config,
     directR2: direct,
     flaq,
   });
-  await withBundle(['image/png'], false);
-  assert.equal(directCalls, 1);
-  assert.equal(flaqCalls, 0);
-
-  const withoutBundle = createUploadAuthorizer({
-    desktop: () => true,
-    provider: () => 'builtin',
-    bundledConfig: async () => null,
-    directR2: direct,
-    flaq,
-  });
-  await withoutBundle(['video/mp4'], false);
-  assert.equal(directCalls, 1);
+  await authorize(['video/mp4'], false);
+  assert.equal(directCalls, 0);
   assert.equal(flaqCalls, 1);
 });
 

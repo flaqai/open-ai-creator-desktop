@@ -7,7 +7,6 @@ import { test } from 'node:test';
 
 import { buildDesktop, validatePrebuiltDesktopOutput } from '../scripts/desktop-build.mjs';
 import { desktopDevEnvironment } from '../scripts/desktop-dev.mjs';
-import { prepareBundledR2 } from '../scripts/prepare-bundled-r2.mjs';
 import { assertDesktopDevPortAvailable, DESKTOP_DEV_HOST, DESKTOP_DEV_PORT } from '../scripts/tauri-dev.mjs';
 
 test('desktop development enables desktop rendering before Next starts', () => {
@@ -51,61 +50,6 @@ test('desktop development refuses to attach to an already running frontend', asy
     await assert.rejects(assertDesktopDevPortAvailable(address.port, DESKTOP_DEV_HOST), /already in use/);
   } finally {
     await new Promise<void>((resolve, reject) => server.close((error) => (error ? reject(error) : resolve())));
-  }
-});
-
-test('desktop packaging encrypts the bundled R2 preset without leaving plaintext in generated source', async () => {
-  const dir = await mkdtemp(path.join(os.tmpdir(), 'flaq-r2-bundle-test-'));
-  try {
-    const output = path.join(dir, 'bundled_r2.rs');
-    const config = {
-      accountId: 'account-that-must-not-leak',
-      accessKeyId: 'access-that-must-not-leak',
-      secretAccessKey: 'secret-that-must-not-leak',
-      bucketName: 'bucket-that-must-not-leak',
-      publicDomain: 'https://assets-that-must-not-leak.example.test',
-    };
-    const result = await prepareBundledR2(dir, {
-      output,
-      config,
-      encryptionKey: Buffer.alloc(32, 7),
-      nonce: Buffer.alloc(12, 3),
-    });
-    const generated = await readFile(output, 'utf8');
-
-    assert.equal(result.available, true);
-    for (const secret of Object.values(config)) assert.equal(generated.includes(secret), false);
-    assert.match(generated, /BUNDLED_R2_AVAILABLE: bool = true/);
-    assert.match(generated, /BUNDLED_R2_CIPHERTEXT/);
-  } finally {
-    await rm(dir, { recursive: true, force: true });
-  }
-});
-
-test('desktop packaging emits an unavailable placeholder when no bundled R2 preset exists', async () => {
-  const dir = await mkdtemp(path.join(os.tmpdir(), 'flaq-r2-bundle-test-'));
-  try {
-    const output = path.join(dir, 'bundled_r2.rs');
-    const result = await prepareBundledR2(dir, { output, environment: {} });
-    assert.equal(result.available, false);
-    assert.match(await readFile(output, 'utf8'), /BUNDLED_R2_AVAILABLE: bool = false/);
-  } finally {
-    await rm(dir, { recursive: true, force: true });
-  }
-});
-
-test('release packaging refuses to publish an installer without the bundled R2 preset', async () => {
-  const dir = await mkdtemp(path.join(os.tmpdir(), 'flaq-r2-bundle-test-'));
-  try {
-    await assert.rejects(
-      prepareBundledR2(dir, {
-        output: path.join(dir, 'bundled_r2.rs'),
-        environment: { FLAQ_REQUIRE_BUNDLED_R2: 'true' },
-      }),
-      /required for this build/,
-    );
-  } finally {
-    await rm(dir, { recursive: true, force: true });
   }
 });
 

@@ -16,12 +16,26 @@ export interface OpenApiConfig {
 }
 
 export interface OpenApiErrorPayload {
+  code?: number | string;
+  message?: string;
   error?: {
     code?: string;
     message?: string;
     param?: string;
     type?: string;
   };
+}
+
+export class OpenApiHttpError extends Error {
+  readonly status: number;
+  readonly code?: number | string;
+
+  constructor(message: string, status: number, code?: number | string) {
+    super(message);
+    this.name = 'OpenApiHttpError';
+    this.status = status;
+    this.code = code;
+  }
 }
 
 type OpenApiRequestOptions = {
@@ -146,10 +160,11 @@ export async function openApiFetchJson<TResponse>(
   const data = (await res.json().catch(() => null)) as null | TResponse | OpenApiErrorPayload;
 
   if (!res.ok) {
+    const errorPayload = data as OpenApiErrorPayload | null;
     const errorMessage =
-      (data as OpenApiErrorPayload | null)?.error?.message || res.statusText || 'Open API request failed';
+      errorPayload?.error?.message || errorPayload?.message || res.statusText || 'Open API request failed';
     void writeDesktopLog('error', 'open-api', `${method} ${path} returned HTTP ${res.status}: ${errorMessage}`);
-    throw new Error(errorMessage);
+    throw new OpenApiHttpError(errorMessage, res.status, errorPayload?.code || errorPayload?.error?.code);
   }
 
   if (!data || typeof data !== 'object') {

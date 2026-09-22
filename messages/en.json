@@ -145,8 +145,8 @@
     "image-hosting": {
       "title": "Image hosting",
       "builtin": "Flaq storage (default)",
-      "builtin-description": "Use the Flaq R2 configuration already provisioned in the app.",
-      "builtin-hint": "Local media uploads directly to R2 first. After upload, only the public URL is sent to the generation API.",
+      "builtin-description": "Flaq securely manages the storage credentials. Connect Flaq to request upload URLs.",
+      "builtin-hint": "The app requests a short-lived upload URL with your Client Key, uploads media directly to storage, then sends only the public URL to the generation API.",
       "custom": "Custom Cloudflare R2",
       "custom-description": "Use your own R2 account, bucket, and public asset domain.",
       "custom-desktop-only": "Custom R2 is available in the desktop app only.",

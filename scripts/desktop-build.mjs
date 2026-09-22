@@ -4,7 +4,6 @@ import { createRequire } from 'node:module';
 import path from 'node:path';
 import { pathToFileURL } from 'node:url';
 
-import { prepareBundledR2 } from './prepare-bundled-r2.mjs';
 import { prepareMedia } from './prepare-media.mjs';
 
 const require = createRequire(import.meta.url);
@@ -61,7 +60,6 @@ export async function validatePrebuiltDesktopOutput(projectRoot) {
 }
 
 export async function buildDesktop(projectRoot, runBuild = runNextBuild, environment = process.env) {
-  await prepareBundledR2(projectRoot, { environment });
   if (environment.FLAQ_DESKTOP_PREBUILT_OUT === 'true') {
     await validatePrebuiltDesktopOutput(projectRoot);
     console.log('Using validated prebuilt desktop frontend output.');

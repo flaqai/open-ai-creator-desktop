@@ -43,12 +43,12 @@ trimming is requested. A serial queue protects the shared runtime and temporary 
 
 Desktop HTTP(S) API requests, signed uploads and media fetches use the native HTTP adapter, avoiding browser CORS
 dependence. Normal web requests retain the original server signing/proxy adapters. The built-in Flaq storage provider
-first reads the encrypted R2 preset packaged for the desktop build and signs short-lived PUT URLs locally. If that
-preset is absent, it falls back to the configured Client Key and `/image/presignedUrl`. Users can alternatively select a
-separately stored custom R2 configuration, which is also signed locally. AWS signing code is lazy-loaded until a direct
-R2 path is selected. Uploads validate every signed row before sending, run at most three transfers per batch and
-preserve reference order. A failed transfer rejects the batch; successful objects from an earlier transfer are not
-deleted automatically.
+uses the configured Client Key to request at most ten 60-second PUT URLs from `/api/v1/files/presignedUrl`; shared R2
+credentials remain on the Flaq service and are never packaged with the application. Users can alternatively select a
+separately stored custom R2 configuration, which is signed locally. AWS signing code is lazy-loaded until that custom
+path is selected. Uploads validate every signed row before sending, run at most three transfers per batch and preserve
+reference order. A failed transfer rejects the batch; successful objects from an earlier transfer are not deleted
+automatically.
 
 Preview object URLs are session-only views over in-memory files and never become durable form values. Desktop drafts
 store media as owned ArrayBuffer bytes plus file metadata in IndexedDB; this avoids WebKit's external Blob references
@@ -83,14 +83,14 @@ encrypted keys, so saving it cannot overwrite the default configuration. Both le
 untouched when only API connection data is cleared. New-format browser encryption is independent of browser version and
 locale. The expensive derived key is cached; encryption failures never silently persist plaintext.
 
-The packaged built-in R2 preset is a temporary distribution choice. Encrypting it in the application package is
-obfuscation, not secret isolation: a determined user can extract both the encrypted payload and the code needed to
-decrypt it. The `/image/presignedUrl` fallback is the safer long-term boundary because shared credentials remain on the
-service. Do not describe the packaged preset as a credential vault or rely on it to resist reverse engineering.
+The built-in storage path never receives shared R2 credentials. It only receives short-lived signed upload URLs and the
+corresponding public asset URLs from Flaq. Release builds therefore do not require R2 secrets or a client-side
+encryption key. Custom R2 remains an explicit user-owned alternative with the weaker WebView storage threat model
+described above.
 
 The native `auth.json` is deliberately readable by the local user and is not a credential vault. Injected JavaScript can
-also observe a key while the app is using it for a request. Custom R2 browser storage has the weaker WebView threat model
-described above. Never embed user keys in source, environment defaults or installers.
+also observe a key while the app is using it for a request. Custom R2 browser storage has the weaker WebView threat
+model described above. Never embed user keys in source, environment defaults or installers.
 
 Polling reserves a task before its first asynchronous request, carries abort signals, and cannot restart a stopped
 timer. Missing session keys pause restoration rather than fail paid jobs. Older pending tasks are queried once before
@@ -104,6 +104,6 @@ cancellation, recovery, isolated build failure and model/language parity. Rust t
 HTTP download success/failure protection. [Review report](REVIEW_REPORT.md) distinguishes automated checks, manual UI
 checks and untested external/platform paths.
 
-The desktop CI matrix builds macOS, Windows and Linux; it has not been executed merely by adding the workflow. Native
-installers need target-OS build/smoke checks. Public distribution additionally requires macOS signing/notarization and
-Windows signing credentials.
+The desktop CI matrix packages macOS and Windows installers after an Ubuntu preflight build; it has not been executed
+merely by adding the workflow. Native installers need target-OS build/smoke checks. Public distribution additionally
+requires macOS signing/notarization and Windows signing credentials.

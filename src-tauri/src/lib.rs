@@ -35,7 +35,6 @@ pub fn run() {
             }
         })
         .invoke_handler(tauri::generate_handler![
-            bundled_r2::get_bundled_r2_config,
             connection_settings::load_connection_settings,
             connection_settings::save_connection_settings,
             connection_settings::clear_connection_settings,
@@ -56,7 +55,6 @@ pub fn run() {
             }
         });
 }
-mod bundled_r2;
 mod connection_settings;
 mod desktop;
 mod logs;

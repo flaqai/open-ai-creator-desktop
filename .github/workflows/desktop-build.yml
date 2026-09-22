@@ -131,12 +131,6 @@ jobs:
       - name: Build native bundles from the reusable frontend
         env:
           FLAQ_DESKTOP_PREBUILT_OUT: 'true'
-          FLAQ_REQUIRE_BUNDLED_R2: 'true'
-          FLAQ_BUNDLED_R2_ACCOUNT_ID: ${{ secrets.FLAQ_BUNDLED_R2_ACCOUNT_ID }}
-          FLAQ_BUNDLED_R2_ACCESS_KEY_ID: ${{ secrets.FLAQ_BUNDLED_R2_ACCESS_KEY_ID }}
-          FLAQ_BUNDLED_R2_SECRET_ACCESS_KEY: ${{ secrets.FLAQ_BUNDLED_R2_SECRET_ACCESS_KEY }}
-          FLAQ_BUNDLED_R2_BUCKET_NAME: ${{ secrets.FLAQ_BUNDLED_R2_BUCKET_NAME }}
-          FLAQ_BUNDLED_R2_PUBLIC_DOMAIN: ${{ secrets.FLAQ_BUNDLED_R2_PUBLIC_DOMAIN }}
         run: >-
           pnpm exec tauri build --ci --no-sign --target ${{ matrix.rustTarget }} --bundles ${{ matrix.bundles }}
 

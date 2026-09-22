@@ -1,5 +1,5 @@
 import { getConfiguredCustomR2 } from '@/lib/desktop/image-hosting-settings';
-import { isDesktopRuntime, isNativeDesktop } from '@/lib/desktop/runtime';
+import { isDesktopRuntime } from '@/lib/desktop/runtime';
 import { getUploadProvider, R2_PUBLIC_DOMAIN_STORAGE_KEY, type UploadProvider } from '@/lib/desktop/storage';
 import { getSecureItem } from '@/lib/utils/secureStorage';
 
@@ -11,17 +11,10 @@ type UploadPolicyDependencies = {
   desktop: () => boolean;
   provider: () => UploadProvider;
   customConfig: () => Promise<R2Config>;
-  bundledConfig: () => Promise<R2Config | null>;
   directR2: (mimeTypes: string[], config: R2Config) => Promise<CreateSignedUrlResponse>;
   flaq: (mimeTypes: string[], isForever?: boolean) => Promise<CreateSignedUrlResponse>;
   web: (mimeTypes: string[]) => Promise<CreateSignedUrlResponse>;
 };
-
-async function getBundledDesktopR2Config(): Promise<R2Config | null> {
-  if (!isNativeDesktop()) return null;
-  const { invoke } = await import('@tauri-apps/api/core');
-  return invoke<R2Config | null>('get_bundled_r2_config');
-}
 
 async function createWebSignedUrls(mimeTypes: string[]): Promise<CreateSignedUrlResponse> {
   const publicDomain = await getSecureItem(R2_PUBLIC_DOMAIN_STORAGE_KEY);
@@ -42,7 +35,6 @@ const defaultDependencies: UploadPolicyDependencies = {
   desktop: isDesktopRuntime,
   provider: getUploadProvider,
   customConfig: getConfiguredCustomR2,
-  bundledConfig: getBundledDesktopR2Config,
   directR2: createDesktopSignedUrls,
   flaq: createFlaqSignedUrls,
   web: createWebSignedUrls,
@@ -56,8 +48,6 @@ export function createUploadAuthorizer(overrides: Partial<UploadPolicyDependenci
     if (dependencies.provider() === 'custom-r2') {
       return dependencies.directR2(mimeTypes, await dependencies.customConfig());
     }
-    const bundled = await dependencies.bundledConfig();
-    if (bundled) return dependencies.directR2(mimeTypes, bundled);
     return dependencies.flaq(mimeTypes, isForever);
   };
 }

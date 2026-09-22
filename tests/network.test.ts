@@ -231,35 +231,37 @@ test('built-in Flaq storage requests authenticated presigned URLs without R2 cre
     request = { url: String(url), init };
     return json({
       code: 200,
-      total: 2,
-      msg: 'success',
-      rows: [
-        { signedUrl: 'https://upload.test/1', url: 'https://asset.test/1' },
-        { signedUrl: 'https://upload.test/2', url: 'https://asset.test/2' },
+      message: 'success',
+      data: [
+        { signed_url: 'https://upload.test/1', url: 'https://asset.test/1' },
+        { signed_url: 'https://upload.test/2', url: 'https://asset.test/2' },
       ],
     });
   };
 
-  const result = await createFlaqSignedUrls(['image/png', 'video/mp4'], true, {
-    config,
-    site: 'desktop-test',
-  });
+  const result = await createFlaqSignedUrls(['image/png', 'video/mp4'], true, { config });
 
-  assert.equal(request?.url, 'https://api.example.test/image/presignedUrl');
+  assert.equal(request?.url, 'https://api.example.test/api/v1/files/presignedUrl');
   assert.equal(request?.init?.method, 'POST');
   assert.equal(new Headers(request?.init?.headers).get('Authorization'), 'Bearer test-only-key');
   assert.deepEqual(JSON.parse(request?.init?.body as string), {
-    mineType: ['image/png', 'video/mp4'],
-    site: 'desktop-test',
-    isForever: true,
+    files: [{ mime_type: 'image/png' }, { mime_type: 'video/mp4' }],
   });
   assert.deepEqual(
     result.rows.map((row) => row.mimeType),
     ['image/png', 'video/mp4'],
   );
 
-  globalThis.fetch = async () => json({ code: 401, msg: 'not authorized', data: null });
-  await assert.rejects(createFlaqSignedUrls(['image/png'], false, { config, site: 'desktop-test' }), /not authorized/);
+  globalThis.fetch = async () => json({ code: 401, message: 'not authorized', data: null }, 401);
+  await assert.rejects(createFlaqSignedUrls(['image/png'], false, { config }), /not authorized to upload media/);
+  await assert.rejects(
+    createFlaqSignedUrls(
+      Array.from({ length: 11 }, () => 'image/png'),
+      false,
+      { config },
+    ),
+    /at most 10 files/,
+  );
 });
 
 test('retry handles transient failures, avoids permanent retries and respects cancellation', async () => {
@@ -331,14 +333,7 @@ test('upload pipeline authorizes, transfers and treats catalog recording as best
   const sign = createUploadAuthorizer({
     desktop: () => true,
     provider: () => 'builtin',
-    bundledConfig: async () => ({
-      accountId: 'account',
-      accessKeyId: 'access',
-      secretAccessKey: 'secret',
-      bucketName: 'bucket',
-      publicDomain: 'assets.test',
-    }),
-    directR2: async (mimeTypes) => ({
+    flaq: async (mimeTypes) => ({
       rows: mimeTypes.map((mimeType, index) => ({
         signedUrl: `https://upload.test/${index}`,
         url: `https://asset.test/${index}`,

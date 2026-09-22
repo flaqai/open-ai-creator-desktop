@@ -145,8 +145,8 @@
     "image-hosting": {
       "title": "图床设置",
       "builtin": "Flaq 自带图床（默认）",
-      "builtin-description": "使用应用已配置的 Flaq R2，无需额外设置。",
-      "builtin-hint": "本地素材会先直传 R2，上传成功后再将公开 URL 发送给生成接口，文件本体不经过生成后端。",
+      "builtin-description": "存储密钥由 Flaq 服务安全托管，连接 Flaq 后即可申请上传地址。",
+      "builtin-hint": "应用使用 Client Key 申请短期上传 URL，将素材直传存储服务，再只把公开 URL 发送给生成接口。",
       "custom": "自定义 Cloudflare R2",
       "custom-description": "使用你自己的 R2 账户、存储桶和公开域名。",
       "custom-desktop-only": "自定义 R2 仅在桌面端可用。",
