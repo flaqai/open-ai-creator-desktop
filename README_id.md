@@ -11,21 +11,19 @@ terpasang tetap Flaq Creator.
 [繁體中文](./README_tw.md) · [한국어](./README_ko.md) · [ไทย](./README_th.md) · [Tiếng Việt](./README_vi.md) ·
 [العربية](./README_ar.md)
 
-## Tentang Flaq.ai
+## Tentang Flaq AI
 
-[Flaq.ai](https://flaq.ai/id/) adalah platform model AI untuk kreator dan pengembang. Satu API key memberikan akses
-terpadu ke pembuatan dan penyuntingan gambar, pembuatan video, serta model bahasa.
+[Flaq AI](https://flaq.ai/id/) adalah platform AI untuk kreator, pengembang, dan bisnis yang menyatukan model AI
+terkemuka dan populer untuk pembuatan serta penyuntingan gambar, pembuatan video, dan pemrosesan bahasa.
 
-- **Jelajahi dan bandingkan model** — Lihat kemampuan, parameter yang didukung, dan harga terkini di
-  [Model Market](https://flaq.ai/model-market/).
-- **Coba sebelum integrasi** — Uji model yang didukung di Playground Flaq.ai untuk menyempurnakan prompt dan pengaturan
-  generasi.
-- **Bangun alur kreatif** — Gunakan [dokumentasi API](https://flaq.ai/docs/) untuk mengintegrasikan AI ke produk dan
-  alat Anda.
+- **API dengan konkurensi tinggi dan stabilitas tinggi** — Integrasikan generasi AI ke produk dan alur produksi melalui
+  API terpadu.
+- **Langsung digunakan secara daring** — Gunakan model dan alat kreatif di [Flaq AI](https://flaq.ai/id/) melalui
+  browser, tanpa menulis kode atau memasang aplikasi desktop.
+- **Jelajahi dan integrasikan model** — Bandingkan kemampuan di [pasar model](https://flaq.ai/id/model-market/) dan
+  mulai melalui [dokumentasi API](https://flaq.ai/id/docs/).
 
-Flaq Creator Desktop menghadirkan alur gambar dan video dalam ruang kerja desktop khusus. Hubungkan Client Key Flaq.ai
-di aplikasi untuk membuat dan mengelola aset visual. Tidak semua API platform tersedia di aplikasi desktop; lihat model
-dan harga yang berlaku di Flaq.ai.
+Kontak bisnis: [contact@flaq.ai](mailto:contact@flaq.ai)
 
 ## Implementasi saat ini
 
@@ -40,7 +38,7 @@ dan pengarsipan merupakan status terpisah.
 ## Mulai cepat
 
 Jalankan dari akar repositori ini. Memerlukan Node.js 22, pnpm 10.5.2, Rust, dan dependensi Tauri sesuai OS. Masukkan
-Client Key Flaq.ai di Pengaturan → Koneksi, uji, lalu simpan. Base URL bawaan: `https://api.flaq.ai`. Generasi nyata
+Client Key Flaq AI di Pengaturan → Koneksi, uji, lalu simpan. Base URL bawaan: `https://api.flaq.ai`. Generasi nyata
 memerlukan internet dan kredit API.
 
 ```bash
@@ -74,9 +72,9 @@ prefiks untuk lainnya. Bahasa Arab menggunakan RTL.
 
 `en`, `ja`, `id`, `it`, `pt`, `es`, `de`, `ru`, `fr`, `zh`, `tw`, `ko`, `th`, `vi`, `ar`
 
-## Program Afiliasi Flaq.ai
+## Program Afiliasi Flaq AI
 
-Jadilah mitra afiliasi Flaq.ai dan dapatkan komisi dengan memperkenalkan alur gambar dan video AI, API model, serta alat
+Jadilah mitra afiliasi Flaq AI dan dapatkan komisi dengan memperkenalkan alur gambar dan video AI, API model, serta alat
 kreatif. Program ini terbuka bagi kreator, desainer, pengembang, pendidik AI, pengulas model, dan tim yang berbagi alur
 AI praktis.
 
@@ -84,13 +82,13 @@ AI praktis.
   valid berikutnya dalam 60 hari setelah pendaftaran, sesuai aturan kelayakan dan atribusi.
 - **Promosi fleksibel** — Bagikan tautan rujukan melalui tutorial, ulasan model, karya kreatif, komunitas, atau panduan
   integrasi API.
-- **Ruang kerja mitra** — Kelola tautan, tinjau aktivitas rujukan, dan atur pembayaran di Flaq.ai.
+- **Ruang kerja mitra** — Kelola tautan, tinjau aktivitas rujukan, dan atur pembayaran di Flaq AI.
 
-Masuk ke Flaq.ai, lengkapi profil afiliasi dan persetujuan perjanjian, lalu buat tautan rujukan Anda. Proyek ini juga
-menyediakan promosi afiliasi multibahasa; pendaftaran mitra dan pengelolaan komisi dilakukan di Flaq.ai, bukan di
+Masuk ke Flaq AI, lengkapi profil afiliasi dan persetujuan perjanjian, lalu buat tautan rujukan Anda. Proyek ini juga
+menyediakan promosi afiliasi multibahasa; pendaftaran mitra dan pengelolaan komisi dilakukan di Flaq AI, bukan di
 aplikasi desktop.
 
-**[Bergabung dengan Program Afiliasi Flaq.ai →](https://flaq.ai/id/affiliate-program/)**
+**[Bergabung dengan Program Afiliasi Flaq AI →](https://flaq.ai/id/affiliate-program/)**
 
 > Kelayakan komisi, atribusi, pengembalian dana, peninjauan pembayaran, dan kerja sama khusus yang disetujui mengikuti
 > ketentuan terbaru pada halaman resmi program.

@@ -11,21 +11,20 @@ dell’app installata rimane Flaq Creator.
 [繁體中文](./README_tw.md) · [한국어](./README_ko.md) · [ไทย](./README_th.md) · [Tiếng Việt](./README_vi.md) ·
 [العربية](./README_ar.md)
 
-## Informazioni su Flaq.ai
+## Informazioni su Flaq AI
 
-[Flaq.ai](https://flaq.ai/it/) è una piattaforma di modelli AI per creatori e sviluppatori. Un'unica chiave API offre
-accesso unificato alla generazione e modifica di immagini, alla generazione di video e ai modelli linguistici.
+[Flaq AI](https://flaq.ai/it/) è una piattaforma di IA per creatori, sviluppatori e aziende che riunisce i principali
+modelli di IA più diffusi per generare e modificare immagini, creare video e svolgere attività linguistiche.
 
-- **Esplora e confronta i modelli** — Consulta capacità, parametri supportati e prezzi attuali nel
-  [Model Market](https://flaq.ai/model-market/).
-- **Prova prima dell'integrazione** — Usa il Playground di Flaq.ai per testare i modelli supportati e perfezionare
-  prompt e impostazioni.
-- **Crea flussi di lavoro creativi** — Segui la [documentazione API](https://flaq.ai/docs/) per integrare l'AI nei tuoi
-  prodotti e strumenti.
+- **API ad alta concorrenza e stabilità** — Integra la generazione IA nei prodotti e nei flussi di produzione tramite
+  un’API unificata.
+- **Utilizzo diretto online** — Usa modelli e strumenti creativi su [Flaq AI](https://flaq.ai/it/) nel browser, senza
+  scrivere codice o installare l’app desktop.
+- **Esplora e integra i modelli** — Confronta le funzionalità nel
+  [catalogo dei modelli](https://flaq.ai/it/model-market/) e inizia con la
+  [documentazione API](https://flaq.ai/it/docs/).
 
-Flaq Creator Desktop porta i flussi di immagini e video in uno spazio di lavoro desktop dedicato. Collega il tuo Client
-Key Flaq.ai nell'app per creare e gestire risorse visive. Non tutte le API della piattaforma sono disponibili nell'app
-desktop; modelli e prezzi aggiornati sono indicati su Flaq.ai.
+Contatti commerciali: [contact@flaq.ai](mailto:contact@flaq.ai)
 
 ## Implementazione attuale
 
@@ -40,7 +39,7 @@ online. Generazione e archiviazione hanno stati di successo separati.
 ## Avvio rapido
 
 Esegui dalla radice di questo repository. Servono Node.js 22, pnpm 10.5.2, Rust e le dipendenze Tauri del sistema
-operativo. In Impostazioni → Connessione inserisci il Client Key Flaq.ai, verifica e salva. Base URL predefinito:
+operativo. In Impostazioni → Connessione inserisci il Client Key Flaq AI, verifica e salva. Base URL predefinito:
 `https://api.flaq.ai`. La generazione reale richiede Internet e crediti API.
 
 ```bash
@@ -74,9 +73,9 @@ altri. L’arabo usa RTL.
 
 `en`, `ja`, `id`, `it`, `pt`, `es`, `de`, `ru`, `fr`, `zh`, `tw`, `ko`, `th`, `vi`, `ar`
 
-## Programma di affiliazione Flaq.ai
+## Programma di affiliazione Flaq AI
 
-Diventa partner affiliato Flaq.ai e guadagna commissioni presentando flussi di immagini e video AI, API dei modelli e
+Diventa partner affiliato Flaq AI e guadagna commissioni presentando flussi di immagini e video AI, API dei modelli e
 strumenti creativi. Il programma accoglie creatori, designer, sviluppatori, formatori AI, recensori di modelli e team
 che condividono flussi AI pratici.
 
@@ -85,13 +84,13 @@ che condividono flussi AI pratici.
   attribuzione.
 - **Promozione flessibile** — Condividi il tuo link in tutorial, recensioni, progetti creativi, community o guide di
   integrazione API.
-- **Area partner** — Gestisci i link, verifica le attività di segnalazione e configura i pagamenti su Flaq.ai.
+- **Area partner** — Gestisci i link, verifica le attività di segnalazione e configura i pagamenti su Flaq AI.
 
-Accedi a Flaq.ai, completa il profilo e accetta l'accordo di affiliazione, quindi crea il tuo link personale. Il
-progetto include anche inviti localizzati al programma; l'iscrizione e la gestione delle commissioni avvengono su
-Flaq.ai, non nell'app desktop.
+Accedi a Flaq AI, completa il profilo e accetta l'accordo di affiliazione, quindi crea il tuo link personale. Il
+progetto include anche inviti localizzati al programma; l'iscrizione e la gestione delle commissioni avvengono su Flaq
+AI, non nell'app desktop.
 
-**[Partecipa al programma di affiliazione Flaq.ai →](https://flaq.ai/it/affiliate-program/)**
+**[Partecipa al programma di affiliazione Flaq AI →](https://flaq.ai/it/affiliate-program/)**
 
 > Idoneità alle commissioni, attribuzione, rimborsi, verifica dei pagamenti e accordi personalizzati approvati sono
 > regolati dalle condizioni aggiornate della pagina ufficiale.

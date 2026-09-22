@@ -12,17 +12,18 @@
 [繁體中文](./README_tw.md) · [한국어](./README_ko.md) · [ไทย](./README_th.md) · [Tiếng Việt](./README_vi.md) ·
 [العربية](./README_ar.md)
 
-## 关于 Flaq.ai
+## 关于 Flaq AI
 
-[Flaq.ai](https://flaq.ai/zh/) 是面向创作者和开发者的 AI 模型平台，通过一个 API
-Key 统一接入图片生成与编辑、视频生成和语言模型。
+[Flaq AI](https://flaq.ai/zh/)
+是面向创作者、开发者和企业的 AI 平台，汇聚最主流的 AI 模型，覆盖图片生成与编辑、视频生成及语言模型等能力。
 
-- **探索与比较模型** — 在[模型市场](https://flaq.ai/model-market/)查看模型能力、支持参数和当前价格。
-- **接入前先体验** — 使用 Flaq.ai 的 Playground 测试支持的模型，调整提示词和生成参数。
-- **构建创作工作流** — 参考 [API 文档](https://flaq.ai/docs/)，将 AI 能力接入自己的产品和工具。
+- **高并发、高稳定性的 API 服务** — 通过统一的 AI 生成 API，将模型能力接入产品与生产工作流。
+- **支持直接在线使用** — 无需编写代码或安装桌面应用，即可在
+  [Flaq AI 官网](https://flaq.ai/zh/)通过浏览器体验模型与 AI 创作工具。
+- **探索模型与快速接入** — 在[模型市场](https://flaq.ai/zh/model-market/)比较模型能力，通过
+  [API 文档](https://flaq.ai/zh/docs/)完成集成。
 
-Flaq Creator Desktop 将平台的图片与视频工作流带到独立桌面工作台。在应用中配置 Flaq.ai Client
-Key，即可创作和管理视觉素材。平台提供的全部 API 能力并不意味着桌面应用均已支持；可用模型和使用价格以 Flaq.ai 官网为准。
+商务联系: [contact@flaq.ai](mailto:contact@flaq.ai)
 
 ## 功能与页面
 
@@ -39,19 +40,19 @@ Key，即可创作和管理视觉素材。平台提供的全部 API 能力并不
 | 参考生视频       | `/reference-to-video` | 根据参考素材生成视频             |
 
 输入类型、数量限制和参数以所选模型为准；实际接入能力以
-[lib/constants/template-models/](./lib/constants/template-models/) 为准，不等于 Flaq.ai 平台全部模型。
+[lib/constants/template-models/](./lib/constants/template-models/) 为准，不等于 Flaq AI 平台全部模型。
 
 桌面体验还包括：
 
 - **提示词素材库**（`/recommended-prompts`）：按模型分类的固定内容快照，支持复制完整提示词、图片／视频预览、缩放与拖动查看。示例图片随应用提供，示例视频需要联网播放；合集中的模型名称不代表生成表单已经接入该模型。
 - **素材目录**（`/media-library`，也内嵌于“设置 → 历史记录”）：聚合已上传参考素材和生成作品，按类型、来源筛选和搜索，查看预览、下载与本地归档状态。
-- **创作工作台**：首次启动的 Flaq.ai 配置引导、连接测试、模型与参数选择、上下文帮助弹窗、外观和语言设置。
+- **创作工作台**：首次启动的 Flaq AI 配置引导、连接测试、模型与参数选择、上下文帮助弹窗、外观和语言设置。
 - **草稿与历史恢复**：输入素材字节保存在 IndexedDB，任务历史与上传素材索引保存在本机。待完成任务恢复的是状态查询，不会重新提交一次付费生成。
 - **本地作品归档**：桌面端生成结果按 `YYYY/MM/DD`
   保存到可配置目录。归档恢复只重试保存已有结果；“生成成功”和“本地归档成功”是两个独立状态。
 - **媒体工具**：原生保存对话框、PNG／JPEG／WebP 图片导出、按需加载的 FFmpeg WASM 裁剪。
 
-真实生成需要联网、有效的 Flaq.ai Client Key 和足够额度。本项目不是离线模型运行器，也不是跨设备同步的云端资产管理系统。
+真实生成需要联网、有效的 Flaq AI Client Key 和足够额度。本项目不是离线模型运行器，也不是跨设备同步的云端资产管理系统。
 
 ## 快速开始
 
@@ -61,7 +62,7 @@ Key，即可创作和管理视觉素材。平台提供的全部 API 能力并不
 - pnpm **10.5.2**，与 [package.json](./package.json) 的 `packageManager` 一致。
 - 原生开发与打包需要 Rust 和目标操作系统对应的
   [Tauri 环境依赖](https://v2.tauri.app/start/prerequisites/)。仅构建静态前端不需要 Rust。
-- 真实生成需要 Flaq.ai 账号和 Client Key；默认桌面图床**不要求自行申请 Cloudflare 账号**。
+- 真实生成需要 Flaq AI 账号和 Client Key；默认桌面图床**不要求自行申请 Cloudflare 账号**。
 
 在本仓库根目录执行：
 
@@ -73,9 +74,9 @@ pnpm desktop:dev
 开发版使用独立应用标识 `ai.flaq.creator.dev`，安装版使用
 `ai.flaq.creator`。两者的配置、WebView 数据和默认作品目录互相隔离。
 
-### 连接 Flaq.ai
+### 连接 Flaq AI
 
-1. 登录 [Flaq.ai](https://flaq.ai/zh/)，获取 Client Key。
+1. 登录 [Flaq AI](https://flaq.ai/zh/)，获取 Client Key。
 2. 按首次启动引导操作，或打开“设置 → 连接”。
 3. Base URL 默认使用 `https://api.flaq.ai`；也可以填写兼容且可信的网关。
 4. 填写 Client Key，测试连接并保存。
@@ -210,18 +211,21 @@ docs/               架构、扩展指南、Review 记录与 README 横幅
   共用中文文案，其他语言在这些面板中回退到英文；注册了 15 个语种不代表每条新界面文案都已翻译完成。
 - 新增语种需同步 [i18n/languages.ts](./i18n/languages.ts)、`messages/`、路由与构建的语种处理、对应 README 和一致性测试。
 
-## Flaq.ai 联盟计划
+## Flaq AI 联盟计划
 
-加入 Flaq.ai 联盟合作伙伴计划，向受众介绍 AI 图片与视频工作流、模型 API 和创作工具，获得推荐佣金。计划欢迎创作者、设计师、开发者、AI 教育者、模型评测者及分享实用 AI 工作流的团队参与。
+加入 Flaq
+AI 联盟合作伙伴计划，向受众介绍 AI 图片与视频工作流、模型 API 和创作工具，获得推荐佣金。计划欢迎创作者、设计师、开发者、AI 教育者、模型评测者及分享实用 AI 工作流的团队参与。
 
 - **推荐奖励**
   — 推荐用户的首笔有效付费订单可获得 20% 佣金，注册后 60 天内的后续有效付费订单可获得 10% 佣金，具体以资格与归因规则为准。
 - **灵活推广** — 在教程、模型评测、创作案例、社区或 API 接入指南中分享专属推荐链接。
-- **合作伙伴工作台** — 在 Flaq.ai 管理推荐链接、查看推荐活动并配置收款信息。
+- **合作伙伴工作台** — 在 Flaq AI 管理推荐链接、查看推荐活动并配置收款信息。
 
-登录 Flaq.ai，完善联盟资料并确认协议后，即可创建专属推荐链接。本项目也提供本地化的联盟推广入口；合作伙伴申请和佣金管理在 Flaq.ai 网站完成，而非桌面应用内。
+登录 Flaq
+AI，完善联盟资料并确认协议后，即可创建专属推荐链接。本项目也提供本地化的联盟推广入口；合作伙伴申请和佣金管理在 Flaq
+AI 网站完成，而非桌面应用内。
 
-**[加入 Flaq.ai 联盟合作伙伴计划 →](https://flaq.ai/zh/affiliate-program/)**
+**[加入 Flaq AI 联盟合作伙伴计划 →](https://flaq.ai/zh/affiliate-program/)**
 
 > 佣金资格、归因、退款、结算审核及经批准的定制合作安排，均以官方计划页面的最新条款为准。
 

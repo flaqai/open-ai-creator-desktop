@@ -11,21 +11,19 @@ cài đặt vẫn là Flaq Creator.
 [繁體中文](./README_tw.md) · [한국어](./README_ko.md) · [ไทย](./README_th.md) · [Tiếng Việt](./README_vi.md) ·
 [العربية](./README_ar.md)
 
-## Giới thiệu Flaq.ai
+## Giới thiệu Flaq AI
 
-[Flaq.ai](https://flaq.ai/vi/) là nền tảng mô hình AI dành cho nhà sáng tạo và lập trình viên. Một khóa API cung cấp
-quyền truy cập thống nhất vào khả năng tạo và chỉnh sửa ảnh, tạo video và các mô hình ngôn ngữ.
+[Flaq AI](https://flaq.ai/vi/) là nền tảng AI dành cho nhà sáng tạo, lập trình viên và doanh nghiệp, tập hợp các mô hình
+AI chủ đạo hàng đầu cho tạo và chỉnh sửa ảnh, tạo video và xử lý ngôn ngữ.
 
-- **Khám phá và so sánh mô hình** — Xem khả năng, tham số được hỗ trợ và giá hiện tại tại
-  [Model Market](https://flaq.ai/model-market/).
-- **Thử trước khi tích hợp** — Dùng Playground của Flaq.ai để thử các mô hình được hỗ trợ, tinh chỉnh prompt và cài đặt
-  tạo nội dung.
-- **Xây dựng quy trình sáng tạo** — Tham khảo [tài liệu API](https://flaq.ai/docs/) để tích hợp AI vào sản phẩm và công
-  cụ của bạn.
+- **API có khả năng xử lý đồng thời cao và độ ổn định cao** — Tích hợp khả năng tạo nội dung AI vào sản phẩm và quy
+  trình vận hành qua một API thống nhất.
+- **Sử dụng trực tiếp trên web** — Dùng mô hình và công cụ sáng tạo trên [Flaq AI](https://flaq.ai/vi/) trong trình
+  duyệt, không cần viết mã hay cài ứng dụng desktop.
+- **Khám phá và tích hợp mô hình** — So sánh khả năng tại [chợ mô hình](https://flaq.ai/vi/model-market/) và bắt đầu với
+  [tài liệu API](https://flaq.ai/vi/docs/).
 
-Flaq Creator Desktop đưa các quy trình ảnh và video vào không gian làm việc riêng trên máy tính. Kết nối Client Key
-Flaq.ai trong ứng dụng để tạo và quản lý nội dung trực quan. Không phải mọi API của nền tảng đều có trong ứng dụng máy
-tính; xem mô hình và giá hiện hành tại Flaq.ai.
+Liên hệ kinh doanh: [contact@flaq.ai](mailto:contact@flaq.ai)
 
 ## Triển khai hiện tại
 
@@ -40,7 +38,7 @@ trạng thái riêng.
 ## Bắt đầu nhanh
 
 Chạy tại thư mục gốc kho mã này. Cần Node.js 22, pnpm 10.5.2, Rust và các phụ thuộc Tauri theo hệ điều hành. Trong Cài
-đặt → Kết nối, nhập Client Key Flaq.ai, kiểm tra rồi lưu. Base URL mặc định: `https://api.flaq.ai`. Tạo nội dung thật
+đặt → Kết nối, nhập Client Key Flaq AI, kiểm tra rồi lưu. Base URL mặc định: `https://api.flaq.ai`. Tạo nội dung thật
 cần mạng và tín dụng API.
 
 ```bash
@@ -73,9 +71,9 @@ luôn có tiền tố ngôn ngữ, kể cả `/en/`; web tiếng Anh dùng `/`, 
 
 `en`, `ja`, `id`, `it`, `pt`, `es`, `de`, `ru`, `fr`, `zh`, `tw`, `ko`, `th`, `vi`, `ar`
 
-## Chương trình tiếp thị liên kết Flaq.ai
+## Chương trình tiếp thị liên kết Flaq AI
 
-Trở thành đối tác liên kết Flaq.ai và nhận hoa hồng khi giới thiệu quy trình ảnh và video AI, API mô hình và công cụ
+Trở thành đối tác liên kết Flaq AI và nhận hoa hồng khi giới thiệu quy trình ảnh và video AI, API mô hình và công cụ
 sáng tạo. Chương trình chào đón nhà sáng tạo, nhà thiết kế, lập trình viên, giảng viên AI, người đánh giá mô hình và các
 nhóm chia sẻ quy trình AI thực tiễn.
 
@@ -83,13 +81,13 @@ nhóm chia sẻ quy trình AI thực tiễn.
   hợp lệ tiếp theo trong vòng 60 ngày sau khi họ đăng ký, theo quy định về điều kiện và ghi nhận giới thiệu.
 - **Quảng bá linh hoạt** — Chia sẻ liên kết qua hướng dẫn, đánh giá mô hình, sản phẩm sáng tạo, cộng đồng hoặc tài liệu
   tích hợp API.
-- **Không gian đối tác** — Quản lý liên kết, xem hoạt động giới thiệu và thiết lập nhận tiền trên Flaq.ai.
+- **Không gian đối tác** — Quản lý liên kết, xem hoạt động giới thiệu và thiết lập nhận tiền trên Flaq AI.
 
-Đăng nhập Flaq.ai, hoàn thành hồ sơ và chấp nhận thỏa thuận liên kết, sau đó tạo liên kết riêng. Dự án cũng có các mục
-giới thiệu chương trình theo ngôn ngữ; việc đăng ký đối tác và quản lý hoa hồng diễn ra trên Flaq.ai, không phải trong
+Đăng nhập Flaq AI, hoàn thành hồ sơ và chấp nhận thỏa thuận liên kết, sau đó tạo liên kết riêng. Dự án cũng có các mục
+giới thiệu chương trình theo ngôn ngữ; việc đăng ký đối tác và quản lý hoa hồng diễn ra trên Flaq AI, không phải trong
 ứng dụng máy tính.
 
-**[Tham gia chương trình tiếp thị liên kết Flaq.ai →](https://flaq.ai/vi/affiliate-program/)**
+**[Tham gia chương trình tiếp thị liên kết Flaq AI →](https://flaq.ai/vi/affiliate-program/)**
 
 > Điều kiện nhận hoa hồng, ghi nhận giới thiệu, hoàn tiền, xét duyệt chi trả và thỏa thuận riêng đã được phê duyệt tuân
 > theo các điều khoản mới nhất trên trang chính thức.

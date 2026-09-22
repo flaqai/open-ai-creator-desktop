@@ -13,20 +13,19 @@ Creator**; package and native identifiers are unchanged.
 [繁體中文](./README_tw.md) · [한국어](./README_ko.md) · [ไทย](./README_th.md) · [Tiếng Việt](./README_vi.md) ·
 [العربية](./README_ar.md)
 
-## About Flaq.ai
+## About Flaq AI
 
-[Flaq.ai](https://flaq.ai/) is an AI model platform for creators and developers, providing unified API access to image
-generation and editing, video generation, and language models through a single API key.
+[Flaq AI](https://flaq.ai/) is an AI platform for creators, developers, and businesses, bringing together leading
+mainstream AI models for image generation and editing, video generation, and language tasks.
 
-- **Explore and compare models** — Browse the [Model Market](https://flaq.ai/model-market/) to compare capabilities,
-  supported parameters, and current pricing.
-- **Try before integrating** — Test supported models in Flaq.ai's Playground to refine prompts and generation settings.
-- **Build creative workflows** — Use the [API documentation](https://flaq.ai/docs/) to integrate AI capabilities into
-  your own products and tools.
+- **High-concurrency, highly stable APIs** — Integrate AI generation into your products and production workflows through
+  a unified API.
+- **Create directly online** — Use AI tools and try models in your browser on [Flaq AI](https://flaq.ai/), without
+  writing code or installing the desktop app.
+- **Explore and integrate** — Compare models in the [Model Market](https://flaq.ai/model-market/) and get started with
+  the [API documentation](https://flaq.ai/docs/).
 
-Flaq Creator Desktop brings the platform's image and video workflows into a dedicated desktop workspace. Connect your
-Flaq.ai Client Key in the app to create and manage visual assets; the platform's broader API catalog does not imply that
-every capability is available in this desktop app. Available models and usage pricing are listed on Flaq.ai.
+Business inquiries: [contact@flaq.ai](mailto:contact@flaq.ai)
 
 ## Features
 
@@ -44,7 +43,7 @@ paths below are relative to the current language prefix.
 | Reference to Video | `/reference-to-video` | Reference-driven video generation      |
 
 Inputs, limits, and available parameters depend on the selected model. The source of truth is
-[lib/constants/template-models/](./lib/constants/template-models/), not the full Flaq.ai model catalog.
+[lib/constants/template-models/](./lib/constants/template-models/), not the full Flaq AI model catalog.
 
 The desktop experience also includes:
 
@@ -53,7 +52,7 @@ The desktop experience also includes:
   not guarantee that model is integrated into the generation forms.
 - **Media catalog** (`/media-library`, also embedded in Settings → History): searchable uploaded references and
   generated results, filtered by type and origin, with preview/download and local-archive status.
-- **Creator workspace**: first-run Flaq.ai guidance, connection testing, model/parameter controls, contextual guide
+- **Creator workspace**: first-run Flaq AI guidance, connection testing, model/parameter controls, contextual guide
   dialogs, appearance and language settings.
 - **Persistent drafts and history**: drafts keep input media bytes in IndexedDB; task history and uploaded-reference
   indexes are device-local. Pending-task recovery resumes status queries, not a fresh paid generation.
@@ -61,7 +60,7 @@ The desktop experience also includes:
   recovery retries saving existing results. Generation success and archive success are separate states.
 - **Media utilities**: native save dialogs, PNG/JPEG/WebP image export, and on-demand FFmpeg WASM trimming.
 
-AI generation requires network access, a valid Flaq.ai Client Key, and sufficient credits. This is not an offline model
+AI generation requires network access, a valid Flaq AI Client Key, and sufficient credits. This is not an offline model
 runtime or an account-wide cloud asset manager.
 
 ## Getting Started
@@ -72,7 +71,7 @@ runtime or an account-wide cloud asset manager.
 - pnpm **10.5.2**, matching `packageManager` in [package.json](./package.json).
 - Rust and the target OS's [Tauri prerequisites](https://v2.tauri.app/start/prerequisites/) for native development and
   packaging. A frontend-only build does not require Rust.
-- A Flaq.ai account and Client Key for real generation. The default desktop upload path does **not** require your own
+- A Flaq AI account and Client Key for real generation. The default desktop upload path does **not** require your own
   Cloudflare account.
 
 From this repository's root:
@@ -85,9 +84,9 @@ pnpm desktop:dev
 Development uses the isolated app ID `ai.flaq.creator.dev`; the installed app uses `ai.flaq.creator`. Their
 configuration, WebView data, and default media directories are separate.
 
-### Connect Flaq.ai
+### Connect Flaq AI
 
-1. Sign in at [Flaq.ai](https://flaq.ai/) and obtain a Client Key.
+1. Sign in at [Flaq AI](https://flaq.ai/) and obtain a Client Key.
 2. Follow first-run guidance or open Settings → Connection.
 3. Use the default Base URL `https://api.flaq.ai`, or your compatible trusted gateway.
 4. Enter the Client Key, test the connection, and save.
@@ -235,9 +234,9 @@ The locale registry and README translations cover: `en`, `ja`, `id`, `it`, `pt`,
 - Add languages through [i18n/languages.ts](./i18n/languages.ts), `messages/`, routing/build locale handling,
   corresponding README files, and parity tests.
 
-## Flaq.ai Affiliate Program
+## Flaq AI Affiliate Program
 
-Become a Flaq.ai affiliate partner and earn commissions by introducing AI image and video workflows, model APIs, and
+Become a Flaq AI affiliate partner and earn commissions by introducing AI image and video workflows, model APIs, and
 creative tools to your audience. The program welcomes creators, designers, developers, AI educators, model reviewers,
 and teams sharing practical AI workflows.
 
@@ -245,13 +244,13 @@ and teams sharing practical AI workflows.
   within 60 days of their registration, subject to the program's eligibility and attribution rules.
 - **Flexible promotion** — Share your partner referral link through tutorials, model reviews, creative showcases,
   communities, or API integration guides.
-- **Partner workspace** — Manage referral links, review referral activity, and prepare payout settings on Flaq.ai.
+- **Partner workspace** — Manage referral links, review referral activity, and prepare payout settings on Flaq AI.
 
-To get started, sign in to Flaq.ai, complete your affiliate profile and agreement, then create your own referral link.
+To get started, sign in to Flaq AI, complete your affiliate profile and agreement, then create your own referral link.
 This project also includes localized affiliate promotion entry points; partner enrollment and commission management take
-place on Flaq.ai, not in the desktop app.
+place on Flaq AI, not in the desktop app.
 
-**[Join the Flaq.ai Affiliate Program →](https://flaq.ai/affiliate-program/)**
+**[Join the Flaq AI Affiliate Program →](https://flaq.ai/affiliate-program/)**
 
 > Commission eligibility, attribution, refunds, payout review, and any approved custom partner arrangements are governed
 > by the latest terms on the official program page.
