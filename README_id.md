@@ -1,7 +1,15 @@
-# Flaq SaaS Template (Bahasa Indonesia)
+![Flaq Open Media Creator](./docs/assets/flaq-open-media-creator-banner.png)
 
-Template SaaS gratis dan sumber terbuka untuk membangun platform pembuatan gambar dan video AI dengan API terpadu
-Flaq.ai.
+# Flaq Open Media Creator (Bahasa Indonesia)
+
+Ruang kerja desktop sumber terbuka untuk kreasi gambar dan video AI, diadaptasi dari Flaq SaaS Template. Nama aplikasi
+terpasang tetap Flaq Creator.
+
+**README:** [English](./README.md) · [日本語](./README_ja.md) · [Bahasa Indonesia](./README_id.md) ·
+[Italiano](./README_it.md) · [Português (Brasil)](./README_pt.md) · [Español](./README_es.md) ·
+[Deutsch](./README_de.md) · [Русский](./README_ru.md) · [Français](./README_fr.md) · [简体中文](./README_zh.md) ·
+[繁體中文](./README_tw.md) · [한국어](./README_ko.md) · [ไทย](./README_th.md) · [Tiếng Việt](./README_vi.md) ·
+[العربية](./README_ar.md)
 
 ## Tentang Flaq.ai
 
@@ -19,46 +27,52 @@ Flaq Creator Desktop menghadirkan alur gambar dan video dalam ruang kerja deskto
 di aplikasi untuk membuat dan mengelola aset visual. Tidak semua API platform tersedia di aplikasi desktop; lihat model
 dan harga yang berlaku di Flaq.ai.
 
-**README:** [English](./README.md) · [日本語](./README_ja.md) · [Bahasa Indonesia](./README_id.md) ·
-[Italiano](./README_it.md) · [Português](./README_pt.md) · [Español](./README_es.md) · [Deutsch](./README_de.md) ·
-[Русский](./README_ru.md) · [Français](./README_fr.md) · [简体中文](./README_zh.md) · [繁體中文](./README_tw.md) ·
-[한국어](./README_ko.md) · [ไทย](./README_th.md) · [Tiếng Việt](./README_vi.md) · [العربية](./README_ar.md)
+## Implementasi saat ini
 
-## Tentang template ini
+Tauri 2 dan Rust menjalankan UI statis Next.js 16 dan React 19, tanpa server Node.js/Next.js di dalam aplikasi.
+Formulir, kontrak model, dan desain dibagikan dengan versi web.
 
-Dibangun dengan Next.js 16, React 19, TypeScript, dan Tailwind CSS. Template ini menyediakan lima alur siap pakai:
-teks-ke-gambar, gambar-ke-gambar, teks-ke-video, gambar-ke-video, dan virtual try-on.
-
-### Fitur utama
-
-- 🎨 Halaman pembuatan gambar dan video dengan pilihan model serta parameter
-- 🔌 Integrasi API Flaq.ai menggunakan satu Client Key
-- 🧠 Mendukung Nano Banana Pro, Seedream, GPT Image, Grok Imagine, Veo, Wan, Kling, Seedance, Vidu, dan model lainnya
-- 🌐 15 bahasa untuk UI, perutean, dan tautan alternatif SEO
-- ☁️ Unggah Cloudflare R2 dan penyimpanan aset hasil generasi
-- 🔒 Penyimpanan API key terenkripsi di sisi klien
-- 📱 UI responsif, mode gelap, dan riwayat generasi
+Tujuh pintu kreasi: AI Media Creator, teks ke gambar, gambar ke gambar, coba pakaian virtual, teks ke video, gambar ke
+video, dan referensi ke video. Tersedia pustaka prompt, katalog media yang dapat dicari, riwayat di Pengaturan, draf
+IndexedDB, dan arsip lokal berdasarkan tanggal. Contoh gambar disertakan; video diputar daring. Keberhasilan generasi
+dan pengarsipan merupakan status terpisah.
 
 ## Mulai cepat
 
+Jalankan dari akar repositori ini. Memerlukan Node.js 22, pnpm 10.5.2, Rust, dan dependensi Tauri sesuai OS. Masukkan
+Client Key Flaq.ai di Pengaturan → Koneksi, uji, lalu simpan. Base URL bawaan: `https://api.flaq.ai`. Generasi nyata
+memerlukan internet dan kredit API.
+
 ```bash
-git clone https://github.com/flaqai/flaq-saas-template.git
-cd flaq-saas-template
-pnpm install
-cp .env.example .env.local
-pnpm dev
+pnpm install --frozen-lockfile
+pnpm desktop:dev
 ```
 
-Atur `NEXT_PUBLIC_SITE_URL` di `.env.local`, lalu tambahkan konfigurasi Cloudflare R2 bila diperlukan. Masukkan Client
-Key [Flaq.ai](https://flaq.ai/id/) melalui menu pengaturan aplikasi. Lihat
-[dokumentasi lengkap berbahasa Inggris](./README.md#getting-started) untuk seluruh variabel lingkungan dan langkah
-penyiapan.
+- `pnpm build:desktop` → `out/`
+- `pnpm desktop:build` → Tauri
+- `pnpm check` → TypeScript + tests + ESLint
+- Web: `pnpm dev`; `pnpm build` + `pnpm start`
 
-## Internasionalisasi
+[Tauri prerequisites](https://v2.tauri.app/start/prerequisites/) ·
+[README: setup / architecture / tests](./README.md#getting-started) ·
+[模块扩展 / Adding modules](./docs/ADDING_MODULES.md)
 
-Kode dan README mendukung 15 locale yang sama: `en`, `ja`, `id`, `it`, `pt`, `es`, `de`, `ru`, `fr`, `zh`, `tw`, `ko`,
-`th`, `vi`, dan `ar`. Bahasa Inggris memakai `/`, bahasa lain memakai `/{locale}/`, dan bahasa Arab dirender dari kanan
-ke kiri.
+## Unggahan dan kredensial
+
+Unggahan bawaan meminta URL bertanda tangan sementara dari Flaq `/api/v1/files/presignedUrl`. Kredensial R2 bersama
+tetap di server; akun Cloudflare sendiri tidak diperlukan. R2 pribadi bersifat opsional dengan penandatanganan lokal.
+Preset AES-GCM di WebView bukan brankas kredensial OS. Jika diingat, Client Key disimpan sebagai teks biasa di
+`auth.json` dalam direktori konfigurasi aplikasi.
+
+## Platform dan bahasa
+
+Konfigurasi rilis mencakup macOS Apple Silicon/Intel (DMG, ZIP) dan Windows x64 (NSIS EXE). Linux dapat dibangun dari
+sumber tetapi belum masuk matriks rilis. Paket saat ini belum ditandatangani. Ada 15 lokal terdaftar, tetapi sebagian
+panel pengaturan, media, dan prompt baru hanya berbahasa Mandarin/Inggris: `zh`/`tw` memakai teks Mandarin bersama,
+lainnya memakai Inggris. Rute desktop selalu berprefiks bahasa termasuk `/en/`; web memakai `/` untuk Inggris dan
+prefiks untuk lainnya. Bahasa Arab menggunakan RTL.
+
+`en`, `ja`, `id`, `it`, `pt`, `es`, `de`, `ru`, `fr`, `zh`, `tw`, `ko`, `th`, `vi`, `ar`
 
 ## Program Afiliasi Flaq.ai
 

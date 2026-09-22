@@ -1,6 +1,14 @@
-# Flaq SaaS Template（繁體中文）
+![Flaq Open Media Creator](./docs/assets/flaq-open-media-creator-banner.png)
 
-免費開源的 SaaS 範本，透過 Flaq.ai 統一 API 快速建立 AI 圖像與影片生成平台。
+# Flaq Open Media Creator（繁體中文）
+
+改造自 Flaq SaaS Template 的開源 AI 圖片與影片桌面創作工作台。安裝後的應用程式名稱仍為 Flaq Creator。
+
+**README:** [English](./README.md) · [日本語](./README_ja.md) · [Bahasa Indonesia](./README_id.md) ·
+[Italiano](./README_it.md) · [Português (Brasil)](./README_pt.md) · [Español](./README_es.md) ·
+[Deutsch](./README_de.md) · [Русский](./README_ru.md) · [Français](./README_fr.md) · [简体中文](./README_zh.md) ·
+[繁體中文](./README_tw.md) · [한국어](./README_ko.md) · [ไทย](./README_th.md) · [Tiếng Việt](./README_vi.md) ·
+[العربية](./README_ar.md)
 
 ## 關於 Flaq.ai
 
@@ -14,43 +22,46 @@ Key 統一存取圖像生成與編輯、影片生成及語言模型。
 Flaq Creator Desktop 將平台的圖像與影片工作流程帶到獨立桌面工作區。在應用程式中設定 Flaq.ai Client
 Key，即可創作與管理視覺素材。平台提供的全部 API 功能不代表桌面應用程式皆已支援；可用模型與使用價格以 Flaq.ai 官網為準。
 
-**README：** [English](./README.md) · [日本語](./README_ja.md) · [Bahasa Indonesia](./README_id.md) ·
-[Italiano](./README_it.md) · [Português](./README_pt.md) · [Español](./README_es.md) · [Deutsch](./README_de.md) ·
-[Русский](./README_ru.md) · [Français](./README_fr.md) · [简体中文](./README_zh.md) · [繁體中文](./README_tw.md) ·
-[한국어](./README_ko.md) · [ไทย](./README_th.md) · [Tiếng Việt](./README_vi.md) · [العربية](./README_ar.md)
+## 目前實作
 
-## 關於本範本
+Tauri 2／Rust 承載 Next.js 16、React
+19 靜態介面；桌面版不內建 Node.js／Next.js 伺服器。表單、模型定義與視覺設計和 Web 版共用。
 
-採用 Next.js 16、React 19、TypeScript 與 Tailwind
-CSS 建置，內含文生圖、圖生圖、文生影片、圖生影片和虛擬試衣五套可直接使用的生成流程。
-
-### 主要特色
-
-- 🎨 圖像與影片生成頁面，支援模型及參數選擇
-- 🔌 使用單一 Client Key 串接 Flaq.ai API
-- 🧠 支援 Nano Banana Pro、Seedream、GPT Image、Grok Imagine、Veo、Wan、Kling、Seedance、Vidu 等模型
-- 🌐 UI、路由與 SEO 替代連結完整支援 15 種語言
-- ☁️ Cloudflare R2 上傳與生成內容儲存
-- 🔒 用戶端加密儲存 API 金鑰
-- 📱 響應式介面、深色模式與生成歷史
+7 個創作入口：統一 AI Media
+Creator、文生圖、圖生圖、虛擬試穿、文生影片、圖生影片與參考生影片。另有提示詞素材庫、可搜尋素材目錄、設定中的歷史紀錄、IndexedDB 草稿及按日期本機歸檔。示例圖片隨應用程式提供，影片需連線播放。生成成功與本機歸檔成功是兩個獨立狀態。
 
 ## 快速開始
 
+在本儲存庫根目錄執行。需要 Node.js 22、pnpm 10.5.2、Rust 與目標系統的 Tauri 依賴。在「設定 → 連線」填入 Flaq.ai Client
+Key、測試並儲存。預設 Base URL 為 `https://api.flaq.ai`。真實生成需要網路與 API 額度。
+
 ```bash
-git clone https://github.com/flaqai/flaq-saas-template.git
-cd flaq-saas-template
-pnpm install
-cp .env.example .env.local
-pnpm dev
+pnpm install --frozen-lockfile
+pnpm desktop:dev
 ```
 
-在 `.env.local` 設定 `NEXT_PUBLIC_SITE_URL`，並視需求加入 Cloudflare R2 參數；再從應用程式設定輸入
-[Flaq.ai](https://flaq.ai/tw/) Client Key。完整環境變數與安裝步驟請參閱[英文完整文件](./README.md#getting-started)。
+- `pnpm build:desktop` → `out/`
+- `pnpm desktop:build` → Tauri
+- `pnpm check` → TypeScript + tests + ESLint
+- Web: `pnpm dev`; `pnpm build` + `pnpm start`
 
-## 國際化
+[Tauri prerequisites](https://v2.tauri.app/start/prerequisites/) ·
+[README: setup / architecture / tests](./README.md#getting-started) ·
+[模块扩展 / Adding modules](./docs/ADDING_MODULES.md)
 
-程式碼與 README 支援相同的 15 個 locale：`en`、`ja`、`id`、`it`、`pt`、`es`、`de`、`ru`、`fr`、`zh`、`tw`、`ko`、`th`、`vi`、`ar`。英文使用
-`/`，其他語言使用 `/{locale}/`，阿拉伯文則採用由右至左顯示。
+## 上傳與憑據
+
+預設上傳向 Flaq 的 `/api/v1/files/presignedUrl`
+取得短期簽名網址，共享 R2 憑據保留在伺服器，不需要自行申請 Cloudflare 帳號。自訂 R2 為選用功能，在本機簽名；預設組態使用 AES-GCM
+WebView 儲存，不是系統憑據保管庫。勾選「記住我」後，Client Key 以明文儲存在應用程式設定目錄的 `auth.json`。
+
+## 支援範圍與多語言
+
+目前發佈組態包含 macOS Apple Silicon／Intel（DMG、ZIP）與 Windows x64（NSIS
+EXE）。Linux 可由原始碼建置，尚未納入發佈矩陣。目前套件未簽名。已註冊 15 個語種，但部分新設定、素材目錄及提示詞面板只有中英文；`zh`／`tw`
+共用中文，其餘回退到英文。桌面路由一律含語言前綴（包括 `/en/`），Web 英語使用 `/`、其他語言有前綴，阿拉伯語使用 RTL。
+
+`en`, `ja`, `id`, `it`, `pt`, `es`, `de`, `ru`, `fr`, `zh`, `tw`, `ko`, `th`, `vi`, `ar`
 
 ## Flaq.ai 聯盟行銷計畫
 

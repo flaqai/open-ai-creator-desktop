@@ -1,7 +1,15 @@
-# Flaq SaaS Template (Deutsch)
+![Flaq Open Media Creator](./docs/assets/flaq-open-media-creator-banner.png)
 
-Kostenlose Open-Source-SaaS-Vorlage zum Aufbau von Plattformen für KI-Bild- und Videogenerierung mit der einheitlichen
-Flaq.ai API.
+# Flaq Open Media Creator (Deutsch)
+
+Ein quelloffener Desktop-Arbeitsbereich für KI-Bilder und -Videos auf Basis des Flaq SaaS Template. Die installierte App
+heißt weiterhin Flaq Creator.
+
+**README:** [English](./README.md) · [日本語](./README_ja.md) · [Bahasa Indonesia](./README_id.md) ·
+[Italiano](./README_it.md) · [Português (Brasil)](./README_pt.md) · [Español](./README_es.md) ·
+[Deutsch](./README_de.md) · [Русский](./README_ru.md) · [Français](./README_fr.md) · [简体中文](./README_zh.md) ·
+[繁體中文](./README_tw.md) · [한국어](./README_ko.md) · [ไทย](./README_th.md) · [Tiếng Việt](./README_vi.md) ·
+[العربية](./README_ar.md)
 
 ## Über Flaq.ai
 
@@ -19,46 +27,52 @@ Flaq Creator Desktop bündelt die Bild- und Videoabläufe in einem eigenen Deskt
 Flaq.ai Client Key in der App, um visuelle Inhalte zu erstellen und zu verwalten. Nicht alle APIs der Plattform sind in
 der Desktop-App verfügbar; verfügbare Modelle und Preise findest du auf Flaq.ai.
 
-**README:** [English](./README.md) · [日本語](./README_ja.md) · [Bahasa Indonesia](./README_id.md) ·
-[Italiano](./README_it.md) · [Português](./README_pt.md) · [Español](./README_es.md) · [Deutsch](./README_de.md) ·
-[Русский](./README_ru.md) · [Français](./README_fr.md) · [简体中文](./README_zh.md) · [繁體中文](./README_tw.md) ·
-[한국어](./README_ko.md) · [ไทย](./README_th.md) · [Tiếng Việt](./README_vi.md) · [العربية](./README_ar.md)
+## Aktuelle Umsetzung
 
-## Über diese Vorlage
+Tauri 2 und Rust laden eine statische Oberfläche aus Next.js 16 und React 19, ohne eingebetteten
+Node.js-/Next.js-Server. Formulare, Modellverträge und Design werden mit der Web-Version geteilt.
 
-Erstellt mit Next.js 16, React 19, TypeScript und Tailwind CSS. Enthalten sind fünf einsatzbereite Abläufe:
-Text-zu-Bild, Bild-zu-Bild, Text-zu-Video, Bild-zu-Video und virtuelle Anprobe.
-
-### Wichtigste Funktionen
-
-- 🎨 Seiten zur Bild- und Videogenerierung mit Modell- und Parameterauswahl
-- 🔌 Flaq.ai-API-Integration mit einem einzigen Client Key
-- 🧠 Unterstützung für Nano Banana Pro, Seedream, GPT Image, Grok Imagine, Veo, Wan, Kling, Seedance, Vidu und weitere
-  Modelle
-- 🌐 15 Sprachen für Oberfläche, Routing und alternative SEO-Links
-- ☁️ Cloudflare-R2-Uploads und Speicherung generierter Dateien
-- 🔒 Verschlüsselte clientseitige Speicherung des API-Schlüssels
-- 📱 Responsive Oberfläche, Dark Mode und Generierungsverlauf
+Sieben Einstiege: AI Media Creator, Text-zu-Bild, Bild-zu-Bild, virtuelle Anprobe, Text-zu-Video, Bild-zu-Video und
+Referenz-zu-Video. Dazu kommen Prompt-Bibliothek, durchsuchbarer Medienkatalog, Verlauf in den Einstellungen,
+IndexedDB-Entwürfe und lokale Datumsarchive. Beispielbilder sind enthalten; Beispielvideos werden online abgespielt.
+Erfolgreiche Generierung und Archivierung sind getrennte Zustände.
 
 ## Schnellstart
 
+Im Stammverzeichnis dieses Repositorys ausführen. Voraussetzungen: Node.js 22, pnpm 10.5.2, Rust und die
+Tauri-Abhängigkeiten des Betriebssystems. Unter Einstellungen → Verbindung den Flaq.ai Client Key eintragen, testen und
+speichern. Standard-Base-URL: `https://api.flaq.ai`. Echte Generierung benötigt Internet und API-Guthaben.
+
 ```bash
-git clone https://github.com/flaqai/flaq-saas-template.git
-cd flaq-saas-template
-pnpm install
-cp .env.example .env.local
-pnpm dev
+pnpm install --frozen-lockfile
+pnpm desktop:dev
 ```
 
-Setze `NEXT_PUBLIC_SITE_URL` in `.env.local` und ergänze bei Bedarf die Cloudflare-R2-Werte. Trage anschließend den
-Client Key von [Flaq.ai](https://flaq.ai/de/) in den App-Einstellungen ein. Alle Variablen und Einrichtungsschritte
-findest du in der [vollständigen englischen Dokumentation](./README.md#getting-started).
+- `pnpm build:desktop` → `out/`
+- `pnpm desktop:build` → Tauri
+- `pnpm check` → TypeScript + tests + ESLint
+- Web: `pnpm dev`; `pnpm build` + `pnpm start`
 
-## Internationalisierung
+[Tauri prerequisites](https://v2.tauri.app/start/prerequisites/) ·
+[README: setup / architecture / tests](./README.md#getting-started) ·
+[模块扩展 / Adding modules](./docs/ADDING_MODULES.md)
 
-Code und READMEs unterstützen dieselben 15 Locales: `en`, `ja`, `id`, `it`, `pt`, `es`, `de`, `ru`, `fr`, `zh`, `tw`,
-`ko`, `th`, `vi` und `ar`. Englisch verwendet `/`, andere Sprachen `/{locale}/`; Arabisch wird von rechts nach links
-dargestellt.
+## Uploads und Zugangsdaten
+
+Standarduploads erhalten kurzlebige signierte URLs über Flaq `/api/v1/files/presignedUrl`. Gemeinsame R2-Zugangsdaten
+bleiben auf dem Server; ein eigenes Cloudflare-Konto ist nicht nötig. Eigenes R2 ist optional und wird lokal signiert.
+AES-GCM-Presets im WebView sind kein Betriebssystem-Tresor. Beim Merken wird der Client Key als Klartext in `auth.json`
+im App-Konfigurationsverzeichnis gespeichert.
+
+## Plattformen und Sprachen
+
+Die Release-Konfiguration umfasst macOS Apple Silicon/Intel (DMG, ZIP) und Windows x64 (NSIS EXE). Linux ist ein
+Quellcode-Build-Ziel, nicht Teil der Release-Matrix. Pakete sind derzeit unsigniert. Es gibt 15 registrierte
+Sprachvarianten, aber Teile neuer Einstellungs-, Medien- und Prompt-Panels sind nur chinesisch/englisch: `zh`/`tw`
+teilen chinesische Texte, andere verwenden Englisch. Desktop-Routen haben immer ein Sprachpräfix, auch `/en/`;
+Web-Englisch nutzt `/`, andere Sprachen Präfixe. Arabisch verwendet RTL.
+
+`en`, `ja`, `id`, `it`, `pt`, `es`, `de`, `ru`, `fr`, `zh`, `tw`, `ko`, `th`, `vi`, `ar`
 
 ## Flaq.ai-Partnerprogramm
 

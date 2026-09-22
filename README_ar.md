@@ -1,6 +1,15 @@
-# Flaq SaaS Template (العربية)
+![Flaq Open Media Creator](./docs/assets/flaq-open-media-creator-banner.png)
 
-قالب SaaS مجاني ومفتوح المصدر لبناء منصات إنشاء الصور والفيديو بالذكاء الاصطناعي عبر واجهة Flaq.ai الموحّدة.
+# Flaq Open Media Creator (العربية)
+
+مساحة عمل مكتبية مفتوحة المصدر لإنشاء الصور والفيديو بالذكاء الاصطناعي، مبنية على Flaq SaaS Template. يظل اسم التطبيق
+المثبّت Flaq Creator.
+
+**README:** [English](./README.md) · [日本語](./README_ja.md) · [Bahasa Indonesia](./README_id.md) ·
+[Italiano](./README_it.md) · [Português (Brasil)](./README_pt.md) · [Español](./README_es.md) ·
+[Deutsch](./README_de.md) · [Русский](./README_ru.md) · [Français](./README_fr.md) · [简体中文](./README_zh.md) ·
+[繁體中文](./README_tw.md) · [한국어](./README_ko.md) · [ไทย](./README_th.md) · [Tiếng Việt](./README_vi.md) ·
+[العربية](./README_ar.md)
 
 ## نبذة عن Flaq.ai
 
@@ -16,44 +25,49 @@
 لإنشاء المحتوى المرئي وإدارته. توفر المنصة واجهات أوسع، لكن هذا لا يعني أن جميع قدراتها متاحة في تطبيق سطح المكتب؛ راجع
 Flaq.ai لمعرفة النماذج والأسعار الحالية.
 
-**README:** [English](./README.md) · [日本語](./README_ja.md) · [Bahasa Indonesia](./README_id.md) ·
-[Italiano](./README_it.md) · [Português](./README_pt.md) · [Español](./README_es.md) · [Deutsch](./README_de.md) ·
-[Русский](./README_ru.md) · [Français](./README_fr.md) · [简体中文](./README_zh.md) · [繁體中文](./README_tw.md) ·
-[한국어](./README_ko.md) · [ไทย](./README_th.md) · [Tiếng Việt](./README_vi.md) · [العربية](./README_ar.md)
+## التنفيذ الحالي
 
-## نبذة عن القالب
+يستضيف Tauri 2 وRust واجهة ثابتة من Next.js 16 وReact 19، دون تضمين خادم Node.js/Next.js. النماذج وعقود نماذج الذكاء
+الاصطناعي والتصميم مشتركة مع نسخة الويب.
 
-مبني باستخدام Next.js 16 وReact 19 وTypeScript وTailwind CSS، ويتضمن خمس تجارب جاهزة: تحويل النص إلى صورة، والصورة إلى
-صورة، والنص إلى فيديو، والصورة إلى فيديو، وتجربة الملابس الافتراضية.
-
-### الميزات الرئيسية
-
-- 🎨 صفحات لإنشاء الصور والفيديو مع اختيار النموذج والمعلمات
-- 🔌 تكامل مع واجهة Flaq.ai باستخدام Client Key واحد
-- 🧠 دعم Nano Banana Pro وSeedream وGPT Image وGrok Imagine وVeo وWan وKling وSeedance وVidu ونماذج أخرى
-- 🌐 دعم 15 لغة في الواجهة والمسارات وروابط SEO البديلة
-- ☁️ رفع الملفات إلى Cloudflare R2 وحفظ النتائج المُنشأة
-- 🔒 تخزين مشفّر لمفتاح API في جهة العميل
-- 📱 واجهة متجاوبة ووضع داكن وسجل لعمليات الإنشاء
+سبعة مداخل للإبداع: AI Media Creator، نص إلى صورة، صورة إلى صورة، تجربة ملابس افتراضية، نص إلى فيديو، صورة إلى فيديو،
+ومراجع إلى فيديو. تتوفر مكتبة مطالبات وفهرس وسائط قابل للبحث وسجل داخل الإعدادات ومسودات IndexedDB وأرشفة محلية حسب
+التاريخ. صور الأمثلة مضمنة، والفيديو يُبث عبر الإنترنت. نجاح الإنشاء ونجاح الأرشفة حالتان منفصلتان.
 
 ## البدء السريع
 
+نفّذ الأوامر من جذر هذا المستودع. تحتاج إلى Node.js 22 وpnpm 10.5.2 وRust ومتطلبات Tauri لنظام التشغيل. في الإعدادات ←
+الاتصال، أدخل Client Key من Flaq.ai واختبر الاتصال ثم احفظه. عنوان Base URL الافتراضي هو `https://api.flaq.ai`. يتطلب
+الإنشاء الفعلي الإنترنت ورصيد API.
+
 ```bash
-git clone https://github.com/flaqai/flaq-saas-template.git
-cd flaq-saas-template
-pnpm install
-cp .env.example .env.local
-pnpm dev
+pnpm install --frozen-lockfile
+pnpm desktop:dev
 ```
 
-اضبط `NEXT_PUBLIC_SITE_URL` في `.env.local`، وأضف قيم Cloudflare R2 عند الحاجة. بعد ذلك أدخل Client Key الخاص بـ
-[Flaq.ai](https://flaq.ai/ar/) من إعدادات التطبيق. راجع [التوثيق الإنجليزي الكامل](./README.md#getting-started) لجميع
-المتغيرات وخطوات الإعداد.
+- `pnpm build:desktop` → `out/`
+- `pnpm desktop:build` → Tauri
+- `pnpm check` → TypeScript + tests + ESLint
+- Web: `pnpm dev`; `pnpm build` + `pnpm start`
 
-## التدويل
+[Tauri prerequisites](https://v2.tauri.app/start/prerequisites/) ·
+[README: setup / architecture / tests](./README.md#getting-started) ·
+[模块扩展 / Adding modules](./docs/ADDING_MODULES.md)
 
-يدعم الكود وملفات README اللغات الخمس عشرة نفسها: `en` و`ja` و`id` و`it` و`pt` و`es` و`de` و`ru` و`fr` و`zh` و`tw` و`ko`
-و`th` و`vi` و`ar`. تستخدم الإنجليزية `/`، وتستخدم بقية اللغات `/{locale}/`، ويُعرض المحتوى العربي من اليمين إلى اليسار.
+## الرفع وبيانات الاعتماد
+
+يحصل الرفع الافتراضي على روابط موقّعة قصيرة الأجل من Flaq عبر `/api/v1/files/presignedUrl`. تبقى بيانات R2 المشتركة على
+الخادم، ولا تحتاج إلى حساب Cloudflare خاص. يمكن اختيار R2 خاص مع توقيع محلي. إعدادات AES-GCM في WebView ليست خزنة اعتماد
+لنظام التشغيل. عند اختيار التذكّر، يُحفظ Client Key كنص صريح في `auth.json` ضمن دليل إعدادات التطبيق.
+
+## المنصات واللغات
+
+إعداد الإصدار الحالي يشمل macOS Apple Silicon/Intel بصيغتي DMG وZIP وWindows x64 بصيغة NSIS EXE. يمكن بناء Linux من
+المصدر لكنه ليس ضمن مصفوفة الإصدار. الحزم الحالية غير موقّعة. توجد 15 لغة مسجّلة، لكن أجزاء من لوحات الإعدادات والوسائط
+والمطالبات الجديدة بالصينية والإنجليزية فقط: يشترك `zh` و`tw` في الصينية وتستخدم اللغات الأخرى الإنجليزية. مسارات سطح
+المكتب تحمل بادئة لغة دائماً، بما فيها `/en/`؛ يستخدم الويب `/` للإنجليزية وبادئات للبقية. العربية تستخدم RTL.
+
+`en`, `ja`, `id`, `it`, `pt`, `es`, `de`, `ru`, `fr`, `zh`, `tw`, `ko`, `th`, `vi`, `ar`
 
 ## برنامج Flaq.ai للتسويق بالعمولة
 

@@ -1,13 +1,22 @@
-# Flaq Creator Desktop
+![Flaq Open Media Creator](./docs/assets/flaq-open-media-creator-banner.png)
 
-Cross-platform desktop adaptation of the open-source [Flaq SaaS Template](https://github.com/flaqai/flaq-saas-template),
-designed for AI image and video creation with the [Flaq.ai](https://flaq.ai) API. The original web experience remains
-available, while the desktop build adds a focused creator workspace for macOS, Windows, and Linux.
+# Flaq Open Media Creator
+
+An open-source desktop workspace for AI image and video creation, adapted from the
+[Flaq SaaS Template](https://github.com/flaqai/flaq-saas-template). Reuse Flaq's creative tools and visual design, with
+focused forms, contextual help, reusable drafts, and local media management. The installed app is currently named **Flaq
+Creator**; package and native identifiers are unchanged.
+
+**README:** [English](./README.md) · [日本語](./README_ja.md) · [Bahasa Indonesia](./README_id.md) ·
+[Italiano](./README_it.md) · [Português (Brasil)](./README_pt.md) · [Español](./README_es.md) ·
+[Deutsch](./README_de.md) · [Русский](./README_ru.md) · [Français](./README_fr.md) · [简体中文](./README_zh.md) ·
+[繁體中文](./README_tw.md) · [한국어](./README_ko.md) · [ไทย](./README_th.md) · [Tiếng Việt](./README_vi.md) ·
+[العربية](./README_ar.md)
 
 ## About Flaq.ai
 
-[Flaq.ai](https://flaq.ai/) is an AI model platform for creators and developers, providing unified API access to
-image generation and editing, video generation, and language models through a single API key.
+[Flaq.ai](https://flaq.ai/) is an AI model platform for creators and developers, providing unified API access to image
+generation and editing, video generation, and language models through a single API key.
 
 - **Explore and compare models** — Browse the [Model Market](https://flaq.ai/model-market/) to compare capabilities,
   supported parameters, and current pricing.
@@ -15,335 +24,222 @@ image generation and editing, video generation, and language models through a si
 - **Build creative workflows** — Use the [API documentation](https://flaq.ai/docs/) to integrate AI capabilities into
   your own products and tools.
 
-Flaq Creator Desktop brings the platform's image and video workflows into a dedicated desktop workspace. Connect
-your Flaq.ai Client Key in the app to create and manage visual assets; the platform's broader API catalog does not
-imply that every capability is available in this desktop app. Available models and usage pricing are listed on Flaq.ai.
-
-**Read this README in:** [English](./README.md) · [日本語](./README_ja.md) · [Bahasa Indonesia](./README_id.md) ·
-[Italiano](./README_it.md) · [Português (Brasil)](./README_pt.md) · [Español](./README_es.md) ·
-[Deutsch](./README_de.md) · [Русский](./README_ru.md) · [Français](./README_fr.md) · [简体中文](./README_zh.md) ·
-[繁體中文](./README_tw.md) · [한국어](./README_ko.md) · [ไทย](./README_th.md) · [Tiếng Việt](./README_vi.md) ·
-[العربية](./README_ar.md)
-
-> The README language set mirrors `i18n/languages.ts`, so every UI locale has a matching project introduction.
-
-## Desktop app
-
-The desktop edition keeps the template's seven creative workflows and visual language, while replacing the long
-marketing layout with a compact workspace, contextual guide dialogs, a first-run Flaq.ai setup flow, and automatic
-date-based local media archiving. All 15 UI locales are included, with RTL layout for Arabic.
-
-- Product and route inventory: [`docs/PRODUCT_INVENTORY.md`](./docs/PRODUCT_INVENTORY.md)
-- Desktop architecture and service boundaries: [`docs/DESKTOP_ARCHITECTURE.md`](./docs/DESKTOP_ARCHITECTURE.md)
-- Review findings and verification boundaries: [`docs/REVIEW_REPORT.md`](./docs/REVIEW_REPORT.md)
-- Adding modules and repeatable local QA: [`docs/ADDING_MODULES.md`](./docs/ADDING_MODULES.md)
-
-```bash
-# Run the desktop app in development mode
-pnpm desktop:dev
-
-# Produce the static desktop frontend
-pnpm build:desktop
-
-# Build the native installer for the current operating system
-pnpm desktop:build
-```
-
-Native builds require the standard [Tauri prerequisites](https://v2.tauri.app/start/prerequisites/) for the target
-operating system, including Rust. Cross-platform release builds are configured in `.github/workflows/desktop-build.yml`.
-
-## Table of Contents
-
-- [Flaq Creator Desktop](#flaq-creator-desktop)
-  - [About Flaq.ai](#about-flaqai)
-  - [Desktop app](#desktop-app)
-  - [Table of Contents](#table-of-contents)
-  - [Features](#features)
-  - [Tech Stack](#tech-stack)
-  - [Getting Started](#getting-started)
-    - [Prerequisites](#prerequisites)
-    - [Installation](#installation)
-    - [Environment Variables](#environment-variables)
-    - [Cloudflare R2 Storage Setup](#cloudflare-r2-storage-setup)
-    - [Flaq.ai API Key Setup](#flaqai-api-key-setup)
-  - [Usage](#usage)
-    - [Development](#development)
-    - [Build](#build)
-    - [Lint \& Format](#lint--format)
-  - [AIGC Capabilities](#aigc-capabilities)
-  - [Internationalization (i18n)](#internationalization-i18n)
-  - [SEO and AI Crawler Discovery](#seo-and-ai-crawler-discovery)
-  - [Project Structure](#project-structure)
-  - [Flaq.ai Affiliate Program](#flaqai-affiliate-program)
-  - [License](#license)
+Flaq Creator Desktop brings the platform's image and video workflows into a dedicated desktop workspace. Connect your
+Flaq.ai Client Key in the app to create and manage visual assets; the platform's broader API catalog does not imply that
+every capability is available in this desktop app. Available models and usage pricing are listed on Flaq.ai.
 
 ## Features
 
-- 🎨 **Text-to-Image** — Generate stunning images from text prompts using state-of-the-art AI models
-- 🖼️ **Image-to-Image** — Transform existing images into creative variations with consistent style
-- 🎬 **Text-to-Video** — Create high-quality videos from simple text descriptions
-- 📹 **Image-to-Video** — Animate static images into dynamic video content
-- 👗 **Virtual Try-On** — AI-powered virtual clothing try-on experience
-- 🌐 **Internationalization** — 15 locales aligned with Flaq.ai, with locale-aware routing and SEO alternates
-- 🚀 **No Signup Required** — Explore, modify, and self-host the template without creating an app account
-- 🤝 **Affiliate Promotion** — Responsive Flaq.ai affiliate callout with localized copy and destination links
-- 🔒 **Secure API Key Management** — Encrypted client-side storage for your Flaq.ai credentials
-- ☁️ **Cloudflare R2 Storage** — Built-in image hosting with Cloudflare's global CDN
-- 📱 **Responsive Design** — Fully responsive UI built with Tailwind CSS and Radix UI
-- 🌓 **Dark Mode** — Beautiful dark-themed UI out of the box
-- ⚡ **Fast Performance** — Powered by Next.js 16 with Turbopack support
-- 🔍 **SEO Optimized** — Dynamic metadata, Open Graph, sitemap, and structured data
-- 🤖 **AI Crawler Ready** — Curated `llms.txt`, expanded `llms-full.txt`, and public crawler access
+Seven creation entry points share the feature registry in [lib/features/catalog.ts](./lib/features/catalog.ts). The
+paths below are relative to the current language prefix.
 
-## Tech Stack
+| Workflow           | Route                 | Purpose                                |
+| ------------------ | --------------------- | -------------------------------------- |
+| AI Media Creator   | `/ai-media-creator`   | Unified image/video creation workspace |
+| Text to Image      | `/text-to-image`      | Generate images from prompts           |
+| Image to Image     | `/image-to-image`     | Edit or transform reference images     |
+| Virtual Try-On     | `/virtual-try-on`     | Combine garment and model references   |
+| Text to Video      | `/text-to-video`      | Generate video from prompts            |
+| Image to Video     | `/image-to-video`     | Generate video with image input        |
+| Reference to Video | `/reference-to-video` | Reference-driven video generation      |
 
-| Category          | Technology                                                                |
-| ----------------- | ------------------------------------------------------------------------- |
-| Framework         | [Next.js 16](https://nextjs.org/) (App Router)                            |
-| Language          | [TypeScript](https://www.typescriptlang.org/)                             |
-| UI Library        | [React 19](https://react.dev/)                                            |
-| Styling           | [Tailwind CSS v4](https://tailwindcss.com/)                               |
-| Component Library | [Radix UI](https://www.radix-ui.com/)                                     |
-| Animations        | [Framer Motion](https://www.framer.com/motion/)                           |
-| Forms             | [React Hook Form](https://react-hook-form.com/) + [Zod](https://zod.dev/) |
-| State Management  | [Zustand](https://zustand.docs.pmnd.rs/)                                  |
-| Data Fetching     | [SWR](https://swr.vercel.app/)                                            |
-| i18n              | [next-intl](https://next-intl-docs.vercel.app/)                           |
-| Icons             | [Lucide React](https://lucide.dev/)                                       |
-| Charts            | [Recharts](https://recharts.org/)                                         |
-| Package Manager   | [pnpm](https://pnpm.io/)                                                  |
-| Linting           | [ESLint](https://eslint.org/) + [Prettier](https://prettier.io/)          |
+Inputs, limits, and available parameters depend on the selected model. The source of truth is
+[lib/constants/template-models/](./lib/constants/template-models/), not the full Flaq.ai model catalog.
+
+The desktop experience also includes:
+
+- **Prompt media library** (`/recommended-prompts`): curated, versioned examples, full prompt copying, image/video
+  previews, zoom and panning. Example images are bundled; example videos stream online. A collection's model label does
+  not guarantee that model is integrated into the generation forms.
+- **Media catalog** (`/media-library`, also embedded in Settings → History): searchable uploaded references and
+  generated results, filtered by type and origin, with preview/download and local-archive status.
+- **Creator workspace**: first-run Flaq.ai guidance, connection testing, model/parameter controls, contextual guide
+  dialogs, appearance and language settings.
+- **Persistent drafts and history**: drafts keep input media bytes in IndexedDB; task history and uploaded-reference
+  indexes are device-local. Pending-task recovery resumes status queries, not a fresh paid generation.
+- **Local media archiving**: completed desktop outputs are saved under `YYYY/MM/DD` in a configurable directory. Archive
+  recovery retries saving existing results. Generation success and archive success are separate states.
+- **Media utilities**: native save dialogs, PNG/JPEG/WebP image export, and on-demand FFmpeg WASM trimming.
+
+AI generation requires network access, a valid Flaq.ai Client Key, and sufficient credits. This is not an offline model
+runtime or an account-wide cloud asset manager.
 
 ## Getting Started
 
 ### Prerequisites
 
-- **Node.js** >= 18.x (check `.nvmrc` for the recommended version)
-- **pnpm** >= 10.x (the project uses `packageManager` field in `package.json`)
-- A [Flaq.ai](https://flaq.ai/) account with an active API key
-- A [Cloudflare](https://cloudflare.com) account (for R2 image storage)
+- Node.js **22**, matching [.nvmrc](./.nvmrc).
+- pnpm **10.5.2**, matching `packageManager` in [package.json](./package.json).
+- Rust and the target OS's [Tauri prerequisites](https://v2.tauri.app/start/prerequisites/) for native development and
+  packaging. A frontend-only build does not require Rust.
+- A Flaq.ai account and Client Key for real generation. The default desktop upload path does **not** require your own
+  Cloudflare account.
 
-### Installation
+From this repository's root:
 
 ```bash
-# 1. Clone the repository
-git clone https://github.com/flaqai/flaq-saas-template.git
-cd flaq-saas-template
-
-# 2. Install pnpm if you haven't already
-npm install -g pnpm
-
-# 3. Install dependencies
-pnpm install
-
-# 4. Copy the environment template
-cp .env.example .env.local
+pnpm install --frozen-lockfile
+pnpm desktop:dev
 ```
 
-### Environment Variables
+Development uses the isolated app ID `ai.flaq.creator.dev`; the installed app uses `ai.flaq.creator`. Their
+configuration, WebView data, and default media directories are separate.
 
-Edit `.env.local` and configure the following variables:
+### Connect Flaq.ai
 
-```bash
-# Your site URL (used for metadata, sitemap, and Open Graph)
-NEXT_PUBLIC_SITE_URL="http://localhost:3000"
+1. Sign in at [Flaq.ai](https://flaq.ai/) and obtain a Client Key.
+2. Follow first-run guidance or open Settings → Connection.
+3. Use the default Base URL `https://api.flaq.ai`, or your compatible trusted gateway.
+4. Enter the Client Key, test the connection, and save.
+5. Keep the built-in upload provider, or explicitly configure your own R2 preset.
+6. Choose a tool and model, enter a prompt/references, then submit. Manage outputs in Settings → History; change the
+   archive folder in Settings → General.
 
-# Contact email displayed in the footer
-NEXT_PUBLIC_CONTACT_US_EMAIL="contact@flaq.ai"
+> **Credential storage:** selecting “Remember me” saves readable JSON in `auth.json` under the current user's
+> application configuration directory. This is **not** OS-keychain storage or application-level encryption. Unix
+> permissions are restricted to the current user; session-only credentials are not saved to that native file. Avoid
+> remembered credentials on shared devices and never commit keys, logs containing secrets, or local configuration.
 
-# Cloudflare R2 Storage Configuration (server-side only)
-# Get these from Cloudflare Dashboard > R2 > Manage R2 API Tokens
-R2_ACCOUNT_ID=your_cloudflare_account_id
-R2_ACCESS_KEY_ID=your_r2_access_key_id
-R2_SECRET_ACCESS_KEY=your_r2_secret_access_key
-R2_BUCKET_NAME=your_r2_bucket_name
-```
+### Uploads and local data
 
-> **⚠️ Important**: Never expose `R2_SECRET_ACCESS_KEY` to the client. The R2 credentials are server-side only.
+| Concern                  | Current implementation                                                                                                                                                                   |
+| ------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Built-in desktop uploads | The Client Key requests short-lived signed URLs from Flaq's `/api/v1/files/presignedUrl`; media is then uploaded directly. Shared R2 credentials stay on the server and are not bundled. |
+| Custom desktop R2        | Optional account ID, bucket, access key, secret key, and public asset domain. Signing happens locally. Presets use AES-GCM WebView storage, not an OS credential vault.                  |
+| Input drafts             | IndexedDB stores media bytes and metadata; selecting a file does not upload it. Upload occurs on submission.                                                                             |
+| History and catalog      | Local Web Storage indexes task records and uploaded references. Catalog entries are not ownership or cloud-deletion permissions.                                                         |
+| Generated files          | Native streaming saves to the configured media root, defaulting to the app data directory. Failed archiving does not make a completed generation fail.                                   |
 
-### Cloudflare R2 Storage Setup
+Custom R2 needs a publicly reachable asset domain, not merely the S3 API endpoint. Retention is controlled by Flaq's
+service policy or your bucket lifecycle; local archiving is independent of cloud hosting. Custom presets' browser-side
+encryption is not protection against a compromised WebView or an attacker with access to the app profile and code. Only
+use trusted API gateways and upload destinations.
 
-This template uses Cloudflare R2 for storing user-uploaded images and generated assets. Follow these steps:
+### Optional web mode
 
-1. **Log in** to your [Cloudflare Dashboard](https://dash.cloudflare.com/)
-2. **Navigate** to **R2** in the sidebar
-3. **Create a bucket** (e.g., `flaq-ai-saas`)
-4. **Generate API Tokens**:
-   - Go to **Manage R2 API Tokens**
-   - Create a new API token with **Object Read & Write** permissions
-   - Save the **Access Key ID** and **Secret Access Key** securely
-5. **Configure Public Access**:
-   - In your R2 bucket settings, enable **Public Access** via a custom domain or `r2.dev` subdomain
-   - Note down the **Public Domain** URL (e.g., `https://your-bucket.your-account.r2.cloudflarestorage.com`)
-6. **Set environment variables** in `.env.local` (see above)
-7. **Configure the public domain** for the web deployment. The desktop app uses its provisioned Flaq R2 configuration by
-   default; users who select Custom Cloudflare R2 can enter a separate credential set encrypted in the local app
-   profile. In both cases files upload to R2 first and only their public URLs are sent to generation APIs.
-
-> The current desktop build may package an encrypted built-in R2 preset and fall back to the Flaq presigned-URL service
-> when that preset is absent. Package encryption is obfuscation, not a secure vault; embedded credentials can be
-> extracted by a determined user. Prefer the server-issued presigned-URL path for stronger production isolation.
-
-### Flaq.ai API Key Setup
-
-1. **Register/Sign in** at [flaq.ai](https://flaq.ai)
-2. **Navigate** to your account dashboard
-3. **Generate a Client Key** from the API Keys section
-4. **Copy** your Client Key
-5. **Open** the app and click the **gear icon** (⚙️) in the header to open the **Open API Settings** dialog
-6. **Paste** your Client Key and click **Test Connection** to verify
-7. **Save** the settings
-
-> **💡 Tip**: In the desktop app, enabling "Remember Me" stores the API key as readable text in `auth.json` under
-> the current user's application configuration directory. On shared or public devices, leave this option unchecked.
-
-> **🔑 API Credits**: You need sufficient API credits to generate images and videos. Top up your balance at
-> [flaq.ai](https://flaq.ai) if needed.
-
-## Usage
-
-### Development
+The original Next.js web mode is retained and runs a server:
 
 ```bash
-# Start the development server (with Turbopack for faster HMR)
-pnpm dev:turbo
-
-# Or start without Turbopack
 pnpm dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) in your browser.
-
-### Build
-
-```bash
-# Production build
+# Production web mode
 pnpm build
-
-# Build with bundle analysis
-pnpm build:analyze
-
-# Start production server
 pnpm start
 ```
 
-### Lint & Format
+Use `http://localhost:3000`. If configuring the web environment, copy [.env.example](./.env.example) to `.env.local`
+using your editor and fill only the values you need:
 
-```bash
-# Run ESLint
-pnpm lint
+| Variables                                                                     | Use                                                      |
+| ----------------------------------------------------------------------------- | -------------------------------------------------------- |
+| `NEXT_PUBLIC_SITE_URL`, `NEXT_PUBLIC_CONTACT_US_EMAIL`                        | Public web site URL and contact information              |
+| `R2_ACCOUNT_ID`, `R2_ACCESS_KEY_ID`, `R2_SECRET_ACCESS_KEY`, `R2_BUCKET_NAME` | Server-only credentials for the web upload signing route |
 
-# Auto-fix lint issues
-pnpm lint:fix
+Web uploads use `app/api/upload/presigned-url/route.ts` and the public domain configured in Image Hosting. The desktop
+default instead uses Flaq-issued signatures: it needs neither local R2 environment values nor a local Next.js API
+server. Never prefix secrets with `NEXT_PUBLIC_` or include them in installers.
 
-# Format code with Prettier
-pnpm prettier
+## Architecture and Project Structure
 
-# TypeScript type checking
-pnpm ts-check
+**Tauri 2 + Rust hosts a statically exported Next.js UI. There is no bundled Node.js/Next.js server.** Desktop and web
+share React pages, forms, model contracts, translations, and design assets.
+
+| Layer                   | Implementation and responsibility                                                               |
+| ----------------------- | ----------------------------------------------------------------------------------------------- |
+| UI                      | Next.js 16, React 19, TypeScript, Tailwind CSS 4, Radix UI, Framer Motion                       |
+| Forms and state         | React Hook Form + Zod; Zustand; SWR where used                                                  |
+| Feature/model contracts | One registry for seven tools; shared model inputs, limits, and defaults                         |
+| Services                | Flaq request adapters, upload policy, centralized task polling and generation/archive lifecycle |
+| Platform boundary       | Native/web HTTP, media export/save, external links; UI does not call native commands directly   |
+| Native shell            | Tauri 2 / Rust: configuration, permissions, windows, logs, streaming and atomic media saves     |
+| Localization            | next-intl, 15 registered locales, Arabic RTL                                                    |
+| Verification            | Node/tsx regression tests, Rust tests, Playwright layout tests, ESLint and TypeScript           |
+
+```text
+app/[locale]/       Localized tool, library, home, and policy pages
+app/api/            Web-only upload signing and image proxy
+components/         Shared UI, desktop shell, forms, dialogs, media/prompt viewers
+hooks/              UI integration and reusable hooks
+lib/features/       Feature registry
+lib/constants/template-models/  Model contracts
+lib/desktop/        Connection settings, drafts, catalog, media preferences
+lib/platform/       Native/web adapters
+lib/recommended-prompts*        Curated prompt definitions and content snapshot
+network/            API clients, upload policy, polling, history, lifecycle
+store/              Shared Zustand state
+i18n/ + messages/   Locale registry, routing, translation files
+src-tauri/          Rust shell, capabilities, packaging configuration
+scripts/            Isolated builds, media preparation, content sync, release tooling
+tests/              Contracts, storage, recovery, build/release and UI regressions
+public/             App assets and bundled prompt images
+docs/               Architecture, module guide, review notes, README banner
 ```
 
-## AIGC Capabilities
+Desktop builds work in an isolated staging directory, omit web-only routes there, and replace `out/` only on success;
+the source route tree is not moved or deleted. Native HTTP handles desktop API/uploads/downloads without browser CORS
+constraints. AWS signing is lazy-loaded for custom R2; local FFmpeg assets load when trimming is requested. Uploads use
+bounded concurrency, shared media processing is serialized, and polling is centralized.
 
-This template comes with five fully functional AI generation tools, all powered by [Flaq.ai](https://flaq.ai) API:
+For new modules, extend the feature registry and model contracts, keep API logic in `network/`, reuse `lib/platform/`,
+and add translations and regression tests. See:
 
-| Capability         | Description                                                                               | Supported Models                                                             |
-| ------------------ | ----------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
-| **Text-to-Image**  | Generate images from natural language prompts                                             | Nano Banana Pro, Seedream 5.0, GPT Image 2, Qwen Image 2.0, Grok Imagine     |
-| **Image-to-Image** | Transform or enhance existing images with AI, maintaining style and composition           | Nano Banana Pro Edit, Seedream 5.0 Edit, GPT Image 2 Edit, Grok Imagine Edit |
-| **Text-to-Video**  | Create videos from text descriptions with advanced motion synthesis                       | Veo 3.1, Wan 2.7, Kling 3.0, Seedance 2.0, Vidu Q3                           |
-| **Image-to-Video** | Animate static images into dynamic videos                                                 | Veo 3.1, Wan 2.7, Kling 3.0, Seedance 2.0, Vidu Q3                           |
-| **Virtual Try-On** | AI-powered virtual clothing try-on — upload a garment and a model photo to see the result | GPT Image 2 Edit, Nano Banana Pro Edit                                       |
+- [Architecture and storage boundaries](./docs/DESKTOP_ARCHITECTURE.md)
+- [Adding modules and local QA](./docs/ADDING_MODULES.md)
+- [Domain vocabulary](./CONTEXT.md)
+- [Product inventory](./docs/PRODUCT_INVENTORY.md) and [review report](./docs/REVIEW_REPORT.md) (point-in-time
+  inventories, not a guarantee of current release verification)
 
-Each tool includes:
+## Build and Test
 
-- Pre-configured form with model selection and parameter controls
-- Real-time generation status polling
-- Result gallery with download and share options
-- History of previously generated assets
+| Command                                           | Purpose                                                                         |
+| ------------------------------------------------- | ------------------------------------------------------------------------------- |
+| `pnpm desktop:dev`                                | Prepare media assets, start the development UI and native app                   |
+| `pnpm build:desktop`                              | Static desktop frontend → `out/`, all registered locales                        |
+| `pnpm desktop:build`                              | Build frontend and native packages for the current OS                           |
+| `pnpm check`                                      | TypeScript + Node regression tests + ESLint                                     |
+| `pnpm test:ui-layout`                             | Playwright layout tests; requires installed Google Chrome and port 3000         |
+| `cargo test --manifest-path src-tauri/Cargo.toml` | Native Rust tests; requires target-platform build dependencies                  |
+| `pnpm prompts:sync`                               | Maintainer command: refresh the curated prompt snapshot/assets from the network |
+
+For local simulated generation, first run `pnpm build:desktop`, then `node scripts/desktop-preview.mjs`. Open
+`http://127.0.0.1:4173/zh/`, set Base URL to `http://127.0.0.1:4173` and use `test-only-key` without remembering it.
+This preview uses simulated APIs; it does not verify live Flaq generation, R2 uploads, or native behavior. Do not use
+real keys for simulated testing.
+
+### Packaging status
+
+The checked-in [release workflow](./.github/workflows/desktop-build.yml) defines these targets:
+
+| Target              | Artifacts                                                       |
+| ------------------- | --------------------------------------------------------------- |
+| macOS Apple Silicon | `.dmg` and zipped `.app`                                        |
+| macOS Intel         | `.dmg` and zipped `.app`                                        |
+| Windows x64         | NSIS `.exe` installer; no MSI                                   |
+| Linux               | Source-build target; not included in the current release matrix |
+
+Manual workflow runs produce candidate artifacts; matching `desktop-v<version>` tags drive release publication. Release
+assembly includes `SHA256SUMS` and `release-manifest.json`. The current workflow builds unsigned packages; public
+distribution still needs platform-specific signing/notarization and native smoke verification. A defined workflow is not
+evidence that every platform has been built or tested successfully.
 
 ## Internationalization (i18n)
 
-This template supports **15 locales** out of the box: English (default), Japanese, Indonesian, Italian, Brazilian
-Portuguese, Spanish, German, Russian, French, Simplified Chinese, Traditional Chinese, Korean, Thai, Vietnamese, and
-Arabic.
+The locale registry and README translations cover: `en`, `ja`, `id`, `it`, `pt`, `es`, `de`, `ru`, `fr`, `zh`, `tw`,
+`ko`, `th`, `vi`, `ar`.
 
-- Translation files are located in the `messages/` directory, one JSON file per locale
-- Locale is auto-detected from the browser's `Accept-Language` header
-- Users can manually switch languages via the footer or the language dialog
-- URL structure: `/` for English and `/{locale}/` for other languages (for example, `/ja/` or `/zh/`)
-- Arabic pages automatically use right-to-left document direction
-
-To add more languages:
-
-1. Add the locale to `i18n/languages.ts`
-2. Create a new translation file in `messages/`
-3. Add any new language-specific metadata in the layout files
-
-## SEO and AI Crawler Discovery
-
-Every public page has localized title and description copy, an absolute canonical URL, 15-language `hreflang`
-alternates, Open Graph metadata, a Twitter card, and index/follow directives. The generated `/sitemap.xml` includes
-every public route in every locale with matching language alternates.
-
-- `/robots.txt` allows search engines and AI assistants to crawl public content while blocking API and callback routes
-- `/llms.txt` provides a concise, structured map of the product, pages, languages, documentation, and policies
-- `/llms-full.txt` provides expanded project context, capabilities, setup instructions, architecture, and usage
-  boundaries
-- JSON-LD identifies the website and MIT-licensed open-source repository without unverifiable ratings
-
-Set `NEXT_PUBLIC_SITE_URL` to the production origin before deployment so canonical, sitemap, and LLM resource URLs use
-the correct domain.
-
-## Project Structure
-
-```
-.
-├── app/                     # Next.js App Router pages
-│   ├── [locale]/           # Internationalized routes (15 supported locales)
-│   │   ├── (with-footer)/  # Pages with footer layout
-│   │   │   ├── (home)/     # Landing page
-│   │   │   └── (ai-features)/ # AIGC feature pages
-│   │   └── (without-footer)/ # Full-screen pages (e.g., +page)
-│   ├── api/                # API routes (proxy-image, upload)
-│   ├── robots.ts           # Robots.txt generation
-│   ├── sitemap.ts          # Dynamic sitemap generation
-│   ├── llms.txt/           # Concise AI-readable site map
-│   └── llms-full.txt/      # Expanded AI-readable project context
-├── components/             # Reusable React components
-│   ├── ui/                 # shadcn/ui-style components (Radix-based)
-│   ├── dialog/             # Dialog components (API settings, etc.)
-│   ├── layout/             # Layout components (header, footer, sidebar)
-│   └── ...                 # Feature-specific components
-├── hooks/                  # Custom React hooks
-├── i18n/                   # Internationalization configuration
-│   ├── languages.ts        # Supported locales definition
-│   ├── request.ts          # next-intl request configuration
-│   └── routing.ts          # Locale routing configuration
-├── lib/                    # Utility libraries
-│   ├── seo/                # Metadata, llms.txt, and crawler helpers
-│   ├── constants/          # App constants, model configs, navigation
-│   ├── utils/              # Utility functions
-│   └── env.ts              # Environment variable helpers
-├── messages/               # One translation file for each supported locale
-├── network/                # API client and network utilities
-│   ├── clientFetch.ts      # Flaq.ai API client with auth
-│   ├── image/              # Image generation API calls
-│   ├── video/              # Video generation API calls
-│   └── upload/             # R2 upload client
-├── public/                 # Static assets (images, icons, fonts)
-├── store/                  # Zustand state stores
-├── next.config.mjs         # Next.js configuration
-├── proxy.ts                # Middleware proxy (i18n + IP forwarding)
-├── tailwind.config.ts      # Tailwind CSS configuration
-└── tsconfig.json           # TypeScript configuration
-```
+- Desktop routes always include the locale, including `/en/`; startup prefers the saved language, then the system
+  language, then English. Traditional Chinese variants map to `tw`.
+- Web routing uses `/` for English and prefixes other locales. Arabic sets RTL document direction.
+- **Current limitation:** some newer settings, media-library and prompt-library text is written directly in Chinese and
+  English. `zh`/`tw` share Chinese copy and other locales fall back to English in these panels. Fifteen registered
+  locales does not mean every new UI string has been translated.
+- Add languages through [i18n/languages.ts](./i18n/languages.ts), `messages/`, routing/build locale handling,
+  corresponding README files, and parity tests.
 
 ## Flaq.ai Affiliate Program
 
-Become a Flaq.ai affiliate partner and earn commissions by introducing AI image and video workflows, model APIs,
-and creative tools to your audience. The program welcomes creators, designers, developers, AI educators, model
-reviewers, and teams sharing practical AI workflows.
+Become a Flaq.ai affiliate partner and earn commissions by introducing AI image and video workflows, model APIs, and
+creative tools to your audience. The program welcomes creators, designers, developers, AI educators, model reviewers,
+and teams sharing practical AI workflows.
 
 - **Referral rewards** — Earn 20% on a referred user's first valid paid order and 10% on subsequent valid paid orders
   within 60 days of their registration, subject to the program's eligibility and attribution rules.
@@ -352,13 +248,13 @@ reviewers, and teams sharing practical AI workflows.
 - **Partner workspace** — Manage referral links, review referral activity, and prepare payout settings on Flaq.ai.
 
 To get started, sign in to Flaq.ai, complete your affiliate profile and agreement, then create your own referral link.
-This project also includes localized affiliate promotion entry points; partner enrollment and commission management
-take place on Flaq.ai, not in the desktop app.
+This project also includes localized affiliate promotion entry points; partner enrollment and commission management take
+place on Flaq.ai, not in the desktop app.
 
 **[Join the Flaq.ai Affiliate Program →](https://flaq.ai/affiliate-program/)**
 
-> Commission eligibility, attribution, refunds, payout review, and any approved custom partner arrangements are
-> governed by the latest terms on the official program page.
+> Commission eligibility, attribution, refunds, payout review, and any approved custom partner arrangements are governed
+> by the latest terms on the official program page.
 
 ## License
 
