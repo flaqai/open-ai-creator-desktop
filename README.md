@@ -4,6 +4,21 @@ Cross-platform desktop adaptation of the open-source [Flaq SaaS Template](https:
 designed for AI image and video creation with the [Flaq.ai](https://flaq.ai) API. The original web experience remains
 available, while the desktop build adds a focused creator workspace for macOS, Windows, and Linux.
 
+## About Flaq.ai
+
+[Flaq.ai](https://flaq.ai/) is an AI model platform for creators and developers, providing unified API access to
+image generation and editing, video generation, and language models through a single API key.
+
+- **Explore and compare models** — Browse the [Model Market](https://flaq.ai/model-market/) to compare capabilities,
+  supported parameters, and current pricing.
+- **Try before integrating** — Test supported models in Flaq.ai's Playground to refine prompts and generation settings.
+- **Build creative workflows** — Use the [API documentation](https://flaq.ai/docs/) to integrate AI capabilities into
+  your own products and tools.
+
+Flaq Creator Desktop brings the platform's image and video workflows into a dedicated desktop workspace. Connect
+your Flaq.ai Client Key in the app to create and manage visual assets; the platform's broader API catalog does not
+imply that every capability is available in this desktop app. Available models and usage pricing are listed on Flaq.ai.
+
 **Read this README in:** [English](./README.md) · [日本語](./README_ja.md) · [Bahasa Indonesia](./README_id.md) ·
 [Italiano](./README_it.md) · [Português (Brasil)](./README_pt.md) · [Español](./README_es.md) ·
 [Deutsch](./README_de.md) · [Русский](./README_ru.md) · [Français](./README_fr.md) · [简体中文](./README_zh.md) ·
@@ -40,6 +55,7 @@ operating system, including Rust. Cross-platform release builds are configured i
 ## Table of Contents
 
 - [Flaq Creator Desktop](#flaq-creator-desktop)
+  - [About Flaq.ai](#about-flaqai)
   - [Desktop app](#desktop-app)
   - [Table of Contents](#table-of-contents)
   - [Features](#features)
@@ -55,11 +71,10 @@ operating system, including Rust. Cross-platform release builds are configured i
     - [Build](#build)
     - [Lint \& Format](#lint--format)
   - [AIGC Capabilities](#aigc-capabilities)
-  - [Flaq.ai Affiliate Program](#flaqai-affiliate-program)
   - [Internationalization (i18n)](#internationalization-i18n)
   - [SEO and AI Crawler Discovery](#seo-and-ai-crawler-discovery)
   - [Project Structure](#project-structure)
-  - [Deployment](#deployment)
+  - [Flaq.ai Affiliate Program](#flaqai-affiliate-program)
   - [License](#license)
 
 ## Features
@@ -247,16 +262,6 @@ Each tool includes:
 - Result gallery with download and share options
 - History of previously generated assets
 
-## Flaq.ai Affiliate Program
-
-Public landing and generation pages include a localized promotion for the
-[Flaq.ai Affiliate Program](https://flaq.ai/affiliate-program?utm_source=flaq-saas-template). The call-to-action opens
-the matching Flaq.ai language page and includes `utm_source=flaq-saas-template` for source attribution.
-
-According to the current program terms, affiliates can earn 20% on a referred user's first valid paid order and 10% on
-subsequent valid paid orders made within 60 days of registration. Eligibility and payout are governed by the terms
-published on the linked program page.
-
 ## Internationalization (i18n)
 
 This template supports **15 locales** out of the box: English (default), Japanese, Indonesian, Italian, Brazilian
@@ -334,18 +339,26 @@ the correct domain.
 └── tsconfig.json           # TypeScript configuration
 ```
 
-## Deployment
+## Flaq.ai Affiliate Program
 
-The easiest way to deploy this template is via [Vercel](https://vercel.com):
+Become a Flaq.ai affiliate partner and earn commissions by introducing AI image and video workflows, model APIs,
+and creative tools to your audience. The program welcomes creators, designers, developers, AI educators, model
+reviewers, and teams sharing practical AI workflows.
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/your-username/flaq-saas-template)
+- **Referral rewards** — Earn 20% on a referred user's first valid paid order and 10% on subsequent valid paid orders
+  within 60 days of their registration, subject to the program's eligibility and attribution rules.
+- **Flexible promotion** — Share your partner referral link through tutorials, model reviews, creative showcases,
+  communities, or API integration guides.
+- **Partner workspace** — Manage referral links, review referral activity, and prepare payout settings on Flaq.ai.
 
-1. Push the repository to GitHub
-2. Import the project in Vercel
-3. Add all environment variables (`R2_*`, `NEXT_PUBLIC_*`) in Vercel's project settings
-4. Deploy!
+To get started, sign in to Flaq.ai, complete your affiliate profile and agreement, then create your own referral link.
+This project also includes localized affiliate promotion entry points; partner enrollment and commission management
+take place on Flaq.ai, not in the desktop app.
 
-> The template also works on any platform that supports Next.js (Netlify, Cloudflare Pages, Docker, etc.).
+**[Join the Flaq.ai Affiliate Program →](https://flaq.ai/affiliate-program/)**
+
+> Commission eligibility, attribution, refunds, payout review, and any approved custom partner arrangements are
+> governed by the latest terms on the official program page.
 
 ## License
 
