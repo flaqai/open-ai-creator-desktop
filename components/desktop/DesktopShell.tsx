@@ -8,6 +8,7 @@ import { isApiConnectionAuthorized } from '@/network/connection-status';
 import packageInfo from '@/package.json';
 import {
   BookOpenText,
+  Check,
   ExternalLink,
   FileText,
   FolderOpen,
@@ -16,6 +17,8 @@ import {
   Image,
   Info,
   LibraryBig,
+  Monitor,
+  Moon,
   Palette,
   PanelLeftClose,
   PanelLeftOpen,
@@ -24,6 +27,7 @@ import {
   ShieldCheck,
   SlidersHorizontal,
   Sparkles,
+  Sun,
   Video,
 } from 'lucide-react';
 import { useLocale, useTranslations } from 'next-intl';
@@ -258,7 +262,7 @@ export default function DesktopShell({ children }: { children: ReactNode }) {
             href='/'
             title={zh ? '工作台' : 'Workspace'}
             aria-current={pathname === '/' ? 'page' : undefined}
-            className={`${linkClass} ${pathname === '/' ? 'bg-accent font-semibold' : ''}`}
+            className={`${linkClass} ${pathname === '/' ? 'bg-accent text-primary font-semibold' : ''}`}
           >
             <Home className='size-5 shrink-0' />
             <SidebarLabel collapsed={collapsed}>{zh ? '工作台' : 'Workspace'}</SidebarLabel>
@@ -449,22 +453,36 @@ export default function DesktopShell({ children }: { children: ReactNode }) {
               {section === 'appearance' && (
                 <div className='space-y-4'>
                   <h2 className='font-semibold'>{zh ? '主题' : 'Theme'}</h2>
-                  <div className='grid gap-3'>
-                    {(['system', 'light', 'dark'] as const).map((theme, i) => (
-                      <label
-                        key={theme}
-                        className='border-border flex cursor-pointer items-center gap-3 rounded-xl border p-4'
-                      >
-                        <input
-                          type='radio'
-                          name='theme'
-                          checked={preferences.theme === theme}
-                          onChange={() => update({ theme })}
-                        />
-                        {(zh ? ['跟随系统', '浅色', '深色'] : ['System', 'Light', 'Dark'])[i]}
-                      </label>
-                    ))}
-                  </div>
+                  <fieldset>
+                    <legend className='sr-only'>{zh ? '选择主题' : 'Choose theme'}</legend>
+                    <div className='grid grid-cols-3 gap-3'>
+                      {(['system', 'light', 'dark'] as const).map((theme, i) => (
+                        <label key={theme} className='group relative min-w-0 cursor-pointer'>
+                          <input
+                            type='radio'
+                            name='theme'
+                            value={theme}
+                            checked={preferences.theme === theme}
+                            onChange={() => update({ theme })}
+                            className='peer sr-only'
+                          />
+                          <span className='border-border bg-card/60 text-muted-foreground peer-focus-visible:ring-primary/45 peer-checked:border-primary/55 peer-checked:bg-primary/10 peer-checked:text-primary peer-focus-visible:ring-offset-background group-hover:border-primary/30 group-hover:bg-primary/[0.045] flex min-h-24 flex-col items-center justify-center gap-2 rounded-2xl border px-3 py-4 text-center text-sm font-medium transition-[border-color,background-color,color,box-shadow,transform] duration-200 ease-out group-active:scale-[0.98] peer-checked:shadow-[0_10px_26px_-18px_color-mix(in_oklab,var(--primary)_78%,transparent)] peer-focus-visible:ring-2 peer-focus-visible:ring-offset-2 motion-reduce:transition-none'>
+                            {theme === 'system' ? (
+                              <Monitor aria-hidden='true' className='size-5' />
+                            ) : theme === 'light' ? (
+                              <Sun aria-hidden='true' className='size-5' />
+                            ) : (
+                              <Moon aria-hidden='true' className='size-5' />
+                            )}
+                            <span>{(zh ? ['跟随系统', '浅色', '深色'] : ['System', 'Light', 'Dark'])[i]}</span>
+                          </span>
+                          <span className='bg-primary text-primary-foreground absolute top-2 right-2 flex size-4 scale-0 items-center justify-center rounded-full transition-transform duration-200 peer-checked:scale-100 motion-reduce:transition-none'>
+                            <Check aria-hidden='true' className='size-3' />
+                          </span>
+                        </label>
+                      ))}
+                    </div>
+                  </fieldset>
                 </div>
               )}
               {section === 'connection' && <ConnectionSettings embedded open={open} onOpenChange={setOpen} />}

@@ -4,12 +4,13 @@ import { useEffect, useRef, useState } from 'react';
 import dynamic from 'next/dynamic';
 import useImageHistory, { deleteImageHistoryItem, type ImageHistoryItem } from '@/network/image/history';
 import useVideoHistory, { deleteVideoHistoryItem, type VideoHistoryItem } from '@/network/video/history';
-import { Eye, Loader2, ZoomIn, ZoomOut } from 'lucide-react';
+import { Eye, ZoomIn, ZoomOut } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 
 import { beginHistoryImageDrag, endHistoryImageDrag } from '@/lib/desktop/image-history-drag';
 import { Slider } from '@/components/ui/slider';
 
+import CreatorImagePreview from './CreatorImagePreview';
 import CreatorVideoPreview from './CreatorVideoPreview';
 
 const ImageDetailModal = dynamic(() => import('@/components/dialog/ImageDetailModal'), { ssr: false });
@@ -25,6 +26,7 @@ const MAX_THUMBNAIL_WIDTH = 360;
 
 export default function CreatorHistory() {
   const t = useTranslations('CreatorHistory');
+  const tCommon = useTranslations('Common');
   const tImageDisplay = useTranslations('components.image-form.display');
   const tVideoDisplay = useTranslations('components.video-form.display');
   const [type, setType] = useState<HistoryType>('video');
@@ -109,19 +111,11 @@ export default function CreatorHistory() {
                   <div
                     className={`border-foreground/10 bg-foreground/5 relative overflow-hidden rounded-xl border ${src ? '' : 'min-h-44'}`}
                   >
-                    {src ? (
-                      <img
-                        src={src}
-                        alt={item.prompt}
-                        loading='lazy'
-                        draggable={false}
-                        className='block h-auto w-full object-contain'
-                      />
-                    ) : (
-                      <div className='text-foreground/30 flex h-full items-center justify-center'>
-                        {item.status === 'processing' ? <Loader2 className='animate-spin' /> : t('no-preview')}
-                      </div>
-                    )}
+                    <CreatorImagePreview
+                      item={item}
+                      noPreviewLabel={t('no-preview')}
+                      loadingLabel={tCommon('loading')}
+                    />
                     <div className='absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/90 to-transparent p-3 pt-10'>
                       <p className='line-clamp-2 text-xs text-white/80'>{item.prompt}</p>
                     </div>
@@ -166,7 +160,11 @@ export default function CreatorHistory() {
                   <div
                     className={`border-foreground/10 bg-foreground/5 relative overflow-hidden rounded-xl border ${hasPreview ? '' : 'min-h-44'}`}
                   >
-                    <CreatorVideoPreview item={item} noPreviewLabel={t('no-preview')} />
+                    <CreatorVideoPreview
+                      item={item}
+                      noPreviewLabel={t('no-preview')}
+                      loadingLabel={tCommon('loading')}
+                    />
                     <div className='absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/90 to-transparent p-3 pt-10'>
                       <p className='line-clamp-2 text-xs text-white/80'>{item.prompt}</p>
                     </div>

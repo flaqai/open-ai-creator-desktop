@@ -52,7 +52,7 @@ export default function TypeTabs({
                 src={item.icon}
                 alt=''
                 className={cn(
-                  'size-full [transform-origin:50%_78%] object-contain drop-shadow-[0_8px_14px_rgba(0,0,0,0.4)] transition-transform motion-reduce:transition-none',
+                  'size-full [transform-origin:50%_78%] object-contain transition-transform motion-reduce:transition-none dark:drop-shadow-[0_8px_14px_rgba(0,0,0,0.4)]',
                   active
                     ? 'translate-y-[-2px] scale-[1.46] duration-[580ms] ease-[cubic-bezier(0.34,1.56,0.64,1)]'
                     : 'translate-y-[-6px] scale-100 duration-[360ms] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:translate-y-[-2px] group-hover:duration-[220ms] group-hover:ease-[cubic-bezier(0,0,0.2,1)] group-active:translate-y-0 group-active:scale-90 group-active:duration-[120ms]',
