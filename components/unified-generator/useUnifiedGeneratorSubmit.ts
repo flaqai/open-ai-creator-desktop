@@ -18,6 +18,7 @@ import type {
 import type { VideoGenerationType, VideoModel } from '@/lib/constants/video';
 import trimAudioFile from '@/lib/utils/audioUtils';
 import { serializeReferencePrompt, validateReferencePromptReferences } from '@/lib/utils/reference-video-prompt';
+import { getUnifiedImageDimensions } from '@/lib/utils/unified-image-generation';
 import { trimVideoFile } from '@/lib/utils/videoUtils';
 import useUploadFiles from '@/hooks/use-upload-files';
 
@@ -44,17 +45,6 @@ interface UnifiedSubmitInput {
   seed?: number;
   negativePrompt?: string;
   guidanceScale?: number;
-}
-
-function getImageDimensions(ratio?: string, resolution?: string) {
-  const base = resolution?.toLowerCase() === '2k' ? 2048 : 1024;
-  const [widthRatio, heightRatio] = (ratio || '1:1').split(':').map(Number);
-  if (!widthRatio || !heightRatio) return { width: base, height: base };
-
-  if (widthRatio >= heightRatio) {
-    return { width: base, height: Math.round((base * heightRatio) / widthRatio) };
-  }
-  return { width: Math.round((base * widthRatio) / heightRatio), height: base };
 }
 
 async function getMediaDuration(source: File | string) {
@@ -166,7 +156,7 @@ export default function useUnifiedGeneratorSubmit() {
         if (input.images.length < minimum) throw new Error(t('errors.reference-required'));
 
         const imageUrls = await uploadAssets(input.images, 'image');
-        const dimensions = getImageDimensions(input.ratio, input.resolution);
+        const dimensions = getUnifiedImageDimensions(input.ratio);
         const response = await createImageTask(await getClientOpenApiConfigAsync(), {
           model_name: input.imageModel.model,
           prompt: input.prompt.trim(),
