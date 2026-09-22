@@ -9,6 +9,7 @@ import { useTranslations } from 'next-intl';
 import { toast } from 'sonner';
 
 import { getImageModelVersionName } from '@/lib/constants/image';
+import { continuousWheelZoom } from '@/lib/media-zoom';
 import { exportImage, type ImageType } from '@/lib/platform/image-export';
 import { fetchMedia } from '@/lib/platform/media';
 import { detectImageFormat } from '@/lib/utils/fileUtils';
@@ -78,22 +79,34 @@ export default function ImageDetailModal({
     originX: number;
     originY: number;
   }>(null);
+  const zoomRef = useRef(1);
   const ownedObjectUrlsRef = useRef(new Set<string>());
 
   const resetView = () => {
+    zoomRef.current = 1;
     setZoom(1);
     setPosition({ x: 0, y: 0 });
   };
 
   const updateZoom = (nextZoom: number) => {
     const clampedZoom = clampZoom(nextZoom);
+    zoomRef.current = clampedZoom;
     setZoom(clampedZoom);
     if (clampedZoom <= 1) setPosition({ x: 0, y: 0 });
   };
 
   const handleWheel = (event: WheelEvent<HTMLDivElement>) => {
     event.preventDefault();
-    updateZoom(zoom + (event.deltaY < 0 ? ZOOM_STEP : -ZOOM_STEP));
+    updateZoom(
+      continuousWheelZoom({
+        currentZoom: zoomRef.current,
+        deltaY: event.deltaY,
+        deltaMode: event.deltaMode,
+        pageHeight: event.currentTarget.clientHeight,
+        minZoom: MIN_ZOOM,
+        maxZoom: MAX_ZOOM,
+      }),
+    );
   };
 
   const handlePointerDown = (event: PointerEvent<HTMLDivElement>) => {
@@ -132,6 +145,7 @@ export default function ImageDetailModal({
     if (!open || !image.url) return undefined;
 
     setDisplayUrl(image.url);
+    zoomRef.current = 1;
     setZoom(1);
     setPosition({ x: 0, y: 0 });
 

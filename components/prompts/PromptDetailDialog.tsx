@@ -32,6 +32,7 @@ import {
 } from 'lucide-react';
 import { toast } from 'sonner';
 
+import { continuousWheelZoom } from '@/lib/media-zoom';
 import { downloadMedia, mediaFileName, saveMedia } from '@/lib/platform/media';
 import {
   clampDividerPercent,
@@ -185,6 +186,8 @@ export default function PromptDetailDialog({
   const imageRef = useRef<HTMLImageElement>(null);
   const panHintTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const activePointerRef = useRef<number | null>(null);
+  const zoomRef = useRef(MIN_MEDIA_ZOOM);
+  const panRef = useRef<Point>(CENTER);
   const dragStartRef = useRef<{ pointer: Point; pan: Point } | null>(null);
   const dividerPointerRef = useRef<number | null>(null);
   const dividerBoundsRef = useRef<{ left: number; width: number } | null>(null);
@@ -227,6 +230,8 @@ export default function PromptDetailDialog({
 
   const resetViewer = useCallback(() => {
     releasePointer();
+    zoomRef.current = MIN_MEDIA_ZOOM;
+    panRef.current = CENTER;
     setZoom(MIN_MEDIA_ZOOM);
     setPan(CENTER);
     setShowPanHint(false);
@@ -327,7 +332,11 @@ export default function PromptDetailDialog({
   }, [isImage, prompt?.id]);
 
   useEffect(() => {
-    setPan((current) => clampPan(current, currentPanBounds));
+    setPan((current) => {
+      const next = clampPan(current, currentPanBounds);
+      panRef.current = next;
+      return next;
+    });
   }, [currentPanBounds]);
 
   useEffect(
@@ -391,15 +400,19 @@ export default function PromptDetailDialog({
     setCanvasSize(measuredCanvas);
     setIntrinsicSize(measuredIntrinsic);
     const next = clampMediaZoom(nextZoom);
-    const wasFitted = zoom === MIN_MEDIA_ZOOM;
+    const currentZoom = zoomRef.current;
+    const currentPan = panRef.current;
+    const wasFitted = currentZoom === MIN_MEDIA_ZOOM;
     const result = zoomAroundPoint({
-      currentZoom: zoom,
+      currentZoom,
       nextZoom: next,
-      pan,
+      pan: currentPan,
       pointer: pointer ?? { x: measuredCanvas.width / 2, y: measuredCanvas.height / 2 },
       viewport: measuredCanvas,
       fitted: measuredFitted,
     });
+    zoomRef.current = result.zoom;
+    panRef.current = result.pan;
     setZoom(result.zoom);
     setPan(result.pan);
     if (wasFitted && result.zoom > MIN_MEDIA_ZOOM) showDragHint();
@@ -409,7 +422,15 @@ export default function PromptDetailDialog({
     if (!canInteract) return;
     event.preventDefault();
     const bounds = event.currentTarget.getBoundingClientRect();
-    setViewerZoom(zoom + (event.deltaY < 0 ? ZOOM_STEP : -ZOOM_STEP), {
+    const nextZoom = continuousWheelZoom({
+      currentZoom: zoomRef.current,
+      deltaY: event.deltaY,
+      deltaMode: event.deltaMode,
+      pageHeight: bounds.height,
+      minZoom: MIN_MEDIA_ZOOM,
+      maxZoom: MAX_MEDIA_ZOOM,
+    });
+    setViewerZoom(nextZoom, {
       x: event.clientX - bounds.left,
       y: event.clientY - bounds.top,
     });
@@ -419,7 +440,7 @@ export default function PromptDetailDialog({
     if (!canInteract || zoom <= MIN_MEDIA_ZOOM || event.button !== 0) return;
     event.currentTarget.setPointerCapture(event.pointerId);
     activePointerRef.current = event.pointerId;
-    dragStartRef.current = { pointer: { x: event.clientX, y: event.clientY }, pan };
+    dragStartRef.current = { pointer: { x: event.clientX, y: event.clientY }, pan: panRef.current };
     setIsPanning(true);
     setShowPanHint(false);
   };
@@ -434,15 +455,17 @@ export default function PromptDetailDialog({
       height: image?.naturalHeight ?? intrinsicSize.height,
     });
     const measuredBounds = panBounds(viewport, measuredFitted, zoom);
-    setPan((current) =>
-      clampPan(
+    setPan((current) => {
+      const next = clampPan(
         {
           x: current.x + event.movementX,
           y: current.y + event.movementY,
         },
         measuredBounds,
-      ),
-    );
+      );
+      panRef.current = next;
+      return next;
+    });
   };
 
   const dividerPercentFromClientX = (clientX: number) => {
