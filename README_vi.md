@@ -2,6 +2,22 @@
 
 Mẫu SaaS miễn phí và mã nguồn mở để xây dựng nền tảng tạo ảnh, video AI bằng API hợp nhất của Flaq.ai.
 
+## Giới thiệu Flaq.ai
+
+[Flaq.ai](https://flaq.ai/vi/) là nền tảng mô hình AI dành cho nhà sáng tạo và lập trình viên. Một khóa API cung cấp
+quyền truy cập thống nhất vào khả năng tạo và chỉnh sửa ảnh, tạo video và các mô hình ngôn ngữ.
+
+- **Khám phá và so sánh mô hình** — Xem khả năng, tham số được hỗ trợ và giá hiện tại tại
+  [Model Market](https://flaq.ai/model-market/).
+- **Thử trước khi tích hợp** — Dùng Playground của Flaq.ai để thử các mô hình được hỗ trợ, tinh chỉnh prompt và cài đặt
+  tạo nội dung.
+- **Xây dựng quy trình sáng tạo** — Tham khảo [tài liệu API](https://flaq.ai/docs/) để tích hợp AI vào sản phẩm và công
+  cụ của bạn.
+
+Flaq Creator Desktop đưa các quy trình ảnh và video vào không gian làm việc riêng trên máy tính. Kết nối Client Key
+Flaq.ai trong ứng dụng để tạo và quản lý nội dung trực quan. Không phải mọi API của nền tảng đều có trong ứng dụng máy
+tính; xem mô hình và giá hiện hành tại Flaq.ai.
+
 **README:** [English](./README.md) · [日本語](./README_ja.md) · [Bahasa Indonesia](./README_id.md) ·
 [Italiano](./README_it.md) · [Português](./README_pt.md) · [Español](./README_es.md) · [Deutsch](./README_de.md) ·
 [Русский](./README_ru.md) · [Français](./README_fr.md) · [简体中文](./README_zh.md) · [繁體中文](./README_tw.md) ·
@@ -22,11 +38,6 @@ Mẫu SaaS miễn phí và mã nguồn mở để xây dựng nền tảng tạo
 - 🔒 Lưu khóa API được mã hóa ở phía máy khách
 - 📱 Giao diện thích ứng, chế độ tối và lịch sử tạo nội dung
 
-## Giới thiệu Flaq.ai
-
-[Flaq.ai](https://flaq.ai/vi/) tập hợp các mô hình tạo ảnh và video hàng đầu trong một API với cơ chế xác thực thống
-nhất. Mẫu đã triển khai sẵn kết nối API, kiểm tra trạng thái, hiển thị kết quả và tải xuống.
-
 ## Bắt đầu nhanh
 
 ```bash
@@ -41,16 +52,31 @@ pnpm dev
 [Flaq.ai](https://flaq.ai/vi/) trong phần cài đặt ứng dụng. Xem [tài liệu tiếng Anh đầy đủ](./README.md#getting-started)
 để biết toàn bộ biến môi trường và các bước thiết lập.
 
-## Chương trình tiếp thị liên kết Flaq.ai
-
-Với [Chương trình tiếp thị liên kết Flaq.ai](https://flaq.ai/vi/affiliate-program?utm_source=flaq-saas-template), bạn có
-thể nhận hoa hồng 20% từ đơn trả phí hợp lệ đầu tiên của người được giới thiệu và 10% từ các đơn hợp lệ tiếp theo trong
-vòng 60 ngày sau khi họ đăng ký. Điều kiện và thanh toán tuân theo quy định mới nhất trên trang chương trình.
-
 ## Quốc tế hóa
 
 Mã nguồn và README hỗ trợ cùng 15 locale: `en`, `ja`, `id`, `it`, `pt`, `es`, `de`, `ru`, `fr`, `zh`, `tw`, `ko`, `th`,
 `vi`, `ar`. Tiếng Anh dùng `/`, các ngôn ngữ khác dùng `/{locale}/`, còn tiếng Ả Rập được hiển thị từ phải sang trái.
+
+## Chương trình tiếp thị liên kết Flaq.ai
+
+Trở thành đối tác liên kết Flaq.ai và nhận hoa hồng khi giới thiệu quy trình ảnh và video AI, API mô hình và công cụ
+sáng tạo. Chương trình chào đón nhà sáng tạo, nhà thiết kế, lập trình viên, giảng viên AI, người đánh giá mô hình và các
+nhóm chia sẻ quy trình AI thực tiễn.
+
+- **Thưởng giới thiệu** — Nhận 20% từ đơn trả phí hợp lệ đầu tiên của người được giới thiệu và 10% từ các đơn trả phí
+  hợp lệ tiếp theo trong vòng 60 ngày sau khi họ đăng ký, theo quy định về điều kiện và ghi nhận giới thiệu.
+- **Quảng bá linh hoạt** — Chia sẻ liên kết qua hướng dẫn, đánh giá mô hình, sản phẩm sáng tạo, cộng đồng hoặc tài liệu
+  tích hợp API.
+- **Không gian đối tác** — Quản lý liên kết, xem hoạt động giới thiệu và thiết lập nhận tiền trên Flaq.ai.
+
+Đăng nhập Flaq.ai, hoàn thành hồ sơ và chấp nhận thỏa thuận liên kết, sau đó tạo liên kết riêng. Dự án cũng có các mục
+giới thiệu chương trình theo ngôn ngữ; việc đăng ký đối tác và quản lý hoa hồng diễn ra trên Flaq.ai, không phải trong
+ứng dụng máy tính.
+
+**[Tham gia chương trình tiếp thị liên kết Flaq.ai →](https://flaq.ai/vi/affiliate-program/)**
+
+> Điều kiện nhận hoa hồng, ghi nhận giới thiệu, hoàn tiền, xét duyệt chi trả và thỏa thuận riêng đã được phê duyệt tuân
+> theo các điều khoản mới nhất trên trang chính thức.
 
 ## Tài liệu và giấy phép
 

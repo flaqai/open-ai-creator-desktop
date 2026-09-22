@@ -4,6 +4,18 @@
 [Flaq.ai](https://flaq.ai)
 API 面向 AI 图片与视频创作。项目保留原有 Web 体验，并新增可运行于 macOS、Windows 和 Linux 的专注型创作工作台。
 
+## 关于 Flaq.ai
+
+[Flaq.ai](https://flaq.ai/zh/) 是面向创作者和开发者的 AI 模型平台，通过一个 API
+Key 统一接入图片生成与编辑、视频生成和语言模型。
+
+- **探索与比较模型** — 在[模型市场](https://flaq.ai/model-market/)查看模型能力、支持参数和当前价格。
+- **接入前先体验** — 使用 Flaq.ai 的 Playground 测试支持的模型，调整提示词和生成参数。
+- **构建创作工作流** — 参考 [API 文档](https://flaq.ai/docs/)，将 AI 能力接入自己的产品和工具。
+
+Flaq Creator Desktop 将平台的图片与视频工作流带到独立桌面工作台。在应用中配置 Flaq.ai Client
+Key，即可创作和管理视觉素材。平台提供的全部 API 能力并不意味着桌面应用均已支持；可用模型和使用价格以 Flaq.ai 官网为准。
+
 **选择 README 语言：** [English](./README.md) · [日本語](./README_ja.md) · [Bahasa Indonesia](./README_id.md) ·
 [Italiano](./README_it.md) · [Português (Brasil)](./README_pt.md) · [Español](./README_es.md) ·
 [Deutsch](./README_de.md) · [Русский](./README_ru.md) · [Français](./README_fr.md) · [简体中文](./README_zh.md) ·
@@ -36,6 +48,7 @@ pnpm desktop:build
 
 ## 目录
 
+- [关于 Flaq.ai](#关于-flaqai)
 - [桌面应用](#桌面应用)
 - [功能特性](#功能特性)
 - [技术栈](#技术栈)
@@ -47,11 +60,10 @@ pnpm desktop:build
   - [Flaq.ai API Key 配置](#flaqai-api-key-配置)
 - [使用方法](#使用方法)
 - [AIGC 能力](#aigc-能力)
-- [Flaq.ai 联盟计划](#flaqai-联盟计划)
 - [国际化 (i18n)](#国际化-i18n)
 - [SEO 与 AI 爬虫发现](#seo-与-ai-爬虫发现)
 - [项目结构](#项目结构)
-- [部署](#部署)
+- [Flaq.ai 联盟计划](#flaqai-联盟计划)
 - [许可证](#许可证)
 
 ## 功能特性
@@ -222,14 +234,6 @@ pnpm ts-check
 - 结果画廊，支持下载和分享
 - 历史生成记录
 
-## Flaq.ai 联盟计划
-
-公开落地页和生成页面均包含本地化的
-[Flaq.ai 联盟计划](https://flaq.ai/zh/affiliate-program?utm_source=flaq-saas-template)
-推荐区块。按钮会根据当前语言打开 Flaq.ai 对应的联盟计划页面，并携带 `utm_source=flaq-saas-template` 用于来源归因。
-
-根据 Flaq.ai 当前公布的规则，推荐用户的首笔有效付费订单可获得 20% 佣金，注册后 60 天内的后续有效付费订单可获得 10% 佣金。具体资格与结算规则以联盟计划页面发布的条款为准。
-
 ## 国际化 (i18n)
 
 本模板默认支持
@@ -302,18 +306,20 @@ Card 以及 index/follow 指令。生成的 `/sitemap.xml` 会列出所有公开
 └── tsconfig.json           # TypeScript 配置
 ```
 
-## 部署
+## Flaq.ai 联盟计划
 
-推荐通过 [Vercel](https://vercel.com) 一键部署：
+加入 Flaq.ai 联盟合作伙伴计划，向受众介绍 AI 图片与视频工作流、模型 API 和创作工具，获得推荐佣金。计划欢迎创作者、设计师、开发者、AI 教育者、模型评测者及分享实用 AI 工作流的团队参与。
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/your-username/flaq-saas-template)
+- **推荐奖励**
+  — 推荐用户的首笔有效付费订单可获得 20% 佣金，注册后 60 天内的后续有效付费订单可获得 10% 佣金，具体以资格与归因规则为准。
+- **灵活推广** — 在教程、模型评测、创作案例、社区或 API 接入指南中分享专属推荐链接。
+- **合作伙伴工作台** — 在 Flaq.ai 管理推荐链接、查看推荐活动并配置收款信息。
 
-1. 将仓库推送到 GitHub
-2. 在 Vercel 中导入项目
-3. 在 Vercel 项目设置中添加所有环境变量（`R2_*`、`NEXT_PUBLIC_*`）
-4. 部署！
+登录 Flaq.ai，完善联盟资料并确认协议后，即可创建专属推荐链接。本项目也提供本地化的联盟推广入口；合作伙伴申请和佣金管理在 Flaq.ai 网站完成，而非桌面应用内。
 
-> 本模板也支持任何兼容 Next.js 的平台（Netlify、Cloudflare Pages、Docker 等）。
+**[加入 Flaq.ai 联盟合作伙伴计划 →](https://flaq.ai/zh/affiliate-program/)**
+
+> 佣金资格、归因、退款、结算审核及经批准的定制合作安排，均以官方计划页面的最新条款为准。
 
 ## 许可证
 
