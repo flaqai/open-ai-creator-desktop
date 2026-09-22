@@ -8,9 +8,8 @@ import { useFormContext } from 'react-hook-form';
 
 import { cn } from '@/lib/utils';
 import { getFileByUrl } from '@/lib/utils/fileUtils';
+import { getMediaInputAccept, isAcceptedMediaFile } from '@/lib/utils/media-upload-formats';
 import { FormControl, FormField, FormItem, FormLabel } from '@/components/ui/form';
-
-const acceptedImageTypes = ['image/jpg', 'image/jpeg', 'image/png', 'image/webp'];
 
 // eslint-disable-next-line prefer-arrow-callback
 const ImageUploadForm: ForwardRefRenderFunction<
@@ -36,6 +35,7 @@ const ImageUploadForm: ForwardRefRenderFunction<
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const previewImage = async (file: File | null | string) => {
+    if (file instanceof File && !isAcceptedMediaFile(file, 'image')) return;
     if (file) {
       if (typeof file === 'string') {
         setImageUrl(file);
@@ -83,10 +83,11 @@ const ImageUploadForm: ForwardRefRenderFunction<
 
   const inputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0] || null;
-    if (file) {
+    if (file && isAcceptedMediaFile(file, 'image')) {
       previewImage(file);
       methods.setValue(name, file);
     }
+    e.target.value = '';
   };
 
   useEffect(() => {
@@ -153,7 +154,7 @@ const ImageUploadForm: ForwardRefRenderFunction<
           <FormControl>
             <input
               type='file'
-              accept={acceptedImageTypes.join(',')}
+              accept={getMediaInputAccept('image')}
               className='hidden'
               ref={fileInputRef}
               required={false}

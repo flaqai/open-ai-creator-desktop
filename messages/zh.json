@@ -56,6 +56,14 @@
       "reference-upload": {
         "upload": "上传",
         "history": "历史记录",
+        "chooseSource": "选择素材来源",
+        "selectFromHistory": "从历史记录选择",
+        "historySelectionTitle": "选择历史素材",
+        "historySelectionDescription": "可选择最多 {count} 个与当前模型兼容的素材。",
+        "noCompatibleHistory": "暂无兼容的已完成历史记录",
+        "selectedCount": "已选 {selected}/{count}",
+        "cancel": "取消",
+        "confirm": "确定",
         "uploadFromDevice": "从设备上传",
         "noCompletedHistory": "暂无已完成的历史记录",
         "addImage": "添加图片",
@@ -1404,6 +1412,7 @@
   "CreatorHistory": {
     "title": "生成历史",
     "description": "您的图片和视频任务会存储在此浏览器本地。",
+    "thumbnail-size": "缩略图大小",
     "image": "图片",
     "video": "视频",
     "no-preview": "暂无预览",

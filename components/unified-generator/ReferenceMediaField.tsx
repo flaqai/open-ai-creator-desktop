@@ -4,6 +4,7 @@ import { useEffect, useMemo, useRef } from 'react';
 import { FileText, ImageIcon, Music2, Plus, VideoIcon, X } from 'lucide-react';
 
 import { cn } from '@/lib/utils';
+import { filterAcceptedMediaFiles, getMediaInputAccept } from '@/lib/utils/media-upload-formats';
 
 type MediaKind = 'image' | 'video' | 'audio' | 'file';
 
@@ -19,8 +20,8 @@ interface ReferenceMediaFieldProps {
 }
 
 const ACCEPT_BY_KIND: Record<MediaKind, string> = {
-  image: 'image/*',
-  video: 'video/*',
+  image: getMediaInputAccept('image'),
+  video: getMediaInputAccept('video'),
   audio: 'audio/*',
   file: '.docx,.doc,.xlsx,.xls,.pptx,.ppt,.pdf,.txt,.key,.pages,.numbers,.md',
 };
@@ -53,7 +54,11 @@ export default function ReferenceMediaField({
 
   const handleFiles = (selectedFiles: FileList | null) => {
     if (!selectedFiles?.length) return;
-    const next = [...files, ...Array.from(selectedFiles)];
+    const selected = Array.from(selectedFiles);
+    const compatible =
+      kind === 'image' || kind === 'video' ? filterAcceptedMediaFiles(selected, kind, accept) : selected;
+    if (!compatible.length) return;
+    const next = [...files, ...compatible];
     if (next.length > max) onLimitReached();
     onChange(next.slice(0, max));
     if (inputRef.current) inputRef.current.value = '';
@@ -119,7 +124,11 @@ export default function ReferenceMediaField({
         multiple={max > 1}
         accept={
           accept?.length
-            ? accept.map((format) => (format.startsWith('.') || format.includes('/') ? format : `.${format}`)).join(',')
+            ? kind === 'image' || kind === 'video'
+              ? getMediaInputAccept(kind, accept)
+              : accept
+                  .map((format) => (format.startsWith('.') || format.includes('/') ? format : `.${format}`))
+                  .join(',')
             : ACCEPT_BY_KIND[kind]
         }
         className='hidden'

@@ -9,15 +9,16 @@ import { useFormContext } from 'react-hook-form';
 import { toast } from 'sonner';
 
 import { cn } from '@/lib/utils';
+import {
+  filterAcceptedMediaFiles,
+  getMediaDropzoneAccept,
+  isAcceptedMediaFile,
+} from '@/lib/utils/media-upload-formats';
 import { useFormRestoration } from '@/hooks/use-form-restoration';
 import SubHeading from '@/components/form/SubHeading';
 import { ObjectIcon, SubjectIcon } from '@/components/svg/form/image-upload-with-frame';
 
-const ACCEPTED_IMAGE_TYPES: Record<string, string[]> = {
-  'image/jpeg': ['.jpg', '.jpeg'],
-  'image/png': ['.png'],
-  'image/webp': ['.webp'],
-};
+const ACCEPTED_IMAGE_TYPES = getMediaDropzoneAccept('image');
 
 const ACCEPTED_FORMATS_LABEL = 'jpg, png, webp';
 
@@ -66,6 +67,7 @@ const TryOnUploadSection = forwardRef<TryOnUploadSectionRef, TryOnUploadSectionP
     // === Subject handlers ===
     const handleSubjectFile = useCallback(
       (file: File) => {
+        if (!isAcceptedMediaFile(file, 'image')) return;
         const url = URL.createObjectURL(file);
         setSubjectImageState({ url, file });
         methods.setValue('subjectImage', file, { shouldValidate: true, shouldDirty: true });
@@ -107,12 +109,13 @@ const TryOnUploadSection = forwardRef<TryOnUploadSectionRef, TryOnUploadSectionP
     };
 
     const addObjectFiles = (files: File[]) => {
+      const compatibleFiles = filterAcceptedMediaFiles(files, 'image');
       const remaining = maxObjectImages - objectImages.length;
       if (remaining <= 0) {
         toast.error(`Max ${maxObjectImages} images`);
         return;
       }
-      const newItems: ImageItem[] = files.slice(0, remaining).map((file) => ({
+      const newItems: ImageItem[] = compatibleFiles.slice(0, remaining).map((file) => ({
         id: nanoid(),
         file,
         previewUrl: URL.createObjectURL(file),

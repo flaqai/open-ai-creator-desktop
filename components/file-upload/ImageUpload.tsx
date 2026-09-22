@@ -11,6 +11,7 @@ import { maxSizeInBytes } from '@/lib/constants';
 import { cn } from '@/lib/utils';
 import { getFileByUrl } from '@/lib/utils/fileUtils';
 import { validateImagePx } from '@/lib/utils/imageUtils';
+import { getMediaInputAccept, isAcceptedMediaFile } from '@/lib/utils/media-upload-formats';
 import { FormControl, FormField, FormItem, FormLabel } from '@/components/ui/form';
 
 import AgSwitch from '../AgSwitch';
@@ -32,8 +33,6 @@ function Text({ title, icon, className }: { title?: string; icon: React.ReactNod
     </div>
   );
 }
-
-const acceptedImageTypes = ['image/jpg', 'image/jpeg', 'image/png', 'image/webp'];
 
 export default function ImageUpload({
   name,
@@ -124,6 +123,10 @@ export default function ImageUpload({
   const inputOnChange: ChangeEventHandler<HTMLInputElement> = async (e) => {
     const file = e.target.files?.[0] || null;
     if (file) {
+      if (!isAcceptedMediaFile(file, 'image')) {
+        clearInputValue();
+        return;
+      }
       if (isValidateImagePx) {
         const isValid = await validateImagePx({ imageFile: file, minWidthPx, minHeightPx });
         if (!isValid) {
@@ -206,7 +209,7 @@ export default function ImageUpload({
                   <input
                     type='file'
                     ref={fileInputRef}
-                    accept={acceptedImageTypes.join(',')}
+                    accept={getMediaInputAccept('image')}
                     className='hidden'
                     required={false}
                     onChange={inputOnChange}

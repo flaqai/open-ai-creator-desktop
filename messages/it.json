@@ -56,6 +56,14 @@
       "reference-upload": {
         "upload": "Carica",
         "history": "Cronologia",
+        "chooseSource": "Choose a source",
+        "selectFromHistory": "Choose from history",
+        "historySelectionTitle": "Choose history media",
+        "historySelectionDescription": "Select up to {count} compatible items for the current model.",
+        "noCompatibleHistory": "No compatible completed history yet",
+        "selectedCount": "Selected {selected}/{count}",
+        "cancel": "Cancel",
+        "confirm": "Confirm",
         "uploadFromDevice": "Carica dal dispositivo",
         "noCompletedHistory": "Non sono ancora presenti elementi completati nella cronologia",
         "addImage": "Aggiungi immagine",
@@ -1404,6 +1412,7 @@
   "CreatorHistory": {
     "title": "Generation History",
     "description": "Your image and video tasks are stored locally in this browser.",
+    "thumbnail-size": "Dimensione miniature",
     "image": "Images",
     "video": "Videos",
     "no-preview": "No preview",

@@ -10,15 +10,12 @@ import { toast } from 'sonner';
 
 import { cn } from '@/lib/utils';
 import { validateImagePx } from '@/lib/utils/imageUtils';
+import { filterAcceptedMediaFiles, getMediaDropzoneAccept } from '@/lib/utils/media-upload-formats';
 import { useFormRestoration } from '@/hooks/use-form-restoration';
 import { FormControl, FormField, FormItem } from '@/components/ui/form';
 import SubHeading from '@/components/form/SubHeading';
 
-const ACCEPTED_IMAGE_TYPES: Record<string, string[]> = {
-  'image/jpeg': ['.jpg', '.jpeg'],
-  'image/png': ['.png'],
-  'image/webp': ['.webp'],
-};
+const ACCEPTED_IMAGE_TYPES = getMediaDropzoneAccept('image');
 
 type ImageItem = {
   id: string;
@@ -71,6 +68,9 @@ const MultiImageUploadFieldWithDrag = forwardRef<
     const methods = useFormContext<{ [key: string]: File[] | null }>();
 
     const [images, setImages] = useState<ImageItem[]>([]);
+    const acceptedExtensions = acceptTypes?.length
+      ? acceptTypes.flatMap((type) => ACCEPTED_IMAGE_TYPES[type] || [type])
+      : Object.values(ACCEPTED_IMAGE_TYPES).flat();
     const firstSync = useRef(true);
     useFormRestoration((data, preview) => {
       const values = Array.isArray(data[name]) ? data[name] : [];
@@ -91,7 +91,7 @@ const MultiImageUploadFieldWithDrag = forwardRef<
 
     const addImages = async (files: File[]) => {
       const remainingSlots = maxImages - images.length;
-      const filesToAdd = files.slice(0, remainingSlots);
+      const filesToAdd = filterAcceptedMediaFiles(files, 'image', acceptedExtensions).slice(0, remainingSlots);
 
       const validationResults = await Promise.all(
         filesToAdd.map(async (file) => {

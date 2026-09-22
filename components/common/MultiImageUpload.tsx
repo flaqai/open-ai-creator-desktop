@@ -7,12 +7,7 @@ import { useTranslations } from 'next-intl';
 import { useDropzone } from 'react-dropzone';
 
 import { cn } from '@/lib/utils';
-
-const ACCEPTED_IMAGE_TYPES: Record<string, string[]> = {
-  'image/jpeg': ['.jpg', '.jpeg'],
-  'image/png': ['.png'],
-  'image/webp': ['.webp'],
-};
+import { filterAcceptedMediaFiles, getMediaDropzoneAccept } from '@/lib/utils/media-upload-formats';
 
 type ImageItem = {
   id: string;
@@ -43,7 +38,7 @@ const MultiImageUpload = forwardRef<MultiImageUploadRef, MultiImageUploadProps>(
 
     const addImages = (files: File[]) => {
       const remainingSlots = maxImages - images.length;
-      const filesToAdd = files.slice(0, remainingSlots);
+      const filesToAdd = filterAcceptedMediaFiles(files, 'image').slice(0, remainingSlots);
 
       const newImages: ImageItem[] = filesToAdd.map((file) => ({
         id: nanoid(),
@@ -103,7 +98,7 @@ const MultiImageUpload = forwardRef<MultiImageUploadRef, MultiImageUploadProps>(
 
     const { getRootProps, getInputProps, isDragActive } = useDropzone({
       onDrop,
-      accept: ACCEPTED_IMAGE_TYPES,
+      accept: getMediaDropzoneAccept('image'),
       multiple: true,
       disabled: images.length >= maxImages,
       noClick: images.length >= maxImages,

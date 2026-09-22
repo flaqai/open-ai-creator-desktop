@@ -4,10 +4,11 @@ import { useMemo, useRef, useState } from 'react';
 import useImageHistory from '@/network/image/history';
 import { nanoid } from 'nanoid';
 import { useTranslations } from 'next-intl';
-import { useDropzone, type Accept, type FileRejection } from 'react-dropzone';
+import { useDropzone, type FileRejection } from 'react-dropzone';
 import { toast } from 'sonner';
 
 import type { UnifiedGeneratorReferenceMediaAsset } from '@/lib/constants/unified-generator/types';
+import { getMediaDropzoneAccept, isAcceptedMediaFile, normalizeMediaFormats } from '@/lib/utils/media-upload-formats';
 
 import ReferenceImagePreviewDialog from './ReferenceImagePreviewDialog';
 import ReferenceMediaPicker from './ReferenceMediaPicker';
@@ -28,27 +29,6 @@ function getImageDimensions(file: File) {
     };
     image.src = objectUrl;
   });
-}
-
-function getAccept(acceptedFormats?: string[]): Accept {
-  const formats = acceptedFormats?.map((item) => item.toLowerCase().replace(/^\./, '')) || [
-    'jpg',
-    'jpeg',
-    'png',
-    'webp',
-  ];
-  const mimeTypes: Record<string, string> = {
-    jpg: 'image/jpeg',
-    jpeg: 'image/jpeg',
-    png: 'image/png',
-    webp: 'image/webp',
-  };
-
-  return formats.reduce<Accept>((result, format) => {
-    const mimeType = mimeTypes[format] || 'image/*';
-    result[mimeType] = [...(result[mimeType] || []), `.${format}`];
-    return result;
-  }, {});
 }
 
 export default function UnifiedImageStackUpload({
@@ -74,7 +54,7 @@ export default function UnifiedImageStackUpload({
   const [isPickerPanelHovered, setIsPickerPanelHovered] = useState(false);
   const [previewIndex, setPreviewIndex] = useState<number | null>(null);
   const [collapseRevision, setCollapseRevision] = useState(0);
-  const imageHistory = useImageHistory(1, 20);
+  const imageHistory = useImageHistory(1, Number.MAX_SAFE_INTEGER);
   const historyAssets = useMemo<UnifiedGeneratorReferenceMediaAsset[]>(
     () =>
       imageHistory.data
@@ -90,11 +70,10 @@ export default function UnifiedImageStackUpload({
     [imageHistory.data],
   );
   const canAdd = values.length < maxImages;
+  const allowedFormats = normalizeMediaFormats('image', acceptedFormats);
 
   const validateImage = async (file: File) => {
-    const formats = acceptedFormats?.map((item) => item.toLowerCase().replace(/^\./, '')) || [];
-    const extension = file.name.split('.').pop()?.toLowerCase() || '';
-    if (!file.type.startsWith('image/') || (formats.length > 0 && !formats.includes(extension))) {
+    if (!isAcceptedMediaFile(file, 'image', allowedFormats)) {
       toast.error(t('unsupportedFormat'));
       return false;
     }
@@ -153,7 +132,7 @@ export default function UnifiedImageStackUpload({
   };
 
   const dropzone = useDropzone({
-    accept: getAccept(acceptedFormats),
+    accept: getMediaDropzoneAccept('image', allowedFormats),
     multiple: maxImages > 1,
     maxFiles: Math.max(maxImages - values.length, 1),
     noClick: true,
@@ -187,12 +166,16 @@ export default function UnifiedImageStackUpload({
           canAdd={canAdd}
           isHistoryLoading={imageHistory.isLoading}
           historyAssets={historyAssets}
+          acceptedFormats={allowedFormats}
+          historySelectionLimit={Math.max(maxImages - values.length, 1)}
           onUploadFromDevice={() => {
             if (inputRef.current) inputRef.current.value = '';
             dropzone.open();
           }}
-          onSelectHistory={(asset) => {
-            onChange([...values, { ...asset, id: `image-${nanoid()}` }].slice(0, maxImages));
+          onSelectHistory={(assets) => {
+            onChange(
+              [...values, ...assets.map((asset) => ({ ...asset, id: `image-${nanoid()}` }))].slice(0, maxImages),
+            );
             setPickerOpen(false);
             setIsPickerPanelHovered(false);
             setCollapseRevision((revision) => revision + 1);

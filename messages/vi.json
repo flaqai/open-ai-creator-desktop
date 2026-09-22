@@ -56,6 +56,14 @@
       "reference-upload": {
         "upload": "Tải lên",
         "history": "Lịch sử",
+        "chooseSource": "Choose a source",
+        "selectFromHistory": "Choose from history",
+        "historySelectionTitle": "Choose history media",
+        "historySelectionDescription": "Select up to {count} compatible items for the current model.",
+        "noCompatibleHistory": "No compatible completed history yet",
+        "selectedCount": "Selected {selected}/{count}",
+        "cancel": "Cancel",
+        "confirm": "Confirm",
         "uploadFromDevice": "Tải lên từ thiết bị",
         "noCompletedHistory": "Chưa có lịch sử hoàn tất",
         "addImage": "Thêm hình ảnh",
@@ -1404,6 +1412,7 @@
   "CreatorHistory": {
     "title": "Generation History",
     "description": "Your image and video tasks are stored locally in this browser.",
+    "thumbnail-size": "Kích thước hình thu nhỏ",
     "image": "Images",
     "video": "Videos",
     "no-preview": "No preview",

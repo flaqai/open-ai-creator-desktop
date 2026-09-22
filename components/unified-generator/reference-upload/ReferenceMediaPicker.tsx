@@ -1,7 +1,7 @@
 'use client';
 
-import { useState } from 'react';
-import { Clock3, Loader2, Plus, Trash2, Upload } from 'lucide-react';
+import { useMemo, useState } from 'react';
+import { Check, Clock3, FolderOpen, Loader2 } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 
 import type {
@@ -10,101 +10,70 @@ import type {
 } from '@/lib/constants/unified-generator/types';
 import { hasReferenceMediaSource } from '@/lib/constants/unified-generator/types';
 import { cn } from '@/lib/utils';
-import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
+import { filterCompatibleHistoryAssets } from '@/lib/utils/history-media-selection';
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+} from '@/components/ui/dialog';
+import { Popover, PopoverContent } from '@/components/ui/popover';
 
 import useReferenceAssetUrl from './useReferenceAssetUrl';
 
-type PickerTab = 'upload' | 'history';
-
-interface LocalMediaUploadItem {
-  id: string;
-  url: string;
-  name?: string;
-}
-
-function PickerRow({
+function HistoryAssetCard({
   asset,
+  selected,
   disabled,
-  onDelete,
-  onSelect,
+  onToggle,
 }: {
   asset: UnifiedGeneratorReferenceMediaAsset;
-  disabled?: boolean;
-  onDelete?: () => void;
-  onSelect: (asset: UnifiedGeneratorReferenceMediaAsset) => void;
+  selected: boolean;
+  disabled: boolean;
+  onToggle: () => void;
 }) {
-  const t = useTranslations('components.hero-form.reference-upload');
-  const [previewOpen, setPreviewOpen] = useState(false);
   const url = useReferenceAssetUrl(asset.source);
   const displayName = asset.name || asset.id;
 
   return (
-    <Popover open={previewOpen} onOpenChange={setPreviewOpen}>
-      <PopoverTrigger asChild>
-        <div
-          onPointerEnter={() => setPreviewOpen(true)}
-          onPointerLeave={() => setPreviewOpen(false)}
-          onFocus={() => setPreviewOpen(true)}
-          onBlur={() => setPreviewOpen(false)}
-          className='group/row text-color-t3 hover:bg-color-c4 hover:text-color-t1 flex h-12 w-full items-center gap-2 rounded-xl px-3 transition-colors'
-        >
-          <button
-            type='button'
-            disabled={disabled}
-            onClick={() => onSelect(asset)}
-            className='flex min-w-0 flex-1 items-center gap-3 text-left disabled:cursor-not-allowed disabled:opacity-50'
-          >
-            {asset.kind === 'image' ? (
-              <img src={url} alt={displayName} className='bg-color-c4 size-9 shrink-0 rounded-md object-cover' />
-            ) : (
-              <video src={url} className='size-9 shrink-0 rounded-md bg-black object-cover' muted preload='metadata'>
-                <track kind='captions' />
-              </video>
-            )}
-            <span className='min-w-0 flex-1 truncate text-xs'>{displayName}</span>
-          </button>
-          {onDelete ? (
-            <button
-              type='button'
-              aria-label={t('deleteLocalImage')}
-              disabled={disabled}
-              onClick={(event) => {
-                event.stopPropagation();
-                event.preventDefault();
-                setPreviewOpen(false);
-                onDelete();
-              }}
-              className='text-color-t3 hover:bg-color-c4 hover:text-color-t1 flex size-8 shrink-0 items-center justify-center rounded-lg opacity-0 transition-colors group-hover/row:opacity-100 focus:opacity-100 disabled:cursor-not-allowed disabled:opacity-0'
-            >
-              <Trash2 className='size-4' />
-            </button>
-          ) : null}
-        </div>
-      </PopoverTrigger>
-      <PopoverContent
-        side='right'
-        align='start'
-        sideOffset={12}
-        onOpenAutoFocus={(event) => event.preventDefault()}
-        onCloseAutoFocus={(event) => event.preventDefault()}
-        className='border-color-b1 bg-color-c1 w-[220px] rounded-2xl border p-1.5 shadow-2xl'
-      >
+    <button
+      type='button'
+      aria-pressed={selected}
+      disabled={disabled}
+      onClick={onToggle}
+      className={cn(
+        'group relative min-w-0 overflow-hidden rounded-xl border text-left transition-[border-color,box-shadow,opacity] duration-200',
+        selected ? 'border-color-main ring-color-main/20 ring-2' : 'border-color-b1 hover:border-color-main/50',
+        disabled && 'cursor-not-allowed opacity-40',
+      )}
+    >
+      <div className='bg-color-c4 aspect-video overflow-hidden'>
         {asset.kind === 'image' ? (
-          <img src={url} alt={displayName} className='max-h-[260px] w-full rounded-xl object-contain' />
-        ) : (
-          <video
+          <img
             src={url}
-            className='max-h-[260px] w-full rounded-xl bg-black object-contain'
-            autoPlay
-            muted
-            loop
-            playsInline
-          >
+            alt={displayName}
+            className='size-full object-cover transition-transform duration-300 group-hover:scale-[1.02]'
+          />
+        ) : (
+          <video src={url} className='size-full bg-black object-cover' muted preload='metadata' playsInline>
             <track kind='captions' />
           </video>
         )}
-      </PopoverContent>
-    </Popover>
+      </div>
+      <div className='text-color-t2 truncate px-3 py-2 text-xs'>{displayName}</div>
+      <span
+        className={cn(
+          'absolute top-2 right-2 flex size-6 items-center justify-center rounded-full border shadow-sm transition-colors',
+          selected
+            ? 'border-color-main bg-color-main text-white'
+            : 'border-white/80 bg-black/35 text-transparent backdrop-blur-sm',
+        )}
+      >
+        <Check className='size-3.5' strokeWidth={3} />
+      </span>
+    </button>
   );
 }
 
@@ -118,10 +87,9 @@ export default function ReferenceMediaPicker({
   isUploading = false,
   isHistoryLoading,
   historyAssets,
-  localMediaAssets = [],
+  acceptedFormats,
+  historySelectionLimit = 1,
   onUploadFromDevice,
-  onDeleteLocalMedia,
-  onSelectLocalMedia,
   onSelectHistory,
 }: {
   open: boolean;
@@ -133,106 +101,160 @@ export default function ReferenceMediaPicker({
   isUploading?: boolean;
   isHistoryLoading: boolean;
   historyAssets: UnifiedGeneratorReferenceMediaAsset[];
-  localMediaAssets?: LocalMediaUploadItem[];
+  acceptedFormats?: string[];
+  historySelectionLimit?: number;
   onUploadFromDevice: () => void;
-  onDeleteLocalMedia?: (id: string) => void;
-  onSelectLocalMedia?: (url: string, name?: string) => void;
-  onSelectHistory: (asset: UnifiedGeneratorReferenceMediaAsset) => void;
+  onSelectHistory: (assets: UnifiedGeneratorReferenceMediaAsset[]) => void | Promise<void>;
 }) {
   const t = useTranslations('components.hero-form.reference-upload');
-  const [tab, setTab] = useState<PickerTab>('upload');
+  const [historyOpen, setHistoryOpen] = useState(false);
+  const [selectedHistoryIds, setSelectedHistoryIds] = useState<string[]>([]);
   const supportsHistory = kind !== 'audio';
-  const visibleLocalMediaAssets = localMediaAssets.filter((item) => item.url.trim().length > 0);
-  const visibleHistoryAssets = historyAssets.filter(hasReferenceMediaSource);
+  const visibleHistoryAssets = useMemo(
+    () => filterCompatibleHistoryAssets(historyAssets.filter(hasReferenceMediaSource), kind, acceptedFormats),
+    [acceptedFormats, historyAssets, kind],
+  );
 
-  const handleOpenChange = (nextOpen: boolean) => {
+  const handlePickerOpenChange = (nextOpen: boolean) => {
     if (!nextOpen) onPanelHoverChange?.(false);
     onOpenChange(nextOpen);
   };
 
-  return (
-    <Popover modal open={open} onOpenChange={handleOpenChange}>
-      {trigger}
-      <PopoverContent
-        align='start'
-        onPointerEnter={(event) => {
-          if (event.pointerType === 'mouse' && window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
-            onPanelHoverChange?.(true);
-          }
-        }}
-        onPointerLeave={() => onPanelHoverChange?.(false)}
-        className='border-color-b1 bg-color-c1 text-color-t1 w-[min(360px,calc(100vw-32px))] rounded-[20px] border p-3 shadow-2xl'
-      >
-        {supportsHistory ? (
-          <div className='bg-color-bg0 flex rounded-full p-1'>
-            <button
-              type='button'
-              onClick={() => setTab('upload')}
-              className={cn(
-                'flex h-8 flex-1 items-center justify-center gap-1.5 rounded-full text-sm transition-colors',
-                tab === 'upload' ? 'bg-color-c4 text-color-t1' : 'text-color-t3 hover:text-color-t1',
-              )}
-            >
-              <Upload className='size-4' />
-              {t('upload')}
-            </button>
-            <button
-              type='button'
-              onClick={() => setTab('history')}
-              className={cn(
-                'flex h-8 flex-1 items-center justify-center gap-1.5 rounded-full text-sm transition-colors',
-                tab === 'history' ? 'bg-color-c4 text-color-t1' : 'text-color-t3 hover:text-color-t1',
-              )}
-            >
-              <Clock3 className='size-4' />
-              {t('history')}
-            </button>
-          </div>
-        ) : null}
+  const openHistory = () => {
+    setSelectedHistoryIds([]);
+    handlePickerOpenChange(false);
+    setHistoryOpen(true);
+  };
 
-        <div className='custom-scrollbar mt-3 max-h-[260px] overflow-y-auto'>
-          {tab === 'upload' || !supportsHistory ? (
-            <div className='flex flex-col gap-1'>
+  const handleHistoryOpenChange = (nextOpen: boolean) => {
+    setHistoryOpen(nextOpen);
+    if (!nextOpen) setSelectedHistoryIds([]);
+  };
+
+  const handleConfirmHistory = async () => {
+    const selectedIds = new Set(selectedHistoryIds);
+    const selectedAssets = visibleHistoryAssets.filter((asset) => selectedIds.has(asset.id));
+    if (!selectedAssets.length) return;
+    await onSelectHistory(selectedAssets);
+    handleHistoryOpenChange(false);
+  };
+
+  return (
+    <>
+      <Popover modal open={open} onOpenChange={handlePickerOpenChange}>
+        {trigger}
+        <PopoverContent
+          align='start'
+          onPointerEnter={(event) => {
+            if (event.pointerType === 'mouse' && window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+              onPanelHoverChange?.(true);
+            }
+          }}
+          onPointerLeave={() => onPanelHoverChange?.(false)}
+          className='border-color-b1 bg-color-c1 text-color-t1 w-[min(400px,calc(100vw-32px))] rounded-[20px] border p-3 shadow-2xl'
+        >
+          <div className='mb-3 px-1'>
+            <p className='text-sm font-medium'>{t('chooseSource')}</p>
+          </div>
+          <div className={cn('grid gap-2', supportsHistory ? 'grid-cols-2' : 'grid-cols-1')}>
+            <button
+              type='button'
+              disabled={!canAdd || isUploading}
+              onClick={() => {
+                handlePickerOpenChange(false);
+                onUploadFromDevice();
+              }}
+              className='border-color-b1 bg-color-bg0 hover:border-color-main/50 hover:bg-color-c4 flex min-h-28 flex-col items-center justify-center gap-3 rounded-2xl border px-4 text-center transition-[background-color,border-color,transform] hover:-translate-y-0.5 disabled:pointer-events-none disabled:opacity-50'
+            >
+              <span className='bg-color-c4 text-color-main flex size-10 items-center justify-center rounded-xl'>
+                <FolderOpen className='size-5' />
+              </span>
+              <span className='text-sm font-medium'>{t('uploadFromDevice')}</span>
+            </button>
+            {supportsHistory ? (
               <button
                 type='button'
-                onClick={onUploadFromDevice}
                 disabled={!canAdd || isUploading}
-                className='bg-color-c3 text-color-t2 hover:bg-color-c4 hover:text-color-t1 flex h-11 w-full items-center gap-2 rounded-xl px-3 text-sm transition-colors disabled:pointer-events-none disabled:opacity-50'
+                onClick={openHistory}
+                className='border-color-b1 bg-color-bg0 hover:border-color-main/50 hover:bg-color-c4 flex min-h-28 flex-col items-center justify-center gap-3 rounded-2xl border px-4 text-center transition-[background-color,border-color,transform] hover:-translate-y-0.5 disabled:pointer-events-none disabled:opacity-50'
               >
-                <Plus className='size-4' />
-                {t('uploadFromDevice')}
+                <span className='bg-color-c4 text-color-main flex size-10 items-center justify-center rounded-xl'>
+                  <Clock3 className='size-5' />
+                </span>
+                <span className='text-sm font-medium'>{t('selectFromHistory')}</span>
               </button>
-              {kind !== 'audio' && onSelectLocalMedia ? (
-                visibleLocalMediaAssets.length > 0 ? (
-                  visibleLocalMediaAssets.map((item) => (
-                    <PickerRow
-                      key={item.id}
-                      disabled={isUploading || !canAdd}
-                      asset={{ id: item.id, kind, source: item.url, name: item.name }}
-                      onDelete={onDeleteLocalMedia ? () => onDeleteLocalMedia(item.id) : undefined}
-                      onSelect={(asset) => onSelectLocalMedia(String(asset.source), asset.name)}
+            ) : null}
+          </div>
+        </PopoverContent>
+      </Popover>
+
+      <Dialog open={historyOpen} onOpenChange={handleHistoryOpenChange}>
+        <DialogContent className='border-color-b1 bg-color-c1 text-color-t1 flex max-h-[min(720px,calc(100dvh-32px))] w-[min(760px,calc(100vw-32px))] max-w-none grid-rows-none flex-col gap-0 overflow-hidden rounded-[24px] border p-0'>
+          <DialogHeader className='border-color-b1 shrink-0 border-b px-6 py-5 pr-14'>
+            <DialogTitle>{t('historySelectionTitle')}</DialogTitle>
+            <DialogDescription className='text-color-t3'>
+              {t('historySelectionDescription', { count: historySelectionLimit })}
+            </DialogDescription>
+          </DialogHeader>
+
+          <div className='custom-scrollbar min-h-0 flex-1 overflow-y-auto p-5 sm:p-6'>
+            {isHistoryLoading ? (
+              <div className='flex min-h-64 items-center justify-center'>
+                <Loader2 className='text-color-main size-6 animate-spin' />
+              </div>
+            ) : visibleHistoryAssets.length > 0 ? (
+              <div className='grid grid-cols-2 gap-3 sm:grid-cols-3'>
+                {visibleHistoryAssets.map((asset) => {
+                  const selected = selectedHistoryIds.includes(asset.id);
+                  const disabled = !selected && selectedHistoryIds.length >= historySelectionLimit;
+                  return (
+                    <HistoryAssetCard
+                      key={asset.id}
+                      asset={asset}
+                      selected={selected}
+                      disabled={disabled}
+                      onToggle={() =>
+                        setSelectedHistoryIds((current) =>
+                          current.includes(asset.id)
+                            ? current.filter((id) => id !== asset.id)
+                            : [...current, asset.id].slice(0, historySelectionLimit),
+                        )
+                      }
                     />
-                  ))
-                ) : (
-                  <div className='text-color-t3 px-3 py-6 text-center text-sm'>{t('noLocalUploads')}</div>
-                )
-              ) : null}
+                  );
+                })}
+              </div>
+            ) : (
+              <div className='text-color-t3 flex min-h-64 items-center justify-center text-center text-sm'>
+                {t('noCompatibleHistory')}
+              </div>
+            )}
+          </div>
+
+          <DialogFooter className='border-color-b1 bg-color-bg0 shrink-0 flex-row items-center justify-between border-t px-6 py-4'>
+            <span className='text-color-t3 text-sm'>
+              {t('selectedCount', { selected: selectedHistoryIds.length, count: historySelectionLimit })}
+            </span>
+            <div className='flex items-center gap-2'>
+              <button
+                type='button'
+                onClick={() => handleHistoryOpenChange(false)}
+                className='border-color-b1 text-color-t2 hover:bg-color-c4 h-9 rounded-lg border px-4 text-sm transition-colors'
+              >
+                {t('cancel')}
+              </button>
+              <button
+                type='button'
+                disabled={selectedHistoryIds.length === 0}
+                onClick={() => void handleConfirmHistory()}
+                className='bg-color-main h-9 rounded-lg px-4 text-sm font-medium text-white transition-opacity hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-40'
+              >
+                {t('confirm')}
+              </button>
             </div>
-          ) : isHistoryLoading ? (
-            <div className='flex h-28 items-center justify-center'>
-              <Loader2 className='text-color-main size-5 animate-spin' />
-            </div>
-          ) : visibleHistoryAssets.length > 0 ? (
-            <div className='flex flex-col gap-1'>
-              {visibleHistoryAssets.map((asset) => (
-                <PickerRow key={asset.id} asset={asset} disabled={isUploading || !canAdd} onSelect={onSelectHistory} />
-              ))}
-            </div>
-          ) : (
-            <div className='text-color-t3 px-3 py-6 text-center text-sm'>{t('noCompletedHistory')}</div>
-          )}
-        </div>
-      </PopoverContent>
-    </Popover>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+    </>
   );
 }

@@ -56,6 +56,14 @@
       "reference-upload": {
         "upload": "Importer",
         "history": "Historique",
+        "chooseSource": "Choose a source",
+        "selectFromHistory": "Choose from history",
+        "historySelectionTitle": "Choose history media",
+        "historySelectionDescription": "Select up to {count} compatible items for the current model.",
+        "noCompatibleHistory": "No compatible completed history yet",
+        "selectedCount": "Selected {selected}/{count}",
+        "cancel": "Cancel",
+        "confirm": "Confirm",
         "uploadFromDevice": "Importer depuis l’appareil",
         "noCompletedHistory": "Aucun historique terminé pour le moment",
         "addImage": "Ajouter une image",
@@ -1404,6 +1412,7 @@
   "CreatorHistory": {
     "title": "Generation History",
     "description": "Your image and video tasks are stored locally in this browser.",
+    "thumbnail-size": "Taille des miniatures",
     "image": "Images",
     "video": "Videos",
     "no-preview": "No preview",

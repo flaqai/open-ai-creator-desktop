@@ -17,6 +17,7 @@ import type {
 } from '@/lib/constants/unified-generator/types';
 import type { VideoGenerationType, VideoModel } from '@/lib/constants/video';
 import trimAudioFile from '@/lib/utils/audioUtils';
+import { isAcceptedMediaFile, type RestrictedMediaKind } from '@/lib/utils/media-upload-formats';
 import { serializeReferencePrompt, validateReferencePromptReferences } from '@/lib/utils/reference-video-prompt';
 import { trimVideoFile } from '@/lib/utils/videoUtils';
 import useUploadFiles from '@/hooks/use-upload-files';
@@ -57,6 +58,17 @@ function getImageDimensions(ratio?: string, resolution?: string) {
   return { width: Math.round((base * widthRatio) / heightRatio), height: base };
 }
 
+function hasUnsupportedLocalMedia(
+  assets: UnifiedGeneratorReferenceMediaAsset[],
+  kind: RestrictedMediaKind,
+  acceptedFormats?: string[],
+) {
+  return assets.some((asset) => {
+    const file = asset.originalFile || asset.source;
+    return file instanceof File && !isAcceptedMediaFile(file, kind, acceptedFormats);
+  });
+}
+
 async function getMediaDuration(source: File | string) {
   return new Promise<number>((resolve, reject) => {
     const kind = source instanceof File && source.type.startsWith('audio/') ? 'audio' : 'video';
@@ -78,6 +90,7 @@ async function getMediaDuration(source: File | string) {
 
 export default function useUnifiedGeneratorSubmit() {
   const t = useTranslations('UnifiedGenerator');
+  const tUpload = useTranslations('components.hero-form.reference-upload');
   const uploadFiles = useUploadFiles();
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -161,6 +174,7 @@ export default function useUnifiedGeneratorSubmit() {
     try {
       if (input.mediaType === 'image') {
         if (!input.imageModel) throw new Error(t('errors.model'));
+        if (hasUnsupportedLocalMedia(input.images, 'image')) throw new Error(tUpload('unsupportedFormat'));
         const imageOptions = input.imageModel.options.imageInput;
         const minimum = imageOptions?.required ? imageOptions.min || 1 : 0;
         if (input.images.length < minimum) throw new Error(t('errors.reference-required'));
@@ -206,6 +220,22 @@ export default function useUnifiedGeneratorSubmit() {
       const standardAudio = !isReferenceVideo && model.options.audioUrl ? input.audios.slice(0, 1) : [];
       const referenceFiles = isReferenceVideo ? input.files : [];
       const referenceLinks = isReferenceVideo ? input.links : [];
+      if (
+        hasUnsupportedLocalMedia(referenceImages, 'image', model.options.multiImage?.acceptedFormats) ||
+        hasUnsupportedLocalMedia(referenceVideos, 'video', model.options.multiVideo?.acceptedFormats) ||
+        hasUnsupportedLocalMedia(
+          input.startImage ? [input.startImage] : [],
+          'image',
+          model.options.startFrame?.acceptedFormats,
+        ) ||
+        hasUnsupportedLocalMedia(
+          input.endImage ? [input.endImage] : [],
+          'image',
+          model.options.endFrame?.acceptedFormats,
+        )
+      ) {
+        throw new Error(tUpload('unsupportedFormat'));
+      }
       const requiredImages = model.options.multiImage?.required
         ? model.options.multiImage.minImages || 1
         : model.options.startFrame?.required

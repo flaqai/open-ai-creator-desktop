@@ -56,6 +56,14 @@
       "reference-upload": {
         "upload": "Загрузить",
         "history": "История",
+        "chooseSource": "Choose a source",
+        "selectFromHistory": "Choose from history",
+        "historySelectionTitle": "Choose history media",
+        "historySelectionDescription": "Select up to {count} compatible items for the current model.",
+        "noCompatibleHistory": "No compatible completed history yet",
+        "selectedCount": "Selected {selected}/{count}",
+        "cancel": "Cancel",
+        "confirm": "Confirm",
         "uploadFromDevice": "Загрузить с устройства",
         "noCompletedHistory": "В истории пока нет завершенных задач",
         "addImage": "Добавить изображение",
@@ -1404,6 +1412,7 @@
   "CreatorHistory": {
     "title": "Generation History",
     "description": "Your image and video tasks are stored locally in this browser.",
+    "thumbnail-size": "Размер миниатюр",
     "image": "Images",
     "video": "Videos",
     "no-preview": "No preview",

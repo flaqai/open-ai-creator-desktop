@@ -18,6 +18,7 @@ import { Upload, X } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import { useFormContext } from 'react-hook-form';
 
+import { filterAcceptedMediaFiles, getMediaInputAccept } from '@/lib/utils/media-upload-formats';
 import { FormControl, FormField, FormItem, FormLabel } from '@/components/ui/form';
 import Box from '@/components/Box';
 
@@ -131,7 +132,9 @@ const MultiImageUploadForm: ForwardRefRenderFunction<
     const accepted = acceptTypes && acceptTypes.length > 0 ? acceptTypes : acceptedImageTypes;
 
     // 1) Type filtering (e.g., exclude webp)
-    const typeFiltered = files.filter((file) => accepted.includes(file.type));
+    const typeFiltered = acceptTypes?.length
+      ? files.filter((file) => accepted.includes(file.type))
+      : filterAcceptedMediaFiles(files, 'image');
     if (typeFiltered.length === 0) return;
 
     // 2) External validation (e.g., aspect ratio validation)
@@ -211,7 +214,7 @@ const MultiImageUploadForm: ForwardRefRenderFunction<
               <input
                 type='file'
                 disabled={!canAddMore}
-                accept={(acceptTypes && acceptTypes.length > 0 ? acceptTypes : acceptedImageTypes).join(',')}
+                accept={acceptTypes && acceptTypes.length > 0 ? acceptTypes.join(',') : getMediaInputAccept('image')}
                 className='hidden'
                 ref={fileInputRef}
                 required={false}

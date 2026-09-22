@@ -10,9 +10,9 @@ import { useFormContext } from 'react-hook-form';
 import { toast } from 'sonner';
 
 import { cn } from '@/lib/utils';
+import { getMediaInputAccept, isAcceptedMediaFile } from '@/lib/utils/media-upload-formats';
 import { AiGenerationIcon } from '@/components/svg/button/common';
 
-const acceptedImageTypes = ['image/jpg', 'image/jpeg', 'image/png', 'image/webp'];
 const maxFileSize = 10 * 1024 * 1024;
 
 export interface FrameImageUploadRef {
@@ -43,6 +43,7 @@ const FrameImageUpload = forwardRef<FrameImageUploadRef, FrameImageUploadProps>(
 
     const previewImage = useCallback(
       async (file: File | string) => {
+        if (file instanceof File && !isAcceptedMediaFile(file, 'image')) return;
         if (file) {
           setShowSample(false);
 
@@ -82,7 +83,7 @@ const FrameImageUpload = forwardRef<FrameImageUploadRef, FrameImageUploadProps>(
     const handleFileSelect = async (e: React.ChangeEvent<HTMLInputElement>) => {
       const file = e.target.files?.[0];
       if (file) {
-        if (!acceptedImageTypes.includes(file.type)) {
+        if (!isAcceptedMediaFile(file, 'image')) {
           toast.error(tUpload('unsupported-format'));
           e.target.value = '';
           return;
@@ -194,7 +195,7 @@ const FrameImageUpload = forwardRef<FrameImageUploadRef, FrameImageUploadProps>(
         <input
           type='file'
           ref={fileInputRef}
-          accept={acceptedImageTypes.join(',')}
+          accept={getMediaInputAccept('image')}
           onChange={handleFileSelect}
           className='hidden'
         />

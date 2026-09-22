@@ -5,7 +5,7 @@ import useImageHistory from '@/network/image/history';
 import useVideoHistory from '@/network/video/history';
 import { nanoid } from 'nanoid';
 import { useTranslations } from 'next-intl';
-import { useDropzone, type Accept, type FileRejection } from 'react-dropzone';
+import { useDropzone, type FileRejection } from 'react-dropzone';
 import { toast } from 'sonner';
 
 import type {
@@ -13,6 +13,12 @@ import type {
   UnifiedGeneratorReferenceMediaKind,
 } from '@/lib/constants/unified-generator/types';
 import type { VideoModel } from '@/lib/constants/video';
+import {
+  getMediaDropzoneAccept,
+  getMediaInputAccept,
+  isAcceptedMediaFile,
+  normalizeMediaFormats,
+} from '@/lib/utils/media-upload-formats';
 import { loadVideoMetadata } from '@/lib/utils/videoUtils';
 
 import ReferenceAudioPreviewDialog from './ReferenceAudioPreviewDialog';
@@ -66,35 +72,6 @@ function getMediaDuration(source: File | string, kind: 'video' | 'audio') {
   });
 }
 
-function getFilesAccept(kind: UnifiedGeneratorReferenceMediaKind, acceptedFormats?: string[]): Accept {
-  if (kind === 'image') {
-    return {
-      'image/jpeg': ['.jpg', '.jpeg'],
-      'image/png': ['.png'],
-      'image/webp': ['.webp'],
-    };
-  }
-  if (kind === 'video' && acceptedFormats?.length) {
-    const mimeTypes: Record<string, string> = { mp4: 'video/mp4', webm: 'video/webm', mov: 'video/quicktime' };
-    return acceptedFormats.reduce<Accept>((result, format) => {
-      const normalized = format.toLowerCase().replace(/^\./, '');
-      const mimeType = mimeTypes[normalized] || 'video/*';
-      result[mimeType] = [...(result[mimeType] || []), `.${normalized}`];
-      return result;
-    }, {});
-  }
-  return kind === 'video' ? { 'video/*': [] } : { 'audio/*': [] };
-}
-
-function getInputAccept(kind: UnifiedGeneratorReferenceMediaKind, acceptedFormats?: string[]) {
-  if (kind === 'image') return 'image/jpeg,image/png,image/webp';
-  if (kind === 'video')
-    return acceptedFormats?.length
-      ? acceptedFormats.map((format) => `.${format.replace(/^\./, '')}`).join(',')
-      : 'video/*';
-  return 'audio/*';
-}
-
 export default function ReferenceMediaUploads({
   model,
   images,
@@ -126,8 +103,8 @@ export default function ReferenceMediaUploads({
   const [hoveredPickerKind, setHoveredPickerKind] = useState<UnifiedGeneratorReferenceMediaKind | null>(null);
   const [collapseRevision, setCollapseRevision] = useState(0);
 
-  const imageHistory = useImageHistory(1, 20);
-  const videoHistory = useVideoHistory({ pageNum: 1, pageSize: 20 });
+  const imageHistory = useImageHistory(1, Number.MAX_SAFE_INTEGER);
+  const videoHistory = useVideoHistory({ pageNum: 1, pageSize: Number.MAX_SAFE_INTEGER });
   const imageHistoryAssets = useMemo<UnifiedGeneratorReferenceMediaAsset[]>(
     () =>
       imageHistory.data
@@ -184,22 +161,21 @@ export default function ReferenceMediaUploads({
     if (kind === 'video') onVideosChange(next);
     if (kind === 'audio') onAudiosChange(next);
   };
-  const acceptedFormats = (kind: UnifiedGeneratorReferenceMediaKind) =>
-    kind === 'image'
-      ? model.options.multiImage?.acceptedFormats
-      : kind === 'video'
-        ? model.options.multiVideo?.acceptedFormats
-        : model.options.multiAudio?.acceptedFormats;
+  const acceptedFormats = (kind: UnifiedGeneratorReferenceMediaKind) => {
+    const configured =
+      kind === 'image'
+        ? model.options.multiImage?.acceptedFormats
+        : kind === 'video'
+          ? model.options.multiVideo?.acceptedFormats
+          : model.options.multiAudio?.acceptedFormats;
+    return kind === 'audio' ? configured : normalizeMediaFormats(kind, configured);
+  };
 
   const validateAsset = async (kind: UnifiedGeneratorReferenceMediaKind, source: File | string) => {
-    if (source instanceof File && !source.type.startsWith(`${kind}/`)) {
-      toast.error(t('unsupportedFormat'));
-      return null;
-    }
-    const formats = acceptedFormats(kind)?.map((format) => format.toLowerCase().replace(/^\./, '')) || [];
-    if (source instanceof File && formats.length) {
-      const extension = source.name.split('.').pop()?.toLowerCase() || '';
-      if (!formats.includes(extension)) {
+    if (source instanceof File) {
+      const validType =
+        kind === 'audio' ? source.type.startsWith('audio/') : isAcceptedMediaFile(source, kind, acceptedFormats(kind));
+      if (!validType) {
         toast.error(t('unsupportedFormat'));
         return null;
       }
@@ -311,7 +287,7 @@ export default function ReferenceMediaUploads({
   };
 
   const imageDropzone = useDropzone({
-    accept: getFilesAccept('image', acceptedFormats('image')),
+    accept: getMediaDropzoneAccept('image', acceptedFormats('image')),
     multiple: imageMax > 1,
     maxFiles: Math.max(imageMax - images.length, 1),
     disabled: imageMax === 0 || images.length >= imageMax,
@@ -320,7 +296,7 @@ export default function ReferenceMediaUploads({
     onDropRejected: (rejections) => handleDropRejected(rejections, imageMax),
   });
   const videoDropzone = useDropzone({
-    accept: getFilesAccept('video', acceptedFormats('video')),
+    accept: getMediaDropzoneAccept('video', acceptedFormats('video')),
     multiple: videoMax > 1,
     maxFiles: Math.max(videoMax - videos.length, 1),
     disabled: videoMax === 0 || videos.length >= videoMax,
@@ -329,7 +305,7 @@ export default function ReferenceMediaUploads({
     onDropRejected: (rejections) => handleDropRejected(rejections, videoMax),
   });
   const audioDropzone = useDropzone({
-    accept: getFilesAccept('audio', acceptedFormats('audio')),
+    accept: { 'audio/*': acceptedFormats('audio')?.map((format) => `.${format.replace(/^\./, '')}`) || [] },
     multiple: false,
     maxFiles: 1,
     disabled: audioMax === 0 || audios.length >= audioMax,
@@ -352,7 +328,13 @@ export default function ReferenceMediaUploads({
         <input
           ref={inputRef}
           type='file'
-          accept={getInputAccept(kind, acceptedFormats(kind))}
+          accept={
+            kind === 'audio'
+              ? acceptedFormats('audio')
+                  ?.map((format) => `.${format.replace(/^\./, '')}`)
+                  .join(',') || 'audio/*'
+              : getMediaInputAccept(kind, acceptedFormats(kind))
+          }
           multiple={kind !== 'audio' && max > 1}
           className='hidden'
           onChange={(event) => {
@@ -368,8 +350,15 @@ export default function ReferenceMediaUploads({
           canAdd={list.length < max}
           isHistoryLoading={historyLoading}
           historyAssets={historyAssets}
+          acceptedFormats={acceptedFormats(kind)}
+          historySelectionLimit={Math.max(max - list.length, 1)}
           onUploadFromDevice={() => inputRef.current?.click()}
-          onSelectHistory={(asset) => void appendSources(kind, [asset.source])}
+          onSelectHistory={(assets) =>
+            appendSources(
+              kind,
+              assets.map((asset) => asset.source),
+            )
+          }
           trigger={
             <ReferenceStackPreview
               kind={kind}

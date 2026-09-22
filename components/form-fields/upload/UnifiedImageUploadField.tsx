@@ -1,6 +1,7 @@
 'use client';
 
-import { forwardRef, useEffect, useImperativeHandle, useRef, useState } from 'react';
+import { forwardRef, useEffect, useImperativeHandle, useMemo, useRef, useState } from 'react';
+import useImageHistory from '@/network/image/history';
 import useImageFormStore from '@/store/form/useImageFormStore';
 import { Plus, Trash2, Upload } from 'lucide-react';
 import { nanoid } from 'nanoid';
@@ -9,18 +10,22 @@ import { useDropzone } from 'react-dropzone';
 import { useFormContext } from 'react-hook-form';
 import { toast } from 'sonner';
 
+import type { UnifiedGeneratorReferenceMediaAsset } from '@/lib/constants/unified-generator/types';
 import { endHistoryImageDrag, hasHistoryImageDrag, readHistoryImageDrag } from '@/lib/desktop/image-history-drag';
 import { cn } from '@/lib/utils';
 import { validateImagePx } from '@/lib/utils/imageUtils';
+import {
+  filterAcceptedMediaFiles,
+  getMediaDropzoneAccept,
+  isAcceptedMediaFile,
+} from '@/lib/utils/media-upload-formats';
 import { useFormRestoration } from '@/hooks/use-form-restoration';
 import { FormControl, FormField, FormItem, FormLabel } from '@/components/ui/form';
+import { PopoverAnchor } from '@/components/ui/popover';
 import SubHeading from '@/components/form/SubHeading';
+import ReferenceMediaPicker from '@/components/unified-generator/reference-upload/ReferenceMediaPicker';
 
-const ACCEPTED_IMAGE_TYPES: Record<string, string[]> = {
-  'image/jpeg': ['.jpg', '.jpeg'],
-  'image/png': ['.png'],
-  'image/webp': ['.webp'],
-};
+const ACCEPTED_IMAGE_TYPES = getMediaDropzoneAccept('image');
 
 type ImageItem = {
   id: string;
@@ -83,6 +88,22 @@ const UnifiedImageUploadField = forwardRef<UnifiedImageUploadFieldRef, UnifiedIm
     const setImageFormSrc = useImageFormStore((state) => state.setImageFormSrc);
 
     const [images, setImages] = useState<ImageItem[]>([]);
+    const [pickerOpen, setPickerOpen] = useState(false);
+    const imageHistory = useImageHistory(1, Number.MAX_SAFE_INTEGER);
+    const historyAssets = useMemo(
+      () =>
+        imageHistory.data
+          .filter(
+            (item) => item.status !== 'processing' && item.status !== 'fail' && Boolean(item.url || item.thumbnailUrl),
+          )
+          .map((item) => ({
+            id: `history-image-${item.id}`,
+            kind: 'image' as const,
+            source: item.url || item.thumbnailUrl,
+            name: item.prompt || item.modelInfo,
+          })),
+      [imageHistory.data],
+    );
     const [isHistoryDragActive, setIsHistoryDragActive] = useState(false);
     useFormRestoration((data, preview) => {
       const raw = data[name];
@@ -111,6 +132,9 @@ const UnifiedImageUploadField = forwardRef<UnifiedImageUploadFieldRef, UnifiedIm
     const hasReadInitialValue = useRef(false);
 
     const isSingleMode = maxImages === 1;
+    const acceptedExtensions = acceptTypes?.length
+      ? acceptTypes.flatMap((type) => ACCEPTED_IMAGE_TYPES[type] || [type])
+      : Object.values(ACCEPTED_IMAGE_TYPES).flat();
 
     const clearInputValue = () => {
       if (fileInputRef.current) {
@@ -121,7 +145,7 @@ const UnifiedImageUploadField = forwardRef<UnifiedImageUploadFieldRef, UnifiedIm
     const addImages = async (files: File[]) => {
       // Single image mode: allow replacing existing image
       const remainingSlots = isSingleMode ? maxImages : maxImages - images.length;
-      const filesToAdd = files.slice(0, remainingSlots);
+      const filesToAdd = filterAcceptedMediaFiles(files, 'image', acceptedExtensions).slice(0, remainingSlots);
 
       const validationResults = await Promise.all(
         filesToAdd.map(async (file) => {
@@ -156,6 +180,7 @@ const UnifiedImageUploadField = forwardRef<UnifiedImageUploadFieldRef, UnifiedIm
     };
 
     const updateFile = async (file: File | Blob | null | string) => {
+      if (file instanceof File && !isAcceptedMediaFile(file, 'image', acceptedExtensions)) return;
       if (typeof file === 'string') {
         // For URL, do not download file; use URL directly as preview
         // Create an empty File object as placeholder
@@ -357,7 +382,7 @@ const UnifiedImageUploadField = forwardRef<UnifiedImageUploadFieldRef, UnifiedIm
       accept: acceptObject,
       multiple: !isSingleMode,
       disabled: !isSingleMode && images.length >= maxImages,
-      noClick: !isSingleMode,
+      noClick: true,
     });
     const uploadRootProps = getRootProps({
       onDragEnter: handleHistoryDragEnter,
@@ -375,8 +400,36 @@ const UnifiedImageUploadField = forwardRef<UnifiedImageUploadFieldRef, UnifiedIm
     };
 
     const handleAddClick = () => {
-      fileInputRef.current?.click();
+      setPickerOpen(true);
     };
+
+    const addHistoryImages = (assets: UnifiedGeneratorReferenceMediaAsset[]) => {
+      const remainingSlots = isSingleMode ? 1 : Math.max(maxImages - images.length, 0);
+      const nextItems = assets.slice(0, remainingSlots).map((asset) => ({
+        id: nanoid(),
+        file: new File([], asset.name || 'history-image', { type: 'image/jpeg' }),
+        previewUrl: String(asset.source),
+        sourceUrl: String(asset.source),
+      }));
+      if (!nextItems.length) return;
+      setImages((current) => (isSingleMode ? nextItems : [...current, ...nextItems].slice(0, maxImages)));
+    };
+
+    const renderSourcePicker = (trigger: React.ReactNode) => (
+      <ReferenceMediaPicker
+        open={pickerOpen}
+        onOpenChange={setPickerOpen}
+        kind='image'
+        canAdd={isSingleMode ? images.length === 0 : images.length < maxImages}
+        isHistoryLoading={imageHistory.isLoading}
+        historyAssets={historyAssets}
+        acceptedFormats={Object.values(acceptObject).flat()}
+        historySelectionLimit={Math.max(isSingleMode ? 1 : maxImages - images.length, 1)}
+        onUploadFromDevice={() => fileInputRef.current?.click()}
+        onSelectHistory={addHistoryImages}
+        trigger={trigger}
+      />
+    );
 
     useImperativeHandle(ref, () => ({
       removeAllImages,
@@ -402,54 +455,61 @@ const UnifiedImageUploadField = forwardRef<UnifiedImageUploadFieldRef, UnifiedIm
       return (
         <div className={cn('flex w-full flex-col gap-2', className)}>
           <SubHeading>{title || tCommon('uploadImages')}</SubHeading>
-          <div
-            {...uploadRootProps}
-            className={cn(
-              'border-foreground/10 bg-card hover:border-foreground/30 hover:bg-card relative h-[112px] w-full rounded-xl border border-dashed',
-              images.length > 0 && 'border-foreground/10 bg-card hover:border-foreground/10 hover:bg-card',
-              (isDragActive || isHistoryDragActive) && 'border-primary bg-primary/5',
-            )}
-          >
-            <FormField
-              control={methods.control}
-              name={name}
-              render={() => (
-                <FormItem className='h-full w-full space-y-0'>
-                  <div className='relative flex h-full w-full items-center gap-1'>
-                    {images.length > 0 ? (
-                      <div className='group absolute flex h-full w-full items-center justify-center rounded-[inherit]'>
-                        <img
-                          src={images[0].previewUrl}
-                          alt={name}
-                          ref={imgRef}
-                          className='max-h-full max-w-full bg-contain'
-                          decoding='async'
-                        />
-                        <button
-                          type='button'
-                          onClick={deleteFile}
-                          style={{ width: imgSize.width, height: imgSize.height }}
-                          className='absolute-center absolute flex items-center justify-center bg-black/40 lg:hidden lg:group-hover:flex'
-                        >
-                          <Trash2 className='text-foreground size-5' />
-                        </button>
+          {renderSourcePicker(
+            <PopoverAnchor asChild>
+              <div
+                {...uploadRootProps}
+                onClick={() => {
+                  if (images.length === 0) setPickerOpen(true);
+                }}
+                className={cn(
+                  'border-foreground/10 bg-card hover:border-foreground/30 hover:bg-card relative h-[112px] w-full rounded-xl border border-dashed',
+                  images.length > 0 && 'border-foreground/10 bg-card hover:border-foreground/10 hover:bg-card',
+                  (isDragActive || isHistoryDragActive) && 'border-primary bg-primary/5',
+                )}
+              >
+                <FormField
+                  control={methods.control}
+                  name={name}
+                  render={() => (
+                    <FormItem className='h-full w-full space-y-0'>
+                      <div className='relative flex h-full w-full items-center gap-1'>
+                        {images.length > 0 ? (
+                          <div className='group absolute flex h-full w-full items-center justify-center rounded-[inherit]'>
+                            <img
+                              src={images[0].previewUrl}
+                              alt={name}
+                              ref={imgRef}
+                              className='max-h-full max-w-full bg-contain'
+                              decoding='async'
+                            />
+                            <button
+                              type='button'
+                              onClick={deleteFile}
+                              style={{ width: imgSize.width, height: imgSize.height }}
+                              className='absolute-center absolute flex items-center justify-center bg-black/40 lg:hidden lg:group-hover:flex'
+                            >
+                              <Trash2 className='text-foreground size-5' />
+                            </button>
+                          </div>
+                        ) : (
+                          <FormLabel className='text-foreground/40 flex h-full w-full flex-col items-center justify-center gap-3 text-center'>
+                            <div className='bg-foreground/5 flex size-8 items-center justify-center rounded-lg'>
+                              <Upload className='size-6' />
+                            </div>
+                            <div className='text-sm'>{label || t('label')}</div>
+                          </FormLabel>
+                        )}
                       </div>
-                    ) : (
-                      <FormLabel className='text-foreground/40 flex h-full w-full flex-col items-center justify-center gap-3 text-center'>
-                        <div className='bg-foreground/5 flex size-8 items-center justify-center rounded-lg'>
-                          <Upload className='size-6' />
-                        </div>
-                        <div className='text-sm'>{label || t('label')}</div>
-                      </FormLabel>
-                    )}
-                  </div>
-                  <FormControl>
-                    <input {...getInputProps()} ref={fileInputRef} />
-                  </FormControl>
-                </FormItem>
-              )}
-            />
-          </div>
+                      <FormControl>
+                        <input {...getInputProps()} ref={fileInputRef} />
+                      </FormControl>
+                    </FormItem>
+                  )}
+                />
+              </div>
+            </PopoverAnchor>,
+          )}
         </div>
       );
     }
@@ -457,103 +517,109 @@ const UnifiedImageUploadField = forwardRef<UnifiedImageUploadFieldRef, UnifiedIm
     return (
       <div className={cn('flex w-full flex-col gap-2', className)}>
         <SubHeading>{title || tCommon('uploadImages')}</SubHeading>
-        <FormField
-          control={methods.control}
-          name={name}
-          render={() => (
-            <FormItem className='w-full space-y-0'>
-              <div
-                {...uploadRootProps}
-                onClick={handleAddClick}
-                onKeyDown={(e) => {
-                  if (e.key === 'Enter' || e.key === ' ') {
-                    e.preventDefault();
-                    handleAddClick();
-                  }
-                }}
-                role='button'
-                tabIndex={0}
-                className={cn(
-                  'border-foreground/10 bg-card hover:border-foreground/30 hover:bg-card relative flex w-full cursor-pointer flex-col rounded-xl border border-dashed p-3 transition-all',
-                  (isDragActive || isHistoryDragActive) && 'border-primary bg-primary/5',
-                  images.length > 0 && 'gap-3',
-                )}
-              >
-                {images.length === 0 ? (
-                  <div className='flex items-center gap-3'>
-                    <div className='border-foreground/20 bg-card flex size-16 shrink-0 items-center justify-center rounded-lg border-2 border-dashed'>
-                      <Plus className='text-foreground/40 size-6' />
-                    </div>
-
-                    <div className='flex flex-1 flex-col items-center justify-center gap-0.5 text-center'>
-                      <div className='text-foreground/40 text-sm'>{label || t('label')}</div>
-                      <div className='text-foreground/30 text-xs'>
-                        {t('supported-formats')}: {acceptedFormats}
-                      </div>
-                      <div className='text-foreground/30 text-xs'>
-                        {images.length}/{maxImages} {tCommon('images')}
-                      </div>
-                    </div>
-                  </div>
-                ) : (
-                  <>
-                    <div className='grid grid-cols-3 gap-2 sm:grid-cols-4 md:grid-cols-5'>
-                      {images.map((image) => (
-                        <div
-                          key={image.id}
-                          className='group relative aspect-square overflow-hidden rounded-lg bg-gray-100'
-                        >
-                          <img
-                            src={image.previewUrl}
-                            alt='Upload preview'
-                            className='size-full object-contain'
-                            decoding='async'
-                          />
-                          <button
-                            type='button'
-                            onClick={(e) => {
-                              e.stopPropagation();
-                              removeImage(image.id);
-                            }}
-                            className='absolute inset-0 flex items-center justify-center bg-black/40 transition-all lg:hidden lg:group-hover:flex'
-                          >
-                            <Trash2 className='text-foreground size-5' />
-                          </button>
-                        </div>
-                      ))}
-
-                      {canAddMore && (
-                        <div className='border-foreground/20 bg-card hover:border-foreground/30 flex aspect-square items-center justify-center rounded-lg border-2 border-dashed transition-all'>
-                          <Plus className='text-foreground/40 size-6' />
-                        </div>
+        {renderSourcePicker(
+          <PopoverAnchor asChild>
+            <div>
+              <FormField
+                control={methods.control}
+                name={name}
+                render={() => (
+                  <FormItem className='w-full space-y-0'>
+                    <div
+                      {...uploadRootProps}
+                      onClick={handleAddClick}
+                      onKeyDown={(e) => {
+                        if (e.key === 'Enter' || e.key === ' ') {
+                          e.preventDefault();
+                          handleAddClick();
+                        }
+                      }}
+                      role='button'
+                      tabIndex={0}
+                      className={cn(
+                        'border-foreground/10 bg-card hover:border-foreground/30 hover:bg-card relative flex w-full cursor-pointer flex-col rounded-xl border border-dashed p-3 transition-all',
+                        (isDragActive || isHistoryDragActive) && 'border-primary bg-primary/5',
+                        images.length > 0 && 'gap-3',
                       )}
-                    </div>
+                    >
+                      {images.length === 0 ? (
+                        <div className='flex items-center gap-3'>
+                          <div className='border-foreground/20 bg-card flex size-16 shrink-0 items-center justify-center rounded-lg border-2 border-dashed'>
+                            <Plus className='text-foreground/40 size-6' />
+                          </div>
 
-                    <div className='text-foreground/30 mt-1 flex items-center justify-between text-xs'>
-                      <span>
-                        {t('supported-formats')}: {acceptedFormats}
-                      </span>
-                      <span>
-                        {images.length}/{maxImages} {tCommon('images')}
-                      </span>
+                          <div className='flex flex-1 flex-col items-center justify-center gap-0.5 text-center'>
+                            <div className='text-foreground/40 text-sm'>{label || t('label')}</div>
+                            <div className='text-foreground/30 text-xs'>
+                              {t('supported-formats')}: {acceptedFormats}
+                            </div>
+                            <div className='text-foreground/30 text-xs'>
+                              {images.length}/{maxImages} {tCommon('images')}
+                            </div>
+                          </div>
+                        </div>
+                      ) : (
+                        <>
+                          <div className='grid grid-cols-3 gap-2 sm:grid-cols-4 md:grid-cols-5'>
+                            {images.map((image) => (
+                              <div
+                                key={image.id}
+                                className='group relative aspect-square overflow-hidden rounded-lg bg-gray-100'
+                              >
+                                <img
+                                  src={image.previewUrl}
+                                  alt='Upload preview'
+                                  className='size-full object-contain'
+                                  decoding='async'
+                                />
+                                <button
+                                  type='button'
+                                  onClick={(e) => {
+                                    e.stopPropagation();
+                                    removeImage(image.id);
+                                  }}
+                                  className='absolute inset-0 flex items-center justify-center bg-black/40 transition-all lg:hidden lg:group-hover:flex'
+                                >
+                                  <Trash2 className='text-foreground size-5' />
+                                </button>
+                              </div>
+                            ))}
+
+                            {canAddMore && (
+                              <div className='border-foreground/20 bg-card hover:border-foreground/30 flex aspect-square items-center justify-center rounded-lg border-2 border-dashed transition-all'>
+                                <Plus className='text-foreground/40 size-6' />
+                              </div>
+                            )}
+                          </div>
+
+                          <div className='text-foreground/30 mt-1 flex items-center justify-between text-xs'>
+                            <span>
+                              {t('supported-formats')}: {acceptedFormats}
+                            </span>
+                            <span>
+                              {images.length}/{maxImages} {tCommon('images')}
+                            </span>
+                          </div>
+                        </>
+                      )}
+
+                      <FormControl>
+                        <input
+                          {...getInputProps()}
+                          ref={fileInputRef}
+                          type='file'
+                          className='hidden'
+                          onChange={handleFileInputChange}
+                          multiple={!isSingleMode}
+                        />
+                      </FormControl>
                     </div>
-                  </>
+                  </FormItem>
                 )}
-
-                <FormControl>
-                  <input
-                    {...getInputProps()}
-                    ref={fileInputRef}
-                    type='file'
-                    className='hidden'
-                    onChange={handleFileInputChange}
-                    multiple={!isSingleMode}
-                  />
-                </FormControl>
-              </div>
-            </FormItem>
-          )}
-        />
+              />
+            </div>
+          </PopoverAnchor>,
+        )}
       </div>
     );
   },

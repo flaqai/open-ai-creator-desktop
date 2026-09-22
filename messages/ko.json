@@ -56,6 +56,14 @@
       "reference-upload": {
         "upload": "업로드",
         "history": "기록",
+        "chooseSource": "Choose a source",
+        "selectFromHistory": "Choose from history",
+        "historySelectionTitle": "Choose history media",
+        "historySelectionDescription": "Select up to {count} compatible items for the current model.",
+        "noCompatibleHistory": "No compatible completed history yet",
+        "selectedCount": "Selected {selected}/{count}",
+        "cancel": "Cancel",
+        "confirm": "Confirm",
         "uploadFromDevice": "기기에서 업로드",
         "noCompletedHistory": "완료된 기록이 아직 없습니다",
         "addImage": "이미지 추가",
@@ -1404,6 +1412,7 @@
   "CreatorHistory": {
     "title": "Generation History",
     "description": "Your image and video tasks are stored locally in this browser.",
+    "thumbnail-size": "썸네일 크기",
     "image": "Images",
     "video": "Videos",
     "no-preview": "No preview",

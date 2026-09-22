@@ -6,12 +6,7 @@ import { useTranslations } from 'next-intl';
 import { useDropzone } from 'react-dropzone';
 
 import { cn } from '@/lib/utils';
-
-const ACCEPTED_IMAGE_TYPES: Record<string, string[]> = {
-  'image/jpeg': ['.jpg', '.jpeg'],
-  'image/png': ['.png'],
-  'image/webp': ['.webp'],
-};
+import { getMediaDropzoneAccept, isAcceptedMediaFile } from '@/lib/utils/media-upload-formats';
 
 export interface SingleImageUploadRef {
   removeImage: () => void;
@@ -34,6 +29,7 @@ const SingleImageUpload = forwardRef<SingleImageUploadRef, SingleImageUploadProp
     );
 
     const setImage = (file: File) => {
+      if (!isAcceptedMediaFile(file, 'image')) return;
       const previewUrl = URL.createObjectURL(file);
       setImageState({ file, previewUrl });
       onImageChange?.(file);
@@ -60,7 +56,7 @@ const SingleImageUpload = forwardRef<SingleImageUploadRef, SingleImageUploadProp
 
     const { getRootProps, getInputProps, isDragActive } = useDropzone({
       onDrop,
-      accept: ACCEPTED_IMAGE_TYPES,
+      accept: getMediaDropzoneAccept('image'),
       maxFiles: 1,
       disabled: !!image,
     });

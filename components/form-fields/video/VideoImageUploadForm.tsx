@@ -13,15 +13,10 @@ import { toast } from 'sonner';
 import { cn } from '@/lib/utils';
 import { getFileByUrl } from '@/lib/utils/fileUtils';
 import { validateImagePx } from '@/lib/utils/imageUtils';
+import { getMediaDropzoneAccept, isAcceptedMediaFile } from '@/lib/utils/media-upload-formats';
 import { FormControl, FormField, FormItem, FormLabel } from '@/components/ui/form';
 
 const ImageCropDialog = dynamic(() => import('@/components/image/ImageCropDialog'), { ssr: false });
-
-const ACCEPTED_IMAGE_TYPES: Record<string, string[]> = {
-  'image/jpeg': ['.jpg', '.jpeg'],
-  'image/png': ['.png'],
-  'image/webp': ['.webp'],
-};
 
 export interface VideoImageUploadFormRef {
   updateFile: (file: File | Blob | null | string) => Promise<void>;
@@ -73,6 +68,7 @@ const VideoImageUploadForm = forwardRef<
     };
 
     const updateFile = async (file: File | Blob | null | string) => {
+      if (file instanceof File && !isAcceptedMediaFile(file, 'image')) return;
       if (typeof file === 'string') {
         // Use URL directly, skip File conversion (avoids CORS issues)
         setFileUrl(file);
@@ -117,6 +113,7 @@ const VideoImageUploadForm = forwardRef<
 
     const onDrop = async (acceptedFiles: File[]) => {
       const file = acceptedFiles[0];
+      if (!file || !isAcceptedMediaFile(file, 'image')) return;
 
       const isValid = await validateImagePx({ imageFile: file, minWidthPx, minHeightPx });
       if (!isValid) {
@@ -139,7 +136,7 @@ const VideoImageUploadForm = forwardRef<
 
     const { getRootProps, getInputProps, isDragActive } = useDropzone({
       onDrop,
-      accept: ACCEPTED_IMAGE_TYPES,
+      accept: getMediaDropzoneAccept('image'),
       maxFiles: 1,
       disabled: !!fileUrl,
     });

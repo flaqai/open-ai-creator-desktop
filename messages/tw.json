@@ -56,6 +56,14 @@
       "reference-upload": {
         "upload": "上傳",
         "history": "歷史記錄",
+        "chooseSource": "選擇素材來源",
+        "selectFromHistory": "從歷史記錄選擇",
+        "historySelectionTitle": "選擇歷史素材",
+        "historySelectionDescription": "可選擇最多 {count} 個與目前模型相容的素材。",
+        "noCompatibleHistory": "暫無相容的已完成歷史記錄",
+        "selectedCount": "已選 {selected}/{count}",
+        "cancel": "取消",
+        "confirm": "確定",
         "uploadFromDevice": "從裝置上傳",
         "noCompletedHistory": "尚無已完成的歷史記錄",
         "addImage": "新增圖片",
@@ -1404,6 +1412,7 @@
   "CreatorHistory": {
     "title": "Generation History",
     "description": "Your image and video tasks are stored locally in this browser.",
+    "thumbnail-size": "縮圖大小",
     "image": "Images",
     "video": "Videos",
     "no-preview": "No preview",
