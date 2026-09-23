@@ -31,6 +31,7 @@ import { sendGAEventBtnClicked } from '@/lib/utils/analyticsUtils';
 import trimAudioFile from '@/lib/utils/audioUtils';
 import { shouldCompressImageFileList, type FileType } from '@/lib/utils/fileUtils';
 import { showConfettiFireworks } from '@/lib/utils/uiUtils';
+import { takeMultiImageUrls } from '@/lib/utils/video-multi-image-upload';
 
 import type { VideoFormData } from '../types';
 import type { VideoFormStores } from './useVideoFormStores';
@@ -110,10 +111,12 @@ export default function useVideoFormSubmit(options: UseVideoFormSubmitOptions) {
       // Handle multi-image upload
       if (formData.multiImages && formData.multiImages.length > 0) {
         formData.multiImages.forEach((file) => {
-          filesToUpload.push({
-            type: file.type,
-            data: file,
-          });
+          if (file instanceof File) {
+            filesToUpload.push({
+              type: file.type,
+              data: file,
+            });
+          }
         });
       }
 
@@ -161,7 +164,7 @@ export default function useVideoFormSubmit(options: UseVideoFormSubmitOptions) {
       let endFrameUrl = '';
       const clothesChangerImageUrl = '';
       let audioUrl = '';
-      const imageUrlList: string[] = [];
+      let imageUrlList: string[] = [];
 
       // Handle audio file URL
       if (formData.audioFile && formData.audioFile instanceof File) {
@@ -170,11 +173,7 @@ export default function useVideoFormSubmit(options: UseVideoFormSubmitOptions) {
 
       // Handle multi-image URL list (pop in reverse order of upload)
       if (formData.multiImages && formData.multiImages.length > 0) {
-        // eslint-disable-next-line no-plusplus
-        for (let i = 0; i < formData.multiImages.length; i++) {
-          const url = uploadedUrls.pop();
-          if (url) imageUrlList.unshift(url); // unshift to maintain correct order
-        }
+        imageUrlList = takeMultiImageUrls(formData.multiImages, uploadedUrls);
       }
 
       // Handle endFrame - if it's a string URL, use directly; if it's a File, get from upload result

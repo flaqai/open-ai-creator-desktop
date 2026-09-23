@@ -18,7 +18,7 @@ export interface VideoFormData {
   resolution?: string; // Resolution option (e.g. '480p', '720p', '1080p')
   startFrame?: File | string; // Can be File object or URL string
   endFrame?: File | string; // Can be File object or URL string
-  multiImages?: File[] | null;
+  multiImages?: (File | string)[] | null;
   enableEndFrame?: boolean;
   enableAudio?: boolean;
   enableBgm?: boolean;

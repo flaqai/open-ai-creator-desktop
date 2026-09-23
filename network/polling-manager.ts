@@ -2,6 +2,7 @@ export type PollTask = { traceId: string; type: 'image' | 'video'; submitTime: n
 type PollState = { controller: AbortController; timer?: ReturnType<typeof setTimeout> };
 type PollingOptions = {
   poll: (task: PollTask, signal: AbortSignal) => Promise<'pending' | 'done'>;
+  onError?: (task: PollTask, error: unknown) => void;
   timeout: (task: PollTask) => void;
   finish: (task: PollTask) => void;
   interval?: number;
@@ -35,8 +36,9 @@ export class PollingManager {
         this.stop(task);
         return;
       }
-    } catch {
+    } catch (error) {
       // Network errors are transient. The age limit still bounds retries.
+      if (!signal.aborted) this.options.onError?.(task, error);
     }
     const maxAge = this.options.maxAge?.(task) ?? (task.type === 'video' ? 30 : 10) * 60_000;
     if (!signal.aborted && (this.options.now?.() ?? Date.now()) - task.submitTime > maxAge) {

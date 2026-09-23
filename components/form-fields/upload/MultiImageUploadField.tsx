@@ -12,6 +12,7 @@ import { cn } from '@/lib/utils';
 import { validateImagePx } from '@/lib/utils/imageUtils';
 import { filterAcceptedMediaFiles, getMediaDropzoneAccept } from '@/lib/utils/media-upload-formats';
 import { useFormRestoration } from '@/hooks/use-form-restoration';
+import { useHistoryImageDrop } from '@/hooks/use-history-image-drop';
 import { FormControl, FormField, FormItem } from '@/components/ui/form';
 import SubHeading from '@/components/form/SubHeading';
 
@@ -21,6 +22,7 @@ type ImageItem = {
   id: string;
   file: File;
   previewUrl: string;
+  sourceUrl?: string;
 };
 
 export interface MultiImageUploadFieldWithDragRef {
@@ -65,7 +67,7 @@ const MultiImageUploadFieldWithDrag = forwardRef<
   ) => {
     const t = useTranslations('components.video-image-upload-form');
     const tCommon = useTranslations('Common');
-    const methods = useFormContext<{ [key: string]: File[] | null }>();
+    const methods = useFormContext<{ [key: string]: (File | string)[] | null }>();
 
     const [images, setImages] = useState<ImageItem[]>([]);
     const acceptedExtensions = acceptTypes?.length
@@ -77,7 +79,11 @@ const MultiImageUploadFieldWithDrag = forwardRef<
       setImages(
         values.flatMap((value) => {
           const url = preview(value);
-          return value instanceof File && url ? [{ id: nanoid(), file: value, previewUrl: url }] : [];
+          if (!url) return [];
+          if (value instanceof File) return [{ id: nanoid(), file: value, previewUrl: url }];
+          return typeof value === 'string'
+            ? [{ id: nanoid(), file: new File([], 'history-image'), previewUrl: url, sourceUrl: value }]
+            : [];
         }),
       );
     });
@@ -136,7 +142,7 @@ const MultiImageUploadFieldWithDrag = forwardRef<
         firstSync.current = false;
         return;
       }
-      const formFiles = images.map((img) => img.file);
+      const formFiles = images.map((img) => img.sourceUrl || img.file);
       methods.setValue(name, formFiles);
 
       if (onImagePreview) {
@@ -163,6 +169,21 @@ const MultiImageUploadFieldWithDrag = forwardRef<
       await addImages(acceptedFiles);
     };
 
+    const { isHistoryDragActive, historyDropProps } = useHistoryImageDrop((image) => {
+      setImages((previous) => {
+        if (previous.length >= maxImages) return previous;
+        return [
+          ...previous,
+          {
+            id: nanoid(),
+            file: new File([], image.name || 'history-image'),
+            previewUrl: image.url,
+            sourceUrl: image.url,
+          },
+        ];
+      });
+    }, images.length < maxImages);
+
     const accepted = acceptTypes && acceptTypes.length > 0 ? acceptTypes : ACCEPTED_IMAGE_TYPES;
     const acceptObject =
       typeof accepted === 'object' && !Array.isArray(accepted)
@@ -178,6 +199,7 @@ const MultiImageUploadFieldWithDrag = forwardRef<
       disabled: images.length >= maxImages,
       noClick: true,
     });
+    const uploadRootProps = getRootProps(historyDropProps);
 
     const handleFileInputChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
       const files = Array.from(e.target.files || []);
@@ -217,7 +239,7 @@ const MultiImageUploadFieldWithDrag = forwardRef<
           render={() => (
             <FormItem className='w-full space-y-0'>
               <div
-                {...getRootProps()}
+                {...uploadRootProps}
                 onClick={handleAddClick}
                 onKeyDown={(e) => {
                   if (e.key === 'Enter' || e.key === ' ') {
@@ -229,7 +251,7 @@ const MultiImageUploadFieldWithDrag = forwardRef<
                 tabIndex={0}
                 className={cn(
                   'border-foreground/10 bg-card hover:border-foreground/30 hover:bg-card relative flex w-full cursor-pointer flex-col rounded-xl border border-dashed p-3 transition-all',
-                  isDragActive && 'border-foreground/30 bg-card',
+                  (isDragActive || isHistoryDragActive) && 'border-primary bg-primary/5',
                   images.length > 0 && 'gap-3',
                 )}
               >

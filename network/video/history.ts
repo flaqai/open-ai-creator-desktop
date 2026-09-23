@@ -33,6 +33,7 @@ export type VideoHistoryRequest = {
   pageNum: number;
   pageSize: number;
   videoType?: 'Image-to-video' | 'Text-to-video' | 'Reference-to-video';
+  excludeFailed?: boolean;
 };
 
 export type VideoHistoryItem = {
@@ -62,8 +63,16 @@ export type VideoHistoryItem = {
 export const pageSize = 8;
 export const videoHistoryKey = `${STORE_PREFIX}-video-history`;
 
+export function filterVideoHistoryItems(
+  items: VideoHistoryItem[],
+  options: Pick<VideoHistoryRequest, 'excludeFailed'>,
+) {
+  return options.excludeFailed ? items.filter((item) => item.status !== 'fail') : items;
+}
+
 export default function useVideoHistory(reqData: VideoHistoryRequest) {
   const [data, setData] = useState<VideoHistoryItem[]>([]);
+  const { excludeFailed, pageNum, pageSize: requestedPageSize, videoType } = reqData;
 
   useEffect(() => {
     setData(readVideoHistoryItems());
@@ -73,12 +82,12 @@ export default function useVideoHistory(reqData: VideoHistoryRequest) {
     });
   }, []);
 
-  const filtered = useMemo(
-    () => (reqData.videoType ? data.filter((item) => item.videoType === reqData.videoType) : data),
-    [data, reqData.videoType],
-  );
-  const start = (reqData.pageNum - 1) * reqData.pageSize;
-  const rows = useMemo(() => filtered.slice(start, start + reqData.pageSize), [filtered, start, reqData.pageSize]);
+  const filtered = useMemo(() => {
+    const visibleItems = filterVideoHistoryItems(data, { excludeFailed });
+    return videoType ? visibleItems.filter((item) => item.videoType === videoType) : visibleItems;
+  }, [data, excludeFailed, videoType]);
+  const start = (pageNum - 1) * requestedPageSize;
+  const rows = useMemo(() => filtered.slice(start, start + requestedPageSize), [filtered, start, requestedPageSize]);
 
   return { data: rows, total: filtered.length, isLoading: false };
 }

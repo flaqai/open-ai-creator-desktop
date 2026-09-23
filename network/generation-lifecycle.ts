@@ -14,6 +14,7 @@ import {
   updateVideoArchive,
 } from '@/network/video/history';
 
+import { sanitizeDesktopLogText, writeDesktopLog, type DesktopLogger } from '@/lib/desktop/logging';
 import { attemptMediaArchive, type MediaArchiveOutcome, type MediaKind } from '@/lib/desktop/media-storage';
 import { isNativeDesktop } from '@/lib/desktop/runtime';
 
@@ -28,7 +29,7 @@ type RemoteMedia = {
 };
 
 type RemoteOutcome =
-  | { status: 'pending' }
+  | { status: 'pending'; remoteStatus: string }
   | { status: 'failed'; message?: string }
   | { status: 'succeeded'; media: RemoteMedia };
 
@@ -64,6 +65,7 @@ type GenerationLifecycleDependencies = {
   archive: (input: ArchiveJob) => Promise<MediaArchiveOutcome>;
   native: () => boolean;
   now: () => number;
+  log: DesktopLogger;
 };
 
 export type GenerationLifecycle = {
@@ -80,6 +82,7 @@ const defaultDependencies: GenerationLifecycleDependencies = {
   archive: ({ type, taskId, url, completedAt }) => attemptMediaArchive({ mediaType: type, taskId, url, completedAt }),
   native: isNativeDesktop,
   now: Date.now,
+  log: writeDesktopLog,
 };
 
 function archivePayload(outcome: MediaArchiveOutcome) {
@@ -94,6 +97,21 @@ export function createGenerationLifecycle(
   overrides: Partial<GenerationLifecycleDependencies> = {},
 ): GenerationLifecycle {
   const dependencies = { ...defaultDependencies, ...overrides };
+  const remoteStatuses = new Map<string, string>();
+
+  const taskKey = (task: PollTask) => `${task.type}:${task.traceId}`;
+  const safeTaskId = (task: PollTask) => sanitizeDesktopLogText(task.traceId, 180);
+  const elapsedMs = (task: PollTask) => Math.max(0, dependencies.now() - task.submitTime);
+  const logStatus = (task: PollTask, status: string) => {
+    const key = taskKey(task);
+    if (remoteStatuses.get(key) === status) return;
+    remoteStatuses.set(key, status);
+    void dependencies.log(
+      status === 'failed' ? 'error' : 'info',
+      `${task.type}-generation`,
+      `Task status changed task=${safeTaskId(task)} status=${sanitizeDesktopLogText(status, 60)} elapsedMs=${elapsedMs(task)}`,
+    );
+  };
 
   const adapters: Record<MediaKind, GenerationAdapter> = {
     image: {
@@ -102,7 +120,9 @@ export function createGenerationLifecycle(
         if (response.data?.task_status === 'failed') {
           return { status: 'failed', message: response.data.task_status_msg || undefined };
         }
-        if (response.data?.task_status !== 'succeed') return { status: 'pending' };
+        if (response.data?.task_status !== 'succeed') {
+          return { status: 'pending', remoteStatus: response.data?.task_status || 'unknown' };
+        }
         const result = response.data.task_result?.images?.[0];
         if (!result?.url) throw new Error('Image result is not available yet.');
         return {
@@ -131,7 +151,9 @@ export function createGenerationLifecycle(
         if (response.data?.task_status === 'failed') {
           return { status: 'failed', message: response.data.task_status_msg || undefined };
         }
-        if (response.data?.task_status !== 'succeed') return { status: 'pending' };
+        if (response.data?.task_status !== 'succeed') {
+          return { status: 'pending', remoteStatus: response.data?.task_status || 'unknown' };
+        }
         const result = response.data.task_result?.videos?.[0];
         if (!result?.url) throw new Error('Video result is not available yet.');
         return {
@@ -176,7 +198,14 @@ export function createGenerationLifecycle(
       try {
         config = await dependencies.getConfig();
       } catch (error) {
-        if (error instanceof MissingApiKeyError) return { state: 'paused' };
+        if (error instanceof MissingApiKeyError) {
+          void dependencies.log(
+            'warn',
+            `${task.type}-generation`,
+            `Polling paused because credentials are unavailable task=${safeTaskId(task)}`,
+          );
+          return { state: 'paused' };
+        }
         throw error;
       }
       if (signal.aborted) return { state: 'done' };
@@ -184,16 +213,35 @@ export function createGenerationLifecycle(
       const adapter = adapters[task.type];
       const outcome = await adapter.poll(config, task.traceId, signal);
       if (signal.aborted) return { state: 'done' };
-      if (outcome.status === 'pending') return { state: 'pending' };
+      if (outcome.status === 'pending') {
+        logStatus(task, outcome.remoteStatus);
+        return { state: 'pending' };
+      }
       if (outcome.status === 'failed') {
+        logStatus(task, 'failed');
         adapter.fail(task.traceId, outcome.message);
+        void dependencies.log(
+          'error',
+          `${task.type}-generation`,
+          `Task failed task=${safeTaskId(task)} status=failed elapsedMs=${elapsedMs(task)} message=${sanitizeDesktopLogText(outcome.message || 'No server failure reason')}`,
+        );
+        remoteStatuses.delete(taskKey(task));
         return { state: 'done', failureMessage: outcome.message };
       }
 
+      logStatus(task, 'succeed');
       const completedAt = dependencies.now();
       const archivePending = dependencies.native();
       adapter.complete(task.traceId, outcome.media, completedAt, archivePending);
-      if (!archivePending) return { state: 'done' };
+      if (!archivePending) {
+        void dependencies.log(
+          'info',
+          `${task.type}-generation`,
+          `Task completed task=${safeTaskId(task)} elapsedMs=${elapsedMs(task)} localArchive=skipped`,
+        );
+        remoteStatuses.delete(taskKey(task));
+        return { state: 'done' };
+      }
 
       const archiveOutcome = await archive({
         type: task.type,
@@ -201,11 +249,23 @@ export function createGenerationLifecycle(
         url: outcome.media.url,
         completedAt,
       });
+      void dependencies.log(
+        archiveOutcome.status === 'failed' ? 'error' : 'info',
+        `${task.type}-generation`,
+        `Task completed task=${safeTaskId(task)} elapsedMs=${elapsedMs(task)} localArchive=${archiveOutcome.status}`,
+      );
+      remoteStatuses.delete(taskKey(task));
       return { state: 'done', archiveFailed: archiveOutcome.status === 'failed' };
     },
 
     timeout(task) {
       adapters[task.type].fail(task.traceId, 'Task timeout');
+      void dependencies.log(
+        'error',
+        `${task.type}-generation`,
+        `Task timed out task=${safeTaskId(task)} elapsedMs=${elapsedMs(task)}`,
+      );
+      remoteStatuses.delete(taskKey(task));
     },
 
     pendingTasks() {

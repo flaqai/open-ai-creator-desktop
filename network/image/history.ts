@@ -51,8 +51,20 @@ export type ImageHistoryItem = {
 };
 
 export type ImageHistoryFilterType = ImageFormType;
+export type ImageHistoryOptions = {
+  excludeFailed?: boolean;
+};
 
-export default function useImageHistory(pageNum: number, pageSize: number, filter?: ImageHistoryFilterType) {
+export function filterImageHistoryItems(items: ImageHistoryItem[], options: ImageHistoryOptions = {}) {
+  return options.excludeFailed ? items.filter((item) => item.status !== 'fail') : items;
+}
+
+export default function useImageHistory(
+  pageNum: number,
+  pageSize: number,
+  filter?: ImageHistoryFilterType,
+  options: ImageHistoryOptions = {},
+) {
   void filter;
 
   const [data, setData] = useState<ImageHistoryItem[]>([]);
@@ -65,12 +77,14 @@ export default function useImageHistory(pageNum: number, pageSize: number, filte
     });
   }, []);
 
+  const { excludeFailed } = options;
+  const filtered = useMemo(() => filterImageHistoryItems(data, { excludeFailed }), [data, excludeFailed]);
   const start = (pageNum - 1) * pageSize;
-  const rows = useMemo(() => data.slice(start, start + pageSize), [data, start, pageSize]);
+  const rows = useMemo(() => filtered.slice(start, start + pageSize), [filtered, start, pageSize]);
 
   return {
     data: rows,
-    total: data.length,
+    total: filtered.length,
     isLoading: false,
   };
 }

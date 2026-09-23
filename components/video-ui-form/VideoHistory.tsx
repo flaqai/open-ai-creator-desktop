@@ -8,6 +8,7 @@ import { Trash2 } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import { toast } from 'sonner';
 
+import { beginHistoryImageDrag, endHistoryImageDrag } from '@/lib/desktop/image-history-drag';
 import { cn } from '@/lib/utils';
 import { numberList } from '@/lib/utils/arrayUtils';
 import { formatDate } from '@/lib/utils/timeUtils';
@@ -24,6 +25,7 @@ function VideoItem({
   status,
   onDelete,
   ratio,
+  dragUrl,
 }: {
   imgSrc?: string;
   onClick: () => void;
@@ -31,6 +33,7 @@ function VideoItem({
   status: VideoHistoryItem['status'];
   onDelete?: () => void;
   ratio?: string;
+  dragUrl?: string;
 }) {
   const calculateWidth = (ratioStr?: string) => {
     if (!ratioStr) return 130;
@@ -75,8 +78,18 @@ function VideoItem({
   return (
     <div
       style={{ width: `${width}px` }}
+      draggable={Boolean(dragUrl)}
+      onDragStart={(event) => {
+        if (!dragUrl) return;
+        beginHistoryImageDrag(event.dataTransfer, {
+          url: dragUrl,
+          name: dragUrl.split('/').pop() || 'history-image',
+        });
+      }}
+      onDragEnd={endHistoryImageDrag}
       className={cn(
-        'group bg-card hover:bg-muted relative flex h-[130px] shrink-0 cursor-pointer items-center justify-center overflow-hidden rounded-lg transition-all duration-200',
+        'group bg-card hover:bg-muted relative flex h-[130px] shrink-0 items-center justify-center overflow-hidden rounded-lg transition-all duration-200',
+        dragUrl ? 'cursor-grab active:cursor-grabbing' : 'cursor-pointer',
       )}
       onClick={onClick}
     >
@@ -84,6 +97,7 @@ function VideoItem({
         <img
           src={imgSrc}
           alt='imgSrc'
+          draggable={false}
           className='h-full w-full object-contain'
           loading='lazy'
           decoding='async'
@@ -192,17 +206,21 @@ const VideoHistory = forwardRef<ScrollRef, VideoHistoryProps>(({ onClickImage, o
         ))}
       {!isLoading &&
         hasData &&
-        data.map((el) => (
-          <VideoItem
-            key={el.id}
-            imgSrc={el.coverImage || el.videoThumbnailUrl || el.imageUrl || undefined}
-            onClick={() => handleClickImg(el)}
-            createTime={el.createTime}
-            status={el.status}
-            ratio={el.ratio}
-            onDelete={el.status === 'fail' ? () => handleDelete(el.id) : undefined}
-          />
-        ))}
+        data.map((el) => {
+          const previewUrl = el.coverImage || el.videoThumbnailUrl || el.imageUrl || undefined;
+          return (
+            <VideoItem
+              key={el.id}
+              imgSrc={previewUrl}
+              dragUrl={el.status === 'completed' ? previewUrl : undefined}
+              onClick={() => handleClickImg(el)}
+              createTime={el.createTime}
+              status={el.status}
+              ratio={el.ratio}
+              onDelete={el.status === 'fail' ? () => handleDelete(el.id) : undefined}
+            />
+          );
+        })}
     </Scroll>
   );
 });

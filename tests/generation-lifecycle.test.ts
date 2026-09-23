@@ -1,6 +1,7 @@
 import assert from 'node:assert/strict';
 import { beforeEach, test } from 'node:test';
 
+import type { DesktopLogLevel } from '../lib/desktop/logging';
 import { MissingApiKeyError, type OpenApiConfig } from '../network/clientFetch';
 import { createGenerationLifecycle } from '../network/generation-lifecycle';
 import type { GetImageTaskResponse } from '../network/image/client';
@@ -175,15 +176,24 @@ test('remote failure and missing credentials preserve their distinct lifecycle s
       status: 'processing',
     },
   ]);
+  const logs: Array<{ level: DesktopLogLevel; scope: string; message: string }> = [];
   const failed = createGenerationLifecycle({
     getConfig: async () => config,
     getImageTask: async () => imageResponse('failed', [], 'moderation rejected'),
+    now: () => 1_234,
+    log: (level, scope, message) => {
+      logs.push({ level, scope, message });
+    },
   });
   assert.deepEqual(await failed.poll({ traceId: 'image-task', type: 'image', submitTime: 10 }, signal), {
     state: 'done',
     failureMessage: 'moderation rejected',
   });
   assert.equal(readImageHistoryItems()[0].status, 'fail');
+  assert.equal(logs.at(-1)?.level, 'error');
+  assert.equal(logs.at(-1)?.scope, 'image-generation');
+  assert.match(logs.at(-1)?.message || '', /task=image-task status=failed elapsedMs=1224/);
+  assert.match(logs.at(-1)?.message || '', /moderation rejected/);
 
   writeLocalHistory(imageHistoryKey, [{ ...readImageHistoryItems()[0], status: 'processing', errorInfo: undefined }]);
   let networkCalls = 0;

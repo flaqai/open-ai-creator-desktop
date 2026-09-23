@@ -110,6 +110,37 @@ test('image/video submit and poll use exact upstream contracts including multimo
   assert.deepEqual(JSON.parse(requests[2].init?.body as string), video);
 });
 
+test('generation submission logs bounded diagnostics without credentials or media URLs', async () => {
+  const logs: Array<{ level: DesktopLogLevel; scope: string; message: string }> = [];
+  const logger = async (level: DesktopLogLevel, scope: string, message: string) => {
+    logs.push({ level, scope, message });
+  };
+  globalThis.fetch = async () =>
+    json({ code: 0, message: 'success', data: { task_id: 'diagnostic-task', task_status: 'submitted' } });
+
+  await createImageTask(
+    config,
+    {
+      model_name: 'gpt-image-2',
+      prompt: '飞天企鹅\nwith stars',
+      width: 1536,
+      height: 1024,
+      resolution: '2K',
+      image_url_list: ['https://assets.test/private-reference.png?token=secret'],
+    },
+    logger,
+  );
+
+  assert.match(logs[0].message, /model=gpt-image-2/);
+  assert.match(logs[0].message, /size=1536x1024/);
+  assert.match(logs[0].message, /references=1/);
+  assert.match(logs[0].message, /prompt="飞天企鹅 with stars"/);
+  assert.match(logs[1].message, /task=diagnostic-task/);
+  assert.ok(logs.every((entry) => !entry.message.includes(config.clientKey)));
+  assert.ok(logs.every((entry) => !entry.message.includes('assets.test')));
+  assert.ok(logs.every((entry) => entry.scope === 'image-generation'));
+});
+
 test('generation submission retries one transient transport failure without retrying HTTP errors', async () => {
   let calls = 0;
   globalThis.fetch = async () => {

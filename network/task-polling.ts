@@ -3,6 +3,8 @@
 import useGenerationPollingStore from '@/store/useGenerationPollingStore';
 import { toast } from 'sonner';
 
+import { formatErrorForDesktopLog, sanitizeDesktopLogText, writeDesktopLog } from '@/lib/desktop/logging';
+
 import { generationLifecycle } from './generation-lifecycle';
 import { PollingManager } from './polling-manager';
 
@@ -27,11 +29,21 @@ const manager = new PollingManager({
     if (result.archiveFailed) toast.error(archiveFailureMessage());
     return result.state === 'pending' ? 'pending' : 'done';
   },
+  onError: (task, error) => {
+    void writeDesktopLog(
+      'warn',
+      `${task.type}-generation`,
+      `Polling attempt failed task=${sanitizeDesktopLogText(task.traceId, 180)} error=${formatErrorForDesktopLog(error)}; retrying`,
+    );
+  },
 });
 
 export function startTaskPolling(traceId: string, type: 'image' | 'video', submitTime = Date.now()) {
   if (typeof window === 'undefined' || !traceId) return;
-  if (manager.start({ traceId, type, submitTime })) useGenerationPollingStore.getState().add(traceId, type);
+  if (manager.start({ traceId, type, submitTime })) {
+    useGenerationPollingStore.getState().add(traceId, type);
+    void writeDesktopLog('info', `${type}-generation`, `Polling started task=${sanitizeDesktopLogText(traceId, 180)}`);
+  }
 }
 
 export function restorePendingTaskPolling() {

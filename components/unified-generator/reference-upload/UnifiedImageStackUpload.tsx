@@ -8,7 +8,9 @@ import { useDropzone, type FileRejection } from 'react-dropzone';
 import { toast } from 'sonner';
 
 import type { UnifiedGeneratorReferenceMediaAsset } from '@/lib/constants/unified-generator/types';
+import { filterCompatibleHistoryAssets } from '@/lib/utils/history-media-selection';
 import { getMediaDropzoneAccept, isAcceptedMediaFile, normalizeMediaFormats } from '@/lib/utils/media-upload-formats';
+import { useHistoryImageDrop } from '@/hooks/use-history-image-drop';
 
 import ReferenceImagePreviewDialog from './ReferenceImagePreviewDialog';
 import ReferenceMediaPicker from './ReferenceMediaPicker';
@@ -71,6 +73,19 @@ export default function UnifiedImageStackUpload({
   );
   const canAdd = values.length < maxImages;
   const allowedFormats = normalizeMediaFormats('image', acceptedFormats);
+  const { isHistoryDragActive, historyDropProps } = useHistoryImageDrop((image) => {
+    const asset: UnifiedGeneratorReferenceMediaAsset = {
+      id: `image-${nanoid()}`,
+      kind: 'image',
+      source: image.url,
+      name: image.name || 'history-image',
+    };
+    if (!filterCompatibleHistoryAssets([asset], 'image', allowedFormats).length) {
+      toast.error(t('unsupportedFormat'));
+      return;
+    }
+    onChange([...values, asset].slice(0, maxImages));
+  }, canAdd);
 
   const validateImage = async (file: File) => {
     if (!isAcceptedMediaFile(file, 'image', allowedFormats)) {
@@ -144,7 +159,7 @@ export default function UnifiedImageStackUpload({
   return (
     <>
       <div
-        {...dropzone.getRootProps()}
+        {...dropzone.getRootProps(historyDropProps)}
         className='relative z-20 flex h-[68px] w-fit shrink-0 items-center overflow-visible bg-transparent focus-within:z-[1000] hover:z-[1000]'
       >
         <input
@@ -186,7 +201,7 @@ export default function UnifiedImageStackUpload({
               assets={values}
               canAdd={canAdd}
               disabled={!canAdd}
-              isDragActive={dropzone.isDragActive}
+              isDragActive={dropzone.isDragActive || isHistoryDragActive}
               isPanelHovered={isPickerPanelHovered}
               emptyLabel={label}
               addLabel={t('addImage')}

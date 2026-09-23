@@ -11,7 +11,6 @@ import { useFormContext } from 'react-hook-form';
 import { toast } from 'sonner';
 
 import type { UnifiedGeneratorReferenceMediaAsset } from '@/lib/constants/unified-generator/types';
-import { endHistoryImageDrag, hasHistoryImageDrag, readHistoryImageDrag } from '@/lib/desktop/image-history-drag';
 import { cn } from '@/lib/utils';
 import { validateImagePx } from '@/lib/utils/imageUtils';
 import {
@@ -20,6 +19,7 @@ import {
   isAcceptedMediaFile,
 } from '@/lib/utils/media-upload-formats';
 import { useFormRestoration } from '@/hooks/use-form-restoration';
+import { useHistoryImageDrop } from '@/hooks/use-history-image-drop';
 import { FormControl, FormField, FormItem, FormLabel } from '@/components/ui/form';
 import { PopoverAnchor } from '@/components/ui/popover';
 import SubHeading from '@/components/form/SubHeading';
@@ -104,7 +104,6 @@ const UnifiedImageUploadField = forwardRef<UnifiedImageUploadFieldRef, UnifiedIm
           })),
       [imageHistory.data],
     );
-    const [isHistoryDragActive, setIsHistoryDragActive] = useState(false);
     useFormRestoration((data, preview) => {
       const raw = data[name];
       const values = Array.isArray(raw) ? raw : raw ? [raw] : [];
@@ -332,42 +331,21 @@ const UnifiedImageUploadField = forwardRef<UnifiedImageUploadFieldRef, UnifiedIm
       await addImages(acceptedFiles);
     };
 
-    const handleHistoryDragEnter = (event: React.DragEvent<HTMLDivElement>) => {
-      if (!hasHistoryImageDrag(event.dataTransfer)) return;
-      event.preventDefault();
-      setIsHistoryDragActive(true);
-    };
-
-    const handleHistoryDragOver = (event: React.DragEvent<HTMLDivElement>) => {
-      if (!hasHistoryImageDrag(event.dataTransfer)) return;
-      event.preventDefault();
-      event.dataTransfer.dropEffect = 'copy';
-    };
-
-    const handleHistoryDragLeave = (event: React.DragEvent<HTMLDivElement>) => {
-      const nextTarget = event.relatedTarget;
-      if (nextTarget instanceof Node && event.currentTarget.contains(nextTarget)) return;
-      setIsHistoryDragActive(false);
-    };
-
-    const handleHistoryDrop = (event: React.DragEvent<HTMLDivElement>) => {
-      const payload = readHistoryImageDrag(event.dataTransfer);
-      if (!payload) return;
-      event.preventDefault();
-      event.stopPropagation();
-      setIsHistoryDragActive(false);
-      endHistoryImageDrag();
-      setImages((previous) => {
-        if (!isSingleMode && previous.length >= maxImages) return previous;
-        const item: ImageItem = {
-          id: nanoid(),
-          file: new File([], payload.name || 'history-image', { type: 'image/jpeg' }),
-          previewUrl: payload.url,
-          sourceUrl: payload.url,
-        };
-        return isSingleMode ? [item] : [...previous, item];
-      });
-    };
+    const { isHistoryDragActive, historyDropProps } = useHistoryImageDrop(
+      (payload) => {
+        setImages((previous) => {
+          if (!isSingleMode && previous.length >= maxImages) return previous;
+          const item: ImageItem = {
+            id: nanoid(),
+            file: new File([], payload.name || 'history-image', { type: 'image/jpeg' }),
+            previewUrl: payload.url,
+            sourceUrl: payload.url,
+          };
+          return isSingleMode ? [item] : [...previous, item];
+        });
+      },
+      isSingleMode || images.length < maxImages,
+    );
 
     const accepted = acceptTypes && acceptTypes.length > 0 ? acceptTypes : ACCEPTED_IMAGE_TYPES;
     const acceptObject =
@@ -384,12 +362,7 @@ const UnifiedImageUploadField = forwardRef<UnifiedImageUploadFieldRef, UnifiedIm
       disabled: !isSingleMode && images.length >= maxImages,
       noClick: true,
     });
-    const uploadRootProps = getRootProps({
-      onDragEnter: handleHistoryDragEnter,
-      onDragOver: handleHistoryDragOver,
-      onDragLeave: handleHistoryDragLeave,
-      onDrop: handleHistoryDrop,
-    });
+    const uploadRootProps = getRootProps(historyDropProps);
 
     const handleFileInputChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
       const files = Array.from(e.target.files || []);

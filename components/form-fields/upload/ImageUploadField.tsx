@@ -12,6 +12,7 @@ import { cn } from '@/lib/utils';
 import { getFileByUrl } from '@/lib/utils/fileUtils';
 import { getMediaDropzoneAccept, isAcceptedMediaFile } from '@/lib/utils/media-upload-formats';
 import { useFormRestoration } from '@/hooks/use-form-restoration';
+import { useHistoryImageDrop } from '@/hooks/use-history-image-drop';
 import { FormControl, FormField, FormItem, FormLabel } from '@/components/ui/form';
 import { PopoverAnchor } from '@/components/ui/popover';
 import ReferenceMediaPicker from '@/components/unified-generator/reference-upload/ReferenceMediaPicker';
@@ -108,19 +109,24 @@ const ImageUploadField = forwardRef<ImageUploadFieldRef, ImageUploadFieldProps>(
 
     const onDrop = async (acceptedFiles: File[]) => {
       const file = acceptedFiles[0];
+      if (!file) return;
       const previewUrl = URL.createObjectURL(file);
       setFileUrl(previewUrl);
       methods.setValue(name, file);
       afterSetImage?.();
     };
 
+    const { isHistoryDragActive, historyDropProps } = useHistoryImageDrop((image) => {
+      void updateFile(image.url);
+    });
+
     const { getRootProps, getInputProps, isDragActive } = useDropzone({
       onDrop,
       accept: getMediaDropzoneAccept('image'),
       maxFiles: 1,
-      disabled: !!fileUrl,
       noClick: true,
     });
+    const uploadRootProps = getRootProps(historyDropProps);
 
     const deleteFile = () => {
       updateFile(null);
@@ -196,14 +202,14 @@ const ImageUploadField = forwardRef<ImageUploadFieldRef, ImageUploadFieldProps>(
           trigger={
             <PopoverAnchor asChild>
               <div
-                {...getRootProps()}
+                {...uploadRootProps}
                 onClick={() => {
                   if (!fileUrl) setPickerOpen(true);
                 }}
                 className={cn(
                   'border-foreground/10 bg-card hover:border-foreground/30 hover:bg-card relative h-[112px] w-full rounded-xl border border-dashed',
-                  isDragActive && 'border-foreground/30 bg-card',
                   fileUrl && 'border-foreground/10 bg-card hover:border-foreground/10 hover:bg-card',
+                  (isDragActive || isHistoryDragActive) && 'border-primary bg-primary/5',
                 )}
               >
                 <FormField
