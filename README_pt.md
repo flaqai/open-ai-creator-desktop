@@ -1,59 +1,97 @@
-# Flaq SaaS Template (Português do Brasil)
+![Flaq Open Media Creator](./docs/assets/flaq-open-media-creator-banner.png)
 
-Template SaaS gratuito e de código aberto para criar plataformas de geração de imagens e vídeos por IA com a API
-unificada da Flaq.ai.
+# Flaq Open Media Creator (Português do Brasil)
+
+Um espaço de trabalho desktop de código aberto para criar imagens e vídeos com IA, adaptado do Flaq SaaS Template. O
+aplicativo instalado continua se chamando Flaq Creator.
 
 **README:** [English](./README.md) · [日本語](./README_ja.md) · [Bahasa Indonesia](./README_id.md) ·
-[Italiano](./README_it.md) · [Português](./README_pt.md) · [Español](./README_es.md) · [Deutsch](./README_de.md) ·
-[Русский](./README_ru.md) · [Français](./README_fr.md) · [简体中文](./README_zh.md) · [繁體中文](./README_tw.md) ·
-[한국어](./README_ko.md) · [ไทย](./README_th.md) · [Tiếng Việt](./README_vi.md) · [العربية](./README_ar.md)
+[Italiano](./README_it.md) · [Português (Brasil)](./README_pt.md) · [Español](./README_es.md) ·
+[Deutsch](./README_de.md) · [Русский](./README_ru.md) · [Français](./README_fr.md) · [简体中文](./README_zh.md) ·
+[繁體中文](./README_tw.md) · [한국어](./README_ko.md) · [ไทย](./README_th.md) · [Tiếng Việt](./README_vi.md) ·
+[العربية](./README_ar.md)
 
-## Sobre o template
+## Sobre a Flaq AI
 
-Construído com Next.js 16, React 19, TypeScript e Tailwind CSS. Inclui cinco fluxos prontos: texto para imagem, imagem
-para imagem, texto para vídeo, imagem para vídeo e provador virtual.
+A [Flaq AI](https://flaq.ai/pt/) é uma plataforma de IA para criadores, desenvolvedores e empresas que reúne os
+principais modelos de IA amplamente utilizados para gerar e editar imagens, criar vídeos e trabalhar com linguagem.
 
-### Principais recursos
+- **APIs com alta concorrência e estabilidade** — Integre a geração de IA aos seus produtos e fluxos de produção por
+  meio de uma API unificada.
+- **Uso direto online** — Utilize modelos e ferramentas criativas na [Flaq AI](https://flaq.ai/pt/) pelo navegador, sem
+  escrever código nem instalar o aplicativo desktop.
+- **Explore e integre modelos** — Compare recursos no [mercado de modelos](https://flaq.ai/pt/model-market/) e comece
+  pela [documentação da API](https://flaq.ai/pt/docs/).
 
-- 🎨 Páginas de geração de imagens e vídeos com seleção de modelos e parâmetros
-- 🔌 Integração com a API da Flaq.ai usando um único Client Key
-- 🧠 Compatível com Nano Banana Pro, Seedream, GPT Image, Grok Imagine, Veo, Wan, Kling, Seedance, Vidu e outros modelos
-- 🌐 15 idiomas na interface, nas rotas e nos links alternativos de SEO
-- ☁️ Upload para Cloudflare R2 e armazenamento dos arquivos gerados
-- 🔒 Armazenamento criptografado da chave de API no cliente
-- 📱 Interface responsiva, modo escuro e histórico de gerações
+Contato comercial: [contact@flaq.ai](mailto:contact@flaq.ai)
 
-## Sobre a Flaq.ai
+## Implementação atual
 
-A [Flaq.ai](https://flaq.ai/pt/) reúne os principais modelos de geração de imagens e vídeos em uma API, com autenticação
-consistente. O template já implementa conexão com a API, consulta de status, exibição dos resultados e download.
+Tauri 2 e Rust hospedam a interface estática de Next.js 16 e React 19, sem servidor Node.js/Next.js embarcado.
+Formulários, contratos dos modelos e design são compartilhados com a versão web.
+
+Sete entradas: AI Media Creator, texto para imagem, imagem para imagem, provador virtual, texto para vídeo, imagem para
+vídeo e referência para vídeo. Inclui biblioteca de prompts, catálogo pesquisável, histórico nas configurações,
+rascunhos IndexedDB e arquivamento local por data. Imagens de exemplo vêm incluídas; vídeos são reproduzidos online.
+Geração e arquivamento têm estados de sucesso separados.
 
 ## Início rápido
 
+Execute na raiz deste repositório. Requer Node.js 22, pnpm 10.5.2, Rust e dependências Tauri do sistema. Em
+Configurações → Conexão, informe seu Client Key Flaq AI, teste e salve. Base URL padrão: `https://api.flaq.ai`. Gerações
+reais exigem internet e créditos de API.
+
 ```bash
-git clone https://github.com/flaqai/flaq-saas-template.git
-cd flaq-saas-template
-pnpm install
-cp .env.example .env.local
-pnpm dev
+pnpm install --frozen-lockfile
+pnpm desktop:dev
 ```
 
-Defina `NEXT_PUBLIC_SITE_URL` em `.env.local` e adicione as configurações do Cloudflare R2 quando necessário. Depois,
-informe o Client Key da [Flaq.ai](https://flaq.ai/pt/) nas configurações do aplicativo. Consulte a
-[documentação completa em inglês](./README.md#getting-started) para todas as variáveis e etapas.
+- `pnpm build:desktop` → `out/`
+- `pnpm desktop:build` → Tauri
+- `pnpm check` → TypeScript + tests + ESLint
+- Web: `pnpm dev`; `pnpm build` + `pnpm start`
 
-## Programa de Afiliados da Flaq.ai
+[Tauri prerequisites](https://v2.tauri.app/start/prerequisites/) ·
+[README: setup / architecture / tests](./README.md#getting-started) ·
+[模块扩展 / Adding modules](./docs/ADDING_MODULES.md)
 
-No [Programa de Afiliados da Flaq.ai](https://flaq.ai/pt/affiliate-program?utm_source=flaq-saas-template), você pode
-ganhar 20% sobre o primeiro pedido pago válido de um usuário indicado e 10% sobre os pedidos pagos válidos seguintes
-realizados em até 60 dias após o cadastro. A elegibilidade e os pagamentos seguem os termos atuais da página do
-programa.
+## Uploads e credenciais
 
-## Internacionalização
+O upload padrão recebe URLs assinadas temporárias de Flaq `/api/v1/files/presignedUrl`. As credenciais R2 compartilhadas
+ficam no servidor; não é necessário ter conta própria Cloudflare. R2 personalizado é opcional e assina localmente.
+Predefinições AES-GCM no WebView não são um cofre do sistema operacional. Ao lembrar a chave, o Client Key é salvo em
+texto simples no `auth.json` do diretório de configuração do aplicativo.
 
-O código e os READMEs oferecem os mesmos 15 locales: `en`, `ja`, `id`, `it`, `pt`, `es`, `de`, `ru`, `fr`, `zh`, `tw`,
-`ko`, `th`, `vi` e `ar`. O inglês usa `/`, os demais idiomas usam `/{locale}/` e o árabe é exibido da direita para a
-esquerda.
+## Plataformas e idiomas
+
+A configuração de lançamento inclui macOS Apple Silicon/Intel (DMG, ZIP) e Windows x64 (NSIS EXE). Linux pode ser
+compilado do código, mas não integra a matriz de lançamento. Os pacotes atuais não são assinados. Há 15 idiomas
+registrados, mas partes dos novos painéis de configurações, mídia e prompts só estão em chinês/inglês: `zh`/`tw`
+compartilham chinês, os demais usam inglês. O desktop sempre usa prefixo, inclusive `/en/`; na web, inglês usa `/` e os
+demais usam prefixos. Árabe usa RTL.
+
+`en`, `ja`, `id`, `it`, `pt`, `es`, `de`, `ru`, `fr`, `zh`, `tw`, `ko`, `th`, `vi`, `ar`
+
+## Programa de Afiliados da Flaq AI
+
+Torne-se um parceiro afiliado da Flaq AI e ganhe comissões apresentando fluxos de imagem e vídeo com IA, APIs de modelos
+e ferramentas criativas. O programa recebe criadores, designers, desenvolvedores, educadores de IA, avaliadores de
+modelos e equipes que compartilham fluxos práticos de IA.
+
+- **Recompensas por indicação** — Ganhe 20% sobre o primeiro pedido pago válido de um usuário indicado e 10% sobre os
+  pedidos pagos válidos seguintes em até 60 dias após o cadastro, conforme as regras de elegibilidade e atribuição.
+- **Promoção flexível** — Compartilhe seu link em tutoriais, avaliações, projetos criativos, comunidades ou guias de
+  integração de APIs.
+- **Área do parceiro** — Gerencie links, acompanhe indicações e configure os recebimentos na Flaq AI.
+
+Entre na Flaq AI, complete seu perfil de afiliado e aceite o acordo para criar seu link de indicação. O projeto também
+oferece chamadas de afiliação em vários idiomas; o cadastro de parceiros e a gestão de comissões são feitos na Flaq AI,
+não no aplicativo desktop.
+
+**[Participe do Programa de Afiliados da Flaq AI →](https://flaq.ai/pt/affiliate-program/)**
+
+> Elegibilidade das comissões, atribuição, reembolsos, análise dos pagamentos e acordos personalizados aprovados seguem
+> os termos mais recentes da página oficial.
 
 ## Documentação e licença
 

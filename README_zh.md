@@ -1,319 +1,233 @@
-# Flaq Creator Desktop（中文）
+![Flaq Open Media Creator](./docs/assets/flaq-open-media-creator-banner.png)
 
-这是开源 [Flaq SaaS Template](https://github.com/flaqai/flaq-saas-template) 的跨平台桌面改造版，基于
-[Flaq.ai](https://flaq.ai)
-API 面向 AI 图片与视频创作。项目保留原有 Web 体验，并新增可运行于 macOS、Windows 和 Linux 的专注型创作工作台。
+# Flaq Open Media Creator
 
-**选择 README 语言：** [English](./README.md) · [日本語](./README_ja.md) · [Bahasa Indonesia](./README_id.md) ·
+面向 AI 图片与视频创作的开源桌面工作台，改造自
+[Flaq SaaS Template](https://github.com/flaqai/flaq-saas-template)。复用 Flaq 的创作工具与视觉设计，通过精简表单、说明弹窗、可恢复草稿和本地素材管理，让设计师更专注于创作。当前安装后的应用名称仍为
+**Flaq Creator**，包名与原生应用标识保持不变。
+
+**README:** [English](./README.md) · [日本語](./README_ja.md) · [Bahasa Indonesia](./README_id.md) ·
 [Italiano](./README_it.md) · [Português (Brasil)](./README_pt.md) · [Español](./README_es.md) ·
 [Deutsch](./README_de.md) · [Русский](./README_ru.md) · [Français](./README_fr.md) · [简体中文](./README_zh.md) ·
 [繁體中文](./README_tw.md) · [한국어](./README_ko.md) · [ไทย](./README_th.md) · [Tiếng Việt](./README_vi.md) ·
 [العربية](./README_ar.md)
 
-> README 的语言集合与 `i18n/languages.ts` 保持一致，每一种界面语言都有对应的项目介绍。
+## 关于 Flaq AI
 
-## 桌面应用
+[Flaq AI](https://flaq.ai/zh/)
+是面向创作者、开发者和企业的 AI 平台，汇聚最主流的 AI 模型，覆盖图片生成与编辑、视频生成及语言模型等能力。
 
-桌面版保留模板中的 7 类创作能力和原有视觉语言，并将较长的营销介绍收纳到上下文说明弹窗中；同时提供首次启动的 Flaq.ai 配置引导、按日期自动归档的本地作品存储和更适合设计师的任务入口。界面完整支持 15 种语言，阿拉伯语支持 RTL 布局。
+- **高并发、高稳定性的 API 服务** — 通过统一的 AI 生成 API，将模型能力接入产品与生产工作流。
+- **支持直接在线使用** — 无需编写代码或安装桌面应用，即可在
+  [Flaq AI 官网](https://flaq.ai/zh/)通过浏览器体验模型与 AI 创作工具。
+- **探索模型与快速接入** — 在[模型市场](https://flaq.ai/zh/model-market/)比较模型能力，通过
+  [API 文档](https://flaq.ai/zh/docs/)完成集成。
 
-- 页面与功能盘点：[`docs/PRODUCT_INVENTORY.md`](./docs/PRODUCT_INVENTORY.md)
-- 桌面架构与服务边界：[`docs/DESKTOP_ARCHITECTURE.md`](./docs/DESKTOP_ARCHITECTURE.md)
+商务联系: [contact@flaq.ai](mailto:contact@flaq.ai)
 
-```bash
-# 启动桌面开发模式
-pnpm desktop:dev
+## 功能与页面
 
-# 生成桌面静态前端
-pnpm build:desktop
+7 个创作入口统一登记在 [lib/features/catalog.ts](./lib/features/catalog.ts) 中。下列路径省略了当前语言前缀。
 
-# 为当前操作系统构建原生安装包
-pnpm desktop:build
-```
+| 创作功能         | 路由                  | 用途                             |
+| ---------------- | --------------------- | -------------------------------- |
+| AI Media Creator | `/ai-media-creator`   | 统一图片／视频创作工作区         |
+| 文生图           | `/text-to-image`      | 根据提示词生成图片               |
+| 图生图           | `/image-to-image`     | 编辑或转换参考图片               |
+| 虚拟试穿         | `/virtual-try-on`     | 结合服装与模特参考图生成试穿效果 |
+| 文生视频         | `/text-to-video`      | 根据提示词生成视频               |
+| 图生视频         | `/image-to-video`     | 以图片作为视频生成输入           |
+| 参考生视频       | `/reference-to-video` | 根据参考素材生成视频             |
 
-原生构建需要安装目标系统对应的
-[Tauri 环境依赖](https://v2.tauri.app/start/prerequisites/)（包括 Rust）。跨平台发布流程已配置在
-`.github/workflows/desktop-build.yml`。
+输入类型、数量限制和参数以所选模型为准；实际接入能力以
+[lib/constants/template-models/](./lib/constants/template-models/) 为准，不等于 Flaq AI 平台全部模型。
 
-## 目录
+桌面体验还包括：
 
-- [桌面应用](#桌面应用)
-- [功能特性](#功能特性)
-- [技术栈](#技术栈)
-- [快速开始](#快速开始)
-  - [环境要求](#环境要求)
-  - [安装步骤](#安装步骤)
-  - [环境变量配置](#环境变量配置)
-  - [Cloudflare R2 存储配置](#cloudflare-r2-存储配置)
-  - [Flaq.ai API Key 配置](#flaqai-api-key-配置)
-- [使用方法](#使用方法)
-- [AIGC 能力](#aigc-能力)
-- [Flaq.ai 联盟计划](#flaqai-联盟计划)
-- [国际化 (i18n)](#国际化-i18n)
-- [SEO 与 AI 爬虫发现](#seo-与-ai-爬虫发现)
-- [项目结构](#项目结构)
-- [部署](#部署)
-- [许可证](#许可证)
+- **提示词素材库**（`/recommended-prompts`）：按模型分类的固定内容快照，支持复制完整提示词、图片／视频预览、缩放与拖动查看。示例图片随应用提供，示例视频需要联网播放；合集中的模型名称不代表生成表单已经接入该模型。
+- **素材目录**（`/media-library`，也内嵌于“设置 → 历史记录”）：聚合已上传参考素材和生成作品，按类型、来源筛选和搜索，查看预览、下载与本地归档状态。
+- **创作工作台**：首次启动的 Flaq AI 配置引导、连接测试、模型与参数选择、上下文帮助弹窗、外观和语言设置。
+- **草稿与历史恢复**：输入素材字节保存在 IndexedDB，任务历史与上传素材索引保存在本机。待完成任务恢复的是状态查询，不会重新提交一次付费生成。
+- **本地作品归档**：桌面端生成结果按 `YYYY/MM/DD`
+  保存到可配置目录。归档恢复只重试保存已有结果；“生成成功”和“本地归档成功”是两个独立状态。
+- **媒体工具**：原生保存对话框、PNG／JPEG／WebP 图片导出、按需加载的 FFmpeg WASM 裁剪。
 
-## 功能特性
-
-- 🎨 **文生图** — 通过文本提示词生成惊艳的 AI 图片
-- 🖼️ **图生图** — 将现有图片转换为创意变体，保持风格一致性
-- 🎬 **文生视频** — 从简单的文本描述创建高质量视频
-- 📹 **图生视频** — 将静态图片动画化为动态视频内容
-- 👗 **虚拟试衣** — AI 驱动的虚拟服装试穿体验
-- 🌐 **国际化** — 内置与 Flaq.ai 对齐的 15 种语言、语言路由与 SEO 多语言链接
-- 🚀 **无需注册** — 无需创建应用账号即可浏览、修改和自行部署模板
-- 🤝 **联盟推广** — 内置响应式 Flaq.ai 联盟推荐区块，文案与跳转均随当前语言切换
-- 🔒 **安全密钥管理** — 加密的客户端存储保护您的 Flaq.ai 凭证
-- ☁️ **Cloudflare R2 存储** — 内置图片托管，享受 Cloudflare 全球 CDN 加速
-- 📱 **响应式设计** — 基于 Tailwind CSS 和 Radix UI 的全响应式界面
-- 🌓 **深色模式** — 精美的深色主题 UI
-- ⚡ **极速性能** — 基于 Next.js 16，支持 Turbopack
-- 🔍 **SEO 优化** — 动态元数据、Open Graph、站点地图和结构化数据
-- 🤖 **AI 爬虫友好** — 提供精简的 `llms.txt`、完整的 `llms-full.txt` 与公开内容抓取规则
-
-## 技术栈
-
-| 类别     | 技术                                                                      |
-| -------- | ------------------------------------------------------------------------- |
-| 框架     | [Next.js 16](https://nextjs.org/) (App Router)                            |
-| 语言     | [TypeScript](https://www.typescriptlang.org/)                             |
-| UI 库    | [React 19](https://react.dev/)                                            |
-| 样式     | [Tailwind CSS v4](https://tailwindcss.com/)                               |
-| 组件库   | [Radix UI](https://www.radix-ui.com/)                                     |
-| 动画     | [Framer Motion](https://www.framer.com/motion/)                           |
-| 表单     | [React Hook Form](https://react-hook-form.com/) + [Zod](https://zod.dev/) |
-| 状态管理 | [Zustand](https://zustand.docs.pmnd.rs/)                                  |
-| 数据请求 | [SWR](https://swr.vercel.app/)                                            |
-| 国际化   | [next-intl](https://next-intl-docs.vercel.app/)                           |
-| 图标     | [Lucide React](https://lucide.dev/)                                       |
-| 图表     | [Recharts](https://recharts.org/)                                         |
-| 包管理器 | [pnpm](https://pnpm.io/)                                                  |
-| 代码规范 | [ESLint](https://eslint.org/) + [Prettier](https://prettier.io/)          |
+真实生成需要联网、有效的 Flaq AI Client Key 和足够额度。本项目不是离线模型运行器，也不是跨设备同步的云端资产管理系统。
 
 ## 快速开始
 
 ### 环境要求
 
-- **Node.js** >= 18.x（根据 `.nvmrc` 推荐版本）
-- **pnpm** >= 10.x（项目在 `package.json` 中已声明 `packageManager`）
-- 一个 [Flaq.ai](https://flaq.ai/) 账户及有效的 API 密钥
-- 一个 [Cloudflare](https://cloudflare.com) 账户（用于 R2 图片存储）
+- Node.js **22**，与 [.nvmrc](./.nvmrc) 一致。
+- pnpm **10.5.2**，与 [package.json](./package.json) 的 `packageManager` 一致。
+- 原生开发与打包需要 Rust 和目标操作系统对应的
+  [Tauri 环境依赖](https://v2.tauri.app/start/prerequisites/)。仅构建静态前端不需要 Rust。
+- 真实生成需要 Flaq AI 账号和 Client Key；默认桌面图床**不要求自行申请 Cloudflare 账号**。
 
-### 安装步骤
+在本仓库根目录执行：
 
 ```bash
-# 1. 克隆仓库
-git clone https://github.com/flaqai/flaq-saas-template.git
-cd flaq-saas-template
-
-# 2. 安装 pnpm（如未安装）
-npm install -g pnpm
-
-# 3. 安装依赖
-pnpm install
-
-# 4. 复制环境变量模板
-cp .env.example .env.local
+pnpm install --frozen-lockfile
+pnpm desktop:dev
 ```
 
-### 环境变量配置
+开发版使用独立应用标识 `ai.flaq.creator.dev`，安装版使用
+`ai.flaq.creator`。两者的配置、WebView 数据和默认作品目录互相隔离。
 
-编辑 `.env.local` 文件，配置以下变量：
+### 连接 Flaq AI
 
-```bash
-# 站点 URL（用于元数据、站点地图和 Open Graph）
-NEXT_PUBLIC_SITE_URL="http://localhost:3000"
+1. 登录 [Flaq AI](https://flaq.ai/zh/)，获取 Client Key。
+2. 按首次启动引导操作，或打开“设置 → 连接”。
+3. Base URL 默认使用 `https://api.flaq.ai`；也可以填写兼容且可信的网关。
+4. 填写 Client Key，测试连接并保存。
+5. 保留内置图床，或主动配置自己的 R2 预设。
+6. 选择工具与模型，填写提示词／参考素材后提交；在“设置 → 历史记录”管理结果，在“设置 → 通用”修改作品存储目录。
 
-# 页脚显示的联系邮箱
-NEXT_PUBLIC_CONTACT_US_EMAIL="contact@flaq.ai"
+> **密钥保存方式：**勾选“记住我”后，连接信息以可读 JSON 保存到当前用户应用配置目录下的
+> `auth.json`。它**不是系统钥匙串，也没有应用层加密**。Unix 下限制为当前用户访问；不勾选时，会话密钥不会写入该原生文件。共享设备不建议记住密钥；不要提交密钥、含敏感信息的日志或本地配置。
 
-# Cloudflare R2 存储配置（仅服务端）
-# 从 Cloudflare 控制台 > R2 > 管理 R2 API 令牌 获取
-R2_ACCOUNT_ID=你的_cloudflare_账户_id
-R2_ACCESS_KEY_ID=你的_r2_访问密钥_id
-R2_SECRET_ACCESS_KEY=你的_r2_秘密访问密钥
-R2_BUCKET_NAME=你的_r2_存储桶名称
-```
+### 上传与本地数据
 
-> **⚠️ 重要提示**：切勿将 `R2_SECRET_ACCESS_KEY` 暴露给客户端。R2 凭证仅在服务端使用。
+| 数据／流程     | 当前实现                                                                                                                     |
+| -------------- | ---------------------------------------------------------------------------------------------------------------------------- |
+| 桌面内置图床   | 使用 Client Key 向 Flaq 的 `/api/v1/files/presignedUrl` 请求短时签名链接，再直传素材；共享 R2 凭据保留在服务端，不打进安装包 |
+| 桌面自定义 R2  | 可选配置账号 ID、桶、Access Key、Secret Key 与素材公网域名；本机签名，预设使用 WebView 中的 AES-GCM 存储，不是系统凭据保险库 |
+| 输入草稿       | IndexedDB 保存素材字节和元数据；选中文件不会立即上传，提交生成时才上传                                                       |
+| 历史与素材目录 | Web Storage 保存本机任务记录和已上传素材索引；目录记录不代表素材所有权或云端删除权限                                         |
+| 生成文件       | 原生流式保存到配置目录，默认位于应用数据目录；归档失败不会把已完成生成改成失败                                               |
 
-### Cloudflare R2 存储配置
+自定义 R2 需要可公开访问素材的域名，而不是直接使用 S3
+API 端点。云端保留时间由 Flaq 服务策略或自己的桶生命周期决定，与本地归档相互独立。自定义预设的浏览器侧加密不能防御被攻陷的 WebView，或能够读取应用数据及代码的攻击者；仅使用可信的 API 网关和上传目标。
 
-本模板使用 Cloudflare R2 存储用户上传的图片和生成的资源。请按以下步骤操作：
+### 可选的 Web 模式
 
-1. **登录** [Cloudflare 控制台](https://dash.cloudflare.com/)
-2. **进入**侧边栏的 **R2** 页面
-3. **创建存储桶**（如 `flaq-ai-saas`）
-4. **生成 API 令牌**：
-   - 点击 **管理 R2 API 令牌**
-   - 创建新的 API 令牌，权限选择 **对象读取与写入**
-   - 安全保存 **访问密钥 ID** 和 **秘密访问密钥**
-5. **配置公共访问**：
-   - 在 R2 存储桶设置中，通过自定义域名或 `r2.dev` 子域名启用 **公共访问**
-   - 记录 **公共域名** URL（如 `https://your-bucket.your-account.r2.cloudflarestorage.com`）
-6. **在 `.env.local` 中设置环境变量**（见上文）
-7. **配置公共域名**：为 Web 部署配置公共资产域名。桌面端默认使用应用已配置的 Flaq R2；用户选择「自定义 Cloudflare
-   R2」后，可单独保存自己的凭证。两种模式都是先直传 R2，再将公开 URL 发给生成接口。
-
-### Flaq.ai API Key 配置
-
-1. **注册/登录** [flaq.ai](https://flaq.ai)
-2. **进入**您的账户控制台
-3. **在 API 密钥管理** 中生成一个 **Client Key**
-4. **复制**您的 Client Key
-5. **打开应用**，点击顶部导航栏的 **齿轮图标**（⚙️）打开 **Open API 设置** 对话框
-6. **粘贴**您的 Client Key，点击 **测试连接** 验证
-7. **保存**设置
-
-> **💡 提示**：启用「记住我」可跨会话安全持久化您的 API 密钥。密钥使用加密本地存储保存。在共享或公共设备上，请勿勾选此选项以确保安全。
-
-> **🔑 API 额度**：生成图片和视频需要足够的 API 额度。如需充值，请访问 [flaq.ai](https://flaq.ai)。
-
-## 使用方法
+项目保留运行 Next.js 服务端的 Web 模式：
 
 ```bash
-# 启动开发服务器（使用 Turbopack 加速热更新）
-pnpm dev:turbo
-
-# 或不使用 Turbopack
 pnpm dev
-
-# 生产环境构建
+# Web 生产模式
 pnpm build
-
-# 构建并分析打包体积
-pnpm build:analyze
-
-# 启动生产服务器
 pnpm start
-
-# 代码检查
-pnpm lint
-
-# 自动修复代码问题
-pnpm lint:fix
-
-# 代码格式化
-pnpm prettier
-
-# TypeScript 类型检查
-pnpm ts-check
 ```
 
-在浏览器中打开 [http://localhost:3000](http://localhost:3000)。
+浏览器访问 `http://localhost:3000`。如需配置 Web 环境，使用编辑器将 [.env.example](./.env.example) 复制为
+`.env.local`，按需填写：
 
-## AIGC 能力
+| 环境变量                                                                      | 用途                             |
+| ----------------------------------------------------------------------------- | -------------------------------- |
+| `NEXT_PUBLIC_SITE_URL`、`NEXT_PUBLIC_CONTACT_US_EMAIL`                        | 公开的站点地址与联系邮箱         |
+| `R2_ACCOUNT_ID`、`R2_ACCESS_KEY_ID`、`R2_SECRET_ACCESS_KEY`、`R2_BUCKET_NAME` | Web 上传签名接口使用的服务端凭据 |
 
-本模板内置五款全功能的 AI 生成工具，全部由 [Flaq.ai](https://flaq.ai) API 驱动：
+Web 上传使用
+`app/api/upload/presigned-url/route.ts`，并读取“图床”设置中的公网域名。桌面默认走 Flaq 签名服务，不需要本地 R2 环境变量，也没有本地 Next.js
+API 服务。不要给任何密钥添加 `NEXT_PUBLIC_` 前缀，也不要将密钥放进安装包。
 
-| 能力         | 描述                                                       | 支持的模型                                                                   |
-| ------------ | ---------------------------------------------------------- | ---------------------------------------------------------------------------- |
-| **文生图**   | 通过自然语言提示词生成图片                                 | Nano Banana Pro、Seedream 5.0、GPT Image 2、Qwen Image 2.0、Grok Imagine     |
-| **图生图**   | 利用 AI 转换或增强现有图片，保持风格和构图                 | Nano Banana Pro Edit、Seedream 5.0 Edit、GPT Image 2 Edit、Grok Imagine Edit |
-| **文生视频** | 从文本描述创建视频，支持高级运动合成                       | Veo 3.1、Wan 2.7、Kling 3.0、Seedance 2.0、Vidu Q3                           |
-| **图生视频** | 将静态图片动画化为动态视频                                 | Veo 3.1、Wan 2.7、Kling 3.0、Seedance 2.0、Vidu Q3                           |
-| **虚拟试衣** | AI 驱动的虚拟服装试穿 — 上传服装和模特照片即可查看试穿效果 | GPT Image 2 Edit、Nano Banana Pro Edit                                       |
+## 技术方案与代码结构
 
-每个工具包含：
+**Tauri 2 + Rust 承载 Next.js 静态导出的界面，安装包不内置 Node.js／Next.js 服务端。**
+桌面端与 Web 端共享 React 页面、表单、模型契约、翻译与设计资源。
 
-- 预配置的表单，支持模型选择和参数控制
-- 实时生成状态轮询
-- 结果画廊，支持下载和分享
-- 历史生成记录
+| 层次           | 技术与职责                                                                |
+| -------------- | ------------------------------------------------------------------------- |
+| 界面           | Next.js 16、React 19、TypeScript、Tailwind CSS 4、Radix UI、Framer Motion |
+| 表单与状态     | React Hook Form + Zod、Zustand，部分数据读取使用 SWR                      |
+| 功能／模型契约 | 7 个工具共用入口注册表；统一输入、限制和默认参数                          |
+| 服务层         | Flaq 请求适配、上传策略、集中轮询、生成与归档生命周期                     |
+| 平台适配       | 原生／Web HTTP、媒体导出与保存、系统浏览器外链；界面不直接调用原生命令    |
+| 原生层         | Tauri 2／Rust：配置、权限、窗口、日志、流式下载与原子保存                 |
+| 本地化         | next-intl、15 个已注册语种、阿拉伯语 RTL                                  |
+| 验证           | Node／tsx 回归测试、Rust 测试、Playwright 布局测试、ESLint 与 TypeScript  |
 
-## Flaq.ai 联盟计划
+```text
+app/[locale]/       多语言工具、素材库、首页与政策页面
+app/api/            仅 Web 使用的上传签名与图片代理
+components/         共用界面、桌面外壳、表单、弹窗与媒体／提示词查看器
+hooks/              界面集成与复用 Hook
+lib/features/       功能注册表
+lib/constants/template-models/  模型能力契约
+lib/desktop/        连接配置、草稿、素材目录与媒体设置
+lib/platform/       原生／Web 平台适配
+lib/recommended-prompts*        提示词定义与固定内容快照
+network/            API 客户端、上传策略、轮询、历史与生命周期
+store/              共享 Zustand 状态
+i18n/ + messages/   语种注册、路由与翻译文件
+src-tauri/          Rust 外壳、权限与打包配置
+scripts/            隔离构建、媒体准备、内容同步和发布工具
+tests/              契约、存储、恢复、构建／发布与界面回归测试
+public/             应用资源与内置提示词图片
+docs/               架构、扩展指南、Review 记录与 README 横幅
+```
 
-公开落地页和生成页面均包含本地化的
-[Flaq.ai 联盟计划](https://flaq.ai/zh/affiliate-program?utm_source=flaq-saas-template)
-推荐区块。按钮会根据当前语言打开 Flaq.ai 对应的联盟计划页面，并携带 `utm_source=flaq-saas-template` 用于来源归因。
+桌面构建在独立临时副本中排除 Web 专用路由，成功后才替换
+`out/`，不会搬移或删除源码路由。桌面 HTTP 请求、上传和下载使用原生适配层，不依赖浏览器 CORS。自定义 R2 的 AWS 签名模块、裁剪所需的本地 FFmpeg 资源按需加载；上传限制并发，共享媒体处理串行执行，任务轮询集中管理。
 
-根据 Flaq.ai 当前公布的规则，推荐用户的首笔有效付费订单可获得 20% 佣金，注册后 60 天内的后续有效付费订单可获得 10% 佣金。具体资格与结算规则以联盟计划页面发布的条款为准。
+扩展功能时，先补功能注册表和模型契约；API 逻辑放入 `network/`，复用
+`lib/platform/`，同步翻译与回归测试，避免在页面里重复实现上传、轮询或原生命令。详细文档：
+
+- [桌面架构与存储边界](./docs/DESKTOP_ARCHITECTURE.md)
+- [新增模块与本地 QA](./docs/ADDING_MODULES.md)
+- [领域术语](./CONTEXT.md)
+- [页面功能盘点](./docs/PRODUCT_INVENTORY.md)与 [Review 报告](./docs/REVIEW_REPORT.md)
+  （阶段性记录，不代表当前版本已完成全部发布验证）
+
+## 构建与测试
+
+| 命令                                              | 用途                                                          |
+| ------------------------------------------------- | ------------------------------------------------------------- |
+| `pnpm desktop:dev`                                | 准备媒体资源，启动开发界面与原生应用                          |
+| `pnpm build:desktop`                              | 生成全部已注册语种的桌面静态前端到 `out/`                     |
+| `pnpm desktop:build`                              | 构建前端与当前系统的原生安装包                                |
+| `pnpm check`                                      | TypeScript + Node 回归测试 + ESLint                           |
+| `pnpm test:ui-layout`                             | Playwright 布局测试，需要已安装 Google Chrome，使用 3000 端口 |
+| `cargo test --manifest-path src-tauri/Cargo.toml` | Rust 原生测试，需要目标平台构建依赖                           |
+| `pnpm prompts:sync`                               | 维护命令：联网刷新提示词快照及素材                            |
+
+无费用模拟生成：先运行 `pnpm build:desktop`，再运行 `node scripts/desktop-preview.mjs`。打开
+`http://127.0.0.1:4173/zh/`，将 Base URL 设置为 `http://127.0.0.1:4173`，Client Key 设置为
+`test-only-key`，不要勾选记住。该预览使用模拟 API，不能验证真实 Flaq 生成、R2 上传或原生行为；不要填入真实密钥。
+
+### 打包支持范围
+
+当前仓库中的[发布流程](./.github/workflows/desktop-build.yml)定义如下目标：
+
+| 平台                | 产物                               |
+| ------------------- | ---------------------------------- |
+| macOS Apple Silicon | `.dmg` 与包含 `.app` 的 ZIP        |
+| macOS Intel         | `.dmg` 与包含 `.app` 的 ZIP        |
+| Windows x64         | NSIS `.exe` 安装包，不包含 MSI     |
+| Linux               | 可从源码构建；尚未纳入当前发布矩阵 |
+
+手动触发只生成候选包；匹配版本的 `desktop-v<version>` 标签触发正式发布流程。发布汇总产物包括 `SHA256SUMS` 和
+`release-manifest.json`。当前流程构建未签名安装包；公开分发仍需平台签名／公证及原生启动验证。“已配置工作流”不等于“所有平台都已构建和测试通过”。
 
 ## 国际化 (i18n)
 
-本模板默认支持
-**15 种语言**：英文、日语、印度尼西亚语、意大利语、巴西葡萄牙语、西班牙语、德语、俄语、法语、简体中文、繁体中文、韩语、泰语、越南语和阿拉伯语。
+语种注册表与 README 翻译包含：
+`en`、`ja`、`id`、`it`、`pt`、`es`、`de`、`ru`、`fr`、`zh`、`tw`、`ko`、`th`、`vi`、`ar`。
 
-- 翻译文件位于 `messages/` 目录，每种语言对应一个 JSON 文件
-- 语言会根据浏览器的 `Accept-Language` 请求头自动检测
-- 用户可通过页脚或语言对话框手动切换语言
-- URL 结构：`/` 为英文，其他语言使用 `/{locale}/`（例如 `/ja/` 或 `/zh/`）
-- 阿拉伯语页面会自动使用从右到左的文档方向
+- 桌面路由始终包含语言前缀，包括 `/en/`；启动时优先使用已保存语言，其次系统语言，最后英语。繁体中文系统变体映射到 `tw`。
+- Web 英语使用 `/`，其他语言使用前缀；阿拉伯语设置 RTL 文档方向。
+- **当前限制：**部分新增设置、素材目录与提示词素材库文案直接使用中英文。 `zh`／`tw`
+  共用中文文案，其他语言在这些面板中回退到英文；注册了 15 个语种不代表每条新界面文案都已翻译完成。
+- 新增语种需同步 [i18n/languages.ts](./i18n/languages.ts)、`messages/`、路由与构建的语种处理、对应 README 和一致性测试。
 
-如需添加更多语言：
+## Flaq AI 联盟计划
 
-1. 在 `i18n/languages.ts` 中添加语言配置
-2. 在 `messages/` 目录中创建新的翻译文件
-3. 在布局文件中添加新语言的相关元数据
+加入 Flaq
+AI 联盟合作伙伴计划，向受众介绍 AI 图片与视频工作流、模型 API 和创作工具，获得推荐佣金。计划欢迎创作者、设计师、开发者、AI 教育者、模型评测者及分享实用 AI 工作流的团队参与。
 
-## SEO 与 AI 爬虫发现
+- **推荐奖励**
+  — 推荐用户的首笔有效付费订单可获得 20% 佣金，注册后 60 天内的后续有效付费订单可获得 10% 佣金，具体以资格与归因规则为准。
+- **灵活推广** — 在教程、模型评测、创作案例、社区或 API 接入指南中分享专属推荐链接。
+- **合作伙伴工作台** — 在 Flaq AI 管理推荐链接、查看推荐活动并配置收款信息。
 
-每个公开页面都包含本地化标题和描述、绝对 canonical URL、15 种语言的 `hreflang`、Open Graph、Twitter
-Card 以及 index/follow 指令。生成的 `/sitemap.xml` 会列出所有公开页面的全部语言版本，并声明对应的语言替代关系。
+登录 Flaq
+AI，完善联盟资料并确认协议后，即可创建专属推荐链接。本项目也提供本地化的联盟推广入口；合作伙伴申请和佣金管理在 Flaq
+AI 网站完成，而非桌面应用内。
 
-- `/robots.txt` 允许搜索引擎和 AI 助手抓取公开内容，同时屏蔽 API、回调和错误页面
-- `/llms.txt` 以精简结构介绍产品、页面、语言、文档和政策入口
-- `/llms-full.txt` 提供项目能力、安装方式、技术架构和免费使用边界等完整上下文
-- JSON-LD 描述网站及 MIT 授权的开源代码仓库，不再使用无法验证的评分数据
+**[加入 Flaq AI 联盟合作伙伴计划 →](https://flaq.ai/zh/affiliate-program/)**
 
-部署前请将 `NEXT_PUBLIC_SITE_URL` 设置为生产环境域名，确保 canonical、sitemap 和 LLM 资源链接指向正确站点。
-
-## 项目结构
-
-```
-.
-├── app/                     # Next.js App Router 页面
-│   ├── [locale]/           # 国际化路由（支持 15 种语言）
-│   │   ├── (with-footer)/  # 带页脚的页面布局
-│   │   │   ├── (home)/     # 首页
-│   │   │   └── (ai-features)/ # AIGC 功能页面
-│   │   └── (without-footer)/ # 全屏页面（如功能页）
-│   ├── api/                # API 路由（图片代理、上传）
-│   ├── robots.ts           # Robots.txt 生成
-│   ├── sitemap.ts          # 动态站点地图生成
-│   ├── llms.txt/           # 精简的 AI 可读站点导航
-│   └── llms-full.txt/      # 完整的 AI 可读项目上下文
-├── components/             # 可复用 React 组件
-│   ├── ui/                 # shadcn/ui 风格组件（基于 Radix）
-│   ├── dialog/             # 对话框组件（API 设置等）
-│   ├── layout/             # 布局组件（页头、页脚、侧栏）
-│   └── ...                 # 功能特定组件
-├── hooks/                  # 自定义 React Hooks
-├── i18n/                   # 国际化配置
-│   ├── languages.ts        # 支持的语言定义
-│   ├── request.ts          # next-intl 请求配置
-│   └── routing.ts          # 语言路由配置
-├── lib/                    # 工具库
-│   ├── seo/                # 元数据、llms.txt 与爬虫辅助工具
-│   ├── constants/          # 应用常量、模型配置、导航
-│   ├── utils/              # 工具函数
-│   └── env.ts              # 环境变量辅助函数
-├── messages/               # 每种支持语言对应一个翻译文件
-├── network/                # API 客户端和网络工具
-│   ├── clientFetch.ts      # Flaq.ai API 客户端（含认证）
-│   ├── image/              # 图片生成 API 调用
-│   ├── video/              # 视频生成 API 调用
-│   └── upload/             # R2 上传客户端
-├── public/                 # 静态资源（图片、图标、字体）
-├── store/                  # Zustand 状态管理
-├── next.config.mjs         # Next.js 配置
-├── proxy.ts                # 中间件代理（i18n + IP 转发）
-└── tsconfig.json           # TypeScript 配置
-```
-
-## 部署
-
-推荐通过 [Vercel](https://vercel.com) 一键部署：
-
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/your-username/flaq-saas-template)
-
-1. 将仓库推送到 GitHub
-2. 在 Vercel 中导入项目
-3. 在 Vercel 项目设置中添加所有环境变量（`R2_*`、`NEXT_PUBLIC_*`）
-4. 部署！
-
-> 本模板也支持任何兼容 Next.js 的平台（Netlify、Cloudflare Pages、Docker 等）。
+> 佣金资格、归因、退款、结算审核及经批准的定制合作安排，均以官方计划页面的最新条款为准。
 
 ## 许可证
 
