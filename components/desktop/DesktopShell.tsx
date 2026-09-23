@@ -2,7 +2,7 @@
 
 import { useEffect, useState, type ReactNode } from 'react';
 import dynamic from 'next/dynamic';
-import { Link, usePathname } from '@/i18n/navigation';
+import { Link, usePathname, useRouter } from '@/i18n/navigation';
 import { OPEN_API_CONFIG_CHANGED_EVENT } from '@/network/clientFetch';
 import { isApiConnectionAuthorized } from '@/network/connection-status';
 import packageInfo from '@/package.json';
@@ -35,6 +35,7 @@ import { toast } from 'sonner';
 
 import { openDesktopLogDirectory, writeDesktopLog } from '@/lib/desktop/logging';
 import { mediaDirectoryPreferences, type MediaStorageSettings } from '@/lib/desktop/media-storage';
+import { desktopMenuRoute } from '@/lib/desktop/menu';
 import { DEFAULT_PREFERENCES, parsePreferences, PREFERENCES_KEY, type AppPreferences } from '@/lib/desktop/preferences';
 import { isNativeDesktop, OPEN_DESKTOP_SETTINGS_EVENT } from '@/lib/desktop/runtime';
 import { FEATURE_MODULES } from '@/lib/features/catalog';
@@ -77,6 +78,7 @@ export default function DesktopShell({ children }: { children: ReactNode }) {
   const zh = locale === 'zh' || locale === 'tw';
   const t = useTranslations('Navigation');
   const pathname = usePathname();
+  const router = useRouter();
   const [preferences, setPreferences] = useState<AppPreferences>(DEFAULT_PREFERENCES);
   const [loaded, setLoaded] = useState(false);
   const [mediaSettings, setMediaSettings] = useState<MediaStorageSettings | null>(null);
@@ -141,21 +143,7 @@ export default function DesktopShell({ children }: { children: ReactNode }) {
     };
     window.addEventListener('error', reportWindowError);
     window.addEventListener('unhandledrejection', reportUnhandledRejection);
-    let disposed = false;
-    let unlisten: (() => void) | undefined;
-    if (isNativeDesktop())
-      void import('@tauri-apps/api/event')
-        .then(async ({ listen }) => {
-          const stop = await listen<string>('desktop-menu', ({ payload }) =>
-            showSettings(payload === 'about' ? 'about' : 'general'),
-          );
-          if (disposed) stop();
-          else unlisten = stop;
-        })
-        .catch(() => toast.error('Native menu connection failed'));
     return () => {
-      disposed = true;
-      unlisten?.();
       window.removeEventListener(OPEN_DESKTOP_SETTINGS_EVENT, connection);
       window.removeEventListener(OPEN_API_CONFIG_CHANGED_EVENT, refreshConnection);
       window.removeEventListener('keydown', key);
@@ -163,6 +151,63 @@ export default function DesktopShell({ children }: { children: ReactNode }) {
       window.removeEventListener('unhandledrejection', reportUnhandledRejection);
     };
   }, [desktop, zh]);
+
+  useEffect(() => {
+    if (!desktop || !isNativeDesktop() || !('__TAURI_INTERNALS__' in window)) return;
+    let disposed = false;
+    let unlisten: (() => void) | undefined;
+    void import('@tauri-apps/api/event')
+      .then(async ({ listen }) => {
+        const stop = await listen<string>('desktop-menu', ({ payload }) => {
+          const route = desktopMenuRoute(payload);
+          if (route) {
+            setOpen(false);
+            router.push(route);
+            return;
+          }
+          if (payload === 'toggle_sidebar') {
+            try {
+              const current = parsePreferences(localStorage.getItem(PREFERENCES_KEY));
+              const next = { ...current, collapsed: !current.collapsed };
+              localStorage.setItem(PREFERENCES_KEY, JSON.stringify(next));
+              setPreferences(next);
+            } catch {
+              toast.error(zh ? '设置保存失败，请检查本地存储' : 'Could not save preferences');
+            }
+            return;
+          }
+          if (payload === 'help') {
+            const docsUrl = `https://flaq.ai/${locale}/docs/`;
+            void openExternalUrl(docsUrl).catch((error) => toast.error(String(error)));
+            return;
+          }
+          const section = {
+            about: 'about',
+            appearance: 'appearance',
+            connection: 'connection',
+            settings: 'general',
+          }[payload] as Section | undefined;
+          if (section) {
+            setSection(section);
+            setOpen(true);
+          }
+        });
+        if (disposed) stop();
+        else unlisten = stop;
+      })
+      .catch(() => toast.error(zh ? '无法连接系统菜单' : 'Native menu connection failed'));
+    return () => {
+      disposed = true;
+      unlisten?.();
+    };
+  }, [desktop, locale, router, zh]);
+
+  useEffect(() => {
+    if (!desktop || !isNativeDesktop() || !('__TAURI_INTERNALS__' in window)) return;
+    void import('@tauri-apps/api/core')
+      .then(({ invoke }) => invoke('set_desktop_menu_locale', { locale }))
+      .catch((error) => toast.error(error instanceof Error ? error.message : String(error)));
+  }, [desktop, locale]);
 
   useEffect(() => {
     if (!desktop || !loaded) return;
