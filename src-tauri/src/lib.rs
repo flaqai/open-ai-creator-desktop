@@ -45,7 +45,8 @@ pub fn run() {
             media::open_media_storage_directory,
             media::archive_generated_media,
             logs::write_desktop_log,
-            logs::open_log_directory
+            logs::open_log_directory,
+            desktop::set_desktop_menu_locale
         ])
         .build(tauri::generate_context!())
         .expect("error while building Flaq Creator")

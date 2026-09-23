@@ -1,8 +1,11 @@
 use serde::{Deserialize, Serialize};
+#[cfg(target_os = "macos")]
+use tauri::menu::Menu;
 use tauri::{
     menu::{MenuBuilder, MenuItem, SubmenuBuilder},
     Emitter, LogicalSize, Manager, PhysicalPosition,
 };
+#[cfg(not(target_os = "macos"))]
 use tauri_plugin_opener::OpenerExt;
 
 #[derive(Serialize, Deserialize)]
@@ -14,13 +17,50 @@ pub struct Geometry {
     height: f64,
 }
 
-pub fn setup(app: &mut tauri::App) -> Result<(), Box<dyn std::error::Error>> {
-    let settings = MenuItem::with_id(app, "settings", "Settings…", true, Some("CmdOrCtrl+,"))?;
-    let quit = MenuItem::with_id(app, "quit", "Quit Flaq Creator", true, Some("CmdOrCtrl+Q"))?;
+#[cfg(target_os = "macos")]
+fn macos_menu(app: &tauri::AppHandle, zh: bool) -> tauri::Result<Menu<tauri::Wry>> {
+    let label = |english, chinese| if zh { chinese } else { english };
+    let settings = MenuItem::with_id(
+        app,
+        "settings",
+        label("Settings…", "设置…"),
+        true,
+        Some("CmdOrCtrl+,"),
+    )?;
+    let workspace = MenuItem::with_id(
+        app,
+        "nav_workspace",
+        label("Workspace", "工作台"),
+        true,
+        Some("CmdOrCtrl+1"),
+    )?;
+    let create = MenuItem::with_id(
+        app,
+        "nav_ai_create",
+        label("AI Creation", "AI 创作"),
+        true,
+        Some("CmdOrCtrl+2"),
+    )?;
+    let library = MenuItem::with_id(
+        app,
+        "nav_library",
+        label("Media Library", "素材库"),
+        true,
+        Some("CmdOrCtrl+3"),
+    )?;
+    let quit = MenuItem::with_id(
+        app,
+        "quit",
+        label("Quit Flaq Creator", "退出 Flaq Creator"),
+        true,
+        Some("CmdOrCtrl+Q"),
+    )?;
     let application = SubmenuBuilder::new(app, "Flaq Creator")
-        .text("about", "About Flaq Creator")
+        .text("about", label("About Flaq Creator", "关于 Flaq Creator"))
         .separator()
         .item(&settings)
+        .text("appearance", label("Appearance…", "外观…"))
+        .text("connection", label("Connect Flaq…", "连接 Flaq…"))
         .separator()
         .hide()
         .hide_others()
@@ -28,7 +68,15 @@ pub fn setup(app: &mut tauri::App) -> Result<(), Box<dyn std::error::Error>> {
         .separator()
         .item(&quit)
         .build()?;
-    let edit = SubmenuBuilder::new(app, "Edit")
+    let file = SubmenuBuilder::new(app, label("File", "文件"))
+        .item(&library)
+        .separator()
+        .text(
+            "open_media_folder",
+            label("Open Media Folder", "打开作品文件夹"),
+        )
+        .build()?;
+    let edit = SubmenuBuilder::new(app, label("Edit", "编辑"))
         .undo()
         .redo()
         .separator()
@@ -37,26 +85,126 @@ pub fn setup(app: &mut tauri::App) -> Result<(), Box<dyn std::error::Error>> {
         .paste()
         .select_all()
         .build()?;
-    let window = SubmenuBuilder::new(app, "Window")
+    let view = SubmenuBuilder::new(app, label("View", "视图"))
+        .item(&workspace)
+        .item(&create)
+        .separator()
+        .text("nav_text_to_image", label("Text to Image", "文本转图像"))
+        .text("nav_image_to_image", label("Image to Image", "图像转图像"))
+        .text("nav_virtual_try_on", label("Virtual Try-On", "虚拟试穿"))
+        .separator()
+        .text("nav_text_to_video", label("Text to Video", "文本转视频"))
+        .text("nav_image_to_video", label("Image to Video", "图片转视频"))
+        .text(
+            "nav_reference_to_video",
+            label("Reference to Video", "参考素材转视频"),
+        )
+        .separator()
+        .text("toggle_sidebar", label("Toggle Sidebar", "切换侧栏"))
+        .build()?;
+    let window = SubmenuBuilder::new(app, label("Window", "窗口"))
         .minimize()
         .maximize()
         .fullscreen()
         .separator()
         .close_window()
         .build()?;
-    let help = SubmenuBuilder::new(app, "Help")
-        .text("help", "Flaq Creator Help")
+    let help = SubmenuBuilder::new(app, label("Help", "帮助"))
+        .text("help", label("Help Center", "帮助中心"))
+        .separator()
+        .text("open_logs", label("Open Log Folder", "打开日志文件夹"))
         .build()?;
-    app.set_menu(
-        MenuBuilder::new(app)
-            .items(&[&application, &edit, &window, &help])
-            .build()?,
-    )?;
+
+    MenuBuilder::new(app)
+        .items(&[&application, &file, &edit, &view, &window, &help])
+        .build()
+}
+
+#[tauri::command]
+pub fn set_desktop_menu_locale(app: tauri::AppHandle, locale: String) -> Result<(), String> {
+    #[cfg(target_os = "macos")]
+    {
+        let menu = macos_menu(&app, matches!(locale.as_str(), "zh" | "tw"))
+            .map_err(|error| error.to_string())?;
+        app.set_menu(menu).map_err(|error| error.to_string())?;
+    }
+    #[cfg(not(target_os = "macos"))]
+    let _ = (app, locale);
+    Ok(())
+}
+
+pub fn setup(app: &mut tauri::App) -> Result<(), Box<dyn std::error::Error>> {
+    #[cfg(target_os = "macos")]
+    app.set_menu(macos_menu(app.handle(), false)?)?;
+
+    #[cfg(not(target_os = "macos"))]
+    {
+        let settings = MenuItem::with_id(app, "settings", "Settings…", true, Some("CmdOrCtrl+,"))?;
+        let quit = MenuItem::with_id(app, "quit", "Quit Flaq Creator", true, Some("CmdOrCtrl+Q"))?;
+        let application = SubmenuBuilder::new(app, "Flaq Creator")
+            .text("about", "About Flaq Creator")
+            .separator()
+            .item(&settings)
+            .separator()
+            .hide()
+            .hide_others()
+            .show_all()
+            .separator()
+            .item(&quit)
+            .build()?;
+        let edit = SubmenuBuilder::new(app, "Edit")
+            .undo()
+            .redo()
+            .separator()
+            .cut()
+            .copy()
+            .paste()
+            .select_all()
+            .build()?;
+        let window = SubmenuBuilder::new(app, "Window")
+            .minimize()
+            .maximize()
+            .fullscreen()
+            .separator()
+            .close_window()
+            .build()?;
+        let help = SubmenuBuilder::new(app, "Help")
+            .text("help", "Flaq Creator Help")
+            .build()?;
+        app.set_menu(
+            MenuBuilder::new(app)
+                .items(&[&application, &edit, &window, &help])
+                .build()?,
+        )?;
+    }
     app.on_menu_event(|app, event| match event.id().as_ref() {
-        "settings" | "about" => {
+        "settings"
+        | "about"
+        | "appearance"
+        | "connection"
+        | "nav_workspace"
+        | "nav_ai_create"
+        | "nav_library"
+        | "nav_text_to_image"
+        | "nav_image_to_image"
+        | "nav_virtual_try_on"
+        | "nav_text_to_video"
+        | "nav_image_to_video"
+        | "nav_reference_to_video"
+        | "toggle_sidebar" => {
             focus_main_window(app);
             if let Some(window) = app.get_webview_window("main") {
                 let _ = window.emit("desktop-menu", event.id().as_ref());
+            }
+        }
+        "open_media_folder" => {
+            if let Err(error) = crate::media::open_media_storage_directory(app.clone()) {
+                eprintln!("Could not open media folder: {error}");
+            }
+        }
+        "open_logs" => {
+            if let Err(error) = crate::logs::open_log_directory(app.clone()) {
+                eprintln!("Could not open log folder: {error}");
             }
         }
         "quit" => {
@@ -64,6 +212,14 @@ pub fn setup(app: &mut tauri::App) -> Result<(), Box<dyn std::error::Error>> {
             app.exit(0);
         }
         "help" => {
+            #[cfg(target_os = "macos")]
+            {
+                focus_main_window(app);
+                if let Some(window) = app.get_webview_window("main") {
+                    let _ = window.emit("desktop-menu", "help");
+                }
+            }
+            #[cfg(not(target_os = "macos"))]
             let _ = app.opener().open_url("https://flaq.ai/docs", None::<&str>);
         }
         _ => {}
