@@ -3640,7 +3640,7 @@ function InfiniteCanvasPage({
               ),
               count: '1',
             };
-      if (hasUnavailableMusicInput(nodeId, nodesRef.current, connectionsRef.current)) {
+      if (hasUnavailableMusicInput(sourceNode.id, nodesRef.current, connectionsRef.current)) {
         message.error(t('music.selectAvailableResult'));
         return;
       }
