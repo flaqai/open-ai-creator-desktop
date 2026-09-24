@@ -82,7 +82,7 @@ Flaq SaaS Template is an MIT-licensed, free and open-source starter for develope
 
 ### Application behavior
 
-Generation forms expose only the inputs and settings supported by the selected model. Tasks are submitted through the Flaq API, polled for status, and displayed in local image or video history. Local uploads can be stored in Cloudflare R2 when server-side R2 credentials and a public asset domain are configured. The Flaq Client Key can be stored in encrypted browser storage when the user enables persistence.
+Generation forms expose only the inputs and settings supported by the selected model. Tasks are submitted through the Flaq API, polled for status, and displayed in local image or video history. Local uploads can be stored in Cloudflare R2 when server-side R2 credentials and a public asset domain are configured. The Flaq Client Key can be stored locally when the user enables persistence.
 
 ### Free and open-source scope
 

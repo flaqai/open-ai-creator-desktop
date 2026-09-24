@@ -43,7 +43,7 @@ const defaultDependencies: UploadPolicyDependencies = {
 export function createUploadAuthorizer(overrides: Partial<UploadPolicyDependencies> = {}) {
   const dependencies = { ...defaultDependencies, ...overrides };
   return async (mimeTypes: string[], isForever = false) => {
-    if (typeof window === 'undefined') throw new Error('Media uploads can only be authorized from the browser.');
+    if (typeof window === 'undefined') throw new Error('Media uploads can only be authorized in the client app.');
     if (!dependencies.desktop()) return dependencies.web(mimeTypes);
     if (dependencies.provider() === 'custom-r2') {
       return dependencies.directR2(mimeTypes, await dependencies.customConfig());
