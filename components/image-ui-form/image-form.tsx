@@ -327,7 +327,7 @@ export default function ImageForm({
               </div>
             )}
 
-            <div className='custom-scrollbar flex flex-1 flex-col gap-3 overflow-y-auto pb-20'>
+            <div className='desktop-inner-scrollbar custom-scrollbar flex flex-1 flex-col gap-3 overflow-y-auto pb-20'>
               {/* Custom slot before default fields */}
               {slotNode}
               {slotNodeFunc?.(form)}

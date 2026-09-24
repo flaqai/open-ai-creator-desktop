@@ -1,5 +1,8 @@
 'use client';
 
+import { contextActions } from '@/lib/desktop/context-actions';
+import { mediaContextActions } from '@/lib/desktop/media-context-actions';
+
 import { useDeferredValue, useMemo, useState } from 'react';
 import dynamic from 'next/dynamic';
 import {
@@ -13,19 +16,31 @@ import {
   Play,
   Search,
   Sparkles,
+  Trash2,
   Upload,
   Video,
   X,
 } from 'lucide-react';
 import { useLocale } from 'next-intl';
+import { toast } from 'sonner';
 
 import { beginHistoryImageDrag, endHistoryImageDrag } from '@/lib/desktop/image-history-drag';
-import type { MediaLibraryItem } from '@/lib/desktop/media-library';
+import { removeMediaCatalogItem, type MediaLibraryItem } from '@/lib/desktop/media-library';
 import { cn } from '@/lib/utils';
 import useMediaCatalog from '@/hooks/use-media-library';
+import {
+  AlertDialog,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from '@/components/ui/alert-dialog';
 import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogPortal } from '@/components/ui/dialog';
 import { Input } from '@/components/ui/input';
+import useVideoHistoryCover from '@/components/unified-generator/useVideoHistoryCover';
 
 const ImageDetailModal = dynamic(() => import('@/components/dialog/ImageDetailModal'), { ssr: false });
 
@@ -51,6 +66,12 @@ function MediaTypeIcon({ kind }: { kind: MediaLibraryItem['kind'] }) {
 }
 
 function AssetPreview({ item, name }: { item: MediaLibraryItem; name: string }) {
+  const generatedVideo = item.kind === 'video' && item.origin === 'generated';
+  const { coverUrl } = useVideoHistoryCover(
+    generatedVideo ? item.historyId || '' : '',
+    generatedVideo ? item.url : '',
+    generatedVideo ? item.localPath : undefined,
+  );
   if (item.kind === 'image') {
     return <img src={item.previewUrl || item.url} alt={name} className='size-full object-cover' loading='lazy' />;
   }
@@ -59,7 +80,7 @@ function AssetPreview({ item, name }: { item: MediaLibraryItem; name: string }) 
       <>
         <video
           src={item.url}
-          poster={item.previewUrl === item.url ? undefined : item.previewUrl}
+          poster={generatedVideo ? coverUrl : item.previewUrl === item.url ? undefined : item.previewUrl}
           className='size-full bg-black object-cover'
           muted
           preload='metadata'
@@ -83,7 +104,23 @@ function AssetPreview({ item, name }: { item: MediaLibraryItem; name: string }) 
   );
 }
 
-function MediaPreviewDialog({ item, onClose, zh }: { item: MediaLibraryItem; onClose: () => void; zh: boolean }) {
+function MediaPreviewDialog({
+  item,
+  onClose,
+  onDelete,
+  zh,
+}: {
+  item: MediaLibraryItem;
+  onClose: () => void;
+  onDelete: () => void;
+  zh: boolean;
+}) {
+  const generatedVideo = item.kind === 'video' && item.origin === 'generated';
+  const { coverUrl } = useVideoHistoryCover(
+    generatedVideo ? item.historyId || '' : '',
+    generatedVideo ? item.url : '',
+    generatedVideo ? item.localPath : undefined,
+  );
   const download = async () => {
     const { downloadFile } = await import('@/lib/utils/fileUtils');
     await downloadFile(item.url, item.name || `flaq-${item.kind}`);
@@ -95,6 +132,7 @@ function MediaPreviewDialog({ item, onClose, zh }: { item: MediaLibraryItem; onC
         <DialogContent
           showCloseButton={false}
           hiddenTitle={item.name}
+          aria-describedby={undefined}
           overlayClassName='bg-black/80'
           className='bg-card text-foreground flex max-h-[calc(100vh-32px)] w-[calc(100vw-32px)] max-w-5xl flex-col overflow-hidden rounded-3xl border p-0 shadow-2xl sm:max-w-5xl'
         >
@@ -122,7 +160,7 @@ function MediaPreviewDialog({ item, onClose, zh }: { item: MediaLibraryItem; onC
             ) : item.kind === 'video' ? (
               <video
                 src={item.url}
-                poster={item.previewUrl}
+                poster={generatedVideo ? coverUrl : item.previewUrl}
                 controls
                 autoPlay
                 className='max-h-[68vh] max-w-full rounded-xl bg-black object-contain'
@@ -161,6 +199,15 @@ function MediaPreviewDialog({ item, onClose, zh }: { item: MediaLibraryItem; onC
                   .join(' · ')}
               </p>
             </div>
+            <Button
+              type='button'
+              variant='outline'
+              onClick={onDelete}
+              className='text-destructive hover:text-destructive'
+            >
+              <Trash2 aria-hidden='true' className='size-4' />
+              {zh ? '移除记录' : 'Remove record'}
+            </Button>
             <Button type='button' onClick={() => void download()}>
               {zh ? '下载素材' : 'Download'}
             </Button>
@@ -179,7 +226,24 @@ export default function MediaLibrary({ embedded = false }: { embedded?: boolean 
   const [origin, setOrigin] = useState<OriginFilter>('all');
   const [query, setQuery] = useState('');
   const [selected, setSelected] = useState<MediaLibraryItem | null>(null);
+  const [deleteTarget, setDeleteTarget] = useState<MediaLibraryItem | null>(null);
+  const [isDeleting, setIsDeleting] = useState(false);
   const deferredQuery = useDeferredValue(query.trim().toLocaleLowerCase());
+
+  const confirmDelete = () => {
+    if (!deleteTarget || isDeleting) return;
+    setIsDeleting(true);
+    try {
+      removeMediaCatalogItem(deleteTarget);
+      setSelected(null);
+      setDeleteTarget(null);
+      toast.success(zh ? '已从本机历史记录移除' : 'Removed from this device’s history');
+    } catch {
+      toast.error(zh ? '移除失败，请重试' : 'Could not remove the record. Please try again.');
+    } finally {
+      setIsDeleting(false);
+    }
+  };
 
   const visibleItems = useMemo(
     () =>
@@ -336,6 +400,7 @@ export default function MediaLibrary({ embedded = false }: { embedded?: boolean 
                     }}
                     onDragEnd={endHistoryImageDrag}
                     onClick={() => setSelected(item)}
+                    onContextMenu={contextActions(() => mediaContextActions(item, zh, { view: () => setSelected(item), remove: () => setDeleteTarget(item) }))}
                     className='group border-border bg-card focus-visible:ring-primary hover:border-primary/35 overflow-hidden rounded-2xl border text-left shadow-sm transition-[transform,box-shadow,border-color] hover:-translate-y-0.5 hover:shadow-lg focus-visible:ring-2 focus-visible:outline-none'
                     style={{ contentVisibility: 'auto', containIntrinsicSize: '280px' }}
                   >
@@ -393,6 +458,7 @@ export default function MediaLibrary({ embedded = false }: { embedded?: boolean 
           open
           onOpenChange={(open) => !open && setSelected(null)}
           onDelete={() => setSelected(null)}
+          onDeleteRequest={() => removeMediaCatalogItem(selected)}
           image={{
             id: selected.historyId || selected.id,
             url: selected.url,
@@ -404,8 +470,32 @@ export default function MediaLibrary({ embedded = false }: { embedded?: boolean 
           }}
         />
       ) : selected ? (
-        <MediaPreviewDialog item={selected} onClose={() => setSelected(null)} zh={zh} />
+        <MediaPreviewDialog
+          item={selected}
+          onClose={() => setSelected(null)}
+          onDelete={() => setDeleteTarget(selected)}
+          zh={zh}
+        />
       ) : null}
+
+      <AlertDialog open={Boolean(deleteTarget)} onOpenChange={(open) => !open && setDeleteTarget(null)}>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>{zh ? '移除这条历史记录？' : 'Remove this history record?'}</AlertDialogTitle>
+            <AlertDialogDescription>
+              {zh
+                ? '它将不再出现在本机历史记录中。云端对象和已归档的本地文件不会被删除。'
+                : 'It will disappear from this device’s history. The remote object and any local archive will remain untouched.'}
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel disabled={isDeleting}>{zh ? '取消' : 'Cancel'}</AlertDialogCancel>
+            <Button type='button' variant='destructive' disabled={isDeleting} onClick={confirmDelete}>
+              {zh ? '移除记录' : 'Remove record'}
+            </Button>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
     </div>
   );
 }

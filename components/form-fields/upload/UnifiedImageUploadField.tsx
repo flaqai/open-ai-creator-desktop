@@ -5,10 +5,12 @@ import useImageHistory from '@/network/image/history';
 import useImageFormStore from '@/store/form/useImageFormStore';
 import { Plus, Trash2, Upload } from 'lucide-react';
 import { nanoid } from 'nanoid';
-import { useTranslations } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 import { useDropzone } from 'react-dropzone';
 import { useFormContext } from 'react-hook-form';
 import { toast } from 'sonner';
+import { Eye, FolderOpen, History, Trash2 as TrashIcon } from 'lucide-react';
+import { contextActions } from '@/lib/desktop/context-actions';
 
 import type { UnifiedGeneratorReferenceMediaAsset } from '@/lib/constants/unified-generator/types';
 import { cn } from '@/lib/utils';
@@ -80,6 +82,8 @@ const UnifiedImageUploadField = forwardRef<UnifiedImageUploadFieldRef, UnifiedIm
     ref,
   ) => {
     const t = useTranslations(translationNamespace);
+    const locale = useLocale();
+    const zh = locale === 'zh' || locale === 'tw';
     const tCommon = useTranslations('Common');
     const methods = useFormContext<{ [key: string]: (File | string)[] | File | string | null }>();
 
@@ -89,6 +93,9 @@ const UnifiedImageUploadField = forwardRef<UnifiedImageUploadFieldRef, UnifiedIm
 
     const [images, setImages] = useState<ImageItem[]>([]);
     const [pickerOpen, setPickerOpen] = useState(false);
+    const [replaceIndex, setReplaceIndex] = useState<number | null>(null);
+    const [replaceFromHistory, setReplaceFromHistory] = useState(false);
+    const [historyRequest, setHistoryRequest] = useState(0);
     const imageHistory = useImageHistory(1, Number.MAX_SAFE_INTEGER);
     const historyAssets = useMemo(
       () =>
@@ -143,7 +150,7 @@ const UnifiedImageUploadField = forwardRef<UnifiedImageUploadFieldRef, UnifiedIm
 
     const addImages = async (files: File[]) => {
       // Single image mode: allow replacing existing image
-      const remainingSlots = isSingleMode ? maxImages : maxImages - images.length;
+      const remainingSlots = replaceIndex !== null ? 1 : isSingleMode ? maxImages : maxImages - images.length;
       const filesToAdd = filterAcceptedMediaFiles(files, 'image', acceptedExtensions).slice(0, remainingSlots);
 
       const validationResults = await Promise.all(
@@ -174,7 +181,9 @@ const UnifiedImageUploadField = forwardRef<UnifiedImageUploadFieldRef, UnifiedIm
         }));
 
       if (validFiles.length > 0) {
-        setImages((prev) => (isSingleMode ? validFiles : [...prev, ...validFiles]));
+        setImages((prev) => replaceIndex !== null && prev[replaceIndex] ? prev.map((item, index) => index === replaceIndex ? validFiles[0]! : item) : isSingleMode ? validFiles : [...prev, ...validFiles]);
+        setReplaceIndex(null);
+        setReplaceFromHistory(false);
       }
     };
 
@@ -373,11 +382,13 @@ const UnifiedImageUploadField = forwardRef<UnifiedImageUploadFieldRef, UnifiedIm
     };
 
     const handleAddClick = () => {
+      setReplaceIndex(null);
+      setReplaceFromHistory(false);
       setPickerOpen(true);
     };
 
     const addHistoryImages = (assets: UnifiedGeneratorReferenceMediaAsset[]) => {
-      const remainingSlots = isSingleMode ? 1 : Math.max(maxImages - images.length, 0);
+      const remainingSlots = replaceIndex !== null ? 1 : isSingleMode ? 1 : Math.max(maxImages - images.length, 0);
       const nextItems = assets.slice(0, remainingSlots).map((asset) => ({
         id: nanoid(),
         file: new File([], asset.name || 'history-image', { type: 'image/jpeg' }),
@@ -385,7 +396,9 @@ const UnifiedImageUploadField = forwardRef<UnifiedImageUploadFieldRef, UnifiedIm
         sourceUrl: String(asset.source),
       }));
       if (!nextItems.length) return;
-      setImages((current) => (isSingleMode ? nextItems : [...current, ...nextItems].slice(0, maxImages)));
+      setImages((current) => replaceIndex !== null && current[replaceIndex] ? current.map((item, index) => index === replaceIndex ? nextItems[0]! : item) : isSingleMode ? nextItems : [...current, ...nextItems].slice(0, maxImages));
+      setReplaceIndex(null);
+      setReplaceFromHistory(false);
     };
 
     const renderSourcePicker = (trigger: React.ReactNode) => (
@@ -393,11 +406,12 @@ const UnifiedImageUploadField = forwardRef<UnifiedImageUploadFieldRef, UnifiedIm
         open={pickerOpen}
         onOpenChange={setPickerOpen}
         kind='image'
-        canAdd={isSingleMode ? images.length === 0 : images.length < maxImages}
+        canAdd={isSingleMode || replaceIndex !== null || images.length < maxImages}
+        historyRequested={replaceFromHistory ? historyRequest : 0}
         isHistoryLoading={imageHistory.isLoading}
         historyAssets={historyAssets}
         acceptedFormats={Object.values(acceptObject).flat()}
-        historySelectionLimit={Math.max(isSingleMode ? 1 : maxImages - images.length, 1)}
+        historySelectionLimit={replaceIndex !== null ? 1 : Math.max(isSingleMode ? 1 : maxImages - images.length, 1)}
         onUploadFromDevice={() => fileInputRef.current?.click()}
         onSelectHistory={addHistoryImages}
         trigger={trigger}
@@ -448,7 +462,13 @@ const UnifiedImageUploadField = forwardRef<UnifiedImageUploadFieldRef, UnifiedIm
                     <FormItem className='h-full w-full space-y-0'>
                       <div className='relative flex h-full w-full items-center gap-1'>
                         {images.length > 0 ? (
-                          <div className='group absolute flex h-full w-full items-center justify-center rounded-[inherit]'>
+                          <div className='group absolute flex h-full w-full items-center justify-center rounded-[inherit]'
+                            onContextMenu={contextActions(() => [
+                              { id: 'preview', label: zh ? '预览' : 'Preview', icon: Eye, run: () => onImagePreview?.([images[0].previewUrl]) },
+                              { id: 'replace-local', label: zh ? '选择本地文件' : 'Choose local file', icon: FolderOpen, run: () => { setReplaceIndex(0); setReplaceFromHistory(false); fileInputRef.current?.click(); } },
+                              { id: 'replace-history', label: zh ? '选择历史记录' : 'Choose from history', icon: History, run: () => { setReplaceIndex(0); setReplaceFromHistory(true); setHistoryRequest((value) => value + 1); setPickerOpen(true); } },
+                              { id: 'remove', label: zh ? '移除素材' : 'Remove reference', icon: TrashIcon, destructive: true, separator: true, run: deleteFile },
+                            ])}>
                             <img
                               src={images[0].previewUrl}
                               alt={name}
@@ -534,9 +554,15 @@ const UnifiedImageUploadField = forwardRef<UnifiedImageUploadFieldRef, UnifiedIm
                       ) : (
                         <>
                           <div className='grid grid-cols-3 gap-2 sm:grid-cols-4 md:grid-cols-5'>
-                            {images.map((image) => (
+                            {images.map((image, index) => (
                               <div
                                 key={image.id}
+                                onContextMenu={contextActions(() => [
+                                  { id: 'preview', label: zh ? '预览' : 'Preview', icon: Eye, run: () => onImagePreview?.([image.previewUrl]) },
+                                  { id: 'replace-local', label: zh ? '选择本地文件' : 'Choose local file', icon: FolderOpen, run: () => { setReplaceIndex(index); setReplaceFromHistory(false); fileInputRef.current?.click(); } },
+                                  { id: 'replace-history', label: zh ? '选择历史记录' : 'Choose from history', icon: History, run: () => { setReplaceIndex(index); setReplaceFromHistory(true); setHistoryRequest((value) => value + 1); setPickerOpen(true); } },
+                                  { id: 'remove', label: zh ? '移除素材' : 'Remove reference', icon: TrashIcon, destructive: true, separator: true, run: () => removeImage(image.id) },
+                                ])}
                                 className='group relative aspect-square overflow-hidden rounded-lg bg-gray-100'
                               >
                                 <img

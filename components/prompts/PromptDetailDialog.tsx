@@ -1,5 +1,8 @@
 'use client';
 
+import { contextActions } from '@/lib/desktop/context-actions';
+import { mediaContextActions, videoPlaybackContextActions } from '@/lib/desktop/media-context-actions';
+
 import {
   useCallback,
   useEffect,
@@ -697,6 +700,15 @@ export default function PromptDetailDialog({
                 }}
                 transition={mediaContentTransition}
                 onWheel={handleWheel}
+                onContextMenu={contextActions(() => [
+                  ...(isImage && canInteract ? [
+                    { id: 'zoom-in', label: zh ? '放大' : 'Zoom in', disabled: zoom >= MAX_MEDIA_ZOOM, run: () => setViewerZoom(zoom + 0.25) },
+                    { id: 'zoom-out', label: zh ? '缩小' : 'Zoom out', disabled: zoom <= MIN_MEDIA_ZOOM, run: () => setViewerZoom(zoom - 0.25) },
+                    { id: 'fit', label: zh ? '适应窗口' : 'Fit to window', run: resetViewer },
+                  ] : []),
+                  ...(!isImage && canvasRef.current?.querySelector('video') ? videoPlaybackContextActions(canvasRef.current.querySelector('video')!, zh) : []),
+                  ...mediaContextActions({ kind: prompt.media.type, url: mediaSource(prompt), prompt: prompt.prompt, name: fallbackFilename(prompt) }, zh, { reuse: false }),
+                ])}
                 onPointerDown={handlePanStart}
                 onPointerMove={handlePanMove}
                 onPointerUp={releasePointer}

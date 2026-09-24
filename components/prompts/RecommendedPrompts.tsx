@@ -1,5 +1,8 @@
 'use client';
 
+import { contextActions } from '@/lib/desktop/context-actions';
+import { mediaContextActions } from '@/lib/desktop/media-context-actions';
+
 import { useState } from 'react';
 import { Link } from '@/i18n/navigation';
 import { ArrowUpRight, Check, Copy, Expand, Image as ImageIcon, Sparkles, Video } from 'lucide-react';
@@ -127,6 +130,7 @@ export default function RecommendedPrompts() {
               <div className='grid gap-4 p-4 md:grid-cols-2 md:p-5 xl:grid-cols-3'>
                 {collection.prompts.map((prompt, promptIndex) => (
                   <article
+                    onContextMenu={contextActions(() => mediaContextActions({ kind: prompt.media.type, url: prompt.media.type === 'video' ? prompt.media.url : prompt.media.image, prompt: prompt.prompt, name: prompt.title }, zh, { view: () => setSelected(prompt), reuse: false }))}
                     key={prompt.id}
                     className='border-border bg-background/65 flex min-h-[430px] flex-col overflow-hidden rounded-2xl border'
                     style={{ contentVisibility: 'auto', containIntrinsicSize: '460px' }}

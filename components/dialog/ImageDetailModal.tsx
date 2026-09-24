@@ -1,11 +1,14 @@
 'use client';
 
+import { contextActions } from '@/lib/desktop/context-actions';
+import { mediaContextActions } from '@/lib/desktop/media-context-actions';
+
 import { useEffect, useRef, useState, type PointerEvent, type WheelEvent } from 'react';
 import dynamic from 'next/dynamic';
 import { deleteImageById } from '@/network/image/client';
 import { refreshImageHistory } from '@/network/image/history';
 import { ChevronDown, Crop, Download, RotateCcw, Trash2, X, ZoomIn, ZoomOut } from 'lucide-react';
-import { useTranslations } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 import { toast } from 'sonner';
 
 import { getImageModelVersionName } from '@/lib/constants/image';
@@ -46,6 +49,7 @@ interface ImageDetailModalProps {
     modelName?: string;
     userImageUrlList?: string[];
     size?: number;
+    localPath?: string;
   };
 }
 
@@ -57,6 +61,8 @@ export default function ImageDetailModal({
   image,
 }: ImageDetailModalProps) {
   const t = useTranslations('Profile.image-history.detail');
+  const locale = useLocale();
+  const zh = locale === 'zh' || locale === 'tw';
   const tHistory = useTranslations('Profile.image-history');
   const tCommon = useTranslations('Common');
   const tCrop = useTranslations('components.video-image-upload-form');
@@ -263,7 +269,7 @@ export default function ImageDetailModal({
     try {
       if (onDeleteRequest) {
         await onDeleteRequest();
-        toast.success(tHistory('delete-success'));
+        toast.success(zh ? '已从本机历史记录移除' : 'Removed from this device’s history');
         onDelete?.();
         onOpenChange(false);
         return;
@@ -351,6 +357,12 @@ export default function ImageDetailModal({
           <div
             className={`relative flex size-full touch-none items-center justify-center overflow-hidden select-none ${isDragging ? 'cursor-grabbing' : 'cursor-grab'}`}
             onWheel={handleWheel}
+            onContextMenu={contextActions(() => [
+              { id: 'zoom-in', label: zh ? '放大' : 'Zoom in', icon: ZoomIn, disabled: zoom >= MAX_ZOOM, run: () => updateZoom(zoom + ZOOM_STEP) },
+              { id: 'zoom-out', label: zh ? '缩小' : 'Zoom out', icon: ZoomOut, disabled: zoom <= MIN_ZOOM, run: () => updateZoom(zoom - ZOOM_STEP) },
+              { id: 'fit', label: zh ? '适应窗口' : 'Fit to window', icon: RotateCcw, run: resetView },
+              ...mediaContextActions({ ...image, url: displayUrl, kind: 'image' }, zh, { remove: () => setShowDeleteConfirm(true) }),
+            ])}
             onPointerDown={handlePointerDown}
             onPointerMove={handlePointerMove}
             onPointerUp={handlePointerEnd}
@@ -484,17 +496,29 @@ export default function ImageDetailModal({
                 type='button'
                 onClick={handleDeleteClick}
                 disabled={isDeleting}
-                className='flex size-10 items-center justify-center rounded-xl text-white/55 transition hover:bg-red-500/15 hover:text-red-300 disabled:opacity-40'
-                aria-label={t('delete')}
-                title={t('delete')}
+                className='flex h-10 items-center gap-2 rounded-xl px-3 text-sm text-red-200 transition hover:bg-red-500/15 hover:text-red-100 disabled:opacity-40'
+                aria-label={onDeleteRequest ? (zh ? '删除记录' : 'Remove record') : t('delete')}
+                title={onDeleteRequest ? (zh ? '删除记录' : 'Remove record') : t('delete')}
               >
                 <Trash2 className='size-4' />
+                <span>{onDeleteRequest ? (zh ? '删除记录' : 'Remove record') : t('delete')}</span>
               </button>
             </div>
           </div>
         </DialogContent>
       </DialogPortal>
-      <ConfirmDialog open={showDeleteConfirm} setOpen={setShowDeleteConfirm} callback={handleDelete} />
+      <ConfirmDialog
+        open={showDeleteConfirm}
+        setOpen={setShowDeleteConfirm}
+        callback={handleDelete}
+        titleText={onDeleteRequest ? (zh ? '移除这条历史记录？' : 'Remove this history record?') : undefined}
+      >
+        {onDeleteRequest
+          ? zh
+            ? '仅移除本机记录，云端对象和本地归档文件都会保留。'
+            : 'Only the record on this device will be removed. The remote object and any local archive will remain untouched.'
+          : undefined}
+      </ConfirmDialog>
       {cropSource && (
         <ImageCropDialog
           open={isCropOpen}

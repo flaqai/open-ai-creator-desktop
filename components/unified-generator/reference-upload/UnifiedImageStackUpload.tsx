@@ -53,6 +53,9 @@ export default function UnifiedImageStackUpload({
   const t = useTranslations('components.hero-form.reference-upload');
   const inputRef = useRef<HTMLInputElement>(null);
   const [pickerOpen, setPickerOpen] = useState(false);
+  const [replaceIndex, setReplaceIndex] = useState<number | null>(null);
+  const [replaceFromHistory, setReplaceFromHistory] = useState(false);
+  const [historyRequest, setHistoryRequest] = useState(0);
   const [isPickerPanelHovered, setIsPickerPanelHovered] = useState(false);
   const [previewIndex, setPreviewIndex] = useState<number | null>(null);
   const [collapseRevision, setCollapseRevision] = useState(0);
@@ -113,13 +116,22 @@ export default function UnifiedImageStackUpload({
 
   const addFiles = async (files: File[]) => {
     if (!files.length) return;
-    if (values.length + files.length > maxImages) {
+    if (replaceIndex === null && values.length + files.length > maxImages) {
       toast.error(t('maxFiles', { count: maxImages }));
       return;
     }
 
     for (const file of files) {
       if (!(await validateImage(file))) return;
+    }
+
+    if (replaceIndex !== null) {
+      const replacement = files[0];
+      if (!replacement || !values[replaceIndex]) return;
+      onChange(values.map((item, index) => index === replaceIndex ? { id: `image-${nanoid()}`, kind: 'image' as const, source: replacement, originalFile: replacement, name: replacement.name } : item));
+      setReplaceIndex(null);
+      setReplaceFromHistory(false);
+      return;
     }
 
     onChange(
@@ -178,19 +190,21 @@ export default function UnifiedImageStackUpload({
           }}
           onPanelHoverChange={setIsPickerPanelHovered}
           kind='image'
-          canAdd={canAdd}
+          canAdd={canAdd || replaceIndex !== null}
+          historyRequested={replaceIndex !== null && replaceFromHistory ? historyRequest : 0}
           isHistoryLoading={imageHistory.isLoading}
           historyAssets={historyAssets}
           acceptedFormats={allowedFormats}
-          historySelectionLimit={Math.max(maxImages - values.length, 1)}
+          historySelectionLimit={replaceIndex !== null ? 1 : Math.max(maxImages - values.length, 1)}
           onUploadFromDevice={() => {
             if (inputRef.current) inputRef.current.value = '';
             dropzone.open();
           }}
           onSelectHistory={(assets) => {
-            onChange(
-              [...values, ...assets.map((asset) => ({ ...asset, id: `image-${nanoid()}` }))].slice(0, maxImages),
-            );
+            if (replaceIndex !== null) onChange(values.map((item, index) => index === replaceIndex ? { ...assets[0]!, id: `image-${nanoid()}` } : item));
+            else onChange([...values, ...assets.map((asset) => ({ ...asset, id: `image-${nanoid()}` }))].slice(0, maxImages));
+            setReplaceIndex(null);
+            setReplaceFromHistory(false);
             setPickerOpen(false);
             setIsPickerPanelHovered(false);
             setCollapseRevision((revision) => revision + 1);
@@ -207,7 +221,9 @@ export default function UnifiedImageStackUpload({
               addLabel={t('addImage')}
               removeLabel={t('remove')}
               collapseRevision={collapseRevision}
-              onOpenPicker={() => setPickerOpen(true)}
+              onOpenPicker={() => { setReplaceIndex(null); setReplaceFromHistory(false); setPickerOpen(true); }}
+              onReplaceLocal={(index) => { setReplaceIndex(index); setReplaceFromHistory(false); dropzone.open(); }}
+              onReplaceHistory={(index) => { setReplaceIndex(index); setReplaceFromHistory(true); setHistoryRequest((value) => value + 1); setPickerOpen(true); }}
               onPreview={setPreviewIndex}
               onRemove={(index) => onChange(values.filter((_, itemIndex) => itemIndex !== index))}
             />

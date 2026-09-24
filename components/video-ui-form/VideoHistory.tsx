@@ -13,13 +13,17 @@ import { cn } from '@/lib/utils';
 import { numberList } from '@/lib/utils/arrayUtils';
 import { formatDate } from '@/lib/utils/timeUtils';
 import FailurePlaceholder from '@/components/ui/failure-placeholder';
+import HistoryContext from '@/components/history/HistoryContext';
+import useVideoHistoryCover from '@/components/unified-generator/useVideoHistoryCover';
 
 import Spinning from '../Spinning';
 import Scroll, { ScrollRef } from './shared/scroll';
 import { showAllVideoHistoryContext, videoTypeContenxt } from './VideoContenxtProvider';
 
 function VideoItem({
-  imgSrc,
+  cacheKey,
+  videoUrl,
+  localPath,
   onClick,
   createTime,
   status,
@@ -27,7 +31,9 @@ function VideoItem({
   ratio,
   dragUrl,
 }: {
-  imgSrc?: string;
+  cacheKey: string;
+  videoUrl: string;
+  localPath?: string;
   onClick: () => void;
   createTime: number;
   status: VideoHistoryItem['status'];
@@ -35,6 +41,7 @@ function VideoItem({
   ratio?: string;
   dragUrl?: string;
 }) {
+  const { coverUrl } = useVideoHistoryCover(cacheKey, videoUrl, localPath);
   const calculateWidth = (ratioStr?: string) => {
     if (!ratioStr) return 130;
     const [w, h] = ratioStr.split(':').map(Number);
@@ -93,9 +100,9 @@ function VideoItem({
       )}
       onClick={onClick}
     >
-      {imgSrc ? (
+      {coverUrl ? (
         <img
-          src={imgSrc}
+          src={coverUrl}
           alt='imgSrc'
           draggable={false}
           className='h-full w-full object-contain'
@@ -207,18 +214,18 @@ const VideoHistory = forwardRef<ScrollRef, VideoHistoryProps>(({ onClickImage, o
       {!isLoading &&
         hasData &&
         data.map((el) => {
-          const previewUrl = el.coverImage || el.videoThumbnailUrl || el.imageUrl || undefined;
           return (
-            <VideoItem
-              key={el.id}
-              imgSrc={previewUrl}
-              dragUrl={el.status === 'completed' ? previewUrl : undefined}
+            <HistoryContext key={el.id} item={el} kind='video'><VideoItem
+              cacheKey={el.id || el.traceId}
+              videoUrl={el.videoUrl}
+              localPath={el.localPath}
+              dragUrl={el.status === 'completed' ? el.videoUrl : undefined}
               onClick={() => handleClickImg(el)}
               createTime={el.createTime}
               status={el.status}
               ratio={el.ratio}
               onDelete={el.status === 'fail' ? () => handleDelete(el.id) : undefined}
-            />
+            /></HistoryContext>
           );
         })}
     </Scroll>

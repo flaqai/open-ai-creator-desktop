@@ -4,6 +4,15 @@ import { useEffect, useMemo, useState } from 'react';
 import type { VideoHistoryItem } from '@/network/video/history';
 import { Loader2 } from 'lucide-react';
 
+import useVideoHistoryCover from './useVideoHistoryCover';
+
+function playVideoPreview(video: HTMLVideoElement) {
+  video.play().catch((error: unknown) => {
+    if (error instanceof Error && error.name === 'AbortError') return;
+    console.error('Failed to play generation history preview:', error);
+  });
+}
+
 export default function CreatorVideoPreview({
   item,
   noPreviewLabel,
@@ -13,7 +22,13 @@ export default function CreatorVideoPreview({
   noPreviewLabel: string;
   loadingLabel: string;
 }) {
-  const covers = useMemo(
+  const { coverUrl: savedFrame, cacheLoadedVideoFrame } = useVideoHistoryCover(
+    item.id || item.traceId,
+    item.videoUrl,
+    item.localPath,
+  );
+  const isProcessing = item.status === 'processing' || item.status === 'pending';
+  const sourceCovers = useMemo(
     () =>
       Array.from(
         new Set(
@@ -22,30 +37,28 @@ export default function CreatorVideoPreview({
       ),
     [item.coverImage, item.imageUrl, item.videoThumbnailUrl],
   );
-  const [coverIndex, setCoverIndex] = useState(0);
-
-  useEffect(() => {
-    setCoverIndex(0);
-  }, [item.coverImage, item.id, item.imageUrl, item.videoThumbnailUrl]);
-
-  const cover = covers[coverIndex];
-  const isProcessing = item.status === 'processing' || item.status === 'pending';
+  const [sourceCoverIndex, setSourceCoverIndex] = useState(0);
+  useEffect(() => setSourceCoverIndex(0), [item.coverImage, item.id, item.imageUrl, item.videoThumbnailUrl]);
+  // Pending tasks can show their source image. Completed videos must use a frame
+  // from the generated video so a reference image is not mistaken for the result.
+  const cover = savedFrame || (isProcessing ? sourceCovers[sourceCoverIndex] : undefined);
   const preview = cover ? (
     <img
       src={cover}
       alt={item.prompt}
       loading='lazy'
       className='block h-auto w-full object-contain'
-      onError={() => setCoverIndex((index) => index + 1)}
+      onError={savedFrame ? undefined : () => setSourceCoverIndex((index) => index + 1)}
     />
   ) : item.videoUrl ? (
     <video
       src={item.videoUrl}
       muted
       playsInline
-      preload='metadata'
+      preload='auto'
       className='block h-auto w-full object-contain'
-      onMouseEnter={(event) => void event.currentTarget.play()}
+      onLoadedData={(event) => cacheLoadedVideoFrame(event.currentTarget)}
+      onMouseEnter={(event) => playVideoPreview(event.currentTarget)}
       onMouseLeave={(event) => {
         event.currentTarget.pause();
         event.currentTarget.currentTime = 0;

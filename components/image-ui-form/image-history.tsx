@@ -12,6 +12,7 @@ import { beginHistoryImageDrag, endHistoryImageDrag } from '@/lib/desktop/image-
 import { numberList } from '@/lib/utils/arrayUtils';
 import { formatDate } from '@/lib/utils/timeUtils';
 import FailurePlaceholder from '@/components/ui/failure-placeholder';
+import HistoryContext from '@/components/history/HistoryContext';
 
 import { useImageContext } from './image-context-provider';
 import Scroll, { ScrollRef } from './shared/scroll';
@@ -176,8 +177,7 @@ const ImageHistory = forwardRef<ScrollRef, ImageHistoryProps>(
             const isProcessing = el.status === 'processing';
             const isFailed = el.status === 'fail';
             return (
-              <ImageItem
-                key={el.id}
+              <HistoryContext key={el.id} item={el} kind='image'><ImageItem
                 imgSrc={el.thumbnailUrl || el.url}
                 dragUrl={!isProcessing && !isFailed && el.url ? el.url : undefined}
                 createTime={el.createTime}
@@ -189,7 +189,7 @@ const ImageHistory = forwardRef<ScrollRef, ImageHistoryProps>(
                 isFailed={isFailed}
                 isLoading={isProcessing}
                 onDelete={isFailed && !isProcessing ? () => handleDelete(el.id) : undefined}
-              />
+              /></HistoryContext>
             );
           })}
       </Scroll>

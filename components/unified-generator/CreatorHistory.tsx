@@ -1,6 +1,9 @@
 'use client';
 
-import { useEffect, useRef, useState, type ComponentProps, type ComponentType } from 'react';
+import { contextActions } from '@/lib/desktop/context-actions';
+import { mediaContextActions } from '@/lib/desktop/media-context-actions';
+
+import { useEffect, useRef, useState, type ComponentProps, type ComponentType, type ReactNode } from 'react';
 import dynamic from 'next/dynamic';
 import useImageHistory, { deleteImageHistoryItem, type ImageHistoryItem } from '@/network/image/history';
 import useVideoHistory, { deleteVideoHistoryItem, type VideoHistoryItem } from '@/network/video/history';
@@ -15,8 +18,9 @@ import {
   type MotionStyle,
   type Variants,
 } from 'framer-motion';
-import { Eye, ZoomIn, ZoomOut } from 'lucide-react';
-import { useTranslations } from 'next-intl';
+import { Eye, Trash2, ZoomIn, ZoomOut } from 'lucide-react';
+import { useLocale, useTranslations } from 'next-intl';
+import { toast } from 'sonner';
 
 import {
   HISTORY_SWITCH_DURATION,
@@ -27,10 +31,23 @@ import {
   indicatorTarget,
 } from '@/lib/creator-history-motion';
 import { beginHistoryImageDrag, endHistoryImageDrag } from '@/lib/desktop/image-history-drag';
+import { useDesktopRuntime } from '@/hooks/use-desktop-runtime';
+import {
+  AlertDialog,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from '@/components/ui/alert-dialog';
+import { Button } from '@/components/ui/button';
+import { ContextMenu, ContextMenuContent, ContextMenuItem, ContextMenuTrigger } from '@/components/ui/context-menu';
 import { Slider } from '@/components/ui/slider';
 
 import CreatorImagePreview from './CreatorImagePreview';
 import CreatorVideoPreview from './CreatorVideoPreview';
+import { preloadVideoHistoryCover } from './useVideoHistoryCover';
 
 const ImageDetailModal = dynamic(() => import('@/components/dialog/ImageDetailModal'), { ssr: false });
 const VideoDetailModal = dynamic(() => import('@/components/dialog/VideoDetailModal'), { ssr: false });
@@ -83,15 +100,30 @@ type MotionDivProps = ComponentProps<'div'> & {
 const MotionSpan = motion.span as unknown as ComponentType<MotionSpanProps>;
 const MotionDiv = motion.div as unknown as ComponentType<MotionDivProps>;
 
+function HistoryWebContext({ children, zh, onView, onRemove }: { children: ReactNode; zh: boolean; onView: () => void; onRemove: () => void }) {
+  const desktop = useDesktopRuntime();
+  if (desktop) return <>{children}</>;
+  return <ContextMenu>
+    <ContextMenuTrigger asChild>{children}</ContextMenuTrigger>
+    <ContextMenuContent>
+      <ContextMenuItem onSelect={onView}><Eye className='size-4' />{zh ? '查看详情' : 'View details'}</ContextMenuItem>
+      <ContextMenuItem variant='destructive' onSelect={onRemove}><Trash2 className='size-4' />{zh ? '移除记录' : 'Remove record'}</ContextMenuItem>
+    </ContextMenuContent>
+  </ContextMenu>;
+}
+
 export default function CreatorHistory() {
+  const locale = useLocale();
+  const zh = locale === 'zh' || locale === 'tw';
   const t = useTranslations('CreatorHistory');
   const tCommon = useTranslations('Common');
   const tImageDisplay = useTranslations('components.image-form.display');
   const tVideoDisplay = useTranslations('components.video-form.display');
   const type = useUnifiedGeneratorStore((state) => state.mediaType);
   const setType = useUnifiedGeneratorStore((state) => state.setMediaType);
-  const [visibleCount, setVisibleCount] = useState(PAGE_SIZE);
+  const [visibleCounts, setVisibleCounts] = useState({ image: PAGE_SIZE, video: PAGE_SIZE });
   const [selectedItem, setSelectedItem] = useState<SelectedHistoryItem>(null);
+  const [deleteTarget, setDeleteTarget] = useState<SelectedHistoryItem>(null);
   const [thumbnailWidth, setThumbnailWidth] = useState(DEFAULT_THUMBNAIL_WIDTH);
   const loadMoreRef = useRef<HTMLDivElement>(null);
   const prefersReducedMotion = useReducedMotion();
@@ -101,11 +133,24 @@ export default function CreatorHistory() {
     [indicatorLeft, indicatorRight],
     ([left, right]) => (Number(right) - Number(left)) / INDICATOR_WIDTH,
   );
-  const imageHistory = useImageHistory(1, visibleCount, undefined, { excludeFailed: true });
-  const videoHistory = useVideoHistory({ pageNum: 1, pageSize: visibleCount, excludeFailed: true });
+  const visibleCount = visibleCounts[type];
+  const imageHistory = useImageHistory(1, visibleCounts.image, undefined, { excludeFailed: true });
+  const videoHistory = useVideoHistory({ pageNum: 1, pageSize: visibleCounts.video, excludeFailed: true });
   const history = type === 'image' ? imageHistory : videoHistory;
   const hasMore = history.data.length < history.total;
   const transitionDirection = type === 'image' ? 1 : -1;
+
+  const confirmDelete = () => {
+    if (!deleteTarget) return;
+    try {
+      if (deleteTarget.type === 'image') deleteImageHistoryItem(deleteTarget.item.id);
+      else deleteVideoHistoryItem(deleteTarget.item.id);
+      setDeleteTarget(null);
+      toast.success(zh ? '已从本机历史记录移除' : 'Removed from this device’s history');
+    } catch {
+      toast.error(zh ? '移除失败，请重试' : 'Could not remove the record. Please try again.');
+    }
+  };
 
   useEffect(() => {
     const target = indicatorTarget(type);
@@ -129,8 +174,11 @@ export default function CreatorHistory() {
   }, [type, prefersReducedMotion, indicatorLeft, indicatorRight]);
 
   useEffect(() => {
-    setVisibleCount(PAGE_SIZE);
-  }, [type]);
+    videoHistory.data.forEach((item) => {
+      if (item.videoUrl)
+        preloadVideoHistoryCover(item.id || item.traceId, item.videoUrl, item.localPath).catch(() => {});
+    });
+  }, [videoHistory.data]);
 
   useEffect(() => {
     const target = loadMoreRef.current;
@@ -139,14 +187,15 @@ export default function CreatorHistory() {
     const observer = new IntersectionObserver(
       (entries) => {
         if (entries[0]?.isIntersecting) {
-          setVisibleCount((count) => count + PAGE_SIZE);
+          observer.disconnect();
+          setVisibleCounts((counts) => ({ ...counts, [type]: counts[type] + PAGE_SIZE }));
         }
       },
       { rootMargin: '300px' },
     );
     observer.observe(target);
     return () => observer.disconnect();
-  }, [hasMore, type]);
+  }, [hasMore, type, visibleCount]);
 
   return (
     <section className='space-y-5'>
@@ -211,11 +260,11 @@ export default function CreatorHistory() {
         </div>
       </div>
 
-      <MotionDiv layout='size' className='relative grid overflow-x-clip'>
+      <MotionDiv layout='size' className='relative grid w-full min-w-0 grid-cols-[minmax(0,1fr)] overflow-x-clip'>
         <AnimatePresence initial={false} mode='sync' custom={transitionDirection}>
           <MotionDiv
             key={type}
-            className='col-start-1 row-start-1 min-w-0'
+            className='col-start-1 row-start-1 w-full min-w-0'
             custom={transitionDirection}
             variants={prefersReducedMotion ? REDUCED_HISTORY_CONTENT_VARIANTS : HISTORY_CONTENT_VARIANTS}
             initial='enter'
@@ -223,7 +272,7 @@ export default function CreatorHistory() {
             exit='exit'
           >
             {history.data.length ? (
-              <div style={{ columnWidth: `${thumbnailWidth}px`, columnGap: '0.75rem' }}>
+              <div className='w-full min-w-0' style={{ columnWidth: `${thumbnailWidth}px`, columnGap: '0.75rem' }}>
                 {type === 'image'
                   ? imageHistory.data.map((item) => {
                       const src = item.thumbnailUrl || item.url;
@@ -251,23 +300,25 @@ export default function CreatorHistory() {
                         </div>
                       );
                       return canOpen ? (
-                        <button
-                          key={item.id}
-                          type='button'
-                          draggable
-                          onDragStart={(event) => {
-                            beginHistoryImageDrag(event.dataTransfer, {
-                              url: item.url,
-                              name: item.url.split('/').pop() || 'history-image',
-                            });
-                          }}
-                          onDragEnd={endHistoryImageDrag}
-                          onClick={() => setSelectedItem({ type: 'image', item })}
-                          className='focus-visible:ring-primary group mb-3 inline-block w-full cursor-grab [break-inside:avoid] rounded-xl text-left align-top focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none active:cursor-grabbing'
-                          aria-label={tImageDisplay('imageDetail')}
-                        >
-                          {card}
-                        </button>
+                        <HistoryWebContext key={item.id} zh={zh} onView={() => setSelectedItem({ type: 'image', item })} onRemove={() => setDeleteTarget({ type: 'image', item })}>
+                            <button
+                              type='button'
+                              draggable
+                              onDragStart={(event) => {
+                                beginHistoryImageDrag(event.dataTransfer, {
+                                  url: item.url,
+                                  name: item.url.split('/').pop() || 'history-image',
+                                });
+                              }}
+                              onDragEnd={endHistoryImageDrag}
+                              onClick={() => setSelectedItem({ type: 'image', item })}
+                              onContextMenu={contextActions(() => mediaContextActions({ ...item, kind: 'image' }, zh, { view: () => setSelectedItem({ type: 'image', item }), remove: () => setDeleteTarget({ type: 'image', item }) }))}
+                              className='focus-visible:ring-primary group mb-3 inline-block w-full cursor-grab [break-inside:avoid] rounded-xl text-left align-top focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none active:cursor-grabbing'
+                              aria-label={tImageDisplay('imageDetail')}
+                            >
+                              {card}
+                            </button>
+                        </HistoryWebContext>
                       ) : (
                         <div key={item.id} className='mb-3 inline-block w-full [break-inside:avoid] align-top'>
                           {card}
@@ -302,15 +353,17 @@ export default function CreatorHistory() {
                         </div>
                       );
                       return canOpen ? (
-                        <button
-                          key={item.id}
-                          type='button'
-                          onClick={() => setSelectedItem({ type: 'video', item })}
-                          className='focus-visible:ring-primary group mb-3 inline-block w-full [break-inside:avoid] rounded-xl text-left align-top focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none'
-                          aria-label={tVideoDisplay('videoDetail')}
-                        >
-                          {card}
-                        </button>
+                        <HistoryWebContext key={item.id} zh={zh} onView={() => setSelectedItem({ type: 'video', item })} onRemove={() => setDeleteTarget({ type: 'video', item })}>
+                            <button
+                              type='button'
+                              onClick={() => setSelectedItem({ type: 'video', item })}
+                              onContextMenu={contextActions(() => mediaContextActions({ ...item, url: item.videoUrl || '', kind: 'video' }, zh, { view: () => setSelectedItem({ type: 'video', item }), remove: () => setDeleteTarget({ type: 'video', item }) }))}
+                              className='focus-visible:ring-primary group mb-3 inline-block w-full [break-inside:avoid] rounded-xl text-left align-top focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none'
+                              aria-label={tVideoDisplay('videoDetail')}
+                            >
+                              {card}
+                            </button>
+                        </HistoryWebContext>
                       ) : (
                         <div key={item.id} className='mb-3 inline-block w-full [break-inside:avoid] align-top'>
                           {card}
@@ -364,6 +417,25 @@ export default function CreatorHistory() {
           video={selectedItem.item}
         />
       )}
+
+      <AlertDialog open={Boolean(deleteTarget)} onOpenChange={(open) => !open && setDeleteTarget(null)}>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>{zh ? '移除这条历史记录？' : 'Remove this history record?'}</AlertDialogTitle>
+            <AlertDialogDescription>
+              {zh
+                ? '仅移除本机记录，云端对象和本地归档文件都会保留。'
+                : 'Only the record on this device will be removed. The remote object and any local archive will remain untouched.'}
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel>{zh ? '取消' : 'Cancel'}</AlertDialogCancel>
+            <Button type='button' variant='destructive' onClick={confirmDelete}>
+              {zh ? '移除记录' : 'Remove record'}
+            </Button>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
     </section>
   );
 }

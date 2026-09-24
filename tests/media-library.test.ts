@@ -5,6 +5,7 @@ import {
   getMediaCatalogSnapshot,
   MEDIA_LIBRARY_UPLOADS_KEY,
   recordReferenceUploads,
+  removeMediaCatalogItem,
   subscribeMediaCatalog,
 } from '../lib/desktop/media-library';
 import { deleteImageHistoryItem, imageHistoryKey } from '../network/image/history';
@@ -125,6 +126,10 @@ test('catalog combines all source adapters and exposes local availability', () =
       { id: 'generated-image:failed-archive', origin: 'generated', availability: 'cloud-only' },
     ],
   );
+  assert.equal(
+    getMediaCatalogSnapshot().find((item) => item.id === 'generated-video:video-task')?.previewUrl,
+    'https://storage.flaq.ai/generated/video.mp4',
+  );
 });
 
 test('catalog subscription observes each adapter and stops cleanly', () => {
@@ -188,4 +193,82 @@ test('catalog reads every local history record without an arbitrary page limit',
     })),
   );
   assert.equal(getMediaCatalogSnapshot().length, 1001);
+});
+
+test('removing a generated record updates its history but leaves its archive reference untouched', () => {
+  writeLocalHistory(imageHistoryKey, [
+    {
+      id: 'image-to-remove',
+      prompt: 'Keep the archive',
+      createTime: 10,
+      url: 'https://storage.flaq.ai/generated/remove.png',
+      thumbnailUrl: '',
+      resolution: '1024x1024',
+      status: 'completed',
+      localPath: '/media/remove.png',
+    },
+  ]);
+  const item = getMediaCatalogSnapshot()[0];
+  assert.equal(item?.localPath, '/media/remove.png');
+  removeMediaCatalogItem(item!);
+  assert.deepEqual(getMediaCatalogSnapshot(), []);
+  assert.deepEqual(JSON.parse(localStorage.getItem(imageHistoryKey) || '[]'), []);
+});
+
+test('removing a legacy uploaded reference hides it without changing its generation record', () => {
+  const url = 'https://storage.flaq.ai/uploads/reference.png';
+  writeLocalHistory(imageHistoryKey, [
+    {
+      id: 'image-with-reference',
+      prompt: 'Keep the generation',
+      createTime: 10,
+      url: 'https://storage.flaq.ai/generated/keep.png',
+      thumbnailUrl: '',
+      resolution: '1024x1024',
+      status: 'completed',
+      userImageUrlList: [url],
+    },
+  ]);
+  const upload = getMediaCatalogSnapshot().find((item) => item.origin === 'upload');
+  assert.ok(upload);
+  removeMediaCatalogItem(upload);
+  assert.deepEqual(
+    getMediaCatalogSnapshot().map((item) => item.origin),
+    ['generated'],
+  );
+  assert.equal(JSON.parse(localStorage.getItem(imageHistoryKey) || '[]')[0].userImageUrlList[0], url);
+
+  recordReferenceUploads(
+    [{ data: new File(['image'], 'reference.png', { type: 'image/png' }), type: 'image/png' }],
+    [url],
+  );
+  assert.equal(getMediaCatalogSnapshot().filter((item) => item.origin === 'upload').length, 1);
+});
+
+test('removing a generated video only removes its local history entry', () => {
+  writeLocalHistory(videoHistoryKey, [
+    {
+      id: 'video-to-remove',
+      traceId: 'video-to-remove',
+      status: 'completed',
+      platformName: 'seedance',
+      categoryName: '',
+      createTime: 10,
+      duration: 5,
+      errorInfo: '',
+      imageEndUrl: '',
+      imageUrl: '',
+      prompt: 'Keep the video archive',
+      videoId: 'video-to-remove',
+      videoThumbnailUrl: '',
+      videoUrl: 'https://storage.flaq.ai/generated/video.mp4',
+      videoType: 'Text-to-video',
+      localPath: '/media/video.mp4',
+    },
+  ]);
+  const item = getMediaCatalogSnapshot()[0];
+  assert.equal(item?.kind, 'video');
+  removeMediaCatalogItem(item!);
+  assert.deepEqual(getMediaCatalogSnapshot(), []);
+  assert.deepEqual(JSON.parse(localStorage.getItem(videoHistoryKey) || '[]'), []);
 });

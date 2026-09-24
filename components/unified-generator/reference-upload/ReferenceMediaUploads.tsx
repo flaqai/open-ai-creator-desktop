@@ -96,6 +96,8 @@ export default function ReferenceMediaUploads({
   const videoInputRef = useRef<HTMLInputElement>(null);
   const audioInputRef = useRef<HTMLInputElement>(null);
   const [pickerKind, setPickerKind] = useState<UnifiedGeneratorReferenceMediaKind | null>(null);
+  const [replacement, setReplacement] = useState<{ kind: UnifiedGeneratorReferenceMediaKind; index: number; history: boolean } | null>(null);
+  const [historyRequest, setHistoryRequest] = useState(0);
   const [previewImageIndex, setPreviewImageIndex] = useState<number | null>(null);
   const [previewVideoIndex, setPreviewVideoIndex] = useState<number | null>(null);
   const [previewAudioIndex, setPreviewAudioIndex] = useState<number | null>(null);
@@ -243,7 +245,7 @@ export default function ReferenceMediaUploads({
   const appendSources = async (kind: UnifiedGeneratorReferenceMediaKind, sources: Array<File | string>) => {
     const list = getList(kind);
     const max = getMax(kind);
-    if (list.length + sources.length > max) {
+    if (replacement?.kind !== kind && list.length + sources.length > max) {
       toast.error(t('maxFiles', { count: max }));
       return;
     }
@@ -276,7 +278,12 @@ export default function ReferenceMediaUploads({
       }
       nextAssets.push(asset);
     }
-    setList(kind, [...list, ...nextAssets].slice(0, max));
+    if (replacement?.kind === kind && list[replacement.index] && nextAssets[0]) {
+      setList(kind, list.map((asset, index) => index === replacement.index ? nextAssets[0]! : asset));
+      setReplacement(null);
+    } else {
+      setList(kind, [...list, ...nextAssets].slice(0, max));
+    }
     setPickerKind(null);
     setCollapseRevision((revision) => revision + 1);
   };
@@ -347,11 +354,12 @@ export default function ReferenceMediaUploads({
           onOpenChange={(open) => setPickerKind(open ? kind : null)}
           onPanelHoverChange={(hovered) => setHoveredPickerKind(hovered ? kind : null)}
           kind={kind}
-          canAdd={list.length < max}
+          canAdd={list.length < max || replacement?.kind === kind}
+          historyRequested={replacement?.kind === kind && replacement.history ? historyRequest : 0}
           isHistoryLoading={historyLoading}
           historyAssets={historyAssets}
           acceptedFormats={acceptedFormats(kind)}
-          historySelectionLimit={Math.max(max - list.length, 1)}
+          historySelectionLimit={replacement?.kind === kind ? 1 : Math.max(max - list.length, 1)}
           onUploadFromDevice={() => inputRef.current?.click()}
           onSelectHistory={(assets) =>
             appendSources(
@@ -371,7 +379,9 @@ export default function ReferenceMediaUploads({
               addLabel={t('addMore')}
               removeLabel={t('remove')}
               collapseRevision={collapseRevision}
-              onOpenPicker={() => setPickerKind(kind)}
+              onOpenPicker={() => { setReplacement(null); setPickerKind(kind); }}
+              onReplaceLocal={(index) => { setReplacement({ kind, index, history: false }); inputRef.current?.click(); }}
+              onReplaceHistory={kind !== 'audio' ? (index) => { setReplacement({ kind, index, history: true }); setHistoryRequest((value) => value + 1); setPickerKind(kind); } : undefined}
               onPreview={(index) => {
                 if (kind === 'image') setPreviewImageIndex(index);
                 if (kind === 'video') setPreviewVideoIndex(index);

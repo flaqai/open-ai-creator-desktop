@@ -138,6 +138,7 @@ test('video completion maps through its adapter and records a saved local archiv
       videoType: 'Text-to-video',
     },
   ]);
+  const covers: Array<{ taskId: string; videoUrl: string; localPath: string }> = [];
   const lifecycle = createGenerationLifecycle({
     getConfig: async () => config,
     native: () => true,
@@ -147,6 +148,9 @@ test('video completion maps through its adapter and records a saved local archiv
         { url: 'https://asset.test/video.mp4', cover_url: 'https://asset.test/cover.png', duration: 5, ratio: '16:9' },
       ]),
     archive: async () => ({ status: 'saved', localPath: '/media/2026/09/17/video-video-task.mp4' }),
+    generateVideoCover: async (taskId, videoUrl, localPath) => {
+      covers.push({ taskId, videoUrl, localPath });
+    },
   });
 
   assert.deepEqual(await lifecycle.poll({ traceId: 'video-task', type: 'video', submitTime: 10 }, signal), {
@@ -161,6 +165,13 @@ test('video completion maps through its adapter and records a saved local archiv
   assert.equal(history.ratio, '16:9');
   assert.equal(history.archiveStatus, 'saved');
   assert.equal(history.localPath, '/media/2026/09/17/video-video-task.mp4');
+  assert.deepEqual(covers, [
+    {
+      taskId: 'video-task',
+      videoUrl: 'https://asset.test/video.mp4',
+      localPath: '/media/2026/09/17/video-video-task.mp4',
+    },
+  ]);
 });
 
 test('remote failure and missing credentials preserve their distinct lifecycle semantics', async () => {

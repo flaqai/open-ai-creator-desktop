@@ -1,6 +1,9 @@
 'use client';
 
 import { useState, type CSSProperties } from 'react';
+import { Eye, FolderOpen, History, Trash2 } from 'lucide-react';
+import { contextActions } from '@/lib/desktop/context-actions';
+import { useLocale } from 'next-intl';
 import { ImageIcon, Loader2, Music2, Plus, VideoIcon, X } from 'lucide-react';
 
 import type {
@@ -76,6 +79,8 @@ export default function ReferenceStackPreview({
   onOpenPicker,
   onPreview,
   onRemove,
+  onReplaceLocal,
+  onReplaceHistory,
 }: {
   kind: UnifiedGeneratorReferenceMediaKind;
   assets: UnifiedGeneratorReferenceMediaAsset[];
@@ -91,7 +96,11 @@ export default function ReferenceStackPreview({
   onOpenPicker: () => void;
   onPreview: (index: number) => void;
   onRemove: (index: number) => void;
+  onReplaceLocal?: (index: number) => void;
+  onReplaceHistory?: (index: number) => void;
 }) {
+  const locale = useLocale();
+  const zh = locale === 'zh' || locale === 'tw';
   const totalItems = assets.length + uploadingItems.length;
   const shouldStack = totalItems > 1 || (totalItems > 0 && canAdd);
   const previewCount = totalItems + (totalItems > 0 && canAdd ? 1 : 0);
@@ -167,6 +176,12 @@ export default function ReferenceStackPreview({
                 event.stopPropagation();
                 onPreview(index);
               }}
+              onContextMenu={contextActions(() => [
+                { id: 'view', label: zh ? '预览' : 'Preview', icon: Eye, run: () => onPreview(index) },
+                ...(onReplaceLocal ? [{ id: 'replace-local', label: zh ? '选择本地文件' : 'Choose local file', icon: FolderOpen, run: () => onReplaceLocal(index) }] : []),
+                ...(onReplaceHistory ? [{ id: 'replace-history', label: zh ? '选择历史记录' : 'Choose from history', icon: History, run: () => onReplaceHistory(index) }] : []),
+                { id: 'remove', label: removeLabel, icon: Trash2, destructive: true, separator: true, run: () => onRemove(index) },
+              ])}
               onKeyDown={(event) => {
                 if (event.key !== 'Enter' && event.key !== ' ') return;
                 event.preventDefault();

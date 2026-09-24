@@ -1,8 +1,11 @@
 'use client';
 
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { Check, Clock3, FolderOpen, Loader2 } from 'lucide-react';
-import { useTranslations } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
+import { toast } from 'sonner';
+import { contextActions } from '@/lib/desktop/context-actions';
+import { MEDIA_REUSE_EVENT, takeMediaReuse } from '@/lib/desktop/media-context-actions';
 
 import type {
   UnifiedGeneratorReferenceMediaAsset,
@@ -91,6 +94,7 @@ export default function ReferenceMediaPicker({
   historySelectionLimit = 1,
   onUploadFromDevice,
   onSelectHistory,
+  historyRequested = 0,
 }: {
   open: boolean;
   onOpenChange: (open: boolean) => void;
@@ -105,15 +109,44 @@ export default function ReferenceMediaPicker({
   historySelectionLimit?: number;
   onUploadFromDevice: () => void;
   onSelectHistory: (assets: UnifiedGeneratorReferenceMediaAsset[]) => void | Promise<void>;
+  historyRequested?: number;
 }) {
   const t = useTranslations('components.hero-form.reference-upload');
+  const locale = useLocale();
+  const zh = locale === 'zh' || locale === 'tw';
+  const [reusedAsset, setReusedAsset] = useState<UnifiedGeneratorReferenceMediaAsset | null>(null);
   const [historyOpen, setHistoryOpen] = useState(false);
+  useEffect(() => {
+    if (historyRequested > 0) { onOpenChange(false); setSelectedHistoryIds([]); setHistoryOpen(true); }
+    // The request is edge-triggered by its parent.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [historyRequested]);
   const [selectedHistoryIds, setSelectedHistoryIds] = useState<string[]>([]);
   const supportsHistory = kind !== 'audio';
   const visibleHistoryAssets = useMemo(
-    () => filterCompatibleHistoryAssets(historyAssets.filter(hasReferenceMediaSource), kind, acceptedFormats),
-    [acceptedFormats, historyAssets, kind],
+    () => filterCompatibleHistoryAssets((reusedAsset ? [reusedAsset, ...historyAssets.filter((asset) => asset.source !== reusedAsset.source)] : historyAssets).filter(hasReferenceMediaSource), kind, acceptedFormats),
+    [acceptedFormats, historyAssets, kind, reusedAsset],
   );
+
+  useEffect(() => {
+    const receive = () => {
+      const media = takeMediaReuse(kind);
+      if (!media) return;
+      const asset: UnifiedGeneratorReferenceMediaAsset = { id: `reuse-${Date.now()}`, kind, source: media.url, name: media.name || media.url.split('/').pop() };
+      if (!canAdd || isUploading || historySelectionLimit < 1) {
+        toast.error(zh ? '当前素材数量已达上限或正在上传，请腾出位置后重试' : 'No available reference slot, or an upload is in progress.');
+      } else if (!filterCompatibleHistoryAssets([asset], kind, acceptedFormats).length) {
+        toast.error(zh ? '当前模型不支持此素材格式，请切换模型后重试' : 'This model does not support the reference format.');
+      } else {
+        setReusedAsset(asset);
+        setSelectedHistoryIds([asset.id]);
+        setHistoryOpen(true);
+      }
+    };
+    receive();
+    window.addEventListener(MEDIA_REUSE_EVENT, receive);
+    return () => window.removeEventListener(MEDIA_REUSE_EVENT, receive);
+  }, [acceptedFormats, canAdd, historySelectionLimit, isUploading, kind, zh]);
 
   const handlePickerOpenChange = (nextOpen: boolean) => {
     if (!nextOpen) onPanelHoverChange?.(false);
@@ -128,7 +161,10 @@ export default function ReferenceMediaPicker({
 
   const handleHistoryOpenChange = (nextOpen: boolean) => {
     setHistoryOpen(nextOpen);
-    if (!nextOpen) setSelectedHistoryIds([]);
+    if (!nextOpen) {
+      setSelectedHistoryIds([]);
+      setReusedAsset(null);
+    }
   };
 
   const handleConfirmHistory = async () => {
@@ -142,7 +178,10 @@ export default function ReferenceMediaPicker({
   return (
     <>
       <Popover modal open={open} onOpenChange={handlePickerOpenChange}>
-        {trigger}
+        <span className='contents' onContextMenu={contextActions([
+          { id: 'local', label: t('uploadFromDevice'), icon: FolderOpen, disabled: !canAdd || isUploading, run: () => { handlePickerOpenChange(false); onUploadFromDevice(); } },
+          ...(supportsHistory ? [{ id: 'history', label: t('selectFromHistory'), icon: Clock3, disabled: !canAdd || isUploading, run: openHistory }] : []),
+        ])}>{trigger}</span>
         <PopoverContent
           align='start'
           onPointerEnter={(event) => {

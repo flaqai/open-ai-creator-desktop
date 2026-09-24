@@ -1,15 +1,20 @@
 'use client';
 
-import { useState } from 'react';
+import { contextActions } from '@/lib/desktop/context-actions';
+import { mediaContextActions, videoPlaybackContextActions } from '@/lib/desktop/media-context-actions';
+
+import { useRef, useState } from 'react';
 import { deleteVideoById } from '@/network/video/client';
 import type { VideoHistoryItem } from '@/network/video/history';
 import { refreshVideoHistory } from '@/network/video/history';
 import { X } from 'lucide-react';
-import { useTranslations } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 import { toast } from 'sonner';
 
 import { getVideoModelVersionName } from '@/lib/constants/video';
 import { Dialog, DialogContent, DialogPortal } from '@/components/ui/dialog';
+import ConfirmDialog from '@/components/dialog/ConfirmDialog';
+import useVideoHistoryCover from '@/components/unified-generator/useVideoHistoryCover';
 
 import {
   CopyrightText,
@@ -37,8 +42,13 @@ export default function VideoDetailModal({
   video,
 }: VideoDetailModalProps) {
   const t = useTranslations('Profile.video-history.detail');
+  const locale = useLocale();
+  const zh = locale === 'zh' || locale === 'tw';
   const tHistory = useTranslations('Profile.video-history');
   const [isDeleting, setIsDeleting] = useState(false);
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
+  const { coverUrl } = useVideoHistoryCover(video.id || video.traceId, video.videoUrl, video.localPath);
 
   const handleDownload = async () => {
     if (!video.videoUrl) return;
@@ -57,7 +67,13 @@ export default function VideoDetailModal({
         await deleteVideoById(video.id);
         refreshVideoHistory();
       }
-      toast.success(tHistory('delete-success'));
+      toast.success(
+        onDeleteRequest
+          ? zh
+            ? '已从本机历史记录移除'
+            : 'Removed from this device’s history'
+          : tHistory('delete-success'),
+      );
       onDelete?.();
       onOpenChange(false);
     } catch (error: any) {
@@ -124,8 +140,13 @@ export default function VideoDetailModal({
             <div className='bg-card flex h-full w-full flex-1 items-center justify-center p-3 lg:h-[700px] lg:p-6'>
               {video.videoUrl ? (
                 <video
+                  ref={videoRef}
+                  onContextMenu={contextActions(() => [
+                    ...(videoRef.current ? videoPlaybackContextActions(videoRef.current, zh) : []),
+                    ...mediaContextActions({ ...video, kind: 'video', url: video.videoUrl || '' }, zh, { remove: () => setShowDeleteConfirm(true) }),
+                  ])}
                   src={video.videoUrl}
-                  poster={video.coverImage || video.imageUrl}
+                  poster={coverUrl}
                   className='max-h-[576px] max-w-full rounded object-contain outline-none'
                   muted
                   autoPlay
@@ -134,7 +155,7 @@ export default function VideoDetailModal({
                 />
               ) : (
                 <img
-                  src={video.coverImage || video.imageUrl}
+                  src={coverUrl || ''}
                   alt={video.prompt}
                   className='max-h-[576px] max-w-full rounded object-contain'
                 />
@@ -177,13 +198,25 @@ export default function VideoDetailModal({
                   <DownloadButton onClick={handleDownload} disabled={!video.videoUrl} />
 
                   {/* Delete Button */}
-                  <DeleteButton onClick={handleDelete} disabled={isDeleting} />
+                  <DeleteButton onClick={() => setShowDeleteConfirm(true)} disabled={isDeleting} />
                 </div>
               </div>
             </div>
           </div>
         </DialogContent>
       </DialogPortal>
+      <ConfirmDialog
+        open={showDeleteConfirm}
+        setOpen={setShowDeleteConfirm}
+        callback={handleDelete}
+        titleText={onDeleteRequest ? (zh ? '移除这条历史记录？' : 'Remove this history record?') : undefined}
+      >
+        {onDeleteRequest
+          ? zh
+            ? '仅移除本机记录，云端对象和本地归档文件都会保留。'
+            : 'Only the record on this device will be removed. The remote object and any local archive will remain untouched.'
+          : undefined}
+      </ConfirmDialog>
     </Dialog>
   );
 }

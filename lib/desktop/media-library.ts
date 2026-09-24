@@ -1,10 +1,12 @@
 import {
+  deleteImageHistoryItem,
   imageHistoryKey,
   readImageHistoryItems,
   subscribeImageHistory,
   type ImageHistoryItem,
 } from '@/network/image/history';
 import {
+  deleteVideoHistoryItem,
   readVideoHistoryItems,
   subscribeVideoHistory,
   videoHistoryKey,
@@ -14,6 +16,7 @@ import {
 import type { FileType } from '@/lib/utils/fileUtils';
 
 export const MEDIA_LIBRARY_UPLOADS_KEY = 'FLAQ-CREATOR-DESKTOP-media-library-uploads-v1';
+export const MEDIA_LIBRARY_HIDDEN_UPLOADS_KEY = 'FLAQ-CREATOR-DESKTOP-media-library-hidden-uploads-v1';
 const MEDIA_LIBRARY_UPLOADS_CHANGED_EVENT = 'flaq-media-library-uploads-changed';
 
 const STORAGE_VERSION = 1;
@@ -106,6 +109,15 @@ function parseReferenceMedia(raw: string | null): StoredReferenceMedia[] {
   }
 }
 
+function readHiddenUploadUrls(storage: Storage): Set<string> {
+  try {
+    const value = JSON.parse(storage.getItem(MEDIA_LIBRARY_HIDDEN_UPLOADS_KEY) || '[]');
+    return new Set(Array.isArray(value) ? value.filter(isRemoteUrl) : []);
+  } catch {
+    return new Set();
+  }
+}
+
 function serializeReferenceMedia(items: StoredReferenceMedia[]) {
   return JSON.stringify({ version: STORAGE_VERSION, items: items.slice(0, MAX_UPLOAD_RECORDS) });
 }
@@ -141,15 +153,17 @@ function buildCatalogItems(
   uploads: StoredReferenceMedia[],
   imageHistory: ImageHistoryItem[],
   videoHistory: VideoHistoryItem[],
+  hiddenUploadUrls: Set<string>,
 ): readonly MediaCatalogItem[] {
   const items = new Map<string, MediaCatalogItem>();
 
   uploads.forEach((item) => {
+    if (hiddenUploadUrls.has(item.url)) return;
     items.set(item.url, { ...item, origin: 'upload', availability: 'cloud-only' });
   });
 
   const addLegacyImageUpload = (url: string, createdAt: number) => {
-    if (!isRemoteUrl(url) || items.has(url)) return;
+    if (!isRemoteUrl(url) || items.has(url) || hiddenUploadUrls.has(url)) return;
     items.set(url, {
       id: `upload:${url}`,
       url,
@@ -192,7 +206,7 @@ function buildCatalogItems(
       id: `generated-video:${item.id}`,
       historyId: item.id,
       url: item.videoUrl,
-      previewUrl: [item.videoThumbnailUrl, item.coverImage, item.imageUrl].find(isRemoteUrl) || item.videoUrl,
+      previewUrl: item.videoUrl,
       name: item.prompt || fallbackName(item.videoUrl, 'Generated video'),
       mimeType: 'video/*',
       kind: 'video',
@@ -213,6 +227,7 @@ function buildCatalogItems(
 function sourceFingerprint(storage: Storage) {
   return [
     storage.getItem(MEDIA_LIBRARY_UPLOADS_KEY),
+    storage.getItem(MEDIA_LIBRARY_HIDDEN_UPLOADS_KEY),
     storage.getItem(imageHistoryKey),
     storage.getItem(videoHistoryKey),
   ].join('\u001f');
@@ -233,6 +248,7 @@ export function getMediaCatalogSnapshot(): readonly MediaCatalogItem[] {
     parseReferenceMedia(storage.getItem(MEDIA_LIBRARY_UPLOADS_KEY)),
     imageHistory,
     videoHistory,
+    readHiddenUploadUrls(storage),
   );
   return cachedCatalog;
 }
@@ -244,7 +260,7 @@ export function subscribeMediaCatalog(callback: () => void) {
   const unsubscribeVideo = subscribeVideoHistory(callback);
   const onUploadChange = () => callback();
   const onStorage = (event: StorageEvent) => {
-    if (event.key === MEDIA_LIBRARY_UPLOADS_KEY) callback();
+    if (event.key === MEDIA_LIBRARY_UPLOADS_KEY || event.key === MEDIA_LIBRARY_HIDDEN_UPLOADS_KEY) callback();
   };
   window.addEventListener(MEDIA_LIBRARY_UPLOADS_CHANGED_EVENT, onUploadChange);
   window.addEventListener('storage', onStorage);
@@ -265,9 +281,35 @@ export function recordReferenceUploads(files: FileType[], urls: string[]) {
     const current = parseReferenceMedia(window.localStorage.getItem(MEDIA_LIBRARY_UPLOADS_KEY));
     const next = mergeReferenceMedia(current, records);
     window.localStorage.setItem(MEDIA_LIBRARY_UPLOADS_KEY, serializeReferenceMedia(next));
+    const hiddenUrls = readHiddenUploadUrls(window.localStorage);
+    records.forEach((record) => hiddenUrls.delete(record.url));
+    window.localStorage.setItem(MEDIA_LIBRARY_HIDDEN_UPLOADS_KEY, JSON.stringify([...hiddenUrls]));
     window.dispatchEvent(new Event(MEDIA_LIBRARY_UPLOADS_CHANGED_EVENT));
     return true;
   } catch {
     return false;
   }
+}
+
+/** Remove one catalog entry from this device only; never delete an archive or remote object. */
+export function removeMediaCatalogItem(item: MediaCatalogItem) {
+  if (typeof window === 'undefined') return;
+  if (item.origin === 'generated') {
+    if (!item.historyId) throw new Error('This generated item has no history ID.');
+    if (item.kind === 'image') deleteImageHistoryItem(item.historyId);
+    else if (item.kind === 'video') deleteVideoHistoryItem(item.historyId);
+    else throw new Error('Unsupported generated media type.');
+    return;
+  }
+
+  const storage = window.localStorage;
+  const hiddenUrls = readHiddenUploadUrls(storage);
+  hiddenUrls.add(item.url);
+  storage.setItem(MEDIA_LIBRARY_HIDDEN_UPLOADS_KEY, JSON.stringify([...hiddenUrls]));
+  const uploads = parseReferenceMedia(storage.getItem(MEDIA_LIBRARY_UPLOADS_KEY));
+  storage.setItem(
+    MEDIA_LIBRARY_UPLOADS_KEY,
+    serializeReferenceMedia(uploads.filter((upload) => upload.url !== item.url)),
+  );
+  window.dispatchEvent(new Event(MEDIA_LIBRARY_UPLOADS_CHANGED_EVENT));
 }

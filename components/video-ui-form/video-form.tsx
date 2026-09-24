@@ -318,7 +318,7 @@ export default function VideoFormBase({
                 {formTitle}
               </div>
             )}
-            <div className='custom-scrollbar flex flex-1 flex-col gap-2.5 overflow-y-auto pb-20 lg:items-stretch'>
+            <div className='desktop-inner-scrollbar custom-scrollbar flex flex-1 flex-col gap-2.5 overflow-y-auto pb-20 lg:items-stretch'>
               {/* Model version selection */}
               {showVideoModelVersion && (
                 <>

@@ -17,6 +17,7 @@ import {
 import { sanitizeDesktopLogText, writeDesktopLog, type DesktopLogger } from '@/lib/desktop/logging';
 import { attemptMediaArchive, type MediaArchiveOutcome, type MediaKind } from '@/lib/desktop/media-storage';
 import { isNativeDesktop } from '@/lib/desktop/runtime';
+import { generateVideoHistoryCover } from '@/lib/media/video-history-frame';
 
 import type { PollTask } from './polling-manager';
 
@@ -63,6 +64,7 @@ type GenerationLifecycleDependencies = {
   getImageTask: typeof getImageTask;
   getVideoTask: typeof getVideoTask;
   archive: (input: ArchiveJob) => Promise<MediaArchiveOutcome>;
+  generateVideoCover: (taskId: string, videoUrl: string, localPath: string) => Promise<unknown>;
   native: () => boolean;
   now: () => number;
   log: DesktopLogger;
@@ -80,6 +82,7 @@ const defaultDependencies: GenerationLifecycleDependencies = {
   getImageTask,
   getVideoTask,
   archive: ({ type, taskId, url, completedAt }) => attemptMediaArchive({ mediaType: type, taskId, url, completedAt }),
+  generateVideoCover: generateVideoHistoryCover,
   native: isNativeDesktop,
   now: Date.now,
   log: writeDesktopLog,
@@ -187,6 +190,18 @@ export function createGenerationLifecycle(
   const archive = async (job: ArchiveJob) => {
     const outcome = await dependencies.archive(job);
     adapters[job.type].updateArchive(job.taskId, outcome);
+    if (job.type === 'video' && outcome.status === 'saved') {
+      try {
+        await dependencies.generateVideoCover(job.taskId, job.url, outcome.localPath);
+      } catch (error) {
+        const reason = error instanceof Error ? error.name : 'UnknownError';
+        void dependencies.log(
+          'warn',
+          'video-history-cover',
+          `Local frame generation failed task=${sanitizeDesktopLogText(job.taskId, 180)} reason=${reason}`,
+        );
+      }
+    }
     return outcome;
   };
 

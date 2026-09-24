@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from 'react';
 
 import { STORE_PREFIX } from '@/lib/constants/config';
 import type { MediaArchiveStatus } from '@/lib/desktop/media-storage';
+import { deleteVideoHistoryCover } from '@/lib/media/video-history-cover-cache';
 
 import { notifyLocalHistory, readLocalHistory, subscribeLocalHistory, writeLocalHistory } from '../local-history';
 
@@ -172,4 +173,5 @@ export function deleteVideoHistoryItem(id: string) {
     videoHistoryKey,
     current.filter((item) => item.id !== id && item.traceId !== id),
   );
+  deleteVideoHistoryCover(id).catch(() => {});
 }
