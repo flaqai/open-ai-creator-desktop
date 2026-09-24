@@ -6,7 +6,10 @@ export type ModelIconConfig = {
 };
 
 export const getModelIconConfig = (modelValue: string): ModelIconConfig => {
-  const lowerValue = modelValue.toLowerCase();
+  // Canvas channel values include a prefix (for example, default::nano-banana-pro).
+  // The icon follows the model, not the channel that provides it.
+  const separator = modelValue.indexOf('::');
+  const lowerValue = (separator < 0 ? modelValue : modelValue.slice(separator + 2)).toLowerCase();
 
   if (lowerValue.startsWith('wan') || lowerValue.startsWith('qwen') || lowerValue.startsWith('z-image')) {
     return { src: '/images/model-provider/wan.svg', background: 'dark' };
@@ -41,7 +44,7 @@ export const getModelIconConfig = (modelValue: string): ModelIconConfig => {
     return { src: '/images/model-icon/veo.svg', background: 'dark' };
   }
 
-  if (lowerValue.startsWith('gpt')) {
+  if (lowerValue.startsWith('gpt') || lowerValue.startsWith('chatgpt')) {
     return { src: '/images/model-icon/openai.svg', background: 'dark' };
   }
 

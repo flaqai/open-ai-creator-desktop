@@ -180,13 +180,15 @@ function ModelIcon({
   config: AiConfig;
 }) {
   const integrations = useOptionalInfiniteCanvasIntegrations();
-  const customIcon = integrations?.renderModelIcon?.({ model, capability, presentationKey: sourceModelPresentationKey(model, config.modelAdapter) });
+  const presentationKey = sourceModelPresentationKey(model, config.modelAdapter);
+  const customIcon = integrations?.renderModelIcon?.({ model, capability, presentationKey });
+  const modelIcon = getModelIcon(presentationKey);
   const sizeClassName = size === 'image-form' ? 'size-5 [&_svg]:size-5' : 'size-4 [&_svg]:size-4';
   if (customIcon != null) return <span className={cn('flex shrink-0 items-center justify-center overflow-hidden', sizeClassName)}>{customIcon}</span>;
   if (capability === 'image' || capability === 'video' || capability === '3d' || capability === 'music') {
     return (
       <span className={cn('flex shrink-0 items-center justify-center overflow-hidden', sizeClassName)}>
-        {getModelIcon(model) ? <img src={getModelIcon(model)} alt='' className='size-full object-contain' /> : <Cpu className='size-full' />}
+        {modelIcon ? <img src={modelIcon} alt='' className='size-full object-contain' /> : <Cpu className='size-full' />}
       </span>
     );
   }
