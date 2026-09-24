@@ -1,5 +1,7 @@
 use serde::{Deserialize, Serialize};
 #[cfg(target_os = "macos")]
+use std::sync::atomic::{AtomicBool, Ordering};
+#[cfg(target_os = "macos")]
 use tauri::menu::Menu;
 use tauri::{
     menu::{MenuBuilder, MenuItem, SubmenuBuilder},
@@ -18,8 +20,14 @@ pub struct Geometry {
 }
 
 #[cfg(target_os = "macos")]
+static MENU_ZH: AtomicBool = AtomicBool::new(false);
+#[cfg(target_os = "macos")]
+static CANVAS_EDITOR_ACTIVE: AtomicBool = AtomicBool::new(false);
+
+#[cfg(target_os = "macos")]
 fn macos_menu(app: &tauri::AppHandle, zh: bool) -> tauri::Result<Menu<tauri::Wry>> {
     let label = |english, chinese| if zh { chinese } else { english };
+    let canvas_active = CANVAS_EDITOR_ACTIVE.load(Ordering::Relaxed);
     let settings = MenuItem::with_id(
         app,
         "settings",
@@ -48,6 +56,48 @@ fn macos_menu(app: &tauri::AppHandle, zh: bool) -> tauri::Result<Menu<tauri::Wry
         true,
         Some("CmdOrCtrl+3"),
     )?;
+    let new_canvas = MenuItem::with_id(
+        app,
+        "canvas_new",
+        label("New Canvas", "新建画布"),
+        true,
+        Some("CmdOrCtrl+N"),
+    )?;
+    let open_canvas = MenuItem::with_id(
+        app,
+        "nav_canvas",
+        label("Infinite Canvas", "无限画布"),
+        true,
+        Some("CmdOrCtrl+4"),
+    )?;
+    let save_canvas = MenuItem::with_id(
+        app,
+        "canvas_save",
+        label("Save Canvas", "保存画布"),
+        canvas_active,
+        Some("CmdOrCtrl+S"),
+    )?;
+    let import_canvas = MenuItem::with_id(
+        app,
+        "canvas_import",
+        label("Import Media…", "导入素材…"),
+        canvas_active,
+        None::<&str>,
+    )?;
+    let export_canvas = MenuItem::with_id(
+        app,
+        "canvas_export",
+        label("Export Canvas…", "导出画布…"),
+        canvas_active,
+        None::<&str>,
+    )?;
+    let reset_canvas_view = MenuItem::with_id(
+        app,
+        "canvas_reset_view",
+        label("Reset Canvas View", "重置画布视图"),
+        canvas_active,
+        Some("CmdOrCtrl+0"),
+    )?;
     let quit = MenuItem::with_id(
         app,
         "quit",
@@ -69,6 +119,8 @@ fn macos_menu(app: &tauri::AppHandle, zh: bool) -> tauri::Result<Menu<tauri::Wry
         .item(&quit)
         .build()?;
     let file = SubmenuBuilder::new(app, label("File", "文件"))
+        .item(&new_canvas)
+        .separator()
         .item(&library)
         .separator()
         .text(
@@ -76,15 +128,78 @@ fn macos_menu(app: &tauri::AppHandle, zh: bool) -> tauri::Result<Menu<tauri::Wry
             label("Open Media Folder", "打开作品文件夹"),
         )
         .build()?;
-    let edit = SubmenuBuilder::new(app, label("Edit", "编辑"))
-        .undo()
-        .redo()
+    let canvas = SubmenuBuilder::new(app, label("Canvas", "画布"))
+        .item(&open_canvas)
         .separator()
-        .cut()
-        .copy()
-        .paste()
-        .select_all()
+        .item(&save_canvas)
+        .item(&import_canvas)
+        .item(&export_canvas)
+        .separator()
+        .item(&reset_canvas_view)
         .build()?;
+    let edit = if canvas_active {
+        let undo = MenuItem::with_id(
+            app,
+            "canvas_undo",
+            label("Undo", "撤销"),
+            true,
+            Some("CmdOrCtrl+Z"),
+        )?;
+        let redo = MenuItem::with_id(
+            app,
+            "canvas_redo",
+            label("Redo", "重做"),
+            true,
+            Some("CmdOrCtrl+Shift+Z"),
+        )?;
+        let cut = MenuItem::with_id(
+            app,
+            "canvas_cut",
+            label("Cut", "剪切"),
+            true,
+            Some("CmdOrCtrl+X"),
+        )?;
+        let copy = MenuItem::with_id(
+            app,
+            "canvas_copy",
+            label("Copy", "复制"),
+            true,
+            Some("CmdOrCtrl+C"),
+        )?;
+        let paste = MenuItem::with_id(
+            app,
+            "canvas_paste",
+            label("Paste", "粘贴"),
+            true,
+            Some("CmdOrCtrl+V"),
+        )?;
+        let select_all = MenuItem::with_id(
+            app,
+            "canvas_select_all",
+            label("Select All", "全选"),
+            true,
+            Some("CmdOrCtrl+A"),
+        )?;
+        SubmenuBuilder::new(app, label("Edit", "编辑"))
+            .item(&undo)
+            .item(&redo)
+            .separator()
+            .item(&cut)
+            .item(&copy)
+            .item(&paste)
+            .item(&select_all)
+            .build()?
+    } else {
+        SubmenuBuilder::new(app, label("Edit", "编辑"))
+            .undo()
+            .redo()
+            .separator()
+            .cut()
+            .copy()
+            .paste()
+            .select_all()
+            .build()?
+    };
     let view = SubmenuBuilder::new(app, label("View", "视图"))
         .item(&workspace)
         .item(&create)
@@ -116,7 +231,7 @@ fn macos_menu(app: &tauri::AppHandle, zh: bool) -> tauri::Result<Menu<tauri::Wry
         .build()?;
 
     MenuBuilder::new(app)
-        .items(&[&application, &file, &edit, &view, &window, &help])
+        .items(&[&application, &file, &edit, &view, &canvas, &window, &help])
         .build()
 }
 
@@ -124,12 +239,27 @@ fn macos_menu(app: &tauri::AppHandle, zh: bool) -> tauri::Result<Menu<tauri::Wry
 pub fn set_desktop_menu_locale(app: tauri::AppHandle, locale: String) -> Result<(), String> {
     #[cfg(target_os = "macos")]
     {
+        MENU_ZH.store(matches!(locale.as_str(), "zh" | "tw"), Ordering::Relaxed);
         let menu = macos_menu(&app, matches!(locale.as_str(), "zh" | "tw"))
             .map_err(|error| error.to_string())?;
         app.set_menu(menu).map_err(|error| error.to_string())?;
     }
     #[cfg(not(target_os = "macos"))]
     let _ = (app, locale);
+    Ok(())
+}
+
+#[tauri::command]
+pub fn set_canvas_editor_menu_active(app: tauri::AppHandle, active: bool) -> Result<(), String> {
+    #[cfg(target_os = "macos")]
+    {
+        CANVAS_EDITOR_ACTIVE.store(active, Ordering::Relaxed);
+        let menu =
+            macos_menu(&app, MENU_ZH.load(Ordering::Relaxed)).map_err(|error| error.to_string())?;
+        app.set_menu(menu).map_err(|error| error.to_string())?;
+    }
+    #[cfg(not(target_os = "macos"))]
+    let _ = (app, active);
     Ok(())
 }
 
@@ -185,6 +315,18 @@ pub fn setup(app: &mut tauri::App) -> Result<(), Box<dyn std::error::Error>> {
         | "nav_workspace"
         | "nav_ai_create"
         | "nav_library"
+        | "nav_canvas"
+        | "canvas_new"
+        | "canvas_save"
+        | "canvas_import"
+        | "canvas_export"
+        | "canvas_reset_view"
+        | "canvas_undo"
+        | "canvas_redo"
+        | "canvas_cut"
+        | "canvas_copy"
+        | "canvas_paste"
+        | "canvas_select_all"
         | "nav_text_to_image"
         | "nav_image_to_image"
         | "nav_virtual_try_on"

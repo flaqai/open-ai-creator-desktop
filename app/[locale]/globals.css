@@ -1,5 +1,6 @@
 @import 'tailwindcss';
 @import 'tw-animate-css';
+@import '../../components/infinite-canvas/integration/canvas.css';
 @plugin "@tailwindcss/typography";
 
 @custom-variant dark (&:is(.dark *));
@@ -10,6 +11,45 @@
   --brand-primary-soft: #8589ff;
   --brand-primary-tint: #e8e9ff;
   --brand-primary-ink: #242957;
+}
+
+.canvas-workspace,
+body:has(.canvas-workspace) {
+  --ui-main-color: var(--brand-primary);
+  --ui-main-color-foreground: #fff;
+  --ui-background-color: var(--background);
+  --ui-text-color: var(--foreground);
+  --ui-gray-color: var(--muted-foreground);
+  --ui-light-gray: var(--muted);
+  --ui-light-gray-1: var(--card);
+  --ui-light-gray-2: var(--border);
+  --ui-dark-color: var(--foreground);
+  --ui-green-color: #16a34a;
+  --ui-yellow-color: #ca8a04;
+  --ui-blue-color: var(--brand-primary);
+  --ui-gradient-main: linear-gradient(var(--brand-primary), var(--brand-primary));
+  --ui-canvas-accent: var(--brand-primary);
+  --ui-canvas-accent-foreground: #fff;
+  --ui-canvas-muted-accent: #52525b;
+  --ui-canvas-background: #f4f4f5;
+  --ui-canvas-panel: #fff;
+  --ui-canvas-surface: #f4f4f5;
+  --ui-canvas-surface-hover: #e4e4e7;
+  --ui-canvas-border: #d4d4d8;
+  --ui-canvas-text: #111111;
+  --ui-canvas-muted: #52525b;
+}
+
+:root.dark .canvas-workspace,
+:root.dark body:has(.canvas-workspace) {
+  --ui-canvas-muted-accent: #d4d4d8;
+  --ui-canvas-background: #0b0b0c;
+  --ui-canvas-panel: #151516;
+  --ui-canvas-surface: #1f1f1f;
+  --ui-canvas-surface-hover: #303033;
+  --ui-canvas-border: #303033;
+  --ui-canvas-text: #f4f4f5;
+  --ui-canvas-muted: #a1a1aa;
 }
 
 @utility container {
@@ -28,6 +68,37 @@ body.desktop-app {
   overscroll-behavior: none;
 }
 
+/* Keep one visible scroll indicator for the desktop page. Nested form and
+   navigation panes still scroll with the wheel, trackpad, and keyboard. */
+html:has(.desktop-shell) {
+  --desktop-scrollbar-thumb: color-mix(in srgb, var(--brand-primary) 28%, var(--background));
+  scrollbar-width: thin;
+  scrollbar-color: var(--desktop-scrollbar-thumb) transparent;
+}
+html.dark:has(.desktop-shell) {
+  --desktop-scrollbar-thumb: color-mix(in srgb, var(--brand-primary) 42%, var(--background));
+}
+html:has(.desktop-shell)::-webkit-scrollbar {
+  width: 10px;
+}
+html:has(.desktop-shell)::-webkit-scrollbar-thumb {
+  border: 2px solid var(--background);
+  border-radius: 999px;
+  background: var(--desktop-scrollbar-thumb);
+}
+html:has(.desktop-shell)::-webkit-scrollbar-track {
+  background: var(--background);
+}
+.desktop-shell .desktop-sidebar nav,
+.desktop-shell .desktop-inner-scrollbar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.desktop-shell .desktop-sidebar nav::-webkit-scrollbar,
+.desktop-shell .desktop-inner-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
 body.desktop-app [data-sidebar='sidebar'],
 body.desktop-app [data-slot='sidebar-gap'],
 body.desktop-app [data-slot='sidebar-container'] {
@@ -36,6 +107,11 @@ body.desktop-app [data-slot='sidebar-container'] {
 .desktop-shell {
   width: 100%;
   transition: padding-inline-start 340ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+.desktop-shell .canvas-editor-shell {
+  inset-inline-start: var(--desktop-sidebar-width, 224px);
+  inset-block-start: var(--desktop-titlebar-height, 0px);
+  transition: inset-inline-start 340ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 .desktop-sidebar {
   transition: width 340ms cubic-bezier(0.22, 1, 0.36, 1);

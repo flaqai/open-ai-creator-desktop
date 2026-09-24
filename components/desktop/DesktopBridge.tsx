@@ -5,6 +5,7 @@ import { toast } from 'sonner';
 
 import { isDesktopRuntime, isNativeDesktop } from '@/lib/desktop/runtime';
 import { openExternalUrl } from '@/lib/platform/navigation';
+import DesktopContextMenu from './DesktopContextMenu';
 
 export default function DesktopBridge() {
   useEffect(() => {
@@ -36,5 +37,5 @@ export default function DesktopBridge() {
     };
   }, []);
 
-  return null;
+  return <DesktopContextMenu />;
 }

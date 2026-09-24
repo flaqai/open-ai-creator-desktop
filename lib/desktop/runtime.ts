@@ -14,9 +14,6 @@ export function isNativeDesktop() {
   if (typeof window === 'undefined') return false;
   if (isLocalDesktopPreview()) return false;
   return (
-    process.env.NEXT_PUBLIC_FLAQ_NATIVE_DESKTOP === 'true' ||
-    process.env.NEXT_PUBLIC_FLAQ_DESKTOP_BUILD === 'true' ||
-    process.env.NEXT_PUBLIC_FLAQ_DESKTOP_RUNTIME === 'true' ||
     '__TAURI_INTERNALS__' in window ||
     window.location?.protocol === 'tauri:' ||
     window.location?.hostname === 'tauri.localhost'

@@ -4,6 +4,7 @@ import { useEffect, useState, useSyncExternalStore } from 'react';
 import { Copy, Minus, Square, X } from 'lucide-react';
 
 import { isNativeDesktop } from '@/lib/desktop/runtime';
+import { safelyUnlisten, type TauriUnlisten } from '@/lib/desktop/tauri-listener';
 
 const subscribe = () => () => {};
 const serverSnapshot = () => false;
@@ -29,7 +30,7 @@ export default function DesktopTitleBar({ sidebarWidth, zh }: DesktopTitleBarPro
   useEffect(() => {
     if (!windows) return;
     let disposed = false;
-    let unlisten: (() => void) | undefined;
+    let unlisten: TauriUnlisten | undefined;
 
     void import('@tauri-apps/api/window')
       .then(async ({ getCurrentWindow }) => {
@@ -40,14 +41,14 @@ export default function DesktopTitleBar({ sidebarWidth, zh }: DesktopTitleBarPro
         };
         await update();
         const stop = await appWindow.onResized(() => void update());
-        if (disposed) stop();
+        if (disposed) void safelyUnlisten(stop);
         else unlisten = stop;
       })
       .catch(() => undefined);
 
     return () => {
       disposed = true;
-      unlisten?.();
+      void safelyUnlisten(unlisten);
     };
   }, [windows]);
 

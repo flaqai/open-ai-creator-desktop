@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState, type ReactNode } from 'react';
+import { useEffect, useState, type CSSProperties, type ReactNode } from 'react';
 import dynamic from 'next/dynamic';
 import { Link, usePathname, useRouter } from '@/i18n/navigation';
 import { OPEN_API_CONFIG_CHANGED_EVENT } from '@/network/clientFetch';
@@ -29,15 +29,19 @@ import {
   Sparkles,
   Sun,
   Video,
+  Workflow,
 } from 'lucide-react';
 import { useLocale, useTranslations } from 'next-intl';
 import { toast } from 'sonner';
 
+import { dispatchDesktopCanvasCommand, type DesktopCanvasCommand } from '@/lib/desktop/canvas-menu';
+import { APP_MENU_EVENT } from '@/lib/desktop/context-actions';
 import { openDesktopLogDirectory, writeDesktopLog } from '@/lib/desktop/logging';
 import { mediaDirectoryPreferences, type MediaStorageSettings } from '@/lib/desktop/media-storage';
 import { desktopMenuRoute } from '@/lib/desktop/menu';
 import { DEFAULT_PREFERENCES, parsePreferences, PREFERENCES_KEY, type AppPreferences } from '@/lib/desktop/preferences';
 import { isNativeDesktop, OPEN_DESKTOP_SETTINGS_EVENT } from '@/lib/desktop/runtime';
+import { safelyUnlisten, type TauriUnlisten } from '@/lib/desktop/tauri-listener';
 import { FEATURE_MODULES } from '@/lib/features/catalog';
 import { openExternalUrl } from '@/lib/platform/navigation';
 import { useDesktopRuntime } from '@/hooks/use-desktop-runtime';
@@ -102,6 +106,25 @@ export default function DesktopShell({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     if (!desktop) return;
+    const handle = (event: Event) => {
+      const command = (event as CustomEvent<string>).detail;
+      if (command.startsWith('route:')) { setOpen(false); router.push(command.slice(6)); return; }
+      if (command === 'settings' || command === 'history') showSettings(command === 'history' ? 'library' : 'general');
+      if (command === 'toggle_sidebar') {
+        try {
+          const current = parsePreferences(localStorage.getItem(PREFERENCES_KEY));
+          const next = { ...current, collapsed: !current.collapsed };
+          localStorage.setItem(PREFERENCES_KEY, JSON.stringify(next));
+          setPreferences(next);
+        } catch { toast.error(zh ? '设置保存失败' : 'Could not save preferences'); }
+      }
+    };
+    window.addEventListener(APP_MENU_EVENT, handle);
+    return () => window.removeEventListener(APP_MENU_EVENT, handle);
+  }, [desktop, router, zh]);
+
+  useEffect(() => {
+    if (!desktop) return;
     try {
       setPreferences(parsePreferences(localStorage.getItem(PREFERENCES_KEY)));
     } catch {
@@ -155,10 +178,36 @@ export default function DesktopShell({ children }: { children: ReactNode }) {
   useEffect(() => {
     if (!desktop || !isNativeDesktop() || !('__TAURI_INTERNALS__' in window)) return;
     let disposed = false;
-    let unlisten: (() => void) | undefined;
+    let unlisten: TauriUnlisten | undefined;
     void import('@tauri-apps/api/event')
       .then(async ({ listen }) => {
         const stop = await listen<string>('desktop-menu', ({ payload }) => {
+          if (payload === 'canvas_new') {
+            void import('@/components/infinite-canvas/runtime/persistence/local-projects')
+              .then(({ createCanvasProjectStorage }) =>
+                createCanvasProjectStorage().createProject(zh ? '未命名画布' : 'Untitled canvas'),
+              )
+              .then((project) => router.push(`/ai-canvas/editor?id=${encodeURIComponent(project.id)}`))
+              .catch((error) => toast.error(error instanceof Error ? error.message : String(error)));
+            return;
+          }
+          if (
+            [
+              'canvas_save',
+              'canvas_import',
+              'canvas_export',
+              'canvas_reset_view',
+              'canvas_undo',
+              'canvas_redo',
+              'canvas_cut',
+              'canvas_copy',
+              'canvas_paste',
+              'canvas_select_all',
+            ].includes(payload)
+          ) {
+            dispatchDesktopCanvasCommand(payload as DesktopCanvasCommand);
+            return;
+          }
           const route = desktopMenuRoute(payload);
           if (route) {
             setOpen(false);
@@ -192,13 +241,13 @@ export default function DesktopShell({ children }: { children: ReactNode }) {
             setOpen(true);
           }
         });
-        if (disposed) stop();
+        if (disposed) void safelyUnlisten(stop);
         else unlisten = stop;
       })
       .catch(() => toast.error(zh ? '无法连接系统菜单' : 'Native menu connection failed'));
     return () => {
       disposed = true;
-      unlisten?.();
+      void safelyUnlisten(unlisten);
     };
   }, [desktop, locale, router, zh]);
 
@@ -280,11 +329,15 @@ export default function DesktopShell({ children }: { children: ReactNode }) {
   return (
     <div
       className='desktop-shell min-h-screen'
-      style={{
-        paddingInlineStart: sidebarWidth,
-        paddingBlockStart: windowsFrame ? 44 : 0,
-        minHeight: windowsFrame ? 'calc(100vh - 44px)' : '100vh',
-      }}
+      style={
+        {
+          '--desktop-sidebar-width': `${sidebarWidth}px`,
+          '--desktop-titlebar-height': windowsFrame ? '44px' : '0px',
+          paddingInlineStart: sidebarWidth,
+          paddingBlockStart: windowsFrame ? 44 : 0,
+          minHeight: windowsFrame ? 'calc(100vh - 44px)' : '100vh',
+        } as CSSProperties
+      }
     >
       <DesktopTitleBar sidebarWidth={sidebarWidth} zh={zh} />
       <aside
@@ -323,6 +376,17 @@ export default function DesktopShell({ children }: { children: ReactNode }) {
           </Link>
           {(['workspace', 'image', 'video'] as const).map((group) => (
             <div key={group} className='space-y-1'>
+              {group === 'image' && (
+                <Link
+                  href='/ai-canvas'
+                  title={t('ai-canvas')}
+                  aria-current={pathname.startsWith('/ai-canvas') ? 'page' : undefined}
+                  className={`${linkClass} ${pathname.startsWith('/ai-canvas') ? 'bg-accent text-primary font-semibold' : ''}`}
+                >
+                  <Workflow className='size-5 shrink-0' />
+                  <SidebarLabel collapsed={collapsed}>{t('ai-canvas')}</SidebarLabel>
+                </Link>
+              )}
               {group !== 'workspace' && (
                 <p
                   aria-hidden={collapsed}

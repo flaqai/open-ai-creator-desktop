@@ -254,6 +254,39 @@ fn existing_archive(directory: &Path, prefix: &str) -> Option<PathBuf> {
         })
 }
 
+fn is_archived_media_file(file: &Path, root: &Path) -> bool {
+    let Ok(relative) = file.strip_prefix(root) else {
+        return false;
+    };
+    let parts: Vec<_> = relative.components().collect();
+    if parts.len() != 4 {
+        return false;
+    }
+    let segments: Vec<_> = parts
+        .iter()
+        .filter_map(|part| part.as_os_str().to_str())
+        .collect();
+    if segments.len() != 4
+        || segments[0].len() != 4
+        || segments[1].len() != 2
+        || segments[2].len() != 2
+        || segments[..3]
+            .iter()
+            .any(|part| !part.chars().all(|c| c.is_ascii_digit()))
+    {
+        return false;
+    }
+    let name = segments[3];
+    let extension = file
+        .extension()
+        .and_then(|value| value.to_str())
+        .unwrap_or_default()
+        .to_ascii_lowercase();
+    (name.starts_with("image-")
+        && ["jpg", "jpeg", "png", "webp", "gif", "avif"].contains(&extension.as_str()))
+        || (name.starts_with("video-") && ["mp4", "webm", "mov"].contains(&extension.as_str()))
+}
+
 #[tauri::command]
 pub fn get_media_storage_settings(app: tauri::AppHandle) -> Result<MediaStorageSettings, String> {
     let (directory, is_default) = configured_media_directory(&app)?;
@@ -313,6 +346,27 @@ pub async fn archive_generated_media(
     archive_url_to_root(&root, &url, &media_type, &task_id, completed_at)
         .await
         .map(|path| path.to_string_lossy().into_owned())
+}
+
+/// Grant the asset protocol access only to a previously archived media file.
+#[tauri::command]
+pub fn register_canvas_media_path(app: tauri::AppHandle, path: String) -> Result<(), String> {
+    let file = std::fs::canonicalize(&path).map_err(|e| e.to_string())?;
+    if !file.is_file() {
+        return Err("Canvas media path is not a file".into());
+    }
+    let (configured_root, _) = configured_media_directory(&app)?;
+    let default_root = default_media_directory(&app)?;
+    let permitted = [configured_root, default_root]
+        .iter()
+        .filter_map(|root| std::fs::canonicalize(root).ok())
+        .any(|root| is_archived_media_file(&file, &root));
+    if !permitted {
+        return Err("Canvas media path is outside the application media directory".into());
+    }
+    app.asset_protocol_scope()
+        .allow_file(&file)
+        .map_err(|e| e.to_string())
 }
 
 async fn archive_url_to_root(
@@ -484,6 +538,32 @@ mod tests {
         let file = dir.path().join("not-a-directory");
         std::fs::write(&file, b"content").unwrap();
         assert!(validate_writable_directory(&file).is_err());
+    }
+
+    #[test]
+    fn asset_scope_accepts_only_dated_archived_media() {
+        let root = Path::new("/example/media");
+        assert!(is_archived_media_file(
+            &root.join("2026/09/23/image-task.png"),
+            root
+        ));
+        assert!(is_archived_media_file(
+            &root.join("2026/09/23/video-task.mp4"),
+            root
+        ));
+        assert!(!is_archived_media_file(&root.join("auth.json"), root));
+        assert!(!is_archived_media_file(
+            &root.join("2026/09/23/image-task.html"),
+            root
+        ));
+        assert!(!is_archived_media_file(
+            &root.join("2026/09/23/secret.png"),
+            root
+        ));
+        assert!(!is_archived_media_file(
+            &root.join("2026/09/23/extra/image-task.png"),
+            root
+        ));
     }
 
     #[test]

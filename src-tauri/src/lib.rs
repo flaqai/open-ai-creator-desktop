@@ -11,6 +11,7 @@ pub fn run() {
         .plugin(tauri_plugin_http::init())
         .plugin(tauri_plugin_dialog::init())
         .plugin(tauri_plugin_fs::init())
+        .plugin(tauri_plugin_clipboard_manager::init())
         .setup(|app| {
             logs::initialize(app.handle());
             desktop::setup(app)
@@ -35,6 +36,9 @@ pub fn run() {
             }
         })
         .invoke_handler(tauri::generate_handler![
+            context_actions::read_clipboard_text,
+            context_actions::write_clipboard_text,
+            context_actions::reveal_media_file,
             connection_settings::load_connection_settings,
             connection_settings::save_connection_settings,
             connection_settings::clear_connection_settings,
@@ -44,9 +48,11 @@ pub fn run() {
             media::set_media_storage_directory,
             media::open_media_storage_directory,
             media::archive_generated_media,
+            media::register_canvas_media_path,
             logs::write_desktop_log,
             logs::open_log_directory,
-            desktop::set_desktop_menu_locale
+            desktop::set_desktop_menu_locale,
+            desktop::set_canvas_editor_menu_active
         ])
         .build(tauri::generate_context!())
         .expect("error while building Flaq Creator")
@@ -57,6 +63,7 @@ pub fn run() {
         });
 }
 mod connection_settings;
+mod context_actions;
 mod desktop;
 mod logs;
 mod media;
