@@ -281,12 +281,18 @@ export function InfiniteCanvas({
     >
       <CanvasGrid viewport={viewport} mode={backgroundMode} />
       <div
+        data-testid='canvas-world'
         className='absolute origin-top-left'
         style={{
-          transform: `translate(${viewport.x}px, ${viewport.y}px) scale(${viewport.k})`,
+          left: viewport.x,
+          top: viewport.y,
         }}
       >
-        {children}
+        {/* CSS zoom lays out text at its final size. Transform scale can reuse a
+            rasterized layer and soften glyphs at fractional zoom levels. */}
+        <div data-testid='canvas-content' className='relative origin-top-left' style={{ zoom: viewport.k }}>
+          {children}
+        </div>
       </div>
     </div>
   );

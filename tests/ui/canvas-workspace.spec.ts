@@ -75,6 +75,89 @@ test('right-button drag temporarily pans while the select tool stays active', as
   await expect(page.getByRole('menu', { name: /打开画布菜单|快捷菜单/ })).toBeHidden();
 });
 
+test('canvas text and SVG geometry share the same layout zoom', async ({ page }) => {
+  await page.goto('/zh/ai-canvas/');
+  await page.getByRole('button', { name: '新建项目' }).first().click();
+  await page.getByRole('button', { name: '文本', exact: true }).last().click();
+
+  const surface = page.getByTestId('infinite-canvas-surface');
+  const node = surface.locator('[data-node-id^="text-"]').first();
+  const world = surface.getByTestId('canvas-world');
+  const content = world.getByTestId('canvas-content');
+  await expect(node).toBeVisible();
+
+  const initial = await node.boundingBox();
+  if (!initial) throw new Error('Text node has no layout box');
+  const initialZoom = await content.evaluate((element) => Number.parseFloat(getComputedStyle(element).zoom));
+  expect(initialZoom).toBe(1);
+
+  const slider = page.getByRole('slider', { name: '缩放画布' });
+  for (const percent of ['175', '250', '65', '100']) {
+    await slider.fill(percent);
+    await expect
+      .poll(() => content.evaluate((element) => Number.parseFloat(getComputedStyle(element).zoom)))
+      .toBe(Number(percent) / 100);
+    const zoomed = await node.boundingBox();
+    if (!zoomed) throw new Error('Zoomed text node has no layout box');
+    const zoom = Number(percent) / 100;
+    expect(zoomed.width / initial.width).toBeCloseTo(zoom, 1);
+
+    const geometry = await content.evaluate((element) => {
+      const svg = element.querySelector('svg');
+      if (!svg) throw new Error('Canvas connection SVG is missing');
+      const marker = document.createElement('div');
+      marker.style.cssText = 'position:absolute;left:394px;top:294px;width:12px;height:12px;pointer-events:none';
+      element.append(marker);
+      const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+      circle.setAttribute('cx', '400');
+      circle.setAttribute('cy', '300');
+      circle.setAttribute('r', '6');
+      svg.append(circle);
+      const htmlBox = marker.getBoundingClientRect();
+      const svgBox = circle.getBoundingClientRect();
+      const result = {
+        dx: Math.abs(htmlBox.left + htmlBox.width / 2 - svgBox.left - svgBox.width / 2),
+        dy: Math.abs(htmlBox.top + htmlBox.height / 2 - svgBox.top - svgBox.height / 2),
+        size: svgBox.width,
+      };
+      marker.remove();
+      circle.remove();
+      return result;
+    });
+    expect(geometry.dx).toBeLessThan(1);
+    expect(geometry.dy).toBeLessThan(1);
+    expect(geometry.size).toBeCloseTo(12 * zoom, 1);
+  }
+  expect(await world.evaluate((element) => getComputedStyle(element).transform)).toBe('none');
+  expect(await content.evaluate((element) => getComputedStyle(element).transform)).toBe('none');
+});
+
+test('zoomed canvas keeps node drag distance synchronized with the pointer', async ({ page }) => {
+  await page.goto('/zh/ai-canvas/');
+  await page.getByRole('button', { name: '新建项目' }).first().click();
+  await page.getByRole('button', { name: '文本', exact: true }).last().click();
+
+  const node = page.locator('[data-node-id^="text-"]').first();
+  await expect(node).toBeVisible();
+  await page.getByRole('slider', { name: '缩放画布' }).fill('175');
+
+  const before = await node.boundingBox();
+  if (!before) throw new Error('Text node has no layout box');
+  const surfaceBox = await page.getByTestId('infinite-canvas-surface').boundingBox();
+  if (!surfaceBox) throw new Error('Canvas surface has no layout box');
+  const startX = Math.min(before.x + before.width - 40, surfaceBox.x + surfaceBox.width - 150);
+  const startY = Math.min(before.y + before.height - 40, surfaceBox.y + surfaceBox.height - 120);
+  await page.mouse.move(startX, startY);
+  await page.mouse.down();
+  await page.mouse.move(startX + 90, startY + 40, { steps: 5 });
+  await page.mouse.up();
+
+  const after = await node.boundingBox();
+  if (!after) throw new Error('Dragged text node has no layout box');
+  expect(Math.abs(after.x - before.x - 90)).toBeLessThan(1.5);
+  expect(Math.abs(after.y - before.y - 40)).toBeLessThan(1.5);
+});
+
 test('pan tool preserves buttons inside canvas cards', async ({ page }) => {
   await page.goto('/zh/ai-canvas/');
   await page.getByRole('button', { name: '新建项目' }).first().click();
