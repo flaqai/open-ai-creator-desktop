@@ -1,6 +1,7 @@
 export const DESKTOP_MENU_ROUTES = {
   nav_workspace: '/',
   nav_ai_create: '/ai-media-creator',
+  nav_canvas: '/ai-canvas',
   nav_library: '/recommended-prompts',
   nav_text_to_image: '/text-to-image',
   nav_image_to_image: '/image-to-image',

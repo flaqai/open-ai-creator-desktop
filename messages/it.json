@@ -125,7 +125,7 @@
     },
     "open-api-settings": {
       "title": "Open API Settings",
-      "description": "Configure the local Open API base URL and client key for this browser.",
+      "description": "Configure the Open API base URL and client key on this device.",
       "base-url": "Base URL",
       "base-url-hint": "Leave this as the default unless you need a custom gateway or proxy.",
       "client-key": "Client Key",
@@ -429,7 +429,9 @@
     },
     "ai-create": "AI Create",
     "reference-to-video": "Reference to Video",
-    "reference-to-video-content": "Create video from image, video, audio, document, or link references"
+    "reference-to-video-content": "Create video from image, video, audio, document, or link references",
+    "ai-canvas": "AI Canvas",
+    "ai-canvas-content": "Create and edit on an infinite AI canvas"
   },
   "Footer": {
     "title": "Immagini e Video AI — Gratuito e Open Source · Nessuna Registrazione",
@@ -1411,7 +1413,7 @@
   },
   "CreatorHistory": {
     "title": "Generation History",
-    "description": "Your image and video tasks are stored locally in this browser.",
+    "description": "Your image and video tasks are stored locally.",
     "thumbnail-size": "Dimensione miniature",
     "image": "Images",
     "video": "Videos",
@@ -1526,7 +1528,7 @@
       },
       "4": {
         "title": "Unified Local History",
-        "description": "Review recent image and video tasks saved in this browser, including video previews when a separate cover image is unavailable."
+        "description": "Review recent image and video tasks saved locally, including video previews when a separate cover image is unavailable."
       },
       "title": "One AI Media Creation Workspace for Every Idea",
       "description": "Move from an initial concept to generated media with a unified form that adapts its models, uploads, and settings to the selected creation type."
@@ -1663,6 +1665,996 @@
           "description": "Connect compatible AI clients to Flaq image and video tools through MCP."
         }
       }
+    }
+  },
+  "InfiniteCanvas": {
+    "theme": {
+      "toggle": "Toggle theme"
+    },
+    "common": {
+      "cancel": "Cancel",
+      "save": "Save",
+      "edit": "Edit",
+      "delete": "Delete",
+      "copy": "Copy",
+      "copied": "Copied",
+      "addToAssets": "Add to My Assets",
+      "addedToAssets": "Added to My Assets",
+      "copyPrompt": "Copy prompt",
+      "promptCopied": "Prompt copied",
+      "created": "Created: {{date}}",
+      "updated": "Updated: {{date}}",
+      "all": "All",
+      "download": "Download",
+      "requestCanceled": "Request canceled",
+      "durationMinutes": "{{minutes}}m {{seconds}}s",
+      "durationSeconds": "{{seconds}}s",
+      "imageReadFailed": "Failed to read image",
+      "confirm": "Confirm",
+      "close": "Close",
+      "retry": "Retry",
+      "loading": "Loading…"
+    },
+    "settingsPanels": {
+      "common": {
+        "auto": "Auto",
+        "low": "Low",
+        "medium": "Medium",
+        "high": "High",
+        "xhigh": "Extra high"
+      },
+      "image": {
+        "title": "Image settings",
+        "quality": "Quality",
+        "size": "Size",
+        "align16": "Align to multiples of 16",
+        "align16Hint": "Round dimensions up to the next multiple of 16 after input",
+        "aspectRatio": "Aspect ratio",
+        "transparent": "Transparent background",
+        "transparentHint": "Generate an image without a background when supported by the model",
+        "count": "Image count",
+        "images": "{{count}} images"
+      },
+      "video": {
+        "title": "Video settings",
+        "quality": "Quality",
+        "size": "Size",
+        "seconds": "Seconds",
+        "resolution": "Resolution",
+        "ratio": "Aspect ratio",
+        "duration": "Duration",
+        "smart": "Smart",
+        "output": "Output",
+        "generateAudio": "Generate audio",
+        "watermark": "Add watermark",
+        "adaptive": "Adaptive",
+        "sizes": {
+          "landscape": "Landscape",
+          "portrait": "Portrait",
+          "square": "Square",
+          "widescreen": "Widescreen",
+          "tall": "Tall",
+          "auto": "Auto"
+        },
+        "ratios": {
+          "landscape": "Landscape",
+          "portrait": "Portrait",
+          "square": "Square",
+          "standardLandscape": "Standard landscape",
+          "standardPortrait": "Standard portrait",
+          "cinematic": "Cinematic",
+          "adaptive": "Adaptive"
+        }
+      },
+      "audio": {
+        "title": "Audio settings",
+        "voice": "Voice",
+        "format": "Format",
+        "speed": "Speed",
+        "instructions": "Voice instructions",
+        "instructionsPlaceholder": "For example: natural, warm, and suitable for narration."
+      },
+      "text": {
+        "title": "Text settings",
+        "reasoning": "Reasoning effort"
+      },
+      "model": {
+        "select": "Select model",
+        "assign": "Assign a model for {{capability}} in the provider settings",
+        "noMatch": "No matching {{capability}} models",
+        "addFirst": "Add a provider and models in Settings first",
+        "capabilities": {
+          "image": "image generation",
+          "video": "video",
+          "text": "text",
+          "audio": "audio"
+        }
+      }
+    },
+    "imageReferences": {
+      "label": "Image {{index}}",
+      "separator": ", ",
+      "promptPrefix": "Reference image labels: {{labels}}. Use these labels to interpret image references in the prompt.\n\n{{prompt}}"
+    },
+    "seedance": {
+      "autoMatch": "Automatic",
+      "separator": ", ",
+      "references": {
+        "image": "Image {{index}}",
+        "video": "Video {{index}}",
+        "audio": "Audio {{index}}"
+      },
+      "promptPrefix": "Reference asset labels: {{labels}}. Use these labels to interpret image, video, and audio references in the prompt.\n\n{{prompt}}",
+      "referenceHint": "Reference videos must be mp4/mov, H.264/H.265, and 24–60 FPS. Use authorized Volcengine asset:// assets when real faces are included.",
+      "errors": {
+        "format": "{{label}} supports mp4/mov only",
+        "size": "{{label}} exceeds 200 MB. Compress it before uploading.",
+        "duration": "{{label}} must be 2–15 seconds",
+        "dimensions": "{{label}} dimensions must be between 300 and 6000px",
+        "ratio": "{{label}} aspect ratio must be between 0.4 and 2.5",
+        "pixels": "{{label}} total pixel count must be between 409600 and 8295044",
+        "totalDuration": "Seedance reference videos cannot exceed 15 seconds in total"
+      }
+    },
+    "assets": {
+      "kinds": {
+        "text": "Text",
+        "image": "Image",
+        "video": "Video"
+      },
+      "title": "Asset library",
+      "upload": "Upload assets",
+      "uploadFailed": "The assets could not be uploaded.",
+      "empty": "No local assets yet.",
+      "remove": "Remove asset"
+    },
+    "prompts": {
+      "library": "Prompt Library",
+      "category": "Category",
+      "tags": "Tags",
+      "searchTitle": "Search by title",
+      "loadFailed": "Failed to load prompts",
+      "sourceMissing": "Prompt source not found",
+      "empty": "No matching prompts found"
+    },
+    "canvas": {
+      "defaultTitle": "Infinite Canvas {{count}}",
+      "library": "Canvas library",
+      "title": "Infinite Canvas",
+      "imported": "Imported {{count}} canvases",
+      "importFailed": "Import failed. Select a valid canvas package.",
+      "opening": "Opening canvas...",
+      "loading": "Loading canvases...",
+      "exportSelected": "Export selected",
+      "deleteSelected": "Delete selected",
+      "deleteAll": "Delete all",
+      "import": "Import canvas",
+      "create": "New canvas",
+      "empty": "No canvases yet",
+      "emptyDescription": "Create a canvas to save its nodes, connections, and appearance independently.",
+      "collapsePanel": "Collapse panel",
+      "expandPanel": "Expand panel",
+      "home": "Home",
+      "docs": "Documentation",
+      "projects": "My Canvases",
+      "deleteCurrent": "Delete current canvas",
+      "importAsset": "Import asset",
+      "exportCurrent": "Export current canvas",
+      "undo": "Undo",
+      "redo": "Redo",
+      "openMenu": "Open canvas menu",
+      "renameHint": "Double-click to rename the canvas",
+      "shortcuts": "Keyboard shortcuts",
+      "miniMapOpen": "Open minimap",
+      "miniMapClose": "Close minimap",
+      "resetView": "Reset view",
+      "zoom": "Zoom canvas",
+      "agentConnected": "Codex connected",
+      "agentConnecting": "Codex {{activity}}",
+      "agentDisconnected": "Codex disconnected",
+      "connecting": "Connecting",
+      "openAgent": "Open local Codex panel",
+      "nodeTypes": {
+        "image": "Image",
+        "text": "Text",
+        "config": "Generation config",
+        "video": "Video",
+        "audio": "Audio",
+        "group": "Group"
+      },
+      "toolbar": {
+        "select": "Select",
+        "pan": "Move",
+        "text": "Text",
+        "image": "Image",
+        "video": "Video",
+        "audio": "Audio",
+        "config": "Generation config",
+        "group": "Group",
+        "extensions": "Extension nodes",
+        "upload": "Upload assets",
+        "appearance": "Canvas appearance",
+        "clear": "Clear canvas",
+        "themeMode": "Theme",
+        "light": "Light",
+        "dark": "Dark",
+        "gridStyle": "Grid style",
+        "dots": "Dots",
+        "lines": "Lines",
+        "blank": "Blank",
+        "imageInfo": "Image info"
+      },
+      "project": {
+        "untitled": "Untitled canvas",
+        "imported": "Imported canvas",
+        "select": "Select {{name}}",
+        "stats": "{{nodes}} nodes · {{connections}} connections",
+        "updated": "Updated {{date}}",
+        "saveName": "Save name",
+        "cancelRename": "Cancel rename",
+        "export": "Export",
+        "rename": "Rename",
+        "delete": "Delete",
+        "deleteTitle": "Delete canvases?",
+        "deleteDescription": "This will delete {{count}} canvases along with their nodes and connections."
+      },
+      "export": {
+        "defaultProjectName": "Infinite Canvas",
+        "defaultNodesName": "Canvas elements",
+        "item": "Element"
+      },
+      "createMenu": {
+        "fromNode": "Generate from this node",
+        "close": "Close",
+        "text": "Generate text",
+        "textDescription": "Scripts, ad copy, and brand content",
+        "image": "Generate image",
+        "video": "Generate video",
+        "audio": "Audio reference",
+        "config": "Configuration node",
+        "configDescription": "Model, size, count, and input order",
+        "select": "Select a node"
+      },
+      "node": {
+        "node": "Node",
+        "untitled": "Untitled node",
+        "renameHint": "Double-click to rename the node",
+        "group": "Group",
+        "nodeCount": "{{count}} nodes",
+        "generating": "Generating",
+        "failed": "Generation failed",
+        "retry": "Retry",
+        "missingPlugin": "Plugin missing",
+        "missingPluginDescription": "The plugin for node type “{{type}}” is not installed or enabled",
+        "generateImage": "Generate image from text",
+        "generate": "Generate",
+        "editText": "Double-click to edit text",
+        "emptyImage": "Empty image node",
+        "emptyVideo": "Empty video node",
+        "emptyAudio": "Empty audio node",
+        "audio": "Audio",
+        "batchExpanded": "Image group expanded",
+        "batchCollapsed": "Image group collapsed",
+        "createCopy": "Create copy",
+        "setPrimary": "Set as primary"
+      },
+      "sidePanel": {
+        "canvas": "Canvas",
+        "assets": "Assets",
+        "prompts": "Prompt Library",
+        "resize": "Resize left panel",
+        "elements": "Canvas elements",
+        "select": "Select",
+        "searchNodes": "Search nodes",
+        "focusNode": "Focus node",
+        "preview": "Large preview",
+        "noNodes": "No nodes on this canvas",
+        "clearAll": "Clear all",
+        "selected": "{{count}} selected",
+        "exporting": "Exporting selected elements…",
+        "exportName": "canvas-elements-{{count}}",
+        "exported": "Exported {{count}} elements",
+        "exportFailed": "Export failed. Try again.",
+        "addingAssets": "Adding assets…",
+        "addedAssets": "Added {{count}} assets",
+        "mediaOnly": "Only image and video files are supported",
+        "addFailed": "Failed to add assets. Try again.",
+        "searchAssets": "Search assets",
+        "add": "Add",
+        "noAssets": "No assets",
+        "inserted": "Insert into canvas",
+        "removeAssetTitle": "Remove this asset?",
+        "remove": "Remove",
+        "removeAsset": "Remove asset",
+        "assetRemoved": "Asset removed",
+        "searchPrompts": "Search prompts",
+        "noPrompts": "No prompts",
+        "promptCopied": "Prompt copied",
+        "copyFailed": "Copy failed",
+        "loadFailedRetry": "Load failed. Click to retry.",
+        "noMatchingPrompts": "No matching prompts",
+        "sourceEmpty": "No prompts from this source",
+        "viewDetails": "View details",
+        "filter": {
+          "image": "Image",
+          "video": "Video",
+          "text": "Text",
+          "audio": "Audio",
+          "config": "Configuration",
+          "group": "Group"
+        }
+      },
+      "assetPicker": {
+        "title": "Select assets",
+        "insert": "Insert",
+        "search": "Search assets",
+        "empty": "No assets"
+      },
+      "imageTools": {
+        "copyPrompt": "Copy prompt",
+        "copyPromptTitle": "Copy the prompt used to generate this image",
+        "reversePrompt": "Reverse prompt",
+        "reversePromptTitle": "Create text and configuration nodes to infer the prompt",
+        "replace": "Replace image",
+        "locked": "Lock ratio",
+        "free": "Free ratio",
+        "lockTitle": "Switch to proportional scaling",
+        "freeTitle": "Switch to free resizing",
+        "mask": "Local edit",
+        "maskTitle": "Paint a mask and edit the selected area",
+        "crop": "Crop",
+        "cropTitle": "Crop into a new node",
+        "split": "Split",
+        "splitTitle": "Split the image by rows and columns",
+        "upscale": "Upscale",
+        "upscaleTitle": "Increase image resolution",
+        "superResolve": "Super resolution",
+        "superResolveTitle": "AI super resolution",
+        "angle": "Multi-angle",
+        "angleTitle": "Generate another angle",
+        "view": "View image",
+        "viewTitle": "View image details",
+        "more": "More",
+        "configure": "Configure quick tools",
+        "customize": "Customize toolbar",
+        "showLabels": "Show button labels",
+        "description": "Choose the quick tools shown in the image-node toolbar.",
+        "preview": "Node preview",
+        "imageNode": "Image node",
+        "quickTools": "Quick tools"
+      },
+      "nodeToolbar": {
+        "noPrompt": "No prompt to copy",
+        "infoTitle": "View node information",
+        "info": "Info",
+        "removeTitle": "Remove node",
+        "retryTitle": "Generate again",
+        "saveAsset": "Save asset",
+        "downloadAudio": "Download audio",
+        "downloadVideo": "Download video",
+        "downloadImage": "Download image",
+        "editTextTitle": "Edit text",
+        "editText": "Edit text",
+        "decreaseFont": "Decrease font size",
+        "increaseFont": "Increase font size",
+        "zoomOut": "Smaller",
+        "zoomIn": "Larger",
+        "uploadImage": "Upload image",
+        "replaceVideo": "Replace video",
+        "uploadVideo": "Upload video",
+        "replaceAudio": "Replace audio",
+        "uploadAudio": "Upload audio",
+        "nodeInfo": "Node information",
+        "name": "Name",
+        "type": "Type",
+        "size": "Size",
+        "position": "Position",
+        "status": "Status",
+        "imageGroup": "Image group",
+        "imageSize": "Image size"
+      },
+      "configNode": {
+        "title": "Generation config",
+        "image": "Image",
+        "text": "Text",
+        "video": "Video",
+        "audio": "Audio",
+        "prompt": "Prompt",
+        "references": "Reference images",
+        "videoReferences": "Reference videos",
+        "audioReferences": "Reference audio",
+        "items": "{{count}} items",
+        "images": "{{count}} images",
+        "compose": "Compose prompt",
+        "stop": "Stop",
+        "generate": "Generate"
+      },
+      "projectPage": {
+        "stopTitle": "Stop generation?",
+        "stopDescription": "The current request will be interrupted. Completed results will be kept.",
+        "stop": "Stop",
+        "continue": "Continue generating",
+        "configConnection": "Configuration nodes cannot be connected to each other",
+        "notFound": "Current canvas not found",
+        "exporting": "Exporting current canvas…",
+        "exported": "Current canvas exported",
+        "clipboardText": "Clipboard text",
+        "clipboardImageAdded": "Added image from clipboard",
+        "clipboardTextAdded": "Added text from clipboard",
+        "noTextToSave": "No text to save",
+        "canvasText": "Canvas text",
+        "noVideoToSave": "No video to save",
+        "canvasVideo": "Canvas video",
+        "noImageToSave": "No image to save",
+        "canvasImage": "Canvas image",
+        "emptyReverse": "The image node is empty, so its prompt cannot be inferred",
+        "reverseTitle": "Reverse prompt",
+        "reverseConfigTitle": "Reverse prompt configuration",
+        "splitTitle": "{{name}} {{row}}-{{column}}",
+        "splitSuccess": "Split into {{count}} child nodes",
+        "maskResult": "Local edit result",
+        "maskFailed": "Local edit failed",
+        "generationFailed": "Generation failed",
+        "partialFailed": "Some images failed to generate",
+        "allFailed": "All images failed to generate",
+        "retryPromptMissing": "No prompt found for retry",
+        "referenceMissing": "The reference image is missing, so retry cannot continue",
+        "emptyTextImage": "The text node is empty, so an image cannot be generated",
+        "untitledCanvas": "Untitled canvas",
+        "superResolve": "AI super resolution",
+        "notImplemented": "Not implemented yet",
+        "imageDetails": "Image details",
+        "clearTitle": "Clear canvas?",
+        "clear": "Clear",
+        "clearDescription": "This will delete every node and connection on the current canvas.",
+        "reversePreset": "Infer a prompt suitable for AI image generation from the reference image.\n\nRequirements:\n1. Output only the prompt, with no explanation.\n2. Cover the subject, composition, style, lighting, color, materials, lens, and atmosphere.\n3. Write a complete prompt that can be used directly with an image model.",
+        "maskPrompt": "Only modify the transparent masked area and keep everything else unchanged. {{prompt}}",
+        "editTextPrompt": "Revise the text according to the instructions.\n\nOriginal:\n{{source}}\n\nInstructions:\n{{prompt}}"
+      },
+      "reverseComposer": "Reference image: @[node:{{imageId}}]\nTask: @[node:{{textId}}]",
+      "editors": {
+        "reset": "Reset",
+        "zoomOut": "Zoom out",
+        "zoomIn": "Zoom in",
+        "loading": "Loading",
+        "unknown": "Unknown",
+        "cancel": "Cancel",
+        "angleTitle": "AI Multi-angle",
+        "angleDescription": "The left side previews direction only; the result is regenerated from the original image",
+        "horizontal": "Horizontal angle",
+        "pitch": "Pitch angle",
+        "distance": "Camera distance",
+        "lens": "Wide-angle lens",
+        "standard": "Standard",
+        "wide": "Wide",
+        "aiGenerate": "Generate with AI",
+        "upscaleTitle": "Upscale image",
+        "source": "Source",
+        "targetPixels": "Target pixels",
+        "maxReached": "The image is already 4K and does not need upscaling",
+        "targetReached": "The image already meets the target pixel count",
+        "algorithm": "Upscaling algorithm",
+        "outputSize": "Output size",
+        "upscale": "Generate upscaled image",
+        "high": "High-quality interpolation",
+        "highDescription": "Best for photos and detailed images",
+        "bilinear": "Bilinear",
+        "bilinearDescription": "Smooth and fast",
+        "nearest": "Nearest neighbor",
+        "nearestDescription": "Best for pixel art",
+        "cropTitle": "Crop image",
+        "adjustCrop": "Adjust crop box",
+        "cropHint": "Mouse wheel to zoom · middle button or Space + left drag to pan",
+        "cropSize": "Crop size {{size}}",
+        "ratio": "Ratio {{ratio}}",
+        "original": "Original {{width}} x {{height}}",
+        "confirmCrop": "Crop",
+        "free": "Free",
+        "fixed": "Fixed",
+        "originalMode": "Original",
+        "maskTitle": "Local mask edit",
+        "maskHint": "Mouse wheel to zoom · middle button or Space + left drag to pan · Alt + left/right drag to resize brush · Ctrl/Cmd+Z to undo · Ctrl/Cmd+Shift+Z to redo",
+        "brush": "Brush",
+        "erase": "Erase",
+        "undoMaskTitle": "Undo mask stroke (Ctrl/Cmd+Z)",
+        "undoMask": "Undo mask stroke",
+        "redoMaskTitle": "Redo mask stroke (Ctrl/Cmd+Shift+Z)",
+        "redoMask": "Redo mask stroke",
+        "brushSize": "Brush size",
+        "editInstructions": "Edit instructions",
+        "maskPlaceholder": "For example: change the selected area to metal while preserving the original lighting",
+        "maskPromptRequired": "Enter edit instructions",
+        "maskRequired": "Paint the area to edit first",
+        "aiEdit": "Edit with AI",
+        "splitTitle": "Split image",
+        "splitDescription": "Create {{count}} image nodes and arrange them in the original grid to the right of the canvas",
+        "splitHint": "Mouse wheel to zoom · middle button or Space + left drag to pan · Delete removes the selected line · Ctrl/Cmd+Z to undo · Ctrl/Cmd+Shift+Z to redo",
+        "undoSplitTitle": "Undo split adjustment (Ctrl/Cmd+Z)",
+        "undoSplit": "Undo split adjustment",
+        "redoSplitTitle": "Redo split adjustment (Ctrl/Cmd+Shift+Z)",
+        "redoSplit": "Redo split adjustment",
+        "rows": "Rows",
+        "columns": "Columns",
+        "horizontalLine": "Horizontal line",
+        "verticalLine": "Vertical line",
+        "deleteLine": "Delete line",
+        "resetLines": "Reset lines",
+        "pieceCount": "Pieces",
+        "pieces": "{{count}}",
+        "averageSize": "Average size",
+        "generateChildren": "Create child nodes"
+      },
+      "plugins": {
+        "title": "Node plugins",
+        "installedPlugin": "Installed plugin {{name}}",
+        "installed": "Installed {{name}}",
+        "installFailed": "Installation failed: {{error}}",
+        "enabled": "Enabled",
+        "disabled": "Disabled",
+        "upgradeAvailable": "New version available — click to upgrade",
+        "updateFromSource": "Update from source",
+        "updated": "Updated",
+        "uninstallTitle": "Uninstall this plugin?",
+        "uninstall": "Uninstall",
+        "newVersion": "A new version is available",
+        "officialDescription": "Official plugins from this project's registry",
+        "refresh": "Refresh",
+        "loadFailed": "Failed to load: {{error}}",
+        "loadingOfficial": "Loading official plugins…",
+        "noOfficial": "No official plugins",
+        "install": "Install",
+        "urlPlaceholder": "Enter a plugin JavaScript URL, for example https://.../plugin.js",
+        "noThirdParty": "No third-party plugins installed",
+        "official": "Official",
+        "local": "Local",
+        "thirdParty": "Third-party",
+        "warning": "Plugin code runs directly on this page and can access local data, including your AI API key. Only install plugins from sources you trust.",
+        "aiConfigRequired": "AI configuration is not ready. Configure a model and API key in Settings first.",
+        "interactiveTitle": "Interaction mode is active. Click to switch to Move mode and drag the node.",
+        "movableTitle": "Move mode is active. Click to switch to Interaction mode and operate the node content.",
+        "move": "Move",
+        "interact": "Interact"
+      },
+      "promptPanel": {
+        "video": "Describe the video you want to generate",
+        "audio": "Describe the audio you want to generate",
+        "image": "Describe the image you want to generate",
+        "text": "Describe the text you want to generate",
+        "editImage": "Describe how you want to change this image",
+        "editText": "Describe how you want to revise this text",
+        "expandEditor": "Expand editor",
+        "editorTitle": "Edit prompt",
+        "stopGeneration": "Stop generation",
+        "generate": "Generate",
+        "stop": "Stop"
+      },
+      "composer": {
+        "title": "Compose prompt",
+        "description": "Use @ to reference connected assets; references are renumbered before sending",
+        "placeholder": "Enter a prompt and use @ to reference connected images or text",
+        "imagePreview": "Referenced image preview",
+        "resources": {
+          "image": "Image {{index}}",
+          "video": "Video {{index}}",
+          "audio": "Audio {{index}}",
+          "text": "Text {{index}}"
+        }
+      },
+      "controls": {
+        "ratio": "Ratio",
+        "duplicate": "Duplicate",
+        "delete": "Delete",
+        "images": "{{count}} images",
+        "reasoning": "Reasoning"
+      },
+      "generation": {
+        "interrupted": "Generation was interrupted by a page refresh. Generate again.",
+        "front": "front view",
+        "rotateRight": "rotated {{angle}} degrees right",
+        "rotateLeft": "rotated {{angle}} degrees left",
+        "level": "eye-level view",
+        "topDown": "{{angle}}-degree top-down view",
+        "lowAngle": "{{angle}}-degree low-angle view",
+        "angleLabel": "AI multi-angle: {{horizontal}}, {{pitch}}, camera distance {{distance}}, {{lens}} lens",
+        "anglePrompt": "Regenerate a new view of the same subject from the reference image. Preserve the subject, colors, materials, and visual style; do not merely apply perspective distortion. {{angle}}."
+      },
+      "agentOps": {
+        "add_node": "Add node",
+        "update_node": "Update node",
+        "delete_node": "Delete node",
+        "delete_connections": "Delete connections",
+        "connect_nodes": "Connect",
+        "set_viewport": "Adjust view",
+        "select_nodes": "Select nodes",
+        "run_generation": "Run generation"
+      },
+      "pluginErrors": {
+        "invalidExport": "The plugin did not export a valid object",
+        "missingFields": "The plugin is missing id or nodes",
+        "downloadFailed": "Download failed (HTTP {{status}})",
+        "registryFailed": "Failed to load the official plugin registry (HTTP {{status}})"
+      },
+      "shortcut": {
+        "dragCanvas": "Drag canvas",
+        "pan": "Pan view",
+        "toggleTool": "Temporarily switch Select / Move",
+        "wheel": "Mouse wheel",
+        "zoom": "Zoom canvas",
+        "zoomSlider": "Zoom slider",
+        "preciseZoom": "Adjust zoom precisely",
+        "boxSelect": "Select multiple nodes",
+        "addSelection": "Add nodes to selection",
+        "selectAll": "Select all nodes",
+        "copyPaste": "Copy/paste nodes or paste clipboard text/images",
+        "copyPasteNodes": "Copy/paste nodes",
+        "delete": "Delete selection",
+        "escape": "Clear selection and close overlays",
+        "dropMedia": "Drop images/videos/audio",
+        "upload": "Upload to canvas",
+        "drag": "Drag",
+        "click": "Click"
+      }
+    },
+    "navigation": {
+      "prompts": "Prompt Library",
+      "landing": "Infinite Canvas home",
+      "dashboard": "Canvas projects",
+      "docs": "Documentation",
+      "plugins": "Plugins",
+      "shortcuts": "Keyboard shortcuts",
+      "lightTheme": "Use light theme",
+      "darkTheme": "Use dark theme",
+      "switchLanguage": "Switch language"
+    },
+    "topNav": {
+      "lightTheme": "Switch to light theme",
+      "darkTheme": "Switch to dark theme"
+    },
+    "workbench": {
+      "selectAll": "Select all"
+    },
+    "config": {
+      "promptSources": {
+        "runtime": {
+          "requestFailed": "Request failed ({{status}})",
+          "urlRequired": "JSON URL is required",
+          "fetchFailed": "Failed to fetch “{{name}}”: {{error}}",
+          "noPrompts": "No valid prompts were parsed from “{{name}}”",
+          "invalidRoot": "Invalid “{{name}}” format: the root value must be an array"
+        }
+      }
+    },
+    "agent": {
+      "composer": {
+        "mentions": {
+          "resourceMissing": "Canvas asset “{{title}}” no longer exists",
+          "imageReadFailed": "Could not read canvas image “{{title}}”"
+        }
+      },
+      "open": "Open local Canvas Agent",
+      "unavailable": "The local Canvas Agent is unavailable.",
+      "connecting": "Connecting to the local Canvas Agent…",
+      "connected": "Local Canvas Agent connected.",
+      "protocolMismatch": "The local Canvas Agent protocol version is incompatible.",
+      "promptPlaceholder": "Ask the local Canvas Agent",
+      "send": "Send"
+    },
+    "dashboard": {
+      "eyebrow": "INFINITE CANVAS · Canvas library",
+      "title": "My canvases",
+      "description": "Manage, organize, and continue your Infinite Canvas projects.",
+      "create": "New project",
+      "creating": "Creating…",
+      "untitled": "Untitled canvas",
+      "emptyTitle": "Start with a blank canvas",
+      "emptyDescription": "Create a project to arrange ideas and generate media on an open workspace.",
+      "loadError": "Projects could not be loaded.",
+      "open": "Open",
+      "rename": "Rename",
+      "delete": "Delete",
+      "deleteSelected": "Delete selected",
+      "exportSelected": "Export selected",
+      "cancelSelection": "Cancel",
+      "selectedLabel": "Selected",
+      "deleteConfirmTitle": "Delete canvas project?",
+      "deleteConfirmDescription": "This action permanently deletes the selected project data.",
+      "importProject": "Import ZIP",
+      "exportProject": "Export ZIP",
+      "nodeCount": "Nodes",
+      "connectionCount": "Connections",
+      "updated": "Updated",
+      "totalProjects": "canvas projects",
+      "showingProjects": "Showing",
+      "renameTitle": "Rename canvas project",
+      "renameDescription": "Update the name shown in your canvas library.",
+      "projectName": "Project name",
+      "saveChanges": "Save changes",
+      "previousPage": "Previous",
+      "nextPage": "Next",
+      "mobile": {
+        "title": "My Canvases",
+        "docs": "User Guide",
+        "create": "New Canvas",
+        "importProject": "Import Canvas",
+        "recentTitle": "Recent projects",
+        "emptyTitle": "No canvases yet",
+        "emptyDescription": "Create a canvas to connect your ideas, prompts, and generated results.",
+        "editProject": "Edit project",
+        "renameTitle": "Edit canvas project",
+        "saveChanges": "Save Changes",
+        "delete": "Delete canvas",
+        "deleteConfirmTitle": "Delete canvas?",
+        "deleteConfirmDescription": "This action cannot be undone. The canvas, its nodes, connections, and generated references will be permanently removed.",
+        "selectedCount": "{count} selected",
+        "exportStarted": "Export started"
+      }
+    },
+    "editor": {
+      "loading": "Loading canvas…",
+      "loadError": "The canvas could not be loaded.",
+      "missingProject": "This canvas project no longer exists.",
+      "backToDashboard": "Back to canvas projects",
+      "moveTool": "Move tool",
+      "selectTool": "Select tool",
+      "undo": "Undo",
+      "redo": "Redo",
+      "zoomIn": "Zoom in",
+      "zoomOut": "Zoom out",
+      "fitView": "Fit view",
+      "addNode": "Add generation configuration",
+      "saveNow": "Save now",
+      "saved": "Saved",
+      "saving": "Saving…",
+      "unsavedChanges": "Unsaved changes",
+      "saveFailed": "Changes are not saved yet. Retrying automatically.",
+      "saveRecovered": "Canvas changes are saved again.",
+      "unsavedTitle": "Leave with unsaved changes?",
+      "unsavedDescription": "The latest canvas changes could not be saved.",
+      "leaveAnyway": "Leave anyway",
+      "savingBeforeLeaving": "Saving canvas before leaving, this may take some seconds"
+    },
+    "nodes": {
+      "image": "Image",
+      "text": "Text",
+      "config": "Generation config",
+      "video": "Video",
+      "audio": "Audio",
+      "group": "Group",
+      "delete": "Delete node",
+      "duplicate": "Duplicate node",
+      "setPrimary": "Set as primary",
+      "download": "Download",
+      "preview": "Preview",
+      "imageCount": "Images",
+      "textCount": "Text outputs",
+      "idle": "Ready",
+      "loading": "Generating…",
+      "error": "Generation failed",
+      "resize": "Resize node",
+      "connect": "Connect node"
+    },
+    "prompt": {
+      "title": "Generation prompt",
+      "placeholder": "Describe what you want to create",
+      "expand": "Expand prompt editor",
+      "collapse": "Collapse prompt editor"
+    },
+    "promptSources": {
+      "title": "Prompt sources",
+      "add": "Add source",
+      "name": "Source name",
+      "url": "Prompt source URL",
+      "remove": "Remove source",
+      "empty": "No prompt sources yet.",
+      "loadFailed": "The prompt source could not be loaded."
+    },
+    "generation": {
+      "generate": "Generate",
+      "generating": "Generating…",
+      "paidTaskContinues": "The accepted generation continues if this view closes.",
+      "retry": "Retry generation",
+      "textUnavailable": "Text generation is unavailable until an approved model is configured.",
+      "streamUnavailable": "Text streaming is not configured.",
+      "failed": "Generation failed."
+    },
+    "plugins": {
+      "title": "Canvas plugins",
+      "install": "Install plugin",
+      "urlPlaceholder": "Plugin module URL",
+      "loadFailed": "The plugin could not be loaded.",
+      "empty": "No plugins installed."
+    },
+    "importExport": {
+      "invalidArchive": "This is not a valid canvas archive.",
+      "importFailed": "The canvas archive could not be imported.",
+      "exportFailed": "The canvas archive could not be exported."
+    },
+    "accessibility": {
+      "canvas": "Infinite Canvas workspace",
+      "minimap": "Canvas minimap",
+      "projectActions": "Project actions",
+      "generationStatus": "Generation status"
+    },
+    "landing": {
+      "eyebrow": "Flaq.ai AI Canvas",
+      "title": "Create without boundaries",
+      "description": "Arrange ideas, references, prompts, images, video, text, and audio on one flexible AI workspace.",
+      "titleHighlight": "Build visual AI workflows on an open canvas",
+      "primaryCta": "Open canvas projects",
+      "secondaryCta": "Read the guide",
+      "capabilities": "Create connected image and video workflows with supported Flaq AI models.",
+      "featuresTitle": "One workspace from idea to output",
+      "featureCanvas": "Connect visual nodes on an open canvas.",
+      "featureGeneration": "Generate media with Flaq AI-supported models.",
+      "featureProjects": "Save and reopen account projects across devices.",
+      "form": {
+        "submit": "Create Canvas Workflow"
+      },
+      "workflow": {
+        "untitled": "Untitled canvas",
+        "generation": "Generation",
+        "inputImage": "Input image",
+        "inputVideo": "Input video",
+        "inputAudio": "Input audio",
+        "uploadFailed": "Unable to upload your files to AI Canvas. Please try again. (Status: {status})",
+        "unsupportedParameters": "Canvas currently supports image, video, and audio references. Remove document files and web links before creating a canvas workflow."
+      },
+      "recent": {
+        "title": "Recent canvases",
+        "viewAll": "View all",
+        "newProject": "New canvas",
+        "newProjectDescription": "Start with an empty workspace",
+        "emptyTitle": "No canvas projects yet",
+        "emptyDescription": "Create your first canvas to organize prompts, references, and generated media.",
+        "sessionExpired": "Your session has expired.",
+        "signInAgain": "Sign in again",
+        "loading": "Loading recent canvases",
+        "loadError": "Recent canvases could not be loaded.",
+        "retry": "Try again",
+        "description": "Continue working on your latest canvas workflows.",
+        "updated": "Updated {date}",
+        "nodes": "{count, plural, one {# node} other {# nodes}}"
+      },
+      "heading": {
+        "title": "Flaq.ai AI Canvas: Build Connected Image and Video Workflows",
+        "description": "Move from a prompt or compatible image input to a visual AI workflow. Create an initial project with a supported image or video setup, then organize, generate, review, and refine connected steps in one canvas."
+      },
+      "features": {
+        "1": {
+          "title": "A Visual Workspace for Every Creative Step",
+          "description": "Arrange prompts, compatible inputs, model settings, and results as connected nodes, so the relationship between each creative step stays visible."
+        },
+        "2": {
+          "title": "Start With a Supported Image or Video Workflow",
+          "description": "Choose text-to-image, image-to-image, text-to-video, or image-to-video, then begin with a representative supported model and the controls available for that setup."
+        },
+        "3": {
+          "title": "Carry Context Forward",
+          "description": "Connect compatible inputs and outputs to later generation nodes, so you can develop variations without rebuilding your creative direction from scratch."
+        },
+        "4": {
+          "title": "Projects You Can Return To",
+          "description": "Save, reopen, rename, and manage Canvas projects locally, then return to continue your visual workflow."
+        },
+        "title": "Core Features of Flaq.ai AI Canvas",
+        "description": "Bring prompts, compatible inputs, model choices, and generation results into a connected Canvas project instead of losing context between separate steps.",
+        "tryNow": "Start Creating"
+      },
+      "useCases": {
+        "1": {
+          "title": "Campaign Concepts and Asset Variations",
+          "description": "Keep campaign prompts, product references, image variations, and video directions together while you develop related creative assets."
+        },
+        "2": {
+          "title": "Storyboards and Scene Development",
+          "description": "Map a scene from written direction to key images and video steps, then keep the visual path visible while you refine the sequence."
+        },
+        "3": {
+          "title": "Product Visual Exploration",
+          "description": "Compare product concepts, source images, instructions, and generated variations in the same project before choosing a direction to develop."
+        },
+        "4": {
+          "title": "Iterative Image and Video Workflows",
+          "description": "Carry a promising result into the next stage, compare directions in context, and preserve the visual path behind the work."
+        },
+        "title": "Use Cases of Flaq.ai AI Canvas",
+        "description": "Use Canvas when image and video generation, shared context, and iteration need to remain visible in one creative workspace.",
+        "tryNow": "Create a Canvas"
+      },
+      "manual": {
+        "1": {
+          "title": "Choose a Workflow and Supported Model",
+          "description": "Start with text-to-image, image-to-image, text-to-video, or image-to-video, then choose a supported model and the controls available for that setup."
+        },
+        "2": {
+          "title": "Add Your Prompt and Compatible Inputs",
+          "description": "Write the creative direction for the result and add compatible image inputs when the selected workflow accepts them."
+        },
+        "3": {
+          "title": "Create the Project, Then Generate on Canvas",
+          "description": "Submitting creates the initial Canvas project and opens it in the editor. Run a generation node when you are ready, then review the result and continue developing the workflow."
+        },
+        "title": "How to Use Flaq.ai AI Canvas",
+        "description": "Choose a supported workflow, add your creative direction, then open a Canvas project to generate and refine the next steps.",
+        "tryNow": "Start Creating"
+      },
+      "faq": {
+        "1": {
+          "question": "What is Flaq.ai AI Canvas?",
+          "answer": "Flaq.ai AI Canvas is a visual workspace for organizing prompts, compatible inputs, generation settings, and AI-generated images or videos as connected nodes."
+        },
+        "2": {
+          "question": "Which workflows can I start with?",
+          "answer": "Start with text-to-image, image-to-image, text-to-video, image-to-video, or reference-to-video. Available inputs and settings depend on the selected model."
+        },
+        "3": {
+          "question": "Does creating a Canvas project generate media immediately?",
+          "answer": "No. The form creates an initial project with your prompt, selected model settings, and compatible input images. Generation begins only when you run a generation node in the Canvas."
+        },
+        "4": {
+          "question": "Can I save a Canvas project and return to it?",
+          "answer": "Yes. Projects are saved locally. Reopen, rename, and manage them from the Canvas library. Export projects to keep a backup or move them to another device."
+        },
+        "5": {
+          "question": "Can I reuse generated results in another step?",
+          "answer": "Yes. Connect compatible image or video nodes to another generation configuration to continue a workflow with an earlier result as context."
+        },
+        "6": {
+          "question": "Which AI models are available in Flaq.ai AI Canvas?",
+          "answer": "Choose from the image and video models listed in the form. Model availability depends on the selected workflow. Generating media requires your Flaq Client Key and sufficient API credit."
+        },
+        "7": {
+          "question": "Will more models be added to Flaq.ai AI Canvas?",
+          "answer": "The available selection may change over time. Check the model picker for the image and video models currently supported by your chosen workflow."
+        },
+        "title": "Flaq.ai AI Canvas FAQ"
+      },
+      "example": {
+        "title": "See an AI Canvas Workflow in Action",
+        "description": "Follow an idea from its first prompt to images and video. Keep references, generated assets, connected steps, and new creative directions visible in one flexible workspace."
+      }
+    },
+    "docs": {
+      "openDashboard": "My Canvas",
+      "backToLanding": "Back to AI Canvas"
+    },
+    "modelAdapter": {
+      "unavailable": "This model is not available in Flaq AI Canvas. Choose a model from the list.",
+      "invalidParameters": "These settings are not supported by the selected model. Check its quality, resolution, ratio, duration, and seed range.",
+      "invalidInputs": "The references do not match this model's requirements. Check the input types and number of files.",
+      "pricingUnavailable": "Model pricing is not ready. Wait a moment and try again."
+    },
+    "advancedParameters": {
+      "label": "Advanced",
+      "seed": "Seed (-1 for random)",
+      "negativePrompt": "Negative prompt",
+      "isTranslate": "Translate prompt"
+    },
+    "pricing": {
+      "estimate": "Estimated per generation: {price}",
+      "loading": "Loading price…",
+      "unavailable": "Price unavailable",
+      "configureInputs": "Check model settings and references to estimate the price"
+    },
+    "threeD": {
+      "label": "3D"
+    },
+    "promptLibrary": {
+      "open": "Open prompt library",
+      "title": "Prompt Library",
+      "description": "Choose a prompt to fill the current node.",
+      "search": "Search prompts",
+      "noSources": "No prompt sources enabled",
+      "loading": "Loading prompts",
+      "loadError": "Could not load this prompt source.",
+      "retry": "Retry",
+      "noMatches": "No matching prompts",
+      "empty": "This source is empty",
+      "viewDetails": "View prompt details",
+      "copy": "Copy prompt",
+      "copied": "Copied",
+      "add": "Add prompt as text node",
+      "select": "Select prompt"
     }
   }
 }

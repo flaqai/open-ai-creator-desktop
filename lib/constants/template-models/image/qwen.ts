@@ -39,4 +39,36 @@ export const QWEN_IMAGE_MODELS: TemplateModelConfig[] = [
     },
     params: QWEN_IMAGE_3_PRO_PARAMS,
   },
+  {
+    id: 'qwen-image-3.0',
+    label: 'Qwen Image 3.0',
+    mediaType: 'image',
+    provider: 'qwen',
+    generationType: 'text-to-image',
+    request: {
+      endpoint: 'image',
+      modelName: 'qwen-image-3.0',
+    },
+    inputs: {
+      prompt: { supported: true, required: true },
+      image: { supported: false, required: false, multiple: false, min: 0, max: 0 },
+    },
+    params: QWEN_IMAGE_3_PRO_PARAMS,
+  },
+  {
+    id: 'qwen-image-3.0-edit',
+    label: 'Qwen Image 3.0 Edit',
+    mediaType: 'image',
+    provider: 'qwen',
+    generationType: 'image-to-image',
+    request: {
+      endpoint: 'image',
+      modelName: 'qwen-image-3.0-edit',
+    },
+    inputs: {
+      prompt: { supported: true, required: true },
+      image: { supported: true, required: true, multiple: true, min: 1, max: 3 },
+    },
+    params: QWEN_IMAGE_3_PRO_PARAMS,
+  },
 ];

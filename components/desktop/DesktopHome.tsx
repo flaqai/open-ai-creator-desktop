@@ -2,13 +2,18 @@
 
 import type { ReactNode } from 'react';
 import { Link } from '@/i18n/navigation';
-import { ArrowUpRight, ImageIcon, Layers3, Play, Shirt, Sparkles, Video } from 'lucide-react';
+import { ArrowUpRight, ImageIcon, Layers3, Play, Shirt, Sparkles, Video, Workflow } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 
 import { FEATURE_MODULES } from '@/lib/features/catalog';
 import { useDesktopRuntime } from '@/hooks/use-desktop-runtime';
 
-const icons = { sparkles: Sparkles, image: ImageIcon, layers: Layers3, shirt: Shirt, video: Video, play: Play };
+const icons = { sparkles: Sparkles, image: ImageIcon, layers: Layers3, shirt: Shirt, video: Video, play: Play, canvas: Workflow };
+const homeOrder = [
+  'ai-media-creator', 'ai-canvas', 'image-to-image', 'virtual-try-on', 'text-to-video',
+  'image-to-video', 'reference-to-video', 'text-to-image',
+] as const;
+const homeModules = homeOrder.map((id) => FEATURE_MODULES.find((tool) => tool.id === id)!);
 
 export default function DesktopHome({ children }: { children?: ReactNode }) {
   const t = useTranslations('Desktop');
@@ -33,7 +38,7 @@ export default function DesktopHome({ children }: { children?: ReactNode }) {
         </div>
 
         <div className='grid gap-4 sm:grid-cols-2 xl:grid-cols-3'>
-          {FEATURE_MODULES.map((tool) => {
+          {homeModules.map((tool) => {
             const { code, href } = tool;
             const Icon = icons[tool.icon];
             const featured = 'featured' in tool && tool.featured;

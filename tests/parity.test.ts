@@ -10,8 +10,9 @@ import { TEMPLATE_MODELS } from '../lib/constants/template-models';
 import { FEATURE_MODULES } from '../lib/features/catalog';
 import baseline from './fixtures/upstream-models.json';
 
-test('all 50 upstream model variants retain their complete input and parameter contracts', () => {
+test('all 60 upstream model variants retain their complete input and parameter contracts', () => {
   const current = new Map(TEMPLATE_MODELS.map((model) => [model.id, model]));
+  assert.equal(current.size, baseline.models.length);
   for (const model of baseline.models) {
     assert.ok(current.has(model.id), `Missing upstream model ${model.id}`);
     assert.equal(
@@ -24,7 +25,7 @@ test('all 50 upstream model variants retain their complete input and parameter c
   }
 });
 
-test('seven creative routes are registered once and backed by actual Next pages', () => {
+test('seven creative routes and the canvas workspace are registered once and backed by Next pages', () => {
   const expected = [
     'ai-media-creator',
     'text-to-image',
@@ -33,6 +34,7 @@ test('seven creative routes are registered once and backed by actual Next pages'
     'text-to-video',
     'image-to-video',
     'reference-to-video',
+    'ai-canvas',
   ];
   assert.deepEqual(FEATURE_MODULES.map((f) => f.id).sort(), expected.sort());
   assert.equal(new Set(ALL_FEATURE_ROUTES.map((f) => f.href)).size, expected.length);
@@ -44,6 +46,7 @@ test('seven creative routes are registered once and backed by actual Next pages'
       pages.some((file) => file.endsWith(`/${id}/page.tsx`)),
       id,
     );
+  assert.ok(pages.some((file) => file.endsWith('/ai-canvas/editor/page.tsx')));
 });
 
 test('every supported language has desktop and tool guide translation keys', () => {
@@ -67,8 +70,12 @@ test('every supported language has desktop and tool guide translation keys', () 
       assert.ok(hostingKeys.has(key), `${locale.lang}: components.image-hosting.${key}`);
     for (const tool of FEATURE_MODULES) {
       assert.ok(messages.Navigation[tool.code], `${locale.lang}: ${tool.code}`);
-      assert.ok(messages[tool.id]?.manual, `${locale.lang}: missing ${tool.id} manual`);
-      assert.ok(messages[tool.id]?.faq, `${locale.lang}: missing ${tool.id} FAQ`);
+      if (tool.group === 'canvas') {
+        assert.ok(messages.InfiniteCanvas?.dashboard, `${locale.lang}: missing InfiniteCanvas dashboard`);
+      } else {
+        assert.ok(messages[tool.id]?.manual, `${locale.lang}: missing ${tool.id} manual`);
+        assert.ok(messages[tool.id]?.faq, `${locale.lang}: missing ${tool.id} FAQ`);
+      }
     }
   }
 });

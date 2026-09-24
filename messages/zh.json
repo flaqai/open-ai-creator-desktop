@@ -125,7 +125,7 @@
     },
     "open-api-settings": {
       "title": "Open API 设置",
-      "description": "为当前浏览器配置本地 Open API 的 Base URL 和 client key。",
+      "description": "在本机配置 Open API 的 Base URL 和 Client Key。",
       "base-url": "Base URL",
       "base-url-hint": "除非你需要自定义网关或代理，否则保持默认即可。",
       "client-key": "Client Key",
@@ -429,7 +429,9 @@
     },
     "ai-create": "AI 创作",
     "reference-to-video": "参考素材转视频",
-    "reference-to-video-content": "基于图片、视频、音频、文档或链接等参考素材创建视频"
+    "reference-to-video-content": "基于图片、视频、音频、文档或链接等参考素材创建视频",
+    "ai-canvas": "AI 画布",
+    "ai-canvas-content": "在无限 AI 画布上创作和编辑"
   },
   "Footer": {
     "title": "AI 图片与视频 — 免费开源 · 无需注册",
@@ -1411,7 +1413,7 @@
   },
   "CreatorHistory": {
     "title": "生成历史",
-    "description": "您的图片和视频任务会存储在此浏览器本地。",
+    "description": "您的图片和视频任务会存储在本地。",
     "thumbnail-size": "缩略图大小",
     "image": "图片",
     "video": "视频",
@@ -1526,7 +1528,7 @@
       },
       "4": {
         "title": "统一的本地历史记录",
-        "description": "查看保存在此浏览器中的近期图片和视频任务；没有单独封面图时，也可使用视频进行预览。"
+        "description": "查看保存在本地的近期图片和视频任务；没有单独封面图时，也可使用视频进行预览。"
       },
       "title": "满足每个创意的一站式 AI 媒体创作工作区",
       "description": "从初步构想到生成媒体，只需使用一个统一表单；它会根据所选创作类型自动调整模型、上传选项和设置。"
@@ -1663,6 +1665,996 @@
           "description": "通过 MCP 将兼容的 AI 客户端连接至 Flaq 图片和视频工具。"
         }
       }
+    }
+  },
+  "InfiniteCanvas": {
+    "theme": {
+      "toggle": "切换主题"
+    },
+    "common": {
+      "cancel": "取消",
+      "save": "保存",
+      "edit": "编辑",
+      "delete": "删除",
+      "copy": "复制",
+      "copied": "已复制",
+      "addToAssets": "添加到我的素材",
+      "addedToAssets": "已添加到我的素材",
+      "copyPrompt": "复制提示词",
+      "promptCopied": "提示词已复制",
+      "created": "创建时间：{{date}}",
+      "updated": "更新时间：{{date}}",
+      "all": "全部",
+      "download": "下载",
+      "requestCanceled": "请求已取消",
+      "durationMinutes": "{{minutes}} 分 {{seconds}} 秒",
+      "durationSeconds": "{{seconds}} 秒",
+      "imageReadFailed": "图片读取失败",
+      "confirm": "确认",
+      "close": "关闭",
+      "retry": "重试",
+      "loading": "加载中…"
+    },
+    "settingsPanels": {
+      "common": {
+        "auto": "自动",
+        "low": "低",
+        "medium": "中",
+        "high": "高",
+        "xhigh": "极高"
+      },
+      "image": {
+        "title": "图片设置",
+        "quality": "质量",
+        "size": "尺寸",
+        "align16": "对齐到 16 的倍数",
+        "align16Hint": "输入后，将尺寸向上取整为最接近的 16 的倍数",
+        "aspectRatio": "宽高比",
+        "transparent": "透明背景",
+        "transparentHint": "模型支持时，生成无背景的图片",
+        "count": "图片数量",
+        "images": "{{count}} 张图片"
+      },
+      "video": {
+        "title": "视频设置",
+        "quality": "质量",
+        "size": "尺寸",
+        "seconds": "秒数",
+        "resolution": "分辨率",
+        "ratio": "宽高比",
+        "duration": "时长",
+        "smart": "智能",
+        "output": "输出",
+        "generateAudio": "生成音频",
+        "watermark": "添加水印",
+        "adaptive": "自适应",
+        "sizes": {
+          "landscape": "横屏",
+          "portrait": "竖屏",
+          "square": "正方形",
+          "widescreen": "宽屏",
+          "tall": "超长竖屏",
+          "auto": "自动"
+        },
+        "ratios": {
+          "landscape": "横屏",
+          "portrait": "竖屏",
+          "square": "正方形",
+          "standardLandscape": "标准横屏",
+          "standardPortrait": "标准竖屏",
+          "cinematic": "电影画幅",
+          "adaptive": "自适应"
+        }
+      },
+      "audio": {
+        "title": "音频设置",
+        "voice": "音色",
+        "format": "格式",
+        "speed": "语速",
+        "instructions": "语音指令",
+        "instructionsPlaceholder": "例如：自然、温暖，适合旁白。"
+      },
+      "text": {
+        "title": "文本设置",
+        "reasoning": "推理强度"
+      },
+      "model": {
+        "select": "选择模型",
+        "assign": "在服务商设置中为{{capability}}指定模型",
+        "noMatch": "没有匹配的{{capability}}模型",
+        "addFirst": "请先在设置中添加服务商和模型",
+        "capabilities": {
+          "image": "图片生成",
+          "video": "视频",
+          "text": "文本",
+          "audio": "音频"
+        }
+      }
+    },
+    "imageReferences": {
+      "label": "图片 {{index}}",
+      "separator": "、",
+      "promptPrefix": "参考图片标签：{{labels}}。请根据这些标签识别提示词中引用的图片。\n\n{{prompt}}"
+    },
+    "seedance": {
+      "autoMatch": "自动",
+      "separator": "、",
+      "references": {
+        "image": "图片 {{index}}",
+        "video": "视频 {{index}}",
+        "audio": "音频 {{index}}"
+      },
+      "promptPrefix": "参考素材标签：{{labels}}。请根据这些标签识别提示词中引用的图片、视频和音频。\n\n{{prompt}}",
+      "referenceHint": "参考视频须为 mp4/mov 格式，采用 H.264/H.265 编码，帧率为 24–60 FPS。包含真人面孔时，请使用已获授权的火山引擎 asset:// 素材。",
+      "errors": {
+        "format": "{{label}}仅支持 mp4/mov 格式",
+        "size": "{{label}}超过 200 MB，请压缩后再上传。",
+        "duration": "{{label}}的时长须为 2–15 秒",
+        "dimensions": "{{label}}的尺寸须在 300 至 6000 像素之间",
+        "ratio": "{{label}}的宽高比须在 0.4 至 2.5 之间",
+        "pixels": "{{label}}的总像素数须在 409600 至 8295044 之间",
+        "totalDuration": "Seedance 参考视频的总时长不能超过 15 秒"
+      }
+    },
+    "assets": {
+      "kinds": {
+        "text": "文本",
+        "image": "图片",
+        "video": "视频"
+      },
+      "title": "素材库",
+      "upload": "上传素材",
+      "uploadFailed": "素材上传失败。",
+      "empty": "暂无本地素材。",
+      "remove": "移除素材"
+    },
+    "prompts": {
+      "library": "提示词库",
+      "category": "分类",
+      "tags": "标签",
+      "searchTitle": "按标题搜索",
+      "loadFailed": "提示词加载失败",
+      "sourceMissing": "未找到提示词来源",
+      "empty": "未找到匹配的提示词"
+    },
+    "canvas": {
+      "defaultTitle": "无限画布 {{count}}",
+      "library": "画布库",
+      "title": "无限画布",
+      "imported": "已导入 {{count}} 个画布",
+      "importFailed": "导入失败，请选择有效的画布文件包。",
+      "opening": "正在打开画布…",
+      "loading": "正在加载画布…",
+      "exportSelected": "导出所选",
+      "deleteSelected": "删除所选",
+      "deleteAll": "全部删除",
+      "import": "导入画布",
+      "create": "新建画布",
+      "empty": "暂无画布",
+      "emptyDescription": "创建画布，独立保存其中的节点、连线和外观。",
+      "collapsePanel": "收起面板",
+      "expandPanel": "展开面板",
+      "home": "首页",
+      "docs": "文档",
+      "projects": "我的画布",
+      "deleteCurrent": "删除当前画布",
+      "importAsset": "导入素材",
+      "exportCurrent": "导出当前画布",
+      "undo": "撤销",
+      "redo": "重做",
+      "openMenu": "打开画布菜单",
+      "renameHint": "双击重命名画布",
+      "shortcuts": "键盘快捷键",
+      "miniMapOpen": "打开小地图",
+      "miniMapClose": "关闭小地图",
+      "resetView": "重置视图",
+      "zoom": "缩放画布",
+      "agentConnected": "Codex 已连接",
+      "agentConnecting": "Codex {{activity}}",
+      "agentDisconnected": "Codex 已断开连接",
+      "connecting": "连接中",
+      "openAgent": "打开本地 Codex 面板",
+      "nodeTypes": {
+        "image": "图片",
+        "text": "文本",
+        "config": "生成配置",
+        "video": "视频",
+        "audio": "音频",
+        "group": "分组"
+      },
+      "toolbar": {
+        "select": "选择",
+        "pan": "移动",
+        "text": "文本",
+        "image": "图片",
+        "video": "视频",
+        "audio": "音频",
+        "config": "生成配置",
+        "group": "分组",
+        "extensions": "扩展节点",
+        "upload": "上传素材",
+        "appearance": "画布外观",
+        "clear": "清空画布",
+        "themeMode": "主题",
+        "light": "浅色",
+        "dark": "深色",
+        "gridStyle": "网格样式",
+        "dots": "点阵",
+        "lines": "线条",
+        "blank": "空白",
+        "imageInfo": "图片信息"
+      },
+      "project": {
+        "untitled": "未命名画布",
+        "imported": "导入的画布",
+        "select": "选择{{name}}",
+        "stats": "{{nodes}} 个节点 · {{connections}} 条连线",
+        "updated": "更新于 {{date}}",
+        "saveName": "保存名称",
+        "cancelRename": "取消重命名",
+        "export": "导出",
+        "rename": "重命名",
+        "delete": "删除",
+        "deleteTitle": "删除画布？",
+        "deleteDescription": "将删除 {{count}} 个画布及其中的节点和连线。"
+      },
+      "export": {
+        "defaultProjectName": "无限画布",
+        "defaultNodesName": "画布元素",
+        "item": "元素"
+      },
+      "createMenu": {
+        "fromNode": "基于此节点生成",
+        "close": "关闭",
+        "text": "生成文本",
+        "textDescription": "脚本、广告文案和品牌内容",
+        "image": "生成图片",
+        "video": "生成视频",
+        "audio": "音频参考",
+        "config": "配置节点",
+        "configDescription": "模型、尺寸、数量和输入顺序",
+        "select": "选择节点"
+      },
+      "node": {
+        "node": "节点",
+        "untitled": "未命名节点",
+        "renameHint": "双击重命名节点",
+        "group": "分组",
+        "nodeCount": "{{count}} 个节点",
+        "generating": "生成中",
+        "failed": "生成失败",
+        "retry": "重试",
+        "missingPlugin": "缺少插件",
+        "missingPluginDescription": "节点类型“{{type}}”对应的插件尚未安装或启用",
+        "generateImage": "根据文本生成图片",
+        "generate": "生成",
+        "editText": "双击编辑文本",
+        "emptyImage": "空图片节点",
+        "emptyVideo": "空视频节点",
+        "emptyAudio": "空音频节点",
+        "audio": "音频",
+        "batchExpanded": "图片组已展开",
+        "batchCollapsed": "图片组已收起",
+        "createCopy": "创建副本",
+        "setPrimary": "设为主图"
+      },
+      "sidePanel": {
+        "canvas": "画布",
+        "assets": "素材",
+        "prompts": "提示词库",
+        "resize": "调整左侧面板大小",
+        "elements": "画布元素",
+        "select": "选择",
+        "searchNodes": "搜索节点",
+        "focusNode": "定位节点",
+        "preview": "大图预览",
+        "noNodes": "此画布上暂无节点",
+        "clearAll": "全部清空",
+        "selected": "已选择 {{count}} 项",
+        "exporting": "正在导出所选元素…",
+        "exportName": "画布元素-{{count}}",
+        "exported": "已导出 {{count}} 个元素",
+        "exportFailed": "导出失败，请重试。",
+        "addingAssets": "正在添加素材…",
+        "addedAssets": "已添加 {{count}} 个素材",
+        "mediaOnly": "仅支持图片和视频文件",
+        "addFailed": "添加素材失败，请重试。",
+        "searchAssets": "搜索素材",
+        "add": "添加",
+        "noAssets": "暂无素材",
+        "inserted": "插入画布",
+        "removeAssetTitle": "移除此素材？",
+        "remove": "移除",
+        "removeAsset": "移除素材",
+        "assetRemoved": "素材已移除",
+        "searchPrompts": "搜索提示词",
+        "noPrompts": "暂无提示词",
+        "promptCopied": "提示词已复制",
+        "copyFailed": "复制失败",
+        "loadFailedRetry": "加载失败，点击重试。",
+        "noMatchingPrompts": "没有匹配的提示词",
+        "sourceEmpty": "此来源暂无提示词",
+        "viewDetails": "查看详情",
+        "filter": {
+          "image": "图片",
+          "video": "视频",
+          "text": "文本",
+          "audio": "音频",
+          "config": "配置",
+          "group": "分组"
+        }
+      },
+      "assetPicker": {
+        "title": "选择素材",
+        "insert": "插入",
+        "search": "搜索素材",
+        "empty": "暂无素材"
+      },
+      "imageTools": {
+        "copyPrompt": "复制提示词",
+        "copyPromptTitle": "复制生成此图片所用的提示词",
+        "reversePrompt": "反推提示词",
+        "reversePromptTitle": "创建文本节点和配置节点以反推提示词",
+        "replace": "替换图片",
+        "locked": "锁定比例",
+        "free": "自由比例",
+        "lockTitle": "切换为等比缩放",
+        "freeTitle": "切换为自由调整大小",
+        "mask": "局部编辑",
+        "maskTitle": "绘制蒙版并编辑选中区域",
+        "crop": "裁剪",
+        "cropTitle": "裁剪为新节点",
+        "split": "分割",
+        "splitTitle": "按行列分割图片",
+        "upscale": "放大",
+        "upscaleTitle": "提高图片分辨率",
+        "superResolve": "超分辨率",
+        "superResolveTitle": "AI 超分辨率",
+        "angle": "多角度",
+        "angleTitle": "生成其他角度",
+        "view": "查看图片",
+        "viewTitle": "查看图片详情",
+        "more": "更多",
+        "configure": "配置快捷工具",
+        "customize": "自定义工具栏",
+        "showLabels": "显示按钮文字",
+        "description": "选择图片节点工具栏中显示的快捷工具。",
+        "preview": "节点预览",
+        "imageNode": "图片节点",
+        "quickTools": "快捷工具"
+      },
+      "nodeToolbar": {
+        "noPrompt": "没有可复制的提示词",
+        "infoTitle": "查看节点信息",
+        "info": "信息",
+        "removeTitle": "移除节点",
+        "retryTitle": "重新生成",
+        "saveAsset": "保存素材",
+        "downloadAudio": "下载音频",
+        "downloadVideo": "下载视频",
+        "downloadImage": "下载图片",
+        "editTextTitle": "编辑文本",
+        "editText": "编辑文本",
+        "decreaseFont": "减小字号",
+        "increaseFont": "增大字号",
+        "zoomOut": "缩小",
+        "zoomIn": "放大",
+        "uploadImage": "上传图片",
+        "replaceVideo": "替换视频",
+        "uploadVideo": "上传视频",
+        "replaceAudio": "替换音频",
+        "uploadAudio": "上传音频",
+        "nodeInfo": "节点信息",
+        "name": "名称",
+        "type": "类型",
+        "size": "尺寸",
+        "position": "位置",
+        "status": "状态",
+        "imageGroup": "图片组",
+        "imageSize": "图片尺寸"
+      },
+      "configNode": {
+        "title": "生成配置",
+        "image": "图片",
+        "text": "文本",
+        "video": "视频",
+        "audio": "音频",
+        "prompt": "提示词",
+        "references": "参考图片",
+        "videoReferences": "参考视频",
+        "audioReferences": "参考音频",
+        "items": "{{count}} 项",
+        "images": "{{count}} 张图片",
+        "compose": "编写提示词",
+        "stop": "停止",
+        "generate": "生成"
+      },
+      "projectPage": {
+        "stopTitle": "停止生成？",
+        "stopDescription": "当前请求将被中断，已完成的结果将保留。",
+        "stop": "停止",
+        "continue": "继续生成",
+        "configConnection": "配置节点之间无法相互连接",
+        "notFound": "未找到当前画布",
+        "exporting": "正在导出当前画布…",
+        "exported": "当前画布已导出",
+        "clipboardText": "剪贴板文本",
+        "clipboardImageAdded": "已添加剪贴板中的图片",
+        "clipboardTextAdded": "已添加剪贴板中的文本",
+        "noTextToSave": "没有可保存的文本",
+        "canvasText": "画布文本",
+        "noVideoToSave": "没有可保存的视频",
+        "canvasVideo": "画布视频",
+        "noImageToSave": "没有可保存的图片",
+        "canvasImage": "画布图片",
+        "emptyReverse": "图片节点为空，无法反推提示词",
+        "reverseTitle": "反推提示词",
+        "reverseConfigTitle": "反推提示词配置",
+        "splitTitle": "{{name}} {{row}}-{{column}}",
+        "splitSuccess": "已分割为 {{count}} 个子节点",
+        "maskResult": "局部编辑结果",
+        "maskFailed": "局部编辑失败",
+        "generationFailed": "生成失败",
+        "partialFailed": "部分图片生成失败",
+        "allFailed": "所有图片均生成失败",
+        "retryPromptMissing": "未找到用于重试的提示词",
+        "referenceMissing": "参考图片缺失，无法继续重试",
+        "emptyTextImage": "文本节点为空，无法生成图片",
+        "untitledCanvas": "未命名画布",
+        "superResolve": "AI 超分辨率",
+        "notImplemented": "暂未实现",
+        "imageDetails": "图片详情",
+        "clearTitle": "清空画布？",
+        "clear": "清空",
+        "clearDescription": "这将删除当前画布上的所有节点和连接。",
+        "reversePreset": "根据参考图片反推适用于 AI 图像生成的提示词。\n\n要求：\n1. 仅输出提示词，不要附加解释。\n2. 涵盖主体、构图、风格、光线、色彩、材质、镜头和氛围。\n3. 编写完整的提示词，可直接用于图像模型。",
+        "maskPrompt": "仅修改透明蒙版区域，保持其他区域不变。{{prompt}}",
+        "editTextPrompt": "根据指令修改文本。\n\n原文：\n{{source}}\n\n指令：\n{{prompt}}"
+      },
+      "reverseComposer": "参考图片：@[node:{{imageId}}]\n任务：@[node:{{textId}}]",
+      "editors": {
+        "reset": "重置",
+        "zoomOut": "缩小",
+        "zoomIn": "放大",
+        "loading": "加载中",
+        "unknown": "未知",
+        "cancel": "取消",
+        "angleTitle": "AI 多角度",
+        "angleDescription": "左侧仅预览方向，结果将基于原图重新生成",
+        "horizontal": "水平角度",
+        "pitch": "俯仰角度",
+        "distance": "相机距离",
+        "lens": "广角镜头",
+        "standard": "标准",
+        "wide": "广角",
+        "aiGenerate": "使用 AI 生成",
+        "upscaleTitle": "放大图片",
+        "source": "原图",
+        "targetPixels": "目标像素数",
+        "maxReached": "图片已达到 4K，无需放大",
+        "targetReached": "图片已达到目标像素数",
+        "algorithm": "放大算法",
+        "outputSize": "输出尺寸",
+        "upscale": "生成放大后的图片",
+        "high": "高质量插值",
+        "highDescription": "适合照片和细节丰富的图片",
+        "bilinear": "双线性插值",
+        "bilinearDescription": "平滑且快速",
+        "nearest": "最近邻插值",
+        "nearestDescription": "适合像素画",
+        "cropTitle": "裁剪图片",
+        "adjustCrop": "调整裁剪框",
+        "cropHint": "鼠标滚轮缩放 · 鼠标中键或空格键 + 鼠标左键拖动平移",
+        "cropSize": "裁剪尺寸 {{size}}",
+        "ratio": "比例 {{ratio}}",
+        "original": "原图 {{width}} x {{height}}",
+        "confirmCrop": "裁剪",
+        "free": "自由",
+        "fixed": "固定",
+        "originalMode": "原始",
+        "maskTitle": "局部蒙版编辑",
+        "maskHint": "鼠标滚轮缩放 · 鼠标中键或空格键 + 鼠标左键拖动平移 · Alt + 左右拖动调整画笔大小 · Ctrl/Cmd+Z 撤销 · Ctrl/Cmd+Shift+Z 重做",
+        "brush": "画笔",
+        "erase": "擦除",
+        "undoMaskTitle": "撤销蒙版笔画（Ctrl/Cmd+Z）",
+        "undoMask": "撤销蒙版笔画",
+        "redoMaskTitle": "重做蒙版笔画（Ctrl/Cmd+Shift+Z）",
+        "redoMask": "重做蒙版笔画",
+        "brushSize": "画笔大小",
+        "editInstructions": "编辑指令",
+        "maskPlaceholder": "例如：将选中区域改为金属材质，同时保留原有光线",
+        "maskPromptRequired": "请输入编辑指令",
+        "maskRequired": "请先涂抹要编辑的区域",
+        "aiEdit": "使用 AI 编辑",
+        "splitTitle": "分割图片",
+        "splitDescription": "创建 {{count}} 个图片节点，并按原网格排列在画布右侧",
+        "splitHint": "鼠标滚轮缩放 · 鼠标中键或空格键 + 鼠标左键拖动平移 · Delete 删除选中的分割线 · Ctrl/Cmd+Z 撤销 · Ctrl/Cmd+Shift+Z 重做",
+        "undoSplitTitle": "撤销分割调整（Ctrl/Cmd+Z）",
+        "undoSplit": "撤销分割调整",
+        "redoSplitTitle": "重做分割调整（Ctrl/Cmd+Shift+Z）",
+        "redoSplit": "重做分割调整",
+        "rows": "行数",
+        "columns": "列数",
+        "horizontalLine": "水平线",
+        "verticalLine": "垂直线",
+        "deleteLine": "删除分割线",
+        "resetLines": "重置分割线",
+        "pieceCount": "分块数量",
+        "pieces": "{{count}}",
+        "averageSize": "平均尺寸",
+        "generateChildren": "创建子节点"
+      },
+      "plugins": {
+        "title": "节点插件",
+        "installedPlugin": "已安装插件 {{name}}",
+        "installed": "已安装 {{name}}",
+        "installFailed": "安装失败：{{error}}",
+        "enabled": "已启用",
+        "disabled": "已禁用",
+        "upgradeAvailable": "有新版本可用，点击升级",
+        "updateFromSource": "从源地址更新",
+        "updated": "已更新",
+        "uninstallTitle": "卸载此插件？",
+        "uninstall": "卸载",
+        "newVersion": "有新版本可用",
+        "officialDescription": "来自本项目插件库的官方插件",
+        "refresh": "刷新",
+        "loadFailed": "加载失败：{{error}}",
+        "loadingOfficial": "正在加载官方插件…",
+        "noOfficial": "暂无官方插件",
+        "install": "安装",
+        "urlPlaceholder": "输入插件 JavaScript 地址，例如 https://.../plugin.js",
+        "noThirdParty": "尚未安装第三方插件",
+        "official": "官方",
+        "local": "本地",
+        "thirdParty": "第三方",
+        "warning": "插件代码会直接在此页面运行，并可访问本地数据，包括你的 AI API 密钥。请仅安装来自可信来源的插件。",
+        "aiConfigRequired": "AI 配置尚未就绪，请先在设置中配置模型和 API 密钥。",
+        "interactiveTitle": "当前为交互模式，点击切换为移动模式以拖动节点。",
+        "movableTitle": "当前为移动模式，点击切换为交互模式以操作节点内容。",
+        "move": "移动",
+        "interact": "交互"
+      },
+      "promptPanel": {
+        "video": "描述你想生成的视频",
+        "audio": "描述你想生成的音频",
+        "image": "描述你想生成的图片",
+        "text": "描述你想生成的文本",
+        "editImage": "描述你想如何修改这张图片",
+        "editText": "描述你想如何修改这段文本",
+        "expandEditor": "展开编辑器",
+        "editorTitle": "编辑提示词",
+        "stopGeneration": "停止生成",
+        "generate": "生成",
+        "stop": "停止"
+      },
+      "composer": {
+        "title": "编写提示词",
+        "description": "使用 @ 引用已连接的素材，发送前会重新编号引用",
+        "placeholder": "输入提示词，使用 @ 引用已连接的图片或文本",
+        "imagePreview": "引用图片预览",
+        "resources": {
+          "image": "图片 {{index}}",
+          "video": "视频 {{index}}",
+          "audio": "音频 {{index}}",
+          "text": "文本 {{index}}"
+        }
+      },
+      "controls": {
+        "ratio": "比例",
+        "duplicate": "创建副本",
+        "delete": "删除",
+        "images": "{{count}} 张图片",
+        "reasoning": "推理"
+      },
+      "generation": {
+        "interrupted": "页面刷新导致生成中断，请重新生成。",
+        "front": "正面视角",
+        "rotateRight": "向右旋转 {{angle}} 度",
+        "rotateLeft": "向左旋转 {{angle}} 度",
+        "level": "平视视角",
+        "topDown": "{{angle}} 度俯视视角",
+        "lowAngle": "{{angle}} 度仰视视角",
+        "angleLabel": "AI 多角度：{{horizontal}}，{{pitch}}，相机距离 {{distance}}，{{lens}}镜头",
+        "anglePrompt": "根据参考图片重新生成同一主体的新视角。保留主体、色彩、材质和视觉风格，不要仅进行透视变形。{{angle}}。"
+      },
+      "agentOps": {
+        "add_node": "添加节点",
+        "update_node": "更新节点",
+        "delete_node": "删除节点",
+        "delete_connections": "删除连接",
+        "connect_nodes": "连接",
+        "set_viewport": "调整视图",
+        "select_nodes": "选择节点",
+        "run_generation": "执行生成"
+      },
+      "pluginErrors": {
+        "invalidExport": "插件未导出有效对象",
+        "missingFields": "插件缺少 id 或 nodes",
+        "downloadFailed": "下载失败（HTTP {{status}}）",
+        "registryFailed": "加载官方插件库失败（HTTP {{status}}）"
+      },
+      "shortcut": {
+        "dragCanvas": "拖动画布",
+        "pan": "平移视图",
+        "toggleTool": "临时切换选择 / 移动工具",
+        "wheel": "鼠标滚轮",
+        "zoom": "缩放画布",
+        "zoomSlider": "缩放滑块",
+        "preciseZoom": "精确调整缩放",
+        "boxSelect": "选择多个节点",
+        "addSelection": "将节点添加到选区",
+        "selectAll": "选择所有节点",
+        "copyPaste": "复制/粘贴节点或粘贴剪贴板中的文本/图片",
+        "copyPasteNodes": "复制/粘贴节点",
+        "delete": "删除选中内容",
+        "escape": "清除选区并关闭浮层",
+        "dropMedia": "拖入图片/视频/音频",
+        "upload": "上传到画布",
+        "drag": "拖动",
+        "click": "点击"
+      }
+    },
+    "navigation": {
+      "prompts": "提示词库",
+      "landing": "无限画布首页",
+      "dashboard": "画布项目",
+      "docs": "文档",
+      "plugins": "插件",
+      "shortcuts": "键盘快捷键",
+      "lightTheme": "使用浅色主题",
+      "darkTheme": "使用深色主题",
+      "switchLanguage": "切换语言"
+    },
+    "topNav": {
+      "lightTheme": "切换为浅色主题",
+      "darkTheme": "切换为深色主题"
+    },
+    "workbench": {
+      "selectAll": "全选"
+    },
+    "config": {
+      "promptSources": {
+        "runtime": {
+          "requestFailed": "请求失败（{{status}}）",
+          "urlRequired": "请输入 JSON 地址",
+          "fetchFailed": "获取“{{name}}”失败：{{error}}",
+          "noPrompts": "未能从“{{name}}”中解析出有效提示词",
+          "invalidRoot": "“{{name}}”格式无效：根值必须为数组"
+        }
+      }
+    },
+    "agent": {
+      "composer": {
+        "mentions": {
+          "resourceMissing": "画布素材“{{title}}”已不存在",
+          "imageReadFailed": "无法读取画布图片“{{title}}”"
+        }
+      },
+      "open": "打开本地 Canvas Agent",
+      "unavailable": "本地 Canvas Agent 不可用。",
+      "connecting": "正在连接本地 Canvas Agent…",
+      "connected": "已连接本地 Canvas Agent。",
+      "protocolMismatch": "本地 Canvas Agent 协议版本不兼容。",
+      "promptPlaceholder": "向本地 Canvas Agent 提问",
+      "send": "发送"
+    },
+    "dashboard": {
+      "eyebrow": "无限画布 · 画布库",
+      "title": "我的画布",
+      "description": "管理、整理并继续创作你的无限画布项目。",
+      "create": "新建项目",
+      "creating": "正在创建…",
+      "untitled": "未命名画布",
+      "emptyTitle": "从空白画布开始",
+      "emptyDescription": "创建项目，在开放的工作空间中整理想法并生成媒体内容。",
+      "loadError": "无法加载项目。",
+      "open": "打开",
+      "rename": "重命名",
+      "delete": "删除",
+      "deleteSelected": "删除所选项目",
+      "exportSelected": "导出所选项目",
+      "cancelSelection": "取消",
+      "selectedLabel": "已选择",
+      "deleteConfirmTitle": "删除画布项目？",
+      "deleteConfirmDescription": "此操作将永久删除所选项目的数据。",
+      "importProject": "导入 ZIP",
+      "exportProject": "导出 ZIP",
+      "nodeCount": "节点",
+      "connectionCount": "连接",
+      "updated": "更新时间",
+      "totalProjects": "个画布项目",
+      "showingProjects": "当前显示",
+      "renameTitle": "重命名画布项目",
+      "renameDescription": "更改画布库中显示的项目名称。",
+      "projectName": "项目名称",
+      "saveChanges": "保存更改",
+      "previousPage": "上一页",
+      "nextPage": "下一页",
+      "mobile": {
+        "title": "我的画布",
+        "docs": "使用指南",
+        "create": "新建画布",
+        "importProject": "导入画布",
+        "recentTitle": "最近项目",
+        "emptyTitle": "暂无画布",
+        "emptyDescription": "创建画布，将想法、提示词和生成结果连接起来。",
+        "editProject": "编辑项目",
+        "renameTitle": "编辑画布项目",
+        "saveChanges": "保存更改",
+        "delete": "删除画布",
+        "deleteConfirmTitle": "删除画布？",
+        "deleteConfirmDescription": "此操作无法撤销。画布及其节点、连接和生成内容的引用都将被永久删除。",
+        "selectedCount": "已选择 {count} 个",
+        "exportStarted": "已开始导出"
+      }
+    },
+    "editor": {
+      "loading": "正在加载画布…",
+      "loadError": "无法加载画布。",
+      "missingProject": "此画布项目已不存在。",
+      "backToDashboard": "返回画布项目",
+      "moveTool": "移动工具",
+      "selectTool": "选择工具",
+      "undo": "撤销",
+      "redo": "重做",
+      "zoomIn": "放大",
+      "zoomOut": "缩小",
+      "fitView": "适应视图",
+      "addNode": "添加生成配置",
+      "saveNow": "立即保存",
+      "saved": "已保存",
+      "saving": "正在保存…",
+      "unsavedChanges": "有未保存的更改",
+      "saveFailed": "更改尚未保存，正在自动重试。",
+      "saveRecovered": "画布更改已恢复正常保存。",
+      "unsavedTitle": "离开并放弃未保存的更改？",
+      "unsavedDescription": "无法保存最新的画布更改。",
+      "leaveAnyway": "仍然离开",
+      "savingBeforeLeaving": "正在离开前保存画布，可能需要几秒钟"
+    },
+    "nodes": {
+      "image": "图像",
+      "text": "文本",
+      "config": "生成配置",
+      "video": "视频",
+      "audio": "音频",
+      "group": "分组",
+      "delete": "删除节点",
+      "duplicate": "复制节点",
+      "setPrimary": "设为主要项",
+      "download": "下载",
+      "preview": "预览",
+      "imageCount": "图像数量",
+      "textCount": "文本输出数量",
+      "idle": "就绪",
+      "loading": "正在生成…",
+      "error": "生成失败",
+      "resize": "调整节点大小",
+      "connect": "连接节点"
+    },
+    "prompt": {
+      "title": "生成提示词",
+      "placeholder": "描述你想创作的内容",
+      "expand": "展开提示词编辑器",
+      "collapse": "收起提示词编辑器"
+    },
+    "promptSources": {
+      "title": "提示词来源",
+      "add": "添加来源",
+      "name": "来源名称",
+      "url": "提示词来源 URL",
+      "remove": "移除来源",
+      "empty": "暂无提示词来源。",
+      "loadFailed": "无法加载提示词来源。"
+    },
+    "generation": {
+      "generate": "生成",
+      "generating": "正在生成…",
+      "paidTaskContinues": "关闭此视图后，已受理的生成任务仍会继续。",
+      "retry": "重新生成",
+      "textUnavailable": "配置获准使用的模型后，才能使用文本生成。",
+      "streamUnavailable": "尚未配置文本流式输出。",
+      "failed": "生成失败。"
+    },
+    "plugins": {
+      "title": "画布插件",
+      "install": "安装插件",
+      "urlPlaceholder": "插件模块 URL",
+      "loadFailed": "无法加载插件。",
+      "empty": "尚未安装插件。"
+    },
+    "importExport": {
+      "invalidArchive": "这不是有效的画布归档文件。",
+      "importFailed": "无法导入画布归档文件。",
+      "exportFailed": "无法导出画布归档文件。"
+    },
+    "accessibility": {
+      "canvas": "无限画布工作空间",
+      "minimap": "画布缩略图",
+      "projectActions": "项目操作",
+      "generationStatus": "生成状态"
+    },
+    "landing": {
+      "eyebrow": "Flaq.ai AI 画布",
+      "title": "让创作不受边界限制",
+      "description": "在一个灵活的 AI 工作空间中，整理想法、参考素材、提示词、图像、视频、文本和音频。",
+      "titleHighlight": "在开放画布上构建可视化 AI 工作流",
+      "primaryCta": "打开画布项目",
+      "secondaryCta": "阅读指南",
+      "capabilities": "使用 Flaq AI 支持的模型，创建相互连接的图像和视频工作流。",
+      "featuresTitle": "从想法到成果，尽在同一工作空间",
+      "featureCanvas": "在开放画布上连接可视化节点。",
+      "featureGeneration": "使用 Flaq AI 支持的模型生成媒体内容。",
+      "featureProjects": "跨设备保存并重新打开账号中的项目。",
+      "form": {
+        "submit": "创建画布工作流"
+      },
+      "workflow": {
+        "untitled": "未命名画布",
+        "generation": "生成",
+        "inputImage": "输入图像",
+        "inputVideo": "输入视频",
+        "inputAudio": "输入音频",
+        "uploadFailed": "无法将文件上传至 AI 画布，请重试。（状态：{status}）",
+        "unsupportedParameters": "画布目前支持图像、视频和音频参考素材。请先移除文档文件和网页链接，再创建画布工作流。"
+      },
+      "recent": {
+        "title": "最近的画布",
+        "viewAll": "查看全部",
+        "newProject": "新建画布",
+        "newProjectDescription": "从空白工作空间开始",
+        "emptyTitle": "暂无画布项目",
+        "emptyDescription": "创建第一个画布，整理提示词、参考素材和生成的媒体内容。",
+        "sessionExpired": "你的会话已过期。",
+        "signInAgain": "重新登录",
+        "loading": "正在加载最近的画布",
+        "loadError": "无法加载最近的画布。",
+        "retry": "重试",
+        "description": "继续创作你最近的画布工作流。",
+        "updated": "更新于 {date}",
+        "nodes": "{count, plural, one {# 个节点} other {# 个节点}}"
+      },
+      "heading": {
+        "title": "Flaq.ai AI 画布：构建相互连接的图像和视频工作流",
+        "description": "从提示词或兼容的图像输入出发，构建可视化 AI 工作流。选择受支持的图像或视频配置创建初始项目，然后在同一画布中整理、生成、审阅并优化相互连接的步骤。"
+      },
+      "features": {
+        "1": {
+          "title": "覆盖每个创作步骤的可视化工作空间",
+          "description": "将提示词、兼容输入、模型设置和结果组织为相互连接的节点，让每个创作步骤之间的关系清晰可见。"
+        },
+        "2": {
+          "title": "从受支持的图像或视频工作流开始",
+          "description": "选择文生图、图生图、文生视频或图生视频，然后使用具有代表性的受支持模型及对应配置的可用选项开始创作。"
+        },
+        "3": {
+          "title": "延续创作上下文",
+          "description": "将兼容的输入和输出连接到后续生成节点，无需从头构建创作思路，即可探索不同的创作版本。"
+        },
+        "4": {
+          "title": "随时回来继续创作",
+          "description": "在本地保存、重新打开、重命名和管理画布项目，随时回来继续你的可视化工作流。"
+        },
+        "title": "Flaq.ai AI 画布的核心功能",
+        "description": "将提示词、兼容输入、模型选择和生成结果汇集到相互连接的画布项目中，让各个步骤之间的上下文保持连贯。",
+        "tryNow": "开始创作"
+      },
+      "useCases": {
+        "1": {
+          "title": "营销创意与素材变体",
+          "description": "在创作相关素材时，将营销活动提示词、产品参考素材、图像变体和视频创意方向集中整理。"
+        },
+        "2": {
+          "title": "分镜与场景创作",
+          "description": "将场景从文字构思逐步展开为关键图像和视频步骤，在优化镜头顺序的过程中，始终清晰呈现视觉创作路径。"
+        },
+        "3": {
+          "title": "产品视觉探索",
+          "description": "在同一项目中比较产品创意、原始图像、指令和生成的不同版本，再选择要深入发展的方向。"
+        },
+        "4": {
+          "title": "持续迭代图像和视频工作流",
+          "description": "将有潜力的结果带入下一阶段，结合上下文比较不同方向，并保留作品背后的视觉创作路径。"
+        },
+        "title": "Flaq.ai AI 画布的应用场景",
+        "description": "当图像和视频生成、共享上下文与迭代过程需要在同一创作空间中清晰呈现时，就使用画布。",
+        "tryNow": "创建画布"
+      },
+      "manual": {
+        "1": {
+          "title": "选择工作流和受支持的模型",
+          "description": "从文生图、图生图、文生视频或图生视频开始，然后选择受支持的模型及对应配置的可用选项。"
+        },
+        "2": {
+          "title": "添加提示词和兼容输入",
+          "description": "写下预期结果的创意方向，并在所选工作流支持时添加兼容的图像输入。"
+        },
+        "3": {
+          "title": "创建项目，然后在画布上生成",
+          "description": "提交后将创建初始画布项目，并在编辑器中打开。准备好后运行生成节点，查看结果并继续完善工作流。"
+        },
+        "title": "如何使用 Flaq.ai AI 画布",
+        "description": "选择受支持的工作流，添加你的创意方向，然后打开画布项目，生成并优化后续步骤。",
+        "tryNow": "开始创作"
+      },
+      "faq": {
+        "1": {
+          "question": "什么是 Flaq.ai AI 画布？",
+          "answer": "Flaq.ai AI 画布是一个可视化工作空间，可将提示词、兼容输入、生成设置以及 AI 生成的图像或视频组织为相互连接的节点。"
+        },
+        "2": {
+          "question": "可以从哪些工作流开始？",
+          "answer": "你可以从文生图、图生图、文生视频、图生视频或参考素材生视频开始。可用的输入和设置取决于所选模型。"
+        },
+        "3": {
+          "question": "创建画布项目会立即生成媒体内容吗？",
+          "answer": "不会。表单会使用你的提示词、所选模型设置和兼容的输入图像创建初始项目。只有在画布中运行生成节点后，才会开始生成。"
+        },
+        "4": {
+          "question": "可以保存画布项目并在之后继续使用吗？",
+          "answer": "可以。项目会保存在本地，你可以在画布库中重新打开、重命名和管理项目。导出项目即可保留备份或将其转移到其他设备。"
+        },
+        "5": {
+          "question": "可以在其他步骤中复用生成结果吗？",
+          "answer": "可以。将兼容的图像或视频节点连接到另一个生成配置，即可使用先前的结果作为上下文，继续推进工作流。"
+        },
+        "6": {
+          "question": "Flaq.ai AI 画布提供哪些 AI 模型？",
+          "answer": "你可以选择表单中列出的图像和视频模型。可用模型取决于所选工作流。生成媒体内容需要你的 Flaq Client Key 和充足的 API 余额。"
+        },
+        "7": {
+          "question": "Flaq.ai AI 画布会添加更多模型吗？",
+          "answer": "可选模型可能随时间变化。请在模型选择器中查看所选工作流当前支持的图像和视频模型。"
+        },
+        "title": "Flaq.ai AI 画布常见问题"
+      },
+      "example": {
+        "title": "查看 AI 画布工作流的实际效果",
+        "description": "从最初的提示词到图像和视频，让想法逐步成形。在一个灵活的工作空间中，清晰呈现参考素材、生成素材、相互连接的步骤和新的创意方向。"
+      }
+    },
+    "docs": {
+      "openDashboard": "我的画布",
+      "backToLanding": "返回 AI 画布"
+    },
+    "modelAdapter": {
+      "unavailable": "此模型在 Flaq AI 画布中不可用，请从列表中选择模型。",
+      "invalidParameters": "所选模型不支持这些设置，请检查质量、分辨率、宽高比、时长和种子值范围。",
+      "invalidInputs": "参考素材不符合此模型的要求，请检查输入类型和文件数量。",
+      "pricingUnavailable": "模型价格暂未就绪，请稍候再试。"
+    },
+    "advancedParameters": {
+      "label": "高级设置",
+      "seed": "种子值（-1 表示随机）",
+      "negativePrompt": "负面提示词",
+      "isTranslate": "翻译提示词"
+    },
+    "pricing": {
+      "estimate": "每次生成预计费用：{price}",
+      "loading": "正在加载价格…",
+      "unavailable": "价格暂不可用",
+      "configureInputs": "请检查模型设置和参考素材，以估算价格"
+    },
+    "threeD": {
+      "label": "3D"
+    },
+    "promptLibrary": {
+      "open": "打开提示词库",
+      "title": "提示词库",
+      "description": "选择提示词并填入当前节点。",
+      "search": "搜索提示词",
+      "noSources": "尚未启用提示词来源",
+      "loading": "正在加载提示词",
+      "loadError": "无法加载此提示词来源。",
+      "retry": "重试",
+      "noMatches": "没有匹配的提示词",
+      "empty": "此来源暂无内容",
+      "viewDetails": "查看提示词详情",
+      "copy": "复制提示词",
+      "copied": "已复制",
+      "add": "将提示词添加为文本节点",
+      "select": "选择提示词"
     }
   }
 }

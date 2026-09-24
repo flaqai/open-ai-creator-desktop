@@ -1,5 +1,5 @@
 {
-  "commit": "285a52bd3dbbdab1b17174b9b60f241b8689952c",
+  "commit": "a057edc447efcc69f5ffebba60a760f533e7da31",
   "models": [
     {
       "id": "nano-banana-pro",
@@ -34,12 +34,52 @@
       "digest": "d402f18d38f2ac000ee75eba729ec7cc780b6dbf75b02bac7982a28bc2fc9f13"
     },
     {
+      "id": "chatgpt-images-2.5",
+      "digest": "1ffefe058d5c21bdd97f4b3efbc2e02874c3d4f68f8d8370848f19cc45ff39ae"
+    },
+    {
+      "id": "chatgpt-images-2.5-edit",
+      "digest": "6c74aa030f797474cda3bf7cb34904442125cfdcb22914bd7bc4460be8bb637d"
+    },
+    {
+      "id": "chatgpt-images-2.5-client",
+      "digest": "91605ba1fdbff75cdeea52c43d24285e5f36da7d90bb1ccd38da431b9e9b6d00"
+    },
+    {
+      "id": "chatgpt-images-2.5-edit-client",
+      "digest": "e7a8c5f545964803d9749f886f0cc11df5225aa4c5011fdd428e5eaa79785c16"
+    },
+    {
+      "id": "gpt-image-2.5-flare",
+      "digest": "afc9fab44439385df31624bc8738015a2032480f17c6182dcc1601c9a8c9543b"
+    },
+    {
+      "id": "gpt-image-2.5-flare-edit",
+      "digest": "75e76282b266f8b53f04f9e20a5e34258b105cfc9b1e91208529c52971c390eb"
+    },
+    {
+      "id": "gpt-image-2.5-sunburst",
+      "digest": "db28bb95b2b2d2566166df720d293783bea5899d54a5ac49a65c64584a7f042d"
+    },
+    {
+      "id": "gpt-image-2.5-sunburst-edit",
+      "digest": "c40dc5f7e824135876e719e6a5d81c75c77259317787b339b3affbb58b0dfde9"
+    },
+    {
       "id": "qwen-image-3.0-pro",
       "digest": "bfe7c78ed833ed7e4f55a5f980f20c03c1ecb6a52fb31f9078fec2552a08bfac"
     },
     {
       "id": "qwen-image-3.0-pro-edit",
       "digest": "36753907daa8074a1e41a64f9a13204e2d61c7d4ca8eb4bdeed8c7cc7ff661e7"
+    },
+    {
+      "id": "qwen-image-3.0",
+      "digest": "a4436c1260365a664d601aaaf669fe6357c3dda8ebefa69c6bfa29b70868dee7"
+    },
+    {
+      "id": "qwen-image-3.0-edit",
+      "digest": "266182e7025fcc9199c29e738256841db51545fd0d4bedd78e428d16cabad4fc"
     },
     {
       "id": "seedream-4.5",

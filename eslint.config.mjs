@@ -53,4 +53,20 @@ export default defineConfig([
     ],
     rules: { '@typescript-eslint/no-explicit-any': 'error', '@typescript-eslint/no-unused-vars': 'error' },
   },
+  {
+    // The pinned upstream canvas engine retains its original type-check and memoization
+    // boundaries. Desktop integration, persistence, transport and tests remain linted.
+    files: [
+      'components/infinite-canvas/components/**/*.{ts,tsx}',
+      'components/infinite-canvas/constant/**/*.{ts,tsx}',
+      'components/infinite-canvas/lib/**/*.{ts,tsx}',
+      'components/infinite-canvas/pages/**/*.{ts,tsx}',
+      'components/infinite-canvas/services/**/*.{ts,tsx}',
+      'components/infinite-canvas/types/**/*.{ts,tsx}',
+    ],
+    rules: {
+      '@typescript-eslint/ban-ts-comment': 'off',
+      'react-hooks/preserve-manual-memoization': 'off',
+    },
+  },
 ]);

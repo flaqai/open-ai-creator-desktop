@@ -1,0 +1,46 @@
+@theme inline {
+  --color-main-color: var(--ui-main-color);
+  --color-main-color-foreground: var(--ui-main-color-foreground);
+  --color-canvas-accent: var(--ui-canvas-accent, var(--ui-text-color));
+  --color-canvas-accent-foreground: var(--ui-canvas-accent-foreground, var(--ui-background-color));
+  --color-canvas-muted-accent: var(--ui-canvas-muted-accent, var(--ui-gray-color));
+  --color-canvas-background: var(--ui-canvas-background, var(--ui-background-color));
+  --color-canvas-panel: var(--ui-canvas-panel, var(--ui-background-color));
+  --color-canvas-surface: var(--ui-canvas-surface, var(--ui-light-gray-1));
+  --color-canvas-surface-hover: var(--ui-canvas-surface-hover, var(--ui-light-gray-2));
+  --color-canvas-border: var(--ui-canvas-border, var(--ui-light-gray-2));
+  --color-canvas-text: var(--ui-canvas-text, var(--ui-text-color));
+  --color-canvas-muted: var(--ui-canvas-muted, var(--ui-gray-color));
+  --color-gradient-main-foreground: var(--ui-gradient-main-foreground, #fff);
+  --color-dark-color: var(--ui-dark-color);
+  --color-background-color: var(--ui-background-color);
+  --color-text-color: var(--ui-text-color);
+  --color-gray-color: var(--ui-gray-color);
+  --color-green-color: var(--ui-green-color);
+  --color-yellow-color: var(--ui-yellow-color);
+  --color-blue-color: var(--ui-blue-color);
+  --color-light-gray: var(--ui-light-gray);
+  --color-light-gray-1: var(--ui-light-gray-1);
+  --color-light-gray-2: var(--ui-light-gray-2);
+  --color-on-media-color: var(--ui-on-media-color, #fff);
+  --color-media-surface: var(--ui-media-surface, #000);
+  --color-overlay-color: var(--ui-overlay-color, #000);
+  --color-media-control-color: var(--ui-media-control-color, rgba(38, 41, 41, 0.5));
+  --color-destructive-color: var(--ui-destructive-color, #d15e5e);
+  --color-hot-color: var(--ui-hot-color, #ff7a59);
+  --color-switch-thumb-color: var(--ui-switch-thumb-color, var(--ui-text-color));
+  --shadow-input: var(
+    --ui-shadow-input,
+    0px 2px 3px -1px rgba(0, 0, 0, 0.1),
+    0px 1px 0px 0px rgba(25, 28, 33, 0.02),
+    0px 0px 0px 1px rgba(25, 28, 33, 0.08)
+  );
+  --shadow-upload-card: var(--ui-shadow-upload-card, 0 10px 28px rgba(0, 0, 0, 0.18));
+  --shadow-upload-action: var(--ui-shadow-upload-action, 0 8px 18px rgba(0, 0, 0, 0.35));
+  --shadow-audio-playhead: var(--ui-shadow-audio-playhead, 0 0 8px rgba(255, 255, 255, 0.65));
+}
+
+
+@utility bg-gradient-main {
+  background-image: var(--ui-gradient-main);
+}

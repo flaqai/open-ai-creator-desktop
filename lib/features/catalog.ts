@@ -8,6 +8,7 @@ export const FEATURE_MODULES = [
     icon: 'sparkles',
     featured: true,
   },
+  { id: 'ai-canvas', code: 'ai-canvas', href: '/ai-canvas', group: 'canvas', icon: 'canvas' },
   { id: 'text-to-image', code: 'text-to-image', href: '/text-to-image', group: 'image', icon: 'image' },
   { id: 'image-to-image', code: 'image-to-image', href: '/image-to-image', group: 'image', icon: 'layers' },
   { id: 'virtual-try-on', code: 'virtual-try-on', href: '/virtual-try-on', group: 'image', icon: 'shirt' },
