@@ -15,6 +15,26 @@ Rust のデスクトップシェルとモダンな React UI から Flaq AI の�
 [繁體中文](./README_tw.md) · [한국어](./README_ko.md) · [ไทย](./README_th.md) · [Tiếng Việt](./README_vi.md) ·
 [العربية](./README_ar.md)
 
+## デスクトップアプリのスクリーンショット：ワークスペース、AI 制作、無限キャンバス
+
+実際に動作する macOS デスクトップアプリの英語画面です。制作パネルはローカルのデモ下書き、プロンプトライブラリの画像は同梱サンプルです。
+
+### 制作ワークスペース — ツール、プロンプト集、メディアへのショートカット
+
+![制作ワークスペース — ツール、プロンプト集、メディアへのショートカット](./docs/assets/screenshots/desktop-workspace.jpg)
+
+### AI 画像制作 — プロンプト、モデル、生成設定
+
+![AI 画像制作 — プロンプト、モデル、生成設定](./docs/assets/screenshots/desktop-ai-creator.jpg)
+
+### 無限キャンバス — 制作ブリーフと生成ノードを配置
+
+![無限キャンバス — 制作ブリーフと生成ノードを配置](./docs/assets/screenshots/desktop-canvas.jpg)
+
+### プロンプトのヒント — 作例と再利用可能なプロンプトを閲覧
+
+![プロンプトのヒント — 作例と再利用可能なプロンプトを閲覧](./docs/assets/screenshots/desktop-prompt-library.jpg)
+
 ## Flaq AI モデルプラットフォームとオンライン制作ツール
 
 [Flaq AI](https://flaq.ai/ja/)

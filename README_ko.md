@@ -14,6 +14,26 @@ React 인터페이스를 통해 Flaq AI 모델 서비스에 연결합니다. 설
 [繁體中文](./README_tw.md) · [한국어](./README_ko.md) · [ไทย](./README_th.md) · [Tiếng Việt](./README_vi.md) ·
 [العربية](./README_ar.md)
 
+## 데스크톱 앱 스크린샷: 작업 공간, AI 창작, 무한 캔버스
+
+실행 중인 macOS 데스크톱 앱의 영어 화면입니다. 창작 패널은 로컬 데모 초안을, 프롬프트 라이브러리는 기본 제공 예제 이미지를 보여 줍니다.
+
+### 창작 작업 공간 — 도구, 프롬프트 영감, 미디어 바로가기
+
+![창작 작업 공간 — 도구, 프롬프트 영감, 미디어 바로가기](./docs/assets/screenshots/desktop-workspace.jpg)
+
+### AI 이미지 창작 — 프롬프트, 모델, 생성 설정
+
+![AI 이미지 창작 — 프롬프트, 모델, 생성 설정](./docs/assets/screenshots/desktop-ai-creator.jpg)
+
+### 무한 캔버스 — 창작 기획과 생성 노드 배치
+
+![무한 캔버스 — 창작 기획과 생성 노드 배치](./docs/assets/screenshots/desktop-canvas.jpg)
+
+### 프롬프트 영감 — 시각 예제와 재사용 가능한 프롬프트 탐색
+
+![프롬프트 영감 — 시각 예제와 재사용 가능한 프롬프트 탐색](./docs/assets/screenshots/desktop-prompt-library.jpg)
+
 ## Flaq AI 모델 플랫폼과 온라인 창작 도구
 
 [Flaq AI](https://flaq.ai/ko/)는 크리에이터, 개발자, 기업을 위해 이미지 생성·편집, 동영상 생성, 언어 작업의 주요 AI

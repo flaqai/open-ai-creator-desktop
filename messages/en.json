@@ -1,5 +1,7 @@
 {
   "Desktop": {
+    "promptLibrary": "Prompt inspiration",
+    "mediaLibrary": "My media",
     "r2AccountId": "R2 account ID",
     "r2BucketName": "Bucket name",
     "r2AccessKeyId": "Access key ID",

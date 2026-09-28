@@ -1,5 +1,7 @@
 {
   "Desktop": {
+    "promptLibrary": "Inspirasi prompt",
+    "mediaLibrary": "Media saya",
     "workspace": "Ruang kerja kreatif",
     "workspaceDescription": "Pilih alur kerja dan mulai berkarya. Pengaturan dan karya terbaru selalu mudah dijangkau.",
     "configure": "Hubungkan Flaq",

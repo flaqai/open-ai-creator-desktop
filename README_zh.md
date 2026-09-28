@@ -14,6 +14,26 @@ Rust 原生外壳与现代 React 界面。当前安装后的应用名称为 **Fl
 [繁體中文](./README_tw.md) · [한국어](./README_ko.md) · [ไทย](./README_th.md) · [Tiếng Việt](./README_vi.md) ·
 [العربية](./README_ar.md)
 
+## 桌面客户端截图：创作工作台、AI 创作与无限画布
+
+以下截图来自实际运行的 macOS 桌面客户端，界面语言为英语。创作面板展示本地演示草稿；提示词库图片为内置示例。
+
+### 创作工作台：直达创作工具、提示词灵感与素材
+
+![创作工作台：直达创作工具、提示词灵感与素材](./docs/assets/screenshots/desktop-workspace.jpg)
+
+### AI 图片创作：编写提示词、选择模型与生成参数
+
+![AI 图片创作：编写提示词、选择模型与生成参数](./docs/assets/screenshots/desktop-ai-creator.jpg)
+
+### 无限画布：整理创意简报与生成节点
+
+![无限画布：整理创意简报与生成节点](./docs/assets/screenshots/desktop-canvas.jpg)
+
+### 提示词灵感：浏览视觉示例与可复用提示词
+
+![提示词灵感：浏览视觉示例与可复用提示词](./docs/assets/screenshots/desktop-prompt-library.jpg)
+
 ## Flaq AI 模型平台与在线创作工具
 
 [Flaq AI](https://flaq.ai/zh/)

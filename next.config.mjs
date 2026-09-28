@@ -30,7 +30,8 @@ const isDesktopRuntime = process.env.FLAQ_DESKTOP_RUNTIME === 'true';
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   ...(isDesktopBuild ? { output: 'export' } : {}),
-  ...(isDesktopRuntime ? { distDir: '.next-desktop-dev' } : {}),
+  // Keep the development indicator from covering the native sidebar controls.
+  ...(isDesktopRuntime ? { distDir: '.next-desktop-dev', devIndicators: false } : {}),
   htmlLimitedBots: /.*/,
   env: {
     NEXT_BASE_API: process.env.NEXT_BASE_API,

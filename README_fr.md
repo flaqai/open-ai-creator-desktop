@@ -15,6 +15,26 @@ avec une enveloppe Tauri 2 + Rust et une interface React moderne. L’applicatio
 [繁體中文](./README_tw.md) · [한국어](./README_ko.md) · [ไทย](./README_th.md) · [Tiếng Việt](./README_vi.md) ·
 [العربية](./README_ar.md)
 
+## Captures de l’application de bureau : espace de travail, création IA et canevas infini
+
+Capturées dans l’application macOS en cours d’exécution, avec une interface en anglais. Les panneaux de création affichent des brouillons de démonstration locaux ; les images de la bibliothèque de prompts sont des exemples intégrés.
+
+### Espace créatif — outils, inspiration de prompts et raccourcis vers les médias
+
+![Espace créatif — outils, inspiration de prompts et raccourcis vers les médias](./docs/assets/screenshots/desktop-workspace.jpg)
+
+### Création d’images IA — prompts, modèles et paramètres de génération
+
+![Création d’images IA — prompts, modèles et paramètres de génération](./docs/assets/screenshots/desktop-ai-creator.jpg)
+
+### Canevas infini — organiser les briefs créatifs et les nœuds de génération
+
+![Canevas infini — organiser les briefs créatifs et les nœuds de génération](./docs/assets/screenshots/desktop-canvas.jpg)
+
+### Inspiration de prompts — parcourir des exemples visuels et des prompts réutilisables
+
+![Inspiration de prompts — parcourir des exemples visuels et des prompts réutilisables](./docs/assets/screenshots/desktop-prompt-library.jpg)
+
 ## Plateforme de modèles Flaq AI et outils de création en ligne
 
 [Flaq AI](https://flaq.ai/fr/) réunit des modèles IA majeurs pour la génération et la retouche d’images, la vidéo et les

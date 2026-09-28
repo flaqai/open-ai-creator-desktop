@@ -16,6 +16,26 @@ Flaq-AI-Modelldienste mit einer Tauri-2-/Rust-Desktop-Hülle und moderner React-
 [繁體中文](./README_tw.md) · [한국어](./README_ko.md) · [ไทย](./README_th.md) · [Tiếng Việt](./README_vi.md) ·
 [العربية](./README_ar.md)
 
+## Desktop-App-Screenshots: Arbeitsbereich, KI-Kreation und unendliche Leinwand
+
+Aufgenommen in der laufenden macOS-Desktop-App mit englischer Oberfläche. Die Erstellungsansichten zeigen lokale Demo-Entwürfe; die Bilder der Prompt-Bibliothek sind mitgelieferte Beispiele.
+
+### Kreativer Arbeitsbereich — Werkzeuge, Prompt-Inspiration und Medienverknüpfungen
+
+![Kreativer Arbeitsbereich — Werkzeuge, Prompt-Inspiration und Medienverknüpfungen](./docs/assets/screenshots/desktop-workspace.jpg)
+
+### KI-Bilderstellung — Prompts, Modelle und Generierungseinstellungen
+
+![KI-Bilderstellung — Prompts, Modelle und Generierungseinstellungen](./docs/assets/screenshots/desktop-ai-creator.jpg)
+
+### Unendliche Leinwand — kreative Briefings und Generierungsknoten anordnen
+
+![Unendliche Leinwand — kreative Briefings und Generierungsknoten anordnen](./docs/assets/screenshots/desktop-canvas.jpg)
+
+### Prompt-Inspiration — Bildbeispiele und wiederverwendbare Prompts entdecken
+
+![Prompt-Inspiration — Bildbeispiele und wiederverwendbare Prompts entdecken](./docs/assets/screenshots/desktop-prompt-library.jpg)
+
 ## Flaq AI: Modellplattform und kreative Online-Werkzeuge
 
 [Flaq AI](https://flaq.ai/de/) bündelt führende Modelle für Bilderzeugung und -bearbeitung, Videogenerierung und

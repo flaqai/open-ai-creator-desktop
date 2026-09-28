@@ -1,5 +1,7 @@
 {
   "Desktop": {
+    "promptLibrary": "Cảm hứng prompt",
+    "mediaLibrary": "Tư liệu của tôi",
     "workspace": "Không gian sáng tạo",
     "workspaceDescription": "Chọn quy trình và bắt đầu sáng tạo. Cài đặt và tác phẩm gần đây luôn trong tầm tay.",
     "configure": "Kết nối Flaq",

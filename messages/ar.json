@@ -1,5 +1,7 @@
 {
   "Desktop": {
+    "promptLibrary": "إلهام الأوامر",
+    "mediaLibrary": "وسائطي",
     "workspace": "مساحة العمل الإبداعية",
     "workspaceDescription": "اختر سير العمل وابدأ الإنشاء. الإعدادات والأعمال الأخيرة في متناولك.",
     "configure": "ربط Flaq",

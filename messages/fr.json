@@ -1,5 +1,7 @@
 {
   "Desktop": {
+    "promptLibrary": "Inspiration de prompts",
+    "mediaLibrary": "Mes médias",
     "workspace": "Espace de création",
     "workspaceDescription": "Choisissez un flux et commencez à créer. Réglages et travaux récents restent à portée de main.",
     "configure": "Connecter Flaq",

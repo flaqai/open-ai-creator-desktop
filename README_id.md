@@ -15,6 +15,26 @@ Flaq AI melalui Tauri 2 + Rust dan antarmuka React modern. Nama aplikasi yang te
 [繁體中文](./README_tw.md) · [한국어](./README_ko.md) · [ไทย](./README_th.md) · [Tiếng Việt](./README_vi.md) ·
 [العربية](./README_ar.md)
 
+## Tangkapan Layar Aplikasi Desktop: Ruang Kerja, Kreasi AI, dan Kanvas Tanpa Batas
+
+Diambil dari aplikasi desktop macOS yang berjalan dalam bahasa Inggris. Panel kreasi menampilkan draf demo lokal; gambar pustaka prompt adalah contoh bawaan.
+
+### Ruang kerja kreatif — alat, inspirasi prompt, dan pintasan media
+
+![Ruang kerja kreatif — alat, inspirasi prompt, dan pintasan media](./docs/assets/screenshots/desktop-workspace.jpg)
+
+### Kreasi gambar AI — prompt, model, dan pengaturan generasi
+
+![Kreasi gambar AI — prompt, model, dan pengaturan generasi](./docs/assets/screenshots/desktop-ai-creator.jpg)
+
+### Kanvas tanpa batas — susun brief kreatif dan node generasi
+
+![Kanvas tanpa batas — susun brief kreatif dan node generasi](./docs/assets/screenshots/desktop-canvas.jpg)
+
+### Inspirasi prompt — jelajahi contoh visual dan prompt yang dapat digunakan kembali
+
+![Inspirasi prompt — jelajahi contoh visual dan prompt yang dapat digunakan kembali](./docs/assets/screenshots/desktop-prompt-library.jpg)
+
 ## Platform Model Flaq AI dan Alat Kreatif Online
 
 [Flaq AI](https://flaq.ai/id/) menyatukan model AI terkemuka untuk pembuatan dan penyuntingan gambar, pembuatan video,

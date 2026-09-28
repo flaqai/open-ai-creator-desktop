@@ -1,5 +1,7 @@
 {
   "Desktop": {
+    "promptLibrary": "프롬프트 영감",
+    "mediaLibrary": "내 미디어",
     "workspace": "크리에이티브 작업 공간",
     "workspaceDescription": "워크플로를 선택하고 바로 제작을 시작하세요. 설정과 최근 작업도 가까이 있습니다.",
     "configure": "Flaq 연결",

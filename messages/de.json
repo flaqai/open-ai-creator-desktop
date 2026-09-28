@@ -1,5 +1,7 @@
 {
   "Desktop": {
+    "promptLibrary": "Prompt-Inspiration",
+    "mediaLibrary": "Meine Medien",
     "workspace": "Kreativbereich",
     "workspaceDescription": "Wähle einen Workflow und lege los. Einstellungen und letzte Arbeiten bleiben griffbereit.",
     "configure": "Flaq verbinden",

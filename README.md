@@ -16,6 +16,26 @@ Creator**.
 [繁體中文](./README_tw.md) · [한국어](./README_ko.md) · [ไทย](./README_th.md) · [Tiếng Việt](./README_vi.md) ·
 [العربية](./README_ar.md)
 
+## Desktop App Screenshots: Workspace, AI Creation, and Infinite Canvas
+
+Captured from the running macOS desktop app in English. Creation panels show local demo drafts; prompt-library images are bundled examples.
+
+### Creative workspace — tools, prompt inspiration, and media shortcuts
+
+![Creative workspace — tools, prompt inspiration, and media shortcuts](./docs/assets/screenshots/desktop-workspace.jpg)
+
+### AI image creation — prompts, models, and generation settings
+
+![AI image creation — prompts, models, and generation settings](./docs/assets/screenshots/desktop-ai-creator.jpg)
+
+### Infinite canvas — arrange creative briefs and generation nodes
+
+![Infinite canvas — arrange creative briefs and generation nodes](./docs/assets/screenshots/desktop-canvas.jpg)
+
+### Prompt inspiration — browse visual examples and reusable prompts
+
+![Prompt inspiration — browse visual examples and reusable prompts](./docs/assets/screenshots/desktop-prompt-library.jpg)
+
 ## Flaq AI Model Platform and Online Creative Tools
 
 [Flaq AI](https://flaq.ai/) is an AI platform for creators, developers, and businesses, bringing together leading

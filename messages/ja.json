@@ -1,5 +1,7 @@
 {
   "Desktop": {
+    "promptLibrary": "プロンプト集",
+    "mediaLibrary": "マイメディア",
     "workspace": "クリエイティブワークスペース",
     "workspaceDescription": "ワークフローを選んですぐに制作を始められます。設定と最近の作品にもすぐアクセスできます。",
     "configure": "Flaq に接続",

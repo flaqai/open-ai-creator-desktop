@@ -81,6 +81,7 @@ export default function DesktopShell({ children }: { children: ReactNode }) {
   const locale = useLocale();
   const zh = locale === 'zh' || locale === 'tw';
   const t = useTranslations('Navigation');
+  const tDesktop = useTranslations('Desktop');
   const pathname = usePathname();
   const router = useRouter();
   const [preferences, setPreferences] = useState<AppPreferences>(DEFAULT_PREFERENCES);
@@ -108,7 +109,11 @@ export default function DesktopShell({ children }: { children: ReactNode }) {
     if (!desktop) return;
     const handle = (event: Event) => {
       const command = (event as CustomEvent<string>).detail;
-      if (command.startsWith('route:')) { setOpen(false); router.push(command.slice(6)); return; }
+      if (command.startsWith('route:')) {
+        setOpen(false);
+        router.push(command.slice(6));
+        return;
+      }
       if (command === 'settings' || command === 'history') showSettings(command === 'history' ? 'library' : 'general');
       if (command === 'toggle_sidebar') {
         try {
@@ -116,7 +121,9 @@ export default function DesktopShell({ children }: { children: ReactNode }) {
           const next = { ...current, collapsed: !current.collapsed };
           localStorage.setItem(PREFERENCES_KEY, JSON.stringify(next));
           setPreferences(next);
-        } catch { toast.error(zh ? '设置保存失败' : 'Could not save preferences'); }
+        } catch {
+          toast.error(zh ? '设置保存失败' : 'Could not save preferences');
+        }
       }
     };
     window.addEventListener(APP_MENU_EVENT, handle);
@@ -367,12 +374,21 @@ export default function DesktopShell({ children }: { children: ReactNode }) {
           </Link>
           <Link
             href='/recommended-prompts'
-            title={zh ? '素材库' : 'Media library'}
+            title={tDesktop('promptLibrary')}
             aria-current={pathname.replace(/\/$/, '') === '/recommended-prompts' ? 'page' : undefined}
             className={`${linkClass} ${pathname.replace(/\/$/, '') === '/recommended-prompts' ? 'bg-accent text-primary font-semibold' : ''}`}
           >
             <BookOpenText className='size-5 shrink-0' />
-            <SidebarLabel collapsed={collapsed}>{zh ? '素材库' : 'Media library'}</SidebarLabel>
+            <SidebarLabel collapsed={collapsed}>{tDesktop('promptLibrary')}</SidebarLabel>
+          </Link>
+          <Link
+            href='/media-library'
+            title={tDesktop('mediaLibrary')}
+            aria-current={pathname.replace(/\/$/, '') === '/media-library' ? 'page' : undefined}
+            className={`${linkClass} ${pathname.replace(/\/$/, '') === '/media-library' ? 'bg-accent text-primary font-semibold' : ''}`}
+          >
+            <FolderOpen className='size-5 shrink-0' />
+            <SidebarLabel collapsed={collapsed}>{tDesktop('mediaLibrary')}</SidebarLabel>
           </Link>
           {(['workspace', 'image', 'video'] as const).map((group) => (
             <div key={group} className='space-y-1'>

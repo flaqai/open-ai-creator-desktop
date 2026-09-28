@@ -15,6 +15,26 @@ Basata su [Flaq SaaS Template](https://github.com/flaqai/flaq-saas-template), co
 [繁體中文](./README_tw.md) · [한국어](./README_ko.md) · [ไทย](./README_th.md) · [Tiếng Việt](./README_vi.md) ·
 [العربية](./README_ar.md)
 
+## Schermate dell’app desktop: spazio di lavoro, creazione AI e canvas infinito
+
+Acquisite dall’app desktop macOS in esecuzione, con interfaccia in inglese. I pannelli di creazione mostrano bozze demo locali; le immagini della libreria di prompt sono esempi inclusi.
+
+### Spazio di lavoro creativo — strumenti, ispirazione per i prompt e accesso rapido ai media
+
+![Spazio di lavoro creativo — strumenti, ispirazione per i prompt e accesso rapido ai media](./docs/assets/screenshots/desktop-workspace.jpg)
+
+### Creazione di immagini AI — prompt, modelli e impostazioni di generazione
+
+![Creazione di immagini AI — prompt, modelli e impostazioni di generazione](./docs/assets/screenshots/desktop-ai-creator.jpg)
+
+### Canvas infinito — organizza brief creativi e nodi di generazione
+
+![Canvas infinito — organizza brief creativi e nodi di generazione](./docs/assets/screenshots/desktop-canvas.jpg)
+
+### Ispirazione per i prompt — esplora esempi visivi e prompt riutilizzabili
+
+![Ispirazione per i prompt — esplora esempi visivi e prompt riutilizzabili](./docs/assets/screenshots/desktop-prompt-library.jpg)
+
 ## Piattaforma di modelli Flaq AI e strumenti creativi online
 
 [Flaq AI](https://flaq.ai/it/) riunisce importanti modelli per generazione e modifica di immagini, video e attività

@@ -1,5 +1,7 @@
 {
   "Desktop": {
+    "promptLibrary": "提示词灵感",
+    "mediaLibrary": "我的素材",
     "r2AccountId": "R2 账户 ID",
     "r2BucketName": "存储桶名称",
     "r2AccessKeyId": "访问密钥 ID",

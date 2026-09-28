@@ -15,6 +15,26 @@ Tauri 2 + Rust y una interfaz React moderna. La aplicación instalada se llama *
 [繁體中文](./README_tw.md) · [한국어](./README_ko.md) · [ไทย](./README_th.md) · [Tiếng Việt](./README_vi.md) ·
 [العربية](./README_ar.md)
 
+## Capturas de la aplicación de escritorio: espacio de trabajo, creación con IA y lienzo infinito
+
+Capturadas en la aplicación de escritorio macOS en funcionamiento, con la interfaz en inglés. Los paneles de creación muestran borradores locales de demostración; las imágenes de la biblioteca de prompts son ejemplos incluidos.
+
+### Espacio creativo — herramientas, inspiración de prompts y accesos a archivos multimedia
+
+![Espacio creativo — herramientas, inspiración de prompts y accesos a archivos multimedia](./docs/assets/screenshots/desktop-workspace.jpg)
+
+### Creación de imágenes con IA — prompts, modelos y ajustes de generación
+
+![Creación de imágenes con IA — prompts, modelos y ajustes de generación](./docs/assets/screenshots/desktop-ai-creator.jpg)
+
+### Lienzo infinito — organiza briefs creativos y nodos de generación
+
+![Lienzo infinito — organiza briefs creativos y nodos de generación](./docs/assets/screenshots/desktop-canvas.jpg)
+
+### Inspiración de prompts — explora ejemplos visuales y prompts reutilizables
+
+![Inspiración de prompts — explora ejemplos visuales y prompts reutilizables](./docs/assets/screenshots/desktop-prompt-library.jpg)
+
 ## Plataforma de modelos Flaq AI y herramientas creativas en línea
 
 [Flaq AI](https://flaq.ai/es/) reúne modelos destacados para generar y editar imágenes, crear vídeos y realizar tareas

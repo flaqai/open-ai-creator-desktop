@@ -2,16 +2,41 @@
 
 import type { ReactNode } from 'react';
 import { Link } from '@/i18n/navigation';
-import { ArrowUpRight, ImageIcon, Layers3, Play, Shirt, Sparkles, Video, Workflow } from 'lucide-react';
+import {
+  ArrowUpRight,
+  BookOpenText,
+  FolderOpen,
+  ImageIcon,
+  Layers3,
+  Play,
+  Shirt,
+  Sparkles,
+  Video,
+  Workflow,
+} from 'lucide-react';
 import { useTranslations } from 'next-intl';
 
 import { FEATURE_MODULES } from '@/lib/features/catalog';
 import { useDesktopRuntime } from '@/hooks/use-desktop-runtime';
 
-const icons = { sparkles: Sparkles, image: ImageIcon, layers: Layers3, shirt: Shirt, video: Video, play: Play, canvas: Workflow };
+const icons = {
+  sparkles: Sparkles,
+  image: ImageIcon,
+  layers: Layers3,
+  shirt: Shirt,
+  video: Video,
+  play: Play,
+  canvas: Workflow,
+};
 const homeOrder = [
-  'ai-media-creator', 'ai-canvas', 'image-to-image', 'virtual-try-on', 'text-to-video',
-  'image-to-video', 'reference-to-video', 'text-to-image',
+  'ai-media-creator',
+  'ai-canvas',
+  'image-to-image',
+  'virtual-try-on',
+  'text-to-video',
+  'image-to-video',
+  'reference-to-video',
+  'text-to-image',
 ] as const;
 const homeModules = homeOrder.map((id) => FEATURE_MODULES.find((tool) => tool.id === id)!);
 
@@ -34,6 +59,22 @@ export default function DesktopHome({ children }: { children?: ReactNode }) {
             </div>
             <h1 className='text-foreground text-3xl font-semibold tracking-tight lg:text-4xl'>{t('workspace')}</h1>
             <p className='text-foreground/60 mt-2 max-w-2xl text-sm leading-6'>{t('workspaceDescription')}</p>
+            <div className='mt-5 flex flex-wrap gap-3'>
+              <Link
+                href='/recommended-prompts'
+                className='border-border bg-card hover:bg-accent focus-visible:ring-ring inline-flex items-center gap-2 rounded-xl border px-4 py-2.5 text-sm font-medium transition-colors focus-visible:ring-2 focus-visible:outline-none'
+              >
+                <BookOpenText aria-hidden='true' className='text-primary size-4' />
+                {t('promptLibrary')}
+              </Link>
+              <Link
+                href='/media-library'
+                className='border-border bg-card hover:bg-accent focus-visible:ring-ring inline-flex items-center gap-2 rounded-xl border px-4 py-2.5 text-sm font-medium transition-colors focus-visible:ring-2 focus-visible:outline-none'
+              >
+                <FolderOpen aria-hidden='true' className='text-primary size-4' />
+                {t('mediaLibrary')}
+              </Link>
+            </div>
           </div>
         </div>
 

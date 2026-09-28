@@ -15,6 +15,26 @@ Flaq AI qua Tauri 2 + Rust và giao diện React hiện đại. Tên ứng dụn
 [繁體中文](./README_tw.md) · [한국어](./README_ko.md) · [ไทย](./README_th.md) · [Tiếng Việt](./README_vi.md) ·
 [العربية](./README_ar.md)
 
+## Ảnh chụp ứng dụng máy tính: không gian làm việc, sáng tạo AI và canvas vô hạn
+
+Chụp từ ứng dụng macOS đang chạy với giao diện tiếng Anh. Các bảng sáng tạo hiển thị bản nháp minh họa cục bộ; ảnh trong thư viện prompt là ví dụ đi kèm.
+
+### Không gian sáng tạo — công cụ, cảm hứng prompt và lối tắt đến tư liệu
+
+![Không gian sáng tạo — công cụ, cảm hứng prompt và lối tắt đến tư liệu](./docs/assets/screenshots/desktop-workspace.jpg)
+
+### Tạo ảnh AI — prompt, mô hình và thiết lập tạo ảnh
+
+![Tạo ảnh AI — prompt, mô hình và thiết lập tạo ảnh](./docs/assets/screenshots/desktop-ai-creator.jpg)
+
+### Canvas vô hạn — sắp xếp bản mô tả ý tưởng và các nút tạo nội dung
+
+![Canvas vô hạn — sắp xếp bản mô tả ý tưởng và các nút tạo nội dung](./docs/assets/screenshots/desktop-canvas.jpg)
+
+### Cảm hứng prompt — khám phá ví dụ trực quan và prompt có thể tái sử dụng
+
+![Cảm hứng prompt — khám phá ví dụ trực quan và prompt có thể tái sử dụng](./docs/assets/screenshots/desktop-prompt-library.jpg)
+
 ## Nền tảng mô hình Flaq AI và công cụ sáng tạo trực tuyến
 
 [Flaq AI](https://flaq.ai/vi/) tập hợp các mô hình hàng đầu về tạo và chỉnh sửa ảnh, tạo video và xử lý ngôn ngữ cho nhà
