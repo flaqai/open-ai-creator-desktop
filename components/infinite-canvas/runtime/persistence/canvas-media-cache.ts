@@ -2,12 +2,15 @@
 
 import { STORE_PREFIX } from '@/lib/constants/config';
 
+import { ensureCanvasDevelopmentDataReset } from './dev-canvas-reset';
+
 const DATABASE = `${STORE_PREFIX}-canvas-media`;
 const STORE = 'media';
 
 type StoredMedia = { url: string; blob?: Blob; localPath?: string };
 
-function openMediaDatabase(): Promise<IDBDatabase> {
+async function openMediaDatabase(): Promise<IDBDatabase> {
+  await ensureCanvasDevelopmentDataReset();
   return new Promise((resolve, reject) => {
     const request = indexedDB.open(DATABASE, 1);
     request.onupgradeneeded = () => request.result.createObjectStore(STORE, { keyPath: 'url' });
