@@ -1,17 +1,18 @@
 // -nocheck
 // Pinned OSS source; compatibility is isolated outside this closure.
 // @ts-nocheck -- pinned OSS source; compatibility is isolated outside this closure.
-import { resolveCanvasMusicValues } from '../../lib/canvas/canvas-music-results';
-import { useEffect, type CSSProperties } from 'react';
+import { useEffect, useMemo, type CSSProperties } from 'react';
 import { Box, Image as ImageIcon, LoaderCircle, Music2, Play, Settings2, Video } from 'lucide-react';
+
+import { hasCanvasThreeDModels } from '../../infinite-canvas-model-adapter';
 // import { MessageSquare } from 'lucide-react';
 
 import { canvasThemes } from '../../lib/canvas-theme';
-import { hasCanvasThreeDModels } from '../../infinite-canvas-model-adapter';
+import { resolveCanvasMusicValues } from '../../lib/canvas/canvas-music-results';
 import {
-  SOURCE_REFERENCE_VIDEO_MODELS,
   getSourceModelMetadataPatch,
   resolveSourceReferenceVideoModel,
+  SOURCE_REFERENCE_VIDEO_MODELS,
   sourceModelName,
 } from '../../runtime/generation/source-model-data';
 import { useInfiniteCanvasTranslation } from '../../runtime/i18n/infinite-canvas-translation';
@@ -27,11 +28,11 @@ import {
 import { useThemeStore } from '../../stores/use-theme-store';
 import type { CanvasGenerationMode, CanvasNodeData, CanvasNodeMetadata } from '../../types/canvas';
 import { ModelPicker } from '../model-picker';
-import { CanvasImageSettingsPopover } from './canvas-image-settings-popover';
 import { CanvasAdvancedSettings } from './canvas-advanced-settings';
+import { CanvasImageSettingsPopover } from './canvas-image-settings-popover';
+import { CanvasMusicSettingsPopover } from './canvas-music-settings-popover';
 // import { CanvasTextSettingsPopover } from './canvas-text-settings-popover';
 import { CanvasVideoSettingsPopover } from './canvas-video-settings-popover';
-import { CanvasMusicSettingsPopover } from './canvas-music-settings-popover';
 
 export type CanvasConfigInputSummary = {
   textCount: number;
@@ -76,24 +77,42 @@ export function CanvasConfigNodePanel({
   const preservesInputs = Boolean(globalConfig.modelAdapter?.getUnavailableReason);
   const mode = hasVideoInput && savedMode !== '3d' && !preservesInputs ? 'video' : savedMode;
   const configuredModel = resolveModelForCapability(globalConfig, node.metadata?.model, mode);
-  const resolvedModel = preservesInputs ? configuredModel : resolveConfigNodeVideoModel(configuredModel, mode, inputSummary, globalConfig.modelAdapter);
+  const resolvedModel = preservesInputs
+    ? configuredModel
+    : resolveConfigNodeVideoModel(configuredModel, mode, inputSummary, globalConfig.modelAdapter);
   const config = buildNodeConfig(globalConfig, node, mode, resolvedModel);
-  const advancedParameters = mode === 'image' || mode === 'video' ? globalConfig.modelAdapter?.getAdvancedParameters?.(resolvedModel, mode) : undefined;
+  const advancedParameters =
+    mode === 'image' || mode === 'video'
+      ? globalConfig.modelAdapter?.getAdvancedParameters?.(resolvedModel, mode)
+      : undefined;
   const chipStyle = { background: theme.node.fill, borderColor: theme.node.stroke, color: theme.node.text };
   const hasAnyInput = Boolean(
     inputSummary.textCount || inputSummary.imageCount || inputSummary.videoCount || inputSummary.audioCount,
   );
   const hasComposerContent = Boolean((node.metadata?.composerContent ?? node.metadata?.prompt ?? '').trim());
-  const unavailable = unavailableMusicInput ? t('music.selectAvailableResult') : mode === '3d' ? undefined : globalConfig.modelAdapter?.getUnavailableReason?.(config, {
-    mode, prompt: prompt ?? node.metadata?.composerContent ?? node.metadata?.prompt ?? '', connectedText, ...inputSummary,
-  });
+  const unavailable = unavailableMusicInput
+    ? t('music.selectAvailableResult')
+    : mode === '3d'
+      ? undefined
+      : globalConfig.modelAdapter?.getUnavailableReason?.(config, {
+          mode,
+          prompt: prompt ?? node.metadata?.composerContent ?? node.metadata?.prompt ?? '',
+          connectedText,
+          ...inputSummary,
+        });
   const canGenerate = (hasComposerContent || hasAnyInput || mode === 'music') && !unavailable;
-  const videoInputContext = {
-    hasAudioSubjects: inputSummary.audioCount > 0,
-    hasImage: inputSummary.imageCount > 0,
-    hasEndFrame: globalConfig.modelAdapter ? inputSummary.imageCount > 1 : undefined,
-    hasVideoSubjects: inputSummary.videoCount > 0,
-  };
+  const videoInputContext = useMemo(
+    () => ({
+      imageCount: inputSummary.imageCount,
+      videoCount: inputSummary.videoCount,
+      audioCount: inputSummary.audioCount,
+      hasAudioSubjects: inputSummary.audioCount > 0,
+      hasImage: inputSummary.imageCount > 0,
+      hasEndFrame: globalConfig.modelAdapter ? inputSummary.imageCount > 1 : undefined,
+      hasVideoSubjects: inputSummary.videoCount > 0,
+    }),
+    [globalConfig.modelAdapter, inputSummary.audioCount, inputSummary.imageCount, inputSummary.videoCount],
+  );
   const usesReferenceVideoModel = mode === 'video' && hasVideoInput;
 
   useEffect(() => {
@@ -107,17 +126,16 @@ export function CanvasConfigNodePanel({
     hasVideoInput,
     node.id,
     onConfigChange,
+    preservesInputs,
     resolvedModel,
     savedMode,
-    videoInputContext.hasAudioSubjects,
-    videoInputContext.hasEndFrame,
-    videoInputContext.hasImage,
-    videoInputContext.hasVideoSubjects,
+    videoInputContext,
   ]);
 
   useEffect(() => {
     if (
-      preservesInputs || savedMode !== 'video' ||
+      preservesInputs ||
+      savedMode !== 'video' ||
       !usesReferenceVideoModel ||
       sourceModelName(node.metadata?.model || '') === sourceModelName(resolvedModel)
     ) {
@@ -125,11 +143,16 @@ export function CanvasConfigNodePanel({
     }
     onConfigChange(
       node.id,
-      getSourceModelMetadataPatch(resolvedModel, 'video', {
-        hasAudioSubjects: inputSummary.audioCount > 0,
-        hasImage: inputSummary.imageCount > 0,
-        hasVideoSubjects: true,
-      }, globalConfig.modelAdapter),
+      getSourceModelMetadataPatch(
+        resolvedModel,
+        'video',
+        {
+          hasAudioSubjects: inputSummary.audioCount > 0,
+          hasImage: inputSummary.imageCount > 0,
+          hasVideoSubjects: true,
+        },
+        globalConfig.modelAdapter,
+      ),
     );
   }, [
     globalConfig.modelAdapter,
@@ -139,6 +162,7 @@ export function CanvasConfigNodePanel({
     node.id,
     node.metadata?.model,
     onConfigChange,
+    preservesInputs,
     resolvedModel,
     savedMode,
     usesReferenceVideoModel,
@@ -146,7 +170,7 @@ export function CanvasConfigNodePanel({
 
   return (
     <div
-      className='custom-scrollbar flex h-full w-full cursor-move flex-col overflow-y-auto px-3 pb-3 pt-7 text-sm'
+      className='custom-scrollbar flex h-full w-full cursor-move flex-col overflow-y-auto px-3 pt-7 pb-3 text-sm'
       style={{ color: theme.node.text }}
       onDoubleClick={(event) => event.stopPropagation()}
       onWheel={(event) => event.stopPropagation()}
@@ -201,13 +225,32 @@ export function CanvasConfigNodePanel({
                   </span>
                 ),
               },
-              ...(globalConfig.modelAdapter?.music ? [
-                { value: 'music', label: <span className='inline-flex items-center gap-1'><Music2 className='size-3.5' />{globalConfig.modelAdapter.music.label}</span> },
-              ] : []),
-              ...(hasCanvasThreeDModels(globalConfig.modelAdapter) && integrations?.renderThreeDPreview ? [{
-                value: '3d',
-                label: <span className='inline-flex items-center gap-1'><Box className='size-3.5' />{globalConfig.modelAdapter.threeD.label}</span>,
-              }] : []),
+              ...(globalConfig.modelAdapter?.music
+                ? [
+                    {
+                      value: 'music',
+                      label: (
+                        <span className='inline-flex items-center gap-1'>
+                          <Music2 className='size-3.5' />
+                          {globalConfig.modelAdapter.music.label}
+                        </span>
+                      ),
+                    },
+                  ]
+                : []),
+              ...(hasCanvasThreeDModels(globalConfig.modelAdapter) && integrations?.renderThreeDPreview
+                ? [
+                    {
+                      value: '3d',
+                      label: (
+                        <span className='inline-flex items-center gap-1'>
+                          <Box className='size-3.5' />
+                          {globalConfig.modelAdapter.threeD.label}
+                        </span>
+                      ),
+                    },
+                  ]
+                : []),
             ]}
           />
         </div>
@@ -232,23 +275,25 @@ export function CanvasConfigNodePanel({
           value={t('canvas.configNode.items', { count: inputSummary.textCount })}
           style={chipStyle}
         />
-        {mode !== 'lyrics' ? <>
-        <InputChip
-          label={t('canvas.configNode.references')}
-          value={t('canvas.configNode.images', { count: inputSummary.imageCount })}
-          style={chipStyle}
-        />
-        <InputChip
-          label={t('canvas.configNode.videoReferences')}
-          value={t('canvas.configNode.items', { count: inputSummary.videoCount })}
-          style={chipStyle}
-        />
-        <InputChip
-          label={t('canvas.configNode.audioReferences')}
-          value={t('canvas.configNode.items', { count: inputSummary.audioCount })}
-          style={chipStyle}
-        />
-        </> : null}
+        {mode !== 'lyrics' ? (
+          <>
+            <InputChip
+              label={t('canvas.configNode.references')}
+              value={t('canvas.configNode.images', { count: inputSummary.imageCount })}
+              style={chipStyle}
+            />
+            <InputChip
+              label={t('canvas.configNode.videoReferences')}
+              value={t('canvas.configNode.items', { count: inputSummary.videoCount })}
+              style={chipStyle}
+            />
+            <InputChip
+              label={t('canvas.configNode.audioReferences')}
+              value={t('canvas.configNode.items', { count: inputSummary.audioCount })}
+              style={chipStyle}
+            />
+          </>
+        ) : null}
         <button
           type='button'
           className='inline-flex h-7 cursor-pointer items-center gap-1 rounded-md border px-2 text-[11px]'
@@ -272,28 +317,55 @@ export function CanvasConfigNodePanel({
         className={`mb-2 grid min-w-0 cursor-default items-center gap-2 ${mode === '3d' || mode === 'lyrics' ? 'grid-cols-1' : 'grid-cols-[minmax(0,1fr)_148px]'}`}
         onMouseDown={(event) => event.stopPropagation()}
       >
-        {mode !== 'lyrics' ? <ModelPicker
-          className='canvas-compact-control'
-          appearance='integration-form'
-          config={config}
-          value={config.model}
-          onChange={(model) => onConfigChange(node.id, getSourceModelMetadataPatch(model, mode, videoInputContext, globalConfig.modelAdapter))}
-          capability={mode === 'lyrics' ? 'music' : mode}
-          allowedModels={mode === 'lyrics' ? globalConfig.modelAdapter?.music?.lyricsModels : !preservesInputs && usesReferenceVideoModel ? (globalConfig.modelAdapter
-            ? [...globalConfig.modelAdapter.referenceVideoModels, ...globalConfig.modelAdapter.videoToVideoModels]
-            : SOURCE_REFERENCE_VIDEO_MODELS) : undefined}
-          onMissingConfig={() => openConfigDialog(true)}
-          fullWidth
-        /> : globalConfig.modelAdapter?.music?.lyrics ? (
+        {mode !== 'lyrics' ? (
+          <ModelPicker
+            className='canvas-compact-control'
+            appearance='integration-form'
+            config={config}
+            value={config.model}
+            inputCounts={{
+              imageCount: inputSummary.imageCount,
+              videoCount: inputSummary.videoCount,
+              audioCount: inputSummary.audioCount,
+            }}
+            onChange={(model) =>
+              onConfigChange(
+                node.id,
+                getSourceModelMetadataPatch(model, mode, videoInputContext, globalConfig.modelAdapter),
+              )
+            }
+            capability={mode === 'lyrics' ? 'music' : mode}
+            allowedModels={
+              mode === 'lyrics'
+                ? globalConfig.modelAdapter?.music?.lyricsModels
+                : !preservesInputs && usesReferenceVideoModel
+                  ? globalConfig.modelAdapter
+                    ? [
+                        ...globalConfig.modelAdapter.referenceVideoModels,
+                        ...globalConfig.modelAdapter.videoToVideoModels,
+                      ]
+                    : SOURCE_REFERENCE_VIDEO_MODELS
+                  : undefined
+            }
+            onMissingConfig={() => openConfigDialog(true)}
+            fullWidth
+          />
+        ) : globalConfig.modelAdapter?.music?.lyrics ? (
           <label className='flex items-center justify-between gap-3 text-sm'>
             {globalConfig.modelAdapter.music.lyrics.languageLabel}
             <select
               className='custom-scrollbar h-9 rounded-lg border px-2'
               style={chipStyle}
               value={String(config.music?.language || globalConfig.modelAdapter.music.lyrics.defaultLanguage)}
-              onChange={(event) => onConfigChange(node.id, { music: { ...config.music, language: event.target.value } })}
+              onChange={(event) =>
+                onConfigChange(node.id, { music: { ...config.music, language: event.target.value } })
+              }
             >
-              {globalConfig.modelAdapter.music.lyrics.languages.map((language) => <option key={language.value} value={language.value}>{language.label}</option>)}
+              {globalConfig.modelAdapter.music.lyrics.languages.map((language) => (
+                <option key={language.value} value={language.value}>
+                  {language.label}
+                </option>
+              ))}
             </select>
           </label>
         ) : null}
@@ -321,8 +393,7 @@ export function CanvasConfigNodePanel({
             buttonClassName='canvas-compact-control !h-10 !w-full !justify-start !rounded-lg !px-2'
             onConfigChange={(key, value) => onConfigChange(node.id, { [key]: value })}
           />
-        ) : (
-          /* Text generation settings are temporarily hidden, not removed.
+        ) : /* Text generation settings are temporarily hidden, not removed.
           <CanvasTextSettingsPopover
             config={config}
             placement='topRight'
@@ -330,11 +401,14 @@ export function CanvasConfigNodePanel({
             onConfigChange={(_, value) => onConfigChange(node.id, { reasoningEffort: value })}
           />
           */
-          null
-        )}
+        null}
       </div>
 
-      {unavailable ? <p className='mb-2 text-xs text-red-400' role='status'>{unavailable}</p> : null}
+      {unavailable ? (
+        <p className='mb-2 text-xs text-red-400' role='status'>
+          {unavailable}
+        </p>
+      ) : null}
       {(mode === 'image' || mode === 'video') && integrations?.renderGenerationPrice ? (
         <div className='mb-1 cursor-default text-center text-xs' onMouseDown={(event) => event.stopPropagation()}>
           {integrations.renderGenerationPrice({ config, mode, ...inputSummary })}
@@ -389,8 +463,7 @@ function buildNodeConfig(
     seed: node.metadata?.seed ?? globalConfig.seed,
     negativePrompt: node.metadata?.negativePrompt ?? globalConfig.negativePrompt,
     isTranslate: node.metadata?.isTranslate ?? globalConfig.isTranslate,
-    imageResolution:
-      node.metadata?.imageResolution || globalConfig.imageResolution || defaultConfig.imageResolution,
+    imageResolution: node.metadata?.imageResolution || globalConfig.imageResolution || defaultConfig.imageResolution,
     imageVersion: node.metadata?.imageVersion ?? node.metadata?.quality ?? globalConfig.imageVersion,
     reasoningEffort: node.metadata?.reasoningEffort || globalConfig.reasoningEffort || defaultConfig.reasoningEffort,
     quality: node.metadata?.quality || globalConfig.quality || defaultConfig.quality,
@@ -421,7 +494,9 @@ function videoConfigPatch(key: keyof AiConfig, value: string) {
   return { [key]: value };
 }
 
-export function visibleConfigGenerationMode(mode?: CanvasGenerationMode): 'image' | 'video' | '3d' | 'music' | 'lyrics' {
+export function visibleConfigGenerationMode(
+  mode?: CanvasGenerationMode,
+): 'image' | 'video' | '3d' | 'music' | 'lyrics' {
   // Restore this resolver together with the commented Text controls when re-enabling Text mode.
   // return mode === 'audio' ? 'image' : mode || 'image';
   return mode === 'music' || mode === 'lyrics' || mode === '3d' || mode === 'video' ? mode : 'image';
@@ -434,7 +509,5 @@ export function resolveConfigNodeVideoModel(
   adapter?: AiConfig['modelAdapter'],
 ): string {
   if (adapter?.videoToVideoModels.includes(sourceModelName(model))) return model;
-  return mode === 'video' && inputSummary.videoCount > 0
-    ? resolveSourceReferenceVideoModel(model, adapter)
-    : model;
+  return mode === 'video' && inputSummary.videoCount > 0 ? resolveSourceReferenceVideoModel(model, adapter) : model;
 }

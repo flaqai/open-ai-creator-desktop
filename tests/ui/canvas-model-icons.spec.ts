@@ -13,22 +13,40 @@ test('canvas image model picker shows provider icons for Google and OpenAI varia
 
   const picker = page.locator('.canvas-composer-model-picker').first();
   await expect(picker).toBeVisible();
+  await page.evaluate(() => {
+    document.documentElement.classList.remove('dark');
+    document.documentElement.classList.add('light');
+  });
   await picker.click();
 
   for (const [model, icon] of [
     ['Nano Banana Pro', '/images/model-icon/veo.svg'],
-    ['Nano Banana Pro Edit', '/images/model-icon/veo.svg'],
     ['Nano Banana 2', '/images/model-icon/veo.svg'],
-    ['Nano Banana 2 Edit', '/images/model-icon/veo.svg'],
     ['GPT Image 2', '/images/model-icon/openai.svg'],
-    ['GPT Image 2 Edit', '/images/model-icon/openai.svg'],
     ['GPT Image 2 Client', '/images/model-icon/openai.svg'],
-    ['GPT Image 2 Edit Client', '/images/model-icon/openai.svg'],
     ['ChatGPT Images 2.5', '/images/model-icon/openai.svg'],
   ] as const) {
-    await expect(page.getByRole('option', { name: model, exact: true }).locator('img')).toHaveAttribute('src', icon);
+    const visibleIcon = page.getByRole('option', { name: model, exact: true }).locator('img:visible');
+    await expect(visibleIcon).toHaveAttribute('src', icon.includes('veo') ? '/images/model-icon/veo-light.svg' : icon);
   }
+  await expect(page.getByRole('option', { name: 'Nano Banana Pro Edit', exact: true })).toHaveCount(0);
+  await expect(page.getByRole('option', { name: 'GPT Image 2 Edit', exact: true })).toHaveCount(0);
+
+  const lightOpenAi = page.getByRole('option', { name: 'GPT Image 2', exact: true }).locator('img:visible');
+  await expect(lightOpenAi).toHaveCSS('filter', 'invert(1)');
+
+  await page.evaluate(() => {
+    document.documentElement.classList.remove('light');
+    document.documentElement.classList.add('dark');
+  });
+  await expect(
+    page.getByRole('option', { name: 'Nano Banana Pro', exact: true }).locator('img:visible'),
+  ).toHaveAttribute('src', '/images/model-icon/veo.svg');
+  await expect(page.getByRole('option', { name: 'GPT Image 2', exact: true }).locator('img:visible')).toHaveCSS(
+    'filter',
+    'none',
+  );
 
   await page.getByRole('option', { name: 'GPT Image 2', exact: true }).click();
-  await expect(picker.locator('img')).toHaveAttribute('src', '/images/model-icon/openai.svg');
+  await expect(picker.locator('img:visible')).toHaveAttribute('src', '/images/model-icon/openai.svg');
 });

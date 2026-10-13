@@ -7,6 +7,12 @@ import { Loader2, RefreshCcw } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 
 import { ALL_IMAGE_MODELS } from '@/lib/constants/image';
+import { TEMPLATE_MODELS } from '@/lib/constants/template-models';
+import {
+  getTemplateModelFamilyId,
+  getTemplateModelFamilyLabel,
+  preferredVideoVariant,
+} from '@/lib/constants/template-models/model-family';
 import { ALL_VIDEO_MODELS, getVersionConfig, type VideoGenerationType } from '@/lib/constants/video';
 import {
   buildReferenceMentionAssets,
@@ -32,6 +38,18 @@ import UploadSlots from './UploadSlots';
 import useUnifiedGeneratorSubmit from './useUnifiedGeneratorSubmit';
 
 type SupportedVideoType = Exclude<VideoGenerationType, 'video-edit'>;
+
+const catalogByRequestName = new Map(TEMPLATE_MODELS.map((model) => [model.request.modelName, model]));
+
+function modelFamilyId(modelName: string): string {
+  const catalogModel = catalogByRequestName.get(modelName);
+  return catalogModel ? getTemplateModelFamilyId(catalogModel) : modelName;
+}
+
+function modelFamilyLabel(modelName: string, fallback: string): string {
+  const catalogModel = catalogByRequestName.get(modelName);
+  return catalogModel ? getTemplateModelFamilyLabel(catalogModel) : fallback;
+}
 
 interface UnifiedGeneratorFormProps {
   submitMode?: 'generate' | 'transfer';
@@ -62,25 +80,70 @@ export default function UnifiedGeneratorForm({ submitMode = 'generate' }: Unifie
     () => ALL_VIDEO_MODELS.filter((model) => model.generationType === videoType && !model.disabled),
     [videoType],
   );
-  const selectedImageModel =
-    availableImageModels.find((model) => model.model === store.imageModel) || availableImageModels[0];
-  const selectedVideoModel =
-    availableVideoModels.find((model) => model.model === store.videoModels[videoType]) || availableVideoModels[0];
-  const videoVersion = selectedVideoModel ? getVersionConfig(selectedVideoModel.modelVersion) : undefined;
-  const videoModelsForPopover = useMemo(
-    () =>
-      availableVideoModels.map((model) => ({
-        ...model,
-        options: {
-          ...model.options,
-          resolution:
-            getVersionConfig(model.modelVersion)?.options.resolution ||
-            (model.options.resolution ? [model.options.resolution] : []),
-        },
-      })),
-    [availableVideoModels],
+  const selectedImageModel = availableImageModels.find((model) => model.model === store.imageModel);
+  const storedVideoFamily = modelFamilyId(store.videoModels[videoType] || '');
+  const selectedVideoVariants = availableVideoModels.filter(
+    (model) => modelFamilyId(model.model) === storedVideoFamily,
   );
-  const selectedVideoPopoverModel = videoModelsForPopover.find((model) => model.model === selectedVideoModel?.model);
+  const selectedVideoModel = preferredVideoVariant(
+    selectedVideoVariants,
+    store.videoParameters[videoType].enableEndFrame,
+  );
+  const familySupportsEndFrame = availableVideoModels.some(
+    (model) =>
+      modelFamilyId(model.model) === modelFamilyId(selectedVideoModel?.model || '') &&
+      model.options.endFrame?.isSupported,
+  );
+  const videoVersion = selectedVideoModel ? getVersionConfig(selectedVideoModel.modelVersion) : undefined;
+  const imageModelsForPopover = useMemo(() => {
+    const families = new Map<string, typeof ALL_IMAGE_MODELS>();
+    for (const model of ALL_IMAGE_MODELS) {
+      const family = modelFamilyId(model.model);
+      const variants = families.get(family) || [];
+      variants.push(model);
+      families.set(family, variants);
+    }
+    return [...families.values()].map((variants) => {
+      const matching = variants.find((model) => availableImageModels.includes(model));
+      const representative = matching || variants[0];
+      return {
+        ...representative,
+        name: modelFamilyLabel(representative.model, representative.name),
+        unavailable: !matching,
+      };
+    });
+  }, [availableImageModels]);
+  const selectedImagePopoverModel = imageModelsForPopover.find(
+    (model) => modelFamilyId(model.model) === modelFamilyId(selectedImageModel?.model || ''),
+  );
+  const videoModelsForPopover = useMemo(() => {
+    const families = new Map<string, typeof ALL_VIDEO_MODELS>();
+    for (const model of ALL_VIDEO_MODELS.filter((item) => !item.disabled)) {
+      const family = modelFamilyId(model.model);
+      const variants = families.get(family) || [];
+      variants.push(model);
+      families.set(family, variants);
+    }
+    return [...families.values()].map((variants) => {
+      const matching = variants.filter((model) => availableVideoModels.includes(model));
+      const representative =
+        preferredVideoVariant(matching, store.videoParameters[videoType].enableEndFrame) || variants[0];
+      return {
+        ...representative,
+        name: modelFamilyLabel(representative.model, representative.name),
+        unavailable: matching.length === 0,
+        options: {
+          ...representative.options,
+          resolution:
+            getVersionConfig(representative.modelVersion)?.options.resolution ||
+            (representative.options.resolution ? [representative.options.resolution] : []),
+        },
+      };
+    });
+  }, [availableVideoModels, store.videoParameters, videoType]);
+  const selectedVideoPopoverModel = videoModelsForPopover.find(
+    (model) => modelFamilyId(model.model) === modelFamilyId(selectedVideoModel?.model || ''),
+  );
   const parameters = mediaType === 'image' ? store.imageParameters : store.videoParameters[videoType];
 
   useEffect(() => {
@@ -317,7 +380,8 @@ export default function UnifiedGeneratorForm({ submitMode = 'generate' }: Unifie
     setMentionInsertRequest({ asset, key: mentionInsertRequestKeyRef.current });
   };
   const handleVideoModelChange = (model: string) => {
-    const nextModel = availableVideoModels.find((item) => item.model === model);
+    const variants = availableVideoModels.filter((item) => modelFamilyId(item.model) === modelFamilyId(model));
+    const nextModel = preferredVideoVariant(variants, store.videoParameters[videoType].enableEndFrame);
     if (!nextModel) return;
     const nextVersion = getVersionConfig(nextModel.modelVersion);
     store.setVideoModel(videoType, model);
@@ -328,7 +392,10 @@ export default function UnifiedGeneratorForm({ submitMode = 'generate' }: Unifie
         ? Number(nextVersion.options.duration[0].replace('s', ''))
         : nextModel.options.duration,
       sound: Boolean(nextModel.options.defaultSound),
-      enableEndFrame: Boolean(nextModel.options.endFrame?.isSupported),
+      enableEndFrame: Boolean(
+        nextModel.options.endFrame?.isSupported &&
+          (nextModel.options.endFrame.required || store.videoParameters[videoType].enableEndFrame),
+      ),
       seed: undefined,
       negativePrompt: '',
     });
@@ -372,7 +439,7 @@ export default function UnifiedGeneratorForm({ submitMode = 'generate' }: Unifie
       if (videoType !== 'image-to-video') {
         store.setVideoStartInput(null);
         store.setVideoEndInput(null);
-      } else if (!nextModel.options.endFrame?.isSupported) {
+      } else if (!variants.some((variant) => variant.options.endFrame?.isSupported)) {
         store.setVideoEndInput(null);
       }
       if (!nextModel.options.audioUrl) store.setVideoAudioInput(null);
@@ -397,16 +464,15 @@ export default function UnifiedGeneratorForm({ submitMode = 'generate' }: Unifie
     setOpenPopover(null);
   };
   const handleVideoTypeChange = (nextType: SupportedVideoType) => {
-    const currentFamily = selectedVideoModel?.model.replace(/-(?:text|image|reference)-to-video$/, '');
-    const nextModel =
-      ALL_VIDEO_MODELS.find(
-        (model) =>
-          !model.disabled &&
-          model.generationType === nextType &&
-          model.model.replace(/-(?:text|image|reference)-to-video$/, '') === currentFamily,
-      ) || ALL_VIDEO_MODELS.find((model) => !model.disabled && model.generationType === nextType);
+    const currentFamily = modelFamilyId(selectedVideoModel?.model || '');
+    const nextModel = ALL_VIDEO_MODELS.find(
+      (model) => !model.disabled && model.generationType === nextType && modelFamilyId(model.model) === currentFamily,
+    );
     store.setVideoType(nextType);
-    if (!nextModel) return;
+    if (!nextModel) {
+      store.setVideoModel(nextType, '');
+      return;
+    }
     const nextVersion = getVersionConfig(nextModel.modelVersion);
     store.setVideoModel(nextType, nextModel.model);
     store.setVideoParameters(nextType, {
@@ -428,13 +494,13 @@ export default function UnifiedGeneratorForm({ submitMode = 'generate' }: Unifie
         ? Boolean(model.options.imageInput?.isSupported)
         : !model.options.imageInput?.isSupported,
     );
-    const currentFamily = selectedImageModel?.model.replace(/-edit(?:-client)?$/, '').replace(/-client$/, '');
-    const nextModel =
-      nextModels.find(
-        (model) => model.model.replace(/-edit(?:-client)?$/, '').replace(/-client$/, '') === currentFamily,
-      ) || nextModels[0];
+    const currentFamily = modelFamilyId(selectedImageModel?.model || '');
+    const nextModel = nextModels.find((model) => modelFamilyId(model.model) === currentFamily);
     store.setImageType(nextType);
-    if (!nextModel) return;
+    if (!nextModel) {
+      store.setImageModel('');
+      return;
+    }
     store.setImageModel(nextModel.model);
     store.setImageParameters({
       ratio:
@@ -596,15 +662,15 @@ export default function UnifiedGeneratorForm({ submitMode = 'generate' }: Unifie
                 onSeedChange={(seed) => store.setVideoParameters(videoType, { seed })}
                 onNegativePromptChange={(negativePrompt) => store.setVideoParameters(videoType, { negativePrompt })}
               />
-              {mediaType === 'image' && selectedImageModel ? (
+              {mediaType === 'image' ? (
                 <ModelPopover
-                  models={availableImageModels}
-                  selectedModel={selectedImageModel}
+                  models={imageModelsForPopover}
+                  selectedModel={selectedImagePopoverModel}
                   label={t('model')}
                   onChange={handleImageModelChange}
                 />
               ) : null}
-              {mediaType === 'video' && selectedVideoModel && selectedVideoPopoverModel ? (
+              {mediaType === 'video' ? (
                 <ModelPopover
                   models={videoModelsForPopover}
                   selectedModel={selectedVideoPopoverModel}
@@ -612,9 +678,7 @@ export default function UnifiedGeneratorForm({ submitMode = 'generate' }: Unifie
                   onChange={handleVideoModelChange}
                 />
               ) : null}
-              {mediaType === 'video' &&
-              videoType === 'image-to-video' &&
-              selectedVideoModel?.options.endFrame?.isSupported ? (
+              {mediaType === 'video' && videoType === 'image-to-video' && familySupportsEndFrame ? (
                 <EndFrameToggle
                   checked={parameters.enableEndFrame}
                   label={t('end-frame')}
@@ -653,7 +717,7 @@ export default function UnifiedGeneratorForm({ submitMode = 'generate' }: Unifie
               <button
                 type='button'
                 onClick={() => void handleSubmit()}
-                disabled={isSubmitting || (mediaType === 'video' && !selectedVideoModel)}
+                disabled={isSubmitting || (mediaType === 'video' ? !selectedVideoModel : !selectedImageModel)}
                 className='bg-color-main text-primary-foreground hover:text-primary-foreground inline-flex h-9 w-full min-w-[120px] shrink-0 items-center justify-center gap-2 rounded-md px-4 py-0 text-base leading-none font-medium whitespace-nowrap transition-opacity hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-50 sm:w-auto'
               >
                 {t('generate')}

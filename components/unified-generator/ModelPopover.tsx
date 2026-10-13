@@ -16,19 +16,21 @@ import {
   Tags,
   Type,
 } from 'lucide-react';
-import { useTranslations } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 
 import { cn } from '@/lib/utils';
 import { getModelIconConfig } from '@/lib/utils/modelIcons';
 import { Button } from '@/components/ui/button';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import { Select, SelectContent, SelectItem, SelectTrigger } from '@/components/ui/select';
+import { ModelIconImage } from '@/components/model/ModelIconImage';
 
 type GeneratorModel = {
   model: string;
   modelVersion?: string;
   name: string;
   provider: string;
+  unavailable?: boolean;
   generationType?: string;
   options?: {
     ratio?: Array<{ value: string }> | null;
@@ -113,16 +115,15 @@ function TypeFilterIcon({ type }: { type: ModelTypeFilter }) {
   return <Tags className='size-4' />;
 }
 
-function ModelIcon({ value, name }: { value: string; name: string }) {
+function ModelIcon({ value }: { value: string }) {
   const icon = getModelIconConfig(value);
   return (
     <span className='flex size-6 shrink-0 items-center justify-center overflow-hidden rounded-md'>
       {icon.src ? (
-        <img
-          src={icon.src}
-          alt={name}
+        <ModelIconImage
+          icon={icon}
           className={cn(
-            'overflow-hidden rounded-md object-contain',
+            'overflow-hidden rounded-md',
             icon.background === 'light' ? 'bg-foreground size-[22px]' : 'size-full',
           )}
         />
@@ -140,11 +141,12 @@ export default function ModelPopover({
   onChange,
 }: {
   models: GeneratorModel[];
-  selectedModel: GeneratorModel;
+  selectedModel?: GeneratorModel;
   label: string;
   onChange: (model: string) => void;
 }) {
   const t = useTranslations('UnifiedGenerator.model-select');
+  const locale = useLocale();
   const [open, setOpen] = useState(false);
   const [providerOpen, setProviderOpen] = useState(false);
   const [providerFilter, setProviderFilter] = useState('all');
@@ -161,11 +163,11 @@ export default function ModelPopover({
         (providerFilter === 'all' || model.provider === providerFilter) &&
         (typeFilter === 'all' || getTypeFilter(model) === typeFilter),
     );
-    const current = filtered.find((model) => model.model === selectedModel.model);
+    const current = filtered.find((model) => model.model === selectedModel?.model);
     const sameProvider = filtered.filter(
-      (model) => model.provider === selectedModel.provider && model.model !== selectedModel.model,
+      (model) => model.provider === selectedModel?.provider && model.model !== selectedModel?.model,
     );
-    const otherProviders = filtered.filter((model) => model.provider !== selectedModel.provider);
+    const otherProviders = filtered.filter((model) => model.provider !== selectedModel?.provider);
     return [...(current ? [current] : []), ...sameProvider, ...otherProviders];
   }, [models, providerFilter, selectedModel, typeFilter]);
 
@@ -204,8 +206,10 @@ export default function ModelPopover({
           className='!bg-color-c3 hover:!bg-color-c4 text-muted-foreground hover:text-muted-foreground flex h-9 w-full min-w-0 flex-1 justify-between rounded-lg !border-0 px-3 py-0 text-sm !shadow-none sm:max-w-[360px] sm:min-w-[280px]'
         >
           <span className='flex min-w-0 items-center gap-2.5'>
-            <ModelIcon value={selectedModel.modelVersion || selectedModel.model} name={selectedModel.name} />
-            <span className='text-foreground min-w-0 truncate'>{selectedModel.model}</span>
+            {selectedModel ? <ModelIcon value={selectedModel.modelVersion || selectedModel.model} /> : null}
+            <span className='text-foreground min-w-0 truncate'>
+              {selectedModel?.name || (locale.startsWith('zh') ? '选择模型' : 'Select a model')}
+            </span>
           </span>
           <ChevronDown className='text-foreground/50 size-4 shrink-0' />
         </Button>
@@ -237,7 +241,7 @@ export default function ModelPopover({
                       <ListFilter className='size-4' />
                     </span>
                   ) : (
-                    <ModelIcon value={providerFilter} name='' />
+                    <ModelIcon value={providerFilter} />
                   )}
                   <span className='truncate'>{providerFilter === 'all' ? t('all-providers') : providerFilter}</span>
                 </span>
@@ -258,7 +262,7 @@ export default function ModelPopover({
                     className='text-color-t2 focus:bg-color-3 cursor-pointer rounded-md'
                   >
                     <span className='flex items-center gap-1.5'>
-                      <ModelIcon value={provider} name='' />
+                      <ModelIcon value={provider} />
                       <span className='truncate'>{provider}</span>
                     </span>
                   </SelectItem>
@@ -313,7 +317,7 @@ export default function ModelPopover({
           ) : null}
           <div ref={modelListRef} onScroll={updateScrollState} className='no-scrollbar max-h-[360px] overflow-y-auto'>
             {visibleModels.map((model) => {
-              const active = model.model === selectedModel.model;
+              const active = model.model === selectedModel?.model;
               const tags = getModelTags(model, {
                 ratio: t('ratio'),
                 image: t('image'),
@@ -326,6 +330,14 @@ export default function ModelPopover({
                 <button
                   key={model.model}
                   type='button'
+                  disabled={model.unavailable}
+                  title={
+                    model.unavailable
+                      ? locale.startsWith('zh')
+                        ? '不支持当前生成模式'
+                        : 'Unavailable in the current generation mode'
+                      : undefined
+                  }
                   onClick={() => {
                     onChange(model.model);
                     setOpen(false);
@@ -333,12 +345,13 @@ export default function ModelPopover({
                   className={cn(
                     'border-color-b1 hover:bg-foreground/5 flex w-full flex-col gap-2 border-b p-2 text-left last:border-b-0',
                     active && 'bg-color-main/10 hover:bg-color-main/10',
+                    model.unavailable && 'cursor-not-allowed opacity-50 hover:bg-transparent',
                   )}
                 >
                   <div className='flex items-start justify-between gap-3'>
                     <div className='flex min-w-0 flex-1 items-center gap-2.5'>
-                      <ModelIcon value={model.modelVersion || model.model} name={model.name} />
-                      <span className='text-foreground min-w-0 truncate text-base font-medium'>{model.model}</span>
+                      <ModelIcon value={model.modelVersion || model.model} />
+                      <span className='text-foreground min-w-0 truncate text-base font-medium'>{model.name}</span>
                     </div>
                     <span
                       className={cn(
@@ -349,6 +362,11 @@ export default function ModelPopover({
                       {active ? <Check className='text-foreground size-3' /> : null}
                     </span>
                   </div>
+                  {model.unavailable ? (
+                    <span className='text-foreground/60 text-xs'>
+                      {locale.startsWith('zh') ? '不支持当前生成模式' : 'Unavailable in the current generation mode'}
+                    </span>
+                  ) : null}
                   {tags.length ? (
                     <div className='flex flex-wrap gap-2'>
                       {tags.map((tag) => (

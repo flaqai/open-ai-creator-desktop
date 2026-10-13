@@ -1,24 +1,24 @@
 // -nocheck
 // Pinned OSS source; compatibility is isolated outside this closure.
 // @ts-nocheck -- pinned OSS source; compatibility is isolated outside this closure.
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { ArrowUp, LoaderCircle, Maximize2 } from 'lucide-react';
 
-
 import { AiCanvasPromptLibrary } from '@/components/canvas-shared/components/ai-canvas-prompt-library/ai-canvas-prompt-library';
+
 import { canvasThemes } from '../../lib/canvas-theme';
+import { resolveCanvasMusicValues } from '../../lib/canvas/canvas-music-results';
 import type { CanvasResourceReference } from '../../lib/canvas/canvas-resource-references';
 import {
-  SOURCE_REFERENCE_VIDEO_MODELS,
   getSourceModelMetadataPatch,
   getSourceVideoModelConfig,
   getSourceVideoModelDefaults,
   resolveSourceReferenceVideoModel,
+  SOURCE_REFERENCE_VIDEO_MODELS,
   sourceModelName,
 } from '../../runtime/generation/source-model-data';
 import { useInfiniteCanvasTranslation } from '../../runtime/i18n/infinite-canvas-translation';
 import { useOptionalInfiniteCanvasIntegrations } from '../../runtime/integrations/infinite-canvas-integrations-context';
-import type { CanvasConfigInputSummary } from './canvas-config-node-panel';
 import { App, Button, Modal, Segmented, Tooltip } from '../../runtime/ui/source-ui';
 import {
   defaultConfig,
@@ -31,8 +31,8 @@ import { useThemeStore } from '../../stores/use-theme-store';
 import { CanvasNodeType, type CanvasGenerationMode, type CanvasNodeData } from '../../types/canvas';
 import { ModelPicker } from '../model-picker';
 import { CanvasAudioSettingsPopover, type CanvasAudioSettingKey } from './canvas-audio-settings-popover';
+import type { CanvasConfigInputSummary } from './canvas-config-node-panel';
 import { CanvasImageSettingsPopover } from './canvas-image-settings-popover';
-import { resolveCanvasMusicValues } from '../../lib/canvas/canvas-music-results';
 import { CanvasMusicComposerFields } from './canvas-music-composer-fields';
 import { CanvasMusicSettingsPopover } from './canvas-music-settings-popover';
 import { CanvasPromptChipInput } from './canvas-prompt-chip-input';
@@ -89,11 +89,16 @@ export function CanvasNodePromptPanel({
   const [activeMusicField, setActiveMusicField] = useState('');
   const isBusy = isRunning || optimizing;
   const videoInputContext = {
+    imageCount: mentionReferences.filter((reference) => reference.kind === 'image').length,
+    videoCount:
+      mentionReferences.filter((reference) => reference.kind === 'video').length + (hasSourceVideoReference ? 1 : 0),
+    audioCount: mentionReferences.filter((reference) => reference.kind === 'audio').length,
     hasAudioSubjects: mentionReferences.some((reference) => reference.kind === 'audio'),
     hasImage: mentionReferences.some((reference) => reference.kind === 'image'),
-    hasEndFrame: globalConfig.modelAdapter ? mentionReferences.filter((reference) => reference.kind === 'image').length > 1 : undefined,
-    hasVideoSubjects:
-      hasSourceVideoReference || mentionReferences.some((reference) => reference.kind === 'video'),
+    hasEndFrame: globalConfig.modelAdapter
+      ? mentionReferences.filter((reference) => reference.kind === 'image').length > 1
+      : undefined,
+    hasVideoSubjects: hasSourceVideoReference || mentionReferences.some((reference) => reference.kind === 'video'),
   };
   const videoModelConfig =
     mode === 'video'
@@ -110,17 +115,35 @@ export function CanvasNodePromptPanel({
         )
       : null;
   const promptOptional = mode === 'music';
-  const musicFields = mode === 'music' ? config.modelAdapter?.music?.getComposerParameters?.(config, { hasMusicResult: Boolean(node.metadata?.musicRecordId), audioCount: mentionReferences.filter((reference) => reference.kind === 'audio').length }) : undefined;
-  const selectedMusicField = musicFields?.find((field) => !field.disabled && field.key === activeMusicField) || musicFields?.find((field) => !field.disabled);
-  const unavailable = unavailableMusicInput ? t('music.selectAvailableResult') : ['image', 'video', 'music'].includes(mode)
-    ? config.modelAdapter?.getUnavailableReason?.(config, {
-        mode, prompt, connectedText: mentionReferences.filter((reference) => reference.kind === 'text').map((reference) => reference.text || '').join('\n\n'),
-        imageCount: mentionReferences.filter((reference) => reference.kind === 'image').length + (hasImageContent ? 1 : 0),
-        videoCount: mentionReferences.filter((reference) => reference.kind === 'video').length + (hasSourceVideoReference ? 1 : 0),
-        audioCount: mentionReferences.filter((reference) => reference.kind === 'audio').length,
-        referenceAudioDurationSeconds: priceInputSummary?.referenceAudioDurationSeconds,
-      })
-    : undefined;
+  const musicFields =
+    mode === 'music'
+      ? config.modelAdapter?.music?.getComposerParameters?.(config, {
+          hasMusicResult: Boolean(node.metadata?.musicRecordId),
+          audioCount: mentionReferences.filter((reference) => reference.kind === 'audio').length,
+        })
+      : undefined;
+  const selectedMusicField =
+    musicFields?.find((field) => !field.disabled && field.key === activeMusicField) ||
+    musicFields?.find((field) => !field.disabled);
+  const unavailable = unavailableMusicInput
+    ? t('music.selectAvailableResult')
+    : ['image', 'video', 'music'].includes(mode)
+      ? config.modelAdapter?.getUnavailableReason?.(config, {
+          mode,
+          prompt,
+          connectedText: mentionReferences
+            .filter((reference) => reference.kind === 'text')
+            .map((reference) => reference.text || '')
+            .join('\n\n'),
+          imageCount:
+            mentionReferences.filter((reference) => reference.kind === 'image').length + (hasImageContent ? 1 : 0),
+          videoCount:
+            mentionReferences.filter((reference) => reference.kind === 'video').length +
+            (hasSourceVideoReference ? 1 : 0),
+          audioCount: mentionReferences.filter((reference) => reference.kind === 'audio').length,
+          referenceAudioDurationSeconds: priceInputSummary?.referenceAudioDurationSeconds,
+        })
+      : undefined;
   const missingRequiredVideoImage = videoModelConfig?.ui.requiresImage === true && !videoInputContext.hasImage;
 
   // Restore prompts only when switching nodes; preserve the current input after generation on the same node.
@@ -148,7 +171,10 @@ export function CanvasNodePromptPanel({
     const field = fields.find((item) => item.key === activeMusicField) || fields[0];
     if (field?.readOnly) return;
     if (!field || field.key === 'style' || field.key === 'prompt') updatePrompt(value);
-    else onConfigChange(node.id, { music: { ...config.music, [field.key]: value, ...(field.key === 'lyrics' ? { lyricsEdited: true } : {}) } });
+    else
+      onConfigChange(node.id, {
+        music: { ...config.music, [field.key]: value, ...(field.key === 'lyrics' ? { lyricsEdited: true } : {}) },
+      });
   };
 
   const submit = () => {
@@ -189,21 +215,40 @@ export function CanvasNodePromptPanel({
       onPointerDown={(event) => event.stopPropagation()}
       onWheel={(event) => event.stopPropagation()}
     >
-      {musicFields?.length ? <CanvasMusicComposerFields key={node.id} activeKey={activeMusicField} onActiveKeyChange={setActiveMusicField} config={config} fields={musicFields} prompt={prompt}
-        connectedText={mentionReferences.filter((reference) => reference.kind === 'text').map((reference) => reference.text || '').join('\n\n')}
-        onPromptChange={updatePrompt} onMusicChange={(music) => onConfigChange(node.id, { music })} /> : <CanvasPromptChipInput
-        value={prompt}
-        references={mentionReferences}
-        onChange={updatePrompt}
-        onSubmit={submit}
-        className='thin-scrollbar h-40 w-full cursor-text resize-none rounded-xl px-3 py-2 text-sm leading-5 outline-none'
-        style={{ background: 'transparent', color: theme.node.text }}
-        placeholder={t(
-          `canvas.promptPanel.${mode === 'image' && hasImageContent ? 'editImage' : mode === 'text' && hasTextContent ? 'editText' : mode}`,
-        )}
-      />}
+      {musicFields?.length ? (
+        <CanvasMusicComposerFields
+          key={node.id}
+          activeKey={activeMusicField}
+          onActiveKeyChange={setActiveMusicField}
+          config={config}
+          fields={musicFields}
+          prompt={prompt}
+          connectedText={mentionReferences
+            .filter((reference) => reference.kind === 'text')
+            .map((reference) => reference.text || '')
+            .join('\n\n')}
+          onPromptChange={updatePrompt}
+          onMusicChange={(music) => onConfigChange(node.id, { music })}
+        />
+      ) : (
+        <CanvasPromptChipInput
+          value={prompt}
+          references={mentionReferences}
+          onChange={updatePrompt}
+          onSubmit={submit}
+          className='thin-scrollbar h-40 w-full cursor-text resize-none rounded-xl px-3 py-2 text-sm leading-5 outline-none'
+          style={{ background: 'transparent', color: theme.node.text }}
+          placeholder={t(
+            `canvas.promptPanel.${mode === 'image' && hasImageContent ? 'editImage' : mode === 'text' && hasTextContent ? 'editText' : mode}`,
+          )}
+        />
+      )}
 
-      {unavailable ? <p className='mb-2 text-xs text-red-400' role='status'>{unavailable}</p> : null}
+      {unavailable ? (
+        <p className='mb-2 text-xs text-red-400' role='status'>
+          {unavailable}
+        </p>
+      ) : null}
       {(mode === 'image' || mode === 'video') && priceInputSummary && integrations?.renderGenerationPrice ? (
         <div className='mt-2 text-right text-xs'>
           {integrations.renderGenerationPrice({ config, mode, ...priceInputSummary })}
@@ -221,7 +266,10 @@ export function CanvasNodePromptPanel({
               aria-label={t('canvas.promptPanel.expandEditor')}
             />
           </Tooltip>
-          <span inert={selectedMusicField?.readOnly || undefined} className={selectedMusicField?.readOnly ? 'cursor-not-allowed opacity-40' : undefined}>
+          <span
+            inert={selectedMusicField?.readOnly || undefined}
+            className={selectedMusicField?.readOnly ? 'cursor-not-allowed opacity-40' : undefined}
+          >
             <AiCanvasPromptLibrary mode='dialog' onSelectPrompt={(item) => updateActiveField(item.prompt)} />
           </span>
           {mode === 'image' ? (
@@ -229,7 +277,14 @@ export function CanvasNodePromptPanel({
               <ModelPicker
                 config={config}
                 value={config.model}
-                onChange={(model) => onConfigChange(node.id, getSourceModelMetadataPatch(model, 'image', {}, config.modelAdapter))}
+                inputCounts={{
+                  imageCount:
+                    mentionReferences.filter((reference) => reference.kind === 'image').length +
+                    (hasImageContent ? 1 : 0),
+                }}
+                onChange={(model) =>
+                  onConfigChange(node.id, getSourceModelMetadataPatch(model, 'image', {}, config.modelAdapter))
+                }
                 capability='image'
                 onMissingConfig={() => openConfigDialog(true)}
                 className='max-w-[190px]'
@@ -248,8 +303,18 @@ export function CanvasNodePromptPanel({
               <ModelPicker
                 config={config}
                 value={config.model}
+                inputCounts={{
+                  imageCount: mentionReferences.filter((reference) => reference.kind === 'image').length,
+                  videoCount:
+                    mentionReferences.filter((reference) => reference.kind === 'video').length +
+                    (hasSourceVideoReference ? 1 : 0),
+                  audioCount: mentionReferences.filter((reference) => reference.kind === 'audio').length,
+                }}
                 onChange={(model) =>
-                  onConfigChange(node.id, getSourceModelMetadataPatch(model, 'video', videoInputContext, config.modelAdapter))
+                  onConfigChange(
+                    node.id,
+                    getSourceModelMetadataPatch(model, 'video', videoInputContext, config.modelAdapter),
+                  )
                 }
                 capability='video'
                 allowedModels={
@@ -269,15 +334,24 @@ export function CanvasNodePromptPanel({
             </>
           ) : mode === 'music' ? (
             <>
-            <ModelPicker config={config} value={config.model} capability='music'
-              onChange={(model) => onConfigChange(node.id, getSourceModelMetadataPatch(model, 'music', {}, config.modelAdapter))}
-              onMissingConfig={() => openConfigDialog(true)} className='max-w-[190px]' />
-              {config.modelAdapter?.music ? <CanvasMusicSettingsPopover
+              <ModelPicker
                 config={config}
-                audioCount={mentionReferences.filter((reference) => reference.kind === 'audio').length}
-                buttonClassName='!h-10 !max-w-[170px] !justify-start !rounded-full !px-3'
-                onConfigChange={(music) => onConfigChange(node.id, { music })}
-              /> : null}
+                value={config.model}
+                capability='music'
+                onChange={(model) =>
+                  onConfigChange(node.id, getSourceModelMetadataPatch(model, 'music', {}, config.modelAdapter))
+                }
+                onMissingConfig={() => openConfigDialog(true)}
+                className='max-w-[190px]'
+              />
+              {config.modelAdapter?.music ? (
+                <CanvasMusicSettingsPopover
+                  config={config}
+                  audioCount={mentionReferences.filter((reference) => reference.kind === 'audio').length}
+                  buttonClassName='!h-10 !max-w-[170px] !justify-start !rounded-full !px-3'
+                  onConfigChange={(music) => onConfigChange(node.id, { music })}
+                />
+              ) : null}
             </>
           ) : mode === 'audio' ? (
             <>
@@ -336,19 +410,34 @@ export function CanvasNodePromptPanel({
         destroyOnHidden
       >
         <div data-canvas-no-zoom className='pt-2' onWheelCapture={(event) => event.stopPropagation()}>
-          {musicFields?.length ? <CanvasMusicComposerFields key={node.id} expanded config={config} fields={musicFields} prompt={prompt}
-            activeKey={activeMusicField} onActiveKeyChange={setActiveMusicField}
-            connectedText={mentionReferences.filter((reference) => reference.kind === 'text').map((reference) => reference.text || '').join('\n\n')}
-            onPromptChange={updatePrompt} onMusicChange={(music) => onConfigChange(node.id, { music })} /> : <CanvasPromptChipInput
-            value={prompt}
-            references={mentionReferences}
-            onChange={updatePrompt}
-            className='thin-scrollbar h-[52dvh] min-h-80 w-full cursor-text overflow-y-auto rounded-xl border p-4 text-[15px] leading-6 outline-none'
-            style={{ background: 'transparent', borderColor: theme.toolbar.border, color: theme.node.text }}
-            placeholder={t(
-              `canvas.promptPanel.${mode === 'image' && hasImageContent ? 'editImage' : mode === 'text' && hasTextContent ? 'editText' : mode}`,
-            )}
-          />}
+          {musicFields?.length ? (
+            <CanvasMusicComposerFields
+              key={node.id}
+              expanded
+              config={config}
+              fields={musicFields}
+              prompt={prompt}
+              activeKey={activeMusicField}
+              onActiveKeyChange={setActiveMusicField}
+              connectedText={mentionReferences
+                .filter((reference) => reference.kind === 'text')
+                .map((reference) => reference.text || '')
+                .join('\n\n')}
+              onPromptChange={updatePrompt}
+              onMusicChange={(music) => onConfigChange(node.id, { music })}
+            />
+          ) : (
+            <CanvasPromptChipInput
+              value={prompt}
+              references={mentionReferences}
+              onChange={updatePrompt}
+              className='thin-scrollbar h-[52dvh] min-h-80 w-full cursor-text overflow-y-auto rounded-xl border p-4 text-[15px] leading-6 outline-none'
+              style={{ background: 'transparent', borderColor: theme.toolbar.border, color: theme.node.text }}
+              placeholder={t(
+                `canvas.promptPanel.${mode === 'image' && hasImageContent ? 'editImage' : mode === 'text' && hasTextContent ? 'editText' : mode}`,
+              )}
+            />
+          )}
         </div>
       </Modal>
     </div>
@@ -372,9 +461,10 @@ function buildNodeConfig(
   hasSourceVideoReference: boolean,
 ): AiConfig {
   const savedModel = node.metadata?.model || globalConfig.videoModel;
-  const referenceModel = hasSourceVideoReference && !globalConfig.modelAdapter?.getUnavailableReason
-    ? resolveSourceReferenceVideoModel(savedModel, globalConfig.modelAdapter)
-    : undefined;
+  const referenceModel =
+    hasSourceVideoReference && !globalConfig.modelAdapter?.getUnavailableReason
+      ? resolveSourceReferenceVideoModel(savedModel, globalConfig.modelAdapter)
+      : undefined;
   const usesReferenceDefaults = Boolean(
     referenceModel && sourceModelName(savedModel) !== sourceModelName(referenceModel),
   );
@@ -389,8 +479,7 @@ function buildNodeConfig(
     seed: node.metadata?.seed ?? globalConfig.seed,
     negativePrompt: node.metadata?.negativePrompt ?? globalConfig.negativePrompt,
     isTranslate: node.metadata?.isTranslate ?? globalConfig.isTranslate,
-    imageResolution:
-      node.metadata?.imageResolution || globalConfig.imageResolution || defaultConfig.imageResolution,
+    imageResolution: node.metadata?.imageResolution || globalConfig.imageResolution || defaultConfig.imageResolution,
     imageVersion: node.metadata?.imageVersion ?? node.metadata?.quality ?? globalConfig.imageVersion,
     reasoningEffort: node.metadata?.reasoningEffort || globalConfig.reasoningEffort || defaultConfig.reasoningEffort,
     quality: node.metadata?.quality || globalConfig.quality || defaultConfig.quality,
