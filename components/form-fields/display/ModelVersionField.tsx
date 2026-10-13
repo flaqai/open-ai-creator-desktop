@@ -2,7 +2,6 @@
 
 import type { ReactNode } from 'react';
 import { useMemo } from 'react';
-import Image from 'next/image';
 import { ImageIcon, Scaling } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import { useFormContext } from 'react-hook-form';
@@ -12,6 +11,7 @@ import { cn } from '@/lib/utils';
 import { getModelIconConfig } from '@/lib/utils/modelIcons';
 import { FormControl, FormField, FormItem } from '@/components/ui/form';
 import SubHeading from '@/components/form/SubHeading';
+import { ModelIconImage } from '@/components/model/ModelIconImage';
 import {
   Select,
   SelectContent,
@@ -129,13 +129,7 @@ export default function ModelVersionField({
                         selectedIcon.background === 'light' && 'bg-foreground p-0.5',
                       )}
                     >
-                      <Image
-                        src={selectedIcon.src}
-                        alt={selectedVersion.name}
-                        width={16}
-                        height={16}
-                        className='size-full object-contain'
-                      />
+                      <ModelIconImage icon={selectedIcon} />
                     </span>
                   ) : (
                     <div className='h-4 w-4 shrink-0' />
@@ -176,13 +170,7 @@ export default function ModelVersionField({
                                   icon.background === 'light' && 'bg-foreground p-0.5',
                                 )}
                               >
-                                <Image
-                                  src={icon.src}
-                                  alt={version.name}
-                                  width={20}
-                                  height={20}
-                                  className='size-full object-contain'
-                                />
+                                <ModelIconImage icon={icon} />
                               </span>
                             ) : (
                               <div className='h-5 w-5 shrink-0' />

@@ -13,6 +13,7 @@ import type { ModelVersionConfig } from '@/lib/constants/video/types';
 import { cn } from '@/lib/utils';
 import { getModelIconConfig } from '@/lib/utils/modelIcons';
 import { FormControl, FormField, FormItem, FormMessage } from '@/components/ui/form';
+import { ModelIconImage } from '@/components/model/ModelIconImage';
 
 import {
   Select,
@@ -218,11 +219,7 @@ export default function ModelSelect({
                         selectedModelIcon.background === 'light' && 'bg-foreground p-0.5',
                       )}
                     >
-                      <img
-                        src={selectedModelIcon.src}
-                        alt={selectedModelVersion}
-                        className='size-full object-contain'
-                      />
+                      <ModelIconImage icon={selectedModelIcon} />
                     </span>
                   ) : (
                     <div className='size-4' />

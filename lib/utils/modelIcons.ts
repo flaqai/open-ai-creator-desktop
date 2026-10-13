@@ -3,6 +3,8 @@ export type ModelIconBackground = 'dark' | 'light';
 export type ModelIconConfig = {
   src: string;
   background: ModelIconBackground;
+  lightSrc?: string;
+  invertOnLight?: boolean;
 };
 
 export const getModelIconConfig = (modelValue: string): ModelIconConfig => {
@@ -15,17 +17,21 @@ export const getModelIconConfig = (modelValue: string): ModelIconConfig => {
     return { src: '/images/model-provider/wan.svg', background: 'dark' };
   }
   if (lowerValue.startsWith('kling')) {
-    return { src: '/images/model-provider/kling.svg', background: 'dark' };
+    return { src: '/images/model-provider/kling.svg', background: 'dark', invertOnLight: true };
   }
   if (lowerValue.startsWith('veo')) {
-    return { src: '/images/model-icon/veo.svg', background: 'dark' };
+    return { src: '/images/model-icon/veo.svg', lightSrc: '/images/model-icon/veo-light.svg', background: 'dark' };
   }
   if (lowerValue.startsWith('vidu')) {
     return { src: '/images/model-icon/vidu.svg', background: 'dark' };
   }
 
   if (lowerValue.startsWith('seedance') || lowerValue.startsWith('seedream') || lowerValue.startsWith('bytedance')) {
-    return { src: '/images/model-provider/bytedance.svg', background: 'dark' };
+    return {
+      src: '/images/model-provider/bytedance.svg',
+      lightSrc: '/images/model-provider/bytedance-light.svg',
+      background: 'dark',
+    };
   }
 
   if (lowerValue.startsWith('flux') || lowerValue.startsWith('black-forest-labs')) {
@@ -41,11 +47,11 @@ export const getModelIconConfig = (modelValue: string): ModelIconConfig => {
   }
 
   if (lowerValue.startsWith('gemini') || lowerValue.startsWith('nano-banana')) {
-    return { src: '/images/model-icon/veo.svg', background: 'dark' };
+    return { src: '/images/model-icon/veo.svg', lightSrc: '/images/model-icon/veo-light.svg', background: 'dark' };
   }
 
   if (lowerValue.startsWith('gpt') || lowerValue.startsWith('chatgpt')) {
-    return { src: '/images/model-icon/openai.svg', background: 'dark' };
+    return { src: '/images/model-icon/openai.svg', background: 'dark', invertOnLight: true };
   }
 
   return { src: '', background: 'dark' };

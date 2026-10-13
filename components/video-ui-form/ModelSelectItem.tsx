@@ -4,6 +4,7 @@ import { Clock3, ImageIcon, Mic, Music4, Palette, Scaling } from 'lucide-react';
 
 import { cn } from '@/lib/utils';
 import { getModelIconConfig } from '@/lib/utils/modelIcons';
+import { ModelIconImage } from '@/components/model/ModelIconImage';
 
 interface ModelFeature {
   icon: 'duration' | 'resolution' | 'audio' | 'sound' | 'bgm' | 'style' | 'endFrame';
@@ -84,7 +85,7 @@ export default function ModelSelectItem({
                     modelIcon.background === 'light' && 'bg-foreground p-0.5',
                   )}
                 >
-                  <img src={modelIcon.src} alt={value} className='size-full object-contain' />
+                  <ModelIconImage icon={modelIcon} />
                 </span>
               ) : (
                 <div className='h-5 w-5 flex-shrink-0' />
